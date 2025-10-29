@@ -1,5 +1,26 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Ignore node_modules directory
+node_modules/
+
+# Ignore npm debug logs
+npm-debug.log*
+.npm/
+
+# Ignore yarn-related files (if using yarn)
+.yarn/
+.pnp.*
+
+# Ignore build output directories (common for many projects)
+dist/
+build/
+out/
+
+# Ignore editor/IDE specific files (optional, but often helpful)
+.idea/
+.vscode/
+*.swp
+
 # dependencies
 /node_modules
 /.pnp

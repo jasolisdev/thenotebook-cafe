@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
+/* We go back to: always dark cafe look.
+   No CSS vars, no :root.dark, no dynamic theme.
+*/
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f0f0f; /* deep espresso black */
+  --foreground: #ededed; /* soft off-white */
 }
 
 @theme inline {
@@ -12,15 +16,83 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* slow glow / pulse for accent elements */
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
   }
 }
 
+/* Mobile nav open animation for burger menu */
+@keyframes cafe-fade-scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-cafe-fade-scale {
+  animation: cafe-fade-scale 0.2s ease-out forwards;
+  transform-origin: top center; /* makes it feel like it opens downward */
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+@keyframes nav-sheet-enter {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%) rotateY(8deg);
+    transform-origin: left center;
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(0) rotateY(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotateY(0deg);
+  }
+}
+
+.nav-sheet-enter {
+  animation: nav-sheet-enter 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+/* subtle notebook paper texture (optional) */
+@keyframes paper-shimmer {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.02);
+  }
+}
+
+.paper-texture {
+  background-image: repeating-linear-gradient(
+    #f6f2e9 0px,
+    #f6f2e9 22px,
+    #ebe4d4 23px
+  );
+  background-size: 100% 23px;
+  animation: paper-shimmer 10s ease-in-out infinite;
+}
+
+/* Base body styling */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
