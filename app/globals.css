@@ -2,21 +2,39 @@
 
 /* -------- Global light palette -------- */
 :root {
-  --ink: #1b1b1b; /* main text */
-  --paper: #f6f2e9; /* warm paper */
-  --rule: rgba(73, 105, 142, 0.26); /* blue line */
-  --band: var(--paper); /* top band color */
-  --sheet-shadow: 0 40px 90px rgba(0, 0, 0, 0.25);
-  --sheet-radius: 22px;
+  /* Ink & paper */
+  --ink: #3a3a3a;
+  --paper: #fffae7;
 
-  /* top band height where lines don't draw */
-  --sheet-top-band: 70px; /* mobile default */
-}
+  /* Notebook lines (tweak last number for strength) */
+  --rule: rgba(73, 105, 142, 0.18);
 
-@media (min-width: 768px) {
-  :root {
-    --sheet-top-band: 70px;
-  }
+  /* Top band (nav) height */
+  --sheet-top-band: 80px;
+
+  /* Clean (no-line) zone height:
+     This is where the top stays pure paper with NO lines & NO wash.
+     Tune the middle value (vh) to sit just above your tagline. */
+  --no-line-zone: clamp(240px, 34vh, 520px);
+
+  /* Lines layout */
+  --lines-step: 23px; /* distance between lines */
+
+  /* “Wash below the lines” look */
+  --wash-below-start: var(--no-line-zone);
+  --wash-fade-1: rgba(214, 192, 158, 0.16);
+  --wash-fade-2: rgba(178, 153, 118, 0.1);
+  --wash-shadow: rgba(0, 0, 0, 0.04);
+
+  /* Sheet rounding & shadow */
+  --sheet-radius: 16px;
+  --sheet-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+  /* UI accents */
+  --accent-color-1: #b68a3a;
+  --button-bg: rgba(255, 255, 255, 0.7);
+  --button-hover-bg: rgba(255, 255, 255, 0.9);
+  --button-border: rgba(0, 0, 0, 0.08);
 }
 
 @theme inline {
@@ -34,13 +52,13 @@ body,
 body {
   color: var(--ink);
   font-family: var(--font-sans);
-  background: #c9a983; /* fallback if /desk.jpg missing */
+  background: #d8c2aa; /* page backdrop behind the sheet */
 }
 
-/* Desk background behind the sheet */
+/* Page backdrop wrapper */
 .page-desk {
   min-height: 100dvh;
-  background: #c9a983 url("/desk.jpg") center / cover no-repeat fixed;
+  background: var(--paper);
 }
 
 /* ------------------ The “Paper Sheet” ------------------ */
@@ -51,56 +69,77 @@ body {
   padding: clamp(14px, 3vw, 28px);
 }
 
-/* Paper surface with ruled lines that begin AFTER the top band */
+/*
+  Layer order (top → bottom):
+  1) Top band (solid paper; hides lines under header)
+  2) “Wash block” that starts BELOW the clean zone (no wash above)
+  3) Ruled lines that also start BELOW the clean zone
+  4) Base paper
+*/
 .sheet__inner {
   position: relative;
   border-radius: var(--sheet-radius);
   box-shadow: var(--sheet-shadow);
   overflow: hidden;
 
-  /* band + ruled lines + paper */
   background-image:
-    linear-gradient(var(--band), var(--band)),
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0 22px,
-      var(--rule) 22px 23px
-    ),
-    linear-gradient(var(--paper), var(--paper));
-  background-size:
-    100% var(--sheet-top-band),
-    100% 23px,
-    100% 100%;
-  background-position:
-    0 0,
-    0 var(--sheet-top-band),
-    0 0;
-  background-repeat: no-repeat, repeat, no-repeat;
+    /* 1) top band */
+    linear-gradient(var(--paper), var(--paper)),
+    /* 2) wash below the clean zone only */
+      linear-gradient(
+        to bottom,
+        transparent var(--wash-below-start),
+        var(--wash-fade-1) calc(var(--wash-below-start) + 220px),
+        var(--wash-fade-2) calc(var(--wash-below-start) + 520px),
+        transparent calc(var(--wash-below-start) + 900px)
+      ),
+    /* 3) ruled lines (shifted down) */
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0 calc(var(--lines-step) - 1px),
+        var(--rule) calc(var(--lines-step) - 1px) var(--lines-step)
+      ),
+    /* 4) base paper */ linear-gradient(var(--paper), var(--paper));
 
-  /* content padding: top = band + little breathing */
+  background-size:
+    /* band height */
+    100% var(--sheet-top-band),
+    /* wash block  */ 100% 100%,
+    /* lines step  */ 100% var(--lines-step),
+    /* paper fill  */ 100% 100%;
+
+  background-position:
+    /* band    */
+    0 0,
+    /* wash    */ 0 0,
+    /* lines   */ 0 var(--no-line-zone),
+    /* paper   */ 0 0;
+
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+
+  /* Content padding (top = band + breathing room) */
   padding: calc(var(--sheet-top-band) + 8px) clamp(18px, 3.2vw, 36px)
     clamp(28px, 5vw, 56px);
   isolation: isolate;
 }
 
-/* Very soft inner vignette */
+/* Subtle inner vignette */
 .sheet__inner::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  box-shadow:
-    inset 0 1px 0 rgba(0, 0, 0, 0.05),
-    inset 0 0 140px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 0 80px var(--wash-shadow);
   border-radius: inherit;
 }
 
 /* Utility */
 .muted {
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--ink);
+  opacity: 0.7;
 }
 
-/* ------------------ Header / Nav (inside paper top band) ------------------ */
+/* ------------------ Header / Nav in top band ------------------ */
 .header {
   position: absolute;
   inset-inline: 0;
@@ -110,6 +149,8 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 clamp(18px, 3.2vw, 36px);
+  background-color: var(--paper); /* pure paper in the band */
+  z-index: 10;
 }
 
 .brand {
@@ -118,6 +159,7 @@ body {
   gap: 10px;
   font-weight: 600;
   font-size: 18px;
+  color: var(--ink);
 }
 
 .nav-desktop {
@@ -133,6 +175,7 @@ body {
 }
 
 .nav-link {
+  color: var(--ink);
   opacity: 0.8;
   transition: opacity 0.15s ease;
 }
@@ -142,14 +185,21 @@ body {
 
 /* ---------- Mobile burger / X ---------- */
 .icon-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: rgba(255, 255, 255, 0.82);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--button-border);
+  background: var(--button-bg);
   display: grid;
   place-items: center;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.icon-btn:hover {
+  background: var(--button-hover-bg);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 @media (min-width: 640px) {
   .icon-btn {
@@ -191,7 +241,6 @@ body {
 .burger-lines::after {
   bottom: 0;
 }
-
 .burger.is-open .burger-lines::before {
   top: 6px;
   transform: rotate(45deg);
@@ -204,11 +253,11 @@ body {
   transform: rotate(-45deg);
 }
 
-/* ---------- Right Drawer & Backdrop ---------- */
+/* ---------- Right Drawer (paper style) & Backdrop ---------- */
 .drawer-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.15);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
@@ -225,31 +274,35 @@ body {
   right: 0;
   height: 100dvh;
   width: min(50vw, 360px);
-  /* Paper style (same as sheet) */
+
+  /* match sheet look inside drawer */
   background-image:
-    linear-gradient(var(--band), var(--band)),
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0 22px,
-      var(--rule) 22px 23px
-    ),
+    /* top band inside drawer */
+    linear-gradient(var(--paper), var(--paper)),
+    /* ruled lines starting below the drawer band */
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0 calc(var(--lines-step) - 1px),
+        var(--rule) calc(var(--lines-step) - 1px) var(--lines-step)
+      ),
     linear-gradient(var(--paper), var(--paper));
   background-size:
-    100% 56px,
-    100% 23px,
+    100% var(--sheet-top-band),
+    100% var(--lines-step),
     100% 100%;
   background-position:
     0 0,
-    0 56px,
+    0 var(--sheet-top-band),
     0 0;
   background-repeat: no-repeat, repeat, no-repeat;
 
-  box-shadow: -40px 0 80px rgba(0, 0, 0, 0.2);
-  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.08);
+  border-left: 1px solid var(--button-border);
   transform: translateX(100%);
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 50;
-  padding: 56px 24px 24px; /* top padding equals band */
+
+  padding: calc(var(--sheet-top-band) + 24px) 24px 24px;
   display: flex;
   flex-direction: column;
 }
@@ -257,12 +310,28 @@ body {
   transform: translateX(0);
 }
 
-/* Close (X) inside drawer (top-right) */
+/* Drawer close (X) */
 .drawer-close {
   position: absolute;
-  top: 8px;
-  right: 12px;
+  top: 10px;
+  right: 10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--button-border);
+  background: var(--button-bg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 2;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.drawer-close:hover {
+  background: var(--button-hover-bg);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 .drawer-x {
   width: 18px;
@@ -294,15 +363,15 @@ body {
   flex-direction: column;
   gap: 18px;
   font-size: 18px;
-  font-weight: 600;
-  align-items: center; /* center horizontally */
+  font-weight: 500;
+  align-items: center;
   text-align: center;
 }
 .drawer-nav a {
-  padding: 10px 12px;
-  border-radius: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
   color: var(--ink);
 }
 .drawer-nav a:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: rgba(0, 0, 0, 0.06);
 }
