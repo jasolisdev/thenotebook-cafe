@@ -1,98 +1,308 @@
 @import "tailwindcss";
 
-/* We go back to: always dark cafe look.
-   No CSS vars, no :root.dark, no dynamic theme.
-*/
-
+/* -------- Global light palette -------- */
 :root {
-  --background: #0f0f0f; /* deep espresso black */
-  --foreground: #ededed; /* soft off-white */
+  --ink: #1b1b1b; /* main text */
+  --paper: #f6f2e9; /* warm paper */
+  --rule: rgba(73, 105, 142, 0.26); /* blue line */
+  --band: var(--paper); /* top band color */
+  --sheet-shadow: 0 40px 90px rgba(0, 0, 0, 0.25);
+  --sheet-radius: 22px;
+
+  /* top band height where lines don't draw */
+  --sheet-top-band: 70px; /* mobile default */
+}
+
+@media (min-width: 768px) {
+  :root {
+    --sheet-top-band: 70px;
+  }
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-/* slow glow / pulse for accent elements */
-@keyframes pulse-slow {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
+/* Base */
+html,
+body,
+#__next {
+  height: 100%;
 }
-
-/* Mobile nav open animation for burger menu */
-@keyframes cafe-fade-scale {
-  0% {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-cafe-fade-scale {
-  animation: cafe-fade-scale 0.2s ease-out forwards;
-  transform-origin: top center; /* makes it feel like it opens downward */
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 8s ease-in-out infinite;
-}
-
-@keyframes nav-sheet-enter {
-  0% {
-    opacity: 0;
-    transform: translateX(-100%) rotateY(8deg);
-    transform-origin: left center;
-  }
-  60% {
-    opacity: 1;
-    transform: translateX(0) rotateY(2deg);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0) rotateY(0deg);
-  }
-}
-
-.nav-sheet-enter {
-  animation: nav-sheet-enter 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, opacity;
-}
-
-/* subtle notebook paper texture (optional) */
-@keyframes paper-shimmer {
-  0%,
-  100% {
-    filter: brightness(1);
-  }
-  50% {
-    filter: brightness(1.02);
-  }
-}
-
-.paper-texture {
-  background-image: repeating-linear-gradient(
-    #f6f2e9 0px,
-    #f6f2e9 22px,
-    #ebe4d4 23px
-  );
-  background-size: 100% 23px;
-  animation: paper-shimmer 10s ease-in-out infinite;
-}
-
-/* Base body styling */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  background: #c9a983; /* fallback if /desk.jpg missing */
+}
+
+/* Desk background behind the sheet */
+.page-desk {
+  min-height: 100dvh;
+  background: #c9a983 url("/desk.jpg") center / cover no-repeat fixed;
+}
+
+/* ------------------ The “Paper Sheet” ------------------ */
+.sheet {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(14px, 3vw, 28px);
+}
+
+/* Paper surface with ruled lines that begin AFTER the top band */
+.sheet__inner {
+  position: relative;
+  border-radius: var(--sheet-radius);
+  box-shadow: var(--sheet-shadow);
+  overflow: hidden;
+
+  /* band + ruled lines + paper */
+  background-image:
+    linear-gradient(var(--band), var(--band)),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 22px,
+      var(--rule) 22px 23px
+    ),
+    linear-gradient(var(--paper), var(--paper));
+  background-size:
+    100% var(--sheet-top-band),
+    100% 23px,
+    100% 100%;
+  background-position:
+    0 0,
+    0 var(--sheet-top-band),
+    0 0;
+  background-repeat: no-repeat, repeat, no-repeat;
+
+  /* content padding: top = band + little breathing */
+  padding: calc(var(--sheet-top-band) + 8px) clamp(18px, 3.2vw, 36px)
+    clamp(28px, 5vw, 56px);
+  isolation: isolate;
+}
+
+/* Very soft inner vignette */
+.sheet__inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow:
+    inset 0 1px 0 rgba(0, 0, 0, 0.05),
+    inset 0 0 140px rgba(0, 0, 0, 0.08);
+  border-radius: inherit;
+}
+
+/* Utility */
+.muted {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* ------------------ Header / Nav (inside paper top band) ------------------ */
+.header {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: var(--sheet-top-band);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(18px, 3.2vw, 36px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.nav-desktop {
+  display: none;
+  gap: 18px;
+  font-size: 14px;
+  align-items: center;
+}
+@media (min-width: 640px) {
+  .nav-desktop {
+    display: inline-flex;
+  }
+}
+
+.nav-link {
+  opacity: 0.8;
+  transition: opacity 0.15s ease;
+}
+.nav-link:hover {
+  opacity: 1;
+}
+
+/* ---------- Mobile burger / X ---------- */
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.82);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+@media (min-width: 640px) {
+  .icon-btn {
+    display: none;
+  }
+}
+
+.burger {
+  position: relative;
+}
+.burger-lines {
+  width: 20px;
+  height: 14px;
+  position: relative;
+  transform: translateZ(0);
+}
+.burger-lines::before,
+.burger-lines::after,
+.burger-lines span {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition:
+    transform 0.22s ease,
+    opacity 0.22s ease,
+    top 0.22s ease,
+    bottom 0.22s ease;
+}
+.burger-lines::before {
+  top: 0;
+}
+.burger-lines span {
+  top: 6px;
+}
+.burger-lines::after {
+  bottom: 0;
+}
+
+.burger.is-open .burger-lines::before {
+  top: 6px;
+  transform: rotate(45deg);
+}
+.burger.is-open .burger-lines span {
+  opacity: 0;
+}
+.burger.is-open .burger-lines::after {
+  bottom: 6px;
+  transform: rotate(-45deg);
+}
+
+/* ---------- Right Drawer & Backdrop ---------- */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 49;
+}
+.drawer-backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100dvh;
+  width: min(50vw, 360px);
+  /* Paper style (same as sheet) */
+  background-image:
+    linear-gradient(var(--band), var(--band)),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 22px,
+      var(--rule) 22px 23px
+    ),
+    linear-gradient(var(--paper), var(--paper));
+  background-size:
+    100% 56px,
+    100% 23px,
+    100% 100%;
+  background-position:
+    0 0,
+    0 56px,
+    0 0;
+  background-repeat: no-repeat, repeat, no-repeat;
+
+  box-shadow: -40px 0 80px rgba(0, 0, 0, 0.2);
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 50;
+  padding: 56px 24px 24px; /* top padding equals band */
+  display: flex;
+  flex-direction: column;
+}
+.drawer.open {
+  transform: translateX(0);
+}
+
+/* Close (X) inside drawer (top-right) */
+.drawer-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  z-index: 2;
+}
+.drawer-x {
+  width: 18px;
+  height: 18px;
+  position: relative;
+}
+.drawer-x::before,
+.drawer-x::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 18px;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+}
+.drawer-x::before {
+  transform: rotate(45deg);
+}
+.drawer-x::after {
+  transform: rotate(-45deg);
+}
+
+/* Drawer nav — centered */
+.drawer-nav {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-size: 18px;
+  font-weight: 600;
+  align-items: center; /* center horizontally */
+  text-align: center;
+}
+.drawer-nav a {
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--ink);
+}
+.drawer-nav a:hover {
+  background: rgba(0, 0, 0, 0.04);
 }
