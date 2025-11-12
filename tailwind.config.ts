@@ -7,6 +7,14 @@ export default {
     "./components/**/*.{ts,tsx,js,jsx}",
     "./pages/**/*.{ts,tsx,js,jsx}",
   ],
-  theme: { extend: {} },
+  theme: {
+    extend: {
+      fontFamily: {
+        /* use Torus globally */
+        sans: ["var(--font-torus)", "Torus", "system-ui", "sans-serif"],
+        mono: ["var(--font-torus)", "Torus", "monospace"],
+      },
+    },
+  },
   plugins: [],
 } satisfies Config;

@@ -1,97 +1,175 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
-import { Instagram } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 
-type Props = { instagramUrl?: string };
+type Breakpoint = "sm" | "md" | "lg" | "xl";
 
-export default function SiteHeader({ instagramUrl }: Props) {
+type Props = {
+  instagramUrl?: string;
+  burgerUntil?: Breakpoint;
+};
+
+const BP_PX: Record<Breakpoint, number> = {
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 1280,
+};
+
+export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  const handleToggle = () => {
+    console.log('Toggle clicked, current open state:', open);
+    setOpen(!open);
+  };
+
+  useEffect(() => {
+    console.log('Drawer open state changed to:', open);
+  }, [open]);
+
+  useEffect(() => {
+    if (open) setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
+
+  const isActive = (href: string) => pathname === href;
+  const bpPx = useMemo(() => BP_PX[burgerUntil], [burgerUntil]);
 
   return (
-    <header className="relative z-10">
-      {/* Row: Logo + Title + (Desktop Nav) + (Mobile Button) */}
-      <div className="flex items-center justify-between gap-3">
-        <a href="/" className="flex items-center gap-3">
+    <>
+      <style jsx>{`
+        @media (min-width: ${bpPx}px) {
+          .burger-btn {
+            display: none !important;
+          }
+          .nav-desktop-show {
+            display: inline-flex !important;
+          }
+        }
+        @media (max-width: ${bpPx - 0.02}px) {
+          .nav-desktop-show {
+            display: none !important;
+          }
+        }
+      `}</style>
+
+      <div className="header-dark">
+        <Link href="/" className="brand-dark" aria-label="Home">
           <Image
             src="/logo.png"
-            alt="The Notebook Café logo"
-            width={36}
-            height={36}
-            className="h-9 w-9 rounded-full shadow-[0_2px_10px_rgba(0,0,0,0.08)] object-contain"
+            alt="The Notebook Café"
+            width={28}
+            height={28}
+            className="rounded-full shadow-sm"
             priority
           />
-          <span className="text-[20px] sm:text-[22px] font-semibold tracking-tight text-neutral-900">
-            The Notebook Café
-          </span>
-        </a>
+          <span>The Notebook Café</span>
+        </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden sm:flex items-center gap-5 text-[14px] text-neutral-700">
-          <a href="/" className="hover:text-neutral-900 transition-colors">
+        <nav className="nav-dark nav-desktop-show" aria-label="Primary">
+          <Link
+            className={isActive("/") ? "nav-active" : ""}
+            href="/"
+            aria-current={isActive("/") ? "page" : undefined}
+          >
             Home
-          </a>
-          <a href="/about" className="hover:text-neutral-900 transition-colors">
+          </Link>
+          <Link
+            className={isActive("/about") ? "nav-active" : ""}
+            href="/about"
+            aria-current={isActive("/about") ? "page" : undefined}
+          >
             About
-          </a>
-          {instagramUrl && (
-            <a
-              href={instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-neutral-900 transition-colors flex items-center"
-              aria-label="Instagram"
-            >
-              <Instagram className="w-4 h-4" strokeWidth={1.6} />
-            </a>
-          )}
+          </Link>
         </nav>
 
-        {/* Mobile hamburger */}
         <button
-          className="sm:hidden h-10 w-10 rounded-2xl bg-white/85 border border-black/10 shadow-[0_8px_20px_rgba(0,0,0,0.06)] flex items-center justify-center"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Open menu"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="mobile-drawer"
+          className={`icon-btn--dark burger burger-btn ${open ? "is-open" : ""}`}
+          onClick={handleToggle}
+          type="button"
         >
-          <span className="relative block h-[14px] w-[20px]">
-            <span
-              className={`absolute inset-x-0 top-0 h-[2px] rounded bg-black transition-all ${open ? "translate-y-[6px] rotate-45" : ""}`}
-            />
-            <span
-              className={`absolute inset-x-0 top-1/2 -translate-y-1/2 h-[2px] rounded bg-black transition-opacity ${open ? "opacity-0" : "opacity-100"}`}
-            />
-            <span
-              className={`absolute inset-x-0 bottom-0 h-[2px] rounded bg-black transition-all ${open ? "-translate-y-[6px] -rotate-45" : ""}`}
-            />
+          <span className="burger-lines">
+            <span />
           </span>
         </button>
       </div>
 
-      {/* Mobile dropdown */}
-      {open && (
-        <div className="sm:hidden mt-[calc(var(--rule)*0.5)] rounded-xl border border-black/10 bg-white/92 backdrop-blur-sm shadow-[0_20px_60px_rgba(0,0,0,0.10)] p-3">
-          <nav className="flex flex-col text-[16px] text-neutral-800">
-            <a href="/" className="px-2 py-2 rounded hover:bg-black/[.04]">
-              Home
-            </a>
-            <a href="/about" className="px-2 py-2 rounded hover:bg-black/[.04]">
-              About
-            </a>
-            {instagramUrl && (
-              <a
-                href={instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-2 py-2 rounded hover:bg-black/[.04] flex items-center gap-2"
-              >
-                <Instagram className="w-4 h-4" />
-                Instagram
-              </a>
-            )}
-          </nav>
+      <div
+        className={`drawer-backdrop ${open ? "show" : ""}`}
+        onClick={() => setOpen(false)}
+        aria-hidden="true"
+      />
+
+      <aside
+        id="mobile-drawer"
+        className={`drawer ${open ? "open" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!open}
+      >
+        <button
+          aria-label="Close menu"
+          className="drawer-close"
+          onClick={() => setOpen(false)}
+          type="button"
+        >
+          <span className="drawer-x" />
+        </button>
+
+        <nav className="drawer-nav" aria-label="Mobile">
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/") ? 'nav-active' : ''}`}
+            style={{ transitionDelay: '0.1s' }}
+          >
+            Home
+          </Link>
+          <Link
+            href="/about"
+            onClick={() => setOpen(false)}
+            className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/about") ? 'nav-active' : ''}`}
+            style={{ transitionDelay: '0.15s' }}
+          >
+            About
+          </Link>
+        </nav>
+
+        <div className={`drawer-footer ${open ? 'is-visible' : ''}`}>
+          <div className="text-xs uppercase tracking-widest opacity-50">
+            The Notebook Café
+          </div>
+          <div className="text-xs opacity-30 mt-1">
+            Opening Fall 2025
+          </div>
         </div>
-      )}
-    </header>
+      </aside>
+    </>
   );
 }
