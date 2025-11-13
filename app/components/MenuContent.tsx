@@ -152,14 +152,13 @@ export default function MenuContent({ items }: MenuContentProps) {
       </div>
 
       {/* Menu Items Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10 scroll-reveal">
         {/* Left Column */}
         <div className="space-y-10">
           {leftColumn.map((item, idx) => (
             <div
               key={`${activeTab}-left-${item.name}-${idx}`}
               className="menu-item-card"
-              style={{ animationDelay: `${idx * 0.12}s` }}
             >
               <div className="flex gap-3 sm:gap-4">
                 {/* Icon */}
@@ -201,7 +200,6 @@ export default function MenuContent({ items }: MenuContentProps) {
             <div
               key={`${activeTab}-right-${item.name}-${idx}`}
               className="menu-item-card"
-              style={{ animationDelay: `${(idx + leftColumn.length) * 0.12}s` }}
             >
               <div className="flex gap-3 sm:gap-4">
                 {/* Icon */}
@@ -250,14 +248,13 @@ export default function MenuContent({ items }: MenuContentProps) {
           </div>
 
           {/* Seasonal Items Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10 scroll-reveal">
             {/* Left Column */}
             <div className="space-y-10">
               {seasonalLeftColumn.map((item, idx) => (
                 <div
                   key={`${activeTab}-seasonal-left-${item.name}-${idx}`}
                   className="menu-item-card"
-                  style={{ animationDelay: `${idx * 0.12}s` }}
                 >
                   <div className="flex gap-3 sm:gap-4">
                     {/* Icon */}
@@ -312,7 +309,6 @@ export default function MenuContent({ items }: MenuContentProps) {
                 <div
                   key={`${activeTab}-seasonal-right-${item.name}-${idx}`}
                   className="menu-item-card"
-                  style={{ animationDelay: `${(idx + seasonalLeftColumn.length) * 0.12}s` }}
                 >
                   <div className="flex gap-3 sm:gap-4">
                     {/* Icon */}

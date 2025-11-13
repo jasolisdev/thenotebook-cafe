@@ -142,8 +142,9 @@ export default async function HomePage() {
       </div>
 
       {/* CARD GRID - 1 col on mobile, 2 cols on tablet+ */}
-      <section className="section-dark mx-auto max-w-[1120px] px-5 sm:px-6 py-32">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+      <section className="section-dark py-32">
+        <div className="mx-auto max-w-[1120px] px-5 sm:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
           {/* CARD: Craft */}
           <div className="home-info-card scroll-reveal" style={{ animationDelay: '0s' }}>
             <div className="flex items-start justify-between mb-3">
@@ -223,6 +224,7 @@ export default async function HomePage() {
               <br />
               {settings?.hours?.weekend || "Sat–Sun: 8 AM – 10 PM"}
             </p>
+          </div>
           </div>
         </div>
       </section>
