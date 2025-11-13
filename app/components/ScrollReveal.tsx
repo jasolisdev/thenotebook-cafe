@@ -10,7 +10,7 @@ export default function ScrollReveal() {
       threshold: 0.1,
     };
 
-    const observer = new IntersectionObserver((entries) => {
+    const intersectionObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
@@ -18,12 +18,32 @@ export default function ScrollReveal() {
       });
     }, observerOptions);
 
-    // Observe all elements with scroll-reveal class
-    const elements = document.querySelectorAll(".scroll-reveal");
-    elements.forEach((el) => observer.observe(el));
+    // Function to observe all scroll-reveal elements
+    const observeElements = () => {
+      const elements = document.querySelectorAll(".scroll-reveal");
+      elements.forEach((el) => {
+        if (!el.classList.contains("is-visible")) {
+          intersectionObserver.observe(el);
+        }
+      });
+    };
+
+    // Initial observation
+    observeElements();
+
+    // Watch for dynamically added elements
+    const mutationObserver = new MutationObserver(() => {
+      observeElements();
+    });
+
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
 
     return () => {
-      elements.forEach((el) => observer.unobserve(el));
+      intersectionObserver.disconnect();
+      mutationObserver.disconnect();
     };
   }, []);
 
