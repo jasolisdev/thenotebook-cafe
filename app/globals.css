@@ -605,17 +605,36 @@ h1, h2, h3 {
   margin: 0;
   padding: 0;
   line-height: 0;
+  overflow: hidden;
+  position: relative;
+  /* Remove any spacing */
+  font-size: 0;
 }
 
 .divider-cream img {
-  width: 100%;
+  width: calc(100% + 2px);
   height: auto;
   display: block;
+  margin: 0;
+  padding: 0;
+  vertical-align: bottom;
+  /* Ensure no gaps - overlap on all sides */
+  margin-left: -1px;
+  margin-right: -1px;
+  margin-bottom: -2px;
+  margin-top: -2px;
+  /* Force GPU rendering for smoother display */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 /* Cream section background */
 .section-cream {
   background-color: #f4f0e9;
+  position: relative;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 /* Adjust icon colors in cream section */
@@ -630,6 +649,8 @@ h1, h2, h3 {
 /* Dark section background */
 .section-dark {
   background-color: var(--bg-solid);
+  position: relative;
+  margin: 0;
 }
 
 .hero-copy {
@@ -730,10 +751,7 @@ a[aria-label="Instagram"]:hover {
   filter: drop-shadow(0 4px 8px rgba(201, 154, 88, 0.3));
 }
 
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
-}
+/* Smooth scroll behavior - removed to prevent scroll animation on page navigation */
 
 /* Selection styling */
 ::selection {
@@ -981,8 +999,21 @@ html {
 /* ============================================================
    MENU PAGE
 ============================================================ */
+@keyframes menuItemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .menu-item-card {
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  opacity: 1;
+  animation: menuItemFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .menu-item-card:hover {

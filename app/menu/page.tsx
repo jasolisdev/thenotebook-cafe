@@ -11,8 +11,14 @@ export const metadata: Metadata = {
 
 async function getData() {
   const [menuItems, settings] = await Promise.all([
-    client.fetch(`*[_type=="menuItem"] | order(section asc, name asc) {
-      name, description, price, section, category, icon
+    client.fetch(`*[_type=="menuItem"] | order(section asc, sortOrder asc, name asc) {
+      name,
+      description,
+      price,
+      section,
+      category,
+      sortOrder,
+      "imageUrl": image.asset->url
     }`),
     client.fetch(
       `*[_type=="settings"][0]{ social{ instagram } }`,
@@ -46,8 +52,7 @@ export default async function MenuPage() {
               MENU
             </h1>
             <p className="text-[15px] sm:text-[16px] text-[#5a4a38] max-w-[600px] mx-auto">
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-              eu fugiat nulla pariatur sint occaecat cupidatat non proident.
+              Crafted with intention. Brewed with rhythm. Explore our signature drinks, matcha blends, and handcrafted pastries—made fresh, every day.
             </p>
           </div>
 
@@ -57,8 +62,8 @@ export default async function MenuPage() {
       </section>
 
       {/* Divider - Wavy transition to dark footer */}
-      <div className="divider-cream" style={{ transform: 'scaleY(-1)' }}>
-        <img src="/divider-cream.png" alt="" />
+      <div className="divider-cream">
+        <img src="/notebook-divider-cream.svg" alt="" />
       </div>
 
       {/* Footer */}

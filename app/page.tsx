@@ -3,6 +3,7 @@ import { client } from "@/sanity/lib/client";
 import SiteHeader from "./components/SiteHeader";
 import NewsletterForm from "./components/NewsLetterForm";
 import ScrollReveal from "./components/ScrollReveal";
+import Link from "next/link";
 import {
   Coffee,
   Music2,
@@ -69,8 +70,8 @@ export default async function HomePage() {
       </section>
 
       {/* Divider - Wavy transition to cream */}
-      <div className="divider-cream">
-        <img src="/divider-cream.png" alt="" />
+      <div className="divider-cream" style={{ transform: 'scaleY(-1)' }}>
+        <img src="/notebook-divider-cream.svg" alt="" />
       </div>
 
       {/* CREAM SECTION */}
@@ -122,12 +123,22 @@ export default async function HomePage() {
               {home.vibeCopy}
             </p>
           )}
+
+          {/* Menu Button */}
+          <div className="mt-10 scroll-reveal">
+            <Link
+              href="/menu"
+              className="inline-block px-8 py-3.5 rounded-full bg-[rgba(201,154,88,0.15)] border-2 border-[rgba(201,154,88,0.4)] text-[14px] font-semibold uppercase tracking-widest text-[#2a1f16] transition-all hover:bg-[rgba(201,154,88,0.25)] hover:border-[rgba(201,154,88,0.6)] hover:transform hover:translateY(-2px) hover:shadow-lg"
+            >
+              EXPLORE OUR MENU
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* Divider - Wavy transition back to dark */}
-      <div className="divider-cream" style={{ transform: 'scaleY(-1)' }}>
-        <img src="/divider-cream.png" alt="" />
+      <div className="divider-cream">
+        <img src="/notebook-divider-cream.svg" alt="" />
       </div>
 
       {/* CARD GRID - 1 col on mobile, 2 cols on tablet+ */}
