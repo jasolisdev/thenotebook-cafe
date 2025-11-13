@@ -24,6 +24,20 @@ const menuItem = defineType({
       description: `Example: "5.50" or "6"`,
     }),
     defineField({
+      name: "section",
+      type: "string",
+      title: "Menu Section",
+      options: {
+        list: [
+          { title: "Drinks", value: "drinks" },
+          { title: "Meals", value: "meals" },
+          { title: "Desserts", value: "desserts" },
+        ],
+        layout: "radio",
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "category",
       type: "string",
       title: "Category",
@@ -38,6 +52,12 @@ const menuItem = defineType({
         ],
         layout: "radio",
       },
+    }),
+    defineField({
+      name: "icon",
+      type: "string",
+      title: "Icon Name",
+      description: "Icon identifier for the menu item (e.g., 'espresso-cup', 'latte-glass')",
     }),
     defineField({
       name: "isFeatured",
