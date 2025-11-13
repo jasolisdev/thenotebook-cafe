@@ -98,6 +98,13 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
             Home
           </Link>
           <Link
+            className={isActive("/menu") ? "nav-active" : ""}
+            href="/menu"
+            aria-current={isActive("/menu") ? "page" : undefined}
+          >
+            Menu
+          </Link>
+          <Link
             className={isActive("/about") ? "nav-active" : ""}
             href="/about"
             aria-current={isActive("/about") ? "page" : undefined}
@@ -152,10 +159,18 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
             Home
           </Link>
           <Link
+            href="/menu"
+            onClick={() => setOpen(false)}
+            className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/menu") ? 'nav-active' : ''}`}
+            style={{ transitionDelay: '0.15s' }}
+          >
+            Menu
+          </Link>
+          <Link
             href="/about"
             onClick={() => setOpen(false)}
             className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/about") ? 'nav-active' : ''}`}
-            style={{ transitionDelay: '0.15s' }}
+            style={{ transitionDelay: '0.2s' }}
           >
             About
           </Link>
