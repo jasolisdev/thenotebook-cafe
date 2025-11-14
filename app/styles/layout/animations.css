@@ -439,3 +439,202 @@
     right: 8%;
   }
 }
+
+/* ============================================================
+   ABOUT PAGE FLOATING ITEMS
+============================================================ */
+
+/* Hero Section Items */
+.about-hero-bean-left {
+  width: 90px;
+  height: auto;
+  left: 8%;
+  top: 35%;
+  transform: translate3d(0, 0, 0) rotate(20deg);
+}
+
+.about-hero-bean-left.visible {
+  animation: floatAboutHeroBean1 10s ease-in-out infinite;
+}
+
+.about-hero-bean-right {
+  width: 80px;
+  height: auto;
+  right: 12%;
+  top: 40%;
+  transform: translate3d(0, 0, 0) rotate(-25deg);
+}
+
+.about-hero-bean-right.visible {
+  animation: floatAboutHeroBean2 11s ease-in-out infinite;
+}
+
+/* Body Section Items (Cream) */
+.about-body-plant-left {
+  width: 180px;
+  height: auto;
+  left: 3%;
+  top: 20%;
+  transform: translate3d(0, 0, 0) rotate(8deg);
+}
+
+.about-body-plant-left.visible {
+  animation: floatAboutBodyPlant 12s ease-in-out infinite;
+}
+
+.about-body-bean-right {
+  width: 95px;
+  height: auto;
+  right: 8%;
+  bottom: 25%;
+  transform: translate3d(0, 0, 0) rotate(-18deg);
+}
+
+.about-body-bean-right.visible {
+  animation: floatAboutBodyBean 9s ease-in-out infinite;
+}
+
+/* Mission Section Items (Dark) */
+.about-mission-flower {
+  width: 130px;
+  height: auto;
+  right: 8%;
+  top: 20%;
+  transform: translate3d(0, 0, 0) rotate(-12deg);
+}
+
+.about-mission-flower.visible {
+  animation: floatAboutMissionFlower 10s ease-in-out infinite;
+}
+
+.about-mission-bean-left {
+  width: 85px;
+  height: auto;
+  left: 10%;
+  top: 30%;
+  transform: translate3d(0, 0, 0) rotate(18deg);
+}
+
+.about-mission-bean-left.visible {
+  animation: floatAboutMissionBeanLeft 11s ease-in-out infinite;
+}
+
+.about-mission-bean-right {
+  width: 80px;
+  height: auto;
+  right: 12%;
+  bottom: 25%;
+  transform: translate3d(0, 0, 0) rotate(-20deg);
+}
+
+.about-mission-bean-right.visible {
+  animation: floatAboutMissionBeanRight 9s ease-in-out infinite;
+}
+
+/* ============================================================
+   ABOUT PAGE ANIMATION KEYFRAMES
+============================================================ */
+
+/* Hero Animations */
+@keyframes floatAboutHeroBean1 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(20deg);
+  }
+  50% {
+    transform: translate3d(0, -20px, 0) rotate(20deg);
+  }
+}
+
+@keyframes floatAboutHeroBean2 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-25deg);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0) rotate(-25deg);
+  }
+}
+
+/* Body Section Animations */
+@keyframes floatAboutBodyPlant {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(8deg);
+  }
+  50% {
+    transform: translate3d(0, -22px, 0) rotate(8deg);
+  }
+}
+
+@keyframes floatAboutBodyBean {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-18deg);
+  }
+  50% {
+    transform: translate3d(0, -16px, 0) rotate(-18deg);
+  }
+}
+
+/* Mission Section Animations */
+@keyframes floatAboutMissionFlower {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-12deg);
+  }
+  50% {
+    transform: translate3d(0, -19px, 0) rotate(-12deg);
+  }
+}
+
+@keyframes floatAboutMissionBeanLeft {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(18deg);
+  }
+  50% {
+    transform: translate3d(0, -21px, 0) rotate(18deg);
+  }
+}
+
+@keyframes floatAboutMissionBeanRight {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-20deg);
+  }
+  50% {
+    transform: translate3d(0, -17px, 0) rotate(-20deg);
+  }
+}
+
+/* Responsive sizing for about page items */
+@media (max-width: 768px) {
+  .about-hero-bean-left {
+    width: 55px;
+    left: 5%;
+  }
+
+  .about-hero-bean-right {
+    width: 50px;
+    right: 8%;
+  }
+
+  .about-body-plant-left {
+    width: 110px;
+    left: 2%;
+  }
+
+  .about-body-bean-right {
+    width: 60px;
+    right: 5%;
+  }
+
+  .about-mission-flower {
+    width: 85px;
+    right: 5%;
+  }
+
+  .about-mission-bean-left {
+    width: 55px;
+    left: 6%;
+  }
+
+  .about-mission-bean-right {
+    width: 50px;
+    right: 8%;
+  }
+}
