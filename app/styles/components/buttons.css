@@ -1,0 +1,46 @@
+/* ============================================================
+   BUTTONS
+============================================================ */
+.btn-pill {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--ink-cream);
+  font-size: 15px;
+  font-weight: 500;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-pill:active {
+  transform: translateY(0);
+}
+
+/* Badge styling */
+.badge-gold {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(201, 154, 88, 0.15), rgba(201, 154, 88, 0.08));
+  border: 1px solid rgba(201, 154, 88, 0.3);
+  color: var(--ink-cream);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(201, 154, 88, 0.15);
+  animation: pulseGlow 3s ease-in-out infinite;
+}
