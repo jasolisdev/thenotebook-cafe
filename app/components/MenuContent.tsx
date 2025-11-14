@@ -238,7 +238,7 @@ export default function MenuContent({ items }: MenuContentProps) {
 
       {/* Specialty/Seasonal Drinks Section - Only for drinks tab */}
       {activeTab === "drinks" && seasonalItems.length > 0 && (
-        <div key={`seasonal-section-${renderKey}`}>
+        <div key={`seasonal-section-${renderKey}`} className="pb-12">
           {/* Section Heading */}
           <div className="mt-16 mb-10 text-center">
             <h3 className="text-[24px] sm:text-[28px] font-bold text-[#2a1f16] uppercase tracking-wider mb-2">

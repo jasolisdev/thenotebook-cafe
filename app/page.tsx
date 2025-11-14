@@ -3,6 +3,7 @@ import { client } from "@/sanity/lib/client";
 import SiteHeader from "./components/SiteHeader";
 import NewsletterForm from "./components/NewsLetterForm";
 import ScrollReveal from "./components/ScrollReveal";
+import HomeFloatingItems from "./components/HomeFloatingItems";
 import Link from "next/link";
 import {
   Coffee,
@@ -41,30 +42,51 @@ export default async function HomePage() {
       </div>
 
       {/* HERO */}
-      <section className="hero hero-gradient">
-        <div className="hero-copy">
-          <h1 className="text-[34px] leading-[1.05] sm:text-[44px] md:text-[54px] font-semibold ink-cream drop-shadow-[0_4px_18px_rgba(0,0,0,.45)]">
+      <section className="hero hero-gradient relative">
+        <HomeFloatingItems variant="hero" />
+        <div className="hero-copy relative z-10">
+          {/* Main Title */}
+          <h1 className="hero-title">
             {home?.heroHeadline || "The Notebook Café"}
           </h1>
 
-          <div className="mt-3 text-[22px] md:text-[26px] font-medium ink-cream-dim">
-            {home?.statusLine || "☕ Coming Soon ☕"}
-          </div>
-          <div className="mt-2 text-[16px] md:text-[17px] ink-cream-dim">
-            {home?.heroTagline || "Coffee. Culture. House Music."}
+          {/* Tagline */}
+          <p className="hero-tagline">
+            Where Every Sip Tells a Story
+          </p>
+
+          {/* Decorative Divider */}
+          <div className="hero-divider">
+            <span>—</span>
+            <span className="hero-divider-dot">•</span>
+            <span>—</span>
           </div>
 
-          <div className="mt-6 badge-gold">Opening Fall 2025</div>
+          {/* Descriptive Text */}
+          <p className="hero-description">
+            A curated space where specialty coffee meets vibrant culture and soulful house music rhythms
+          </p>
 
-          <div className="mt-6">
+          {/* Primary CTA */}
+          <div className="hero-cta-wrapper">
             <a
               href={home?.ctaUrl || (settings?.social?.instagram ?? "#")}
               target="_blank"
               rel="noreferrer"
-              className="btn-pill"
+              className="hero-cta-button"
             >
-              {home?.ctaText || "Follow us on Instagram"}
+              <span>Follow Our Journey</span>
+              <svg className="hero-cta-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M1 8h14M9 2l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </a>
+          </div>
+
+          {/* Secondary Badge */}
+          <div className="hero-badge">
+            <span className="hero-badge-icon">✦</span>
+            <span>Opening Fall 2025</span>
+            <span className="hero-badge-icon">✦</span>
           </div>
         </div>
       </section>
@@ -75,9 +97,10 @@ export default async function HomePage() {
       </div>
 
       {/* CREAM SECTION */}
-      <section className="section-cream py-20">
+      <section className="section-cream py-20 relative">
+        <HomeFloatingItems variant="welcome" />
         {/* Welcome Header */}
-        <div className="mx-auto max-w-[900px] px-6 text-center mb-20 scroll-reveal">
+        <div className="mx-auto max-w-[900px] px-6 text-center mb-20 pt-16 scroll-reveal relative z-10">
           <h2 className="text-[24px] sm:text-[40px] md:text-[48px] font-bold tracking-tight text-[#2a1f16] mb-4">
             WELCOME TO THE NOTEBOOK CAFÉ
           </h2>
@@ -87,14 +110,16 @@ export default async function HomePage() {
         </div>
 
         {/* What to Expect */}
-        <div className="mx-auto max-w-[800px] px-6 text-center scroll-reveal">
-          <div className="home-section-label mb-10">
-            <span className="inline-block px-4 py-2 rounded-full bg-[rgba(201,154,88,0.12)] border border-[rgba(201,154,88,0.25)] text-[11px] uppercase tracking-[2px] text-[rgba(201,154,88,0.9)]">
-              What to Expect
-            </span>
+        <div className="mx-auto max-w-[900px] px-6 scroll-reveal relative z-10">
+          {/* Section Label */}
+          <div className="welcome-section-label">
+            <div className="welcome-divider-line"></div>
+            <span className="welcome-label-text">What to Expect</span>
+            <div className="welcome-divider-line"></div>
           </div>
 
-          <ul className="inline-block text-left space-y-6 text-[17px] leading-8 text-[#3a3024]">
+          {/* Highlights Grid */}
+          <div className="welcome-highlights-grid">
             {(
               home?.whatToExpectBullets ?? [
                 "Specialty espresso, roasted right",
@@ -102,35 +127,66 @@ export default async function HomePage() {
                 "Stay, study, create — Riverside",
               ]
             ).map((t: string, i: number) => (
-              <li key={i} className="home-highlight-item scroll-reveal" style={{ animationDelay: `${i * 0.1}s` }}>
-                <span className="home-highlight-icon">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <circle cx="10" cy="10" r="4" />
-                  </svg>
-                </span>
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
+              <div key={i} className="welcome-highlight-card scroll-reveal" style={{ animationDelay: `${i * 0.1}s` }}>
+                <div className="welcome-highlight-icon-wrapper">
+                  {/* Coffee Cup with Steam - Index 0 */}
+                  {i === 0 && (
+                    <div className="welcome-icon-coffee">
+                      <svg className="coffee-cup" width="28" height="28" viewBox="0 0 24 24" fill="none">
+                        <path d="M17 10V8C17 6.89543 16.1046 6 15 6H5C3.89543 6 3 6.89543 3 8V10M17 10V16C17 17.1046 16.1046 18 15 18H5C3.89543 18 3 17.1046 3 16V10M17 10H18C19.1046 10 20 10.8954 20 12C20 13.1046 19.1046 14 18 14H17M3 18H17" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      </svg>
+                      <div className="steam steam-1"></div>
+                      <div className="steam steam-2"></div>
+                      <div className="steam steam-3"></div>
+                    </div>
+                  )}
 
+                  {/* Music Notes - Index 1 */}
+                  {i === 1 && (
+                    <div className="welcome-icon-music">
+                      <svg className="music-note music-note-1" width="20" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                      </svg>
+                      <svg className="music-note music-note-2" width="16" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                      </svg>
+                    </div>
+                  )}
+
+                  {/* Notebook with Pen - Index 2 */}
+                  {i === 2 && (
+                    <svg className="welcome-icon-notebook" width="28" height="28" viewBox="0 0 24 24" fill="none">
+                      <rect x="4" y="3" width="13" height="18" rx="1" stroke="currentColor" strokeWidth="2"/>
+                      <line x1="4" y1="7" x2="17" y2="7" stroke="currentColor" strokeWidth="2"/>
+                      <line x1="7" y1="11" x2="14" y2="11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                      <line x1="7" y1="14" x2="12" y2="14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                      <path className="notebook-pen" d="M15 15L20 10L21 11L16 16L15 15Z" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )}
+                </div>
+                <p className="welcome-highlight-text">{t}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Vibe Copy */}
           {home?.vibeCopy && (
-            <p className="home-vibe-copy text-[15.5px] leading-8 mt-10 text-[#5a4a38] max-w-[64ch] mx-auto scroll-reveal">
-              {home.vibeCopy}
-            </p>
+            <div className="welcome-vibe-section">
+              <div className="welcome-quote-mark">"</div>
+              <p className="welcome-vibe-text scroll-reveal">
+                {home.vibeCopy}
+              </p>
+              <div className="welcome-quote-mark welcome-quote-mark-end">"</div>
+            </div>
           )}
 
           {/* Menu Button */}
-          <div className="mt-10 scroll-reveal">
-            <Link
-              href="/menu"
-              className="inline-block px-8 py-3.5 rounded-full bg-[rgba(201,154,88,0.15)] border-2 border-[rgba(201,154,88,0.4)] text-[14px] font-semibold uppercase tracking-widest text-[#2a1f16] transition-all hover:bg-[rgba(201,154,88,0.25)] hover:border-[rgba(201,154,88,0.6)] hover:transform hover:translateY(-2px) hover:shadow-lg"
-            >
-              EXPLORE OUR MENU
+          <div className="welcome-cta-section scroll-reveal">
+            <Link href="/menu" className="welcome-cta-button">
+              <span>EXPLORE OUR MENU</span>
+              <svg className="welcome-cta-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M1 8h14M9 2l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </Link>
           </div>
         </div>
@@ -142,8 +198,9 @@ export default async function HomePage() {
       </div>
 
       {/* CARD GRID - 1 col on mobile, 2 cols on tablet+ */}
-      <section className="section-dark py-32">
-        <div className="mx-auto max-w-[1120px] px-5 sm:px-6">
+      <section className="section-dark py-32 relative">
+        <HomeFloatingItems variant="cards" />
+        <div className="mx-auto max-w-[1120px] px-5 sm:px-6 relative z-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
           {/* CARD: Craft */}
           <div className="home-info-card scroll-reveal" style={{ animationDelay: '0s' }}>
@@ -231,7 +288,7 @@ export default async function HomePage() {
 
       {/* Newsletter - ENHANCED */}
       {/* Newsletter - Connected to Sanity */}
-      <section className="home-newsletter mx-auto max-w-[720px] px-6 mb-32 scroll-reveal">
+      <section className="home-newsletter mx-auto max-w-[720px] px-6 mb-32 scroll-reveal relative z-10">
         <div className="home-newsletter-card text-center">
           <h3 className="text-[22px] sm:text-[24px] font-semibold tracking-wide ink-cream mb-2">
             Stay in the Loop
@@ -245,8 +302,9 @@ export default async function HomePage() {
       </section>
 
       {/* Footer - ENHANCED */}
-      <footer className="home-footer text-center text-[13px] leading-6 py-12 px-5">
-        <div className="max-w-[600px] mx-auto">
+      <footer className="home-footer text-center text-[13px] leading-6 py-12 px-5 relative">
+        <HomeFloatingItems variant="footer" />
+        <div className="max-w-[600px] mx-auto relative z-10">
           <div className="text-[11px] uppercase tracking-widest mb-2 opacity-60">
             The Notebook Café
           </div>

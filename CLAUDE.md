@@ -239,7 +239,151 @@ SITE_PASSWORD=your_password_here
 
 ## Recent Updates & Changes
 
-### November 2024 - Menu System Enhancements
+### November 2024 - Design System Overhaul
+
+#### **Floating SVG Decoration System**
+A comprehensive floating decoration system was implemented across all sections using `HomeFloatingItems` and `FloatingItems` components:
+
+**Component Architecture:**
+- `app/components/HomeFloatingItems.tsx` - Homepage decorations with 4 variants: "hero", "welcome", "cards", "footer"
+- `app/components/FloatingItems.tsx` - Menu page decorations
+- All use `position: absolute` to scroll naturally with content (not fixed to viewport)
+- SVGs have continuous float animations with different durations for organic feel
+
+**Homepage Decorations:**
+- **Hero Section**: 2 coffee beans (left bottom, right top) with gentle float animations
+- **Welcome Section**: 3 items - coffee bean (up-left), coffee bean (bottom-right), coffee plant (bottom-left)
+- **Cards Section**: 4 coffee beans positioned at all corners with staggered animations
+- **Footer Section**: 3 dark-themed items - flower, left coffee bean, right coffee bean (uses `*-dark.svg` variants)
+
+**Menu Page Decorations:**
+- Coffee cup SVG (right side, 350-450px)
+- Left coffee bean (120px, top-left)
+- Right coffee bean (100px, bottom-right)
+- Each with independent float animations (8s, 9s, 10s)
+
+**CSS Implementation:**
+- Each decoration has custom positioning, rotation, and animation
+- Keyframes defined for each item type (e.g., `floatHeroBean1`, `floatCardsBean2`)
+- Responsive sizing with media queries (smaller on mobile)
+- Opacity set to 1 by default, animations run continuously
+- All use `cubic-bezier` easing for smooth motion
+
+#### **Hero Section Complete Redesign**
+The hero section was completely rebuilt for maximum impact and sophistication:
+
+**Typography System:**
+- **Main Title** (`.hero-title`): Alpino, 42-72px (clamp), bold, -0.02em letter-spacing
+- **Tagline** (`.hero-tagline`): Torus Light 300, 20-28px, 0.02em spacing
+- **Description** (`.hero-description`): Torus, 15-17px, max-width 650px, 85% opacity
+- All use staggered fadeInUp animations (0.1s, 0.2s, 0.3s, 0.4s, 0.5s, 0.6s delays)
+
+**Content Structure:**
+```tsx
+1. Main Title: "The Notebook Café"
+2. Tagline: "Where Every Sip Tells a Story"
+3. Decorative Divider: (—•—) with gold accent
+4. Description: "A curated space where specialty coffee meets vibrant culture..."
+5. Primary CTA: "Follow Our Journey" with arrow icon
+6. Badge: "✦ Opening Fall 2025 ✦" with pulsing sparkles
+```
+
+**CTA Button Design** (`.hero-cta-button`):
+- Gold background (rgba(201,154,88,1)) with dark text
+- Pill shape (50px border-radius)
+- Arrow SVG that slides right on hover
+- Lift effect: translateY(-2px) with enhanced shadow
+- All transitions use cubic-bezier(0.4, 0, 0.2, 1)
+
+**Badge Design** (`.hero-badge`):
+- Semi-transparent background with gold border
+- Sparkle icons (✦) with 3s pulse animation
+- Uppercase, letter-spaced text
+- Backdrop blur for glass effect
+
+**Layout:**
+- Max-width: 900px container
+- Center-aligned for optimal hero presentation
+- Vertical spacing: 20px, 32px, 48px, 24px rhythm
+
+#### **Welcome Section Enhancement**
+Complete redesign of "What to Expect" section with card-based layout:
+
+**Section Label:**
+- Horizontal dividers with gold gradient on both sides
+- Centered label text (12px, uppercase, 0.15em letter-spacing)
+- Class: `.welcome-section-label`
+
+**Card Grid System:**
+- 3-column grid on desktop, 1-column on mobile
+- Each card (`.welcome-highlight-card`):
+  - Semi-transparent white background (rgba(255,255,255,0.4))
+  - 16px border-radius
+  - Hover: lifts 4px, brightens background
+  - Contains icon + text
+
+**Custom Animated Icons:**
+1. **Coffee Cup with Steam** (Index 0):
+   - SVG cup with 3 CSS-animated steam wisps
+   - Steam rises 16px, fades in/out over 2s
+   - Staggered delays (0s, 0.4s, 0.8s)
+   - Keyframe: `@keyframes steam-rise`
+
+2. **Music Notes** (Index 1):
+   - 2 music note SVGs with float animation
+   - Bounce 6px up/down over 2s
+   - Second note offset by 0.5s for rhythm
+   - Keyframe: `@keyframes music-float`
+
+3. **Notebook with Pen** (Index 2):
+   - Notebook SVG with animated pen
+   - Pen moves in writing motion (±2px, ±5deg rotation)
+   - 3s loop with opacity changes
+   - Keyframe: `@keyframes pen-write`
+
+**Icon Wrapper:**
+- 56px circular container
+- Gold background and border
+- Scales to 1.05 on card hover
+- Icons intensify color on hover
+
+**Vibe Quote Section:**
+- Large decorative quotation marks (72px, Georgia serif)
+- Alpino italic font for quote text
+- Centered layout with 700px max-width
+- Quote marks positioned absolutely (top-left, bottom-right rotated)
+
+**CTA Button** (`.welcome-cta-button`):
+- Dark background (#2a1f16) for high contrast on cream
+- Cream text (#f4f0e9)
+- Hover: transforms to gold background with dark text
+- Arrow icon with slide-right animation
+- High visibility on light background (WCAG compliant)
+
+#### **Menu Page Improvements**
+**Padding Adjustments:**
+- Menu header: Added `pt-12` (48px top padding)
+- Specialty drinks section: Added `pb-12` (48px bottom padding)
+
+**Menu Item Animations:**
+- Changed from staggered cascade to simultaneous load
+- All items: 0.6s zoom animation (scale 0.92 → 1.0)
+- No individual delays for cleaner, faster appearance
+- Keyframe: `@keyframes menuItemFadeIn`
+
+**Floating Items Behavior:**
+- Position changed from `fixed` to `absolute`
+- Items now scroll naturally with page content
+- Stay within section boundaries
+- Continue gentle float animations
+
+#### **Password Protection Notes**
+**Important:** Environment variables require server restart to take effect.
+- Cookie duration: 7 days (can be reduced to 60s for testing)
+- To test: Clear `site-auth` cookie in DevTools → Application → Cookies
+- Production: Use full 7-day duration for better UX
+
+### Earlier November 2024 - Menu System Enhancements
 1. **SVG Icon System**: Replaced emoji icons with SVG files for professional appearance
 2. **Seasonal Drinks Section**: Added dedicated section for specialty/seasonal items
 3. **Mobile Optimization**: Improved responsive layout for all screen sizes
@@ -255,6 +399,9 @@ SITE_PASSWORD=your_password_here
 - Divider CSS enhanced with GPU acceleration and negative margins to eliminate gaps
 - Menu item animations use premium spring-like cubic-bezier easing
 - Icon rendering optimized with `object-contain` and responsive sizing
+- ScrollReveal component enhanced with MutationObserver to detect dynamically added elements
+- All floating decorations use opacity: 1 by default (no fade-in transition)
+- Homepage cards section: proper centering with wrapper div structure
 
 ## Deployment Notes
 
