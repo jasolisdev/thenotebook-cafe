@@ -1,0 +1,26 @@
+/* ============================================================
+   FOOTER
+============================================================ */
+.footer-dim {
+  color: var(--ink-cream-dim);
+}
+
+footer {
+  animation: fadeIn 1s ease 0.8s backwards;
+}
+
+/* Social icons hover effects */
+a[aria-label="Facebook"],
+a[aria-label="Twitter / X"],
+a[aria-label="Instagram"] {
+  transition: transform 0.2s, opacity 0.2s, filter 0.2s;
+  display: inline-block;
+}
+
+a[aria-label="Facebook"]:hover,
+a[aria-label="Twitter / X"]:hover,
+a[aria-label="Instagram"]:hover {
+  transform: translateY(-2px) scale(1.1);
+  opacity: 1;
+  filter: drop-shadow(0 4px 8px rgba(201, 154, 88, 0.3));
+}

@@ -1,6 +1,8 @@
 // app/about/page.tsx
 import { client } from "@/sanity/lib/client";
 import SiteHeader from "../components/SiteHeader";
+import ScrollReveal from "../components/ScrollReveal";
+import AboutFloatingItems from "../components/AboutFloatingItems";
 import { CoffeeIcon, EqIcon, NoteIcon } from "../components/Icons";
 
 /** Fetch "aboutPage" + "settings" from Sanity */
@@ -20,7 +22,7 @@ async function getAboutData() {
 function PT({ body }: { body: any[] }) {
   if (!body) return null;
   return (
-    <div className="space-y-4 leading-7 text-[15px] ink-cream-dim">
+    <div className="space-y-4 leading-7 text-[15px] text-[#2a1f16]">
       {body.map((b: any, i: number) =>
         b._type === "block" ? (
           <p key={i}>{b.children?.map((c: any) => c.text).join("")}</p>
@@ -42,6 +44,8 @@ export default async function AboutPage() {
 
   return (
     <main className="page-dark">
+      <ScrollReveal />
+
       {/* Fixed dark nav */}
       <div className="nav-glass-wrap">
         <div className="nav-glass">
@@ -49,24 +53,34 @@ export default async function AboutPage() {
         </div>
       </div>
 
-      {/* Hero (text only) - ENHANCED */}
-      <section className="about-hero text-center px-5 pt-[120px] pb-16">
-        <div className="about-hero-badge">Our Story</div>
-        <h1 className="about-hero-title text-[38px] sm:text-[48px] md:text-[60px] font-semibold ink-cream">
+      {/* HERO SECTION - DARK */}
+      <section className="about-hero text-center px-5 pt-[120px] pb-20 relative">
+        <AboutFloatingItems variant="hero" />
+        <div className="scroll-reveal" style={{ animationDelay: '0.1s' }}>
+          <div className="about-hero-badge">Our Story</div>
+        </div>
+        <h1 className="scroll-reveal about-hero-title text-[38px] sm:text-[48px] md:text-[60px] font-semibold ink-cream" style={{ animationDelay: '0.2s' }}>
+          The Notebook Café
         </h1>
-        <p className="about-hero-subtitle mt-5 ink-cream-dim max-w-[68ch] mx-auto text-[16px] sm:text-[17px] leading-relaxed">
+        <p className="scroll-reveal about-hero-subtitle mt-5 ink-cream-dim max-w-[68ch] mx-auto text-[16px] sm:text-[17px] leading-relaxed" style={{ animationDelay: '0.3s' }}>
           The Notebook Café is a house-music-driven coffee space rooted in
           Riverside — where music meets craft.
         </p>
       </section>
 
-      {/* Body copy - ENHANCED */}
-      <section className="px-5 pb-14">
-        <div className="about-body-card mx-auto max-w-[72ch]">
+      {/* Wavy divider - transition to cream */}
+      <div className="divider-cream" style={{ transform: 'scaleY(-1)' }}>
+        <img src="/notebook-divider-cream.svg" alt="" />
+      </div>
+
+      {/* CREAM SECTION - Body Copy */}
+      <section className="section-cream py-16 px-5 relative">
+        <AboutFloatingItems variant="body" />
+        <div className="scroll-reveal about-body-card mx-auto max-w-[72ch]" style={{ animationDelay: '0.1s' }}>
           {about?.body ? (
             <PT body={about.body} />
           ) : (
-            <p className="ink-cream-dim text-[15.5px] leading-relaxed">
+            <p className="text-[#2a1f16] text-[15.5px] leading-relaxed">
               We're building a place to slow down, create, meet up, and feel
               inspired — like your favorite listening room and your favorite
               espresso bar had a kid.
@@ -75,11 +89,11 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Values - ENHANCED */}
-      <section className="px-5 pb-10">
+      {/* CREAM SECTION - Values */}
+      <section className="section-cream px-5 pb-20">
         <div className="mx-auto max-w-[880px]">
-          <div className="about-section-label text-center mb-8">
-            <span className="inline-block px-4 py-2 rounded-full bg-[rgba(201,154,88,0.08)] border border-[rgba(201,154,88,0.2)] text-[11px] uppercase tracking-[2px] ink-cream">
+          <div className="scroll-reveal about-section-label text-center mb-8" style={{ animationDelay: '0.1s' }}>
+            <span className="inline-block px-4 py-2 rounded-full bg-[rgba(201,154,88,0.15)] border border-[rgba(201,154,88,0.25)] text-[11px] uppercase tracking-[2px] text-[rgba(201,154,88,0.95)]">
               {about?.valuesHeading || "What we're building"}
             </span>
           </div>
@@ -88,34 +102,35 @@ export default async function AboutPage() {
             {bullets.map((t: string, i: number) => (
               <div
                 key={i}
-                className="about-value-card"
-                style={{ animationDelay: `${i * 0.1}s` }}
+                className="scroll-reveal about-value-card"
+                style={{ animationDelay: `${0.2 + i * 0.1}s` }}
               >
                 <div className="about-value-icon">
                   {i === 0 ? <CoffeeIcon /> : i === 1 ? <EqIcon /> : <NoteIcon />}
                 </div>
-                <div className="ink-cream text-[15px] leading-relaxed">{t}</div>
+                <div className="text-[#2a1f16] text-[15px] leading-relaxed">{t}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Divider - ENHANCED */}
-      <div className="my-14 mx-auto max-w-[760px] px-5">
-        <div className="about-divider" />
+      {/* Wavy divider - back to dark */}
+      <div className="divider-cream">
+        <img src="/notebook-divider-cream.svg" alt="" />
       </div>
 
-      {/* Mission / founder note - ENHANCED */}
-      <section className="px-5 pb-24">
+      {/* DARK SECTION - Mission */}
+      <section className="section-dark px-5 py-20 relative">
+        <AboutFloatingItems variant="mission" />
         <div className="mx-auto max-w-[820px]">
-          <div className="about-section-label text-center mb-6">
+          <div className="scroll-reveal about-section-label text-center mb-8" style={{ animationDelay: '0.1s' }}>
             <span className="inline-block px-4 py-2 rounded-full bg-[rgba(201,154,88,0.08)] border border-[rgba(201,154,88,0.2)] text-[11px] uppercase tracking-[2px] ink-cream">
               {about?.missionHeading || "Why we're doing this"}
             </span>
           </div>
 
-          <div className="about-mission-card">
+          <div className="scroll-reveal about-mission-card" style={{ animationDelay: '0.2s' }}>
             <div className="about-mission-accent" />
             <p className="whitespace-pre-line ink-cream text-[16px] leading-[1.8] relative z-10">
               {about?.founderNote ||
@@ -127,7 +142,7 @@ A space that feels like Riverside, made for locals, creatives, and anyone who lo
         </div>
       </section>
 
-      {/* Footer - ENHANCED */}
+      {/* Footer */}
       <footer className="about-footer text-center text-[13px] leading-6 py-12 px-5">
         <div className="max-w-[600px] mx-auto">
           <div className="text-[11px] uppercase tracking-widest mb-2 opacity-60">
