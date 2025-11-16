@@ -213,7 +213,7 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
 
           {/* Location and Opening */}
           <p className="drawer-location-text">
-            University Ave & Orange St. | Opening Early 2026
+            University Ave & Orange St. | Grand Opening 2026
           </p>
         </div>
       </aside>

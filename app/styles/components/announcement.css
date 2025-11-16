@@ -4,7 +4,7 @@
 .announcement-banner {
   position: sticky;
   top: 0;
-  z-index: 70;
+  z-index: 100;
   width: 100%;
   background: linear-gradient(135deg, rgba(201, 154, 88, 0.95) 0%, rgba(181, 134, 68, 0.95) 100%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -156,8 +156,8 @@
 
 .announcement-text-scroll {
   display: flex;
-  gap: 48px;
-  animation: announcement-scroll 15s linear infinite;
+  gap: 25vw; /* 25% viewport width gap between repetitions */
+  animation: announcement-scroll 20s linear infinite;
   will-change: transform;
 }
 
@@ -166,7 +166,7 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-33.333%);
+    transform: translateX(calc(-100% / 3 - 25vw / 3));
   }
 }
 
