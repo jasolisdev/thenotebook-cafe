@@ -196,33 +196,33 @@
   pointer-events: auto;
 }
 
-/* Drawer panel - Full screen overlay */
+/* Drawer panel - Slide down from top */
 .drawer {
   position: fixed;
-  inset: 0;
+  left: 0;
+  right: 0;
   top: 92px; /* Below announcement banner + nav */
   width: 100%;
-  height: calc(100dvh - 92px);
+  max-height: 50vh;
   background: linear-gradient(135deg, rgba(15, 12, 10, 0.98) 0%, rgba(22, 17, 13, 0.98) 100%);
-  opacity: 0;
+  transform: translateY(-100%);
   pointer-events: none;
-  transition:
-    opacity 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
-    backdrop-filter 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-  padding: 60px 20px 40px;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 40px 20px 32px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   overflow-y: auto;
   z-index: 40;
-  backdrop-filter: blur(0px);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(201, 154, 88, 0.2);
 }
 
 .drawer.open {
-  opacity: 1;
+  transform: translateY(0);
   pointer-events: auto;
-  backdrop-filter: blur(20px);
 }
 
 .drawer::before {
@@ -243,15 +243,15 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   align-items: center;
   text-align: center;
-  margin-bottom: auto;
+  margin-bottom: 24px;
 }
 
 .drawer-nav-item {
   font-family: var(--font-display);
-  font-size: 48px;
+  font-size: 32px;
   font-weight: 700;
   letter-spacing: 0.02em;
   color: var(--ink-cream);
@@ -261,20 +261,20 @@
     opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
     text-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
-  transform: translateY(30px) scale(0.95);
+  transform: translateY(20px) scale(0.95);
   position: relative;
-  padding: 8px 16px;
+  padding: 6px 12px;
 }
 
 @media (min-width: 640px) {
   .drawer-nav-item {
-    font-size: 64px;
+    font-size: 40px;
   }
 }
 
 @media (min-width: 768px) {
   .drawer-nav-item {
-    font-size: 72px;
+    font-size: 44px;
   }
 }
 
@@ -288,7 +288,7 @@
   text-shadow:
     0 0 20px rgba(201, 154, 88, 0.3),
     0 0 40px rgba(201, 154, 88, 0.2);
-  transform: translateY(-4px) scale(1.02);
+  transform: translateY(-2px) scale(1.02);
 }
 
 .drawer-nav-item:active {
@@ -304,17 +304,17 @@
 
 .drawer-footer {
   margin-top: auto;
-  padding: 32px 20px;
+  padding: 24px 20px 16px;
   text-align: center;
   color: var(--ink-cream-dim);
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(15px);
   transition:
-    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s,
-    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s,
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   align-items: center;
 }
 

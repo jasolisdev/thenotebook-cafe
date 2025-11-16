@@ -4,7 +4,7 @@ type Props = {
   text?: string;
 };
 
-export default function AnnouncementBanner({ text = 'THE NOTEBOOK CAFE • RIVERSIDE, CA • Opening Early Q1 2026' }: Props) {
+export default function AnnouncementBanner({ text = 'THE NOTEBOOK CAFE • RIVERSIDE, CA • Grand Opening 2026' }: Props) {
   return (
     <div className="announcement-banner">
       <div className="announcement-content">
