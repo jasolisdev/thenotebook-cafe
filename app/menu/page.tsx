@@ -3,6 +3,8 @@ import SiteHeader from "../components/SiteHeader";
 import MenuContent from "../components/MenuContent";
 import ScrollReveal from "../components/ScrollReveal";
 import FloatingItems from "../components/FloatingItems";
+import SiteFooter from "../components/SiteFooter";
+import AnnouncementBanner from "../components/AnnouncementBanner";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -34,15 +36,15 @@ export default async function MenuPage() {
   return (
     <main className="page-dark">
       <ScrollReveal />
+      {/* Announcement Banner */}
+      <AnnouncementBanner />
+
       {/* Fixed dark nav */}
       <div className="nav-glass-wrap">
         <div className="nav-glass">
           <SiteHeader instagramUrl={settings?.social?.instagram} />
         </div>
       </div>
-
-      {/* Hero Spacer */}
-      <div className="h-32"></div>
 
       {/* Menu Section - Cream Background */}
       <section className="section-cream py-20 min-h-screen relative">
@@ -69,16 +71,7 @@ export default async function MenuPage() {
       </div>
 
       {/* Footer */}
-      <footer className="section-dark text-center text-[13px] leading-6 py-12 px-5">
-        <div className="max-w-[600px] mx-auto">
-          <div className="text-[11px] uppercase tracking-widest mb-2 opacity-60 ink-cream">
-            The Notebook Café
-          </div>
-          <div className="ink-cream-dim">
-            © {new Date().getFullYear()} The Notebook Café LLC — Riverside, CA
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
