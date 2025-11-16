@@ -14,7 +14,7 @@ async function getAboutData() {
       title, body, valuesHeading, valuesBullets, missionHeading, founderNote
     }`),
     client.fetch(`*[_type=="settings"][0]{
-      social{ instagram }
+      social{ instagram, spotify }
     }`),
   ]);
   return { about, settings };
@@ -51,11 +51,10 @@ export default async function AboutPage() {
       <AnnouncementBanner />
 
       {/* Fixed dark nav */}
-      <div className="nav-glass-wrap">
-        <div className="nav-glass">
-          <SiteHeader instagramUrl={settings?.social?.instagram} />
-        </div>
-      </div>
+      <SiteHeader
+        instagramUrl={settings?.social?.instagram}
+        spotifyUrl={settings?.social?.spotify}
+      />
 
       {/* HERO SECTION - DARK */}
       <section className="about-hero text-center px-5 pt-[60px] pb-10 relative">

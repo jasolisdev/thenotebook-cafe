@@ -12,10 +12,8 @@ import {
   Music2,
   MapPin,
   Clock,
-  Instagram,
-  Facebook,
-  Twitter,
 } from "lucide-react";
+import { SiInstagram, SiSpotify } from "react-icons/si";
 
 async function getData() {
   const [home, settings] = await Promise.all([
@@ -24,7 +22,7 @@ async function getData() {
       whatToExpectBullets, vibeCopy
     }`),
     client.fetch(
-      `*[_type=="settings"][0]{ social{ instagram }, address, hours }`,
+      `*[_type=="settings"][0]{ social{ instagram, spotify }, address, hours }`,
     ),
   ]);
   return { home, settings };
@@ -40,32 +38,34 @@ export default async function HomePage() {
       <AnnouncementBanner />
 
       {/* Fixed dark nav */}
-      <div className="nav-glass-wrap">
-        <div className="nav-glass">
-          <SiteHeader instagramUrl={settings?.social?.instagram} />
-        </div>
-      </div>
+      <SiteHeader
+        instagramUrl={settings?.social?.instagram}
+        spotifyUrl={settings?.social?.spotify}
+      />
 
       {/* HERO */}
       <section className="hero hero-gradient relative">
         <HomeFloatingItems variant="hero" />
         <div className="hero-copy relative z-10">
-          {/* Main Title */}
-          <h1 className="hero-title">
+          {/* Screen reader only title for SEO */}
+          <h1 className="sr-only">
             {home?.heroHeadline || "The Notebook Café"}
           </h1>
+
+          {/* Logo */}
+          <div className="hero-logo-wrapper">
+            <img
+              src="/logo.png"
+              alt="The Notebook Café"
+              className="hero-logo"
+            />
+          </div>
 
           {/* Tagline */}
           <p className="hero-tagline">
             Where Every Sip Tells a Story
           </p>
 
-          {/* Decorative Divider */}
-          <div className="hero-divider">
-            <span>—</span>
-            <span className="hero-divider-dot">•</span>
-            <span>—</span>
-          </div>
 
           {/* Descriptive Text */}
           <p className="hero-description">
@@ -109,16 +109,9 @@ export default async function HomePage() {
           <h2 className="text-[16px] min-[375px]:text-[20px] sm:text-[24px] md:text-[28px] font-medium text-[rgba(201,154,88,0.9)] tracking-wide mb-3 sm:mb-4">
             WELCOME TO THE NOTEBOOK CAFÉ
           </h2>
-          <h1 className="text-[20px] min-[375px]:text-[24px] sm:text-[40px] md:text-[48px] font-bold tracking-tight text-[#2a1f16] mb-6 sm:mb-8">
-            WHERE EVERY CUP TELLS A STORY
+          <h1 className="text-[16px] min-[375px]:text-[18px] sm:text-[36px] md:text-[44px] font-bold tracking-tight text-[#2a1f16] mb-4 sm:mb-6">
+            COME FOR THE COFFEE, STAY FOR THE VIBE
           </h1>
-          <div className="flex justify-center">
-            <img
-              src="/logo.png"
-              alt="The Notebook Café Logo"
-              className="w-24 h-24 min-[375px]:w-32 min-[375px]:h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain"
-            />
-          </div>
         </div>
 
         {/* What to Expect */}
@@ -220,16 +213,21 @@ export default async function HomePage() {
               Ambient house, soul, and groove—setting the perfect backdrop for focus and creation. Tune in to our curated playlist before the doors open.
             </p>
 
-            {/* Music Player Placeholder - TODO: Add actual playlist embed once BIL provides playlist name */}
-            <div className="bg-[rgba(201,154,88,0.08)] border-2 border-[rgba(201,154,88,0.2)] rounded-2xl p-12 sm:p-16">
-              <div className="flex flex-col items-center gap-4">
-                <Music2 className="w-16 h-16 text-[rgba(201,154,88,0.7)]" />
-                <p className="text-[14px] text-[#5a4a38] italic">
-                  Spotify/Apple Music player coming soon
-                </p>
-                <p className="text-[12px] text-[#8a7a68]">
-                  (Playlist name needed from BIL)
-                </p>
+            {/* Spotify Playlist Embed */}
+            <div className="max-w-[700px] mx-auto">
+              <div className="rounded-2xl overflow-hidden border-2 border-[rgba(201,154,88,0.2)] shadow-xl bg-gradient-to-br from-[rgba(201,154,88,0.08)] to-transparent p-3">
+                <div className="rounded-xl overflow-hidden shadow-inner">
+                  <iframe
+                    src="https://open.spotify.com/embed/playlist/58qhSWWn3g1QeCKoVFoAJk?utm_source=generator&theme=0"
+                    width="100%"
+                    height="380"
+                    frameBorder="0"
+                    allowFullScreen
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                    className="w-full rounded-lg"
+                  ></iframe>
+                </div>
               </div>
             </div>
           </div>
@@ -252,21 +250,30 @@ export default async function HomePage() {
               A quiet canvas for creativity. We're building with warm wood laminates, calming olive green accents, and minimalist beige tones—a refined retreat from the hustle, built for long stays and deep focus.
             </p>
 
-            {/* Mood Board Placeholder - TODO: Add actual mood board images */}
+            {/* Coffee Mood Board */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-[800px] mx-auto">
-              <div className="bg-[#d4c5a9] rounded-lg aspect-square flex items-center justify-center">
-                <p className="text-[#5a4a38] text-[12px] px-4 text-center">Warm wood laminates</p>
+              <div className="rounded-lg aspect-square overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=400&fit=crop"
+                  alt="Specialty coffee with latte art"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <div className="bg-[#8a9a7e] rounded-lg aspect-square flex items-center justify-center">
-                <p className="text-white text-[12px] px-4 text-center">Olive green accents</p>
+              <div className="rounded-lg aspect-square overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=400&fit=crop"
+                  alt="Cozy coffee shop interior"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <div className="bg-[#f4f0e9] rounded-lg aspect-square flex items-center justify-center border-2 border-[rgba(201,154,88,0.2)]">
-                <p className="text-[#5a4a38] text-[12px] px-4 text-center">Minimalist beige tones</p>
+              <div className="rounded-lg aspect-square overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400&h=400&fit=crop"
+                  alt="Coffee on minimalist table"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
-            <p className="text-[11px] text-[#8a7a68] mt-4 italic">
-              Mood board images coming soon
-            </p>
           </div>
         </div>
       </section>
@@ -323,28 +330,11 @@ export default async function HomePage() {
                   <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
               </div>
-              <p className="text-[13.5px] min-[375px]:text-[14.5px] sm:text-[15px] leading-6 sm:leading-7 ink-cream-dim mb-3 sm:mb-4">
+              <p className="text-[13.5px] min-[375px]:text-[14.5px] sm:text-[15px] leading-6 sm:leading-7 ink-cream-dim">
                 Corner of University Ave & Orange St
                 <br />
                 Riverside, CA • Opening Early 2026
               </p>
-              <div className="home-social-links flex gap-3 sm:gap-4 mt-auto">
-                <a
-                  href={settings?.social?.instagram || "#"}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="home-social-icon"
-                  aria-label="Instagram"
-                >
-                  <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
-                </a>
-                <a href="#" className="home-social-icon" aria-label="Facebook">
-                  <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
-                </a>
-                <a href="#" className="home-social-icon" aria-label="Twitter / X">
-                  <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
-                </a>
-              </div>
             </div>
 
             {/* CARD: Hours */}
@@ -372,10 +362,10 @@ export default async function HomePage() {
       <section className="home-newsletter mx-auto max-w-[720px] px-4 sm:px-6 mb-20 sm:mb-32 scroll-reveal relative z-10">
         <div className="home-newsletter-card text-center">
           <h3 className="text-[18px] min-[375px]:text-[20px] sm:text-[24px] font-semibold tracking-wide ink-cream mb-3">
-            STAY IN THE LOOP: GET THE KEY
+            FOR CREATIVES & COFFEE LOVERS
           </h3>
           <p className="text-[13px] min-[375px]:text-[14px] sm:text-[15px] ink-cream-dim mb-5 sm:mb-6 leading-relaxed">
-            Join our inner circle for exclusive pre-opening soft launch invites, first access to our menu, and the exact date we open our doors at University & Orange.
+            Join our community for opening announcements, exclusive pre-launch events, and first look at what we're brewing.
           </p>
 
           <NewsletterForm source="homepage" />

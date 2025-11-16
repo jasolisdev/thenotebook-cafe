@@ -5,16 +5,19 @@
 /* Header container wraps nav + drawer for proper z-index stacking */
 .header-container {
   position: fixed;
-  top: 42px; /* Height of announcement banner */
+  top: 42px;
+  /* Height of announcement banner */
   left: 0;
   right: 0;
-  z-index: 40; /* Below banner (50), above page content */
+  z-index: 40;
+  /* Below banner (50), above page content */
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateY(0);
 }
 
 .header-container.header-hidden {
-  transform: translateY(-200%); /* Slide up completely out of view */
+  transform: translateY(-64px);
+  /* Slide up under the banner */
 }
 
 @media (min-width: 375px) {
@@ -41,7 +44,6 @@
 .nav-glass {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 14px clamp(16px, 3vw, 28px);
 }
 
 /* Nav bar - always visible on top within container */
@@ -51,7 +53,8 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-  z-index: 2; /* Above drawer (1) within container */
+  z-index: 2;
+  /* Above drawer (1) within container */
   background: linear-gradient(135deg, rgba(15, 12, 10, 1) 0%, rgba(22, 17, 13, 1) 100%);
   border-bottom: 1px solid rgba(201, 154, 88, 0.15);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -75,6 +78,22 @@
   text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
 }
 
+/* Hide brand text on mobile, show only logo */
+.brand-text {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .brand-text {
+    display: inline;
+  }
+
+  .brand-logo {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
 .nav-dark {
   display: none;
   gap: 18px;
@@ -89,8 +108,8 @@
 
 .nav-dark a {
   font-family: var(--font-sans);
-  font-weight: 500;
-  letter-spacing: 0.5px;
+  font-weight: 400;
+  letter-spacing: 1.2px;
   color: var(--ink-cream-dim);
   transition:
     color 0.18s ease,
@@ -220,7 +239,8 @@
   background: rgba(0, 0, 0, 0.4);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s cubic-bezier(0.25, 0.1, 0.25, 1); /* Match drawer: 0.2s */
+  transition: opacity 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  /* Match drawer: 0.2s */
   z-index: 25;
 }
 
@@ -232,7 +252,8 @@
 /* Drawer panel - Half-screen Quake-style dropdown behind nav */
 .drawer {
   position: absolute;
-  top: 64px; /* Start below nav bar height */
+  top: 64px;
+  /* Start below nav bar height */
   left: 0;
   right: 0;
   width: 100%;
@@ -240,12 +261,16 @@
   background: linear-gradient(135deg, rgba(15, 12, 10, 0.98) 0%, rgba(22, 17, 13, 0.98) 100%);
   transform: translateY(-100%);
   pointer-events: none;
-  transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1); /* Instant feel: 0.3s -> 0.2s */
+  transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  /* Instant feel: 0.3s -> 0.2s */
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Disable scrolling */
-  z-index: 1; /* Below nav (2) within container */
+  overflow: hidden;
+  /* Disable scrolling */
+  z-index: 1;
+  /* Below nav (2) within container */
   backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(201, 154, 88, 0.15);
 }
 
 .drawer.open {
@@ -284,7 +309,8 @@
   transition:
     color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), /* Instant: 0.2s */
+    opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    /* Instant: 0.2s */
     text-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
   transform: translateY(15px);
@@ -312,8 +338,8 @@
 }
 
 .drawer-nav-item.nav-active {
-  color: rgba(201, 154, 88, 1); /* Gold color, no glow */
-  border-bottom: 2px solid rgba(201, 154, 88, 0.8);
+  color: rgba(201, 154, 88, 1);
+  /* Gold color, no glow */
 }
 
 .drawer-footer {
@@ -324,7 +350,8 @@
   opacity: 0;
   transform: translateY(15px);
   transition:
-    opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), /* Instant: 0.2s, no delay */
+    opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    /* Instant: 0.2s, no delay */
     transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
@@ -369,7 +396,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(201, 154, 88, 1); /* Gold color */
+  color: rgba(201, 154, 88, 1);
+  /* Gold color */
   background: rgba(201, 154, 88, 0.08);
   border-radius: 50%;
   border: 1px solid rgba(201, 154, 88, 0.15);
@@ -380,17 +408,28 @@
     border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.drawer-social-icon svg {
+.drawer-social-icon .icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 20px;
   height: 20px;
-  line-height: 1;
+}
+
+.drawer-social-icon .icon-adjust {
+  transform: translate(13px, 13px);
+}
+
+.drawer-social-icon svg {
+  width: 20px !important;
+  height: 20px !important;
   display: block;
-  margin: auto; /* Ensure perfect centering regardless of viewBox */
-  vertical-align: middle;
+  flex-shrink: 0;
 }
 
 .drawer-social-icon:hover {
-  color: rgba(201, 154, 88, 1); /* Stay gold on hover */
+  color: rgba(201, 154, 88, 1);
+  /* Stay gold on hover */
   background: rgba(201, 154, 88, 0.2);
   border-color: rgba(201, 154, 88, 0.4);
   transform: translateY(-2px) scale(1.05);
@@ -418,6 +457,7 @@
 }
 
 @media (min-width: 640px) {
+
   .drawer-bean-1,
   .drawer-bean-2 {
     width: 80px;
@@ -440,18 +480,24 @@
 }
 
 @keyframes drawerFloatBean1 {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) rotate(-15deg);
   }
+
   50% {
     transform: translateY(-15px) rotate(-20deg);
   }
 }
 
 @keyframes drawerFloatBean2 {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) rotate(25deg);
   }
+
   50% {
     transform: translateY(-12px) rotate(30deg);
   }

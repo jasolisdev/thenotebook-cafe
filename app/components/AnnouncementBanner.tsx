@@ -1,40 +1,28 @@
+/**
+ * AnnouncementBanner Component
+ *
+ * Sticky banner at the top of all pages displaying announcement text with animated
+ * coffee cup icons and steam effects on both sides.
+ *
+ * Features:
+ * - Fixed positioning (z-index: 50, below navigation)
+ * - Gold gradient background matching site aesthetic
+ * - Animated steam rising from coffee cups (CSS animation)
+ * - Responsive gap between cups and text (8px → 10px → 12px)
+ * - Static text display (no scrolling animation)
+ *
+ * Styles: app/styles/components/announcement.css
+ */
+
 'use client';
 
-import { useEffect, useState } from 'react';
-
 type Props = {
-  text?: string;
+  text?: string; // Optional announcement text (defaults to 'Grand Opening 2026')
 };
 
-export default function AnnouncementBanner({ text = 'THE NOTEBOOK CAFE • RIVERSIDE, CA • Grand Opening 2026' }: Props) {
-  const [bannerVisible, setBannerVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  // Auto-hide banner on scroll down, show on scroll up
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY < 10) {
-        // Always show banner at top of page
-        setBannerVisible(true);
-      } else if (currentScrollY > lastScrollY) {
-        // Scrolling down - hide banner
-        setBannerVisible(false);
-      } else {
-        // Scrolling up - show banner
-        setBannerVisible(true);
-      }
-
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
-
+export default function AnnouncementBanner({ text = 'Grand Opening 2026' }: Props) {
   return (
-    <div className={`announcement-banner ${bannerVisible ? '' : 'banner-hidden'}`}>
+    <div className="announcement-banner">
       <div className="announcement-content">
         {/* Left Coffee Cup */}
         <div className="announcement-icon">
@@ -54,9 +42,7 @@ export default function AnnouncementBanner({ text = 'THE NOTEBOOK CAFE • RIVER
         {/* Scrolling Text Container */}
         <div className="announcement-text-wrapper">
           <div className="announcement-text-scroll">
-            <p className="announcement-text">{text}</p>
-            <p className="announcement-text">{text}</p>
-            <p className="announcement-text">{text}</p>
+            <span className="announcement-text">{text}</span>
           </div>
         </div>
 

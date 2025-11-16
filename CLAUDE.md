@@ -463,8 +463,88 @@ Created reusable `SiteFooter` component:
 - All floating decorations use opacity: 1 by default (no fade-in transition)
 - Homepage cards section: proper centering with wrapper div structure
 
+### January 2025 - Navigation, Typography & Content Refinements
+
+#### **Announcement Banner**
+- Fixed announcement banner spacing
+- Changed gap between coffee cup icons from 100px → 20px (mobile) for better mobile UX
+- Removed scrolling animation for static text display
+- Responsive gap: 8px (320px) → 10px (375px) → 12px (640px)
+
+#### **Navigation Typography**
+- Updated nav link typography for refined aesthetic:
+  - Font weight: 500 → 400 (regular)
+  - Letter spacing: 0.5px → 1.2px
+  - More elegant, sophisticated look matching upscale café aesthetic
+
+#### **Hero Section Logo Update**
+- Replaced text title "The Notebook Café" with logo image in hero
+- Kept h1 with `.sr-only` class for SEO/accessibility
+- Logo sizing: 140px (mobile) → 160px (375px) → 200px (640px) → 240px (1024px)
+- Maintains fadeInUp animation matching original title
+
+#### **Homepage Content Updates**
+**Welcome Section:**
+- Updated heading: "WHERE EVERY CUP TELLS A STORY" → "COME FOR THE COFFEE, STAY FOR THE VIBE"
+- Reduced font sizes for mobile readability:
+  - Mobile: 16px → 18px → 36px → 44px (was 20px → 24px → 40px → 48px)
+- Removed logo from welcome section (now only in hero)
+
+**What to Expect Cards:**
+- Enhanced card styling for better contrast on cream background:
+  - Subtle gradient background: `linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.5) 100%)`
+  - Stronger gold border: 1.5px at `rgba(201,154,88,0.25)`
+  - Enhanced shadows with inset highlight for depth
+  - Improved hover states with brighter gradients
+- Music notes animation: brought notes 10px closer together (gap: 4px → 0px, added -6px margin to second note)
+
+**Newsletter Section:**
+- Updated copy from "STAY IN THE LOOP: GET THE KEY" to "FOR CREATIVES & COFFEE LOVERS"
+- New description: "Join our community for opening announcements, exclusive pre-launch events, and first look at what we're brewing."
+- More targeted messaging for creative audience
+
+#### **Info Cards (Bottom of Homepage)**
+- Enhanced typography with 1.5px letter-spacing on headings
+- Changed title color to gold: `rgba(201,154,88,0.95)`
+- Reverted to original subtle card styling (semi-transparent backgrounds)
+- Removed social icons from Location card for cleaner design
+- Icons remain unchanged (Coffee, Music, MapPin, Clock)
+
+#### **Spotify Integration**
+- Embedded Spotify playlist in "Hear the Vibe" section
+- Playlist ID: `58qhSWWn3g1QeCKoVFoAJk`
+- Styled player with:
+  - Gold gradient frame background
+  - 2px gold border `rgba(201,154,88,0.2)`
+  - Double-layered design with padding
+  - Enhanced shadows (outer + inner)
+- Spotify icon in mobile drawer links directly to playlist
+- Removed playlist from main navigation (only accessible via drawer icon)
+
+#### **Menu Page**
+- Added coffee hero image from Unsplash below menu description
+- Reduced top padding from `pt-12` to `pt-4` for tighter spacing
+- Image sizing: 200px (mobile) → 300px (tablet) → 400px (desktop)
+- Unsplash image configured in `next.config.ts`
+
+#### **Image Configuration**
+- Added `images.unsplash.com` to Next.js remote patterns
+- Allows optimized loading of Unsplash images throughout site
+
+#### **Commonly Edited Files This Session**
+- `app/page.tsx` - Homepage content, logo, newsletter, cards, Spotify embed
+- `app/menu/page.tsx` - Menu hero image, padding adjustments
+- `app/components/SiteHeader.tsx` - Navigation typography, Spotify link
+- `app/components/AnnouncementBanner.tsx` - Banner spacing and animation
+- `app/styles/components/navigation.css` - Nav link typography refinement
+- `app/styles/components/hero.css` - Logo styles, sr-only utility
+- `app/styles/components/announcement.css` - Banner responsive gaps
+- `app/styles/pages/home.css` - Card enhancements, music note spacing
+- `next.config.ts` - Unsplash image domain configuration
+
 ## Deployment Notes
 
 - Configured for Vercel deployment
 - Static metadata in `app/layout.tsx`
 - Robots and sitemap generation via `app/robots.ts` and `app/sitemap.ts`
+- **Important:** Environment variables require server restart to take effect
