@@ -76,7 +76,9 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
         }
       `}</style>
 
-      <div className="header-dark">
+      {/* Header container wraps nav and drawer for proper z-index stacking */}
+      <div className="header-container">
+        <div className="header-dark">
         <Link href="/" className="brand-dark" aria-label="Home">
           <Image
             src="/logo.png"
@@ -216,7 +218,22 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
             University Ave & Orange St. | Grand Opening 2026
           </p>
         </div>
+
+        {/* Floating Coffee Beans in Drawer */}
+        <div className="drawer-floating-items">
+          <img
+            src="/coffee-bean.svg"
+            alt=""
+            className="drawer-bean-1"
+          />
+          <img
+            src="/coffee-bean.svg"
+            alt=""
+            className="drawer-bean-2"
+          />
+        </div>
       </aside>
+      </div>
     </>
   );
 }

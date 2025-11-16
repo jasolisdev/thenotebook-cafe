@@ -1,28 +1,35 @@
 /* ============================================================
    NAVIGATION
 ============================================================ */
-.nav-glass-wrap {
+
+/* Header container wraps nav + drawer for proper z-index stacking */
+.header-container {
   position: fixed;
   top: 42px; /* Height of announcement banner */
   left: 0;
   right: 0;
-  z-index: 40;
-  background: linear-gradient(135deg, rgba(15, 12, 10, 1) 0%, rgba(22, 17, 13, 1) 100%);
-  border-bottom: 1px solid rgba(201, 154, 88, 0.15);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  animation: fadeIn 0.4s ease;
+  z-index: 40; /* Below banner (50), above page content */
 }
 
 @media (min-width: 375px) {
-  .nav-glass-wrap {
+  .header-container {
     top: 46px;
   }
 }
 
 @media (min-width: 640px) {
-  .nav-glass-wrap {
+  .header-container {
     top: 48px;
   }
+}
+
+/* Legacy nav-glass-wrap (not currently used) */
+.nav-glass-wrap {
+  position: relative;
+  background: linear-gradient(135deg, rgba(15, 12, 10, 1) 0%, rgba(22, 17, 13, 1) 100%);
+  border-bottom: 1px solid rgba(201, 154, 88, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.4s ease;
 }
 
 .nav-glass {
@@ -31,13 +38,18 @@
   padding: 14px clamp(16px, 3vw, 28px);
 }
 
+/* Nav bar - always visible on top within container */
 .header-dark {
   height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
-  z-index: 1;
+  z-index: 2; /* Above drawer (1) within container */
+  background: linear-gradient(135deg, rgba(15, 12, 10, 1) 0%, rgba(22, 17, 13, 1) 100%);
+  border-bottom: 1px solid rgba(201, 154, 88, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  padding: 0 clamp(16px, 3vw, 28px);
 }
 
 .brand-dark {
@@ -214,8 +226,8 @@
 
 /* Drawer panel - Half-screen Quake-style dropdown behind nav */
 .drawer {
-  position: fixed;
-  top: 106px; /* Start below banner (42px) + nav (64px) */
+  position: absolute;
+  top: 64px; /* Start below nav bar height */
   left: 0;
   right: 0;
   width: 100%;
@@ -227,20 +239,8 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  z-index: 30;
+  z-index: 1; /* Below nav (2) within container */
   backdrop-filter: blur(20px);
-}
-
-@media (min-width: 375px) {
-  .drawer {
-    top: 110px; /* Banner (46px) + Nav (64px) */
-  }
-}
-
-@media (min-width: 640px) {
-  .drawer {
-    top: 112px; /* Banner (48px) + Nav (64px) */
-  }
 }
 
 .drawer.open {
@@ -383,6 +383,8 @@
   height: 20px;
   line-height: 1;
   display: block;
+  margin: auto; /* Ensure perfect centering regardless of viewBox */
+  vertical-align: middle;
 }
 
 .drawer-social-icon:hover {
@@ -436,10 +438,69 @@
   letter-spacing: 0.5px;
   color: var(--ink-cream-dim);
   margin: 0;
+  padding-bottom: 24px; /* Padding below address */
 }
 
 @media (min-width: 640px) {
   .drawer-location-text {
     font-size: 13px;
+    padding-bottom: 32px;
+  }
+}
+
+/* Floating Coffee Beans in Drawer */
+.drawer-floating-items {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.drawer-bean-1,
+.drawer-bean-2 {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  opacity: 0.15;
+  will-change: transform;
+}
+
+@media (min-width: 640px) {
+  .drawer-bean-1,
+  .drawer-bean-2 {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.drawer-bean-1 {
+  top: 15%;
+  left: 8%;
+  animation: drawerFloatBean1 8s ease-in-out infinite;
+  transform: rotate(-15deg);
+}
+
+.drawer-bean-2 {
+  bottom: 12%;
+  right: 10%;
+  animation: drawerFloatBean2 9s ease-in-out infinite;
+  transform: rotate(25deg);
+}
+
+@keyframes drawerFloatBean1 {
+  0%, 100% {
+    transform: translateY(0) rotate(-15deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(-20deg);
+  }
+}
+
+@keyframes drawerFloatBean2 {
+  0%, 100% {
+    transform: translateY(0) rotate(25deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(30deg);
   }
 }

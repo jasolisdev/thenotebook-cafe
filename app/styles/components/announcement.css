@@ -158,8 +158,8 @@
 
 .announcement-text-scroll {
   display: flex;
-  gap: 25vw; /* 25% viewport width gap between repetitions */
-  animation: announcement-scroll 20s linear infinite;
+  gap: 20vw; /* Gap between repetitions */
+  animation: announcement-scroll 18s linear infinite; /* 10% faster than 20s */
   will-change: transform;
 }
 
@@ -168,7 +168,8 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-100% / 3 - 25vw / 3));
+    /* Move by exactly one text width + one gap for seamless loop */
+    transform: translateX(calc(-100% / 3 - 20vw / 3));
   }
 }
 
