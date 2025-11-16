@@ -1,12 +1,40 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 type Props = {
   text?: string;
 };
 
 export default function AnnouncementBanner({ text = 'THE NOTEBOOK CAFE • RIVERSIDE, CA • Grand Opening 2026' }: Props) {
+  const [bannerVisible, setBannerVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Auto-hide banner on scroll down, show on scroll up
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < 10) {
+        // Always show banner at top of page
+        setBannerVisible(true);
+      } else if (currentScrollY > lastScrollY) {
+        // Scrolling down - hide banner
+        setBannerVisible(false);
+      } else {
+        // Scrolling up - show banner
+        setBannerVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <div className="announcement-banner">
+    <div className={`announcement-banner ${bannerVisible ? '' : 'banner-hidden'}`}>
       <div className="announcement-content">
         {/* Left Coffee Cup */}
         <div className="announcement-icon">

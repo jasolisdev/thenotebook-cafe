@@ -9,6 +9,12 @@
   left: 0;
   right: 0;
   z-index: 40; /* Below banner (50), above page content */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+}
+
+.header-container.header-hidden {
+  transform: translateY(-200%); /* Slide up completely out of view */
 }
 
 @media (min-width: 375px) {

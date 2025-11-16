@@ -21,6 +21,8 @@ const BP_PX: Record<Breakpoint, number> = {
 
 export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) {
   const [open, setOpen] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
 
   const handleToggle = () => {
@@ -55,6 +57,29 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
     };
   }, [open]);
 
+  // Auto-hide header on scroll down, show on scroll up
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < 10) {
+        // Always show header at top of page
+        setHeaderVisible(true);
+      } else if (currentScrollY > lastScrollY) {
+        // Scrolling down - hide header
+        setHeaderVisible(false);
+      } else {
+        // Scrolling up - show header
+        setHeaderVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   const isActive = (href: string) => pathname === href;
   const bpPx = useMemo(() => BP_PX[burgerUntil], [burgerUntil]);
 
@@ -84,7 +109,7 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
       />
 
       {/* Header container wraps nav and drawer for proper z-index stacking */}
-      <div className="header-container">
+      <div className={`header-container ${headerVisible ? '' : 'header-hidden'}`}>
         <div className="header-dark">
         <Link href="/" className="brand-dark" aria-label="Home">
           <Image
