@@ -140,6 +140,21 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
         aria-modal="true"
         aria-hidden={!open}
       >
+        {/* Drawer Header */}
+        <div className="drawer-header">
+          <span className="drawer-menu-label">Menu</span>
+          <button
+            onClick={() => setOpen(false)}
+            className="drawer-close-button"
+            aria-label="Close menu"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
         <nav className="drawer-nav" aria-label="Mobile">
           <Link
             href="/"
