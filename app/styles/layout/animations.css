@@ -1,0 +1,640 @@
+/* ============================================================
+   FLOATING ITEMS - BACKGROUND DECORATION
+============================================================ */
+.floating-items-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-item {
+  position: absolute;
+  opacity: 1;
+}
+
+.floating-item.visible {
+  animation: float 8s ease-in-out infinite;
+}
+
+/* ============================================================
+   MENU PAGE FLOATING ITEMS
+============================================================ */
+.floating-cup {
+  width: 350px;
+  height: auto;
+  right: 8%;
+  top: 280px;
+  transform: translate3d(0, 0, 0) rotate(-8deg);
+}
+
+@media (min-width: 1024px) {
+  .floating-cup {
+    width: 450px;
+    right: 10%;
+  }
+}
+
+/* Coffee Bean - Left Side */
+.floating-bean-left {
+  width: 120px;
+  height: auto;
+  left: 5%;
+  top: 180px;
+  transform: translate3d(0, 0, 0) rotate(15deg);
+}
+
+.floating-bean-left.visible {
+  animation: floatBeanLeft 10s ease-in-out infinite;
+}
+
+/* Coffee Bean - Right Side */
+.floating-bean-right {
+  width: 100px;
+  height: auto;
+  right: 12%;
+  bottom: 150px;
+  transform: translate3d(0, 0, 0) rotate(-20deg);
+}
+
+.floating-bean-right.visible {
+  animation: floatBeanRight 9s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-8deg);
+  }
+
+  50% {
+    transform: translate3d(0, -20px, 0) rotate(-8deg);
+  }
+}
+
+@keyframes floatBeanLeft {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(15deg);
+  }
+
+  50% {
+    transform: translate3d(0, -25px, 0) rotate(15deg);
+  }
+}
+
+@keyframes floatBeanRight {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-20deg);
+  }
+
+  50% {
+    transform: translate3d(0, -15px, 0) rotate(-20deg);
+  }
+}
+
+/* Responsive sizing */
+@media (max-width: 768px) {
+  .floating-cup {
+    width: 180px;
+    right: 2%;
+    bottom: 15%;
+  }
+
+  .floating-bean-left {
+    width: 80px;
+    left: 2%;
+    top: 140px;
+  }
+
+  .floating-bean-right {
+    width: 70px;
+    right: 5%;
+    bottom: 100px;
+  }
+}
+
+/* ============================================================
+   HOME PAGE FLOATING ITEMS
+============================================================ */
+
+/* Hero Section Items */
+.hero-bean-left {
+  width: 80px;
+  height: auto;
+  left: 10%;
+  bottom: 20%;
+  transform: translate3d(0, 0, 0) rotate(25deg);
+}
+
+.hero-bean-left.visible {
+  animation: floatHeroBean1 9s ease-in-out infinite;
+}
+
+.hero-bean-right {
+  width: 70px;
+  height: auto;
+  right: 15%;
+  top: 18%;
+  transform: translate3d(0, 0, 0) rotate(-30deg);
+}
+
+.hero-bean-right.visible {
+  animation: floatHeroBean2 10s ease-in-out infinite;
+}
+
+/* Welcome Section Items */
+.home-bean-up-left {
+  width: 100px;
+  height: auto;
+  left: 8%;
+  top: 15%;
+  transform: translate3d(0, 0, 0) rotate(20deg);
+}
+
+.home-bean-up-left.visible {
+  animation: floatHomeBean1 11s ease-in-out infinite;
+}
+
+.home-bean-bottom-right {
+  width: 90px;
+  height: auto;
+  right: 10%;
+  bottom: 10%;
+  transform: translate3d(0, 0, 0) rotate(-15deg);
+}
+
+.home-bean-bottom-right.visible {
+  animation: floatHomeBean2 9s ease-in-out infinite;
+}
+
+.home-coffee-plant {
+  width: 200px;
+  height: auto;
+  left: 5%;
+  bottom: 15%;
+  transform: translate3d(0, 0, 0) rotate(5deg);
+}
+
+.home-coffee-plant.visible {
+  animation: floatHomePlant 12s ease-in-out infinite;
+}
+
+/* Cards Section Items */
+.cards-bean-top-left {
+  width: 85px;
+  height: auto;
+  left: 6%;
+  top: 12%;
+  transform: translate3d(0, 0, 0) rotate(18deg);
+}
+
+.cards-bean-top-left.visible {
+  animation: floatCardsBean1 11s ease-in-out infinite;
+}
+
+.cards-bean-top-right {
+  width: 75px;
+  height: auto;
+  right: 8%;
+  top: 28%;
+  transform: translate3d(0, 0, 0) rotate(-22deg);
+}
+
+.cards-bean-top-right.visible {
+  animation: floatCardsBean2 9s ease-in-out infinite;
+}
+
+.cards-bean-bottom-left {
+  width: 70px;
+  height: auto;
+  left: 12%;
+  bottom: -5%;
+  transform: translate3d(0, 0, 0) rotate(-12deg);
+}
+
+.cards-bean-bottom-left.visible {
+  animation: floatCardsBean3 10s ease-in-out infinite;
+}
+
+.cards-bean-bottom-right {
+  width: 80px;
+  height: auto;
+  right: 10%;
+  bottom: 0%;
+  transform: translate3d(0, 0, 0) rotate(28deg);
+}
+
+.cards-bean-bottom-right.visible {
+  animation: floatCardsBean4 12s ease-in-out infinite;
+}
+
+/* Footer Items */
+.footer-flower-dark {
+  width: 140px;
+  height: auto;
+  right: 10%;
+  top: 15%;
+  transform: translate3d(0, 0, 0) rotate(-10deg);
+}
+
+.footer-flower-dark.visible {
+  animation: floatFooterFlower 10s ease-in-out infinite;
+}
+
+.footer-bean-left-dark {
+  width: 90px;
+  height: auto;
+  left: 8%;
+  top: 25%;
+  transform: translate3d(0, 0, 0) rotate(15deg);
+}
+
+.footer-bean-left-dark.visible {
+  animation: floatFooterBeanLeft 11s ease-in-out infinite;
+}
+
+.footer-bean-right-dark {
+  width: 85px;
+  height: auto;
+  right: 15%;
+  bottom: 20%;
+  transform: translate3d(0, 0, 0) rotate(-18deg);
+}
+
+.footer-bean-right-dark.visible {
+  animation: floatFooterBeanRight 9s ease-in-out infinite;
+}
+
+/* ============================================================
+   ANIMATION KEYFRAMES
+============================================================ */
+
+/* Hero Animations */
+@keyframes floatHeroBean1 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(25deg);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0) rotate(25deg);
+  }
+}
+
+@keyframes floatHeroBean2 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-30deg);
+  }
+  50% {
+    transform: translate3d(0, -22px, 0) rotate(-30deg);
+  }
+}
+
+/* Cards Section Animations */
+@keyframes floatCardsBean1 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(18deg);
+  }
+  50% {
+    transform: translate3d(0, -20px, 0) rotate(18deg);
+  }
+}
+
+@keyframes floatCardsBean2 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-22deg);
+  }
+  50% {
+    transform: translate3d(0, -16px, 0) rotate(-22deg);
+  }
+}
+
+@keyframes floatCardsBean3 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-12deg);
+  }
+  50% {
+    transform: translate3d(0, -19px, 0) rotate(-12deg);
+  }
+}
+
+@keyframes floatCardsBean4 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(28deg);
+  }
+  50% {
+    transform: translate3d(0, -24px, 0) rotate(28deg);
+  }
+}
+
+/* Welcome Section Animations */
+@keyframes floatHomeBean1 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(20deg);
+  }
+  50% {
+    transform: translate3d(0, -20px, 0) rotate(20deg);
+  }
+}
+
+@keyframes floatHomeBean2 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-15deg);
+  }
+  50% {
+    transform: translate3d(0, -15px, 0) rotate(-15deg);
+  }
+}
+
+@keyframes floatHomePlant {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(5deg);
+  }
+  50% {
+    transform: translate3d(0, -25px, 0) rotate(5deg);
+  }
+}
+
+/* Footer Animations */
+@keyframes floatFooterFlower {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-10deg);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0) rotate(-10deg);
+  }
+}
+
+@keyframes floatFooterBeanLeft {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(15deg);
+  }
+  50% {
+    transform: translate3d(0, -20px, 0) rotate(15deg);
+  }
+}
+
+@keyframes floatFooterBeanRight {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-18deg);
+  }
+  50% {
+    transform: translate3d(0, -16px, 0) rotate(-18deg);
+  }
+}
+
+/* Responsive sizing for home items */
+@media (max-width: 768px) {
+  .hero-bean-left {
+    width: 50px;
+    left: 5%;
+  }
+
+  .hero-bean-right {
+    width: 45px;
+    right: 8%;
+  }
+
+  .home-bean-up-left {
+    width: 70px;
+    left: 5%;
+  }
+
+  .home-bean-bottom-right {
+    width: 60px;
+    right: 5%;
+  }
+
+  .home-coffee-plant {
+    width: 120px;
+    left: 2%;
+  }
+
+  .cards-bean-top-left,
+  .cards-bean-top-right,
+  .cards-bean-bottom-left,
+  .cards-bean-bottom-right {
+    width: 50px;
+  }
+
+  .footer-flower-dark {
+    width: 90px;
+    right: 5%;
+  }
+
+  .footer-bean-left-dark {
+    width: 60px;
+    left: 5%;
+  }
+
+  .footer-bean-right-dark {
+    width: 55px;
+    right: 8%;
+  }
+}
+
+/* ============================================================
+   ABOUT PAGE FLOATING ITEMS
+============================================================ */
+
+/* Hero Section Items */
+.about-hero-bean-left {
+  width: 90px;
+  height: auto;
+  left: 8%;
+  top: 28%;
+  transform: translate3d(0, 0, 0) rotate(20deg);
+}
+
+.about-hero-bean-left.visible {
+  animation: floatAboutHeroBean1 10s ease-in-out infinite;
+}
+
+.about-hero-bean-right {
+  width: 80px;
+  height: auto;
+  right: 12%;
+  top: 32%;
+  transform: translate3d(0, 0, 0) rotate(-25deg);
+}
+
+.about-hero-bean-right.visible {
+  animation: floatAboutHeroBean2 11s ease-in-out infinite;
+}
+
+/* Body Section Items (Cream) */
+.about-body-plant-left {
+  width: 180px;
+  height: auto;
+  left: 3%;
+  top: 20%;
+  transform: translate3d(0, 0, 0) rotate(8deg);
+}
+
+.about-body-plant-left.visible {
+  animation: floatAboutBodyPlant 12s ease-in-out infinite;
+}
+
+.about-body-bean-right {
+  width: 95px;
+  height: auto;
+  right: 8%;
+  bottom: 25%;
+  transform: translate3d(0, 0, 0) rotate(-18deg);
+}
+
+.about-body-bean-right.visible {
+  animation: floatAboutBodyBean 9s ease-in-out infinite;
+}
+
+/* Mission Section Items (Dark) */
+.about-mission-flower {
+  width: 130px;
+  height: auto;
+  right: 8%;
+  top: 20%;
+  transform: translate3d(0, 0, 0) rotate(-12deg);
+}
+
+.about-mission-flower.visible {
+  animation: floatAboutMissionFlower 10s ease-in-out infinite;
+}
+
+.about-mission-bean-left {
+  width: 85px;
+  height: auto;
+  left: 10%;
+  top: 30%;
+  transform: translate3d(0, 0, 0) rotate(18deg);
+}
+
+.about-mission-bean-left.visible {
+  animation: floatAboutMissionBeanLeft 11s ease-in-out infinite;
+}
+
+.about-mission-bean-right {
+  width: 80px;
+  height: auto;
+  right: 12%;
+  bottom: 25%;
+  transform: translate3d(0, 0, 0) rotate(-20deg);
+}
+
+.about-mission-bean-right.visible {
+  animation: floatAboutMissionBeanRight 9s ease-in-out infinite;
+}
+
+/* ============================================================
+   ABOUT PAGE ANIMATION KEYFRAMES
+============================================================ */
+
+/* Hero Animations */
+@keyframes floatAboutHeroBean1 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(20deg);
+  }
+  50% {
+    transform: translate3d(0, -20px, 0) rotate(20deg);
+  }
+}
+
+@keyframes floatAboutHeroBean2 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-25deg);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0) rotate(-25deg);
+  }
+}
+
+/* Body Section Animations */
+@keyframes floatAboutBodyPlant {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(8deg);
+  }
+  50% {
+    transform: translate3d(0, -22px, 0) rotate(8deg);
+  }
+}
+
+@keyframes floatAboutBodyBean {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-18deg);
+  }
+  50% {
+    transform: translate3d(0, -16px, 0) rotate(-18deg);
+  }
+}
+
+/* Mission Section Animations */
+@keyframes floatAboutMissionFlower {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-12deg);
+  }
+  50% {
+    transform: translate3d(0, -19px, 0) rotate(-12deg);
+  }
+}
+
+@keyframes floatAboutMissionBeanLeft {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(18deg);
+  }
+  50% {
+    transform: translate3d(0, -21px, 0) rotate(18deg);
+  }
+}
+
+@keyframes floatAboutMissionBeanRight {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-20deg);
+  }
+  50% {
+    transform: translate3d(0, -17px, 0) rotate(-20deg);
+  }
+}
+
+/* Responsive sizing for about page items */
+@media (max-width: 768px) {
+  .about-hero-bean-left {
+    width: 55px;
+    left: 5%;
+  }
+
+  .about-hero-bean-right {
+    width: 50px;
+    right: 8%;
+  }
+
+  .about-body-plant-left {
+    width: 110px;
+    left: 2%;
+  }
+
+  .about-body-bean-right {
+    width: 60px;
+    right: 5%;
+  }
+
+  .about-mission-flower {
+    width: 85px;
+    right: 5%;
+  }
+
+  .about-mission-bean-left {
+    width: 55px;
+    left: 6%;
+  }
+
+  .about-mission-bean-right {
+    width: 50px;
+    right: 8%;
+  }
+}
