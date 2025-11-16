@@ -212,14 +212,14 @@
   pointer-events: auto;
 }
 
-/* Drawer panel - Full screen overlay below nav */
+/* Drawer panel - Half-screen Quake-style dropdown behind nav */
 .drawer {
   position: fixed;
-  inset: 0;
-  top: 0;
-  padding-top: 106px; /* Banner (42px) + Nav (64px) */
+  top: 106px; /* Start below banner (42px) + nav (64px) */
+  left: 0;
+  right: 0;
   width: 100%;
-  height: 100vh;
+  height: 50vh;
   background: linear-gradient(135deg, rgba(15, 12, 10, 0.98) 0%, rgba(22, 17, 13, 0.98) 100%);
   transform: translateY(-100%);
   pointer-events: none;
@@ -233,13 +233,13 @@
 
 @media (min-width: 375px) {
   .drawer {
-    padding-top: 110px; /* Banner (46px) + Nav (64px) */
+    top: 110px; /* Banner (46px) + Nav (64px) */
   }
 }
 
 @media (min-width: 640px) {
   .drawer {
-    padding-top: 112px; /* Banner (48px) + Nav (64px) */
+    top: 112px; /* Banner (48px) + Nav (64px) */
   }
 }
 
@@ -256,50 +256,6 @@
     radial-gradient(circle at 50% 30%, rgba(201, 154, 88, 0.04), transparent 50%),
     radial-gradient(circle at 20% 70%, rgba(201, 154, 88, 0.02), transparent 40%);
   pointer-events: none;
-}
-
-.drawer-close {
-  display: none;
-}
-
-/* Drawer Header */
-.drawer-header {
-  padding: 24px 20px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(201, 154, 88, 0.15);
-}
-
-.drawer-menu-label {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: rgba(201, 154, 88, 0.8);
-}
-
-.drawer-close-button {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ink-cream-dim);
-  background: rgba(201, 154, 88, 0.08);
-  border-radius: 50%;
-  border: 1px solid rgba(201, 154, 88, 0.15);
-  transition:
-    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.drawer-close-button:hover {
-  color: var(--ink-cream);
-  background: rgba(201, 154, 88, 0.15);
-  transform: scale(1.08);
 }
 
 /* Drawer Navigation */
