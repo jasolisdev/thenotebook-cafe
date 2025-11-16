@@ -4,8 +4,9 @@
 .nav-glass-wrap {
   position: relative;
   z-index: 60;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: saturate(140%) blur(8px);
+  background: linear-gradient(135deg, rgba(15, 12, 10, 1) 0%, rgba(22, 17, 13, 1) 100%);
+  border-bottom: 1px solid rgba(201, 154, 88, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.4s ease;
 }
 
