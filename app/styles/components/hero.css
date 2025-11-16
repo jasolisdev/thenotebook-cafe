@@ -304,3 +304,53 @@
     font-size: 16px;
   }
 }
+
+/* Screen Reader Only (for SEO) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Hero Logo */
+.hero-logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
+}
+
+.hero-logo {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.5));
+}
+
+@media (min-width: 375px) {
+  .hero-logo {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+@media (min-width: 640px) {
+  .hero-logo {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-logo {
+    width: 240px;
+    height: 240px;
+  }
+}

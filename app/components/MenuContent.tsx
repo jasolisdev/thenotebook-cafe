@@ -178,7 +178,7 @@ export default function MenuContent({ items }: MenuContentProps) {
                       <>
                         <div className="flex-1 border-b-2 border-dotted border-[rgba(201,154,88,0.3)] mb-1"></div>
                         <span className="text-[16px] sm:text-[18px] font-bold text-[rgba(201,154,88,0.9)] whitespace-nowrap flex-shrink-0">
-                          $ {item.price} USD
+                          from ${item.price} USD
                         </span>
                       </>
                     )}
@@ -219,7 +219,7 @@ export default function MenuContent({ items }: MenuContentProps) {
                       <>
                         <div className="flex-1 border-b-2 border-dotted border-[rgba(201,154,88,0.3)] mb-1"></div>
                         <span className="text-[16px] sm:text-[18px] font-bold text-[rgba(201,154,88,0.9)] whitespace-nowrap flex-shrink-0">
-                          $ {item.price} USD
+                          from ${item.price} USD
                         </span>
                       </>
                     )}
@@ -235,6 +235,67 @@ export default function MenuContent({ items }: MenuContentProps) {
           ))}
         </div>
       </div>
+
+      {/* MAKE IT YOURS Section - Only for drinks tab */}
+      {activeTab === "drinks" && (
+        <div className="mt-16 mb-12 scroll-reveal">
+          {/* Section Title */}
+          <div className="text-center mb-8">
+            <h3 className="text-[20px] sm:text-[24px] font-bold text-[#2a1f16] tracking-wider mb-2">
+              • MAKE IT YOURS •
+            </h3>
+            <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
+          </div>
+
+          {/* Customization Options */}
+          <div className="max-w-[800px] mx-auto space-y-6">
+            {/* Milk Alternatives */}
+            <div className="bg-[rgba(201,154,88,0.05)] border border-[rgba(201,154,88,0.15)] rounded-lg p-6">
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mb-2">
+                <h4 className="text-[16px] sm:text-[18px] font-bold text-[#2a1f16] uppercase tracking-wide">
+                  Milk Alternatives
+                </h4>
+                <span className="text-[14px] sm:text-[16px] font-semibold text-[rgba(201,154,88,0.9)]">
+                  +$0.75
+                </span>
+              </div>
+              <p className="text-[14px] sm:text-[15px] text-[#5a4a38]">
+                Oat, Almond, Soy, Coconut, Whole
+              </p>
+            </div>
+
+            {/* House-Made Syrups */}
+            <div className="bg-[rgba(201,154,88,0.05)] border border-[rgba(201,154,88,0.15)] rounded-lg p-6">
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mb-2">
+                <h4 className="text-[16px] sm:text-[18px] font-bold text-[#2a1f16] uppercase tracking-wide">
+                  House-Made Syrups
+                </h4>
+                <span className="text-[14px] sm:text-[16px] font-semibold text-[rgba(201,154,88,0.9)]">
+                  +$0.50
+                </span>
+              </div>
+              <p className="text-[14px] sm:text-[15px] text-[#5a4a38]">
+                Vanilla, Hazelnut, Caramel, + Seasonal Flavors
+              </p>
+            </div>
+
+            {/* Extra Espresso Shot */}
+            <div className="bg-[rgba(201,154,88,0.05)] border border-[rgba(201,154,88,0.15)] rounded-lg p-6">
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mb-2">
+                <h4 className="text-[16px] sm:text-[18px] font-bold text-[#2a1f16] uppercase tracking-wide">
+                  Extra Espresso Shot
+                </h4>
+                <span className="text-[14px] sm:text-[16px] font-semibold text-[rgba(201,154,88,0.9)]">
+                  +$1.00
+                </span>
+              </div>
+              <p className="text-[14px] sm:text-[15px] text-[#5a4a38] italic">
+                Fuel the groove.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Specialty/Seasonal Drinks Section - Only for drinks tab */}
       {activeTab === "drinks" && seasonalItems.length > 0 && (
@@ -273,7 +334,7 @@ export default function MenuContent({ items }: MenuContentProps) {
                         </h3>
                         {item.price && (
                           <span className="text-[14px] font-bold text-[rgba(201,154,88,0.9)]">
-                            ${item.price}
+                            from ${item.price}
                           </span>
                         )}
                       </div>
@@ -327,7 +388,7 @@ export default function MenuContent({ items }: MenuContentProps) {
                         </h3>
                         {item.price && (
                           <span className="text-[14px] font-bold text-[rgba(201,154,88,0.9)]">
-                            ${item.price}
+                            from ${item.price}
                           </span>
                         )}
                       </div>
