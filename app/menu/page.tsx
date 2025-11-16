@@ -24,7 +24,7 @@ async function getData() {
       "imageUrl": image.asset->url
     }`),
     client.fetch(
-      `*[_type=="settings"][0]{ social{ instagram } }`,
+      `*[_type=="settings"][0]{ social{ instagram, spotify } }`,
     ),
   ]);
   return { menuItems, settings };
@@ -40,24 +40,34 @@ export default async function MenuPage() {
       <AnnouncementBanner />
 
       {/* Fixed dark nav */}
-      <div className="nav-glass-wrap">
-        <div className="nav-glass">
-          <SiteHeader instagramUrl={settings?.social?.instagram} />
-        </div>
-      </div>
+      <SiteHeader
+        instagramUrl={settings?.social?.instagram}
+        spotifyUrl={settings?.social?.spotify}
+      />
 
       {/* Menu Section - Cream Background */}
       <section className="section-cream py-20 min-h-screen relative">
         <FloatingItems />
         <div className="mx-auto max-w-[1200px] px-6 relative z-10">
           {/* Header */}
-          <div className="text-center mb-12 pt-12 scroll-reveal">
+          <div className="text-center mb-12 pt-4 scroll-reveal">
             <h1 className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-tight text-[#2a1f16] mb-4">
               MENU
             </h1>
-            <p className="text-[15px] sm:text-[16px] text-[#5a4a38] max-w-[600px] mx-auto">
+            <p className="text-[15px] sm:text-[16px] text-[#5a4a38] max-w-[600px] mx-auto mb-8">
               Crafted with intention. Brewed with rhythm. Explore our signature drinks, matcha blends, and handcrafted pastries—made fresh, every day.
             </p>
+
+            {/* Coffee Hero Image */}
+            <div className="max-w-[800px] mx-auto mb-12 scroll-reveal">
+              <div className="rounded-2xl overflow-hidden shadow-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&h=400&fit=crop"
+                  alt="Artisan espresso being poured"
+                  className="w-full h-[200px] sm:h-[300px] md:h-[400px] object-cover"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Menu Content with Tabs */}

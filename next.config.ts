@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
         // You can optionally include `port` and `pathname` if you want to be super strict,
         // but just protocol + hostname is enough for Sanity CDN.
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
     ],
   },
 };

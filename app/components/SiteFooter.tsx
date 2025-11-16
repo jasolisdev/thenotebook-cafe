@@ -2,7 +2,7 @@ import Link from "next/link";
 
 type FooterProps = {
   showFloatingItems?: boolean;
-  FloatingItemsComponent?: React.ComponentType<{ variant: string }>;
+  FloatingItemsComponent?: React.ComponentType<{ variant: "welcome" | "footer" | "hero" | "cards" }>;
 };
 
 export default function SiteFooter({
