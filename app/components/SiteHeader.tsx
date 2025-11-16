@@ -148,7 +148,6 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
             href="/"
             onClick={() => setOpen(false)}
             className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/") ? 'nav-active' : ''}`}
-            style={{ transitionDelay: '0.1s' }}
           >
             HOME
           </Link>
@@ -156,7 +155,6 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
             href="/menu"
             onClick={() => setOpen(false)}
             className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/menu") ? 'nav-active' : ''}`}
-            style={{ transitionDelay: '0.15s' }}
           >
             MENU
           </Link>
@@ -164,7 +162,6 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
             href="/about"
             onClick={() => setOpen(false)}
             className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/about") ? 'nav-active' : ''}`}
-            style={{ transitionDelay: '0.2s' }}
           >
             ABOUT
           </Link>
