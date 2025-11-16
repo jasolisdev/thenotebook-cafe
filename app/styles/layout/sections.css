@@ -1,0 +1,84 @@
+/* ============================================================
+   SECTIONS & DIVIDERS
+============================================================ */
+
+/* Dividers */
+.divider-cream {
+  width: 100vw;
+  height: auto;
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  overflow: hidden;
+  position: relative;
+  /* Remove any spacing */
+  font-size: 0;
+  /* Ensure full width on mobile */
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.divider-cream img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+  padding: 0;
+  vertical-align: bottom;
+  /* Prevent any subpixel gaps */
+  transform: translateZ(0) scale(1.03);
+  -webkit-transform: translateZ(0) scale(1.03);
+  /* Anti-aliasing for smooth edges */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Cream section background */
+.section-cream {
+  background-color: #f4f0e9;
+  position: relative;
+  margin: 0;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  overflow-x: hidden;
+}
+
+@media (min-width: 375px) {
+  .section-cream {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+@media (min-width: 640px) {
+  .section-cream {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-cream {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+}
+
+/* Adjust icon colors in cream section */
+.section-cream .home-highlight-icon {
+  color: rgba(201, 154, 88, 0.8);
+}
+
+.section-cream .home-highlight-item:hover .home-highlight-icon {
+  color: rgba(201, 154, 88, 1);
+}
+
+/* Dark section background */
+.section-dark {
+  background-color: var(--bg-solid);
+  position: relative;
+  margin: 0;
+}
