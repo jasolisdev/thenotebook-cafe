@@ -90,6 +90,43 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      {/* OUR RIVERSIDE COMMITMENT Section */}
+      <section className="section-cream px-5 pb-16">
+        <div className="mx-auto max-w-[880px]">
+          <div className="scroll-reveal about-section-label text-center mb-8" style={{ animationDelay: '0.1s' }}>
+            <span className="inline-block px-4 py-2 rounded-full bg-[rgba(201,154,88,0.15)] border border-[rgba(201,154,88,0.25)] text-[11px] uppercase tracking-[2px] text-[rgba(201,154,88,0.95)]">
+              Our Riverside Commitment
+            </span>
+          </div>
+
+          <div className="scroll-reveal mx-auto max-w-[700px] text-center" style={{ animationDelay: '0.2s' }}>
+            <p className="text-[#2a1f16] text-[15px] sm:text-[16px] leading-relaxed">
+              We chose the vibrant intersection of University Ave and Orange St because it sits at the cross-section of culture, commerce, and creativity. The Notebook Cafe is built to be a true community anchor for students, creatives, and locals—a peaceful hub to find your flow.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* THE CRAFT & THE RHYTHM Section */}
+      <section className="section-cream px-5 pb-16">
+        <div className="mx-auto max-w-[880px]">
+          <div className="scroll-reveal about-section-label text-center mb-8" style={{ animationDelay: '0.1s' }}>
+            <span className="inline-block px-4 py-2 rounded-full bg-[rgba(201,154,88,0.15)] border border-[rgba(201,154,88,0.25)] text-[11px] uppercase tracking-[2px] text-[rgba(201,154,88,0.95)]">
+              The Craft & The Rhythm
+            </span>
+          </div>
+
+          <div className="scroll-reveal mx-auto max-w-[700px] text-center" style={{ animationDelay: '0.2s' }}>
+            <p className="text-[#2a1f16] text-[15px] sm:text-[16px] leading-relaxed mb-4">
+              Our mission extends beyond the cup. We ensure our specialty espresso is ethically sourced and roasted right, prepared on state-of-the-art equipment for consistent, perfect texture. We treat every step of the brewing process with respect.
+            </p>
+            <p className="text-[13px] text-[#8a7a68] italic">
+              Coffee roaster: [TBD - need info from BIL]
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CREAM SECTION - Values */}
       <section className="section-cream px-5 pb-20">
         <div className="mx-auto max-w-[880px]">

@@ -90,7 +90,7 @@ export default async function HomePage() {
           {/* Secondary Badge */}
           <div className="hero-badge">
             <span className="hero-badge-icon">✦</span>
-            <span>Opening Fall 2025</span>
+            <span>Opening Early Q1 2026</span>
             <span className="hero-badge-icon">✦</span>
           </div>
         </div>
@@ -204,6 +204,73 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* HEAR THE VIBE Section */}
+      <section className="section-cream pb-20 relative">
+        <div className="mx-auto max-w-[900px] px-4 sm:px-6 scroll-reveal relative z-10">
+          {/* Section Label */}
+          <div className="welcome-section-label mb-8">
+            <div className="welcome-divider-line"></div>
+            <span className="welcome-label-text">Hear the Vibe</span>
+            <div className="welcome-divider-line"></div>
+          </div>
+
+          {/* Content */}
+          <div className="text-center mb-8">
+            <p className="text-[15px] sm:text-[16px] leading-relaxed text-[#2a1f16] max-w-[700px] mx-auto mb-10">
+              Ambient house, soul, and groove—setting the perfect backdrop for focus and creation. Tune in to our curated playlist before the doors open.
+            </p>
+
+            {/* Music Player Placeholder - TODO: Add actual playlist embed once BIL provides playlist name */}
+            <div className="bg-[rgba(201,154,88,0.08)] border-2 border-[rgba(201,154,88,0.2)] rounded-2xl p-12 sm:p-16">
+              <div className="flex flex-col items-center gap-4">
+                <Music2 className="w-16 h-16 text-[rgba(201,154,88,0.7)]" />
+                <p className="text-[14px] text-[#5a4a38] italic">
+                  Spotify/Apple Music player coming soon
+                </p>
+                <p className="text-[12px] text-[#8a7a68]">
+                  (Playlist name needed from BIL)
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* DESIGN NOTES Section */}
+      <section className="section-cream pb-20 relative">
+        <div className="mx-auto max-w-[900px] px-4 sm:px-6 scroll-reveal relative z-10">
+          {/* Section Label */}
+          <div className="welcome-section-label mb-8">
+            <div className="welcome-divider-line"></div>
+            <span className="welcome-label-text">The Atmosphere</span>
+            <div className="welcome-divider-line"></div>
+          </div>
+
+          {/* Content */}
+          <div className="text-center mb-10">
+            <p className="text-[15px] sm:text-[17px] leading-relaxed text-[#2a1f16] max-w-[700px] mx-auto mb-10">
+              A quiet canvas for creativity. We're building with warm wood laminates, calming olive green accents, and minimalist beige tones—a refined retreat from the hustle, built for long stays and deep focus.
+            </p>
+
+            {/* Mood Board Placeholder - TODO: Add actual mood board images */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-[800px] mx-auto">
+              <div className="bg-[#d4c5a9] rounded-lg aspect-square flex items-center justify-center">
+                <p className="text-[#5a4a38] text-[12px] px-4 text-center">Warm wood laminates</p>
+              </div>
+              <div className="bg-[#8a9a7e] rounded-lg aspect-square flex items-center justify-center">
+                <p className="text-white text-[12px] px-4 text-center">Olive green accents</p>
+              </div>
+              <div className="bg-[#f4f0e9] rounded-lg aspect-square flex items-center justify-center border-2 border-[rgba(201,154,88,0.2)]">
+                <p className="text-[#5a4a38] text-[12px] px-4 text-center">Minimalist beige tones</p>
+              </div>
+            </div>
+            <p className="text-[11px] text-[#8a7a68] mt-4 italic">
+              Mood board images coming soon
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Divider - Wavy transition back to dark */}
       <div className="divider-cream">
         <img src="/notebook-divider-cream.svg" alt="" />
@@ -257,7 +324,9 @@ export default async function HomePage() {
                 </div>
               </div>
               <p className="text-[13.5px] min-[375px]:text-[14.5px] sm:text-[15px] leading-6 sm:leading-7 ink-cream-dim mb-3 sm:mb-4">
-                {settings?.address || "Riverside, CA"} • Opening 2026
+                Corner of University Ave & Orange St
+                <br />
+                Riverside, CA • Opening Early 2026
               </p>
               <div className="home-social-links flex gap-3 sm:gap-4 mt-auto">
                 <a
@@ -302,11 +371,11 @@ export default async function HomePage() {
       {/* Newsletter - Connected to Sanity */}
       <section className="home-newsletter mx-auto max-w-[720px] px-4 sm:px-6 mb-20 sm:mb-32 scroll-reveal relative z-10">
         <div className="home-newsletter-card text-center">
-          <h3 className="text-[18px] min-[375px]:text-[20px] sm:text-[24px] font-semibold tracking-wide ink-cream mb-2">
-            Stay in the Loop
+          <h3 className="text-[18px] min-[375px]:text-[20px] sm:text-[24px] font-semibold tracking-wide ink-cream mb-3">
+            STAY IN THE LOOP: GET THE KEY
           </h3>
-          <p className="text-[13px] min-[375px]:text-[14px] ink-cream-dim mb-5 sm:mb-6">
-            Get updates on our opening and for future events.
+          <p className="text-[13px] min-[375px]:text-[14px] sm:text-[15px] ink-cream-dim mb-5 sm:mb-6 leading-relaxed">
+            Join our inner circle for exclusive pre-opening soft launch invites, first access to our menu, and the exact date we open our doors at University & Orange.
           </p>
 
           <NewsletterForm source="homepage" />
