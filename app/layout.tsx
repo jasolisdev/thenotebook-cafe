@@ -1,6 +1,23 @@
 // app/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
+
+// Component styles
+import "./styles/components/navigation.css";
+import "./styles/components/hero.css";
+import "./styles/components/buttons.css";
+import "./styles/components/footer.css";
+import "./styles/components/announcement.css";
+
+// Layout styles
+import "./styles/layout/sections.css";
+import "./styles/layout/animations.css";
+
+// Page styles
+import "./styles/pages/home.css";
+import "./styles/pages/about.css";
+import "./styles/pages/menu.css";
+
 import { ThemeProvider } from "next-themes";
 import { torus } from "./fonts";
 import { cookies } from "next/headers";

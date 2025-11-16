@@ -1,46 +1,44 @@
+import Link from "next/link";
+
 type FooterProps = {
-  businessName?: string;
-  address?: string;
-  hours?: { weekday?: string; weekend?: string };
-  instagramUrl?: string;
+  showFloatingItems?: boolean;
+  FloatingItemsComponent?: React.ComponentType<{ variant: string }>;
 };
 
 export default function SiteFooter({
-  businessName = "The Notebook Café LLC",
-  address,
-  hours,
-  instagramUrl,
+  showFloatingItems = false,
+  FloatingItemsComponent,
 }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="text-center text-[13px] leading-6 mt-12 footer-dim">
-      {address && <div className="mb-1">{address}</div>}
-      {hours?.weekday || hours?.weekend ? (
-        <div className="mb-1">
-          {hours?.weekday && <span>Mon–Fri: {hours.weekday}</span>}
-          {hours?.weekend && (
-            <>
-              {" "}
-              • <span>Sat–Sun: {hours.weekend}</span>
-            </>
-          )}
-        </div>
-      ) : null}
-      {instagramUrl && (
-        <div className="mb-1">
-          <a
-            href={instagramUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="ink-cream-dim underline underline-offset-4"
-          >
-            Instagram
-          </a>
-        </div>
+    <footer className="home-footer text-center text-[13px] leading-6 py-12 px-5 relative">
+      {showFloatingItems && FloatingItemsComponent && (
+        <FloatingItemsComponent variant="footer" />
       )}
-      <div>
-        © {year} {businessName} — Riverside, CA
+      <div className="max-w-[600px] mx-auto relative z-10">
+        <div className="text-[11px] uppercase tracking-widest mb-3 opacity-60">
+          The Notebook Café
+        </div>
+
+        {/* Footer Navigation */}
+        <nav className="footer-nav mb-4">
+          <Link href="/" className="footer-nav-link">
+            Home
+          </Link>
+          <span className="footer-nav-separator">•</span>
+          <Link href="/menu" className="footer-nav-link">
+            Menu
+          </Link>
+          <span className="footer-nav-separator">•</span>
+          <Link href="/about" className="footer-nav-link">
+            About
+          </Link>
+        </nav>
+
+        <div className="ink-cream-dim">
+          © {year} The Notebook Café LLC — Riverside, CA
+        </div>
       </div>
     </footer>
   );
