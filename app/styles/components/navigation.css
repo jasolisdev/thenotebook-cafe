@@ -237,7 +237,7 @@
   transition: transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow: hidden; /* Disable scrolling */
   z-index: 1; /* Below nav (2) within container */
   backdrop-filter: blur(20px);
 }
@@ -397,35 +397,18 @@
   transform: translateY(0) scale(0.95);
 }
 
-/* Stay in the Loop - with gold glow */
-.drawer-stay-in-loop {
+/* Cafe Name - no glow */
+.drawer-cafe-name {
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.8px;
   color: rgba(201, 154, 88, 1);
-  text-shadow:
-    0 0 8px rgba(201, 154, 88, 0.8),
-    0 0 16px rgba(201, 154, 88, 0.6);
   margin: 0;
-  animation: drawer-glow-pulse 3s ease-in-out infinite;
-}
-
-@keyframes drawer-glow-pulse {
-  0%, 100% {
-    text-shadow:
-      0 0 8px rgba(201, 154, 88, 0.8),
-      0 0 16px rgba(201, 154, 88, 0.6);
-  }
-  50% {
-    text-shadow:
-      0 0 12px rgba(201, 154, 88, 1),
-      0 0 24px rgba(201, 154, 88, 0.8);
-  }
 }
 
 @media (min-width: 640px) {
-  .drawer-stay-in-loop {
+  .drawer-cafe-name {
     font-size: 14px;
   }
 }

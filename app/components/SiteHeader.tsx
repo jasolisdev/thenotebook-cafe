@@ -177,7 +177,7 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
           {/* Social Icons */}
           <div className="drawer-social-icons">
             <a
-              href="https://open.spotify.com"
+              href="https://open.spotify.com/playlist/58qhSWWn3g1QeCKoVFoAJk?si=akRAtMTkSyuJ-SrwUKO-0g&pt=1f4f182511693e4b498077b163463a86&pi=eYO5G4iVQDqyn"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Spotify"
@@ -211,8 +211,8 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
             </a>
           </div>
 
-          {/* Stay in the Loop */}
-          <p className="drawer-stay-in-loop">Stay in the Loop</p>
+          {/* Cafe Name */}
+          <p className="drawer-cafe-name">THE NOTEBOOK CAFÉ</p>
 
           {/* Location and Opening */}
           <p className="drawer-location-text">
@@ -223,12 +223,12 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
         {/* Floating Coffee Beans in Drawer */}
         <div className="drawer-floating-items">
           <img
-            src="/coffee-bean.svg"
+            src="/notebook-coffeebean-up-right.svg"
             alt=""
             className="drawer-bean-1"
           />
           <img
-            src="/coffee-bean.svg"
+            src="/notebook-coffeebean-up-left.svg"
             alt=""
             className="drawer-bean-2"
           />
