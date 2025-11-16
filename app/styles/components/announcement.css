@@ -132,6 +132,44 @@
   }
 }
 
+/* Scrolling Text Container */
+.announcement-text-wrapper {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  min-width: 0;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+.announcement-text-scroll {
+  display: flex;
+  gap: 48px;
+  animation: announcement-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+@keyframes announcement-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
 /* Announcement Text */
 .announcement-text {
   font-family: var(--font-sans);
@@ -142,6 +180,8 @@
   color: rgba(42, 31, 22, 0.95);
   margin: 0;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 @media (min-width: 375px) {
