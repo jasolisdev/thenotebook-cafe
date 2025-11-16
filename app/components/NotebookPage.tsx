@@ -31,14 +31,7 @@ export default function NotebookPage({
 
       <section className="mx-auto max-w-[1100px] px-5 pt-[96px] pb-10">
         <div className="mx-auto max-w-[760px] text-center">{children}</div>
-        {footer && (
-          <SiteFooter
-            businessName={footer.businessName}
-            address={footer.address}
-            hours={footer.hours}
-            instagramUrl={footer.instagramUrl}
-          />
-        )}
+        {footer && <SiteFooter />}
       </section>
     </main>
   );

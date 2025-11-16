@@ -1,6 +1,10 @@
 'use client';
 
-export default function AnnouncementBanner() {
+type Props = {
+  text?: string;
+};
+
+export default function AnnouncementBanner({ text = 'Opening Soon...' }: Props) {
   return (
     <div className="announcement-banner">
       <div className="announcement-content">
@@ -20,7 +24,7 @@ export default function AnnouncementBanner() {
         </div>
 
         {/* Text */}
-        <p className="announcement-text">Opening Soon...</p>
+        <p className="announcement-text">{text}</p>
       </div>
     </div>
   );
