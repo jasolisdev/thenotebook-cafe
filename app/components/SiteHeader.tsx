@@ -76,6 +76,13 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
         }
       `}</style>
 
+      {/* Backdrop outside container for proper layering */}
+      <div
+        className={`drawer-backdrop ${open ? "show" : ""}`}
+        onClick={() => setOpen(false)}
+        aria-hidden="true"
+      />
+
       {/* Header container wraps nav and drawer for proper z-index stacking */}
       <div className="header-container">
         <div className="header-dark">
@@ -128,12 +135,6 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
           </span>
         </button>
       </div>
-
-      <div
-        className={`drawer-backdrop ${open ? "show" : ""}`}
-        onClick={() => setOpen(false)}
-        aria-hidden="true"
-      />
 
       <aside
         id="mobile-drawer"
