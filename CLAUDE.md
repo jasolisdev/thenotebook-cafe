@@ -383,6 +383,66 @@ Complete redesign of "What to Expect" section with card-based layout:
 - To test: Clear `site-auth` cookie in DevTools → Application → Cookies
 - Production: Use full 7-day duration for better UX
 
+### December 2024 - Mobile Optimization & UI Enhancements
+
+#### **iPhone 5/SE Support (320px+ Screens)**
+Comprehensive responsive design overhaul to support small devices:
+- **Section Padding**: Responsive padding scales from 40px (320px) → 60px (375px) → 80px (640px) → 100px (1024px)
+- **Typography**: All text sizes scale appropriately from 320px upwards
+  - Hero title: 36px → 42-72px (375px+)
+  - Welcome headings: 16px/20px → 20px/24px (375px+)
+  - Body text: 13.5px → 14.5px (375px+)
+- **Components**: Buttons, cards, icons, and navigation all optimized for small screens
+- **Logo**: Scales from 96px (mobile) → 192px (desktop)
+- **Spacing**: Margins, padding, and gaps adjusted for compact mobile display
+
+#### **Announcement Banner**
+New sticky announcement banner at top of site:
+- **Component**: `app/components/AnnouncementBanner.tsx`
+- **Features**: "Opening Soon..." text with animated steaming coffee cup
+- **Animation**: 3 steam wisps with staggered 2s rise-and-fade effect
+- **Styling**: Gold gradient background, sticky positioning (z-index: 70)
+- **Responsive**: Text 11-15px, icon 20-24px, padding scales with screen size
+
+#### **Navigation Updates**
+- **Position**: Changed from fixed/sticky to static (stays at top only)
+- **Logo Font**: Uses Alpino display font with -0.01em letter-spacing
+- **Nav Links Font**: Uses Torus sans font (matches drawer-footer styling)
+  - Font weight: 500, letter-spacing: 0.5px
+- **Z-Index**: Maintained at 60 for proper layering
+
+#### **Footer Redesign**
+Created reusable `SiteFooter` component:
+- **Component**: `app/components/SiteFooter.tsx`
+- **Navigation Links**: Home • About • Menu with gold color (rgba(201, 154, 88, 0.85))
+- **Hover Effects**: Brightens to lighter gold with underline animation and slight lift
+- **Reusable**: Used across all pages (Home, About, Menu)
+- **Optional Floating Items**: Supports homepage floating decorations via props
+
+#### **Homepage Enhancements**
+- **Welcome Cards**: Icons moved from top to left side of text
+  - Horizontal flexbox layout with responsive sizing
+  - Icons: 44px (mobile) → 48px (375px) → 56px (640px)
+- **Section Headings**: Swapped sizes and colors
+  - "Welcome to The Notebook Café": Now smaller with gold color
+  - "Where Every Cup Tells a Story": Now larger heading with dark brown
+- **Logo Addition**: Added below main heading (96-192px responsive)
+- **Explore Menu Button**: Added responsive bottom margin (32-64px)
+
+#### **About Page Updates**
+- **Hero Heading**: Changed from "The Notebook Café" to "Our Story"
+  - Uses badge typography: uppercase, 1.5px letter-spacing, gold color
+  - Large heading size: 38px → 48px → 60px
+- **Padding Reductions**:
+  - Hero section: Cut top/bottom padding by half (60px top, 40px bottom)
+  - Cream section: Reduced top padding to pt-8 (32px)
+- **Floating Beans**: Moved up 7-8% for better positioning (28% and 32%)
+
+#### **Floating Items Adjustments**
+- **Hero Bean (Right)**: Moved up from 25% to 18% (not behind "Café" text)
+- **Cards Bean (Top Right)**: Moved down from 18% to 28% (not blocking cup icon)
+- **Cards Beans (Bottom)**: Repositioned to -5% and 0% (float between cards and newsletter)
+
 ### Earlier November 2024 - Menu System Enhancements
 1. **SVG Icon System**: Replaced emoji icons with SVG files for professional appearance
 2. **Seasonal Drinks Section**: Added dedicated section for specialty/seasonal items

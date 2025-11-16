@@ -3,6 +3,8 @@ import { client } from "@/sanity/lib/client";
 import SiteHeader from "../components/SiteHeader";
 import ScrollReveal from "../components/ScrollReveal";
 import AboutFloatingItems from "../components/AboutFloatingItems";
+import SiteFooter from "../components/SiteFooter";
+import AnnouncementBanner from "../components/AnnouncementBanner";
 import { CoffeeIcon, EqIcon, NoteIcon } from "../components/Icons";
 
 /** Fetch "aboutPage" + "settings" from Sanity */
@@ -45,6 +47,8 @@ export default async function AboutPage() {
   return (
     <main className="page-dark">
       <ScrollReveal />
+      {/* Announcement Banner */}
+      <AnnouncementBanner />
 
       {/* Fixed dark nav */}
       <div className="nav-glass-wrap">
@@ -54,13 +58,10 @@ export default async function AboutPage() {
       </div>
 
       {/* HERO SECTION - DARK */}
-      <section className="about-hero text-center px-5 pt-[120px] pb-20 relative">
+      <section className="about-hero text-center px-5 pt-[60px] pb-10 relative">
         <AboutFloatingItems variant="hero" />
-        <div className="scroll-reveal" style={{ animationDelay: '0.1s' }}>
-          <div className="about-hero-badge">Our Story</div>
-        </div>
-        <h1 className="scroll-reveal about-hero-title text-[38px] sm:text-[48px] md:text-[60px] font-semibold ink-cream" style={{ animationDelay: '0.2s' }}>
-          The Notebook Café
+        <h1 className="scroll-reveal text-[38px] sm:text-[48px] md:text-[60px] font-medium uppercase tracking-[1.5px] mb-6" style={{ animationDelay: '0.1s', color: 'rgba(201, 154, 88, 0.9)' }}>
+          Our Story
         </h1>
         <p className="scroll-reveal about-hero-subtitle mt-5 ink-cream-dim max-w-[68ch] mx-auto text-[16px] sm:text-[17px] leading-relaxed" style={{ animationDelay: '0.3s' }}>
           The Notebook Café is a house-music-driven coffee space rooted in
@@ -74,7 +75,7 @@ export default async function AboutPage() {
       </div>
 
       {/* CREAM SECTION - Body Copy */}
-      <section className="section-cream py-16 px-5 relative">
+      <section className="section-cream pt-8 pb-16 px-5 relative">
         <AboutFloatingItems variant="body" />
         <div className="scroll-reveal about-body-card mx-auto max-w-[72ch]" style={{ animationDelay: '0.1s' }}>
           {about?.body ? (
@@ -143,16 +144,7 @@ A space that feels like Riverside, made for locals, creatives, and anyone who lo
       </section>
 
       {/* Footer */}
-      <footer className="about-footer text-center text-[13px] leading-6 py-12 px-5">
-        <div className="max-w-[600px] mx-auto">
-          <div className="text-[11px] uppercase tracking-widest mb-2 opacity-60">
-            The Notebook Café
-          </div>
-          <div className="ink-cream-dim">
-            © {new Date().getFullYear()} The Notebook Café LLC — Riverside, CA
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

@@ -86,7 +86,7 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "md" }: Props) 
             className="rounded-full shadow-sm"
             priority
           />
-          <span>The Notebook Café</span>
+          <span>THE NOTEBOOK CAFÉ</span>
         </Link>
 
         <nav className="nav-dark nav-desktop-show" aria-label="Primary">

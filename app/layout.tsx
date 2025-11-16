@@ -7,6 +7,7 @@ import "./styles/components/navigation.css";
 import "./styles/components/hero.css";
 import "./styles/components/buttons.css";
 import "./styles/components/footer.css";
+import "./styles/components/announcement.css";
 
 // Layout styles
 import "./styles/layout/sections.css";

@@ -4,7 +4,7 @@
 
 /* Dividers */
 .divider-cream {
-  width: 100%;
+  width: 100vw;
   height: auto;
   display: block;
   margin: 0;
@@ -14,23 +14,26 @@
   position: relative;
   /* Remove any spacing */
   font-size: 0;
+  /* Ensure full width on mobile */
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 .divider-cream img {
-  width: calc(100% + 2px);
+  width: 100%;
   height: auto;
   display: block;
   margin: 0;
   padding: 0;
   vertical-align: bottom;
-  /* Ensure no gaps - overlap on all sides */
-  margin-left: -1px;
-  margin-right: -1px;
-  margin-bottom: -2px;
-  margin-top: -2px;
-  /* Force GPU rendering for smoother display */
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
+  /* Prevent any subpixel gaps */
+  transform: translateZ(0) scale(1.03);
+  -webkit-transform: translateZ(0) scale(1.03);
+  /* Anti-aliasing for smooth edges */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* Cream section background */
@@ -38,8 +41,30 @@
   background-color: #f4f0e9;
   position: relative;
   margin: 0;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  overflow-x: hidden;
+}
+
+@media (min-width: 375px) {
+  .section-cream {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+@media (min-width: 640px) {
+  .section-cream {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-cream {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
 }
 
 /* Adjust icon colors in cream section */
