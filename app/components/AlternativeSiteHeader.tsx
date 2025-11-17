@@ -31,6 +31,7 @@ export default function AlternativeSiteHeader({ instagramUrl, spotifyUrl }: Prop
       data-scroll-direction={scrollDirection}
       style={{
         transform: isHeaderHidden ? 'translateY(-100%)' : 'translateY(0)',
+        WebkitTransform: isHeaderHidden ? 'translateY(-100%)' : 'translateY(0)',
       }}
     >
       <div className="alt-header-inner">
@@ -73,13 +74,15 @@ export default function AlternativeSiteHeader({ instagramUrl, spotifyUrl }: Prop
           top: 0;
           left: 0;
           right: 0;
+          width: 100%;
           z-index: 100;
           background: linear-gradient(135deg, rgba(15, 12, 10, 0.95) 0%, rgba(22, 17, 13, 0.95) 100%);
           backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
           border-bottom: 1px solid rgba(201, 154, 88, 0.2);
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
           transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          will-change: transform;
+          -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .alt-header-inner {
