@@ -5,44 +5,18 @@ import ScrollReveal from "../components/ScrollReveal";
 import AboutFloatingItems from "../components/AboutFloatingItems";
 import SiteFooter from "../components/SiteFooter";
 import AnnouncementBanner from "../components/AnnouncementBanner";
-import { CoffeeIcon, EqIcon, NoteIcon } from "../components/Icons";
+import Image from "next/image";
 
-/** Fetch "aboutPage" + "settings" from Sanity */
+/** Fetch settings from Sanity */
 async function getAboutData() {
-  const [about, settings] = await Promise.all([
-    client.fetch(`*[_type=="aboutPage"][0]{
-      title, body, valuesHeading, valuesBullets, missionHeading, founderNote
-    }`),
-    client.fetch(`*[_type=="settings"][0]{
-      social{ instagram, spotify }
-    }`),
-  ]);
-  return { about, settings };
-}
-
-/** Very small portable text renderer */
-function PT({ body }: { body: any[] }) {
-  if (!body) return null;
-  return (
-    <div className="space-y-4 leading-7 text-[15px] text-[#2a1f16]">
-      {body.map((b: any, i: number) =>
-        b._type === "block" ? (
-          <p key={i}>{b.children?.map((c: any) => c.text).join("")}</p>
-        ) : null,
-      )}
-    </div>
-  );
+  const settings = await client.fetch(`*[_type=="settings"][0]{
+    social{ instagram, spotify }
+  }`);
+  return { settings };
 }
 
 export default async function AboutPage() {
-  const { about, settings } = await getAboutData();
-
-  const bullets = about?.valuesBullets ?? [
-    "A café that plays house, soul, and groove — not top 40 radio.",
-    "A space you can actually sit in. Stay, settle, think, create.",
-    "Coffee treated with respect — from beans to texture.",
-    "A Riverside original — for locals and creatives alike.",
-  ];
+  const { settings } = await getAboutData();
 
   return (
     <main className="page-dark">
@@ -63,8 +37,7 @@ export default async function AboutPage() {
           Our Story
         </h1>
         <p className="scroll-reveal about-hero-subtitle mt-5 ink-cream-dim max-w-[68ch] mx-auto text-[16px] sm:text-[17px] leading-relaxed" style={{ animationDelay: '0.3s' }}>
-          The Notebook Café is a house-music-driven coffee space rooted in
-          Riverside — where music meets craft.
+          The Notebook Café is a house-music–driven coffee space rooted in Riverside — where craft, culture, and atmosphere meet. We're building a place to slow down, connect, and feel inspired.
         </p>
       </section>
 
@@ -73,24 +46,24 @@ export default async function AboutPage() {
         <img src="/notebook-divider-cream.svg" alt="" />
       </div>
 
-      {/* CREAM SECTION - Body Copy */}
-      <section className="section-cream pt-8 pb-16 px-5 relative">
+      {/* CREAM SECTION - Image 1 */}
+      <section className="section-cream pt-12 pb-8 px-5 relative">
         <AboutFloatingItems variant="body" />
-        <div className="scroll-reveal about-body-card mx-auto max-w-[72ch]" style={{ animationDelay: '0.1s' }}>
-          {about?.body ? (
-            <PT body={about.body} />
-          ) : (
-            <p className="text-[#2a1f16] text-[15.5px] leading-relaxed">
-              We're building a place to slow down, create, meet up, and feel
-              inspired — like your favorite listening room and your favorite
-              espresso bar had a kid.
-            </p>
-          )}
+        <div className="scroll-reveal mx-auto max-w-[900px]" style={{ animationDelay: '0.1s' }}>
+          <div className="rounded-2xl overflow-hidden shadow-2xl">
+            <Image
+              src="https://images.unsplash.com/photo-1522204502582-0ecf9f1e2014"
+              alt="Moody warm coffee shop interior with soft lighting"
+              width={900}
+              height={600}
+              className="w-full h-auto object-cover"
+            />
+          </div>
         </div>
       </section>
 
       {/* OUR RIVERSIDE COMMITMENT Section */}
-      <section className="section-cream px-5 pb-16">
+      <section className="section-cream px-5 pb-12">
         <div className="mx-auto max-w-[880px]">
           <div className="scroll-reveal about-section-label text-center mb-8" style={{ animationDelay: '0.1s' }}>
             <span className="inline-block px-4 py-2 rounded-full bg-[rgba(201,154,88,0.15)] border border-[rgba(201,154,88,0.25)] text-[11px] uppercase tracking-[2px] text-[rgba(201,154,88,0.95)]">
@@ -100,14 +73,29 @@ export default async function AboutPage() {
 
           <div className="scroll-reveal mx-auto max-w-[700px] text-center" style={{ animationDelay: '0.2s' }}>
             <p className="text-[#2a1f16] text-[15px] sm:text-[16px] leading-relaxed">
-              We chose the vibrant intersection of University Ave and Orange St because it sits at the cross-section of culture, commerce, and creativity. The Notebook Cafe is built to be a true community anchor for students, creatives, and locals—a peaceful hub to find your flow.
+              We chose the intersection of University Ave and Orange St because it sits at the cross-section of culture, creativity, and community. Our goal is to be a calm anchor in downtown Riverside — a place where students, creatives, and locals find their flow.
             </p>
           </div>
         </div>
       </section>
 
+      {/* Image 2 - Downtown Street */}
+      <section className="section-cream px-5 pb-12 relative">
+        <div className="scroll-reveal mx-auto max-w-[900px]" style={{ animationDelay: '0.1s' }}>
+          <div className="rounded-2xl overflow-hidden shadow-2xl">
+            <Image
+              src="https://images.unsplash.com/photo-1508057198894-247b23fe5ade"
+              alt="Downtown street at golden hour with warm tones"
+              width={900}
+              height={600}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* THE CRAFT & THE RHYTHM Section */}
-      <section className="section-cream px-5 pb-16">
+      <section className="section-cream px-5 pb-12">
         <div className="mx-auto max-w-[880px]">
           <div className="scroll-reveal about-section-label text-center mb-8" style={{ animationDelay: '0.1s' }}>
             <span className="inline-block px-4 py-2 rounded-full bg-[rgba(201,154,88,0.15)] border border-[rgba(201,154,88,0.25)] text-[11px] uppercase tracking-[2px] text-[rgba(201,154,88,0.95)]">
@@ -115,39 +103,81 @@ export default async function AboutPage() {
             </span>
           </div>
 
-          <div className="scroll-reveal mx-auto max-w-[700px] text-center" style={{ animationDelay: '0.2s' }}>
-            <p className="text-[#2a1f16] text-[15px] sm:text-[16px] leading-relaxed mb-4">
-              Our mission extends beyond the cup. We ensure our specialty espresso is ethically sourced and roasted right, prepared on state-of-the-art equipment for consistent, perfect texture. We treat every step of the brewing process with respect.
+          <div className="scroll-reveal mx-auto max-w-[700px] text-center space-y-4" style={{ animationDelay: '0.2s' }}>
+            <p className="text-[#2a1f16] text-[15px] sm:text-[16px] leading-relaxed">
+              From ethically sourced beans to precise brewing, we treat every detail with care. Our espresso is crafted on state-of-the-art equipment to bring out depth, texture, and consistency.
             </p>
-            <p className="text-[13px] text-[#8a7a68] italic">
-              Coffee roaster: [TBD - need info from BIL]
+            <p className="text-[#2a1f16] text-[15px] sm:text-[16px] leading-relaxed">
+              The same intention shapes our atmosphere: warm lighting, low-end house music, and a room tuned for conversation and creativity.
             </p>
           </div>
         </div>
       </section>
 
-      {/* CREAM SECTION - Values */}
-      <section className="section-cream px-5 pb-20">
+      {/* WHAT WE'RE BUILDING Section */}
+      <section className="section-cream px-5 pb-12">
         <div className="mx-auto max-w-[880px]">
           <div className="scroll-reveal about-section-label text-center mb-8" style={{ animationDelay: '0.1s' }}>
             <span className="inline-block px-4 py-2 rounded-full bg-[rgba(201,154,88,0.15)] border border-[rgba(201,154,88,0.25)] text-[11px] uppercase tracking-[2px] text-[rgba(201,154,88,0.95)]">
-              {about?.valuesHeading || "What we're building"}
+              What We're Building
             </span>
           </div>
 
-          <div className="about-values-grid grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
-            {bullets.map((t: string, i: number) => (
-              <div
-                key={i}
-                className="scroll-reveal about-value-card"
-                style={{ animationDelay: `${0.2 + i * 0.1}s` }}
-              >
-                <div className="about-value-icon">
-                  {i === 0 ? <CoffeeIcon /> : i === 1 ? <EqIcon /> : <NoteIcon />}
-                </div>
-                <div className="text-[#2a1f16] text-[15px] leading-relaxed">{t}</div>
-              </div>
-            ))}
+          <div className="scroll-reveal mx-auto max-w-[700px] text-center space-y-4" style={{ animationDelay: '0.2s' }}>
+            <p className="text-[#2a1f16] text-[15px] sm:text-[16px] leading-relaxed">
+              A café that feels like your favorite listening room and your favorite espresso bar had a kid.
+            </p>
+            <p className="text-[#2a1f16] text-[15px] sm:text-[16px] leading-relaxed">
+              A space to sit, think, settle, and create.
+            </p>
+            <p className="text-[#2a1f16] text-[15px] sm:text-[16px] leading-relaxed">
+              A Riverside original — made for locals and creatives who love good energy, good music, and good coffee.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Image 3 - Espresso Shot */}
+      <section className="section-cream px-5 pb-16 relative">
+        <div className="scroll-reveal mx-auto max-w-[900px]" style={{ animationDelay: '0.1s' }}>
+          <div className="rounded-2xl overflow-hidden shadow-2xl">
+            <Image
+              src="https://images.unsplash.com/photo-1511920170033-f8396924c348"
+              alt="Close-up of espresso shot pouring from portafilter"
+              width={900}
+              height={600}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* MEET THE FOUNDERS Section */}
+      <section className="section-cream px-5 pb-16">
+        <div className="mx-auto max-w-[880px]">
+          <div className="scroll-reveal about-section-label text-center mb-8" style={{ animationDelay: '0.1s' }}>
+            <span className="inline-block px-4 py-2 rounded-full bg-[rgba(201,154,88,0.15)] border border-[rgba(201,154,88,0.25)] text-[11px] uppercase tracking-[2px] text-[rgba(201,154,88,0.95)]">
+              Meet the Founders
+            </span>
+          </div>
+
+          {/* Barista Image */}
+          <div className="scroll-reveal mx-auto max-w-[700px] mb-8" style={{ animationDelay: '0.15s' }}>
+            <div className="rounded-2xl overflow-hidden shadow-xl">
+              <Image
+                src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"
+                alt="Barista preparing espresso behind the counter"
+                width={700}
+                height={500}
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="scroll-reveal mx-auto max-w-[700px] text-center" style={{ animationDelay: '0.2s' }}>
+            <p className="text-[#2a1f16] text-[15px] sm:text-[16px] leading-relaxed">
+              The Notebook Café was created by family — built from a shared love of great espresso, warm spaces, and the soulful rhythm of house music. We wanted to bring Riverside a café that feels personal, intentional, and rooted in real craft.
+            </p>
           </div>
         </div>
       </section>
@@ -163,17 +193,16 @@ export default async function AboutPage() {
         <div className="mx-auto max-w-[820px]">
           <div className="scroll-reveal about-section-label text-center mb-8" style={{ animationDelay: '0.1s' }}>
             <span className="inline-block px-4 py-2 rounded-full bg-[rgba(201,154,88,0.08)] border border-[rgba(201,154,88,0.2)] text-[11px] uppercase tracking-[2px] ink-cream">
-              {about?.missionHeading || "Why we're doing this"}
+              Why We're Doing This
             </span>
           </div>
 
           <div className="scroll-reveal about-mission-card" style={{ animationDelay: '0.2s' }}>
             <div className="about-mission-accent" />
             <p className="whitespace-pre-line ink-cream text-[16px] leading-[1.8] relative z-10">
-              {about?.founderNote ||
-                `We're building a spot where people who care about taste — in coffee, in music, in atmosphere — can actually hang.
+              We're building a spot where people who care about taste — in coffee, in music, in atmosphere — can actually hang.
 
-A space that feels like Riverside, made for locals, creatives, and anyone who loves good energy.`}
+A space that feels like Riverside, made for locals, creatives, and anyone who loves good energy.
             </p>
           </div>
         </div>

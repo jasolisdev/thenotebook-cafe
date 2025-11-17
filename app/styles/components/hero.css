@@ -3,7 +3,7 @@
 ============================================================ */
 .hero {
   position: relative;
-  padding: clamp(80px, 18vh, 170px) 12px clamp(40px, 14vh, 130px);
+  padding: clamp(40px, 12vh, 140px) 12px clamp(40px, 14vh, 130px);
   text-align: center;
   display: flex;
   align-items: center;
@@ -12,13 +12,13 @@
 
 @media (min-width: 375px) {
   .hero {
-    padding: clamp(88px, 18vh, 170px) 16px clamp(48px, 14vh, 130px);
+    padding: clamp(50px, 14vh, 150px) 16px clamp(48px, 14vh, 130px);
   }
 }
 
 @media (min-width: 640px) {
   .hero {
-    padding: clamp(96px, 18vh, 170px) 18px clamp(56px, 14vh, 130px);
+    padding: clamp(80px, 16vh, 170px) 18px clamp(56px, 14vh, 130px);
   }
 }
 
@@ -26,13 +26,13 @@
   background-image: url('/hero-bg.png');
   background-size: cover;
   background-position: center;
-  min-height: 600px;
+  min-height: 550px;
   background-repeat: no-repeat;
 }
 
 @media (min-width: 375px) {
   .hero-gradient {
-    min-height: 680px;
+    min-height: 620px;
   }
 }
 

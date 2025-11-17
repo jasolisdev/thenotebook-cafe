@@ -214,7 +214,7 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "md
               </span>
             </a>
             <a
-              href={instagramUrl || "#"}
+              href="https://instagram.com/thenotebookcafellc"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -225,7 +225,7 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "md
               </span>
             </a>
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/profile.php?id=61571875252956"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"

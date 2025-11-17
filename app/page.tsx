@@ -331,9 +331,9 @@ export default async function HomePage() {
                 </div>
               </div>
               <p className="text-[13.5px] min-[375px]:text-[14.5px] sm:text-[15px] leading-6 sm:leading-7 ink-cream-dim">
-                Corner of University Ave & Orange St
+                3512 9th St, Riverside CA 92501
                 <br />
-                Riverside, CA • Opening Early 2026
+                (951) 823-0004 • Opening Early 2026
               </p>
             </div>
 
@@ -361,10 +361,10 @@ export default async function HomePage() {
       {/* Newsletter - Connected to Sanity */}
       <section className="home-newsletter mx-auto max-w-[720px] px-4 sm:px-6 mb-20 sm:mb-32 scroll-reveal relative z-10">
         <div className="home-newsletter-card text-center">
-          <h3 className="text-[18px] min-[375px]:text-[20px] sm:text-[24px] font-semibold tracking-wide ink-cream mb-3">
+          <h3 className="text-[16px] min-[375px]:text-[18px] sm:text-[20px] md:text-[22px] font-semibold mb-3">
             FOR CREATIVES & COFFEE LOVERS
           </h3>
-          <p className="text-[13px] min-[375px]:text-[14px] sm:text-[15px] ink-cream-dim mb-5 sm:mb-6 leading-relaxed">
+          <p className="text-[13.5px] min-[375px]:text-[14.5px] sm:text-[15px] leading-6 sm:leading-7 ink-cream-dim mb-5 sm:mb-6">
             Join our community for opening announcements, exclusive pre-launch events, and first look at what we're brewing.
           </p>
 
