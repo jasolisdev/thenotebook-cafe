@@ -4,7 +4,7 @@ import SiteHeader from "../components/SiteHeader";
 import ScrollReveal from "../components/ScrollReveal";
 import AboutFloatingItems from "../components/AboutFloatingItems";
 import SiteFooter from "../components/SiteFooter";
-import AnnouncementBanner from "../components/AnnouncementBanner";
+// import AnnouncementBanner from "../components/AnnouncementBanner";
 import Image from "next/image";
 
 /** Fetch settings from Sanity */
@@ -21,8 +21,8 @@ export default async function AboutPage() {
   return (
     <main className="page-dark">
       <ScrollReveal />
-      {/* Announcement Banner */}
-      <AnnouncementBanner />
+      {/* Announcement Banner - COMMENTED OUT FOR TESTING */}
+      {/* <AnnouncementBanner /> */}
 
       {/* Fixed dark nav */}
       <SiteHeader

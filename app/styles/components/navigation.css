@@ -5,8 +5,8 @@
 /* Header container wraps nav + drawer for proper z-index stacking */
 .header-container {
   position: fixed;
-  top: 42px;
-  /* Height of announcement banner */
+  top: 0;
+  /* TESTING: Banner commented out, so position at top */
   left: 0;
   right: 0;
   z-index: 40;
@@ -28,18 +28,6 @@
   .header-container.header-hidden {
     transform: translateY(0);
     /* Keep visible on desktop */
-  }
-}
-
-@media (min-width: 375px) {
-  .header-container {
-    top: 46px;
-  }
-}
-
-@media (min-width: 640px) {
-  .header-container {
-    top: 48px;
   }
 }
 

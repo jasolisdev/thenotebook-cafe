@@ -4,7 +4,7 @@ import SiteHeader from "./components/SiteHeader";
 import NewsletterForm from "./components/NewsLetterForm";
 import ScrollReveal from "./components/ScrollReveal";
 import HomeFloatingItems from "./components/HomeFloatingItems";
-import AnnouncementBanner from "./components/AnnouncementBanner";
+// import AnnouncementBanner from "./components/AnnouncementBanner";
 import SiteFooter from "./components/SiteFooter";
 import Link from "next/link";
 import {
@@ -34,8 +34,8 @@ export default async function HomePage() {
   return (
     <main className="page-dark">
       <ScrollReveal />
-      {/* Announcement Banner */}
-      <AnnouncementBanner />
+      {/* Announcement Banner - COMMENTED OUT FOR TESTING */}
+      {/* <AnnouncementBanner /> */}
 
       {/* Fixed dark nav */}
       <SiteHeader

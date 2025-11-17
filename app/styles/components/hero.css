@@ -8,13 +8,15 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-top: max(20px, calc(106px + 20px));
+  padding-top: max(20px, calc(64px + 20px));
+  /* TESTING: Only header height (64px), no banner */
 }
 
 @media (min-width: 375px) {
   .hero {
     padding: clamp(30px, 10vh, 130px) 16px clamp(48px, 14vh, 130px);
-    padding-top: max(30px, calc(110px + 20px));
+    padding-top: max(30px, calc(64px + 20px));
+    /* TESTING: Only header height (64px), no banner */
   }
 }
 

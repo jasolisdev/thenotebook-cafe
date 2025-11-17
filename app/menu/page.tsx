@@ -4,7 +4,7 @@ import MenuContent from "../components/MenuContent";
 import ScrollReveal from "../components/ScrollReveal";
 import FloatingItems from "../components/FloatingItems";
 import SiteFooter from "../components/SiteFooter";
-import AnnouncementBanner from "../components/AnnouncementBanner";
+// import AnnouncementBanner from "../components/AnnouncementBanner";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -36,8 +36,8 @@ export default async function MenuPage() {
   return (
     <main className="page-dark">
       <ScrollReveal />
-      {/* Announcement Banner */}
-      <AnnouncementBanner />
+      {/* Announcement Banner - COMMENTED OUT FOR TESTING */}
+      {/* <AnnouncementBanner /> */}
 
       {/* Fixed dark nav */}
       <SiteHeader
