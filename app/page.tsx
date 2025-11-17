@@ -1,6 +1,6 @@
 // app/page.tsx
 import { client } from "@/sanity/lib/client";
-import SiteHeader from "./components/AlternativeSiteHeader";
+import SiteHeader from "./components/SiteHeader";
 import NewsletterForm from "./components/NewsLetterForm";
 import ScrollReveal from "./components/ScrollReveal";
 import HomeFloatingItems from "./components/HomeFloatingItems";
