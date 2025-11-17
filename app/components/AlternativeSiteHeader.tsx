@@ -4,11 +4,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useScrollDirection } from "../hooks/useScrollDirection";
 
+type Props = {
+  instagramUrl?: string;
+  spotifyUrl?: string;
+};
+
 /**
  * Alternative simplified header for testing scroll-based hide/show behavior.
  * This is a minimal prototype to test the scroll effect across all screen sizes.
  */
-export default function AlternativeSiteHeader() {
+export default function AlternativeSiteHeader({ instagramUrl, spotifyUrl }: Props) {
   const pathname = usePathname();
   const scrollDirection = useScrollDirection({ threshold: 10 });
 
