@@ -21,10 +21,11 @@ export default function SiteFooter({
           The Notebook Café
         </div>
 
-        {/* About Summary */}
-        <p className="text-[13px] sm:text-[14px] leading-relaxed ink-cream-dim mb-6 max-w-[600px] mx-auto">
-          The Notebook Café is a house-music–inspired coffee space in Riverside, blending warm lighting, soulful rhythms, and craft espresso into a place designed for creatives and locals to slow down, meet up, and feel inspired.
-        </p>
+        {/* Address and Phone */}
+        <div className="text-[13px] sm:text-[14px] leading-relaxed ink-cream-dim mb-6">
+          <div>3512 9TH ST, RIVERSIDE CA 92501</div>
+          <div className="mt-1">(951) 823-0004</div>
+        </div>
 
         {/* Footer Navigation */}
         <nav className="footer-nav mb-4">
