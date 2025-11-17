@@ -99,7 +99,7 @@ body {
   min-height: 100dvh;
   background: var(--bg-solid);
   color: var(--ink-cream);
-  padding-top: 70px; /* AlternativeSiteHeader height (banner commented out) */
+  padding-top: 0; /* Header now flows in document (position: relative) */
 }
 
 .ink-cream {

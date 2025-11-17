@@ -70,10 +70,7 @@ export default function AlternativeSiteHeader({ instagramUrl, spotifyUrl }: Prop
 
       <style jsx>{`
         .alt-header {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
+          position: relative;
           width: 100%;
           z-index: 100;
           background: linear-gradient(135deg, rgba(15, 12, 10, 0.95) 0%, rgba(22, 17, 13, 0.95) 100%);
