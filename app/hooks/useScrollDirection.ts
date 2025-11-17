@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 type ScrollDirection = 'up' | 'down' | 'none';
 
@@ -36,55 +36,63 @@ export function useScrollDirection(
   const { threshold = 10, initialDirection = 'none' } = options;
 
   const [scrollDirection, setScrollDirection] = useState<ScrollDirection>(initialDirection);
-  const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Use refs to avoid re-running effect when these values change
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
 
   useEffect(() => {
-    let ticking = false;
-
     const updateScrollDirection = () => {
       const currentScrollY = window.scrollY;
 
+      console.log('[useScrollDirection] Scroll Y:', currentScrollY, 'Last:', lastScrollY.current);
+
       // At the very top of the page
       if (currentScrollY < 10) {
+        console.log('[useScrollDirection] At top, setting direction: none');
         setScrollDirection('none');
-        setLastScrollY(currentScrollY);
-        ticking = false;
+        lastScrollY.current = currentScrollY;
+        ticking.current = false;
         return;
       }
 
       // Only update if we've scrolled past the threshold
-      if (Math.abs(currentScrollY - lastScrollY) < threshold) {
-        ticking = false;
+      const scrollDelta = Math.abs(currentScrollY - lastScrollY.current);
+      if (scrollDelta < threshold) {
+        console.log('[useScrollDirection] Below threshold:', scrollDelta, '<', threshold);
+        ticking.current = false;
         return;
       }
 
       // Determine direction
-      const newDirection: ScrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+      const newDirection: ScrollDirection = currentScrollY > lastScrollY.current ? 'down' : 'up';
 
-      if (newDirection !== scrollDirection) {
-        setScrollDirection(newDirection);
-      }
+      console.log('[useScrollDirection] Direction changed:', newDirection, '(delta:', scrollDelta, ')');
+      setScrollDirection(newDirection);
 
-      setLastScrollY(currentScrollY);
-      ticking = false;
+      lastScrollY.current = currentScrollY;
+      ticking.current = false;
     };
 
     const handleScroll = () => {
       // Use requestAnimationFrame for better performance
-      if (!ticking) {
-        ticking = true;
+      if (!ticking.current) {
+        ticking.current = true;
         window.requestAnimationFrame(updateScrollDirection);
       }
     };
+
+    console.log('[useScrollDirection] Hook mounted, adding scroll listener');
 
     // Add scroll listener with passive option for better scroll performance
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Cleanup
     return () => {
+      console.log('[useScrollDirection] Hook unmounting, removing scroll listener');
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [scrollDirection, lastScrollY, threshold]);
+  }, [threshold]); // Only re-run if threshold changes
 
   return scrollDirection;
 }

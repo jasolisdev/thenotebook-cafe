@@ -32,6 +32,11 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "md
   // Header is hidden when scrolling down, visible when scrolling up or at top
   const isHeaderHidden = scrollDirection === 'down';
 
+  // Debug logging
+  useEffect(() => {
+    console.log('[SiteHeader] Scroll direction:', scrollDirection, '| Header hidden:', isHeaderHidden);
+  }, [scrollDirection, isHeaderHidden]);
+
   const handleToggle = () => {
     setOpen(!open);
   };
