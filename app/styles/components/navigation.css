@@ -11,13 +11,24 @@
   right: 0;
   z-index: 40;
   /* Below banner (50), above page content */
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.25s ease-in-out;
   transform: translateY(0);
 }
 
-.header-container.header-hidden {
-  transform: translateY(-64px);
-  /* Slide up under the banner */
+/* Hide/show behavior only applies on mobile/tablet (below 768px) */
+@media (max-width: 767px) {
+  .header-container.header-hidden {
+    transform: translateY(-100%);
+    /* Slide up completely out of view */
+  }
+}
+
+/* On desktop (768px+), header always stays visible */
+@media (min-width: 768px) {
+  .header-container.header-hidden {
+    transform: translateY(0);
+    /* Keep visible on desktop */
+  }
 }
 
 @media (min-width: 375px) {
