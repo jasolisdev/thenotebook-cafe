@@ -99,7 +99,7 @@ body {
   min-height: 100dvh;
   background: var(--bg-solid);
   color: var(--ink-cream);
-  padding-top: 0; /* Header now flows in document (position: relative) */
+  padding-top: 70px; /* Header is position: fixed, needs padding to prevent overlap */
 }
 
 .ink-cream {
