@@ -32,19 +32,20 @@ export default async function HomePage() {
   const { home, settings } = await getData();
 
   return (
-    <main className="page-dark">
-      <ScrollReveal />
-      {/* Announcement Banner - COMMENTED OUT FOR TESTING */}
-      {/* <AnnouncementBanner /> */}
-
-      {/* Fixed dark nav */}
+    <>
+      {/* Fixed dark nav - Outside main container to avoid stacking context issues */}
       <SiteHeader
         instagramUrl={settings?.social?.instagram}
         spotifyUrl={settings?.social?.spotify}
       />
 
-      {/* HERO */}
-      <section className="hero hero-gradient relative">
+      <main className="page-dark">
+        <ScrollReveal />
+        {/* Announcement Banner - COMMENTED OUT FOR TESTING */}
+        {/* <AnnouncementBanner /> */}
+
+        {/* HERO */}
+        <section className="hero hero-gradient relative">
         <HomeFloatingItems variant="hero" />
         <div className="hero-copy relative z-10">
           {/* Screen reader only title for SEO */}
@@ -377,6 +378,7 @@ export default async function HomePage() {
         showFloatingItems={true}
         FloatingItemsComponent={HomeFloatingItems}
       />
-    </main>
+      </main>
+    </>
   );
 }
