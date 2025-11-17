@@ -16,9 +16,15 @@ export default function SiteFooter({
       {showFloatingItems && FloatingItemsComponent && (
         <FloatingItemsComponent variant="footer" />
       )}
-      <div className="max-w-[600px] mx-auto relative z-10">
-        <div className="text-[11px] uppercase tracking-widest mb-3 opacity-60">
+      <div className="max-w-[700px] mx-auto relative z-10">
+        <div className="text-[11px] uppercase tracking-widest mb-4 opacity-60">
           The Notebook Café
+        </div>
+
+        {/* Address and Phone */}
+        <div className="text-[13px] sm:text-[14px] leading-relaxed ink-cream-dim mb-6">
+          <div>3512 9TH ST, RIVERSIDE CA 92501</div>
+          <div className="mt-1">(951) 823-0004</div>
         </div>
 
         {/* Footer Navigation */}

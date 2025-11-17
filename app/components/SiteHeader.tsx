@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { SiSpotify, SiInstagram, SiFacebook } from "react-icons/si";
+import { useScrollDirection } from "../hooks/useScrollDirection";
 
 type Breakpoint = "sm" | "md" | "lg" | "xl";
 
@@ -23,23 +24,30 @@ const BP_PX: Record<Breakpoint, number> = {
 
 export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "md" }: Props) {
   const [open, setOpen] = useState(false);
-  const [headerVisible, setHeaderVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
 
+  // Use custom scroll direction hook
+  const scrollDirection = useScrollDirection({ threshold: 10 });
+
+  // Header is hidden when scrolling down, visible when scrolling up or at top
+  const isHeaderHidden = scrollDirection === 'down';
+
+  // Debug logging
+  useEffect(() => {
+    console.log('[SiteHeader] Scroll direction:', scrollDirection, '| Header hidden:', isHeaderHidden);
+  }, [scrollDirection, isHeaderHidden]);
+
   const handleToggle = () => {
-    console.log('Toggle clicked, current open state:', open);
     setOpen(!open);
   };
 
-  useEffect(() => {
-    console.log('Drawer open state changed to:', open);
-  }, [open]);
-
+  // Close drawer when route changes
   useEffect(() => {
     if (open) setOpen(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
+  // Close drawer on Escape key
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
@@ -48,6 +56,7 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "md
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // Prevent body scroll when drawer is open
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -58,31 +67,6 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "md
       document.body.style.overflow = '';
     };
   }, [open]);
-
-  // Auto-hide header on scroll down, show on scroll up
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY < 10) {
-        // Always show header at top of page
-        setHeaderVisible(true);
-      } else if (currentScrollY > lastScrollY) {
-        // Scrolling down - hide header
-        console.log('Scrolling down, hiding header');
-        setHeaderVisible(false);
-      } else {
-        // Scrolling up - show header
-        console.log('Scrolling up, showing header');
-        setHeaderVisible(true);
-      }
-
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
 
   const isActive = (href: string) => pathname === href;
   const bpPx = useMemo(() => BP_PX[burgerUntil], [burgerUntil]);
@@ -113,7 +97,7 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "md
       />
 
       {/* Header container wraps nav and drawer for proper z-index stacking */}
-      <div className={`header-container ${headerVisible ? '' : 'header-hidden'}`} data-visible={headerVisible}>
+      <div className={`header-container ${isHeaderHidden ? 'header-hidden' : ''}`} data-hidden={isHeaderHidden}>
         <div className="header-dark">
         <Link href="/" className="brand-dark" aria-label="Home">
           <Image
@@ -214,7 +198,7 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "md
               </span>
             </a>
             <a
-              href={instagramUrl || "#"}
+              href="https://instagram.com/thenotebookcafellc"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -225,7 +209,7 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "md
               </span>
             </a>
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/profile.php?id=61571875252956"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
