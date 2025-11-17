@@ -20,12 +20,18 @@ export default function AlternativeSiteHeader({ instagramUrl, spotifyUrl }: Prop
   // Hide header when scrolling down, show when scrolling up or at top
   const isHeaderHidden = scrollDirection === 'down';
 
+  // Debug logging
+  console.log('[AlternativeSiteHeader] Direction:', scrollDirection, '| Hidden:', isHeaderHidden);
+
   const isActive = (href: string) => pathname === href;
 
   return (
     <header
-      className={`alt-header ${isHeaderHidden ? 'alt-header-hidden' : ''}`}
+      className="alt-header"
       data-scroll-direction={scrollDirection}
+      style={{
+        transform: isHeaderHidden ? 'translateY(-100%)' : 'translateY(0)',
+      }}
     >
       <div className="alt-header-inner">
         {/* Brand */}
@@ -73,13 +79,7 @@ export default function AlternativeSiteHeader({ instagramUrl, spotifyUrl }: Prop
           border-bottom: 1px solid rgba(201, 154, 88, 0.2);
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
           transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          transform: translateY(0);
           will-change: transform;
-        }
-
-        /* Hide/show behavior on ALL screen sizes */
-        .alt-header.alt-header-hidden {
-          transform: translateY(-100%);
         }
 
         .alt-header-inner {
