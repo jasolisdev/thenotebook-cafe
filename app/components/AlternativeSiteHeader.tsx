@@ -17,8 +17,8 @@ export default function AlternativeSiteHeader({ instagramUrl, spotifyUrl }: Prop
   const pathname = usePathname();
   const scrollDirection = useScrollDirection({ threshold: 10 });
 
-  // Hide header when scrolling down, show when scrolling up or at top
-  const isHeaderHidden = scrollDirection === 'down';
+  // TESTING: Keep fixed, no hiding for now
+  const isHeaderHidden = false; // scrollDirection === 'down';
 
   // Debug logging
   console.log('[AlternativeSiteHeader] Direction:', scrollDirection, '| Hidden:', isHeaderHidden);
@@ -30,8 +30,8 @@ export default function AlternativeSiteHeader({ instagramUrl, spotifyUrl }: Prop
       className="alt-header"
       data-scroll-direction={scrollDirection}
       style={{
-        transform: isHeaderHidden ? 'translateY(-100%)' : 'translateY(0)',
-        WebkitTransform: isHeaderHidden ? 'translateY(-100%)' : 'translateY(0)',
+        transform: 'translateY(0)',
+        WebkitTransform: 'translateY(0)',
       }}
     >
       <div className="alt-header-inner">
