@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 const images = [
   {
@@ -17,12 +17,12 @@ const images = [
   },
 ];
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   show: {
     transition: {
       staggerChildren: 0.14,
-      ease: [0.22, 0.61, 0.36, 1],
+      ease: [0.22, 0.61, 0.36, 1] as const,
     },
   },
 };
@@ -41,7 +41,7 @@ const cardVariants = (index: number) => ({
     x: index === 0 ? -20 : index === 2 ? 20 : 0,
     rotate: index === 0 ? -4 : index === 2 ? 4 : 0,
     scale: 1,
-    transition: { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] },
+    transition: { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] as const },
   },
 });
 
