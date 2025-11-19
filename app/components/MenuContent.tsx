@@ -1,4 +1,5 @@
 "use client";
+"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -45,11 +46,12 @@ function getMenuItemIcon(item: MenuItem) {
   // Priority 2: Use category SVG icon
   if (item.category && categorySVGs[item.category]) {
     return (
-      <img
+      <Image
         src={categorySVGs[item.category]}
         alt={item.category}
+        width={32}
+        height={32}
         className="w-6 h-6 sm:w-8 sm:h-8 object-contain opacity-80"
-        style={{ maxWidth: '32px', maxHeight: '32px' }}
       />
     );
   }
@@ -63,11 +65,12 @@ function getMenuItemIcon(item: MenuItem) {
 
   const fallbackSVG = sectionSVGs[item.section] || "/icons/espresso.svg";
   return (
-    <img
+    <Image
       src={fallbackSVG}
       alt={item.section}
+      width={32}
+      height={32}
       className="w-6 h-6 sm:w-8 sm:h-8 object-contain opacity-80"
-      style={{ maxWidth: '32px', maxHeight: '32px' }}
     />
   );
 }

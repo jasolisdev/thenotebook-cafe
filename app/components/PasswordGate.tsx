@@ -30,7 +30,7 @@ export default function PasswordGate() {
         setError("Incorrect password. Please try again.");
         setPassword("");
       }
-    } catch (err) {
+    } catch {
       setError("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
@@ -61,7 +61,7 @@ export default function PasswordGate() {
             THE NOTEBOOK CAFÉ
           </h1>
           <p className="text-[15px] text-[#6b5a48] mb-2">
-            We're currently under development
+            We&apos;re currently under development
           </p>
           <p className="text-[14px] text-[#8a7a68]">
             Enter password to preview the site

@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Component Styles */
+@import "./styles/components/card-gallery.css";
+
 /* ============================================================
    CUSTOM FONTS
 ============================================================ */
@@ -53,23 +56,39 @@
   --font-mono: "Torus", monospace;
   --font-display: "Alpino", "Torus", system-ui, sans-serif;
 
+  /* New café palette */
+  --latte-cream: #ede7d8; /* base background (lightened almond) */
+  --vanilla-beige: #d6bd98; /* Almond */
+  --paper-bag: #c4b59f; /* softened neutral */
+  --warm-taupe: #677d6a; /* Matcha Brew */
+  --coffee-bean: #1a3636; /* Eclipse (cool teal - accent) */
+  --soft-mocha: #40534c; /* Forest Roast (cool green - accent) */
+  --foggy-cappuccino: #b7afa6; /* dividers / outlines */
+  --deep-roast: #0f1c1c; /* extra contrast */
+  --espresso-brown: #2a1f16; /* Primary dark brown for text */
+  --warm-brown: #5a4a38; /* Secondary brown for text on cream */
+
   /* Solid background + neutrals */
-  --bg-solid: #0f0c0a;
-  /* espresso-black */
-  --ink-cream: #efe6d7;
-  /* main text */
-  --ink-cream-dim: #cfc4b4;
+  --bg-solid: var(--coffee-bean);
+  --cream: var(--latte-cream);
+  --offwhite: #f8f3e8;
+  --warm-roast: var(--soft-mocha);
+  --latte: var(--vanilla-beige);
+  --taupe: var(--paper-bag);
+
+  /* primary text */
+  --ink-cream: #f8f3e8;
   /* muted text */
+  --ink-cream-dim: #e4dbc8;
 
   /* Panels / borders */
-  --panel: rgba(255, 255, 255, 0.045);
-  --panel-border: rgba(255, 255, 255, 0.08);
-  --glow: 0 0 0.6rem rgba(201, 154, 88, 0.25);
-  /* subtle warmth for shadows */
+  --panel: rgba(26, 54, 54, 0.06);
+  --panel-border: rgba(26, 54, 54, 0.08);
+  --glow: 0 0 0.6rem rgba(64, 83, 76, 0.35);
 
   /* Accent colors for hover states */
-  --accent-warm: rgba(201, 154, 88, 0.15);
-  --accent-glow: rgba(201, 154, 88, 0.4);
+  --accent-warm: rgba(64, 83, 76, 0.18);
+  --accent-glow: rgba(64, 83, 76, 0.42);
 
 }
 
@@ -92,6 +111,15 @@ body {
   width: 100%;
 }
 
+/* Hide horizontal scrollbar for hero gallery track */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
 /* ============================================================
    GLOBAL UTILITIES
 ============================================================ */
@@ -99,18 +127,21 @@ body {
   min-height: 100dvh;
   background: var(--bg-solid);
   color: var(--ink-cream);
-  padding-top: 106px; /* Banner (42px) + Nav (64px) */
+  padding-top: 106px;
+  /* Banner (42px) + Nav (64px) */
 }
 
 @media (min-width: 375px) {
   .page-dark {
-    padding-top: 110px; /* Banner (46px) + Nav (64px) */
+    padding-top: 110px;
+    /* Banner (46px) + Nav (64px) */
   }
 }
 
 @media (min-width: 640px) {
   .page-dark {
-    padding-top: 112px; /* Banner (48px) + Nav (64px) */
+    padding-top: 112px;
+    /* Banner (48px) + Nav (64px) */
   }
 }
 
@@ -151,7 +182,9 @@ h3 {
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.6;
     transform: scale(1);
   }
@@ -176,52 +209,68 @@ h3 {
 
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(201, 154, 88, 0.1);
+    box-shadow: 0 0 20px rgba(164, 131, 116, 0.1);
   }
 
   50% {
-    box-shadow: 0 0 30px rgba(201, 154, 88, 0.2);
-  }
-}
-
-@keyframes scrollReveal {
-  0% {
-    opacity: 0;
-    transform: translateY(50px) scale(0.92);
-  }
-
-  50% {
-    opacity: 0.7;
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+    box-shadow: 0 0 30px rgba(164, 131, 116, 0.2);
   }
 }
 
 /* ============================================================
-   SCROLL REVEAL SYSTEM
+   SCROLL REVEAL SYSTEM - Rebuilt from scratch
+   Speed: Quick (0.5s)
+   Style: Fade + Scale
+   Trigger: 50px before viewport
 ============================================================ */
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(50px) scale(0.92);
-  transition: none;
+
+/* Scroll-triggered animation (below the fold) */
+@keyframes scrollReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.scroll-reveal.is-visible {
-  animation: scrollReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Initial page load animation (above the fold) */
+@keyframes fadeInQuick {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Default state - hidden */
+.scroll-reveal {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Scroll-triggered reveal - Quick 0.5s */
+.scroll-reveal.is-visible:not(.above-fold) {
+  animation: scrollReveal 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Above-the-fold reveal - Instant 0.3s fade */
+.scroll-reveal.is-visible.above-fold {
+  animation: fadeInQuick 0.3s ease-out forwards;
 }
 
 /* ============================================================
    ACCESSIBILITY
 ============================================================ */
 ::selection {
-  background: rgba(201, 154, 88, 0.3);
+  background: rgba(164, 131, 116, 0.3);
   color: var(--ink-cream);
 }
 
 *:focus-visible {
-  outline: 2px solid rgba(201, 154, 88, 0.5);
+  outline: 2px solid rgba(164, 131, 116, 0.5);
   outline-offset: 2px;
 }

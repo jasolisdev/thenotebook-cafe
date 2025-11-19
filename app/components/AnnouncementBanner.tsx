@@ -16,11 +16,23 @@
 
 'use client';
 
+import { useEffect, useState } from 'react';
+
 type Props = {
   text?: string; // Optional announcement text (defaults to 'Grand Opening 2026')
 };
 
 export default function AnnouncementBanner({ text = 'Grand Opening 2026' }: Props) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <div className="announcement-banner">
       <div className="announcement-content">
