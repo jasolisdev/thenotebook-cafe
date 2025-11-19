@@ -37,8 +37,8 @@ export default function SiteFooter({
             Menu
           </Link>
           <span className="footer-nav-separator">•</span>
-          <Link href="/about" className="footer-nav-link">
-            About
+          <Link href="/story" className="footer-nav-link">
+            Story
           </Link>
         </nav>
 

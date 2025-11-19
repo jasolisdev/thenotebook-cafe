@@ -311,36 +311,34 @@ export default async function HomePage() {
 
           {/* CARD GALLERY */}
           <div className="mt-12 sm:mt-16 pb-0">
-            <div className="test-container">
-              <div className="main-hero">
-                <div className="flex-h hero-gallery test-hero-gallery">
-                  <div className="image-card transform-01 scroll-reveal">
-                    <img
-                      src="https://images.unsplash.com/photo-1612737144187-d51c1483225a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D"
-                      loading="lazy"
-                      sizes="(max-width: 1200px) 100vw, 1200px"
-                      srcSet="https://images.unsplash.com/photo-1612737144187-d51c1483225a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D 900w"
-                      alt="Aesthetic coffee drink"
-                    />
-                  </div>
-                  <div className="image-card transform-02 scroll-reveal">
-                    <img
-                      src="https://images.unsplash.com/photo-1683882490013-5b94462881a3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D"
-                      loading="lazy"
-                      sizes="(max-width: 1200px) 100vw, 1200px"
-                      srcSet="https://images.unsplash.com/photo-1683882490013-5b94462881a3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D 900w"
-                      alt="Coffee bar aesthetic"
-                    />
-                  </div>
-                  <div className="image-card transform-03 scroll-reveal">
-                    <img
-                      src="https://plus.unsplash.com/premium_photo-1681711648620-9fa368907a86?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmUlMjBjdXB8ZW58MHx8MHx8fDA%3D"
-                      loading="lazy"
-                      sizes="(max-width: 1200px) 100vw, 1200px"
-                      srcSet="https://plus.unsplash.com/premium_photo-1681711648620-9fa368907a86?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmUlMjBjdXB8ZW58MHx8MHx8fDA%3D 900w"
-                      alt="Coffee cup close-up"
-                    />
-                  </div>
+            <div className="main-hero">
+              <div className="flex-h hero-gallery test-hero-gallery">
+                <div className="image-card transform-01 scroll-reveal">
+                  <img
+                    src="https://images.unsplash.com/photo-1612737144187-d51c1483225a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D"
+                    loading="lazy"
+                    sizes="(max-width: 1200px) 100vw, 1200px"
+                    srcSet="https://images.unsplash.com/photo-1612737144187-d51c1483225a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D 900w"
+                    alt="Aesthetic coffee drink"
+                  />
+                </div>
+                <div className="image-card transform-02 scroll-reveal">
+                  <img
+                    src="https://images.unsplash.com/photo-1683882490013-5b94462881a3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D"
+                    loading="lazy"
+                    sizes="(max-width: 1200px) 100vw, 1200px"
+                    srcSet="https://images.unsplash.com/photo-1683882490013-5b94462881a3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D 900w"
+                    alt="Coffee bar aesthetic"
+                  />
+                </div>
+                <div className="image-card transform-03 scroll-reveal">
+                  <img
+                    src="https://plus.unsplash.com/premium_photo-1681711648620-9fa368907a86?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmUlMjBjdXB8ZW58MHx8MHx8fDA%3D"
+                    loading="lazy"
+                    sizes="(max-width: 1200px) 100vw, 1200px"
+                    srcSet="https://plus.unsplash.com/premium_photo-1681711648620-9fa368907a86?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmUlMjBjdXB8ZW58MHx8MHx8fDA%3D 900w"
+                    alt="Coffee cup close-up"
+                  />
                 </div>
               </div>
             </div>

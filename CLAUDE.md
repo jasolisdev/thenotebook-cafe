@@ -32,7 +32,7 @@ npm run lint     # Run ESLint
 - Uses Next.js 16 App Router with TypeScript
 - Server components by default for data fetching
 - Route handlers in `app/api/` for backend functionality
-- Main pages: `/` (home), `/menu` (menu with tabs), `/about`
+- Main pages: `/` (home), `/menu` (menu with tabs), `/story` (was `/about`), `/events`
 
 ### Sanity CMS Integration
 **Two Sanity clients exist with different purposes:**
@@ -238,6 +238,22 @@ SITE_PASSWORD=your_password_here
 **To disable:** Remove or leave `SITE_PASSWORD` empty in `.env.local`
 
 ## Recent Updates & Changes
+
+### January 2025 - Navigation & Atmosphere Polish
+- **Announcement Banner Integration**
+  - `SiteHeader` now renders `AnnouncementBanner` so every page automatically gets the steaming cup banner above the nav.
+  - Added `--announcement-banner-height` CSS variable (announcement.css) and reworked `navigation.css` offsets so the fixed header and drawer account for the banner height across breakpoints.
+  - Banner palette updated to the latte/paper tones from the site palette for better visual harmony.
+- **Navigation / Drawer Enhancements**
+  - Navbar branding uses `notebook-cafe-navbar-dark.png` instead of text, with responsive `.brand-logo` sizing.
+  - Burger button redesigned (larger circle, thicker lines, extra right margin) and drawer now covers the full viewport (no banner gap) with a centered stack of links.
+  - Mobile drawer links re-ordered to `HOME, MENU, STORY, EVENTS`; the CTA button was removed to tighten the layout, and footer text/socials sit closer to the links for small screens.
+  - Drawer z-index layering fixed so taps on links aren’t blocked by the backdrop overlay.
+- **Atmosphere Carousel Animation Fix**
+  - Removed the keyframe animation replay bug by keeping the stacked transforms until `.atmosphere-card-animate` is applied and letting the existing card transitions handle the spread.
+- **Visual Cleanups**
+  - Removed temporary debug borders from cream/dark sections and home page test classes.
+  - Matched the wavy divider SVG fill to `--cream` for seamless transitions.
 
 ### November 2024 - Design System Overhaul
 
@@ -641,6 +657,86 @@ Implemented balanced 80-100px spacing between sections for consistent rhythm:
 - `app/menu/page.tsx` - Section spacing adjustments
 - `app/styles/components/navigation.css` - Hybrid gradient implementation
 - `app/styles/pages/home.css` - Text color contrast improvements
+
+### January 2025 - Full-Screen Mobile Navigation & Story Page
+
+#### **Full-Screen Mobile Navigation Overhaul**
+Completely redesigned the mobile navigation menu for a premium, immersive experience:
+
+**Navigation Structure:**
+- Full-screen overlay (100vh) on mobile breakpoints (below 640px)
+- Desktop navigation remains unchanged with links in header
+- Mobile drawer z-index: 100 (above all content)
+
+**Animation System:**
+- **Drawer**: Fade + scale animation (opacity 0→1, scale 0.95→1)
+- **Transition**: 0.4s with cubic-bezier(0.25, 0.1, 0.25, 1)
+- **Backdrop**: Darkened to 0.6 opacity, fade transition
+- **Nav items**: Simple fade-in with minimal vertical spacing
+- **Footer**: Scale animation with 0.2s delay for staggered effect
+
+**Layout & Components** (`app/components/SiteHeader.tsx`):
+- **Close button**: Top-right (X icon) with fade-in and scale
+- **Navigation order**: HOME → STORY → EVENTS → VIEW MENU (button)
+- **VIEW MENU button**: Rounded gold pill button with 16px top/bottom spacing
+  - Background: `rgba(164, 131, 116, 0.95)`
+  - Dark text (#0f0c0a)
+  - Hover: scales to 1.05 with enhanced shadow
+- **Footer section**:
+  - Vibe text: "Low lights, good sound, better coffee."
+  - "Follow us!" heading above social icons
+  - Social icons: Spotify, Instagram, Facebook
+
+**Styling** (`app/styles/components/navigation.css`):
+- Background: Lighter gradient `rgba(26, 20, 16, 0.96)` for improved readability
+- Nav items: Simple text links without button styling (removed backgrounds/borders)
+- Minimal spacing throughout to fit content on iPhone viewports:
+  - Nav gap: 8px
+  - Footer gap: 12px
+  - Padding optimized for small screens
+- Hover effects: Only on desktop via `@media (hover: hover)` queries
+
+**Accessibility:**
+- Proper ARIA labels on all interactive elements
+- Keyboard navigation support (Escape key closes drawer)
+- Focus management when drawer opens/closes
+- Screen reader announcements for menu state
+
+#### **About → Story Page Rename**
+Renamed the About page to "Story" for better brand narrative:
+
+**Files Updated:**
+- ✅ Renamed `/app/about/` directory to `/app/story/`
+- ✅ Updated `SiteHeader.tsx` - Both desktop and mobile navigation
+- ✅ Updated `SiteFooter.tsx` - Footer navigation links
+- ✅ Updated `sitemap.ts` - SEO sitemap entry `/about` → `/story`
+- ✅ Route: `/story` (was `/about`)
+
+**Navigation Text:**
+- Desktop nav: "Story"
+- Mobile drawer: "STORY"
+- Footer: "Story"
+
+**Note**: Sanity CMS schema file `aboutPage.ts` remains unchanged for backend compatibility.
+
+#### **Card Hover Animations**
+Enhanced image card hover effects for premium feel:
+
+**Animation Specifications:**
+- **Transition**: 1.2s (slow, luxurious feel)
+- **Easing**: `cubic-bezier(0.22, 0.61, 0.36, 1)`
+- **Hover effect**: `scale(1.08)` with translateY(-8px)
+- **Shadow**: Enhanced from base to create depth
+- **Desktop only**: Effects disabled on mobile via `@media (hover: hover)`
+
+**Affected Components:**
+- `.image-card` - Hero gallery and atmosphere carousel
+- `.welcome-highlight-card` - What to Expect cards
+- `.home-info-card` - Bottom section cards
+
+**Shadow Updates:**
+- **Base shadow**: `0 8px 16px rgba(0, 0, 0, 0.35)` - smaller but stronger
+- **Hover shadow**: `0 22px 52px rgba(0, 0, 0, 0.22)` - enhanced depth
 
 ## Deployment Notes
 

@@ -166,14 +166,14 @@
   aspect-ratio: 4 / 5;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.32);
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
   box-sizing: border-box;
   transition:
-    transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
-    box-shadow 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
   --tilt: 0deg;
   transform: rotate(var(--tilt)) translateZ(0);
   transform-origin: center center;
@@ -191,13 +191,11 @@
   box-sizing: border-box;
 }
 
-.image-card:hover {
-  transform: rotate(var(--tilt)) translateY(-8px) scale(1.065) translateZ(0);
-  box-shadow: 0 22px 52px rgba(0, 0, 0, 0.22);
-}
-
-.image-card:active {
-  transform: rotate(var(--tilt)) translateY(-4px) scale(1.08) translateZ(0);
+@media (hover: hover) {
+  .image-card:hover {
+    transform: rotate(var(--tilt)) translateY(-8px) scale(1.08) translateZ(0);
+    box-shadow: 0 22px 52px rgba(0, 0, 0, 0.22);
+  }
 }
 
 /* Responsive sizing for image-card */
@@ -287,6 +285,23 @@
 .test-gallery .image-card.transform-03 {
   opacity: 1;
   /* Override animation setup - cards are immediately visible */
+}
+
+/* Hover states for animated cards - override animation forwards */
+.scroll-reveal.is-visible.transform-01,
+.scroll-reveal.is-visible.transform-02,
+.scroll-reveal.is-visible.transform-03 {
+  transition: transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@media (hover: hover) {
+
+  .scroll-reveal.is-visible.transform-01:hover,
+  .scroll-reveal.is-visible.transform-02:hover,
+  .scroll-reveal.is-visible.transform-03:hover {
+    transform: translateY(-8px) rotate(var(--tilt)) scale(1.08) !important;
+    box-shadow: 0 22px 52px rgba(0, 0, 0, 0.22);
+  }
 }
 
 @keyframes slideFromRight {
@@ -453,7 +468,7 @@
 }
 
 .welcome-highlight-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px) scale(1.02);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.65) 100%);
   border-color: rgba(164, 131, 116, 0.4);
   box-shadow: 0 8px 24px rgba(42, 31, 22, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8);
@@ -945,12 +960,15 @@
   /* Base layout */
   display: flex;
   gap: 64px;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: flex-start;
+  /* Start alignment for mobile */
   flex-wrap: nowrap;
   /* Always horizontal, no wrapping on any screen size */
-  padding: 40px 20px;
-  /* Allow overflow on all sides */
+  padding: 40px 40px;
+  /* Generous horizontal padding for mobile overflow */
+  margin: 0 -20px;
+  /* Pull carousel beyond container edges */
   /* Scroll behavior - smooth free scrolling */
   overflow-x: auto;
   overflow-y: visible;
@@ -960,8 +978,6 @@
   -ms-overflow-style: none;
   /* IE and Edge */
   scroll-behavior: smooth;
-  /* Negative margins to allow overflow beyond container */
-  margin: -40px -20px;
 }
 
 .atmosphere-carousel::-webkit-scrollbar {
@@ -979,6 +995,8 @@
     /* Pull carousel beyond container for overflow effect */
     overflow-x: visible;
     /* No scrolling - all cards fit on screen */
+    justify-content: center;
+    /* Center alignment for desktop */
   }
 }
 
@@ -1035,67 +1053,42 @@
    ATMOSPHERE CARD ANIMATIONS - No fade, smooth visible spread
 ============================================================ */
 /* Initial state: Cards visible, stacked at center */
-.atmosphere-card-initial.atmosphere-card-1 {
+.atmosphere-card-initial.atmosphere-card-1:not(.atmosphere-card-animate) {
   opacity: 1;
   transform: translateY(60px) translateX(280px) rotate(var(--tilt));
 }
 
-.atmosphere-card-initial.atmosphere-card-2 {
+.atmosphere-card-initial.atmosphere-card-2:not(.atmosphere-card-animate) {
   opacity: 1;
   transform: translateY(60px) translateX(0) rotate(var(--tilt));
 }
 
-.atmosphere-card-initial.atmosphere-card-3 {
+.atmosphere-card-initial.atmosphere-card-3:not(.atmosphere-card-animate) {
   opacity: 1;
   transform: translateY(60px) translateX(-280px) rotate(var(--tilt));
 }
 
-/* Smooth spread - cards visible the whole time, spread at same time */
 .atmosphere-card-1.atmosphere-card-animate {
-  animation: atmosphereSpreadLeft 1.1s ease forwards;
+  transform: translateY(0) translateX(0) rotate(var(--tilt));
 }
 
 .atmosphere-card-2.atmosphere-card-animate {
-  animation: atmosphereStayCentered 1.1s ease forwards;
+  transform: translateY(0) translateX(0) rotate(var(--tilt));
 }
 
 .atmosphere-card-3.atmosphere-card-animate {
-  animation: atmosphereSpreadRight 1.1s ease forwards;
+  transform: translateY(0) translateX(0) rotate(var(--tilt));
 }
 
-/* Card 1: Slides up and spreads left - visible throughout */
-@keyframes atmosphereSpreadLeft {
-  0% {
-    opacity: 1;
-    transform: translateY(60px) translateX(280px) rotate(var(--tilt));
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) translateX(0) rotate(var(--tilt));
-  }
+/* Hover states for atmosphere cards - override animation forwards */
+.atmosphere-card-animate {
+  transition: transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* Card 2: Slides up, stays centered - visible throughout */
-@keyframes atmosphereStayCentered {
-  0% {
-    opacity: 1;
-    transform: translateY(60px) translateX(0) rotate(var(--tilt));
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) translateX(0) rotate(var(--tilt));
-  }
-}
-
-/* Card 3: Slides up and spreads right - visible throughout */
-@keyframes atmosphereSpreadRight {
-  0% {
-    opacity: 1;
-    transform: translateY(60px) translateX(-280px) rotate(var(--tilt));
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) translateX(0) rotate(var(--tilt));
+@media (hover: hover) {
+  .atmosphere-card-animate:hover {
+    transform: translateY(-8px) translateX(0) rotate(var(--tilt)) scale(1.08) !important;
+    box-shadow: 0 22px 52px rgba(0, 0, 0, 0.22);
   }
 }
 
@@ -1192,7 +1185,7 @@
 }
 
 .home-info-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-6px) scale(1.02);
   box-shadow:
     0 16px 40px rgba(0, 0, 0, 0.4),
     0 0 40px rgba(164, 131, 116, 0.15),

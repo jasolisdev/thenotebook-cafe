@@ -32,7 +32,7 @@ A modern web platform for **The Notebook Café LLC**, a Riverside-based coffee s
 ### Design & UX
 - 🎨 **Premium design system** with custom Alpino display font
 - 📱 **Mobile-first responsive design** (iPhone 13 optimized)
-- 🍔 **Animated mobile navigation** with slide-down drawer menu
+- 🍔 **Full-screen mobile navigation** with fade + scale animation
 - 🌊 **Wavy SVG section dividers** for visual flow
 - ✨ **Scroll-triggered animations** using Intersection Observer API
 - ☕ **Floating decorative elements** (coffee beans, plants)
@@ -43,6 +43,16 @@ A modern web platform for **The Notebook Café LLC**, a Riverside-based coffee s
 - 🎯 **SEO optimized** with metadata and Open Graph tags
 - ⚙️ **Type-safe data fetching** with `next-sanity`
 - 🚀 **Vercel deployment** with automatic builds
+
+---
+
+## 🔄 Recent UI Enhancements
+
+- **Global announcement banner** now lives inside `SiteHeader`, and navigation/drawer offsets rely on a shared CSS variable so the banner stays fixed above the navbar everywhere.
+- **Navbar polish**: PNG logotype replaces the text mark, the burger button is larger with bolder lines, and the mobile drawer spans the full viewport without leaving the banner gap exposed.
+- **Drawer IA cleanup**: mobile links read `HOME → MENU → STORY → EVENTS`, the CTA button is removed, and the footer text/social block sits closer to the links for iPhone-sized screens.
+- **Atmosphere Carousel fix**: card spread animation now relies on transforms + transitions so it doesn’t bounce when swiping the carousel or revisiting the section.
+- **Visual touch-ups**: removed temporary debug borders and recolored the wavy divider SVG to the same cream tone used for light sections.
 
 ---
 
@@ -67,7 +77,8 @@ thenotebook-cafe/
 │   │       └── about.css         # About page layout
 │   ├── page.tsx                  # Homepage
 │   ├── menu/page.tsx             # Menu page
-│   ├── about/page.tsx            # About page
+│   ├── story/page.tsx            # Story page (was about)
+│   ├── events/page.tsx           # Events page
 │   └── api/                      # API routes (newsletter, etc.)
 ├── sanity/                       # Sanity CMS configuration
 │   ├── schemaTypes/              # Content models
@@ -168,10 +179,18 @@ Uses Intersection Observer API:
 - Staggered delays via `style={{ animationDelay: '0.1s' }}`
 
 ### Mobile Navigation
-- **Desktop** (640px+): Horizontal nav bar
-- **Mobile**: Hamburger menu → slide-down drawer
-- Drawer includes nav links + social icons (Instagram, Spotify)
-- Auto-closes on route change or ESC key
+- **Desktop** (640px+): Horizontal nav bar with links (Home, Menu, Story, Events)
+- **Mobile** (below 640px): Full-screen overlay menu
+  - **Open**: Hamburger icon in top-right
+  - **Close**: X button in top-right of overlay
+  - **Animation**: Fade + scale (0.4s smooth transition)
+  - **Layout**:
+    - Navigation links: HOME, STORY, EVENTS
+    - Gold "VIEW MENU" button (pill-shaped CTA)
+    - Footer with vibe text + "Follow us!" + social icons
+  - **Styling**: Lighter dark gradient for readability
+  - **Behavior**: Auto-closes on route change or ESC key
+  - **Optimized**: Minimal spacing for iPhone viewports
 
 ### Hero Section
 - Logo image (replaces text title for visual impact)

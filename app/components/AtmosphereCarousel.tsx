@@ -71,7 +71,7 @@ export default function AtmosphereCarousel({ images }: AtmosphereCarouselProps) 
                 'atmosphere-image-wrapper',
                 `atmosphere-tilt-${cardNumber}`,
                 `atmosphere-card-${cardNumber}`,
-                !animate ? 'atmosphere-card-initial' : '',
+                'atmosphere-card-initial',
                 animate ? 'atmosphere-card-animate' : '',
               ].filter(Boolean).join(' ');
 

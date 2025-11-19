@@ -1,6 +1,5 @@
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
-import AnnouncementBanner from "./AnnouncementBanner";
 
 type Props = {
   children: React.ReactNode;
@@ -24,8 +23,11 @@ export default function NotebookPage({
 }: Props) {
   return (
     <main className="page-dark">
-      {announcementText ? <AnnouncementBanner text={announcementText} /> : null}
-      <SiteHeader instagramUrl={instagramUrl} spotifyUrl={spotifyUrl} />
+      <SiteHeader
+        instagramUrl={instagramUrl}
+        spotifyUrl={spotifyUrl}
+        announcementText={announcementText}
+      />
 
       <section className="mx-auto max-w-[1100px] px-5 pt-[96px] pb-10">
         <div className="mx-auto max-w-[760px] text-center">{children}</div>
