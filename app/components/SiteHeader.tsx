@@ -127,7 +127,7 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "lg
         aria-hidden="true"
       />
 
-      {/* Header container wraps nav and drawer for proper z-index stacking */}
+      {/* Header container wraps nav bar only */}
       <div className={`header-container ${headerVisible ? '' : 'header-hidden'}`} data-visible={headerVisible}>
         <div className={`header-dark ${isAtTop ? "header-transparent" : ""} ${open ? "header-open" : ""}`}>
           <Link href="/" className="brand-dark brand-inline" aria-label="Home">
@@ -186,111 +186,112 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "lg
             </span>
           </button>
         </div>
+      </div>
 
-        <aside
-          id="mobile-drawer"
-          className={`drawer ${open ? "open" : ""}`}
-          role="dialog"
-          aria-modal="true"
-          aria-hidden={!open}
-        >
-          <div className="drawer-content">
-            <nav className="drawer-nav" aria-label="Mobile">
-              <Link
-                href="/"
-                onClick={() => setOpen(false)}
-                className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/") ? 'nav-active' : ''}`}
-              >
-                HOME
-              </Link>
-              <Link
-                href="/menu"
-                onClick={() => setOpen(false)}
-                className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/menu") ? 'nav-active' : ''}`}
-              >
-                MENU
-              </Link>
-              <Link
-                href="/story"
-                onClick={() => setOpen(false)}
-                className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/story") ? 'nav-active' : ''}`}
-              >
-                STORY
-              </Link>
-              <Link
-                href="/events"
-                onClick={() => setOpen(false)}
-                className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/events") ? 'nav-active' : ''}`}
-              >
-                EVENTS
-              </Link>
-            </nav>
+      {/* Drawer moved outside header-container to fix z-index stacking */}
+      <aside
+        id="mobile-drawer"
+        className={`drawer ${open ? "open" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!open}
+      >
+        <div className="drawer-content">
+          <nav className="drawer-nav" aria-label="Mobile">
+            <Link
+              href="/"
+              onClick={() => setOpen(false)}
+              className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/") ? 'nav-active' : ''}`}
+            >
+              HOME
+            </Link>
+            <Link
+              href="/menu"
+              onClick={() => setOpen(false)}
+              className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/menu") ? 'nav-active' : ''}`}
+            >
+              MENU
+            </Link>
+            <Link
+              href="/story"
+              onClick={() => setOpen(false)}
+              className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/story") ? 'nav-active' : ''}`}
+            >
+              STORY
+            </Link>
+            <Link
+              href="/events"
+              onClick={() => setOpen(false)}
+              className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/events") ? 'nav-active' : ''}`}
+            >
+              EVENTS
+            </Link>
+          </nav>
 
-            <div className={`drawer-footer ${open ? 'is-visible' : ''}`}>
-              {/* Vibe Statement */}
-              <p className="drawer-vibe-text">Low lights, good sound, better coffee.</p>
+          <div className={`drawer-footer ${open ? 'is-visible' : ''}`}>
+            {/* Vibe Statement */}
+            <p className="drawer-vibe-text">Low lights, good sound, better coffee.</p>
 
-              {/* Follow Us */}
-              <p className="drawer-follow-text">Follow us!</p>
+            {/* Follow Us */}
+            <p className="drawer-follow-text">Follow us!</p>
 
-              {/* Social Icons */}
-              <div className="drawer-social-icons">
-                <a
-                  href={spotifyUrl || "https://open.spotify.com/playlist/58qhSWWn3g1QeCKoVFoAJk"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Spotify Playlist"
-                  className="drawer-social-icon"
-                >
-                  <span className="icon-wrapper">
-                    <SiSpotify size={20} />
-                  </span>
-                </a>
-                <a
-                  href={instagramUrl || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram"
-                  className="drawer-social-icon"
-                >
-                  <span className="icon-wrapper icon-adjust">
-                    <SiInstagram size={20} />
-                  </span>
-                </a>
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Facebook"
-                  className="drawer-social-icon"
-                >
-                  <span className="icon-wrapper icon-adjust">
-                    <SiFacebook size={20} />
-                  </span>
-                </a>
-              </div>
+            {/* Social Icons */}
+            <div className="drawer-social-icons">
+              <a
+                href={spotifyUrl || "https://open.spotify.com/playlist/58qhSWWn3g1QeCKoVFoAJk"}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Spotify Playlist"
+                className="drawer-social-icon"
+              >
+                <span className="icon-wrapper">
+                  <SiSpotify size={20} />
+                </span>
+              </a>
+              <a
+                href={instagramUrl || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="drawer-social-icon"
+              >
+                <span className="icon-wrapper icon-adjust">
+                  <SiInstagram size={20} />
+                </span>
+              </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="drawer-social-icon"
+              >
+                <span className="icon-wrapper icon-adjust">
+                  <SiFacebook size={20} />
+                </span>
+              </a>
             </div>
           </div>
+        </div>
 
-          {/* Floating Coffee Beans in Drawer */}
-          <div className="drawer-floating-items">
-            <Image
-              src="/notebook-coffeebean-up-right.svg"
-              alt=""
-              className="drawer-bean-1"
-              width={160}
-              height={160}
-            />
-            <Image
-              src="/notebook-coffeebean-up-left.svg"
-              alt=""
-              className="drawer-bean-2"
-              width={160}
-              height={160}
-            />
-          </div>
-        </aside>
-      </div>
+        {/* Floating Coffee Beans in Drawer */}
+        <div className="drawer-floating-items">
+          <Image
+            src="/notebook-coffeebean-up-right.svg"
+            alt=""
+            className="drawer-bean-1"
+            width={160}
+            height={160}
+          />
+          <Image
+            src="/notebook-coffeebean-up-left.svg"
+            alt=""
+            className="drawer-bean-2"
+            width={160}
+            height={160}
+          />
+        </div>
+      </aside>
     </div>
   );
 }
