@@ -1,6 +1,22 @@
 /* ============================================================
    ANNOUNCEMENT BANNER
 ============================================================ */
+:root {
+  --announcement-banner-height: 42px;
+}
+
+@media (min-width: 375px) {
+  :root {
+    --announcement-banner-height: 46px;
+  }
+}
+
+@media (min-width: 640px) {
+  :root {
+    --announcement-banner-height: 48px;
+  }
+}
+
 .announcement-banner {
   position: fixed;
   top: 0;
@@ -8,8 +24,8 @@
   right: 0;
   z-index: 50;
   width: 100%;
-  background: linear-gradient(135deg, rgba(164, 131, 116, 0.95) 0%, rgba(181, 134, 68, 0.95) 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(214, 189, 152, 0.98) 0%, rgba(196, 181, 159, 0.98) 100%);
+  border-bottom: 1px solid rgba(42, 31, 22, 0.08);
   padding: 10px 16px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);

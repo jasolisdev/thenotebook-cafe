@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { SiSpotify, SiInstagram, SiFacebook } from "react-icons/si";
+import AnnouncementBanner from "./AnnouncementBanner";
 
 // Suppress hydration warnings for client-only components
 const isBrowser = typeof window !== 'undefined';
@@ -15,6 +16,7 @@ type Props = {
   instagramUrl?: string;
   spotifyUrl?: string;
   burgerUntil?: Breakpoint;
+  announcementText?: string;
 };
 
 const BP_PX: Record<Breakpoint, number> = {
@@ -24,7 +26,7 @@ const BP_PX: Record<Breakpoint, number> = {
   xl: 1280,
 };
 
-export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "lg" }: Props) {
+export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "lg", announcementText }: Props) {
   const [open, setOpen] = useState(false);
   const [headerVisible, setHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -101,6 +103,7 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "lg
 
   return (
     <div suppressHydrationWarning>
+      <AnnouncementBanner text={announcementText} />
       <style jsx>{`
         @media (min-width: ${bpPx}px) {
           .burger-btn {
@@ -128,7 +131,15 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "lg
       <div className={`header-container ${headerVisible ? '' : 'header-hidden'}`} data-visible={headerVisible}>
         <div className={`header-dark ${isAtTop ? "header-transparent" : ""} ${open ? "header-open" : ""}`}>
           <Link href="/" className="brand-dark brand-inline" aria-label="Home">
-            <span className="brand-text">The Notebook Café</span>
+            <Image
+              src="/notebook-cafe-navbar-dark.png"
+              alt="The Notebook Café"
+              width={160}
+              height={55}
+              priority
+              className="brand-logo"
+            />
+            <span className="sr-only">The Notebook Café</span>
           </Link>
 
           <nav className="nav-dark nav-desktop-show" aria-label="Primary">
@@ -147,11 +158,11 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "lg
               Menu
             </Link>
             <Link
-              className={isActive("/about") ? "nav-active" : ""}
-              href="/about"
-              aria-current={isActive("/about") ? "page" : undefined}
+              className={isActive("/story") ? "nav-active" : ""}
+              href="/story"
+              aria-current={isActive("/story") ? "page" : undefined}
             >
-              About
+              Story
             </Link>
             <Link
               className={isActive("/events") ? "nav-active" : ""}
@@ -183,76 +194,81 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "lg
           aria-modal="true"
           aria-hidden={!open}
         >
-          <nav className="drawer-nav" aria-label="Mobile">
-            <Link
-              href="/"
-              onClick={() => setOpen(false)}
-              className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/") ? 'nav-active' : ''}`}
-            >
-              HOME
-            </Link>
-            <Link
-              href="/menu"
-              onClick={() => setOpen(false)}
-              className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/menu") ? 'nav-active' : ''}`}
-            >
-              MENU
-            </Link>
-            <Link
-              href="/about"
-              onClick={() => setOpen(false)}
-              className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/about") ? 'nav-active' : ''}`}
-            >
-              ABOUT
-            </Link>
-            <Link
-              href="/events"
-              onClick={() => setOpen(false)}
-              className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/events") ? 'nav-active' : ''}`}
-            >
-              EVENTS
-            </Link>
-          </nav>
+          <div className="drawer-content">
+            <nav className="drawer-nav" aria-label="Mobile">
+              <Link
+                href="/"
+                onClick={() => setOpen(false)}
+                className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/") ? 'nav-active' : ''}`}
+              >
+                HOME
+              </Link>
+              <Link
+                href="/menu"
+                onClick={() => setOpen(false)}
+                className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/menu") ? 'nav-active' : ''}`}
+              >
+                MENU
+              </Link>
+              <Link
+                href="/story"
+                onClick={() => setOpen(false)}
+                className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/story") ? 'nav-active' : ''}`}
+              >
+                STORY
+              </Link>
+              <Link
+                href="/events"
+                onClick={() => setOpen(false)}
+                className={`drawer-nav-item ${open ? 'is-visible' : ''} ${isActive("/events") ? 'nav-active' : ''}`}
+              >
+                EVENTS
+              </Link>
+            </nav>
 
-          <div className={`drawer-footer ${open ? 'is-visible' : ''}`}>
-            {/* Vibe Statement */}
-            <p className="drawer-vibe-text">Low lights, good sound, better coffee.</p>
+            <div className={`drawer-footer ${open ? 'is-visible' : ''}`}>
+              {/* Vibe Statement */}
+              <p className="drawer-vibe-text">Low lights, good sound, better coffee.</p>
 
-            {/* Social Icons */}
-            <div className="drawer-social-icons">
-              <a
-                href={spotifyUrl || "https://open.spotify.com/playlist/58qhSWWn3g1QeCKoVFoAJk"}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Spotify Playlist"
-                className="drawer-social-icon"
-              >
-                <span className="icon-wrapper">
-                  <SiSpotify size={20} />
-                </span>
-              </a>
-              <a
-                href={instagramUrl || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="drawer-social-icon"
-              >
-                <span className="icon-wrapper icon-adjust">
-                  <SiInstagram size={20} />
-                </span>
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="drawer-social-icon"
-              >
-                <span className="icon-wrapper icon-adjust">
-                  <SiFacebook size={20} />
-                </span>
-              </a>
+              {/* Follow Us */}
+              <p className="drawer-follow-text">Follow us!</p>
+
+              {/* Social Icons */}
+              <div className="drawer-social-icons">
+                <a
+                  href={spotifyUrl || "https://open.spotify.com/playlist/58qhSWWn3g1QeCKoVFoAJk"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Spotify Playlist"
+                  className="drawer-social-icon"
+                >
+                  <span className="icon-wrapper">
+                    <SiSpotify size={20} />
+                  </span>
+                </a>
+                <a
+                  href={instagramUrl || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="drawer-social-icon"
+                >
+                  <span className="icon-wrapper icon-adjust">
+                    <SiInstagram size={20} />
+                  </span>
+                </a>
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="drawer-social-icon"
+                >
+                  <span className="icon-wrapper icon-adjust">
+                    <SiFacebook size={20} />
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
 
