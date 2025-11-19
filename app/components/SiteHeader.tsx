@@ -13,6 +13,7 @@ type Breakpoint = "sm" | "md" | "lg" | "xl";
 
 type Props = {
   instagramUrl?: string;
+  spotifyUrl?: string;
   burgerUntil?: Breakpoint;
 };
 
@@ -23,7 +24,7 @@ const BP_PX: Record<Breakpoint, number> = {
   xl: 1280,
 };
 
-export default function SiteHeader({ instagramUrl, burgerUntil = "lg" }: Props) {
+export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "lg" }: Props) {
   const [open, setOpen] = useState(false);
   const [headerVisible, setHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -220,7 +221,7 @@ export default function SiteHeader({ instagramUrl, burgerUntil = "lg" }: Props) 
             {/* Social Icons */}
             <div className="drawer-social-icons">
               <a
-                href="https://open.spotify.com/playlist/58qhSWWn3g1QeCKoVFoAJk"
+                href={spotifyUrl || "https://open.spotify.com/playlist/58qhSWWn3g1QeCKoVFoAJk"}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Spotify Playlist"
