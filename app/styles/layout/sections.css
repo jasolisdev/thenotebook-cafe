@@ -38,7 +38,7 @@
 
 /* Cream section background */
 .section-cream {
-  background-color: #f4f0e9;
+  background-color: var(--cream);
   position: relative;
   margin: 0;
   padding-top: 40px;
@@ -69,11 +69,11 @@
 
 /* Adjust icon colors in cream section */
 .section-cream .home-highlight-icon {
-  color: rgba(201, 154, 88, 0.8);
+  color: rgba(164, 131, 116, 0.8);
 }
 
 .section-cream .home-highlight-item:hover .home-highlight-icon {
-  color: rgba(201, 154, 88, 1);
+  color: rgba(164, 131, 116, 1);
 }
 
 /* Dark section background */

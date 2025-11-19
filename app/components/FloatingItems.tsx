@@ -1,25 +1,33 @@
 "use client";
+"use client";
+import Image from "next/image";
 
 export default function FloatingItems() {
   return (
     <div className="floating-items-container">
-      <img
+      <Image
         src="/notebook-cup-of-coffee.svg"
         alt="Coffee decoration"
         className="floating-item floating-cup visible"
-        style={{ display: 'block' }}
+        width={200}
+        height={200}
+        priority={false}
       />
-      <img
+      <Image
         src="/notebook-coffeebean-up-left.svg"
         alt="Coffee bean decoration"
         className="floating-item floating-bean-left visible"
-        style={{ display: 'block' }}
+        width={200}
+        height={200}
+        priority={false}
       />
-      <img
+      <Image
         src="/notebook-coffeebean-up-right.svg"
         alt="Coffee bean decoration"
         className="floating-item floating-bean-right visible"
-        style={{ display: 'block' }}
+        width={200}
+        height={200}
+        priority={false}
       />
     </div>
   );

@@ -7,6 +7,8 @@
 
 footer {
   animation: fadeIn 1s ease 0.8s backwards;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 /* Social icons hover effects */
@@ -22,7 +24,7 @@ a[aria-label="Twitter / X"]:hover,
 a[aria-label="Instagram"]:hover {
   transform: translateY(-2px) scale(1.1);
   opacity: 1;
-  filter: drop-shadow(0 4px 8px rgba(201, 154, 88, 0.3));
+  filter: drop-shadow(0 4px 8px rgba(164, 131, 116, 0.3));
 }
 
 /* Footer Navigation */
@@ -44,7 +46,7 @@ a[aria-label="Instagram"]:hover {
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 500;
-  color: rgba(201, 154, 88, 0.85);
+  color: rgba(164, 131, 116, 0.85);
   text-decoration: none;
   transition: color 0.3s ease, transform 0.3s ease;
   position: relative;
@@ -68,7 +70,7 @@ a[aria-label="Instagram"]:hover {
   left: 0;
   right: 0;
   height: 1px;
-  background: rgba(201, 154, 88, 0.6);
+  background: rgba(164, 131, 116, 0.6);
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }

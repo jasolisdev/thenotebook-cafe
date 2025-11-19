@@ -638,3 +638,122 @@
     right: 8%;
   }
 }
+
+/* ============================================================
+   EVENTS PAGE FLOATING ITEMS
+============================================================ */
+
+/* Hero Section Items */
+.events-hero-bean-left {
+  width: 90px;
+  height: auto;
+  left: 8%;
+  top: 25%;
+  transform: translate3d(0, 0, 0) rotate(22deg);
+}
+
+.events-hero-bean-left.visible {
+  animation: floatEventsHeroBean1 10s ease-in-out infinite;
+}
+
+.events-hero-bean-right {
+  width: 85px;
+  height: auto;
+  right: 10%;
+  top: 30%;
+  transform: translate3d(0, 0, 0) rotate(-28deg);
+}
+
+.events-hero-bean-right.visible {
+  animation: floatEventsHeroBean2 11s ease-in-out infinite;
+}
+
+/* Cream Section Items */
+.events-cream-plant-left {
+  width: 170px;
+  height: auto;
+  left: 4%;
+  top: 15%;
+  transform: translate3d(0, 0, 0) rotate(10deg);
+}
+
+.events-cream-plant-left.visible {
+  animation: floatEventsCreamPlant 12s ease-in-out infinite;
+}
+
+.events-cream-bean-right {
+  width: 90px;
+  height: auto;
+  right: 8%;
+  bottom: 20%;
+  transform: translate3d(0, 0, 0) rotate(-15deg);
+}
+
+.events-cream-bean-right.visible {
+  animation: floatEventsCreamBean 9s ease-in-out infinite;
+}
+
+/* ============================================================
+   EVENTS PAGE ANIMATION KEYFRAMES
+============================================================ */
+
+/* Hero Animations */
+@keyframes floatEventsHeroBean1 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(22deg);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0) rotate(22deg);
+  }
+}
+
+@keyframes floatEventsHeroBean2 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-28deg);
+  }
+  50% {
+    transform: translate3d(0, -20px, 0) rotate(-28deg);
+  }
+}
+
+/* Cream Section Animations */
+@keyframes floatEventsCreamPlant {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(10deg);
+  }
+  50% {
+    transform: translate3d(0, -22px, 0) rotate(10deg);
+  }
+}
+
+@keyframes floatEventsCreamBean {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-15deg);
+  }
+  50% {
+    transform: translate3d(0, -16px, 0) rotate(-15deg);
+  }
+}
+
+/* Responsive sizing for events page items */
+@media (max-width: 768px) {
+  .events-hero-bean-left {
+    width: 55px;
+    left: 5%;
+  }
+
+  .events-hero-bean-right {
+    width: 52px;
+    right: 8%;
+  }
+
+  .events-cream-plant-left {
+    width: 105px;
+    left: 2%;
+  }
+
+  .events-cream-bean-right {
+    width: 58px;
+    right: 5%;
+  }
+}

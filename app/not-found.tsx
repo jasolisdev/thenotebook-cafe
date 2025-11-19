@@ -16,9 +16,9 @@ export default function NotFound() {
 
         {/* Description */}
         <p className="text-[15px] sm:text-[16px] md:text-[17px] leading-relaxed text-[#6b5a48] max-w-[640px] mx-auto mb-12">
-          We couldn't find the page you're looking for. The URL might be incorrect,
+          We couldn&apos;t find the page you&apos;re looking for. The URL might be incorrect,
           or the page may have been moved. Head back to our homepage or explore our
-          carefully crafted menu to find what you're craving.
+          carefully crafted menu to find what you&apos;re craving.
         </p>
 
         {/* Buttons */}

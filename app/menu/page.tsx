@@ -3,8 +3,8 @@ import SiteHeader from "../components/SiteHeader";
 import MenuContent from "../components/MenuContent";
 import ScrollReveal from "../components/ScrollReveal";
 import FloatingItems from "../components/FloatingItems";
+import Image from "next/image";
 import SiteFooter from "../components/SiteFooter";
-// import AnnouncementBanner from "../components/AnnouncementBanner";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -36,8 +36,6 @@ export default async function MenuPage() {
   return (
     <main className="page-dark">
       <ScrollReveal />
-      {/* Announcement Banner - COMMENTED OUT FOR TESTING */}
-      {/* <AnnouncementBanner /> */}
 
       {/* Fixed dark nav */}
       <SiteHeader
@@ -46,7 +44,7 @@ export default async function MenuPage() {
       />
 
       {/* Menu Section - Cream Background */}
-      <section className="section-cream py-20 min-h-screen relative">
+      <section className="section-cream pt-24 sm:pt-28 lg:pt-32 pb-16 sm:pb-20 min-h-screen relative">
         <FloatingItems />
         <div className="mx-auto max-w-[1200px] px-6 relative z-10">
           {/* Header */}
@@ -59,15 +57,18 @@ export default async function MenuPage() {
             </p>
 
             {/* Coffee Hero Image */}
-            <div className="max-w-[800px] mx-auto mb-12 scroll-reveal">
-              <div className="rounded-2xl overflow-hidden shadow-lg">
-                <img
-                  src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&h=400&fit=crop"
-                  alt="Artisan espresso being poured"
-                  className="w-full h-[200px] sm:h-[300px] md:h-[400px] object-cover"
-                />
+              <div className="max-w-[800px] mx-auto mb-12 scroll-reveal">
+                <div className="rounded-2xl overflow-hidden shadow-lg relative h-[200px] sm:h-[300px] md:h-[400px]">
+                  <Image
+                    src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&h=400&fit=crop"
+                    alt="Artisan espresso being poured"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 900px) 100vw, 800px"
+                    priority={false}
+                  />
+                </div>
               </div>
-            </div>
           </div>
 
           {/* Menu Content with Tabs */}
@@ -77,7 +78,7 @@ export default async function MenuPage() {
 
       {/* Divider - Wavy transition to dark footer */}
       <div className="divider-cream">
-        <img src="/notebook-divider-cream.svg" alt="" />
+        <Image src="/notebook-divider-cream.svg" alt="" width={1440} height={120} />
       </div>
 
       {/* Footer */}

@@ -542,6 +542,106 @@ Created reusable `SiteFooter` component:
 - `app/styles/pages/home.css` - Card enhancements, music note spacing
 - `next.config.ts` - Unsplash image domain configuration
 
+### November 2025 - Design System Consistency & Animation Overhaul
+
+#### **Hybrid Color Palette Implementation**
+Implemented a hybrid color approach that uses warm browns/golds as primary colors with cool teals/greens as accents:
+
+**Color System (`app/globals.css`)**:
+- **Primary Text Colors** (on cream backgrounds):
+  - `#2a1f16` (espresso-brown) - Primary dark text, excellent contrast (10.7:1 ratio)
+  - `#5a4a38` (warm-brown) - Secondary text on cream
+  - `rgba(164,131,116,0.9)` - Gold accent for headings and labels
+
+- **Cool Accent Colors** (preserved from original palette):
+  - `#1a3636` (coffee-bean) - Cool teal for backgrounds and accents
+  - `#40534c` (soft-mocha) - Cool green for subtle accents
+
+- **Navigation Gradient**: Blends cool teal to warm brown
+  - `linear-gradient(135deg, rgba(26, 54, 54, 0.94) 0%, rgba(42, 31, 22, 0.92) 100%)`
+  - Border: `rgba(164, 131, 116, 0.25)` - warm gold border
+
+**Typography Contrast Fixes**:
+- All cream section text now uses `#2a1f16` for optimal readability
+- Section labels use `rgba(164,131,116,0.9)` for accent color
+- Removed `var(--coffee-bean)` from cream sections (was too low contrast)
+
+#### **Bold Scroll Reveal Animation**
+Enhanced scroll reveal animations for more dramatic, eye-catching entrance effects:
+
+**Animation Specifications** (`app/globals.css`):
+```css
+@keyframes scrollReveal {
+  0% { opacity: 0; transform: translateY(80px) scale(0.88); }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+```
+
+**Key Changes**:
+- **TranslateY**: Increased from 50px → 80px for more dramatic entrance
+- **Scale**: Reduced from 0.92 → 0.88 for bolder zoom effect
+- **Duration**: Extended from 0.9s → 1.0s for smoother motion
+- **Easing**: Maintained `cubic-bezier(0.16, 1, 0.3, 1)` for spring-like feel
+
+**Implementation**:
+- Applied consistently across all `.scroll-reveal` elements
+- Works across all breakpoints (mobile, tablet, desktop)
+- Threshold: 0.1 (animation triggers when 10% of element is visible)
+
+#### **Standardized Section Spacing**
+Implemented balanced 80-100px spacing between sections for consistent rhythm:
+
+**Homepage (`app/page.tsx`)**:
+- **Hero Section**: Responsive padding with clamp()
+- **Welcome Section**: `pb-0` (relies on section-cream padding)
+- **Card Gallery**: `mt-12 sm:mt-16` spacing from previous section
+- **Vibe Quote**: `mt-12 sm:mt-16` consistent spacing
+- **Coffee Difference**: `mt-12 sm:mt-16 lg:mt-20` progressive scaling
+- **View Menu Button**: `mt-10 sm:mt-12 pb-8 sm:pb-12` bottom spacing
+- **Hear the Vibe**: `py-16 sm:py-20` balanced top/bottom
+- **Atmosphere**: `py-16 sm:py-20` consistent with Hear the Vibe
+- **Info Cards (Dark)**: `py-20 sm:py-24 lg:py-28` larger for emphasis
+- **Newsletter**: `mb-20 sm:mb-24` footer spacing
+
+**About Page (`app/about/page.tsx`)**:
+- **Hero Section**: `pt-[60px] pb-10` compact hero
+- **Body Section**: `pt-16 sm:pt-20 pb-16 sm:pb-20` balanced
+- **Riverside Commitment**: `pb-16 sm:pb-20` consistent bottom
+- **Craft & Rhythm**: `pb-16 sm:pb-20` consistent bottom
+- **Values Section**: `pb-16 sm:pb-20` consistent bottom
+- **Mission Section**: `py-20 sm:py-24 lg:py-28` emphasis spacing
+
+**Menu Page (`app/menu/page.tsx`)**:
+- **Menu Section**: `pt-16 sm:pt-20 pb-16 sm:pb-20` balanced throughout
+
+**Section CSS (`app/styles/layout/sections.css`)**:
+- **Cream Sections**:
+  - Mobile: 40px padding
+  - 375px+: 60px padding
+  - 640px+: 80px padding
+  - 1024px+: 100px padding
+
+#### **Responsive Spacing Philosophy**
+**Progressive Scale**: Mobile → Tablet → Desktop
+- Small screens: Tighter spacing (40-60px) for efficient use of limited space
+- Medium screens: Balanced spacing (60-80px) for comfortable reading
+- Large screens: Generous spacing (80-100px) for premium, magazine-like feel
+
+**Consistent Patterns**:
+- Use `py-16 sm:py-20` for standard sections on cream background
+- Use `py-20 sm:py-24 lg:py-28` for emphasis sections on dark background
+- Use `mt-12 sm:mt-16` for spacing between subsections
+- Use `pb-0` when section inherits padding from parent `.section-cream`
+
+#### **Files Modified in This Update**
+- `app/globals.css` - Scroll reveal animation, color palette documentation
+- `app/page.tsx` - Section spacing standardization
+- `app/about/page.tsx` - Spacing and color contrast fixes
+- `app/menu/page.tsx` - Section spacing adjustments
+- `app/styles/components/navigation.css` - Hybrid gradient implementation
+- `app/styles/pages/home.css` - Text color contrast improvements
+
 ## Deployment Notes
 
 - Configured for Vercel deployment
