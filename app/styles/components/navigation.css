@@ -8,17 +8,13 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 40;
+  z-index: 49;
   padding-top: var(--announcement-banner-height, 0px);
-  /* Above page content */
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateY(0);
+  /* Below announcement banner (z-index: 50), above page content */
+  transition: transform 0.15s ease-out;
+  /* Fast, smooth transition for live scroll tracking */
   overflow: visible; /* Ensure drawer is not clipped */
-}
-
-.header-container.header-hidden {
-  transform: translateY(-64px);
-  /* Slide up off screen */
+  will-change: transform;
 }
 
 /* Legacy nav-glass-wrap (not currently used) */
@@ -261,23 +257,7 @@
   transform: rotate(-45deg);
 }
 
-/* Drawer backdrop */
-.drawer-backdrop {
-  position: fixed;
-  inset: 0;
-  background: transparent;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-  z-index: 80;
-}
-
-.drawer-backdrop.show {
-  opacity: 0;
-  pointer-events: auto;
-}
-
-/* Drawer panel - positioned below nav bar */
+/* Drawer panel - full screen overlay */
 .drawer {
   position: fixed;
   top: 0;
@@ -296,7 +276,8 @@
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  z-index: 90;
+  z-index: 48;
+  /* Below navbar (z-index: 49), below announcement banner (z-index: 50) */
 }
 
 .drawer.open {
