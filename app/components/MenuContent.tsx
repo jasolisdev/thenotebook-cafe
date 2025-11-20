@@ -50,8 +50,8 @@ export default function MenuContent({ items }: MenuContentProps) {
 
   return (
     <>
-      {/* Tabs */}
-      <div className="flex justify-center gap-8 sm:gap-16 mb-16 border-b border-[rgba(201,154,88,0.2)] scroll-reveal">
+      {/* Tabs - Sticky */}
+      <div className="menu-tabs-sticky flex justify-center gap-8 sm:gap-16 mb-16 border-b border-[rgba(201,154,88,0.2)] scroll-reveal">
         <button
           onClick={() => setActiveTab("drinks")}
           className={`pb-4 text-[16px] sm:text-[18px] font-semibold uppercase tracking-wider transition-all relative ${
@@ -104,8 +104,8 @@ export default function MenuContent({ items }: MenuContentProps) {
               {/* Left Side - Text */}
               <div className="flex-1">
                 <h3 className="menu-card-title">{drink.name}</h3>
-                <p className="menu-card-price">${drink.price}</p>
                 <p className="menu-card-description">{drink.description}</p>
+                <p className="menu-card-price">${drink.price}</p>
               </div>
 
               {/* Right Side - Image + Button */}

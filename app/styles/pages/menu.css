@@ -1,6 +1,18 @@
 /* ============================================================
    MENU PAGE - NEW CARD DESIGN
 ============================================================ */
+
+/* Sticky Tabs */
+.menu-tabs-sticky {
+  position: sticky;
+  top: 0;
+  background: #f4f0e9;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  z-index: 10;
+  margin-bottom: 3rem !important;
+}
+
 @keyframes menuCardFadeIn {
   from {
     opacity: 0;
@@ -24,8 +36,8 @@
     rgba(249, 246, 242, 0.90) 100%
   );
 
-  /* Border */
-  border: 1.5px solid rgba(201, 154, 88, 0.15);
+  /* Border - 1px light brown */
+  border: 1px solid rgba(164, 131, 116, 0.25);
   border-radius: 16px;
 
   /* Padding */
@@ -48,7 +60,7 @@
     0 4px 12px rgba(42, 31, 22, 0.08),
     0 12px 32px rgba(42, 31, 22, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  border-color: rgba(201, 154, 88, 0.25);
+  border-color: rgba(164, 131, 116, 0.35);
 }
 
 /* Mobile responsive */
@@ -66,21 +78,29 @@
   font-weight: 700;
   color: #2a1f16;
   letter-spacing: 0.5px;
-  margin-bottom: 0.375rem;
+  margin-bottom: 0.5rem;
   line-height: 1.3;
-}
-
-.menu-card-price {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #2a1f16;
-  margin-bottom: 0.75rem;
 }
 
 .menu-card-description {
   font-size: 0.9375rem;
   line-height: 1.6;
   color: #5a4a38;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+
+  /* Truncate on mobile */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu-card-price {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #2a1f16;
 }
 
 @media (min-width: 640px) {
@@ -88,12 +108,17 @@
     font-size: 1.375rem;
   }
 
-  .menu-card-price {
-    font-size: 1.125rem;
-  }
-
   .menu-card-description {
     font-size: 1rem;
+    /* Remove truncation on desktop */
+    display: block;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    overflow: visible;
+  }
+
+  .menu-card-price {
+    font-size: 1.125rem;
   }
 }
 
