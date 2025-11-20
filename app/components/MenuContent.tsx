@@ -109,7 +109,7 @@ export default function MenuContent({ items }: MenuContentProps) {
 
       {/* Drinks Tab - New Card Design */}
       {activeTab === "drinks" && (
-        <div className="w-full max-w-[840px] mx-auto px-4 sm:px-6 space-y-3 scroll-reveal">
+        <div className="w-full max-w-[1000px] mx-auto px-4 sm:px-6 space-y-3 scroll-reveal">
           {MENU_DRINKS.map((drink, idx) => (
             <div
               key={`drink-${idx}`}
