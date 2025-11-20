@@ -2,15 +2,15 @@
    NAVIGATION
 ============================================================ */
 
-/* Header container wraps nav + drawer for proper z-index stacking */
+/* Header container wraps nav bar - stays above drawer */
 .header-container {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 40;
+  z-index: 100;
   padding-top: var(--announcement-banner-height, 0px);
-  /* Above page content */
+  /* Above page content and drawer */
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateY(0);
   overflow: visible; /* Ensure drawer is not clipped */
@@ -280,12 +280,12 @@
 /* Drawer panel - positioned below nav bar */
 .drawer {
   position: fixed;
-  top: 0;
+  top: calc(var(--announcement-banner-height, 0px) + 64px);
   left: 0;
   right: 0;
   bottom: 0;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - var(--announcement-banner-height, 0px) - 64px);
   background: #f4f0e9;
   opacity: 0;
   transform: scale(0.95);
