@@ -126,7 +126,7 @@ export default function MenuContent({ items }: MenuContentProps) {
               <div className="relative flex-shrink-0">
                 <div className="menu-card-image-wrapper">
                   <Image
-                    src="https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=300&h=400&fit=crop"
+                    src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=300&h=400&fit=crop"
                     alt={drink.name}
                     fill
                     className="menu-card-image"
