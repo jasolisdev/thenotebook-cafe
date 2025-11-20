@@ -21,9 +21,8 @@
 .menu-card {
   /* Layout */
   display: flex;
-  gap: 1rem;
-  align-items: center;
-  min-height: 120px;
+  gap: 0;
+  align-items: stretch;
 
   /* Background - Soft warm cream */
   background: linear-gradient(135deg,
@@ -36,7 +35,7 @@
   border-radius: 12px;
 
   /* Padding */
-  padding: 1rem 0 1rem 1.5rem;
+  padding: 0;
 
   /* Shadows - Warm premium shadows */
   box-shadow:
@@ -58,12 +57,17 @@
   border-color: rgba(164, 131, 116, 0.35);
 }
 
-/* Mobile responsive */
-@media (max-width: 640px) {
-  .menu-card {
-    min-height: 100px;
-    gap: 0.75rem;
-    padding: 0.875rem 0 0.875rem 1rem;
+/* Text content wrapper */
+.menu-card > .flex-1 {
+  padding: 1rem 1rem 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .menu-card > .flex-1 {
+    padding: 1.25rem 1.5rem 1.25rem 1.5rem;
   }
 }
 
@@ -120,8 +124,8 @@
 /* Image Wrapper */
 .menu-card-image-wrapper {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 112px; /* w-28 */
+  height: 100%;
   border-radius: 0 11px 11px 0;
   overflow: hidden;
   background: rgba(244, 240, 233, 0.5);
@@ -130,8 +134,7 @@
 
 @media (min-width: 640px) {
   .menu-card-image-wrapper {
-    width: 140px;
-    height: 140px;
+    width: 128px; /* w-32 */
   }
 }
 
