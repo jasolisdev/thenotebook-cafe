@@ -1,10 +1,14 @@
+/**
+ * Events Page - The Notebook Café
+ *
+ * Displays upcoming events, grand opening information, and newsletter signup.
+ */
 import Image from "next/image";
-// app/events/page.tsx
-import SiteHeader from "../components/SiteHeader";
-import SiteFooter from "../components/SiteFooter";
-import ScrollReveal from "../components/ScrollReveal";
-import NewsletterForm from "../components/NewsLetterForm";
-import EventsFloatingItems from "../components/EventsFloatingItems";
+import SiteHeader from "../components/layout/SiteHeader";
+import SiteFooter from "../components/layout/SiteFooter";
+import ScrollReveal from "../components/layout/ScrollReveal";
+import NewsletterForm from "../components/features/NewsLetterForm";
+import EventsFloatingItems from "../components/decorative/EventsFloatingItems";
 import { Calendar, Clock, MapPin, Music2, Ticket } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 
@@ -20,7 +24,7 @@ export default async function EventsPage() {
 
   return (
     <>
-      <main className="page-dark">
+      <main className="site-layout">
         <ScrollReveal />
 
         <SiteHeader
@@ -91,7 +95,7 @@ export default async function EventsPage() {
             <div className="text-center mb-12 scroll-reveal">
               <div className="events-dj-image relative">
                 <Image
-                  src="https://images.unsplash.com/photo-1571266028243-d220c6c2b8d2?w=1200&h=600&fit=crop"
+                  src="/unsplash/event-hero.jpg"
                   alt="DJ performing at event"
                   fill
                   className="object-cover"
@@ -224,15 +228,15 @@ export default async function EventsPage() {
               <div className="events-gallery">
                 {[
                   {
-                    src: "https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=800&h=600&fit=crop",
+                    src: "/unsplash/event-1.jpg",
                     alt: "DJ mixing at turntables",
                   },
                   {
-                    src: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&h=600&fit=crop",
+                    src: "/unsplash/event-2.jpg",
                     alt: "Crowd enjoying music",
                   },
                   {
-                    src: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&h=600&fit=crop",
+                    src: "/unsplash/event-3.jpg",
                     alt: "DJ performing with lights",
                   },
                 ].map((item) => (

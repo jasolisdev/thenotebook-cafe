@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { SiSpotify, SiInstagram, SiFacebook } from "react-icons/si";
 import AnnouncementBanner from "./AnnouncementBanner";
 
@@ -28,25 +28,14 @@ const BP_PX: Record<Breakpoint, number> = {
 
 export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "lg", announcementText }: Props) {
   const [open, setOpen] = useState(false);
-  const [headerVisible, setHeaderVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [isAtTop, setIsAtTop] = useState(true);
   const pathname = usePathname();
 
   const handleToggle = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('🔴 BURGER CLICKED! Current state:', open);
     const newState = !open;
     setOpen(newState);
-    console.log('🔴 Setting state to:', newState);
   };
-
-  useEffect(() => {
-    console.log('✅ Drawer state updated to:', open);
-    console.log('✅ Drawer element:', document.querySelector('.drawer'));
-    console.log('✅ Drawer has "open" class:', document.querySelector('.drawer.open'));
-  }, [open]);
 
   // Close drawer when navigating to a new page
   useEffect(() => {
@@ -72,32 +61,6 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "lg
     };
   }, [open]);
 
-  // Auto-hide header on scroll down, show on scroll up
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setIsAtTop(currentScrollY < 10);
-
-      if (currentScrollY < 5) {
-        // Always show header at top of page
-        setHeaderVisible(true);
-      } else if (currentScrollY > lastScrollY) {
-        // Scrolling down - hide header
-        console.log('Scrolling down, hiding header');
-        setHeaderVisible(false);
-      } else {
-        // Scrolling up - show header
-        console.log('Scrolling up, showing header');
-        setHeaderVisible(true);
-      }
-
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
-
   const isActive = (href: string) => pathname === href;
   const bpPx = useMemo(() => BP_PX[burgerUntil], [burgerUntil]);
 
@@ -120,16 +83,9 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "lg
         }
       `}</style>
 
-      {/* Backdrop outside container for proper layering */}
-      <div
-        className={`drawer-backdrop ${open ? "show" : ""}`}
-        onClick={() => setOpen(false)}
-        aria-hidden="true"
-      />
-
-      {/* Header container wraps nav and drawer for proper z-index stacking */}
-      <div className={`header-container ${headerVisible ? '' : 'header-hidden'}`} data-visible={headerVisible}>
-        <div className={`header-dark ${isAtTop ? "header-transparent" : ""} ${open ? "header-open" : ""}`}>
+      {/* Header container wraps nav bar only */}
+      <div className="header-container">
+        <div className={`header-dark ${open ? "header-open" : ""}`}>
           <Link href="/" className="brand-dark brand-inline" aria-label="Home">
             <Image
               src="/notebook-cafe-navbar-dark.png"
@@ -186,15 +142,18 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "lg
             </span>
           </button>
         </div>
+      </div>
 
-        <aside
-          id="mobile-drawer"
-          className={`drawer ${open ? "open" : ""}`}
-          role="dialog"
-          aria-modal="true"
-          aria-hidden={!open}
-        >
-          <div className="drawer-content">
+      {/* Drawer - outside header container, below announcement banner */}
+      <aside
+        id="mobile-drawer"
+        className={`drawer ${open ? "open" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!open}
+        onClick={() => setOpen(false)}
+      >
+        <div className="drawer-content" onClick={(e) => e.stopPropagation()}>
             <nav className="drawer-nav" aria-label="Mobile">
               <Link
                 href="/"
@@ -290,7 +249,6 @@ export default function SiteHeader({ instagramUrl, spotifyUrl, burgerUntil = "lg
             />
           </div>
         </aside>
-      </div>
     </div>
   );
 }

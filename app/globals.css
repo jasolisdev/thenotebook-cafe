@@ -2,6 +2,7 @@
 
 /* Component Styles */
 @import "./styles/components/card-gallery.css";
+@import "./styles/components/modal.css";
 
 /* ============================================================
    CUSTOM FONTS
@@ -70,16 +71,21 @@
 
   /* Solid background + neutrals */
   --bg-solid: var(--coffee-bean);
+  --bg-dark: var(--coffee-bean);
+  --bg-cream: var(--latte-cream);
   --cream: var(--latte-cream);
   --offwhite: #f8f3e8;
   --warm-roast: var(--soft-mocha);
   --latte: var(--vanilla-beige);
   --taupe: var(--paper-bag);
 
-  /* primary text */
-  --ink-cream: #f8f3e8;
-  /* muted text */
-  --ink-cream-dim: #e4dbc8;
+  /* Text colors (semantic names) */
+  --text-light: #f8f3e8;        /* Primary text on dark backgrounds */
+  --text-light-muted: #e4dbc8;  /* Muted text on dark backgrounds */
+
+  /* Legacy names (deprecated) */
+  --ink-cream: var(--text-light);
+  --ink-cream-dim: var(--text-light-muted);
 
   /* Panels / borders */
   --panel: rgba(26, 54, 54, 0.06);
@@ -123,34 +129,44 @@ body {
 /* ============================================================
    GLOBAL UTILITIES
 ============================================================ */
-.page-dark {
+.site-layout {
   min-height: 100dvh;
   background: var(--bg-solid);
-  color: var(--ink-cream);
+  color: var(--text-light);
   padding-top: 106px;
   /* Banner (42px) + Nav (64px) */
 }
 
 @media (min-width: 375px) {
-  .page-dark {
+  .site-layout {
     padding-top: 110px;
     /* Banner (46px) + Nav (64px) */
   }
 }
 
 @media (min-width: 640px) {
-  .page-dark {
+  .site-layout {
     padding-top: 112px;
     /* Banner (48px) + Nav (64px) */
   }
 }
 
+/* Text color utilities for dark backgrounds */
+.text-light {
+  color: var(--text-light);
+}
+
+.text-light-muted {
+  color: var(--text-light-muted);
+}
+
+/* Legacy class names (deprecated - use .text-light instead) */
 .ink-cream {
-  color: var(--ink-cream);
+  color: var(--text-light);
 }
 
 .ink-cream-dim {
-  color: var(--ink-cream-dim);
+  color: var(--text-light-muted);
 }
 
 /* ============================================================
