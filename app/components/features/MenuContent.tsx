@@ -21,40 +21,46 @@ type MenuContentProps = {
 // Hardcoded menu items
 const MENU_DRINKS: MenuItem[] = [
   {
-    name: "Drip Coffee",
+    name: "Espresso",
     price: "3.50",
-    description: "Classic drip coffee brewed fresh throughout the day. Smooth and bold.",
+    description: "Rich, concentrated shot of pure coffee excellence. Bold flavor with a smooth crema finish.",
     section: "drinks",
+    imageUrl: "/menu/tnc-menu-expresso-1.png",
   },
   {
     name: "Cappuccino",
     price: "4.50",
     description: "Espresso with velvety steamed milk and thick foam. Perfectly balanced.",
     section: "drinks",
+    imageUrl: "/menu/cappuccino.jpg",
   },
   {
     name: "Vanilla Latte",
     price: "5.00",
     description: "House-made vanilla syrup, espresso, and steamed milk. Sweet and creamy.",
     section: "drinks",
+    imageUrl: "/menu/vanilla-latte.jpg",
   },
   {
     name: "Iced Mocha",
     price: "5.50",
     description: "Rich chocolate, espresso, and milk over ice. Cool and indulgent.",
     section: "drinks",
+    imageUrl: "/menu/iced-mocha.jpg",
   },
   {
     name: "Cold Brew",
     price: "4.50",
     description: "Smooth cold brew steeped for 16 hours. Served over ice, naturally sweet.",
     section: "drinks",
+    imageUrl: "/menu/cold-brew.jpg",
   },
   {
     name: "Caramel Macchiato",
     price: "5.50",
     description: "Vanilla-infused milk, espresso, and caramel drizzle. Layered and sweet.",
     section: "drinks",
+    imageUrl: "/menu/caramel-macchiato.jpg",
   },
 ];
 
@@ -65,6 +71,7 @@ const MENU_SEASONAL: MenuItem[] = [
     description: "Fall classic with pumpkin, cinnamon, and nutmeg. Topped with whipped cream.",
     section: "drinks",
     category: "seasonal",
+    imageUrl: "/menu/pumpkin-spice-latte.jpg",
   },
   {
     name: "Honey Lavender Latte",
@@ -72,6 +79,7 @@ const MENU_SEASONAL: MenuItem[] = [
     description: "Floral lavender and local honey with espresso and steamed milk. Light and aromatic.",
     section: "drinks",
     category: "seasonal",
+    imageUrl: "/menu/honey-lavender-latte.jpg",
   },
   {
     name: "Iced Brown Sugar Shaken Espresso",
@@ -79,6 +87,7 @@ const MENU_SEASONAL: MenuItem[] = [
     description: "Shaken espresso with brown sugar and oat milk over ice. Smooth and lightly sweet.",
     section: "drinks",
     category: "seasonal",
+    imageUrl: "/menu/iced-brown-sugar-espresso.jpg",
   },
   {
     name: "Peppermint Mocha",
@@ -86,6 +95,7 @@ const MENU_SEASONAL: MenuItem[] = [
     description: "Rich chocolate, espresso, and cool peppermint. Holiday favorite, hot or iced.",
     section: "drinks",
     category: "seasonal",
+    imageUrl: "/menu/peppermint-mocha.jpg",
   },
 ];
 
@@ -95,36 +105,42 @@ const MENU_MEALS: MenuItem[] = [
     price: "8.50",
     description: "Egg, cheddar, and bacon on a toasted English muffin. Add avocado +$2.",
     section: "meals",
+    imageUrl: "/menu/breakfast-sandwich.jpg",
   },
   {
     name: "Avocado Toast",
     price: "9.00",
     description: "Smashed avocado on sourdough with cherry tomatoes, feta, and chili flakes.",
     section: "meals",
+    imageUrl: "/menu/avocado-toast.jpg",
   },
   {
     name: "Turkey & Swiss Panini",
     price: "10.50",
     description: "Sliced turkey, Swiss cheese, spinach, and honey mustard on pressed ciabatta.",
     section: "meals",
+    imageUrl: "/menu/turkey-swiss-panini.jpg",
   },
   {
     name: "Grilled Cheese & Tomato Soup",
     price: "9.50",
     description: "Classic grilled cheese on sourdough with creamy tomato basil soup.",
     section: "meals",
+    imageUrl: "/menu/grilled-cheese-soup.jpg",
   },
   {
     name: "Caesar Salad",
     price: "9.00",
     description: "Crisp romaine, parmesan, croutons, and house Caesar dressing. Add chicken +$3.",
     section: "meals",
+    imageUrl: "/menu/caesar-salad.jpg",
   },
   {
     name: "Yogurt Parfait",
     price: "7.00",
     description: "Greek yogurt layered with granola, fresh berries, and a drizzle of honey.",
     section: "meals",
+    imageUrl: "/menu/yogurt-parfait.jpg",
   },
 ];
 
@@ -134,24 +150,28 @@ const MENU_DESSERTS: MenuItem[] = [
     price: "6.00",
     description: "Classic creamy cheesecake on a graham cracker crust. Topped with berry compote.",
     section: "desserts",
+    imageUrl: "/menu/new-york-cheesecake.jpg",
   },
   {
     name: "Chocolate Brownie",
     price: "5.00",
     description: "Rich, fudgy brownie with walnuts. Served warm with vanilla ice cream.",
     section: "desserts",
+    imageUrl: "/menu/chocolate-brownie.jpg",
   },
   {
     name: "Chocolate Chip Cookie",
     price: "3.50",
     description: "Freshly baked, gooey center with semi-sweet chocolate chips. A classic favorite.",
     section: "desserts",
+    imageUrl: "/menu/chocolate-chip-cookie.jpg",
   },
   {
     name: "Cinnamon Roll",
     price: "5.50",
     description: "House-made cinnamon roll with cream cheese frosting. Warm and indulgent.",
     section: "desserts",
+    imageUrl: "/menu/cinnamon-roll.jpg",
   },
 ];
 
@@ -160,10 +180,24 @@ export default function MenuContent({ items }: MenuContentProps) {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+  const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
 
   const handleItemClick = (item: MenuItem) => {
     setSelectedItem(item);
     setIsModalOpen(true);
+  };
+
+  const handleAddClick = (e: React.MouseEvent, itemName: string) => {
+    e.stopPropagation();
+    setAddedItems(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(itemName)) {
+        newSet.delete(itemName);
+      } else {
+        newSet.add(itemName);
+      }
+      return newSet;
+    });
   };
 
   const closeModal = () => {
@@ -190,11 +224,10 @@ export default function MenuContent({ items }: MenuContentProps) {
       <div className="menu-tabs-sticky flex justify-center gap-8 sm:gap-16 mb-8 border-b border-[rgba(201,154,88,0.2)] scroll-reveal">
         <button
           onClick={() => setActiveTab("drinks")}
-          className={`pb-4 text-[16px] sm:text-[18px] font-semibold uppercase tracking-wider transition-all relative ${
-            activeTab === "drinks"
-              ? "text-[#2a1f16]"
-              : "text-[#8a7a68] hover:text-[#5a4a38]"
-          }`}
+          className={`pb-4 text-[16px] sm:text-[18px] font-semibold uppercase tracking-wider transition-all relative ${activeTab === "drinks"
+            ? "text-[#2a1f16]"
+            : "text-[#8a7a68] hover:text-[#5a4a38]"
+            }`}
         >
           DRINKS
           {activeTab === "drinks" && (
@@ -203,11 +236,10 @@ export default function MenuContent({ items }: MenuContentProps) {
         </button>
         <button
           onClick={() => setActiveTab("meals")}
-          className={`pb-4 text-[16px] sm:text-[18px] font-semibold uppercase tracking-wider transition-all relative ${
-            activeTab === "meals"
-              ? "text-[#2a1f16]"
-              : "text-[#8a7a68] hover:text-[#5a4a38]"
-          }`}
+          className={`pb-4 text-[16px] sm:text-[18px] font-semibold uppercase tracking-wider transition-all relative ${activeTab === "meals"
+            ? "text-[#2a1f16]"
+            : "text-[#8a7a68] hover:text-[#5a4a38]"
+            }`}
         >
           MEALS
           {activeTab === "meals" && (
@@ -216,11 +248,10 @@ export default function MenuContent({ items }: MenuContentProps) {
         </button>
         <button
           onClick={() => setActiveTab("desserts")}
-          className={`pb-4 text-[16px] sm:text-[18px] font-semibold uppercase tracking-wider transition-all relative ${
-            activeTab === "desserts"
-              ? "text-[#2a1f16]"
-              : "text-[#8a7a68] hover:text-[#5a4a38]"
-          }`}
+          className={`pb-4 text-[16px] sm:text-[18px] font-semibold uppercase tracking-wider transition-all relative ${activeTab === "desserts"
+            ? "text-[#2a1f16]"
+            : "text-[#8a7a68] hover:text-[#5a4a38]"
+            }`}
         >
           DESSERTS
           {activeTab === "desserts" && (
@@ -249,21 +280,18 @@ export default function MenuContent({ items }: MenuContentProps) {
                 {/* Visual Section - Image + Add Button */}
                 <div className="notebook-item-visual">
                   <Image
-                    src="/unsplash/dark-coffee.png"
+                    src={drink.imageUrl || "/unsplash/dark-coffee.png"}
                     alt={drink.name}
                     fill
                     className="notebook-item-photo"
                   />
                   <button
-                    className="notebook-add-btn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleItemClick(drink);
-                    }}
+                    className={`notebook-add-btn ${addedItems.has(drink.name) ? 'added' : ''}`}
+                    onClick={(e) => handleAddClick(e, drink.name)}
                     aria-label={`Add ${drink.name}`}
                   >
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                     </svg>
                   </button>
                 </div>
@@ -285,6 +313,7 @@ export default function MenuContent({ items }: MenuContentProps) {
                 <div
                   key={`seasonal-${idx}`}
                   className="notebook-menu-item"
+                  onClick={() => handleItemClick(drink)}
                 >
                   {/* Text Content - Title, Description, Price */}
                   <div className="notebook-item-content">
@@ -296,14 +325,18 @@ export default function MenuContent({ items }: MenuContentProps) {
                   {/* Visual Section - Image + Add Button */}
                   <div className="notebook-item-visual">
                     <Image
-                      src="/unsplash/dark-coffee.png"
+                      src={drink.imageUrl || "/unsplash/dark-coffee.png"}
                       alt={drink.name}
                       fill
                       className="notebook-item-photo"
                     />
-                    <button className="notebook-add-btn" aria-label={`Add ${drink.name}`}>
+                    <button
+                      className={`notebook-add-btn ${addedItems.has(drink.name) ? 'added' : ''}`}
+                      onClick={(e) => handleAddClick(e, drink.name)}
+                      aria-label={`Add ${drink.name}`}
+                    >
                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                        <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                       </svg>
                     </button>
                   </div>
@@ -322,6 +355,7 @@ export default function MenuContent({ items }: MenuContentProps) {
               <div
                 key={`meal-${idx}`}
                 className="notebook-menu-item"
+                onClick={() => handleItemClick(meal)}
               >
                 {/* Text Content - Title, Description, Price */}
                 <div className="notebook-item-content">
@@ -333,14 +367,18 @@ export default function MenuContent({ items }: MenuContentProps) {
                 {/* Visual Section - Image + Add Button */}
                 <div className="notebook-item-visual">
                   <Image
-                    src="/unsplash/dark-coffee.png"
+                    src={meal.imageUrl || "/unsplash/dark-coffee.png"}
                     alt={meal.name}
                     fill
                     className="notebook-item-photo"
                   />
-                  <button className="notebook-add-btn" aria-label={`Add ${meal.name}`}>
+                  <button
+                    className={`notebook-add-btn ${addedItems.has(meal.name) ? 'added' : ''}`}
+                    onClick={(e) => handleAddClick(e, meal.name)}
+                    aria-label={`Add ${meal.name}`}
+                  >
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                     </svg>
                   </button>
                 </div>
@@ -358,6 +396,7 @@ export default function MenuContent({ items }: MenuContentProps) {
               <div
                 key={`dessert-${idx}`}
                 className="notebook-menu-item"
+                onClick={() => handleItemClick(dessert)}
               >
                 {/* Text Content - Title, Description, Price */}
                 <div className="notebook-item-content">
@@ -369,14 +408,18 @@ export default function MenuContent({ items }: MenuContentProps) {
                 {/* Visual Section - Image + Add Button */}
                 <div className="notebook-item-visual">
                   <Image
-                    src="/unsplash/dark-coffee.png"
+                    src={dessert.imageUrl || "/unsplash/dark-coffee.png"}
                     alt={dessert.name}
                     fill
                     className="notebook-item-photo"
                   />
-                  <button className="notebook-add-btn" aria-label={`Add ${dessert.name}`}>
+                  <button
+                    className={`notebook-add-btn ${addedItems.has(dessert.name) ? 'added' : ''}`}
+                    onClick={(e) => handleAddClick(e, dessert.name)}
+                    aria-label={`Add ${dessert.name}`}
+                  >
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                     </svg>
                   </button>
                 </div>
@@ -393,7 +436,7 @@ export default function MenuContent({ items }: MenuContentProps) {
         aria-label="Scroll to top"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
 

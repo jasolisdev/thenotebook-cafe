@@ -4,7 +4,6 @@
  * Displays the full menu with tab navigation for drinks, meals, and desserts.
  */
 import { client } from "@/sanity/lib/client";
-import SiteHeader from "../components/layout/SiteHeader";
 import MenuContent from "../components/features/MenuContent";
 import ScrollReveal from "../components/layout/ScrollReveal";
 import FloatingItems from "../components/decorative/FloatingItems";
@@ -42,14 +41,8 @@ export default async function MenuPage() {
     <main className="site-layout">
       <ScrollReveal />
 
-      {/* Site Header */}
-      <SiteHeader
-        instagramUrl={settings?.social?.instagram}
-        spotifyUrl={settings?.social?.spotify}
-      />
-
       {/* Menu Section - Cream Background */}
-      <section className="section-cream pt-[76px] sm:pt-[92px] lg:pt-[108px] pb-16 sm:pb-20 relative" style={{ minHeight: '200vh' }}>
+      <section className="section-cream pt-[76px] sm:pt-[92px] lg:pt-[108px] pb-16 sm:pb-20 relative">
         <FloatingItems />
         <div className="mx-auto max-w-[1200px] px-0 relative z-10">
           {/* Header */}

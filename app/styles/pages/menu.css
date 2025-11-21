@@ -444,6 +444,24 @@
   transform: scale(1.08) rotate(90deg);
 }
 
+/* Added state - when item is selected */
+.notebook-add-btn.added {
+  background: rgba(201, 154, 88, 0.95);
+  border-color: rgba(201, 154, 88, 1);
+  color: #fff;
+  transform: rotate(45deg);
+}
+
+.notebook-add-btn.added:hover {
+  background: rgba(201, 154, 88, 1);
+  border-color: rgba(180, 138, 78, 1);
+  transform: scale(1.15) rotate(45deg);
+}
+
+.notebook-add-btn.added:active {
+  transform: scale(1.08) rotate(45deg);
+}
+
 /* Scroll to Top Button */
 .scroll-to-top {
   position: fixed;

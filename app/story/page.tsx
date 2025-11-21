@@ -5,7 +5,6 @@
  * About page featuring the café's story, values, and mission.
  */
 import { client } from "@/sanity/lib/client";
-import SiteHeader from "../components/layout/SiteHeader";
 import ScrollReveal from "../components/layout/ScrollReveal";
 import AboutFloatingItems from "../components/decorative/AboutFloatingItems";
 import SiteFooter from "../components/layout/SiteFooter";
@@ -54,12 +53,6 @@ export default async function AboutPage() {
   return (
     <main className="site-layout">
       <ScrollReveal />
-
-      {/* Fixed dark nav */}
-      <SiteHeader
-        instagramUrl={settings?.social?.instagram}
-        spotifyUrl={settings?.social?.spotify}
-      />
 
       {/* HERO SECTION - DARK */}
       <section className="about-hero text-center px-5 pt-[60px] pb-10 relative">

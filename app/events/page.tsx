@@ -4,7 +4,6 @@
  * Displays upcoming events, grand opening information, and newsletter signup.
  */
 import Image from "next/image";
-import SiteHeader from "../components/layout/SiteHeader";
 import SiteFooter from "../components/layout/SiteFooter";
 import ScrollReveal from "../components/layout/ScrollReveal";
 import NewsletterForm from "../components/features/NewsLetterForm";
@@ -26,11 +25,6 @@ export default async function EventsPage() {
     <>
       <main className="site-layout">
         <ScrollReveal />
-
-        <SiteHeader
-          instagramUrl={settings?.social?.instagram}
-          spotifyUrl={settings?.social?.spotify}
-        />
 
         {/* HERO SECTION */}
         <section className="events-hero relative section-dark">

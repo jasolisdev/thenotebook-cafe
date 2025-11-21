@@ -6,7 +6,6 @@
  * atmosphere carousel, info cards, and newsletter signup.
  */
 import { client } from "@/sanity/lib/client";
-import SiteHeader from "./components/layout/SiteHeader";
 import NewsletterForm from "./components/features/NewsLetterForm";
 import ScrollReveal from "./components/layout/ScrollReveal";
 import HomeFloatingItems from "./components/decorative/HomeFloatingItems";
@@ -85,12 +84,6 @@ export default async function HomePage() {
   return (
     <main className="site-layout" suppressHydrationWarning>
       <ScrollReveal />
-
-      {/* Fixed dark nav */}
-      <SiteHeader
-        instagramUrl={settings?.social?.instagram}
-        spotifyUrl={settings?.social?.spotify}
-      />
 
       {/* HERO */}
       <section className="hero hero-gradient relative">
