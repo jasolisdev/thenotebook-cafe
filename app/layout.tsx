@@ -22,7 +22,7 @@ import "./styles/pages/events.css";
 import { ThemeProvider } from "next-themes";
 import { torus } from "./fonts";
 import { cookies } from "next/headers";
-import PasswordGate from "./components/PasswordGate";
+import PasswordGate from "./components/ui/PasswordGate";
 import Script from "next/script";
 
 export const metadata: Metadata = {

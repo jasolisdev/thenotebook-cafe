@@ -27,22 +27,22 @@ const posts = [
   {
     title: "Behind the Bar",
     desc: "How we dial in espresso every morning.",
-    src: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80&auto=format&fit=crop",
+    src: "/unsplash/coffee-shop-counter.jpg",
   },
   {
     title: "House Vibes",
     desc: "A look at the music that shapes our space.",
-    src: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&q=80&auto=format&fit=crop",
+    src: "/unsplash/coffee-shop-interior.jpg",
   },
   {
     title: "Slow Mornings",
     desc: "Why we love cozy corners and long stays.",
-    src: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&q=80&auto=format&fit=crop",
+    src: "/unsplash/blog-coffee-meeting.jpg",
   },
   {
     title: "Seasonal Sips",
     desc: "Testing new flavor notes for our next menu drop.",
-    src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=80&auto=format&fit=crop",
+    src: "/unsplash/blog-food.jpg",
   },
 ];
 

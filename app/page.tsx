@@ -1,11 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-// app/page.tsx
+/**
+ * Homepage - The Notebook Café
+ *
+ * Main landing page featuring hero section, welcome content, card gallery,
+ * atmosphere carousel, info cards, and newsletter signup.
+ */
 import { client } from "@/sanity/lib/client";
-import SiteHeader from "./components/SiteHeader";
-import NewsletterForm from "./components/NewsLetterForm";
-import ScrollReveal from "./components/ScrollReveal";
-import HomeFloatingItems from "./components/HomeFloatingItems";
-import SiteFooter from "./components/SiteFooter";
+import SiteHeader from "./components/layout/SiteHeader";
+import NewsletterForm from "./components/features/NewsLetterForm";
+import ScrollReveal from "./components/layout/ScrollReveal";
+import HomeFloatingItems from "./components/decorative/HomeFloatingItems";
+import SiteFooter from "./components/layout/SiteFooter";
 import {
   Coffee,
   Music2,
@@ -20,43 +25,43 @@ import {
   SiApplemusic,
   SiSoundcloud,
 } from "react-icons/si";
-import CoffeeDifferenceSection from "./components/CoffeeDifferenceSection";
-import AtmosphereCarousel from "./components/AtmosphereCarousel";
+import CoffeeDifferenceSection from "./components/features/CoffeeDifferenceSection";
+import AtmosphereCarousel from "./components/features/AtmosphereCarousel";
 import Image from "next/image";
 
 const mosaicItems = [
   {
-    src: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&auto=format&fit=crop&q=80",
+    src: "/unsplash/coffee-shop-counter.jpg",
   },
   {
-    src: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&auto=format&fit=crop&q=80",
+    src: "/unsplash/coffee-shop-interior.jpg",
     span2: true,
   },
   {
-    src: "https://images.unsplash.com/photo-1459257868276-5e65389e2722?w=800&auto=format&fit=crop&q=80",
+    src: "/unsplash/coffee-shop-atmosphere.jpg",
   }, // coffee bar
   {
-    src: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=800&auto=format&fit=crop&q=80",
+    src: "/unsplash/coffee-shop-people.jpg",
   },
   {
-    src: "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800&auto=format&fit=crop&q=80",
+    src: "/unsplash/coffee-shop-vintage.jpg",
   },
   {
-    src: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&auto=format&fit=crop&q=80",
+    src: "/unsplash/espresso-pour.jpg",
   }, // outdoor seating
 ];
 
 const atmosphereImages = [
   {
-    src: "https://plus.unsplash.com/premium_photo-1677607237294-b041e4b57391?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "/unsplash/aesthetic-coffee-1.jpg",
     alt: "Cafe interior atmosphere"
   },
   {
-    src: "https://plus.unsplash.com/premium_photo-1677607236617-aecfe677388f?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "/unsplash/aesthetic-coffee-2.jpg",
     alt: "Cafe seating area"
   },
   {
-    src: "https://plus.unsplash.com/premium_photo-1677607237201-64668c2266ab?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "/unsplash/coffee-shop-interior.jpg",
     alt: "Cafe workspace ambiance"
   },
 ];
@@ -78,7 +83,7 @@ export default async function HomePage() {
   const { home, settings } = await getData();
 
   return (
-    <main className="page-dark" suppressHydrationWarning>
+    <main className="site-layout" suppressHydrationWarning>
       <ScrollReveal />
 
       {/* Fixed dark nav */}

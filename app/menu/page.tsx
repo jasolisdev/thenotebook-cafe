@@ -1,10 +1,15 @@
+/**
+ * Menu Page - The Notebook Café
+ *
+ * Displays the full menu with tab navigation for drinks, meals, and desserts.
+ */
 import { client } from "@/sanity/lib/client";
-import SiteHeader from "../components/SiteHeader";
-import MenuContent from "../components/MenuContent";
-import ScrollReveal from "../components/ScrollReveal";
-import FloatingItems from "../components/FloatingItems";
+import SiteHeader from "../components/layout/SiteHeader";
+import MenuContent from "../components/features/MenuContent";
+import ScrollReveal from "../components/layout/ScrollReveal";
+import FloatingItems from "../components/decorative/FloatingItems";
 import Image from "next/image";
-import SiteFooter from "../components/SiteFooter";
+import SiteFooter from "../components/layout/SiteFooter";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -34,41 +39,27 @@ export default async function MenuPage() {
   const { menuItems, settings } = await getData();
 
   return (
-    <main className="page-dark">
+    <main className="site-layout">
       <ScrollReveal />
 
-      {/* Fixed dark nav */}
+      {/* Site Header */}
       <SiteHeader
         instagramUrl={settings?.social?.instagram}
         spotifyUrl={settings?.social?.spotify}
       />
 
       {/* Menu Section - Cream Background */}
-      <section className="section-cream pt-24 sm:pt-28 lg:pt-32 pb-16 sm:pb-20 min-h-screen relative">
+      <section className="section-cream pt-[76px] sm:pt-[92px] lg:pt-[108px] pb-16 sm:pb-20 relative" style={{ minHeight: '200vh' }}>
         <FloatingItems />
-        <div className="mx-auto max-w-[1200px] px-6 relative z-10">
+        <div className="mx-auto max-w-[1200px] px-0 relative z-10">
           {/* Header */}
           <div className="text-center mb-12 pt-4 scroll-reveal">
             <h1 className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-tight text-[#2a1f16] mb-4">
               MENU
             </h1>
-            <p className="text-[15px] sm:text-[16px] text-[#5a4a38] max-w-[600px] mx-auto mb-8">
+            <p className="text-[15px] sm:text-[16px] text-[#5a4a38] max-w-[600px] mx-auto">
               Crafted with intention. Brewed with rhythm. Explore our signature drinks, matcha blends, and handcrafted pastries—made fresh, every day.
             </p>
-
-            {/* Coffee Hero Image */}
-              <div className="max-w-[800px] mx-auto mb-12 scroll-reveal">
-                <div className="rounded-2xl overflow-hidden shadow-lg relative h-[200px] sm:h-[300px] md:h-[400px]">
-                  <Image
-                    src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&h=400&fit=crop"
-                    alt="Artisan espresso being poured"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 900px) 100vw, 800px"
-                    priority={false}
-                  />
-                </div>
-              </div>
           </div>
 
           {/* Menu Content with Tabs */}
