@@ -1,11 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-// app/about/page.tsx
+/**
+ * Story Page - The Notebook Café
+ *
+ * About page featuring the café's story, values, and mission.
+ */
 import { client } from "@/sanity/lib/client";
-import SiteHeader from "../components/SiteHeader";
-import ScrollReveal from "../components/ScrollReveal";
-import AboutFloatingItems from "../components/AboutFloatingItems";
-import SiteFooter from "../components/SiteFooter";
-import { CoffeeIcon, EqIcon, NoteIcon } from "../components/Icons";
+import ScrollReveal from "../components/layout/ScrollReveal";
+import AboutFloatingItems from "../components/decorative/AboutFloatingItems";
+import SiteFooter from "../components/layout/SiteFooter";
+import { CoffeeIcon, EqIcon, NoteIcon } from "../components/ui/Icons";
 
 type PortableChild = { text?: string };
 type PortableBlock = { _type?: string; children?: PortableChild[] };
@@ -48,14 +51,8 @@ export default async function AboutPage() {
   ];
 
   return (
-    <main className="page-dark">
+    <main className="site-layout">
       <ScrollReveal />
-
-      {/* Fixed dark nav */}
-      <SiteHeader
-        instagramUrl={settings?.social?.instagram}
-        spotifyUrl={settings?.social?.spotify}
-      />
 
       {/* HERO SECTION - DARK */}
       <section className="about-hero text-center px-5 pt-[60px] pb-10 relative">

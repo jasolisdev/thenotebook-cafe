@@ -1,5 +1,5 @@
-import SiteHeader from "./SiteHeader";
-import SiteFooter from "./SiteFooter";
+import SiteHeader from "../layout/SiteHeader";
+import SiteFooter from "../layout/SiteFooter";
 
 type Props = {
   children: React.ReactNode;
@@ -22,7 +22,7 @@ export default function NotebookPage({
   announcementText,
 }: Props) {
   return (
-    <main className="page-dark">
+    <main className="site-layout">
       <SiteHeader
         instagramUrl={instagramUrl}
         spotifyUrl={spotifyUrl}

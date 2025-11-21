@@ -8,6 +8,7 @@ import "./styles/components/hero.css";
 import "./styles/components/buttons.css";
 import "./styles/components/footer.css";
 import "./styles/components/announcement.css";
+import "./styles/components/page-transitions.css";
 
 // Layout styles
 import "./styles/layout/sections.css";
@@ -22,8 +23,11 @@ import "./styles/pages/events.css";
 import { ThemeProvider } from "next-themes";
 import { torus } from "./fonts";
 import { cookies } from "next/headers";
-import PasswordGate from "./components/PasswordGate";
+import PasswordGate from "./components/ui/PasswordGate";
+import PageTransition from "./components/layout/PageTransition";
+import SiteHeader from "./components/layout/SiteHeader";
 import Script from "next/script";
+import { client } from "@/sanity/lib/client";
 
 export const metadata: Metadata = {
   title: "The Notebook Café",
@@ -43,6 +47,13 @@ export default async function RootLayout({
   // Show password gate if password is set and user is not authenticated
   const showPasswordGate = sitePassword && !isAuthenticated;
 
+  // Fetch settings for header (only if not showing password gate)
+  const settings = !showPasswordGate ? await client.fetch(`
+    *[_type=="settings"][0]{
+      social
+    }
+  `) : null;
+
   return (
     <html
       lang="en"
@@ -59,7 +70,19 @@ export default async function RootLayout({
           defaultTheme="dark"
           enableSystem={false}
         >
-          {showPasswordGate ? <PasswordGate /> : children}
+          {showPasswordGate ? (
+            <PasswordGate />
+          ) : (
+            <>
+              <SiteHeader
+                instagramUrl={settings?.social?.instagram}
+                spotifyUrl={settings?.social?.spotify}
+              />
+              <PageTransition>
+                {children}
+              </PageTransition>
+            </>
+          )}
         </ThemeProvider>
       </body>
     </html>

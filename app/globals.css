@@ -2,6 +2,7 @@
 
 /* Component Styles */
 @import "./styles/components/card-gallery.css";
+@import "./styles/components/modal.css";
 
 /* ============================================================
    CUSTOM FONTS
@@ -57,38 +58,55 @@
   --font-display: "Alpino", "Torus", system-ui, sans-serif;
 
   /* New café palette */
-  --latte-cream: #ede7d8; /* base background (lightened almond) */
-  --vanilla-beige: #d6bd98; /* Almond */
-  --paper-bag: #c4b59f; /* softened neutral */
-  --warm-taupe: #677d6a; /* Matcha Brew */
-  --coffee-bean: #1a3636; /* Eclipse (cool teal - accent) */
-  --soft-mocha: #40534c; /* Forest Roast (cool green - accent) */
-  --foggy-cappuccino: #b7afa6; /* dividers / outlines */
-  --deep-roast: #0f1c1c; /* extra contrast */
-  --espresso-brown: #2a1f16; /* Primary dark brown for text */
-  --warm-brown: #5a4a38; /* Secondary brown for text on cream */
+  --latte-cream: #ede7d8;
+  /* base background (lightened almond) */
+  --vanilla-beige: #d6bd98;
+  /* Almond */
+  --paper-bag: #c4b59f;
+  /* softened neutral */
+  --warm-taupe: #677d6a;
+  /* Matcha Brew */
+  --coffee-bean: #3D4030;
+  /* Deep olive (matches hero gradient) */
+  --soft-mocha: #40534c;
+  /* Forest Roast (cool green - accent) */
+  --foggy-cappuccino: #b7afa6;
+  /* dividers / outlines */
+  --deep-roast: #0f1c1c;
+  /* extra contrast */
+  --espresso-brown: #2a1f16;
+  /* Primary dark brown for text */
+  --warm-brown: #5a4a38;
+  /* Secondary brown for text on cream */
 
   /* Solid background + neutrals */
   --bg-solid: var(--coffee-bean);
+  --bg-dark: var(--coffee-bean);
+  --bg-cream: var(--latte-cream);
   --cream: var(--latte-cream);
   --offwhite: #f8f3e8;
   --warm-roast: var(--soft-mocha);
   --latte: var(--vanilla-beige);
   --taupe: var(--paper-bag);
 
-  /* primary text */
-  --ink-cream: #f8f3e8;
-  /* muted text */
-  --ink-cream-dim: #e4dbc8;
+  /* Text colors (semantic names) */
+  --text-light: #f8f3e8;
+  /* Primary text on dark backgrounds */
+  --text-light-muted: #e4dbc8;
+  /* Muted text on dark backgrounds */
+
+  /* Legacy names (deprecated) */
+  --ink-cream: var(--text-light);
+  --ink-cream-dim: var(--text-light-muted);
 
   /* Panels / borders */
-  --panel: rgba(26, 54, 54, 0.06);
-  --panel-border: rgba(26, 54, 54, 0.08);
-  --glow: 0 0 0.6rem rgba(64, 83, 76, 0.35);
+  --panel: rgba(61, 64, 48, 0.06);
+  --panel-border: rgba(61, 64, 48, 0.08);
+  --glow: 0 0 0.6rem rgba(61, 64, 48, 0.35);
 
   /* Accent colors for hover states */
-  --accent-warm: rgba(64, 83, 76, 0.18);
-  --accent-glow: rgba(64, 83, 76, 0.42);
+  --accent-warm: rgba(61, 64, 48, 0.18);
+  --accent-glow: rgba(61, 64, 48, 0.42);
 
 }
 
@@ -109,6 +127,19 @@ body {
   padding: 0;
   overflow-x: hidden;
   width: 100%;
+  background-color: #3D4030;
+}
+
+/* GPU acceleration for smoother animations */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  /* Prevent layout shifts during page transitions */
+  overflow-anchor: none;
 }
 
 /* Hide horizontal scrollbar for hero gallery track */
@@ -123,34 +154,44 @@ body {
 /* ============================================================
    GLOBAL UTILITIES
 ============================================================ */
-.page-dark {
+.site-layout {
   min-height: 100dvh;
   background: var(--bg-solid);
-  color: var(--ink-cream);
+  color: var(--text-light);
   padding-top: 106px;
   /* Banner (42px) + Nav (64px) */
 }
 
 @media (min-width: 375px) {
-  .page-dark {
+  .site-layout {
     padding-top: 110px;
     /* Banner (46px) + Nav (64px) */
   }
 }
 
 @media (min-width: 640px) {
-  .page-dark {
+  .site-layout {
     padding-top: 112px;
     /* Banner (48px) + Nav (64px) */
   }
 }
 
+/* Text color utilities for dark backgrounds */
+.text-light {
+  color: var(--text-light);
+}
+
+.text-light-muted {
+  color: var(--text-light-muted);
+}
+
+/* Legacy class names (deprecated - use .text-light instead) */
 .ink-cream {
-  color: var(--ink-cream);
+  color: var(--text-light);
 }
 
 .ink-cream-dim {
-  color: var(--ink-cream-dim);
+  color: var(--text-light-muted);
 }
 
 /* ============================================================
@@ -230,6 +271,7 @@ h3 {
     opacity: 0;
     transform: scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -241,6 +283,7 @@ h3 {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
