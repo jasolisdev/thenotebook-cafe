@@ -718,6 +718,16 @@ All components must include JSDoc:
 
 ## Recent Updates
 
+### **November 2025 - Menu Modal & Image Enhancements**
+- ✅ Enhanced menu modal UX with fixed positioning and sticky elements
+- ✅ Added 19 unique high-quality images for all menu items (drinks, meals, desserts)
+- ✅ Implemented full viewport height modal on mobile (100vh)
+- ✅ Fixed "Add to Order" button with cream background and dark styling
+- ✅ Updated modal images to use object-fit: cover for better presentation
+- ✅ Added modal functionality to all menu categories (seasonal, meals, desserts)
+- ✅ Removed extra whitespace issues in menu layout
+- ✅ Images stored in `/public/menu/` directory with proper naming
+
 ### **November 2025 - Major Refactoring**
 - ✅ Reorganized components into `layout/`, `ui/`, `features/`, `decorative/`
 - ✅ Renamed confusing classes (`.page-dark` → `.site-layout`, `.ink-cream` → `.text-light`)
