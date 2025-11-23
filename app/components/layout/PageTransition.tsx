@@ -30,14 +30,15 @@ export default function PageTransition({
     if (prevPathname.current !== pathname) {
       prevPathname.current = pathname;
 
-      // Smooth scroll to top on page change
-      window.scrollTo({ top: 0, behavior: "instant" });
-
       // Check if browser supports View Transitions API
       if (document.startViewTransition) {
         document.startViewTransition(() => {
-          // The DOM update happens here automatically
+          // Scroll to top during the transition (smoother)
+          window.scrollTo({ top: 0, behavior: "instant" });
         });
+      } else {
+        // Fallback: scroll to top without transition
+        window.scrollTo({ top: 0, behavior: "instant" });
       }
     }
   }, [pathname]);

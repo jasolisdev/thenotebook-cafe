@@ -1,0 +1,20 @@
+
+ The Notebook Café - Project Overview
+
+  The Notebook Café is react website for a Riverside-based coffee shop that
+  combines coffee culture with creative community vibes.
+
+  What It Is
+
+  A full-stack web application featuring:
+  - Public Website: Homepage, menu, story, and events pages
+  - Interactive Menu: Tab-based menu with modal details and custom images
+
+  Core Features
+
+  - 🎨 Premium Design: Mobile-first responsive UI
+  - 🎵 Vibe-Focused: House music, soulful atmosphere, creative community
+  - 📱 Fully Responsive: Optimized for iPhone SE (320px) through large desktop
+  - 🎭 Rich Animations: Scroll reveals, floating decorative elements, carousel effects
+  - ☕ Menu System: Drinks, meals, desserts with high-quality imagery
+

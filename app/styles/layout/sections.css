@@ -46,27 +46,6 @@
   overflow-x: hidden;
 }
 
-@media (min-width: 375px) {
-  .section-cream {
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
-}
-
-@media (min-width: 640px) {
-  .section-cream {
-    padding-top: 80px;
-    padding-bottom: 80px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section-cream {
-    padding-top: 100px;
-    padding-bottom: 100px;
-  }
-}
-
 /* Adjust icon colors in cream section */
 .section-cream .home-highlight-icon {
   color: rgba(164, 131, 116, 0.8);

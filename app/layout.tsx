@@ -8,7 +8,6 @@ import "./styles/components/hero.css";
 import "./styles/components/buttons.css";
 import "./styles/components/footer.css";
 import "./styles/components/announcement.css";
-import "./styles/components/page-transitions.css";
 
 // Layout styles
 import "./styles/layout/sections.css";
@@ -24,7 +23,6 @@ import { ThemeProvider } from "next-themes";
 import { torus } from "./fonts";
 import { cookies } from "next/headers";
 import PasswordGate from "./components/ui/PasswordGate";
-import PageTransition from "./components/layout/PageTransition";
 import SiteHeader from "./components/layout/SiteHeader";
 import Script from "next/script";
 import { client } from "@/sanity/lib/client";
@@ -32,6 +30,10 @@ import { client } from "@/sanity/lib/client";
 export const metadata: Metadata = {
   title: "The Notebook Café",
   description: "Coffee. Culture. House Music.",
+  icons: {
+    icon: '/logo.png',
+    apple: '/logo.png',
+  },
 };
 
 export default async function RootLayout({
@@ -78,9 +80,7 @@ export default async function RootLayout({
                 instagramUrl={settings?.social?.instagram}
                 spotifyUrl={settings?.social?.spotify}
               />
-              <PageTransition>
-                {children}
-              </PageTransition>
+              {children}
             </>
           )}
         </ThemeProvider>
