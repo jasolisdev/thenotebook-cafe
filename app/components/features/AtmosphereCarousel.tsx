@@ -63,7 +63,7 @@ export default function AtmosphereCarousel({ images }: AtmosphereCarouselProps) 
     <div className="mt-12 sm:mt-16 pb-0">
       <div className="test-container">
         <div className="main-hero">
-          <div className="flex-h hero-gallery atmosphere-carousel" ref={carouselRef}>
+          <div className="flex-h atmosphere-carousel" ref={carouselRef}>
             {images.map((item, idx) => {
               const cardNumber = idx + 1;
               const classes = [

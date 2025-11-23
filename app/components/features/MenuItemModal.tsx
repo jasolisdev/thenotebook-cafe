@@ -74,8 +74,14 @@ export default function MenuItemModal({ isOpen, onClose, item }: MenuItemModalPr
       />
 
       {/* Modal - Now scrollable */}
-      <div className={`menu-modal-container ${isAnimating ? 'is-visible' : ''}`}>
-        <div className="menu-modal">
+      <div
+        className={`menu-modal-container ${isAnimating ? 'is-visible' : ''}`}
+        onClick={onClose}
+      >
+        <div
+          className="menu-modal"
+          onClick={(e) => e.stopPropagation()}
+        >
           {/* Close button */}
           <button
             className="menu-modal-close"

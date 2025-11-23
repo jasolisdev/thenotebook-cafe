@@ -23,7 +23,9 @@
 }
 
 .hero-gradient {
-  background: linear-gradient(180deg, rgba(61, 64, 48, 0.92) 0%, rgba(61, 64, 48, 0.88) 40%, rgba(61, 64, 48, 0.72) 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   min-height: 520px;
 }
 

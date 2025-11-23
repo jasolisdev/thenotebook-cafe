@@ -158,7 +158,7 @@
 }
 
 /* ============================================================
-   BASE IMAGE CARD - No animations, others inherit from this
+   BASE IMAGE CARD - Styling only, no transform
 ============================================================ */
 .image-card {
   width: 280px;
@@ -171,11 +171,7 @@
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
   box-sizing: border-box;
-  transition:
-    transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1),
-    box-shadow 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
   --tilt: 0deg;
-  transform: rotate(var(--tilt)) translateZ(0);
   transform-origin: center center;
   will-change: transform, box-shadow;
   flex-shrink: 0;
@@ -191,12 +187,7 @@
   box-sizing: border-box;
 }
 
-@media (hover: hover) {
-  .image-card:hover {
-    transform: rotate(var(--tilt)) translateY(-8px) scale(1.08) translateZ(0);
-    box-shadow: 0 22px 52px rgba(0, 0, 0, 0.22);
-  }
-}
+/* No hover on base - handled by specific gallery styles */
 
 /* Responsive sizing for image-card */
 @media (min-width: 768px) {
@@ -208,21 +199,18 @@
 }
 
 /* ============================================================
-   TILT CLASSES - Define rotation angles
+   TILT CLASSES - Define rotation angles ONLY
 ============================================================ */
 .transform-01 {
   --tilt: -6deg;
-  opacity: 0;
 }
 
 .transform-02 {
   --tilt: 8deg;
-  opacity: 0;
 }
 
 .transform-03 {
   --tilt: -7deg;
-  opacity: 0;
 }
 
 /* ============================================================
@@ -240,115 +228,137 @@
   }
 }
 
-.scroll-reveal.is-visible.transform-01 {
-  animation: slideFromRight 0.9s ease forwards;
-  animation-fill-mode: forwards;
+/* ============================================================
+   SPREAD ANIMATION - Reusable gallery spread effect
+============================================================ */
+/* Initial stacked state - cards start low and spread out */
+.gallery-spread-initial.transform-01:not(.gallery-spread-animate) {
+  opacity: 1;
+  transform: translateY(60px) translateX(-40px) rotate(var(--tilt));
 }
 
-.scroll-reveal.is-visible.transform-02 {
-  animation: slideFromLeft 0.9s ease forwards 0.12s;
-  animation-fill-mode: forwards;
+.gallery-spread-initial.transform-02:not(.gallery-spread-animate) {
+  opacity: 1;
+  transform: translateY(60px) translateX(0) rotate(var(--tilt));
 }
 
-.scroll-reveal.is-visible.transform-03 {
-  animation: slideFromRight 0.9s ease forwards 0.24s;
-  animation-fill-mode: forwards;
+.gallery-spread-initial.transform-03:not(.gallery-spread-animate) {
+  opacity: 1;
+  transform: translateY(60px) translateX(40px) rotate(var(--tilt));
 }
 
+/* Desktop - wider spread */
 @media (min-width: 768px) {
-  .scroll-reveal.is-visible.transform-01 {
-    animation: stackSpreadLeft 0.9s ease forwards;
-    animation-fill-mode: forwards;
+  .gallery-spread-initial.transform-01:not(.gallery-spread-animate) {
+    transform: translateY(60px) translateX(-80px) rotate(var(--tilt));
   }
 
-  .scroll-reveal.is-visible.transform-02 {
-    animation: stackSpreadRight 0.9s ease forwards 0.08s;
-    animation-fill-mode: forwards;
+  .gallery-spread-initial.transform-03:not(.gallery-spread-animate) {
+    transform: translateY(60px) translateX(80px) rotate(var(--tilt));
   }
+}
 
-  .scroll-reveal.is-visible.transform-03 {
-    animation: stackSpreadLeft 0.9s ease forwards 0.16s;
-    animation-fill-mode: forwards;
+/* Animated state - spread out to final position */
+.gallery-spread-initial.gallery-spread-animate.transform-01,
+.gallery-spread-initial.gallery-spread-animate.transform-02,
+.gallery-spread-initial.gallery-spread-animate.transform-03 {
+  opacity: 1;
+  transform: translateY(0) translateX(0) rotate(var(--tilt));
+}
+
+/* Smooth transition for spread animation */
+.gallery-spread-initial {
+  transition: transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.6s ease;
+}
+
+/* No delays needed - each card triggers individually on scroll */
+
+/* Hover effect - lift and zoom */
+@media (hover: hover) {
+  .gallery-spread-animate:hover {
+    transform: translateY(-8px) translateX(0) rotate(var(--tilt)) scale(1.08) !important;
+    box-shadow: 0 22px 52px rgba(0, 0, 0, 0.22);
   }
 }
 
 /* ============================================================
-   TEST GALLERY - No animations, just static display
+   MOBILE SLIDE-IN ANIMATIONS - Cards slide in from sides
 ============================================================ */
-.test-gallery {
-  flex-wrap: nowrap;
-  /* No wrapping on any screen size */
-}
+/* Mobile only - slide in from alternating sides */
+@media (max-width: 767px) {
+  /* Card 1 - slide from right */
+  .gallery-spread-initial.transform-01:not(.gallery-spread-animate) {
+    opacity: 0;
+    transform: translateX(80px) rotate(var(--tilt));
+  }
 
-.test-gallery .image-card.transform-01,
-.test-gallery .image-card.transform-02,
-.test-gallery .image-card.transform-03 {
-  opacity: 1;
-  /* Override animation setup - cards are immediately visible */
-}
+  /* Card 2 - slide from left */
+  .gallery-spread-initial.transform-02:not(.gallery-spread-animate) {
+    opacity: 0;
+    transform: translateX(-80px) rotate(var(--tilt));
+  }
 
-/* Hover states for animated cards - override animation forwards */
-.scroll-reveal.is-visible.transform-01,
-.scroll-reveal.is-visible.transform-02,
-.scroll-reveal.is-visible.transform-03 {
-  transition: transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
+  /* Card 3 - slide from right */
+  .gallery-spread-initial.transform-03:not(.gallery-spread-animate) {
+    opacity: 0;
+    transform: translateX(80px) rotate(var(--tilt));
+  }
 
-@media (hover: hover) {
-
-  .scroll-reveal.is-visible.transform-01:hover,
-  .scroll-reveal.is-visible.transform-02:hover,
-  .scroll-reveal.is-visible.transform-03:hover {
-    transform: translateY(-8px) rotate(var(--tilt)) scale(1.08) !important;
-    box-shadow: 0 22px 52px rgba(0, 0, 0, 0.22);
+  /* Animated state - slide to center */
+  .gallery-spread-initial.gallery-spread-animate.transform-01,
+  .gallery-spread-initial.gallery-spread-animate.transform-02,
+  .gallery-spread-initial.gallery-spread-animate.transform-03 {
+    opacity: 1;
+    transform: translateX(0) rotate(var(--tilt));
   }
 }
 
 @keyframes slideFromRight {
   0% {
     opacity: 0;
-    transform: translateX(80px) rotate(var(--tilt));
+    transform: translateX(80px) rotate(0deg) scale(0.9);
   }
 
   100% {
     opacity: 1;
-    transform: translateX(0) rotate(var(--tilt));
+    transform: translateX(0) rotate(var(--tilt)) scale(1);
   }
 }
 
 @keyframes slideFromLeft {
   0% {
     opacity: 0;
-    transform: translateX(-80px) rotate(var(--tilt));
+    transform: translateX(-80px) rotate(0deg) scale(0.9);
   }
 
   100% {
     opacity: 1;
-    transform: translateX(0) rotate(var(--tilt));
+    transform: translateX(0) rotate(var(--tilt)) scale(1);
   }
 }
 
 @keyframes stackSpreadLeft {
   0% {
-    transform: translate(-20px, 40px) rotate(-6deg) scale(0.95);
+    transform: translate(-20px, 40px) rotate(0deg) scale(0.9);
     opacity: 0;
   }
 
   100% {
-    transform: translate(0, 0) rotate(-6deg) scale(1);
+    transform: translate(0, 0) rotate(var(--tilt)) scale(1);
     opacity: 1;
   }
 }
 
 @keyframes stackSpreadRight {
   0% {
-    transform: translate(20px, 40px) rotate(8deg) scale(0.95);
+    transform: translate(20px, 40px) rotate(0deg) scale(0.9);
     opacity: 0;
   }
 
   100% {
-    transform: translate(0, 0) rotate(8deg) scale(1);
-    opacity: 1;
+    transform: translate(0, 0) rotate(var(--tilt)) scale(1);
   }
 }
 
