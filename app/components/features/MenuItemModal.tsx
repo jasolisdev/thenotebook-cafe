@@ -82,17 +82,6 @@ export default function MenuItemModal({ isOpen, onClose, item }: MenuItemModalPr
           className="menu-modal"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Close button */}
-          <button
-            className="menu-modal-close"
-            onClick={onClose}
-            aria-label="Close"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </button>
-
           {/* Image */}
           <div className="menu-modal-image">
             <Image
@@ -135,10 +124,21 @@ export default function MenuItemModal({ isOpen, onClose, item }: MenuItemModalPr
             </div>
           </div>
 
-          {/* Add to order button */}
-          <button className="menu-modal-add-btn">
-            Add to Order - ${item.price}
-          </button>
+          {/* Action buttons - Close and Add to Order */}
+          <div className="menu-modal-actions">
+            <button
+              className="menu-modal-close-btn"
+              onClick={onClose}
+              aria-label="Close"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            </button>
+            <button className="menu-modal-add-btn">
+              Add to Order - ${item.price}
+            </button>
+          </div>
         </div>
         </div>
       </div>

@@ -90,10 +90,10 @@ export default async function AboutPage() {
       {/* OUR RIVERSIDE COMMITMENT Section */}
       <section className="section-cream px-5 pb-16 sm:pb-20">
         <div className="mx-auto max-w-[880px]">
-          <div className="scroll-reveal about-section-label text-center mb-8" style={{ animationDelay: '0.1s' }}>
-            <span className="inline-block px-4 py-2 rounded-full border text-[11px] uppercase tracking-[2px]" style={{ background: 'rgba(164,131,116,0.15)', borderColor: 'rgba(164,131,116,0.25)', color: 'var(--warm-roast)' }}>
-              Our Riverside Commitment
-            </span>
+          <div className="scroll-reveal welcome-section-label mb-8" style={{ animationDelay: '0.1s' }}>
+            <div className="welcome-divider-line"></div>
+            <span className="welcome-label-text">Our Riverside Commitment</span>
+            <div className="welcome-divider-line"></div>
           </div>
 
           <div className="scroll-reveal mx-auto max-w-[700px] text-center" style={{ animationDelay: '0.2s' }}>
@@ -107,10 +107,10 @@ export default async function AboutPage() {
       {/* THE CRAFT & THE RHYTHM Section */}
       <section className="section-cream px-5 pb-16 sm:pb-20">
         <div className="mx-auto max-w-[880px]">
-          <div className="scroll-reveal about-section-label text-center mb-8" style={{ animationDelay: '0.1s' }}>
-            <span className="inline-block px-4 py-2 rounded-full border text-[11px] uppercase tracking-[2px]" style={{ background: 'rgba(164,131,116,0.15)', borderColor: 'rgba(164,131,116,0.25)', color: 'var(--warm-roast)' }}>
-              The Craft & The Rhythm
-            </span>
+          <div className="scroll-reveal welcome-section-label mb-8" style={{ animationDelay: '0.1s' }}>
+            <div className="welcome-divider-line"></div>
+            <span className="welcome-label-text">The Craft & The Rhythm</span>
+            <div className="welcome-divider-line"></div>
           </div>
 
           <div className="scroll-reveal mx-auto max-w-[700px] text-center" style={{ animationDelay: '0.2s' }}>
@@ -127,10 +127,10 @@ export default async function AboutPage() {
       {/* CREAM SECTION - Values */}
       <section className="section-cream px-5 pb-16 sm:pb-20">
         <div className="mx-auto max-w-[880px]">
-          <div className="scroll-reveal about-section-label text-center mb-8" style={{ animationDelay: '0.1s' }}>
-            <span className="inline-block px-4 py-2 rounded-full border text-[11px] uppercase tracking-[2px]" style={{ background: 'rgba(164,131,116,0.15)', borderColor: 'rgba(164,131,116,0.25)', color: 'var(--warm-roast)' }}>
-              {about?.valuesHeading || "What we're building"}
-            </span>
+          <div className="scroll-reveal welcome-section-label mb-8" style={{ animationDelay: '0.1s' }}>
+            <div className="welcome-divider-line"></div>
+            <span className="welcome-label-text">{about?.valuesHeading || "What we're building"}</span>
+            <div className="welcome-divider-line"></div>
           </div>
 
           <div className="about-values-grid grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
@@ -159,10 +159,10 @@ export default async function AboutPage() {
       <section className="section-dark px-5 py-20 sm:py-24 lg:py-28 relative">
         <AboutFloatingItems variant="mission" />
         <div className="mx-auto max-w-[820px]">
-          <div className="scroll-reveal about-section-label text-center mb-8" style={{ animationDelay: '0.1s' }}>
-            <span className="inline-block px-4 py-2 rounded-full bg-[rgba(201,154,88,0.08)] border border-[rgba(201,154,88,0.2)] text-[11px] uppercase tracking-[2px] ink-cream">
-              {about?.missionHeading || "Why we&apos;re doing this"}
-            </span>
+          <div className="scroll-reveal welcome-section-label mb-8" style={{ animationDelay: '0.1s' }}>
+            <div className="welcome-divider-line"></div>
+            <span className="welcome-label-text text-light">{about?.missionHeading || "Why we&apos;re doing this"}</span>
+            <div className="welcome-divider-line"></div>
           </div>
 
           <div className="scroll-reveal about-mission-card" style={{ animationDelay: '0.2s' }}>

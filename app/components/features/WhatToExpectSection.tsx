@@ -38,22 +38,18 @@ export default function WhatToExpectSection() {
   return (
     <section
       id="what-to-expect"
-      className="relative overflow-hidden"
-      style={{
-        background: "linear-gradient(to bottom, #f8f1e7 0%, #f1e0c9 100%)",
-      }}
+      className="section-cream relative overflow-hidden py-16 sm:py-20 lg:py-24"
     >
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 py-16 sm:py-20 lg:py-24">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - Text Content */}
           <div className="text-center lg:text-left">
-            {/* Section Label */}
-            <p
-              className="text-xs sm:text-sm font-semibold tracking-widest uppercase mb-4"
-              style={{ color: "rgba(90, 74, 56, 0.8)" }}
-            >
-              What to Expect
-            </p>
+            {/* Section Label - Hear the Vibe Style */}
+            <div className="welcome-section-label mb-8">
+              <div className="welcome-divider-line"></div>
+              <span className="welcome-label-text">What to Expect</span>
+              <div className="welcome-divider-line"></div>
+            </div>
 
             {/* Main Headline */}
             <h2
@@ -85,8 +81,13 @@ export default function WhatToExpectSection() {
             >
               {/* Vertical Timeline Line */}
               <div
-                className="absolute left-10 sm:left-12 top-20 bottom-20 w-0.5"
-                style={{ background: "#ecd7bf" }}
+                className="absolute w-0.5"
+                style={{
+                  background: "#ecd7bf",
+                  left: "calc(1.5rem + 24px)", // padding + half of icon width (48px/2)
+                  top: "calc(1.5rem + 24px + 12px)", // padding + half icon + gap
+                  bottom: "calc(1.5rem + 24px + 12px)"
+                }}
                 aria-hidden="true"
               />
 

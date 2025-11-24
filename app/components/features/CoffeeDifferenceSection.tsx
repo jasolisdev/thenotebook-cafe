@@ -175,19 +175,15 @@ export default function CoffeeDifferenceSection() {
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeUp}
         >
-          <motion.div
-            className="inline-block mb-4 px-4 py-1.5 rounded-full"
-            style={{
-              background: "rgba(164, 131, 116, 0.08)",
-              border: "1px solid rgba(164, 131, 116, 0.15)"
-            }}
-          >
-            <span className="text-xs sm:text-sm font-medium tracking-wider uppercase" style={{ color: "#a48374" }}>
-              Our Commitment
-            </span>
-          </motion.div>
+          {/* Section Label - Hear the Vibe Style */}
+          <div className="welcome-section-label mb-8">
+            <div className="welcome-divider-line"></div>
+            <span className="welcome-label-text">Our Commitment</span>
+            <div className="welcome-divider-line"></div>
+          </div>
+
           <motion.h2
-            className="text-2xl sm:text-3xl lg:text-4xl xl:text-[2.75rem] font-semibold tracking-tight leading-tight"
+            className="text-[19px] sm:text-3xl lg:text-4xl xl:text-[2.75rem] font-semibold tracking-tight leading-tight"
             style={{ color: "#2a1f16" }}
           >
             What Makes Our Coffee Different?
