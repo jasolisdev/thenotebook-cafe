@@ -37,7 +37,7 @@ type AnnouncementBannerProps = {
  * - Gold gradient background matching site aesthetic
  * - Animated steam rising from coffee cup (2s loop)
  * - Close button (X) to dismiss banner
- * - Dismissal state persisted in localStorage
+ * - Dismissal state persisted in sessionStorage (shows again on new browser session)
  * - Responsive spacing (8px → 12px gap between cup and text)
  * - Client-side hydration handling to prevent mismatch
  *
@@ -57,13 +57,13 @@ export default function AnnouncementBanner({
 
   /**
    * Set mounted state after initial render
-   * Check if banner was previously dismissed
+   * Check if banner was previously dismissed in this session
    * Prevents hydration mismatch issues
    */
   useEffect(() => {
     setMounted(true);
-    // Check if banner was dismissed
-    const dismissed = localStorage.getItem("announcement-banner-dismissed");
+    // Check if banner was dismissed in this session
+    const dismissed = sessionStorage.getItem("announcement-banner-dismissed");
     if (dismissed === "true") {
       setIsDismissed(true);
       // Remove padding from header when banner is dismissed
@@ -76,12 +76,12 @@ export default function AnnouncementBanner({
 
   /**
    * Handle banner dismissal
-   * Saves dismissal state to localStorage
+   * Saves dismissal state to sessionStorage (resets on new browser session)
    * Removes header padding smoothly
    */
   const handleDismiss = () => {
     setIsDismissed(true);
-    localStorage.setItem("announcement-banner-dismissed", "true");
+    sessionStorage.setItem("announcement-banner-dismissed", "true");
 
     // Smoothly remove padding from header
     const headerContainer = document.querySelector('.header-container') as HTMLElement;
