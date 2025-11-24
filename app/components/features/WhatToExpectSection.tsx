@@ -79,14 +79,14 @@ export default function WhatToExpectSection() {
                 borderColor: "#ecd7bf",
               }}
             >
-              {/* Vertical Timeline Line */}
+              {/* Vertical Timeline Line - connects first two circles only */}
               <div
                 className="absolute w-0.5"
                 style={{
                   background: "#ecd7bf",
                   left: "calc(1.5rem + 24px)", // padding + half of icon width (48px/2)
-                  top: "calc(1.5rem + 24px + 12px)", // padding + half icon + gap
-                  bottom: "calc(1.5rem + 24px + 12px)"
+                  top: "calc(1.5rem + 24px + 12px)", // padding + half first icon + gap
+                  height: "calc(48px + 2rem + 12px)" // icon height + gap (32px from space-y-8) + half second icon
                 }}
                 aria-hidden="true"
               />

@@ -204,25 +204,15 @@ export default function CoffeeDifferenceSection() {
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <div
-            className="overflow-hidden rounded-[32px] bg-gradient-to-br from-[#fff7ed] to-[#f4f0e9] p-1.5 shadow-2xl max-w-[400px] lg:max-w-[500px] mx-auto group"
-            style={{
-              border: "1px solid rgba(164, 131, 116, 0.2)",
-            }}
-          >
-            <div
-              className="overflow-hidden rounded-[26px] transition-transform duration-700 group-hover:scale-[1.02]"
-              style={{ aspectRatio: "4 / 5" }}
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1610030621290-527342d7eb4a?q=80&w=925&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Artisan coffee craftsmanship"
-                width={925}
-                height={700}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                priority={false}
-              />
-            </div>
+          <div className="image-card max-w-[400px] lg:max-w-[500px] mx-auto">
+            <Image
+              src="https://images.unsplash.com/photo-1610030621290-527342d7eb4a?q=80&w=925&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Artisan coffee craftsmanship"
+              width={925}
+              height={700}
+              className="w-full h-full object-cover"
+              priority={false}
+            />
           </div>
         </motion.div>
 
