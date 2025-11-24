@@ -18,6 +18,7 @@ import "./styles/pages/home.css";
 import "./styles/pages/about.css";
 import "./styles/pages/menu.css";
 import "./styles/pages/events.css";
+import "./styles/pages/contact.css";
 
 import { ThemeProvider } from "next-themes";
 import { torus } from "./fonts";
