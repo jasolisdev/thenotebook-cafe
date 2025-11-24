@@ -66,16 +66,29 @@ export default function AnnouncementBanner({
     const dismissed = localStorage.getItem("announcement-banner-dismissed");
     if (dismissed === "true") {
       setIsDismissed(true);
+      // Remove padding from header when banner is dismissed
+      const headerContainer = document.querySelector('.header-container') as HTMLElement;
+      if (headerContainer) {
+        headerContainer.style.paddingTop = '0';
+      }
     }
   }, []);
 
   /**
    * Handle banner dismissal
    * Saves dismissal state to localStorage
+   * Removes header padding smoothly
    */
   const handleDismiss = () => {
     setIsDismissed(true);
     localStorage.setItem("announcement-banner-dismissed", "true");
+
+    // Smoothly remove padding from header
+    const headerContainer = document.querySelector('.header-container') as HTMLElement;
+    if (headerContainer) {
+      headerContainer.style.transition = 'padding-top 0.3s ease';
+      headerContainer.style.paddingTop = '0';
+    }
   };
 
   // Don't render on server to avoid hydration issues

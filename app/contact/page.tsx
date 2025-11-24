@@ -8,7 +8,7 @@ import ScrollReveal from "../components/layout/ScrollReveal";
 import SiteFooter from "../components/layout/SiteFooter";
 import ContactForm from "../components/features/ContactForm";
 import { MapPin, Clock, Phone, Mail } from "lucide-react";
-import { SiSpotify, SiInstagram, SiFacebook } from "react-icons/si";
+import { SiInstagram, SiFacebook, SiTiktok } from "react-icons/si";
 import Image from "next/image";
 
 async function getData() {
@@ -55,74 +55,52 @@ export default async function ContactPage() {
       <section className="section-cream py-16 sm:py-20 relative">
         <div className="mx-auto max-w-[900px] px-4 sm:px-6 relative z-10">
 
-          {/* Contact Info Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 mb-12 sm:mb-16">
+          {/* Contact Info - Simple Flat Layout */}
+          <div className="mb-12 sm:mb-16 scroll-reveal text-center">
 
-            {/* Address Card */}
-            <div className="contact-info-card scroll-reveal" style={{ animationDelay: "0s" }}>
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="text-[18px] sm:text-[20px] font-semibold tracking-wide" style={{ color: "#2a1f16" }}>
-                  LOCATION
+            {/* Address */}
+            <div className="mb-8">
+              <div className="flex items-center justify-center gap-3 mb-2">
+                <MapPin className="w-5 h-5" style={{ color: "rgba(164,131,116,0.9)" }} />
+                <h3 className="text-[16px] sm:text-[18px] font-semibold tracking-wide uppercase" style={{ color: "rgba(164,131,116,0.9)" }}>
+                  Location
                 </h3>
-                <div className="contact-card-icon">
-                  <MapPin className="w-5 h-5" />
-                </div>
               </div>
-              <p className="text-[14px] sm:text-[15px] leading-relaxed" style={{ color: "rgba(42,31,22,0.8)" }}>
-                {settings?.address || "3512 9TH ST, RIVERSIDE CA 92501"}
+              <p className="text-[15px] sm:text-[16px] leading-relaxed" style={{ color: "#2a1f16" }}>
+                3512 9TH ST, RIVERSIDE CA 92501
               </p>
             </div>
 
-            {/* Phone Card */}
-            <div className="contact-info-card scroll-reveal" style={{ animationDelay: "0.1s" }}>
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="text-[18px] sm:text-[20px] font-semibold tracking-wide" style={{ color: "#2a1f16" }}>
-                  PHONE
+            {/* Phone */}
+            <div className="mb-8">
+              <div className="flex items-center justify-center gap-3 mb-2">
+                <Phone className="w-5 h-5" style={{ color: "rgba(164,131,116,0.9)" }} />
+                <h3 className="text-[16px] sm:text-[18px] font-semibold tracking-wide uppercase" style={{ color: "rgba(164,131,116,0.9)" }}>
+                  Phone
                 </h3>
-                <div className="contact-card-icon">
-                  <Phone className="w-5 h-5" />
-                </div>
               </div>
-              <p className="text-[14px] sm:text-[15px] leading-relaxed" style={{ color: "rgba(42,31,22,0.8)" }}>
-                <a href={`tel:${settings?.phone || "(951) 823-0004"}`} className="hover:underline">
-                  {settings?.phone || "(951) 823-0004"}
+              <p className="text-[15px] sm:text-[16px] leading-relaxed" style={{ color: "#2a1f16" }}>
+                <a href="tel:+19518230004" className="hover:underline">
+                  (951) 823-0004
                 </a>
               </p>
             </div>
 
-            {/* Hours Card */}
-            <div className="contact-info-card scroll-reveal" style={{ animationDelay: "0.2s" }}>
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="text-[18px] sm:text-[20px] font-semibold tracking-wide" style={{ color: "#2a1f16" }}>
-                  HOURS
+            {/* Hours */}
+            <div className="mb-8">
+              <div className="flex items-center justify-center gap-3 mb-2">
+                <Clock className="w-5 h-5" style={{ color: "rgba(164,131,116,0.9)" }} />
+                <h3 className="text-[16px] sm:text-[18px] font-semibold tracking-wide uppercase" style={{ color: "rgba(164,131,116,0.9)" }}>
+                  Business Hours
                 </h3>
-                <div className="contact-card-icon">
-                  <Clock className="w-5 h-5" />
-                </div>
               </div>
-              <p className="text-[14px] sm:text-[15px] leading-relaxed" style={{ color: "rgba(42,31,22,0.8)" }}>
-                {settings?.hours?.weekday || "Mon–Fri: 7 AM – 9 PM"}
-                <br />
-                {settings?.hours?.weekend || "Sat–Sun: 8 AM – 10 PM"}
-              </p>
+              <div className="text-[15px] sm:text-[16px] leading-relaxed" style={{ color: "#2a1f16" }}>
+                <p>Monday - Thursday: 06:30am – 04:00pm</p>
+                <p>Friday - Saturday: 06:30am – 06:00pm</p>
+                <p>Sunday: 06:30am – 04:00pm</p>
+              </div>
             </div>
 
-            {/* Email Card */}
-            <div className="contact-info-card scroll-reveal" style={{ animationDelay: "0.3s" }}>
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="text-[18px] sm:text-[20px] font-semibold tracking-wide" style={{ color: "#2a1f16" }}>
-                  EMAIL
-                </h3>
-                <div className="contact-card-icon">
-                  <Mail className="w-5 h-5" />
-                </div>
-              </div>
-              <p className="text-[14px] sm:text-[15px] leading-relaxed" style={{ color: "rgba(42,31,22,0.8)" }}>
-                <a href={`mailto:${settings?.email || "hello@thenotebookcafe.com"}`} className="hover:underline">
-                  {settings?.email || "hello@thenotebookcafe.com"}
-                </a>
-              </p>
-            </div>
           </div>
 
           {/* Social Links */}
@@ -131,15 +109,6 @@ export default async function ContactPage() {
               Follow us for updates
             </p>
             <div className="flex items-center justify-center gap-4">
-              <a
-                href={settings?.social?.spotify || "#"}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,131,116,0.15)] text-[rgba(164,131,116,0.9)] hover:bg-[rgba(164,131,116,0.25)] hover:text-[rgba(164,131,116,1)] transition"
-                aria-label="Spotify"
-              >
-                <SiSpotify className="w-5 h-5" />
-              </a>
               <a
                 href={settings?.social?.instagram || "#"}
                 target="_blank"
@@ -151,6 +120,17 @@ export default async function ContactPage() {
               </a>
               <a
                 href="#"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,131,116,0.15)] text-[rgba(164,131,116,0.9)] hover:bg-[rgba(164,131,116,0.25)] hover:text-[rgba(164,131,116,1)] transition"
+                aria-label="TikTok"
+              >
+                <SiTiktok className="w-5 h-5" />
+              </a>
+              <a
+                href="#"
+                target="_blank"
+                rel="noreferrer"
                 className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,131,116,0.15)] text-[rgba(164,131,116,0.9)] hover:bg-[rgba(164,131,116,0.25)] hover:text-[rgba(164,131,116,1)] transition"
                 aria-label="Facebook"
               >
