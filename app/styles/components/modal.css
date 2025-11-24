@@ -355,14 +355,14 @@
   padding: 12px 16px;
   border: none;
   border-radius: 12px;
-  background: #f4f0e9;
-  color: #2a1f16;
+  background: #2a1f16;
+  color: #f4f0e9;
   font-family: 'Torus', sans-serif;
   font-size: 17px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 4px 12px rgba(42, 31, 22, 0.1);
+  box-shadow: 0 4px 12px rgba(42, 31, 22, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -371,15 +371,15 @@
 
 @media (hover: hover) {
   .menu-modal-close-btn:hover {
-    background: #ede7d8;
+    background: #40534c;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(42, 31, 22, 0.15);
+    box-shadow: 0 6px 16px rgba(42, 31, 22, 0.25);
   }
 }
 
 .menu-modal-close-btn:active {
   transform: translateY(0);
-  background: #ede7d8;
+  background: #40534c;
 }
 
 /* Add to Order Button */

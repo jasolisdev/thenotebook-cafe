@@ -139,18 +139,6 @@ export default async function ContactPage() {
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="mx-auto max-w-[720px] scroll-reveal">
-            <div className="contact-form-card">
-              <h2 className="text-[24px] sm:text-[28px] font-semibold tracking-wide mb-2 text-center" style={{ color: "#2a1f16" }}>
-                CONNECT WITH US
-              </h2>
-              <p className="text-[14px] sm:text-[15px] mb-6 text-center" style={{ color: "rgba(42,31,22,0.7)" }}>
-                Send us a message and we'll get back to you soon.
-              </p>
-              <ContactForm />
-            </div>
-          </div>
         </div>
       </section>
 
