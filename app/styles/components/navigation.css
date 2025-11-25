@@ -40,20 +40,26 @@
   position: relative;
   z-index: 2;
   /* Above drawer (1) within container */
-  background: #f4f0e9;
+  background: rgba(244, 240, 233, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(42, 31, 22, 0.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   padding: 0 clamp(16px, 3vw, 28px);
 }
 
 .site-header.header-transparent {
-  background: #f4f0e9;
+  background: rgba(244, 240, 233, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom-color: rgba(42, 31, 22, 0.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .site-header.header-open {
-  background: #f4f0e9;
+  background: rgba(244, 240, 233, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom-color: rgba(42, 31, 22, 0.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   z-index: 3;

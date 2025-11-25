@@ -82,6 +82,12 @@ export default function SiteFooter({
           <Link href="/story" className="footer-nav-link">
             Story
           </Link>
+          <span className="footer-nav-separator" aria-hidden="true">
+            •
+          </span>
+          <Link href="/contact" className="footer-nav-link">
+            Contact Us
+          </Link>
         </nav>
 
         {/* Copyright Notice */}

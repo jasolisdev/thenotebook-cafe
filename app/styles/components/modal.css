@@ -37,6 +37,24 @@
   }
 }
 
+@keyframes slideUpBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-8px);
+  }
+  80% {
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Modal Container - Fixed wrapper (no scroll) */
 .menu-modal-container {
   position: fixed;
@@ -277,6 +295,13 @@
   flex-wrap: wrap;
 }
 
+/* Wrapping options with auto-sizing buttons */
+.menu-modal-options-wrap .menu-modal-option {
+  flex: 0 0 auto;
+  min-width: auto;
+  padding: 10px 16px;
+}
+
 .menu-modal-option {
   flex: 1;
   min-width: 80px;
@@ -340,13 +365,26 @@
   text-align: center;
 }
 
-/* Add to Order Button - Sticky at bottom */
-.menu-modal-add-btn {
+/* Action Buttons Container - Sticky at bottom */
+.menu-modal-actions {
   position: sticky;
   bottom: 0;
-  width: 100%;
-  padding: 12px 24px;
+  display: flex;
+  gap: 12px;
   margin-top: 16px;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.menu-modal-actions.is-visible {
+  animation: slideUpBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.2s;
+}
+
+/* Close Button - Button style */
+.menu-modal-close-btn {
+  padding: 12px 16px;
   border: none;
   border-radius: 12px;
   background: #2a1f16;
@@ -357,7 +395,39 @@
   cursor: pointer;
   transition: all 0.2s;
   box-shadow: 0 4px 12px rgba(42, 31, 22, 0.2);
-  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (hover: hover) {
+  .menu-modal-close-btn:hover {
+    background: #40534c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(42, 31, 22, 0.25);
+  }
+}
+
+.menu-modal-close-btn:active {
+  transform: translateY(0);
+  background: #40534c;
+}
+
+/* Add to Order Button */
+.menu-modal-add-btn {
+  flex: 1;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  background: #2a1f16;
+  color: #f4f0e9;
+  font-family: 'Torus', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(42, 31, 22, 0.2);
 }
 
 @media (hover: hover) {
@@ -374,22 +444,21 @@
 }
 
 @media (max-width: 640px) {
-  .menu-modal-add-btn {
+  .menu-modal-actions {
     position: fixed;
     bottom: 20px;
     left: 20px;
     right: 20px;
-    padding: 18px 24px;
-    font-size: 17px;
-    border-radius: 12px;
     margin: 0;
-    width: auto;
-    background: #2a1f16;
-    color: #f4f0e9;
-    box-shadow: 0 4px 16px rgba(42, 31, 22, 0.4);
   }
 
-  .menu-modal-add-btn:active {
-    background: #1a1108;
+  .menu-modal-close-btn {
+    padding: 18px 16px;
+    font-size: 17px;
+  }
+
+  .menu-modal-add-btn {
+    padding: 18px 24px;
+    font-size: 17px;
   }
 }
