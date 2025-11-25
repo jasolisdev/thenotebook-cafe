@@ -186,8 +186,8 @@ export default function SiteHeader({
             <Image
               src="/thenotebookcafe-navbar-dark.png"
               alt="The Notebook Café"
-              width={200}
-              height={68}
+              width={220}
+              height={75}
               priority
               className="brand-logo"
             />
@@ -294,11 +294,6 @@ export default function SiteHeader({
 
           {/* Drawer Footer */}
           <div className={`drawer-footer ${open ? "is-visible" : ""}`}>
-            {/* Vibe Statement */}
-            <p className="drawer-vibe-text">
-              Low lights, good sound, better coffee.
-            </p>
-
             {/* Social Links Header */}
             <p className="drawer-follow-text">Follow us!</p>
 

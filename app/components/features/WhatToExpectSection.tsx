@@ -41,16 +41,19 @@ export default function WhatToExpectSection() {
       className="section-cream relative overflow-hidden py-16 sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
+        {/* Centered Section Label at Top */}
+        <div className="text-center mb-12">
+          <div className="welcome-section-label mb-8">
+            <div className="welcome-divider-line"></div>
+            <span className="welcome-label-text">What to Expect</span>
+            <div className="welcome-divider-line"></div>
+          </div>
+        </div>
+
+        {/* Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - Text Content */}
           <div className="text-center lg:text-left">
-            {/* Section Label - Hear the Vibe Style */}
-            <div className="welcome-section-label mb-8">
-              <div className="welcome-divider-line"></div>
-              <span className="welcome-label-text">What to Expect</span>
-              <div className="welcome-divider-line"></div>
-            </div>
-
             {/* Main Headline */}
             <h2
               className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight"
@@ -79,18 +82,6 @@ export default function WhatToExpectSection() {
                 borderColor: "#ecd7bf",
               }}
             >
-              {/* Vertical Timeline Line - connects all three items */}
-              <div
-                className="absolute w-0.5"
-                style={{
-                  background: "#ecd7bf",
-                  left: "calc(1.5rem + 24px)", // padding + half of icon width (48px/2)
-                  top: "calc(1.5rem + 24px + 12px)", // padding + half first icon + gap
-                  height: "calc(96px + 4rem + 24px)" // first icon + gap + second icon + gap + half third icon
-                }}
-                aria-hidden="true"
-              />
-
               {/* Timeline Items */}
               <div className="space-y-8">
                 {timelineItems.map((item, index) => (

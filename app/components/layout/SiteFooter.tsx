@@ -90,6 +90,11 @@ export default function SiteFooter({
           </Link>
         </nav>
 
+        {/* Vibe Quote */}
+        <p className="footer-vibe-quote mb-6">
+          Low lights, good sound, better coffee.
+        </p>
+
         {/* Copyright Notice */}
         <div className="text-light-muted">
           © {year} The Notebook Café LLC — Riverside, CA

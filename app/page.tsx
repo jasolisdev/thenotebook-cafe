@@ -54,16 +54,16 @@ const mosaicItems = [
 
 const atmosphereImages = [
   {
-    src: "/unsplash/aesthetic-coffee-1.jpg",
-    alt: "Cafe interior atmosphere"
+    src: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=900&auto=format&fit=crop&q=80&ixlib=rb-4.1.0",
+    alt: "Room filled with furniture and windows"
   },
   {
-    src: "/unsplash/aesthetic-coffee-2.jpg",
-    alt: "Cafe seating area"
+    src: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=900&auto=format&fit=crop&q=80&ixlib=rb-4.1.0",
+    alt: "Cozy dining nook with woven chairs"
   },
   {
-    src: "/unsplash/coffee-shop-interior.jpg",
-    alt: "Cafe workspace ambiance"
+    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&auto=format&fit=crop&q=80&ixlib=rb-4.1.0",
+    alt: "Restaurant with tables and large window"
   },
 ];
 
@@ -109,12 +109,11 @@ export default async function HomePage() {
           </div>
 
           {/* Tagline */}
-          <p className="hero-tagline">Where Every Sip Tells a Story</p>
+          <p className="hero-tagline">Where Every Cup Tells a Story</p>
 
           {/* Descriptive Text */}
           <p className="hero-description">
-            A curated space where specialty coffee meets vibrant culture and
-            soulful house music rhythms
+            A new vibe is brewing...
           </p>
 
           {/* Primary CTA */}
@@ -125,7 +124,7 @@ export default async function HomePage() {
               rel="noreferrer"
               className="hero-cta-button"
             >
-              <span>Follow Our Journey</span>
+              <span>FOLLOW FOR UPDATES</span>
               <svg
                 className="hero-cta-arrow"
                 width="16"
@@ -142,13 +141,6 @@ export default async function HomePage() {
                 />
               </svg>
             </a>
-          </div>
-
-          {/* Secondary Badge */}
-          <div className="hero-badge">
-            <span className="hero-badge-icon">✦</span>
-            <span>Opening Early Q1 2026</span>
-            <span className="hero-badge-icon">✦</span>
           </div>
         </div>
       </section>
@@ -300,17 +292,14 @@ export default async function HomePage() {
           {/* Section Label */}
           <div className="welcome-section-label mb-8">
             <div className="welcome-divider-line"></div>
-            <span className="welcome-label-text">The Atmosphere</span>
+            <span className="welcome-label-text" style={{ fontSize: "28px" }}>The Atmosphere</span>
             <div className="welcome-divider-line"></div>
           </div>
 
           {/* Content */}
           <div className="text-center mb-10">
-            <p className="text-[15px] sm:text-[17px] leading-relaxed text-[#2a1f16] max-w-[700px] mx-auto mb-10">
-              A quiet canvas for creativity. We&apos;re building with warm wood
-              laminates, calming olive green accents, and minimalist beige
-              tones—a refined retreat from the hustle, built for long stays and
-              deep focus.
+            <p className="text-[24px] leading-relaxed text-[#2a1f16] max-w-[700px] mx-auto mb-10">
+              A calm, warm space designed for focus, comfort, and creativity.
             </p>
 
             {/* Amenities mini grid */}
@@ -323,13 +312,15 @@ export default async function HomePage() {
               ].map((item, idx) => (
                 <div
                   key={item.label}
-                  className="flex items-center justify-start gap-2 text-[13.5px] sm:text-[14px] text-[rgba(42,31,22,0.9)]"
+                  className="flex items-center justify-start gap-2 text-[14px] sm:text-[14.7px] text-[rgba(42,31,22,0.9)]"
                 >
                   <item.Icon
-                    className="w-5 h-5 amenity-icon"
+                    className="amenity-icon"
                     style={{
                       animationDelay: `${idx * 0.1}s`,
                       color: "var(--warm-roast)",
+                      width: "21px",
+                      height: "21px"
                     }}
                   />
                   <span>{item.label}</span>
