@@ -184,7 +184,7 @@ export default function SiteHeader({
             aria-label="The Notebook Café - Home"
           >
             <Image
-              src="/notebook-cafe-navbar-dark.png"
+              src="/thenotebookcafe-navbar-dark.png"
               alt="The Notebook Café"
               width={160}
               height={55}

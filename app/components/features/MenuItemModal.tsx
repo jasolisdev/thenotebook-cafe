@@ -125,7 +125,7 @@ export default function MenuItemModal({ isOpen, onClose, item }: MenuItemModalPr
           </div>
 
           {/* Action buttons - Close and Add to Order */}
-          <div className="menu-modal-actions">
+          <div className={`menu-modal-actions ${isAnimating ? 'is-visible' : ''}`}>
             <button
               className="menu-modal-close-btn"
               onClick={onClose}
