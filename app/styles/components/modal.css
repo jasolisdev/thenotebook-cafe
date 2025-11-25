@@ -295,6 +295,13 @@
   flex-wrap: wrap;
 }
 
+/* Wrapping options with auto-sizing buttons */
+.menu-modal-options-wrap .menu-modal-option {
+  flex: 0 0 auto;
+  min-width: auto;
+  padding: 10px 16px;
+}
+
 .menu-modal-option {
   flex: 1;
   min-width: 80px;
