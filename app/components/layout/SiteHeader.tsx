@@ -186,8 +186,8 @@ export default function SiteHeader({
             <Image
               src="/thenotebookcafe-navbar-dark.png"
               alt="The Notebook Café"
-              width={160}
-              height={55}
+              width={200}
+              height={68}
               priority
               className="brand-logo"
             />
