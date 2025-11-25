@@ -1011,16 +1011,7 @@
 }
 
 .atmosphere-image-wrapper {
-  /* Slightly smaller than default image-card */
-  width: 252px !important;
-  min-width: 216px !important;
-}
-
-@media (min-width: 768px) {
-  .atmosphere-image-wrapper {
-    width: 288px !important;
-    min-width: 288px !important;
-  }
+  /* No special styles needed - inherits from .image-card */
 }
 
 .atmosphere-image-number {

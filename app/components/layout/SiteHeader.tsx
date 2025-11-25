@@ -294,6 +294,11 @@ export default function SiteHeader({
 
           {/* Drawer Footer */}
           <div className={`drawer-footer ${open ? "is-visible" : ""}`}>
+            {/* Vibe Statement */}
+            <p className="drawer-vibe-text">
+              Low lights, good sound, better coffee.
+            </p>
+
             {/* Social Links Header */}
             <p className="drawer-follow-text">Follow us!</p>
 
