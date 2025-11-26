@@ -42,6 +42,19 @@ export default function SiteFooter({
           </Link>
         </nav>
 
+
+
+        {/* Vibe Copy */}
+        {home?.vibeCopy && (
+          <div className="welcome-vibe-section mt-40 sm:mt-24 lg:mt-28 pb-0">
+            <div className="welcome-quote-mark">&quot;</div>
+            <p className="welcome-vibe-text scroll-reveal">
+              {home.vibeCopy}
+            </p>
+            <div className="welcome-quote-mark welcome-quote-mark-end">&quot;</div>
+          </div>
+        )}
+
         <div className="ink-cream-dim">
           © {year} The Notebook Café LLC — Riverside, CA
         </div>

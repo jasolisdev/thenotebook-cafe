@@ -161,22 +161,9 @@ body {
   min-height: 100dvh;
   background: var(--bg-solid);
   color: var(--text-light);
-  padding-top: 106px;
-  /* Banner (42px) + Nav (64px) */
-}
-
-@media (min-width: 375px) {
-  .site-layout {
-    padding-top: 110px;
-    /* Banner (46px) + Nav (64px) */
-  }
-}
-
-@media (min-width: 640px) {
-  .site-layout {
-    padding-top: 112px;
-    /* Banner (48px) + Nav (64px) */
-  }
+  padding-top: calc(var(--announcement-banner-height, 42px) + 64px);
+  transition: padding-top 0.3s ease;
+  /* Dynamic: Banner height + Nav (64px) */
 }
 
 /* Text color utilities for dark backgrounds */

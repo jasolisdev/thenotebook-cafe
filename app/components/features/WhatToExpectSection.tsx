@@ -1,3 +1,5 @@
+import HeroGallery from './HeroGallery';
+
 /**
  * WhatToExpectSection Component
  *
@@ -42,8 +44,8 @@ export default function WhatToExpectSection() {
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         {/* Centered Section Label at Top */}
-        <div className="text-center mb-12">
-          <div className="welcome-section-label mb-8">
+        <div className="section-label-description mb-12">
+          <div className="section-label">
             <div className="welcome-divider-line"></div>
             <span className="welcome-label-text">What to Expect</span>
             <div className="welcome-divider-line"></div>
@@ -220,6 +222,27 @@ export default function WhatToExpectSection() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Hero Gallery */}
+        <div className="mt-16 sm:mt-20">
+          <HeroGallery images={[
+            {
+              src: "https://images.unsplash.com/photo-1612737144187-d51c1483225a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D",
+              srcSet: "https://images.unsplash.com/photo-1612737144187-d51c1483225a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D 900w",
+              alt: "Aesthetic coffee drink"
+            },
+            {
+              src: "https://images.unsplash.com/photo-1683882490013-5b94462881a3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D",
+              srcSet: "https://images.unsplash.com/photo-1683882490013-5b94462881a3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D 900w",
+              alt: "Coffee bar aesthetic"
+            },
+            {
+              src: "https://plus.unsplash.com/premium_photo-1681711648620-9fa368907a86?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmUlMjBjdXB8ZW58MHx8MHx8fDA%3D",
+              srcSet: "https://plus.unsplash.com/premium_photo-1681711648620-9fa368907a86?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmUlMjBjdXB8ZW58MHx8MHx8fDA%3D 900w",
+              alt: "Coffee cup close-up"
+            }
+          ]} />
         </div>
       </div>
     </section>

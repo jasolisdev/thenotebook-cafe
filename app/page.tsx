@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+
 /**
  * Homepage - The Notebook Café
  *
@@ -155,16 +155,10 @@ export default async function HomePage() {
         <HomeFloatingItems variant="welcome" />
         {/* Welcome Header */}
         <div className="mx-auto max-w-[900px] px-4 text-center sm:px-6 scroll-reveal relative z-10">
-          <h2
-            className="text-[16px] min-[375px]:text-[20px] sm:text-[24px] md:text-[28px] font-medium tracking-wide mb-3 sm:mb-4"
-            style={{ color: "rgba(164,131,116,0.9)" }}
-          >
+          <h2 className="welcome-section-label">
             WELCOME TO THE NOTEBOOK CAFÉ
           </h2>
-          <h1
-            className="text-[16px] min-[375px]:text-[18px] sm:text-[32px] md:text-[38px] font-bold tracking-tight mb-4 sm:mb-6"
-            style={{ color: "#2a1f16" }}
-          >
+          <h1 className="welcome-section-description">
             COME FOR THE COFFEE, STAY FOR THE VIBE
           </h1>
         </div>
@@ -173,54 +167,17 @@ export default async function HomePage() {
       {/* WHAT TO EXPECT SECTION */}
       <WhatToExpectSection />
 
-      {/* CREAM SECTION - CONTINUED */}
-      <section className="section-cream relative pb-0">
-        <div className="mx-auto max-w-[900px] px-4 sm:px-6 scroll-reveal relative z-10">
+      {/* OUR COMMITMENT SECTION */}
+      <section className="section-cream relative pt-0 pb-16 sm:pb-20" style={{ border: "3px solid red" }}>
+        <CoffeeDifferenceSection />
 
-          {/* CARD GALLERY */}
-          <HeroGallery images={[
-            {
-              src: "https://images.unsplash.com/photo-1612737144187-d51c1483225a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D",
-              srcSet: "https://images.unsplash.com/photo-1612737144187-d51c1483225a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D 900w",
-              alt: "Aesthetic coffee drink"
-            },
-            {
-              src: "https://images.unsplash.com/photo-1683882490013-5b94462881a3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D",
-              srcSet: "https://images.unsplash.com/photo-1683882490013-5b94462881a3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YWVzdGhldGljJTIwY29mZmUlMjBkcmlua3xlbnwwfHwwfHx8MA%3D%3D 900w",
-              alt: "Coffee bar aesthetic"
-            },
-            {
-              src: "https://plus.unsplash.com/premium_photo-1681711648620-9fa368907a86?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmUlMjBjdXB8ZW58MHx8MHx8fDA%3D",
-              srcSet: "https://plus.unsplash.com/premium_photo-1681711648620-9fa368907a86?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmUlMjBjdXB8ZW58MHx8MHx8fDA%3D 900w",
-              alt: "Coffee cup close-up"
-            }
-          ]} />
-
-
-          {/* Vibe Copy */}
-          {home?.vibeCopy && (
-            <div className="welcome-vibe-section mt-40 sm:mt-24 lg:mt-28 pb-0">
-              <div className="welcome-quote-mark">&quot;</div>
-              <p className="welcome-vibe-text scroll-reveal">
-                {home.vibeCopy}
-              </p>
-              <div className="welcome-quote-mark welcome-quote-mark-end">&quot;</div>
-            </div>
-          )}
-
-          {/* What Makes Our Coffee Different */}
-          <div className="mt-12 sm:mt-16 lg:mt-20">
-            <CoffeeDifferenceSection />
-          </div>
-
-          <div className="mt-10 sm:mt-12 flex justify-center pb-8 sm:pb-12">
-            <a href="/menu" className="view-menu-button">
-              <span>View Our Menu</span>
-              <svg className="view-menu-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
-          </div>
+        <div className="mt-10 sm:mt-12 flex justify-center">
+          <a href="/menu" className="view-menu-button">
+            <span>View Our Menu</span>
+            <svg className="view-menu-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
         </div>
       </section>
 
@@ -228,14 +185,14 @@ export default async function HomePage() {
       <section className="section-cream py-16 sm:py-20 relative">
         <div className="mx-auto max-w-[900px] px-4 sm:px-6 scroll-reveal relative z-10">
           {/* Section Label */}
-          <div className="welcome-section-label mb-8">
+          <div className="section-label">
             <div className="welcome-divider-line"></div>
             <span className="welcome-label-text">Hear the Vibe</span>
             <div className="welcome-divider-line"></div>
           </div>
 
           {/* Content */}
-          <div className="text-center mb-8">
+          <div className="section-label-description">
             <p
               className="text-[15px] sm:text-[16px] leading-relaxed max-w-[700px] mx-auto mb-10"
               style={{ color: "#2a1f16" }}
@@ -290,14 +247,14 @@ export default async function HomePage() {
       <section className="section-cream py-16 sm:py-20 relative">
         <div className="mx-auto max-w-[900px] px-4 sm:px-6 scroll-reveal relative z-10">
           {/* Section Label */}
-          <div className="welcome-section-label mb-8">
+          <div className="section-label">
             <div className="welcome-divider-line"></div>
             <span className="welcome-label-text">The Atmosphere</span>
             <div className="welcome-divider-line"></div>
           </div>
 
           {/* Content */}
-          <div className="text-center mb-10">
+          <div className="section-label-description mb-10">
             <p className="text-[15px] sm:text-[17px] leading-relaxed text-[#2a1f16] max-w-[700px] mx-auto mb-10">
               A calm, warm space designed for focus, comfort, and creativity.
             </p>
@@ -443,6 +400,7 @@ export default async function HomePage() {
       <SiteFooter
         showFloatingItems={true}
         FloatingItemsComponent={HomeFloatingItems}
+        vibeCopy={home?.vibeCopy}
       />
     </main>
   );

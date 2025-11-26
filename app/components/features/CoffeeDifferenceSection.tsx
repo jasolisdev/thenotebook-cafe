@@ -176,7 +176,7 @@ export default function CoffeeDifferenceSection() {
           variants={fadeUp}
         >
           {/* Section Label - Hear the Vibe Style */}
-          <div className="welcome-section-label mb-8">
+          <div className="section-label">
             <div className="welcome-divider-line"></div>
             <span className="welcome-label-text">Our Commitment</span>
             <div className="welcome-divider-line"></div>

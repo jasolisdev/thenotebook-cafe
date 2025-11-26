@@ -66,11 +66,8 @@ export default function AnnouncementBanner({
     const dismissed = sessionStorage.getItem("announcement-banner-dismissed");
     if (dismissed === "true") {
       setIsDismissed(true);
-      // Remove padding from header when banner is dismissed
-      const headerContainer = document.querySelector('.header-container') as HTMLElement;
-      if (headerContainer) {
-        headerContainer.style.paddingTop = '0';
-      }
+      // Update CSS variable to 0 when banner is dismissed
+      document.documentElement.style.setProperty('--announcement-banner-height', '0px');
     }
   }, []);
 
@@ -83,12 +80,9 @@ export default function AnnouncementBanner({
     setIsDismissed(true);
     sessionStorage.setItem("announcement-banner-dismissed", "true");
 
-    // Smoothly remove padding from header
-    const headerContainer = document.querySelector('.header-container') as HTMLElement;
-    if (headerContainer) {
-      headerContainer.style.transition = 'padding-top 0.3s ease';
-      headerContainer.style.paddingTop = '0';
-    }
+    // Smoothly update CSS variable to 0 to adjust all spacing
+    document.documentElement.style.transition = 'all 0.3s ease';
+    document.documentElement.style.setProperty('--announcement-banner-height', '0px');
   };
 
   // Don't render on server to avoid hydration issues

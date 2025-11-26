@@ -12,21 +12,26 @@ import { SiInstagram, SiFacebook, SiTiktok } from "react-icons/si";
 import Image from "next/image";
 
 async function getData() {
-  const settings = await client.fetch(
-    `*[_type=="settings"][0]{
-      businessName,
-      address,
-      phone,
-      email,
-      hours,
-      social{ instagram, spotify }
-    }`
-  );
-  return { settings };
+  const [settings, home] = await Promise.all([
+    client.fetch(
+      `*[_type=="settings"][0]{
+        businessName,
+        address,
+        phone,
+        email,
+        hours,
+        social{ instagram, spotify }
+      }`
+    ),
+    client.fetch(`*[_type=="homePage"][0]{
+      vibeCopy
+    }`),
+  ]);
+  return { settings, home };
 }
 
 export default async function ContactPage() {
-  const { settings } = await getData();
+  const { settings, home } = await getData();
 
   return (
     <main className="site-layout" suppressHydrationWarning>
@@ -148,7 +153,7 @@ export default async function ContactPage() {
       </div>
 
       {/* Footer */}
-      <SiteFooter />
+      <SiteFooter vibeCopy={home?.vibeCopy} />
     </main>
   );
 }

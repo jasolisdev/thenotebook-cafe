@@ -13,17 +13,20 @@ import { CoffeeIcon, EqIcon, NoteIcon } from "../components/ui/Icons";
 type PortableChild = { text?: string };
 type PortableBlock = { _type?: string; children?: PortableChild[] };
 
-/** Fetch "aboutPage" + "settings" from Sanity */
+/** Fetch "aboutPage" + "settings" + "homePage" from Sanity */
 async function getAboutData() {
-  const [about, settings] = await Promise.all([
+  const [about, settings, home] = await Promise.all([
     client.fetch(`*[_type=="aboutPage"][0]{
       title, body, valuesHeading, valuesBullets, missionHeading, founderNote
     }`),
     client.fetch(`*[_type=="settings"][0]{
       social{ instagram, spotify }
     }`),
+    client.fetch(`*[_type=="homePage"][0]{
+      vibeCopy
+    }`),
   ]);
-  return { about, settings };
+  return { about, settings, home };
 }
 
 /** Very small portable text renderer */
@@ -41,7 +44,7 @@ function PT({ body }: { body: PortableBlock[] }) {
 }
 
 export default async function AboutPage() {
-  const { about, settings } = await getAboutData();
+  const { about, settings, home } = await getAboutData();
 
   const bullets = about?.valuesBullets ?? [
     "A café that plays house, soul, and groove — not top 40 radio.",
@@ -55,7 +58,7 @@ export default async function AboutPage() {
       <ScrollReveal />
 
       {/* HERO SECTION - DARK */}
-      <section className="about-hero text-center px-5 pt-[60px] pb-10 relative">
+      <section className="about-hero text-center px-5 pb-10 relative" style={{ paddingTop: 'calc(var(--announcement-banner-height, 42px) + 60px)' }}>
         <AboutFloatingItems variant="hero" />
         <h1 className="scroll-reveal text-[38px] sm:text-[48px] md:text-[60px] font-medium uppercase tracking-[1.5px] mb-6" style={{ animationDelay: '0.1s', color: 'rgba(164,131,116,0.9)' }}>
           Our Story
@@ -90,13 +93,13 @@ export default async function AboutPage() {
       {/* OUR RIVERSIDE COMMITMENT Section */}
       <section className="section-cream px-5 pb-16 sm:pb-20">
         <div className="mx-auto max-w-[880px]">
-          <div className="scroll-reveal welcome-section-label mb-8" style={{ animationDelay: '0.1s' }}>
+          <div className="scroll-reveal section-label" style={{ animationDelay: '0.1s' }}>
             <div className="welcome-divider-line"></div>
             <span className="welcome-label-text">Our Riverside Commitment</span>
             <div className="welcome-divider-line"></div>
           </div>
 
-          <div className="scroll-reveal mx-auto max-w-[700px] text-center" style={{ animationDelay: '0.2s' }}>
+          <div className="scroll-reveal section-label-description mx-auto max-w-[700px]" style={{ animationDelay: '0.2s' }}>
             <p className="text-[15px] sm:text-[16px] leading-relaxed" style={{ color: '#2a1f16' }}>
               We chose the vibrant intersection of University Ave and Orange St because it sits at the cross-section of culture, commerce, and creativity. The Notebook Cafe is built to be a true community anchor for students, creatives, and locals—a peaceful hub to find your flow.
             </p>
@@ -107,13 +110,13 @@ export default async function AboutPage() {
       {/* THE CRAFT & THE RHYTHM Section */}
       <section className="section-cream px-5 pb-16 sm:pb-20">
         <div className="mx-auto max-w-[880px]">
-          <div className="scroll-reveal welcome-section-label mb-8" style={{ animationDelay: '0.1s' }}>
+          <div className="scroll-reveal section-label" style={{ animationDelay: '0.1s' }}>
             <div className="welcome-divider-line"></div>
             <span className="welcome-label-text">The Craft & The Rhythm</span>
             <div className="welcome-divider-line"></div>
           </div>
 
-          <div className="scroll-reveal mx-auto max-w-[700px] text-center" style={{ animationDelay: '0.2s' }}>
+          <div className="scroll-reveal section-label-description mx-auto max-w-[700px]" style={{ animationDelay: '0.2s' }}>
             <p className="text-[15px] sm:text-[16px] leading-relaxed mb-4" style={{ color: '#2a1f16' }}>
               Our mission extends beyond the cup. We ensure our specialty espresso is ethically sourced and roasted right, prepared on state-of-the-art equipment for consistent, perfect texture. We treat every step of the brewing process with respect.
             </p>
@@ -127,7 +130,7 @@ export default async function AboutPage() {
       {/* CREAM SECTION - Values */}
       <section className="section-cream px-5 pb-16 sm:pb-20">
         <div className="mx-auto max-w-[880px]">
-          <div className="scroll-reveal welcome-section-label mb-8" style={{ animationDelay: '0.1s' }}>
+          <div className="scroll-reveal section-label" style={{ animationDelay: '0.1s' }}>
             <div className="welcome-divider-line"></div>
             <span className="welcome-label-text">{about?.valuesHeading || "What we're building"}</span>
             <div className="welcome-divider-line"></div>
@@ -159,7 +162,7 @@ export default async function AboutPage() {
       <section className="section-dark px-5 py-20 sm:py-24 lg:py-28 relative">
         <AboutFloatingItems variant="mission" />
         <div className="mx-auto max-w-[820px]">
-          <div className="scroll-reveal welcome-section-label mb-8" style={{ animationDelay: '0.1s' }}>
+          <div className="scroll-reveal section-label" style={{ animationDelay: '0.1s' }}>
             <div className="welcome-divider-line"></div>
             <span className="welcome-label-text text-light">{about?.missionHeading || "Why we&apos;re doing this"}</span>
             <div className="welcome-divider-line"></div>
@@ -178,7 +181,7 @@ A space that feels like Riverside, made for locals, creatives, and anyone who lo
       </section>
 
       {/* Footer */}
-      <SiteFooter />
+      <SiteFooter vibeCopy={home?.vibeCopy} />
     </main>
   );
 }
