@@ -33,7 +33,7 @@
 
 /* Site header - always visible on top within container */
 .site-header {
-  height: 64px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -116,7 +116,7 @@
 
 @media (min-width: 1024px) {
   .brand-logo {
-    width: 226px;
+    width: 300px;
   }
 }
 
@@ -154,6 +154,12 @@
   .site-nav a {
     font-size: 16px;
     padding: 8px 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-nav a {
+    font-weight: 700;
   }
 }
 

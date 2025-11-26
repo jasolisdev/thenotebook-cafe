@@ -23,10 +23,12 @@
 }
 
 .hero-gradient {
+  background-color: var(--cream);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 520px;
+  border-radius: 10px;
 }
 
 @media (min-width: 375px) {
@@ -69,10 +71,10 @@
   font-size: 36px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--ink-cream);
+  color: var(--desert-rock);
   line-height: 1.05;
   margin: 0;
-  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  text-shadow: none;
   animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
 }
 
@@ -88,7 +90,7 @@
   font-size: 18px;
   font-weight: 300;
   letter-spacing: 0.02em;
-  color: var(--ink-cream);
+  color: var(--desert-rock);
   line-height: 1.4;
   margin: 16px 0 0;
   opacity: 0.95;
@@ -153,7 +155,7 @@
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 0.01em;
-  color: var(--ink-cream-dim);
+  color: var(--desert-rock);
   line-height: 1.6;
   margin: 0 auto;
   max-width: 650px;
@@ -343,7 +345,7 @@
   width: 140px;
   height: 140px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.5));
+  filter: none;
 }
 
 @media (min-width: 375px) {

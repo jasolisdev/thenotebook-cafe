@@ -87,9 +87,11 @@ export default async function HomePage() {
     <main className="site-layout" suppressHydrationWarning>
       <ScrollReveal />
 
-      {/* HERO */}
-      <section className="hero hero-gradient relative">
-        <HomeFloatingItems variant="hero" />
+      {/* HERO WRAPPER */}
+      <section className="section-hero">
+        {/* HERO */}
+        <section className="hero hero-gradient relative">
+          <HomeFloatingItems variant="hero" />
         <div className="hero-copy relative z-10">
           {/* Screen reader only title for SEO */}
           <h1 className="sr-only">
@@ -143,6 +145,7 @@ export default async function HomePage() {
             </a>
           </div>
         </div>
+        </section>
       </section>
 
       {/* Divider - Wavy transition to cream */}

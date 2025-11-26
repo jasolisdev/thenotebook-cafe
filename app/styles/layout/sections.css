@@ -61,3 +61,12 @@
   position: relative;
   margin: 0;
 }
+
+/* Hero wrapper section - dark background with rounded corner and padding */
+.section-hero {
+  background-color: var(--bg-dark);
+  padding: 10px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  position: relative;
+}
