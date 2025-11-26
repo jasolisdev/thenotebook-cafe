@@ -3,11 +3,13 @@ import Link from "next/link";
 type FooterProps = {
   showFloatingItems?: boolean;
   FloatingItemsComponent?: React.ComponentType<{ variant: "welcome" | "footer" | "hero" | "cards" }>;
+  vibeCopy?: string;
 };
 
 export default function SiteFooter({
   showFloatingItems = false,
   FloatingItemsComponent,
+  vibeCopy,
 }: FooterProps) {
   const year = new Date().getFullYear();
 
@@ -45,11 +47,11 @@ export default function SiteFooter({
 
 
         {/* Vibe Copy */}
-        {home?.vibeCopy && (
+        {vibeCopy && (
           <div className="welcome-vibe-section mt-40 sm:mt-24 lg:mt-28 pb-0">
             <div className="welcome-quote-mark">&quot;</div>
             <p className="welcome-vibe-text scroll-reveal">
-              {home.vibeCopy}
+              {vibeCopy}
             </p>
             <div className="welcome-quote-mark welcome-quote-mark-end">&quot;</div>
           </div>
