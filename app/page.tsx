@@ -175,21 +175,45 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* FEATURED DRINKS SECTION */}
+      <section className="section-featured">
+        <div className="featured-card scroll-reveal">
+          <Image
+            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000&auto=format&fit=crop"
+            alt="Featured specialty drink"
+            width={1000}
+            height={750}
+            className="w-full h-auto"
+          />
+        </div>
+        <div className="flex justify-center">
+          <a href="/menu" className="featured-menu-button">
+            <span>View Our Menu</span>
+            <svg
+              className="featured-menu-arrow"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <path
+                d="M1 8h14M9 2l6 6-6 6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
+        </div>
+      </section>
+
       {/* WHAT TO EXPECT SECTION */}
       <WhatToExpectSection />
 
       {/* OUR COMMITMENT SECTION */}
-      <section className="section-cream relative py-10">
+      <section className="section-cream relative pt-0 pb-16 sm:pb-20">
         <CoffeeDifferenceSection />
-
-        <div className="mt-10 sm:mt-12 flex justify-center">
-          <a href="/menu" className="view-menu-button">
-            <span>View Our Menu</span>
-            <svg className="view-menu-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
-        </div>
       </section>
 
       {/* HEAR THE VIBE Section */}

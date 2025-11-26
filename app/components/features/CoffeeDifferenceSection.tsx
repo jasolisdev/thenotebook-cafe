@@ -239,10 +239,11 @@ export default function CoffeeDifferenceSection() {
               >
                 {/* Icon */}
                 <div
-                  className="inline-flex items-center justify-center w-11 h-11 rounded-xl mb-4 transition-all duration-300 group-hover:scale-110"
+                  className="inline-flex items-center justify-center w-11 h-11 rounded-xl mb-4 transition-all duration-300 group-hover:scale-110 group-hover:rotate-[-5deg]"
                   style={{
-                    background: "rgba(164, 141, 120, 0.12)",
-                    color: "#a48374"
+                    background: "rgba(164, 141, 120, 0.08)",
+                    border: "1px solid rgba(164, 141, 120, 0.15)",
+                    color: "rgba(164, 141, 120, 0.8)"
                   }}
                 >
                   <FeatureIcon type={item.icon} />

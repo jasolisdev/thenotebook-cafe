@@ -251,8 +251,8 @@
   align-items: center;
   gap: 8px;
   padding: 12px 28px;
-  background: rgba(164, 141, 120, 0.15);
-  color: var(--desert-rock);
+  background: rgba(164, 141, 120, 0.25);
+  color: #6b5a48;
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 500;
@@ -260,7 +260,7 @@
   letter-spacing: 0.12em;
   text-decoration: none;
   border-radius: 50px;
-  border: 1px solid rgba(164, 141, 120, 0.25);
+  border: 1.5px solid rgba(164, 141, 120, 0.35);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition:
@@ -300,8 +300,8 @@
 
 .hero-cta-button:hover {
   transform: translateY(-2px);
-  background: rgba(164, 141, 120, 0.25);
-  border-color: rgba(164, 141, 120, 0.4);
+  background: rgba(164, 141, 120, 0.35);
+  border-color: rgba(164, 141, 120, 0.5);
   box-shadow: 0 4px 12px rgba(164, 141, 120, 0.15);
 }
 

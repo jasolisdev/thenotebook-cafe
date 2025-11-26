@@ -70,3 +70,16 @@
   border-bottom-right-radius: 20px;
   position: relative;
 }
+
+/* Featured drinks section */
+.section-featured {
+  background-color: var(--cream);
+  padding: 60px 20px;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .section-featured {
+    padding: 80px 24px;
+  }
+}

@@ -438,16 +438,17 @@
 }
 
 .welcome-section-description {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   margin-bottom: 1rem;
   color: #2a1f16;
 }
 
 @media (min-width: 375px) {
   .welcome-section-description {
-    font-size: 18px;
+    font-size: 16px;
+    letter-spacing: -0.025em;
   }
 }
 
@@ -1393,4 +1394,87 @@
       rgba(164, 141, 120, 0.02),
       transparent);
   animation: fadeIn 1s ease 0.7s backwards;
+}
+
+/* Featured Drinks Section */
+.featured-card {
+  max-width: 400px;
+  margin: 0 auto 32px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(164, 141, 120, 0.12);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 640px) {
+  .featured-card {
+    max-width: 500px;
+  }
+}
+
+.featured-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(164, 141, 120, 0.18);
+}
+
+.featured-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Featured Menu Button - Frosted Glass */
+.featured-menu-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: rgba(164, 141, 120, 0.25);
+  color: #6b5a48;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  border-radius: 50px;
+  border: 1.5px solid rgba(164, 141, 120, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(164, 141, 120, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-menu-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, transparent 50%);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.featured-menu-button:hover {
+  transform: translateY(-2px);
+  background: rgba(164, 141, 120, 0.35);
+  border-color: rgba(164, 141, 120, 0.5);
+  box-shadow: 0 4px 12px rgba(164, 141, 120, 0.15);
+}
+
+.featured-menu-button:active {
+  transform: translateY(0);
+}
+
+.featured-menu-arrow {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.featured-menu-button:hover .featured-menu-arrow {
+  transform: translateX(3px);
 }
