@@ -168,7 +168,7 @@ export default async function HomePage() {
       <WhatToExpectSection />
 
       {/* OUR COMMITMENT SECTION */}
-      <section className="section-cream relative pt-0 pb-16 sm:pb-20" style={{ border: "3px solid red" }}>
+      <section className="section-cream relative py-10">
         <CoffeeDifferenceSection />
 
         <div className="mt-10 sm:mt-12 flex justify-center">
@@ -193,10 +193,7 @@ export default async function HomePage() {
 
           {/* Content */}
           <div className="section-label-description">
-            <p
-              className="text-[15px] sm:text-[16px] leading-relaxed max-w-[700px] mx-auto mb-10"
-              style={{ color: "#2a1f16" }}
-            >
+            <p className="text-[15px] sm:text-[16px] leading-relaxed max-w-[700px] mx-auto mb-10 text-[var(--desert-rock)]">
               Ambient house, soul, and groove—setting the perfect backdrop for
               focus and creation. Tune in to our curated playlist before the
               doors open.
@@ -213,30 +210,27 @@ export default async function HomePage() {
                 href={settings?.social?.spotify || "#"}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,131,116,0.15)] text-[rgba(164,131,116,0.9)] hover:bg-[rgba(164,131,116,0.25)] hover:text-[rgba(164,131,116,1)] transition"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,141,120,0.15)] text-[rgba(164,141,120,0.9)] hover:bg-[rgba(164,141,120,0.25)] hover:text-[rgba(164,141,120,1)] transition"
                 aria-label="Open Spotify"
               >
                 <SiSpotify className="w-5 h-5" />
               </a>
               <a
                 href="#"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,131,116,0.15)] text-[rgba(164,131,116,0.9)] hover:bg-[rgba(164,131,116,0.25)] hover:text-[rgba(164,131,116,1)] transition"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,141,120,0.15)] text-[rgba(164,141,120,0.9)] hover:bg-[rgba(164,141,120,0.25)] hover:text-[rgba(164,141,120,1)] transition"
                 aria-label="Open Apple Music"
               >
                 <SiApplemusic className="w-5 h-5" />
               </a>
               <a
                 href="#"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,131,116,0.15)] text-[rgba(164,131,116,0.9)] hover:bg-[rgba(164,131,116,0.25)] hover:text-[rgba(164,131,116,1)] transition"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,141,120,0.15)] text-[rgba(164,141,120,0.9)] hover:bg-[rgba(164,141,120,0.25)] hover:text-[rgba(164,141,120,1)] transition"
                 aria-label="Open SoundCloud"
               >
                 <SiSoundcloud className="w-5 h-5" />
               </a>
             </div>
-            <p
-              className="text-[13px] sm:text-[14px] mt-6 mb-4"
-              style={{ color: "rgba(164,131,116,0.9)" }}
-            >
+            <p className="text-[13px] sm:text-[14px] mt-6 mb-4 text-[var(--desert-rock)] opacity-90">
               Your soundtrack to focus, flow, and creativity.
             </p>
           </div>
@@ -255,7 +249,7 @@ export default async function HomePage() {
 
           {/* Content */}
           <div className="section-label-description mb-10">
-            <p className="text-[15px] sm:text-[17px] leading-relaxed text-[#2a1f16] max-w-[700px] mx-auto mb-10">
+            <p className="text-[15px] sm:text-[17px] leading-relaxed text-[var(--desert-rock)] max-w-[700px] mx-auto mb-10">
               A calm, warm space designed for focus, comfort, and creativity.
             </p>
 

@@ -48,11 +48,11 @@
 
 /* Adjust icon colors in cream section */
 .section-cream .home-highlight-icon {
-  color: rgba(164, 131, 116, 0.8);
+  color: rgba(164, 141, 120, 0.8);
 }
 
 .section-cream .home-highlight-item:hover .home-highlight-icon {
-  color: rgba(164, 131, 116, 1);
+  color: rgba(164, 141, 120, 1);
 }
 
 /* Dark section background */

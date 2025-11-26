@@ -109,7 +109,7 @@
   justify-content: center;
   gap: 8px;
   margin: 24px auto;
-  color: rgba(164, 131, 116, 0.6);
+  color: rgba(164, 141, 120, 0.6);
   font-size: 12px;
   animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
 }
@@ -132,7 +132,7 @@
 
 .hero-divider-dot {
   font-size: 16px;
-  color: rgba(164, 131, 116, 0.8);
+  color: rgba(164, 141, 120, 0.8);
 }
 
 @media (min-width: 375px) {
@@ -268,10 +268,10 @@
   gap: 8px;
   margin-top: 18px;
   padding: 8px 18px;
-  background: rgba(164, 131, 116, 0.1);
-  border: 1.5px solid rgba(164, 131, 116, 0.3);
+  background: rgba(164, 141, 120, 0.1);
+  border: 1.5px solid rgba(164, 141, 120, 0.3);
   border-radius: 50px;
-  color: rgba(164, 131, 116, 0.95);
+  color: rgba(164, 141, 120, 0.95);
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 500;

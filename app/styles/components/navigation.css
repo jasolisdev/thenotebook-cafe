@@ -21,8 +21,8 @@
 .nav-glass-wrap {
   position: relative;
   background: linear-gradient(135deg, rgba(58, 45, 40, 0.98) 0%, rgba(58, 45, 40, 0.92) 100%);
-  border-bottom: 1px solid rgba(164, 131, 116, 0.15);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(164, 131, 116, 0.08);
+  border-bottom: 1px solid rgba(164, 141, 120, 0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(164, 141, 120, 0.08);
   animation: fadeIn 0.4s ease;
 }
 
@@ -40,26 +40,26 @@
   position: relative;
   z-index: 2;
   /* Above drawer (1) within container */
-  background: rgba(244, 240, 233, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(244, 240, 233, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(42, 31, 22, 0.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   padding: 0 clamp(16px, 3vw, 28px);
 }
 
 .site-header.header-transparent {
-  background: rgba(244, 240, 233, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(244, 240, 233, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom-color: rgba(42, 31, 22, 0.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .site-header.header-open {
-  background: rgba(244, 240, 233, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(244, 240, 233, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom-color: rgba(42, 31, 22, 0.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   z-index: 3;
@@ -104,19 +104,19 @@
 
 .brand-logo {
   display: block;
-  width: 140px;
+  width: 168px;
   height: auto;
 }
 
 @media (min-width: 640px) {
   .brand-logo {
-    width: 165px;
+    width: 198px;
   }
 }
 
 @media (min-width: 1024px) {
   .brand-logo {
-    width: 188px;
+    width: 226px;
   }
 }
 
@@ -379,7 +379,7 @@
 }
 
 .drawer-nav-item:hover {
-  color: rgba(164, 131, 116, 0.95);
+  color: rgba(164, 141, 120, 0.95);
   transform: translateY(-2px);
 }
 
@@ -388,7 +388,7 @@
 }
 
 .drawer-nav-item.nav-active {
-  color: rgba(164, 131, 116, 1);
+  color: rgba(164, 141, 120, 1);
 }
 
 .drawer-footer {
@@ -419,7 +419,7 @@
   font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(164, 131, 116, 0.9);
+  color: rgba(164, 141, 120, 0.9);
   margin-bottom: 0;
 }
 

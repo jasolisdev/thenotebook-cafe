@@ -60,56 +60,41 @@
   --font-mono: "Torus", monospace;
   --font-display: "Alpino", "Torus", system-ui, sans-serif;
 
-  /* New café palette */
-  --latte-cream: #ede7d8;
-  /* base background (lightened almond) */
-  --vanilla-beige: #d6bd98;
-  /* Almond */
-  --paper-bag: #c4b59f;
-  /* softened neutral */
-  --warm-taupe: #677d6a;
-  /* Matcha Brew */
-  --coffee-bean: #3D4030;
-  /* Deep olive (matches hero gradient) */
-  --soft-mocha: #40534c;
-  /* Forest Roast (cool green - accent) */
-  --foggy-cappuccino: #b7afa6;
-  /* dividers / outlines */
-  --deep-roast: #0f1c1c;
-  /* extra contrast */
-  --espresso-brown: #2a1f16;
-  /* Primary dark brown for text */
-  --warm-brown: #5a4a38;
-  /* Secondary brown for text on cream */
+  /* ===============================
+     NEW COLOR PALETTE
+     (Neutral Café Minimalist Set)
+  =============================== */
 
-  /* Solid background + neutrals */
-  --bg-solid: var(--coffee-bean);
-  --bg-dark: var(--coffee-bean);
-  --bg-cream: var(--latte-cream);
-  --cream: var(--latte-cream);
-  --offwhite: #f8f3e8;
-  --warm-roast: var(--soft-mocha);
-  --latte: var(--vanilla-beige);
-  --taupe: var(--paper-bag);
+  --desert-rock: #A48D78;       /* Medium warm taupe brown */
+  --soft-sandstone: #CBB9A4;    /* Soft beige */
+  --creamed-honey: #E6DAC8;     /* Light warm cream */
+  --porcelain-mist: #F4F1EA;    /* Near-white beige */
+  --feather-white: #FAF9F6;     /* Clean soft white */
 
-  /* Text colors (semantic names) */
-  --text-light: #f8f3e8;
-  /* Primary text on dark backgrounds */
-  --text-light-muted: #e4dbc8;
-  /* Muted text on dark backgrounds */
+  /* Core semantic tokens using new palette */
+  --bg-solid: var(--desert-rock);
+  --bg-dark: var(--desert-rock);
+  --bg-cream: var(--creamed-honey);
+  --cream: var(--creamed-honey);
 
-  /* Legacy names (deprecated) */
-  --ink-cream: var(--text-light);
-  --ink-cream-dim: var(--text-light-muted);
+  --offwhite: var(--feather-white);
+
+  /* Text colors */
+  --text-light: var(--feather-white);
+  --text-light-muted: var(--porcelain-mist);
 
   /* Panels / borders */
-  --panel: rgba(61, 64, 48, 0.06);
-  --panel-border: rgba(61, 64, 48, 0.08);
-  --glow: 0 0 0.6rem rgba(61, 64, 48, 0.35);
+  --panel: rgba(164, 141, 120, 0.08);       /* desert-rock at 8% */
+  --panel-border: rgba(164, 141, 120, 0.12);
+  --glow: 0 0 0.6rem rgba(164, 141, 120, 0.35);
 
-  /* Accent colors for hover states */
-  --accent-warm: rgba(61, 64, 48, 0.18);
-  --accent-glow: rgba(61, 64, 48, 0.42);
+  /* Accent colors */
+  --accent-warm: rgba(164, 141, 120, 0.20);
+  --accent-glow: rgba(164, 141, 120, 0.45);
+
+  /* Legacy (optional) */
+  --ink-cream: var(--text-light);
+  --ink-cream-dim: var(--text-light-muted);
 
 }
 
@@ -130,7 +115,7 @@ body {
   padding: 0;
   overflow-x: hidden;
   width: 100%;
-  background-color: #3D4030;
+  background-color: var(--bg-solid);
 }
 
 /* GPU acceleration for smoother animations */
@@ -240,11 +225,11 @@ h3 {
 
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(164, 131, 116, 0.1);
+    box-shadow: 0 0 20px rgba(164, 141, 120, 0.1);
   }
 
   50% {
-    box-shadow: 0 0 30px rgba(164, 131, 116, 0.2);
+    box-shadow: 0 0 30px rgba(164, 141, 120, 0.2);
   }
 }
 
@@ -299,11 +284,11 @@ h3 {
    ACCESSIBILITY
 ============================================================ */
 ::selection {
-  background: rgba(164, 131, 116, 0.3);
+  background: rgba(164, 141, 120, 0.3);
   color: var(--ink-cream);
 }
 
 *:focus-visible {
-  outline: 2px solid rgba(164, 131, 116, 0.5);
+  outline: 2px solid rgba(164, 141, 120, 0.5);
   outline-offset: 2px;
 }
