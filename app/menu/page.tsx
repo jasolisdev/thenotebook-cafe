@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 async function getData() {
-  const [menuItems, settings] = await Promise.all([
+  const [menuItems, settings, home] = await Promise.all([
     client.fetch(`*[_type=="menuItem"] | order(section asc, sortOrder asc, name asc) {
       name,
       description,
@@ -30,23 +30,26 @@ async function getData() {
     client.fetch(
       `*[_type=="settings"][0]{ social{ instagram, spotify } }`,
     ),
+    client.fetch(`*[_type=="homePage"][0]{
+      vibeCopy
+    }`),
   ]);
-  return { menuItems, settings };
+  return { menuItems, settings, home };
 }
 
 export default async function MenuPage() {
-  const { menuItems, settings } = await getData();
+  const { menuItems, settings, home } = await getData();
 
   return (
     <main className="site-layout">
       <ScrollReveal />
 
       {/* Menu Section - Cream Background */}
-      <section className="section-cream pt-[76px] sm:pt-[92px] lg:pt-[108px] pb-16 sm:pb-20 relative">
+      <section className="section-cream pb-16 sm:pb-20 relative" style={{ paddingTop: 'calc(var(--announcement-banner-height, 42px) + 60px)' }}>
         <FloatingItems />
         <div className="mx-auto max-w-[1200px] px-0 relative z-10">
           {/* Header */}
-          <div className="text-center mb-12 pt-4 scroll-reveal">
+          <div className="text-center mb-12 scroll-reveal">
             <h1 className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-tight text-[#2a1f16] mb-4">
               MENU
             </h1>
@@ -66,7 +69,7 @@ export default async function MenuPage() {
       </div>
 
       {/* Footer */}
-      <SiteFooter />
+      <SiteFooter vibeCopy={home?.vibeCopy} />
     </main>
   );
 }

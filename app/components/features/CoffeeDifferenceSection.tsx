@@ -175,19 +175,15 @@ export default function CoffeeDifferenceSection() {
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeUp}
         >
-          <motion.div
-            className="inline-block mb-4 px-4 py-1.5 rounded-full"
-            style={{
-              background: "rgba(164, 131, 116, 0.08)",
-              border: "1px solid rgba(164, 131, 116, 0.15)"
-            }}
-          >
-            <span className="text-xs sm:text-sm font-medium tracking-wider uppercase" style={{ color: "#a48374" }}>
-              Our Commitment
-            </span>
-          </motion.div>
+          {/* Section Label - Hear the Vibe Style */}
+          <div className="section-label">
+            <div className="welcome-divider-line"></div>
+            <span className="welcome-label-text">Our Commitment</span>
+            <div className="welcome-divider-line"></div>
+          </div>
+
           <motion.h2
-            className="text-2xl sm:text-3xl lg:text-4xl xl:text-[2.75rem] font-semibold tracking-tight leading-tight"
+            className="text-[19px] sm:text-3xl lg:text-4xl xl:text-[2.75rem] font-semibold tracking-tight leading-tight"
             style={{ color: "#2a1f16" }}
           >
             What Makes Our Coffee Different?
@@ -208,25 +204,15 @@ export default function CoffeeDifferenceSection() {
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <div
-            className="overflow-hidden rounded-[32px] bg-gradient-to-br from-[#fff7ed] to-[#f4f0e9] p-1.5 shadow-2xl max-w-[400px] lg:max-w-[500px] mx-auto group"
-            style={{
-              border: "1px solid rgba(164, 131, 116, 0.2)",
-            }}
-          >
-            <div
-              className="overflow-hidden rounded-[26px] transition-transform duration-700 group-hover:scale-[1.02]"
-              style={{ aspectRatio: "4 / 5" }}
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1610030621290-527342d7eb4a?q=80&w=925&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Artisan coffee craftsmanship"
-                width={925}
-                height={700}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                priority={false}
-              />
-            </div>
+          <div className="image-card max-w-[400px] lg:max-w-[500px] mx-auto">
+            <Image
+              src="https://images.unsplash.com/photo-1610030621290-527342d7eb4a?q=80&w=925&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Artisan coffee craftsmanship"
+              width={925}
+              height={700}
+              className="w-full h-full object-cover"
+              priority={false}
+            />
           </div>
         </motion.div>
 

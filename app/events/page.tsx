@@ -11,15 +11,20 @@ import EventsFloatingItems from "../components/decorative/EventsFloatingItems";
 import { Calendar, Clock, MapPin, Music2, Ticket } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 
-async function getSettings() {
-  const settings = await client.fetch(
-    `*[_type=="settings"][0]{ social{ instagram, spotify }, address }`,
-  );
-  return settings;
+async function getData() {
+  const [settings, home] = await Promise.all([
+    client.fetch(
+      `*[_type=="settings"][0]{ social{ instagram, spotify }, address }`,
+    ),
+    client.fetch(`*[_type=="homePage"][0]{
+      vibeCopy
+    }`),
+  ]);
+  return { settings, home };
 }
 
 export default async function EventsPage() {
-  const settings = await getSettings();
+  const { settings, home } = await getData();
 
   return (
     <>
@@ -255,7 +260,7 @@ export default async function EventsPage() {
         </div>
 
         {/* Footer */}
-        <SiteFooter showFloatingItems={false} />
+        <SiteFooter showFloatingItems={false} vibeCopy={home?.vibeCopy} />
       </main>
     </>
   );

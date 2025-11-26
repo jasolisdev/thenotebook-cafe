@@ -8,6 +8,7 @@ import "./styles/components/hero.css";
 import "./styles/components/buttons.css";
 import "./styles/components/footer.css";
 import "./styles/components/announcement.css";
+import "./styles/components/what-to-expect.css";
 
 // Layout styles
 import "./styles/layout/sections.css";
@@ -18,6 +19,7 @@ import "./styles/pages/home.css";
 import "./styles/pages/about.css";
 import "./styles/pages/menu.css";
 import "./styles/pages/events.css";
+import "./styles/pages/contact.css";
 
 import { ThemeProvider } from "next-themes";
 import { torus } from "./fonts";

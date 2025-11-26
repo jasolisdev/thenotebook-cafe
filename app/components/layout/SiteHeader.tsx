@@ -80,8 +80,8 @@ const BP_PX: Record<Breakpoint, number> = {
  * - Decorative floating coffee beans in drawer
  *
  * Navigation Structure:
- * - Desktop: Home | Menu | Story | Events
- * - Mobile: HOME | MENU | STORY | EVENTS + social icons + footer
+ * - Desktop: Home | Menu | Story | Contact
+ * - Mobile: HOME | MENU | STORY | CONTACT + social icons + footer
  *
  * @param {SiteHeaderProps} props - Component props
  * @returns {React.JSX.Element} Rendered header
@@ -184,10 +184,10 @@ export default function SiteHeader({
             aria-label="The Notebook Café - Home"
           >
             <Image
-              src="/notebook-cafe-navbar-dark.png"
+              src="/thenotebookcafe-navbar-dark.png"
               alt="The Notebook Café"
-              width={160}
-              height={55}
+              width={220}
+              height={75}
               priority
               className="brand-logo"
             />
@@ -221,11 +221,11 @@ export default function SiteHeader({
               Story
             </Link>
             <Link
-              className={isActive("/events") ? "nav-active" : ""}
-              href="/events"
-              aria-current={isActive("/events") ? "page" : undefined}
+              className={isActive("/contact") ? "nav-active" : ""}
+              href="/contact"
+              aria-current={isActive("/contact") ? "page" : undefined}
             >
-              Events
+              Contact
             </Link>
           </nav>
 
@@ -283,12 +283,12 @@ export default function SiteHeader({
               STORY
             </Link>
             <Link
-              href="/events"
+              href="/contact"
               onClick={() => setOpen(false)}
-              className={`drawer-nav-item ${open ? "is-visible" : ""} ${isActive("/events") ? "nav-active" : ""}`}
-              aria-current={isActive("/events") ? "page" : undefined}
+              className={`drawer-nav-item ${open ? "is-visible" : ""} ${isActive("/contact") ? "nav-active" : ""}`}
+              aria-current={isActive("/contact") ? "page" : undefined}
             >
-              EVENTS
+              CONTACT
             </Link>
           </nav>
 

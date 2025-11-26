@@ -91,3 +91,20 @@ a[aria-label="Instagram"]:hover {
     font-size: 11px;
   }
 }
+
+/* Vibe Quote in Footer */
+.footer-vibe-quote {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+  color: var(--text-light-muted);
+  margin: 0;
+  font-style: italic;
+}
+
+@media (min-width: 640px) {
+  .footer-vibe-quote {
+    font-size: 14px;
+  }
+}

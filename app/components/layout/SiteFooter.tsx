@@ -18,6 +18,12 @@ type SiteFooterProps = {
   FloatingItemsComponent?: React.ComponentType<{
     variant: "welcome" | "footer" | "hero" | "cards";
   }>;
+
+  /**
+   * Vibe quote text from Sanity CMS
+   * Falls back to default text if not provided
+   */
+  vibeCopy?: string;
 };
 
 /**
@@ -43,6 +49,7 @@ type SiteFooterProps = {
 export default function SiteFooter({
   showFloatingItems = false,
   FloatingItemsComponent,
+  vibeCopy,
 }: SiteFooterProps): React.JSX.Element {
   const year = new Date().getFullYear();
 
@@ -82,7 +89,18 @@ export default function SiteFooter({
           <Link href="/story" className="footer-nav-link">
             Story
           </Link>
+          <span className="footer-nav-separator" aria-hidden="true">
+            •
+          </span>
+          <Link href="/contact" className="footer-nav-link">
+            Contact Us
+          </Link>
         </nav>
+
+        {/* Vibe Quote */}
+        <p className="footer-vibe-quote mb-6">
+          {vibeCopy || "Low lights, good sound, better coffee."}
+        </p>
 
         {/* Copyright Notice */}
         <div className="text-light-muted">

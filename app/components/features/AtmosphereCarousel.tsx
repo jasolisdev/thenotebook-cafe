@@ -82,9 +82,6 @@ export default function AtmosphereCarousel({ images }: AtmosphereCarouselProps) 
                     alt={item.alt}
                     loading={idx === 1 ? "eager" : "lazy"}
                   />
-                  <span className="atmosphere-image-number">
-                    {cardNumber}
-                  </span>
                 </div>
               );
             })}

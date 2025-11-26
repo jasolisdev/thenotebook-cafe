@@ -6,24 +6,29 @@
    HERO SECTION
 ============================================================ */
 .events-hero {
-  padding: clamp(96px, 12vh, 120px) 0 clamp(48px, 10vh, 72px);
+  padding-top: calc(var(--announcement-banner-height, 42px) + clamp(96px, 12vh, 120px));
+  padding-bottom: clamp(48px, 10vh, 72px);
+  transition: padding-top 0.3s ease;
 }
 
 @media (min-width: 375px) {
   .events-hero {
-    padding: clamp(104px, 13vh, 128px) 0 clamp(56px, 11vh, 84px);
+    padding-top: calc(var(--announcement-banner-height, 46px) + clamp(104px, 13vh, 128px));
+    padding-bottom: clamp(56px, 11vh, 84px);
   }
 }
 
 @media (min-width: 640px) {
   .events-hero {
-    padding: clamp(112px, 14vh, 136px) 0 clamp(64px, 12vh, 96px);
+    padding-top: calc(var(--announcement-banner-height, 48px) + clamp(112px, 14vh, 136px));
+    padding-bottom: clamp(64px, 12vh, 96px);
   }
 }
 
 @media (min-width: 1024px) {
   .events-hero {
-    padding: clamp(120px, 15vh, 144px) 0 clamp(72px, 13vh, 104px);
+    padding-top: calc(var(--announcement-banner-height, 48px) + clamp(120px, 15vh, 144px));
+    padding-bottom: clamp(72px, 13vh, 104px);
   }
 }
 

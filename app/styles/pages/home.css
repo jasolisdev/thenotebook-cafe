@@ -269,8 +269,8 @@
 /* Smooth transition for spread animation */
 .gallery-spread-initial {
   transition: transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1),
-              box-shadow 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
-              opacity 0.6s ease;
+    box-shadow 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.6s ease;
 }
 
 /* No delays needed - each card triggers individually on scroll */
@@ -288,6 +288,7 @@
 ============================================================ */
 /* Mobile only - slide in from alternating sides */
 @media (max-width: 767px) {
+
   /* Card 1 - slide from right */
   .gallery-spread-initial.transform-01:not(.gallery-spread-animate) {
     opacity: 0;
@@ -398,12 +399,75 @@
 }
 
 
-.welcome-section-label {
+/* Section label with dividers - reusable across all pages */
+.section-label {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 24px;
-  margin-bottom: 48px;
+  margin-top: 0;
+  margin-bottom: 2rem; /* 32px - consistent spacing */
+}
+
+/* Welcome section heading styles */
+.welcome-section-label {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  margin-bottom: 0.75rem;
+  color: rgba(164, 131, 116, 0.9);
+}
+
+@media (min-width: 375px) {
+  .welcome-section-label {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 640px) {
+  .welcome-section-label {
+    font-size: 24px;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .welcome-section-label {
+    font-size: 28px;
+  }
+}
+
+.welcome-section-description {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+  color: #2a1f16;
+}
+
+@media (min-width: 375px) {
+  .welcome-section-description {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 640px) {
+  .welcome-section-description {
+    font-size: 32px;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .welcome-section-description {
+    font-size: 38px;
+  }
+}
+
+/* Section label description - text container below section labels */
+.section-label-description {
+  text-align: center;
+  margin-bottom: 2rem; /* 32px */
 }
 
 .welcome-divider-line {
@@ -415,7 +479,7 @@
 
 .welcome-label-text {
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.15em;
