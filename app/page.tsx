@@ -116,6 +116,14 @@ export default async function HomePage() {
           {/* Descriptive Text */}
           <p className="hero-description">
             A new vibe is brewing...
+            <span className="coffee-cup">
+              ☕
+              <span className="coffee-steam">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </span>
           </p>
 
           {/* Primary CTA */}
