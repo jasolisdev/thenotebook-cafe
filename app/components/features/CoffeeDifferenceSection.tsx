@@ -234,15 +234,16 @@ export default function CoffeeDifferenceSection() {
                 className="relative p-6 sm:p-7 lg:p-8 rounded-2xl transition-all duration-500 hover:shadow-lg h-full"
                 style={{
                   background: "rgba(244, 240, 233, 0.4)",
-                  border: "1px solid rgba(164, 131, 116, 0.12)",
+                  border: "1px solid rgba(164, 141, 120, 0.12)",
                 }}
               >
                 {/* Icon */}
                 <div
-                  className="inline-flex items-center justify-center w-11 h-11 rounded-xl mb-4 transition-all duration-300 group-hover:scale-110"
+                  className="inline-flex items-center justify-center w-11 h-11 rounded-xl mb-4 transition-all duration-300 group-hover:scale-110 group-hover:rotate-[-5deg]"
                   style={{
-                    background: "rgba(164, 131, 116, 0.12)",
-                    color: "#a48374"
+                    background: "rgba(164, 141, 120, 0.08)",
+                    border: "1px solid rgba(164, 141, 120, 0.15)",
+                    color: "rgba(164, 141, 120, 0.8)"
                   }}
                 >
                   <FeatureIcon type={item.icon} />
@@ -265,7 +266,7 @@ export default function CoffeeDifferenceSection() {
                 {/* Subtle accent line */}
                 <div
                   className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500 rounded-full"
-                  style={{ background: "linear-gradient(90deg, rgba(164,131,116,0.4), rgba(164,131,116,0))" }}
+                  style={{ background: "linear-gradient(90deg, rgba(164,141,120,0.4), rgba(164,141,120,0))" }}
                 />
               </div>
             </motion.div>

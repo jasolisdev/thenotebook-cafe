@@ -48,11 +48,11 @@
 
 /* Adjust icon colors in cream section */
 .section-cream .home-highlight-icon {
-  color: rgba(164, 131, 116, 0.8);
+  color: rgba(164, 141, 120, 0.8);
 }
 
 .section-cream .home-highlight-item:hover .home-highlight-icon {
-  color: rgba(164, 131, 116, 1);
+  color: rgba(164, 141, 120, 1);
 }
 
 /* Dark section background */
@@ -60,4 +60,26 @@
   background-color: var(--bg-solid);
   position: relative;
   margin: 0;
+}
+
+/* Hero wrapper section - dark background with rounded corner and padding */
+.section-hero {
+  background-color: var(--bg-dark);
+  padding: 10px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  position: relative;
+}
+
+/* Featured drinks section */
+.section-featured {
+  background-color: var(--cream);
+  padding: 60px 20px;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .section-featured {
+    padding: 80px 24px;
+  }
 }

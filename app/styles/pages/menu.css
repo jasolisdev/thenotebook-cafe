@@ -80,7 +80,7 @@
       rgba(249, 246, 242, 0.92) 100%);
 
   /* Border - Subtle warm brown */
-  border: 1px solid rgba(164, 131, 116, 0.22);
+  border: 1px solid rgba(164, 141, 120, 0.22);
   border-radius: 8px;
 
   /* Premium shadow system */
@@ -134,7 +134,7 @@
 
 .notebook-menu-item:hover {
   transform: translateY(-3px);
-  border-color: rgba(164, 131, 116, 0.4);
+  border-color: rgba(164, 141, 120, 0.4);
   box-shadow:
     0 4px 8px rgba(42, 31, 22, 0.08),
     0 12px 28px rgba(42, 31, 22, 0.06),
@@ -470,7 +470,7 @@
   width: 48px;
   height: 48px;
   background: #2a1f16;
-  border: 1px solid rgba(164, 131, 116, 0.3);
+  border: 1px solid rgba(164, 141, 120, 0.3);
   border-radius: 50%;
   display: flex;
   align-items: center;

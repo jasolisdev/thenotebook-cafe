@@ -60,7 +60,7 @@ export default async function AboutPage() {
       {/* HERO SECTION - DARK */}
       <section className="about-hero text-center px-5 pb-10 relative" style={{ paddingTop: 'calc(var(--announcement-banner-height, 42px) + 60px)' }}>
         <AboutFloatingItems variant="hero" />
-        <h1 className="scroll-reveal text-[38px] sm:text-[48px] md:text-[60px] font-medium uppercase tracking-[1.5px] mb-6" style={{ animationDelay: '0.1s', color: 'rgba(164,131,116,0.9)' }}>
+        <h1 className="scroll-reveal text-[38px] sm:text-[48px] md:text-[60px] font-medium uppercase tracking-[1.5px] mb-6" style={{ animationDelay: '0.1s', color: 'rgba(164,141,120,0.9)' }}>
           Our Story
         </h1>
         <p className="scroll-reveal about-hero-subtitle mt-5 max-w-[68ch] mx-auto text-[16px] sm:text-[17px] leading-relaxed" style={{ animationDelay: '0.3s', color: 'var(--ink-cream-dim)' }}>

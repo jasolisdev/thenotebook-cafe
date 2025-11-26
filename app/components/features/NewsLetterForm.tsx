@@ -41,42 +41,42 @@ export default function NewsletterForm({ source = "homepage" }: { source?: strin
   }
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-4">
-      <input
-        type="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        inputMode="email"
-        autoComplete="email"
-        className="flex-1 rounded-xl bg-transparent border border-[rgba(255,255,255,.15)]
-                   px-4 py-3 text-[15px] ink-cream placeholder-[rgba(255,255,255,.35)]
-                   focus:outline-none focus:border-[rgba(255,255,255,.35)]"
-      />
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="rounded-xl px-6 py-3 bg-[rgba(255,255,255,.08)]
-                   border border-[rgba(255,255,255,.18)]
-                   ink-cream text-[15px] font-medium
-                   hover:bg-[rgba(255,255,255,.15)] transition-colors
-                   disabled:opacity-60 disabled:cursor-not-allowed"
-      >
-        {status === "loading" ? "Subscribing…" : "Subscribe"}
-      </button>
+    <div>
+      <form onSubmit={onSubmit} className="newsletter-form-wrapper">
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+          inputMode="email"
+          autoComplete="email"
+          className="newsletter-input"
+        />
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="newsletter-submit-btn"
+        >
+          {status === "loading" ? "Subscribing…" : "Subscribe"}
+        </button>
+      </form>
 
       {msg && (
         <div
           role="status"
-          className={`text-sm ${status === "success" || status === "duplicate"
-              ? "ink-cream"
-              : "ink-cream-dim"
+          className={`text-sm mt-3 ${status === "success" || status === "duplicate"
+              ? "text-green-700"
+              : "text-red-700"
             }`}
         >
           {msg}
         </div>
       )}
-    </form>
+
+      <p className="newsletter-privacy mt-4">
+        We respect your privacy. Unsubscribe anytime.
+      </p>
+    </div>
   );
 }

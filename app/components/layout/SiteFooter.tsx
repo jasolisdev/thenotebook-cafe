@@ -1,109 +1,99 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import { Instagram } from "lucide-react";
+import { FaTiktok } from "react-icons/fa";
 
-/**
- * Props for the SiteFooter component
- */
 type SiteFooterProps = {
-  /**
-   * Whether to show decorative floating items (coffee beans, plants, etc.)
-   * @default false
-   */
   showFloatingItems?: boolean;
-
-  /**
-   * React component to render floating decorative elements
-   * Receives a 'variant' prop to determine which decorations to show
-   */
   FloatingItemsComponent?: React.ComponentType<{
     variant: "welcome" | "footer" | "hero" | "cards";
   }>;
-
-  /**
-   * Vibe quote text from Sanity CMS
-   * Falls back to default text if not provided
-   */
   vibeCopy?: string;
 };
 
-/**
- * SiteFooter Component
- *
- * Global footer displayed across all pages of the website.
- * Contains business information, navigation links, and copyright notice.
- *
- * @component
- * @example
- * ```tsx
- * // Basic footer
- * <SiteFooter />
- *
- * // Footer with floating decorations (homepage)
- * import HomeFloatingItems from '@/app/components/decorative/HomeFloatingItems';
- * <SiteFooter showFloatingItems={true} FloatingItemsComponent={HomeFloatingItems} />
- * ```
- *
- * @param {SiteFooterProps} props - Component props
- * @returns {React.JSX.Element} Rendered footer
- */
 export default function SiteFooter({
   showFloatingItems = false,
   FloatingItemsComponent,
-  vibeCopy,
 }: SiteFooterProps): React.JSX.Element {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="home-footer text-center text-[13px] leading-6 py-12 px-5 relative">
-      {/* Floating decorative items (optional) */}
+    <footer className="site-footer">
       {showFloatingItems && FloatingItemsComponent && (
         <FloatingItemsComponent variant="footer" />
       )}
 
-      <div className="max-w-[700px] mx-auto relative z-10">
-        {/* Business Name */}
-        <div className="text-[11px] uppercase tracking-widest mb-4 opacity-60">
-          The Notebook Café
+      {/* Main Footer Content */}
+      <div className="footer-main">
+        <div className="footer-grid">
+          {/* Brand & Contact */}
+          <div className="footer-brand">
+            <h4 className="footer-brand-name">THE NOTEBOOK CAFÉ</h4>
+            <div className="footer-contact">
+              <p>📍 3512 9th St, Riverside, CA 92501</p>
+              <p>📞 (951) 823-0004</p>
+            </div>
+          </div>
+
+          {/* Navigation Column */}
+          <div className="footer-column">
+            <h5 className="footer-column-title">NAVIGATION</h5>
+            <ul className="footer-links">
+              <li><Link href="/">Home</Link></li>
+              <li><Link href="/story">Story</Link></li>
+              <li><Link href="/menu">Menu</Link></li>
+              <li><Link href="/contact">Contact Us</Link></li>
+            </ul>
+          </div>
+
+          {/* Information Column */}
+          <div className="footer-column">
+            <h5 className="footer-column-title">INFORMATION</h5>
+            <ul className="footer-links">
+              <li><Link href="/hours">Hours</Link></li>
+              <li><Link href="/contact">Location</Link></li>
+              <li><Link href="/careers">Careers</Link></li>
+            </ul>
+          </div>
+
+          {/* Policies Column */}
+          <div className="footer-column">
+            <h5 className="footer-column-title">POLICIES</h5>
+            <ul className="footer-links">
+              <li><Link href="/privacy">Privacy Policy</Link></li>
+              <li><Link href="/terms">Terms &amp; Conditions</Link></li>
+            </ul>
+          </div>
+
+          {/* Social Media Column */}
+          <div className="footer-column">
+            <h5 className="footer-column-title">SOCIAL MEDIA</h5>
+            <div className="footer-social-icons">
+              <a
+                href="https://instagram.com/notebookcafe"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="footer-social-link"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a
+                href="https://tiktok.com/@notebookcafe"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+                className="footer-social-link"
+              >
+                <FaTiktok className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
         </div>
 
-        {/* Address and Phone */}
-        <div className="text-[13px] sm:text-[14px] leading-relaxed text-light-muted mb-6">
-          <div>3512 9TH ST, RIVERSIDE CA 92501</div>
-          <div className="mt-1">(951) 823-0004</div>
-        </div>
-
-        {/* Footer Navigation */}
-        <nav className="footer-nav mb-4" aria-label="Footer navigation">
-          <Link href="/" className="footer-nav-link">
-            Home
-          </Link>
-          <span className="footer-nav-separator" aria-hidden="true">
-            •
-          </span>
-          <Link href="/menu" className="footer-nav-link">
-            Menu
-          </Link>
-          <span className="footer-nav-separator" aria-hidden="true">
-            •
-          </span>
-          <Link href="/story" className="footer-nav-link">
-            Story
-          </Link>
-          <span className="footer-nav-separator" aria-hidden="true">
-            •
-          </span>
-          <Link href="/contact" className="footer-nav-link">
-            Contact Us
-          </Link>
-        </nav>
-
-        {/* Vibe Quote */}
-        <p className="footer-vibe-quote mb-6">
-          {vibeCopy || "Low lights, good sound, better coffee."}
-        </p>
-
-        {/* Copyright Notice */}
-        <div className="text-light-muted">
+        {/* Copyright */}
+        <div className="footer-copyright">
           © {year} The Notebook Café LLC — Riverside, CA
         </div>
       </div>

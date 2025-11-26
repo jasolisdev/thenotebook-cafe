@@ -66,8 +66,8 @@ export default async function ContactPage() {
             {/* Address */}
             <div className="mb-8">
               <div className="flex items-center justify-center gap-3 mb-2">
-                <MapPin className="w-5 h-5" style={{ color: "rgba(164,131,116,0.9)" }} />
-                <h3 className="text-[16px] sm:text-[18px] font-semibold tracking-wide uppercase" style={{ color: "rgba(164,131,116,0.9)" }}>
+                <MapPin className="w-5 h-5" style={{ color: "rgba(164,141,120,0.9)" }} />
+                <h3 className="text-[16px] sm:text-[18px] font-semibold tracking-wide uppercase" style={{ color: "rgba(164,141,120,0.9)" }}>
                   Location
                 </h3>
               </div>
@@ -79,8 +79,8 @@ export default async function ContactPage() {
             {/* Phone */}
             <div className="mb-8">
               <div className="flex items-center justify-center gap-3 mb-2">
-                <Phone className="w-5 h-5" style={{ color: "rgba(164,131,116,0.9)" }} />
-                <h3 className="text-[16px] sm:text-[18px] font-semibold tracking-wide uppercase" style={{ color: "rgba(164,131,116,0.9)" }}>
+                <Phone className="w-5 h-5" style={{ color: "rgba(164,141,120,0.9)" }} />
+                <h3 className="text-[16px] sm:text-[18px] font-semibold tracking-wide uppercase" style={{ color: "rgba(164,141,120,0.9)" }}>
                   Phone
                 </h3>
               </div>
@@ -94,8 +94,8 @@ export default async function ContactPage() {
             {/* Hours */}
             <div className="mb-8">
               <div className="flex items-center justify-center gap-3 mb-2">
-                <Clock className="w-5 h-5" style={{ color: "rgba(164,131,116,0.9)" }} />
-                <h3 className="text-[16px] sm:text-[18px] font-semibold tracking-wide uppercase" style={{ color: "rgba(164,131,116,0.9)" }}>
+                <Clock className="w-5 h-5" style={{ color: "rgba(164,141,120,0.9)" }} />
+                <h3 className="text-[16px] sm:text-[18px] font-semibold tracking-wide uppercase" style={{ color: "rgba(164,141,120,0.9)" }}>
                   Business Hours
                 </h3>
               </div>
@@ -110,7 +110,7 @@ export default async function ContactPage() {
 
           {/* Social Links */}
           <div className="text-center mb-12 sm:mb-16 scroll-reveal">
-            <p className="text-[13px] sm:text-[14px] mb-4" style={{ color: "rgba(164,131,116,0.9)" }}>
+            <p className="text-[13px] sm:text-[14px] mb-4" style={{ color: "rgba(164,141,120,0.9)" }}>
               Follow us for updates
             </p>
             <div className="flex items-center justify-center gap-4">
@@ -118,7 +118,7 @@ export default async function ContactPage() {
                 href={settings?.social?.instagram || "#"}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,131,116,0.15)] text-[rgba(164,131,116,0.9)] hover:bg-[rgba(164,131,116,0.25)] hover:text-[rgba(164,131,116,1)] transition"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,141,120,0.15)] text-[rgba(164,141,120,0.9)] hover:bg-[rgba(164,141,120,0.25)] hover:text-[rgba(164,141,120,1)] transition"
                 aria-label="Instagram"
               >
                 <SiInstagram className="w-5 h-5" />
@@ -127,7 +127,7 @@ export default async function ContactPage() {
                 href="#"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,131,116,0.15)] text-[rgba(164,131,116,0.9)] hover:bg-[rgba(164,131,116,0.25)] hover:text-[rgba(164,131,116,1)] transition"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,141,120,0.15)] text-[rgba(164,141,120,0.9)] hover:bg-[rgba(164,141,120,0.25)] hover:text-[rgba(164,141,120,1)] transition"
                 aria-label="TikTok"
               >
                 <SiTiktok className="w-5 h-5" />
@@ -136,7 +136,7 @@ export default async function ContactPage() {
                 href="#"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,131,116,0.15)] text-[rgba(164,131,116,0.9)] hover:bg-[rgba(164,131,116,0.25)] hover:text-[rgba(164,131,116,1)] transition"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,141,120,0.15)] text-[rgba(164,141,120,0.9)] hover:bg-[rgba(164,141,120,0.25)] hover:text-[rgba(164,141,120,1)] transition"
                 aria-label="Facebook"
               >
                 <SiFacebook className="w-5 h-5" />

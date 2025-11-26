@@ -87,9 +87,11 @@ export default async function HomePage() {
     <main className="site-layout" suppressHydrationWarning>
       <ScrollReveal />
 
-      {/* HERO */}
-      <section className="hero hero-gradient relative">
-        <HomeFloatingItems variant="hero" />
+      {/* HERO WRAPPER */}
+      <section className="section-hero">
+        {/* HERO */}
+        <section className="hero hero-gradient relative">
+          <HomeFloatingItems variant="hero" />
         <div className="hero-copy relative z-10">
           {/* Screen reader only title for SEO */}
           <h1 className="sr-only">
@@ -114,6 +116,14 @@ export default async function HomePage() {
           {/* Descriptive Text */}
           <p className="hero-description">
             A new vibe is brewing...
+            <span className="coffee-cup">
+              ☕
+              <span className="coffee-steam">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </span>
           </p>
 
           {/* Primary CTA */}
@@ -143,6 +153,7 @@ export default async function HomePage() {
             </a>
           </div>
         </div>
+        </section>
       </section>
 
       {/* Divider - Wavy transition to cream */}
@@ -164,21 +175,45 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* FEATURED DRINKS SECTION */}
+      <section className="section-featured">
+        <div className="featured-card scroll-reveal">
+          <Image
+            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000&auto=format&fit=crop"
+            alt="Featured specialty drink"
+            width={1000}
+            height={750}
+            className="w-full h-auto"
+          />
+        </div>
+        <div className="flex justify-center">
+          <a href="/menu" className="featured-menu-button">
+            <span>View Our Menu</span>
+            <svg
+              className="featured-menu-arrow"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <path
+                d="M1 8h14M9 2l6 6-6 6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
+        </div>
+      </section>
+
       {/* WHAT TO EXPECT SECTION */}
       <WhatToExpectSection />
 
       {/* OUR COMMITMENT SECTION */}
-      <section className="section-cream relative pt-0 pb-16 sm:pb-20" style={{ border: "3px solid red" }}>
+      <section className="section-cream relative py-16 sm:py-20">
         <CoffeeDifferenceSection />
-
-        <div className="mt-10 sm:mt-12 flex justify-center">
-          <a href="/menu" className="view-menu-button">
-            <span>View Our Menu</span>
-            <svg className="view-menu-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
-        </div>
       </section>
 
       {/* HEAR THE VIBE Section */}
@@ -193,10 +228,7 @@ export default async function HomePage() {
 
           {/* Content */}
           <div className="section-label-description">
-            <p
-              className="text-[15px] sm:text-[16px] leading-relaxed max-w-[700px] mx-auto mb-10"
-              style={{ color: "#2a1f16" }}
-            >
+            <p className="text-[15px] sm:text-[16px] leading-relaxed max-w-[700px] mx-auto mb-10 text-[var(--desert-rock)]">
               Ambient house, soul, and groove—setting the perfect backdrop for
               focus and creation. Tune in to our curated playlist before the
               doors open.
@@ -213,30 +245,27 @@ export default async function HomePage() {
                 href={settings?.social?.spotify || "#"}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,131,116,0.15)] text-[rgba(164,131,116,0.9)] hover:bg-[rgba(164,131,116,0.25)] hover:text-[rgba(164,131,116,1)] transition"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,141,120,0.15)] text-[rgba(164,141,120,0.9)] hover:bg-[rgba(164,141,120,0.25)] hover:text-[rgba(164,141,120,1)] transition"
                 aria-label="Open Spotify"
               >
                 <SiSpotify className="w-5 h-5" />
               </a>
               <a
                 href="#"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,131,116,0.15)] text-[rgba(164,131,116,0.9)] hover:bg-[rgba(164,131,116,0.25)] hover:text-[rgba(164,131,116,1)] transition"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,141,120,0.15)] text-[rgba(164,141,120,0.9)] hover:bg-[rgba(164,141,120,0.25)] hover:text-[rgba(164,141,120,1)] transition"
                 aria-label="Open Apple Music"
               >
                 <SiApplemusic className="w-5 h-5" />
               </a>
               <a
                 href="#"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,131,116,0.15)] text-[rgba(164,131,116,0.9)] hover:bg-[rgba(164,131,116,0.25)] hover:text-[rgba(164,131,116,1)] transition"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,141,120,0.15)] text-[rgba(164,141,120,0.9)] hover:bg-[rgba(164,141,120,0.25)] hover:text-[rgba(164,141,120,1)] transition"
                 aria-label="Open SoundCloud"
               >
                 <SiSoundcloud className="w-5 h-5" />
               </a>
             </div>
-            <p
-              className="text-[13px] sm:text-[14px] mt-6 mb-4"
-              style={{ color: "rgba(164,131,116,0.9)" }}
-            >
+            <p className="text-[13px] sm:text-[14px] mt-6 mb-4 text-[var(--desert-rock)] opacity-90">
               Your soundtrack to focus, flow, and creativity.
             </p>
           </div>
@@ -255,7 +284,7 @@ export default async function HomePage() {
 
           {/* Content */}
           <div className="section-label-description mb-10">
-            <p className="text-[15px] sm:text-[17px] leading-relaxed text-[#2a1f16] max-w-[700px] mx-auto mb-10">
+            <p className="text-[15px] sm:text-[17px] leading-relaxed text-[var(--desert-rock)] max-w-[700px] mx-auto mb-10">
               A calm, warm space designed for focus, comfort, and creativity.
             </p>
 
@@ -382,19 +411,23 @@ export default async function HomePage() {
       </section>
 
       {/* Newsletter - Connected to Sanity */}
-      <section className="home-newsletter mx-auto max-w-[720px] px-4 sm:px-6 mb-20 sm:mb-24 scroll-reveal relative z-10">
-        <div className="home-newsletter-card text-center">
-          <h3 className="text-[18px] min-[375px]:text-[20px] sm:text-[24px] font-semibold tracking-wide ink-cream mb-3">
-            FOR CREATIVES &amp; COFFEE LOVERS
-          </h3>
-          <p className="text-[13px] min-[375px]:text-[14px] sm:text-[15px] ink-cream-dim mb-5 sm:mb-6 leading-relaxed">
-            Join our community for opening announcements, exclusive pre-launch
-            events, and first look at what we&apos;re brewing.
+      <section className="newsletter-section">
+        <div className="newsletter-box scroll-reveal">
+          <h2 className="newsletter-heading">
+            Join our community &amp; get 10% off your first drink.
+          </h2>
+          <p className="newsletter-subtext">
+            Be the first to know about specials, events, and our grand opening.
           </p>
 
           <NewsletterForm source="homepage" />
         </div>
       </section>
+
+      {/* Divider - Wavy transition to footer */}
+      <div className="divider-cream">
+        <Image src="/notebook-divider-cream.svg" alt="" width={1440} height={120} />
+      </div>
 
       {/* Footer */}
       <SiteFooter

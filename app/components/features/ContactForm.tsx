@@ -76,8 +76,8 @@ export default function ContactForm() {
           value={formData.name}
           onChange={handleChange}
           placeholder="Name"
-          className="w-full rounded-xl bg-white border border-[rgba(164,131,116,0.25)]
-                     px-4 py-3 text-[15px] focus:outline-none focus:border-[rgba(164,131,116,0.5)]
+          className="w-full rounded-xl bg-white border border-[rgba(164,141,120,0.25)]
+                     px-4 py-3 text-[15px] focus:outline-none focus:border-[rgba(164,141,120,0.5)]
                      transition-colors"
           style={{ color: "#2a1f16" }}
         />
@@ -98,8 +98,8 @@ export default function ContactForm() {
           placeholder="Email"
           inputMode="email"
           autoComplete="email"
-          className="w-full rounded-xl bg-white border border-[rgba(164,131,116,0.25)]
-                     px-4 py-3 text-[15px] focus:outline-none focus:border-[rgba(164,131,116,0.5)]
+          className="w-full rounded-xl bg-white border border-[rgba(164,141,120,0.25)]
+                     px-4 py-3 text-[15px] focus:outline-none focus:border-[rgba(164,141,120,0.5)]
                      transition-colors"
           style={{ color: "#2a1f16" }}
         />
@@ -118,8 +118,8 @@ export default function ContactForm() {
           value={formData.subject}
           onChange={handleChange}
           placeholder="Subject"
-          className="w-full rounded-xl bg-white border border-[rgba(164,131,116,0.25)]
-                     px-4 py-3 text-[15px] focus:outline-none focus:border-[rgba(164,131,116,0.5)]
+          className="w-full rounded-xl bg-white border border-[rgba(164,141,120,0.25)]
+                     px-4 py-3 text-[15px] focus:outline-none focus:border-[rgba(164,141,120,0.5)]
                      transition-colors"
           style={{ color: "#2a1f16" }}
         />
@@ -138,8 +138,8 @@ export default function ContactForm() {
           onChange={handleChange}
           placeholder="Message"
           rows={6}
-          className="w-full rounded-xl bg-white border border-[rgba(164,131,116,0.25)]
-                     px-4 py-3 text-[15px] focus:outline-none focus:border-[rgba(164,131,116,0.5)]
+          className="w-full rounded-xl bg-white border border-[rgba(164,141,120,0.25)]
+                     px-4 py-3 text-[15px] focus:outline-none focus:border-[rgba(164,141,120,0.5)]
                      transition-colors resize-none"
           style={{ color: "#2a1f16" }}
         />
@@ -149,7 +149,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="rounded-xl px-6 py-3 bg-[rgba(164,131,116,1)] text-[#0f0c0a]
+        className="rounded-xl px-6 py-3 bg-[rgba(164,141,120,1)] text-[#0f0c0a]
                    text-[15px] font-semibold tracking-wide uppercase
                    hover:bg-[rgba(180,138,78,1)] transition-all
                    disabled:opacity-60 disabled:cursor-not-allowed
@@ -164,7 +164,7 @@ export default function ContactForm() {
           role="status"
           className={`text-sm text-center py-2 rounded-lg ${
             status === "success"
-              ? "bg-[rgba(164,131,116,0.1)] text-[rgba(42,31,22,0.9)]"
+              ? "bg-[rgba(164,141,120,0.1)] text-[rgba(42,31,22,0.9)]"
               : "bg-[rgba(200,100,100,0.1)] text-[rgba(150,50,50,0.9)]"
           }`}
         >

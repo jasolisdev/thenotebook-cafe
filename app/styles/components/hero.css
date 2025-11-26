@@ -23,10 +23,12 @@
 }
 
 .hero-gradient {
+  background-color: var(--cream);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 520px;
+  border-radius: 10px;
 }
 
 @media (min-width: 375px) {
@@ -69,10 +71,10 @@
   font-size: 36px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--ink-cream);
+  color: var(--desert-rock);
   line-height: 1.05;
   margin: 0;
-  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  text-shadow: none;
   animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
 }
 
@@ -88,7 +90,7 @@
   font-size: 18px;
   font-weight: 300;
   letter-spacing: 0.02em;
-  color: var(--ink-cream);
+  color: var(--desert-rock);
   line-height: 1.4;
   margin: 16px 0 0;
   opacity: 0.95;
@@ -109,7 +111,7 @@
   justify-content: center;
   gap: 8px;
   margin: 24px auto;
-  color: rgba(164, 131, 116, 0.6);
+  color: rgba(164, 141, 120, 0.6);
   font-size: 12px;
   animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
 }
@@ -132,7 +134,7 @@
 
 .hero-divider-dot {
   font-size: 16px;
-  color: rgba(164, 131, 116, 0.8);
+  color: rgba(164, 141, 120, 0.8);
 }
 
 @media (min-width: 375px) {
@@ -153,12 +155,69 @@
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 0.01em;
-  color: var(--ink-cream-dim);
+  color: var(--desert-rock);
   line-height: 1.6;
   margin: 0 auto;
   max-width: 650px;
   opacity: 0.85;
   animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Coffee Cup Icon */
+.coffee-cup {
+  font-size: 20px;
+  display: inline-block;
+  position: relative;
+}
+
+/* Steam Animation */
+.coffee-steam {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+}
+
+.coffee-steam span {
+  display: block;
+  width: 2px;
+  height: 6px;
+  background: var(--desert-rock);
+  border-radius: 2px;
+  opacity: 0.4;
+  animation: steam 2s ease-in-out infinite;
+}
+
+.coffee-steam span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.coffee-steam span:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.coffee-steam span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes steam {
+  0% {
+    transform: translateY(0) scaleY(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-8px) scaleY(1.5);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-12px) scaleY(0.5);
+    opacity: 0;
+  }
 }
 
 @media (min-width: 375px) {
@@ -186,30 +245,29 @@
   }
 }
 
-/* Hero CTA Button */
+/* Hero CTA Button - Frosted Glass Effect */
 .hero-cta-button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 12px 28px;
-  background: linear-gradient(135deg, rgba(201, 154, 88, 1) 0%, rgba(180, 138, 78, 1) 100%);
-  color: #0f0c0a;
+  background: rgba(164, 141, 120, 0.25);
+  color: #6b5a48;
   font-family: var(--font-sans);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   text-decoration: none;
   border-radius: 50px;
-  border: none;
+  border: 1.5px solid rgba(164, 141, 120, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition:
     transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow:
-    0 4px 20px rgba(201, 154, 88, 0.4),
-    0 8px 40px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(164, 141, 120, 0.08);
   position: relative;
   overflow: hidden;
 }
@@ -219,8 +277,9 @@
   position: absolute;
   inset: 0;
   border-radius: 50px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, transparent 50%);
   pointer-events: none;
+  opacity: 0.5;
 }
 
 @media (min-width: 375px) {
@@ -240,13 +299,10 @@
 }
 
 .hero-cta-button:hover {
-  transform: translateY(-3px);
-  background: linear-gradient(135deg, rgba(221, 174, 108, 1) 0%, rgba(201, 154, 88, 1) 100%);
-  box-shadow:
-    0 6px 28px rgba(201, 154, 88, 0.6),
-    0 12px 56px rgba(0, 0, 0, 0.6),
-    0 0 24px rgba(201, 154, 88, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  background: rgba(164, 141, 120, 0.35);
+  border-color: rgba(164, 141, 120, 0.5);
+  box-shadow: 0 4px 12px rgba(164, 141, 120, 0.15);
 }
 
 .hero-cta-button:active {
@@ -268,10 +324,10 @@
   gap: 8px;
   margin-top: 18px;
   padding: 8px 18px;
-  background: rgba(164, 131, 116, 0.1);
-  border: 1.5px solid rgba(164, 131, 116, 0.3);
+  background: rgba(164, 141, 120, 0.1);
+  border: 1.5px solid rgba(164, 141, 120, 0.3);
   border-radius: 50px;
-  color: rgba(164, 131, 116, 0.95);
+  color: rgba(164, 141, 120, 0.95);
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 500;
@@ -343,7 +399,7 @@
   width: 140px;
   height: 140px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.5));
+  filter: none;
 }
 
 @media (min-width: 375px) {
