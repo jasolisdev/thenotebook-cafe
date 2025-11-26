@@ -212,7 +212,7 @@ export default async function HomePage() {
       <WhatToExpectSection />
 
       {/* OUR COMMITMENT SECTION */}
-      <section className="section-cream relative pt-0 pb-16 sm:pb-20">
+      <section className="section-cream relative py-16 sm:py-20">
         <CoffeeDifferenceSection />
       </section>
 
@@ -423,6 +423,11 @@ export default async function HomePage() {
           <NewsletterForm source="homepage" />
         </div>
       </section>
+
+      {/* Divider - Wavy transition to footer */}
+      <div className="divider-cream">
+        <Image src="/notebook-divider-cream.svg" alt="" width={1440} height={120} />
+      </div>
 
       {/* Footer */}
       <SiteFooter

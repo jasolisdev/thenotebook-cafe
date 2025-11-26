@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Instagram } from "lucide-react";
 import { FaTiktok } from "react-icons/fa";
-import NewsletterForm from "../features/NewsLetterForm";
 
 type SiteFooterProps = {
   showFloatingItems?: boolean;
@@ -24,19 +23,6 @@ export default function SiteFooter({
       {showFloatingItems && FloatingItemsComponent && (
         <FloatingItemsComponent variant="footer" />
       )}
-
-      {/* Email Signup Section */}
-      <div className="footer-email-section">
-        <div className="footer-email-box">
-          <h3 className="footer-email-heading">
-            Join our community &amp; enjoy 10% off.
-          </h3>
-          <p className="footer-email-subtext">
-            Sign up for updates, events, and exclusive Notebook Café offers.
-          </p>
-          <NewsletterForm source="footer" />
-        </div>
-      </div>
 
       {/* Main Footer Content */}
       <div className="footer-main">
