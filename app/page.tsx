@@ -411,14 +411,13 @@ export default async function HomePage() {
       </section>
 
       {/* Newsletter - Connected to Sanity */}
-      <section className="home-newsletter mx-auto max-w-[720px] px-4 sm:px-6 mb-20 sm:mb-24 scroll-reveal relative z-10">
-        <div className="home-newsletter-card text-center">
-          <h3 className="text-[18px] min-[375px]:text-[20px] sm:text-[24px] font-semibold tracking-wide ink-cream mb-3">
-            FOR CREATIVES &amp; COFFEE LOVERS
-          </h3>
-          <p className="text-[13px] min-[375px]:text-[14px] sm:text-[15px] ink-cream-dim mb-5 sm:mb-6 leading-relaxed">
-            Join our community for opening announcements, exclusive pre-launch
-            events, and first look at what we&apos;re brewing.
+      <section className="newsletter-section">
+        <div className="newsletter-box scroll-reveal">
+          <h2 className="newsletter-heading">
+            Join our community &amp; get 10% off your first drink.
+          </h2>
+          <p className="newsletter-subtext">
+            Be the first to know about specials, events, and our grand opening.
           </p>
 
           <NewsletterForm source="homepage" />
