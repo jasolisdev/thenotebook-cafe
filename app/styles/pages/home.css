@@ -406,7 +406,8 @@
   justify-content: center;
   gap: 24px;
   margin-top: 0;
-  margin-bottom: 2rem; /* 32px - consistent spacing */
+  margin-bottom: 2rem;
+  /* 32px - consistent spacing */
 }
 
 /* Welcome section heading styles */
@@ -468,7 +469,8 @@
 /* Section label description - text container below section labels */
 .section-label-description {
   text-align: center;
-  margin-bottom: 2rem; /* 32px */
+  margin-bottom: 2rem;
+  /* 32px */
 }
 
 .welcome-divider-line {
@@ -1398,17 +1400,26 @@
 
 /* Featured Drinks Section */
 .featured-card {
-  max-width: 400px;
+  width: calc(100vw - 40px);
+  max-width: 100%;
   margin: 0 auto 32px;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(164, 141, 120, 0.12);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  aspect-ratio: 4 / 5;
+  position: relative;
 }
 
 @media (min-width: 640px) {
   .featured-card {
-    max-width: 500px;
+    width: 100%;
+    max-width: 100%;
+    height: 300px;
+    aspect-ratio: auto;
+    background: transparent;
+    box-shadow: none;
+    overflow: visible;
   }
 }
 
@@ -1417,10 +1428,208 @@
   box-shadow: 0 8px 32px rgba(164, 141, 120, 0.18);
 }
 
-.featured-card img {
+@media (min-width: 640px) {
+  .featured-card:hover {
+    box-shadow: none;
+  }
+}
+
+/* Platter background - visible on mobile only */
+.featured-platter-bg {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
+}
+
+/* Hide platter on desktop */
+@media (min-width: 640px) {
+  .featured-platter-bg {
+    display: none;
+  }
+}
+
+/* Iced coffee - slides from right on mobile, bottom on desktop */
+.featured-iced-coffee {
+  position: absolute;
+  width: 60%;
+  height: auto;
+  object-fit: contain;
+  top: 50%;
+  left: 50%;
+  transform: translate(150%, -50%);
+  opacity: 0;
+}
+
+/* Trigger animation on scroll reveal - only for first slide */
+.scroll-reveal.is-visible .featured-coffee-slide:first-child .featured-iced-coffee {
+  animation: slideFromRight 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Other slides should be visible immediately when swiped to */
+.featured-coffee-slide:not(:first-child) .featured-iced-coffee {
+  transform: translate(-50%, -50%);
+  opacity: 1;
+}
+
+/* Mobile animation - slide from right */
+@keyframes slideFromRight {
+  0% {
+    opacity: 0;
+    transform: translate(150%, -50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Desktop styles and animation */
+@media (min-width: 640px) {
+  /* Change carousel to horizontal layout on desktop */
+  .featured-coffee-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+  }
+
+  .featured-coffee-track {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    overflow: visible;
+    scroll-snap-type: none;
+    height: auto;
+    pointer-events: none;
+  }
+
+  .featured-coffee-slide {
+    flex: 0 0 auto;
+    width: auto;
+    height: auto;
+    scroll-snap-align: none;
+    pointer-events: auto;
+  }
+
+  .featured-iced-coffee {
+    width: 200px;
+    height: 250px;
+    object-fit: contain;
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: translateY(100%);
+  }
+
+  /* Animate all slides on desktop with staggered delays */
+  .scroll-reveal.is-visible .featured-coffee-slide:nth-child(1) .featured-iced-coffee {
+    animation: slideFromBottom 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0s;
+  }
+
+  .scroll-reveal.is-visible .featured-coffee-slide:nth-child(2) .featured-iced-coffee {
+    animation: slideFromBottom 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.2s;
+  }
+
+  .scroll-reveal.is-visible .featured-coffee-slide:nth-child(3) .featured-iced-coffee {
+    animation: slideFromBottom 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.4s;
+  }
+
+  .scroll-reveal.is-visible .featured-coffee-slide:nth-child(4) .featured-iced-coffee {
+    animation: slideFromBottom 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.6s;
+  }
+
+  /* Desktop animation - slide from bottom */
+  @keyframes slideFromBottom {
+    0% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Coffee Carousel - Mobile Only */
+.featured-coffee-carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.featured-coffee-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.featured-coffee-track::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+.featured-coffee-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Carousel dots/indicators */
+.featured-carousel-dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(164, 141, 120, 0.4);
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background: rgba(164, 141, 120, 0.9);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* Hide dots on desktop */
+@media (min-width: 640px) {
+  .featured-carousel-dots {
+    display: none;
+  }
 }
 
 /* Featured Menu Button - Frosted Glass */

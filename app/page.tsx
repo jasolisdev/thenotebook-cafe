@@ -92,67 +92,67 @@ export default async function HomePage() {
         {/* HERO */}
         <section className="hero hero-gradient relative">
           <HomeFloatingItems variant="hero" />
-        <div className="hero-copy relative z-10">
-          {/* Screen reader only title for SEO */}
-          <h1 className="sr-only">
-            {home?.heroHeadline || "The Notebook Café"}
-          </h1>
+          <div className="hero-copy relative z-10">
+            {/* Screen reader only title for SEO */}
+            <h1 className="sr-only">
+              {home?.heroHeadline || "The Notebook Café"}
+            </h1>
 
-          {/* Logo */}
-          <div className="hero-logo-wrapper">
-            <Image
-              src="/logo.png"
-              alt="The Notebook Café"
-              className="hero-logo"
-              width={320}
-              height={100}
-              priority
-            />
-          </div>
+            {/* Logo */}
+            <div className="hero-logo-wrapper">
+              <Image
+                src="/logo.png"
+                alt="The Notebook Café"
+                className="hero-logo"
+                width={320}
+                height={100}
+                priority
+              />
+            </div>
 
-          {/* Tagline */}
-          <p className="hero-tagline">Where Every Cup Tells a Story</p>
+            {/* Tagline */}
+            <p className="hero-tagline">Where Every Cup Tells a Story</p>
 
-          {/* Descriptive Text */}
-          <p className="hero-description">
-            A new vibe is brewing...
-            <span className="coffee-cup">
-              ☕
-              <span className="coffee-steam">
-                <span></span>
-                <span></span>
-                <span></span>
+            {/* Descriptive Text */}
+            <p className="hero-description">
+              A new vibe is brewing...
+              <span className="coffee-cup">
+                ☕
+                <span className="coffee-steam">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
               </span>
-            </span>
-          </p>
+            </p>
 
-          {/* Primary CTA */}
-          <div className="hero-cta-wrapper">
-            <a
-              href={home?.ctaUrl || (settings?.social?.instagram ?? "#")}
-              target="_blank"
-              rel="noreferrer"
-              className="hero-cta-button"
-            >
-              <span>FOLLOW FOR UPDATES</span>
-              <svg
-                className="hero-cta-arrow"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
+            {/* Primary CTA */}
+            <div className="hero-cta-wrapper">
+              <a
+                href={home?.ctaUrl || (settings?.social?.instagram ?? "#")}
+                target="_blank"
+                rel="noreferrer"
+                className="hero-cta-button"
               >
-                <path
-                  d="M1 8h14M9 2l6 6-6 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
+                <span>FOLLOW FOR UPDATES</span>
+                <svg
+                  className="hero-cta-arrow"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                >
+                  <path
+                    d="M1 8h14M9 2l6 6-6 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
           </div>
-        </div>
         </section>
       </section>
 
@@ -178,14 +178,73 @@ export default async function HomePage() {
       {/* FEATURED DRINKS SECTION */}
       <section className="section-featured">
         <div className="featured-card scroll-reveal">
+          {/* Background platter (visible on mobile only) */}
           <Image
-            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000&auto=format&fit=crop"
-            alt="Featured specialty drink"
-            width={1000}
-            height={750}
-            className="w-full h-auto"
+            src="/unsplash/showcase-platter.jpg"
+            alt="Showcase platter background"
+            width={280}
+            height={350}
+            className="featured-platter-bg"
           />
+
+          {/* Coffee carousel - swipeable */}
+          <div className="featured-coffee-carousel">
+            <div className="featured-coffee-track">
+              {/* Coffee 1 - slides in on scroll reveal */}
+              <div className="featured-coffee-slide">
+                <Image
+                  src="/unsplash/hero-iced-coffee-1.png"
+                  alt="Featured coffee 1"
+                  width={200}
+                  height={300}
+                  className="featured-iced-coffee"
+                />
+              </div>
+
+              {/* Coffee 2 */}
+              <div className="featured-coffee-slide">
+                <Image
+                  src="/unsplash/hero-iced-coffee-1.png"
+                  alt="Featured coffee 2"
+                  width={200}
+                  height={300}
+                  className="featured-iced-coffee"
+                />
+              </div>
+
+              {/* Coffee 3 */}
+              <div className="featured-coffee-slide">
+                <Image
+                  src="/unsplash/hero-iced-coffee-1.png"
+                  alt="Featured coffee 3"
+                  width={200}
+                  height={300}
+                  className="featured-iced-coffee"
+                />
+              </div>
+
+              {/* Coffee 4 */}
+              <div className="featured-coffee-slide">
+                <Image
+                  src="/unsplash/hero-iced-coffee-1.png"
+                  alt="Featured coffee 4"
+                  width={200}
+                  height={300}
+                  className="featured-iced-coffee"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Carousel indicators */}
+          <div className="featured-carousel-dots">
+            <span className="carousel-dot active"></span>
+            <span className="carousel-dot"></span>
+            <span className="carousel-dot"></span>
+            <span className="carousel-dot"></span>
+          </div>
         </div>
+
         <div className="flex justify-center">
           <a href="/menu" className="featured-menu-button">
             <span>View Our Menu</span>
@@ -210,11 +269,6 @@ export default async function HomePage() {
 
       {/* WHAT TO EXPECT SECTION */}
       <WhatToExpectSection />
-
-      {/* OUR COMMITMENT SECTION */}
-      <section className="section-cream relative py-16 sm:py-20">
-        <CoffeeDifferenceSection />
-      </section>
 
       {/* HEAR THE VIBE Section */}
       <section className="section-cream py-16 sm:py-20 relative">
@@ -318,6 +372,11 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* OUR COMMITMENT SECTION */}
+      <section className="section-cream relative py-16 sm:py-20">
+        <CoffeeDifferenceSection />
+      </section>
+
 
       {/* Divider - Wavy transition back to dark */}
       <div className="divider-cream">
@@ -414,7 +473,7 @@ export default async function HomePage() {
       <section className="newsletter-section">
         <div className="newsletter-box scroll-reveal">
           <h2 className="newsletter-heading">
-            Join our community &amp; get 10% off your first drink.
+            Join our community; get 10% off your first drink.
           </h2>
           <p className="newsletter-subtext">
             Be the first to know about specials, events, and our grand opening.
