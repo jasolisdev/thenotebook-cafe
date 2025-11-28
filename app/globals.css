@@ -4,9 +4,6 @@
 @import "./styles/components/card-gallery.css";
 @import "./styles/components/modal.css";
 
-/* DEBUG: Remove this import when debugging is complete */
-@import "./styles/debug.css";
-
 /* ============================================================
    CUSTOM FONTS
 ============================================================ */
@@ -65,11 +62,16 @@
      (Neutral Café Minimalist Set)
   =============================== */
 
-  --desert-rock: #A48D78;       /* Medium warm taupe brown */
-  --soft-sandstone: #CBB9A4;    /* Soft beige */
-  --creamed-honey: #E6DAC8;     /* Light warm cream */
-  --porcelain-mist: #F4F1EA;    /* Near-white beige */
-  --feather-white: #FAF9F6;     /* Clean soft white */
+  --desert-rock: #A48D78;
+  /* Medium warm taupe brown */
+  --soft-sandstone: #CBB9A4;
+  /* Soft beige */
+  --creamed-honey: #EDE7D8;
+  /* Light warm cream */
+  --porcelain-mist: #F4F1EA;
+  /* Near-white beige */
+  --feather-white: #FAF9F6;
+  /* Clean soft white */
 
   /* Core semantic tokens using new palette */
   --bg-solid: var(--desert-rock);
@@ -84,7 +86,8 @@
   --text-light-muted: var(--porcelain-mist);
 
   /* Panels / borders */
-  --panel: rgba(164, 141, 120, 0.08);       /* desert-rock at 8% */
+  --panel: rgba(164, 141, 120, 0.08);
+  /* desert-rock at 8% */
   --panel-border: rgba(164, 141, 120, 0.12);
   --glow: 0 0 0.6rem rgba(164, 141, 120, 0.35);
 
