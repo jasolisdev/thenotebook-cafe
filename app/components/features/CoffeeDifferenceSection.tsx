@@ -159,7 +159,7 @@ const FeatureIcon = ({ type }: { type: string }) => {
 
 export default function CoffeeDifferenceSection() {
   return (
-    <section className="w-full px-4 sm:px-6 py-16 sm:py-20 lg:py-28 relative overflow-hidden">
+    <section className="w-full px-4 sm:px-6 relative overflow-hidden">
       {/* Subtle decorative background elements */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
         <div className="absolute top-[10%] left-[5%] w-32 h-32 rounded-full bg-[#a48374]" />

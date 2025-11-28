@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import MenuItemModal from "./MenuItemModal";
 
@@ -19,7 +19,24 @@ type MenuContentProps = {
 };
 
 // Hardcoded menu items
-const MENU_DRINKS: MenuItem[] = [
+const MENU_FEATURED: MenuItem[] = [
+  {
+    name: "Honey Lavender Latte",
+    price: "5.75",
+    description: "Floral lavender and local honey with espresso and steamed milk. Light and aromatic.",
+    section: "drinks",
+    imageUrl: "/menu/honey-lavender-latte.jpg",
+  },
+  {
+    name: "Iced Brown Sugar Shaken Espresso",
+    price: "5.50",
+    description: "Shaken espresso with brown sugar and oat milk over ice. Smooth and lightly sweet.",
+    section: "drinks",
+    imageUrl: "/menu/iced-brown-sugar-espresso.jpg",
+  },
+];
+
+const MENU_ESPRESSO: MenuItem[] = [
   {
     name: "Espresso",
     price: "3.50",
@@ -42,11 +59,28 @@ const MENU_DRINKS: MenuItem[] = [
     imageUrl: "/menu/vanilla-latte.jpg",
   },
   {
-    name: "Iced Mocha",
+    name: "Caramel Macchiato",
     price: "5.50",
-    description: "Rich chocolate, espresso, and milk over ice. Cool and indulgent.",
+    description: "Vanilla-infused milk, espresso, and caramel drizzle. Layered and sweet.",
     section: "drinks",
-    imageUrl: "/menu/iced-mocha.jpg",
+    imageUrl: "/menu/caramel-macchiato.jpg",
+  },
+];
+
+const MENU_CLASSIC_COFFEE: MenuItem[] = [
+  {
+    name: "Drip Coffee",
+    price: "3.00",
+    description: "Freshly brewed classic coffee. Available in light, medium, or dark roast.",
+    section: "drinks",
+    imageUrl: "/menu/cold-brew.jpg",
+  },
+  {
+    name: "Americano",
+    price: "3.75",
+    description: "Espresso shots diluted with hot water. Bold yet smooth.",
+    section: "drinks",
+    imageUrl: "/menu/cold-brew.jpg",
   },
   {
     name: "Cold Brew",
@@ -56,11 +90,125 @@ const MENU_DRINKS: MenuItem[] = [
     imageUrl: "/menu/cold-brew.jpg",
   },
   {
-    name: "Caramel Macchiato",
-    price: "5.50",
-    description: "Vanilla-infused milk, espresso, and caramel drizzle. Layered and sweet.",
+    name: "Iced Coffee",
+    price: "3.50",
+    description: "Chilled brewed coffee over ice. Simple and refreshing.",
     section: "drinks",
-    imageUrl: "/menu/caramel-macchiato.jpg",
+    imageUrl: "/menu/cold-brew.jpg",
+  },
+];
+
+const MENU_MATCHA: MenuItem[] = [
+  {
+    name: "Matcha Latte",
+    price: "5.50",
+    description: "Premium Japanese matcha whisked with steamed milk. Earthy and smooth.",
+    section: "drinks",
+    imageUrl: "/menu/vanilla-latte.jpg",
+  },
+  {
+    name: "Iced Matcha Latte",
+    price: "5.50",
+    description: "Creamy iced matcha with your choice of milk. Refreshing green goodness.",
+    section: "drinks",
+    imageUrl: "/menu/iced-mocha.jpg",
+  },
+  {
+    name: "Matcha Lemonade",
+    price: "5.75",
+    description: "Vibrant matcha shaken with fresh lemonade. Sweet, tart, and energizing.",
+    section: "drinks",
+    imageUrl: "/menu/iced-mocha.jpg",
+  },
+  {
+    name: "Vanilla Matcha",
+    price: "6.00",
+    description: "Matcha with house-made vanilla syrup and steamed milk. Sweet and balanced.",
+    section: "drinks",
+    imageUrl: "/menu/vanilla-latte.jpg",
+  },
+  {
+    name: "Coconut Matcha",
+    price: "6.00",
+    description: "Matcha with coconut milk and a hint of coconut syrup. Tropical twist.",
+    section: "drinks",
+    imageUrl: "/menu/vanilla-latte.jpg",
+  },
+  {
+    name: "Strawberry Matcha",
+    price: "6.25",
+    description: "Matcha layered with strawberry puree and milk. Instagram-worthy favorite.",
+    section: "drinks",
+    imageUrl: "/menu/iced-mocha.jpg",
+  },
+];
+
+const MENU_TEAS: MenuItem[] = [
+  {
+    name: "Earl Grey Tea",
+    price: "3.50",
+    description: "Classic black tea with bergamot. Aromatic and refined.",
+    section: "drinks",
+    imageUrl: "/menu/cappuccino.jpg",
+  },
+  {
+    name: "Chamomile Tea",
+    price: "3.50",
+    description: "Soothing herbal tea. Naturally caffeine-free and calming.",
+    section: "drinks",
+    imageUrl: "/menu/cappuccino.jpg",
+  },
+  {
+    name: "Green Tea",
+    price: "3.50",
+    description: "Light and refreshing Japanese green tea. Delicate and pure.",
+    section: "drinks",
+    imageUrl: "/menu/cappuccino.jpg",
+  },
+  {
+    name: "Chai Latte",
+    price: "5.00",
+    description: "Spiced black tea with steamed milk. Warm and comforting.",
+    section: "drinks",
+    imageUrl: "/menu/vanilla-latte.jpg",
+  },
+  {
+    name: "Hot Chocolate",
+    price: "4.50",
+    description: "Rich dark chocolate with steamed milk and whipped cream. Kid and adult approved.",
+    section: "drinks",
+    imageUrl: "/menu/iced-mocha.jpg",
+  },
+];
+
+const MENU_KIDS: MenuItem[] = [
+  {
+    name: "Steamed Milk",
+    price: "3.00",
+    description: "Warm steamed milk with a choice of vanilla, chocolate, or caramel flavor.",
+    section: "drinks",
+    imageUrl: "/menu/vanilla-latte.jpg",
+  },
+  {
+    name: "Kids Hot Chocolate",
+    price: "3.50",
+    description: "Smaller portion of our rich hot chocolate. Topped with whipped cream and sprinkles.",
+    section: "drinks",
+    imageUrl: "/menu/iced-mocha.jpg",
+  },
+  {
+    name: "Apple Juice",
+    price: "2.50",
+    description: "Fresh pressed apple juice. No added sugar.",
+    section: "drinks",
+    imageUrl: "/menu/cold-brew.jpg",
+  },
+  {
+    name: "Chocolate Milk",
+    price: "3.00",
+    description: "Cold whole milk with premium chocolate syrup. Classic favorite.",
+    section: "drinks",
+    imageUrl: "/menu/iced-mocha.jpg",
   },
 ];
 
@@ -177,7 +325,6 @@ const MENU_DESSERTS: MenuItem[] = [
 
 export default function MenuContent({ items }: MenuContentProps) {
   const [activeTab, setActiveTab] = useState<"drinks" | "meals" | "desserts">("drinks");
-  const [showScrollTop, setShowScrollTop] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
@@ -205,23 +352,10 @@ export default function MenuContent({ items }: MenuContentProps) {
     setTimeout(() => setSelectedItem(null), 300); // Clear after animation
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <>
       {/* Tabs - Sticky */}
-      <div className="menu-tabs-sticky flex justify-center gap-8 sm:gap-16 mb-8 border-b border-[rgba(201,154,88,0.2)] scroll-reveal">
+      <div className="menu-tabs-sticky flex justify-center gap-8 sm:gap-16 mb-3 border-b border-[rgba(201,154,88,0.2)] scroll-reveal">
         <button
           onClick={() => setActiveTab("drinks")}
           className={`pb-4 text-[16px] sm:text-[18px] font-semibold uppercase tracking-wider transition-all relative ${activeTab === "drinks"
@@ -263,51 +397,266 @@ export default function MenuContent({ items }: MenuContentProps) {
       {/* Drinks Tab - Notebook Café Card Design */}
       {activeTab === "drinks" && (
         <div className="w-full max-w-[1200px] mx-auto px-1 sm:px-4 lg:px-6 scroll-reveal">
-          <div className="notebook-menu-grid">
-            {MENU_DRINKS.map((drink, idx) => (
-              <div
-                key={`drink-${idx}`}
-                className="notebook-menu-item"
-                onClick={() => handleItemClick(drink)}
-              >
-                {/* Text Content - Title, Description, Price */}
-                <div className="notebook-item-content">
-                  <h3 className="notebook-item-header">{drink.name}</h3>
-                  <p className="notebook-item-details">{drink.description}</p>
-                  <p className="notebook-item-pricing">${drink.price}</p>
+          {/* Featured Section */}
+          <div className="mb-16">
+            <div className="text-center mb-10">
+              <h3 className="text-[22px] sm:text-[26px] font-bold text-[#2a1f16] tracking-wide mb-2">
+                FEATURED
+              </h3>
+              <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
+            </div>
+            <div className="notebook-menu-grid">
+              {MENU_FEATURED.map((drink, idx) => (
+                <div
+                  key={`featured-${idx}`}
+                  className="notebook-menu-item"
+                  onClick={() => handleItemClick(drink)}
+                >
+                  <div className="notebook-item-content">
+                    <h3 className="notebook-item-header">{drink.name}</h3>
+                    <p className="notebook-item-details">{drink.description}</p>
+                    <p className="notebook-item-pricing">${drink.price}</p>
+                  </div>
+                  <div className="notebook-item-visual">
+                    <Image
+                      src={drink.imageUrl || "/unsplash/dark-coffee.png"}
+                      alt={drink.name}
+                      fill
+                      className="notebook-item-photo"
+                    />
+                    <button
+                      className={`notebook-add-btn ${addedItems.has(drink.name) ? 'added' : ''}`}
+                      onClick={(e) => handleAddClick(e, drink.name)}
+                      aria-label={`Add ${drink.name}`}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </div>
 
-                {/* Visual Section - Image + Add Button */}
-                <div className="notebook-item-visual">
-                  <Image
-                    src={drink.imageUrl || "/unsplash/dark-coffee.png"}
-                    alt={drink.name}
-                    fill
-                    className="notebook-item-photo"
-                  />
-                  <button
-                    className={`notebook-add-btn ${addedItems.has(drink.name) ? 'added' : ''}`}
-                    onClick={(e) => handleAddClick(e, drink.name)}
-                    aria-label={`Add ${drink.name}`}
-                  >
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                    </svg>
-                  </button>
+          {/* Espresso Section */}
+          <div className="mb-16 pt-12 border-t-2 border-[rgba(201,154,88,0.15)]">
+            <div className="text-center mb-10">
+              <h3 className="text-[22px] sm:text-[26px] font-bold text-[#2a1f16] tracking-wide mb-2">
+                ESPRESSO
+              </h3>
+              <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
+            </div>
+            <div className="notebook-menu-grid">
+              {MENU_ESPRESSO.map((drink, idx) => (
+                <div
+                  key={`espresso-${idx}`}
+                  className="notebook-menu-item"
+                  onClick={() => handleItemClick(drink)}
+                >
+                  <div className="notebook-item-content">
+                    <h3 className="notebook-item-header">{drink.name}</h3>
+                    <p className="notebook-item-details">{drink.description}</p>
+                    <p className="notebook-item-pricing">${drink.price}</p>
+                  </div>
+                  <div className="notebook-item-visual">
+                    <Image
+                      src={drink.imageUrl || "/unsplash/dark-coffee.png"}
+                      alt={drink.name}
+                      fill
+                      className="notebook-item-photo"
+                    />
+                    <button
+                      className={`notebook-add-btn ${addedItems.has(drink.name) ? 'added' : ''}`}
+                      onClick={(e) => handleAddClick(e, drink.name)}
+                      aria-label={`Add ${drink.name}`}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Classic Coffee Section */}
+          <div className="mb-16 pt-12 border-t-2 border-[rgba(201,154,88,0.15)]">
+            <div className="text-center mb-10">
+              <h3 className="text-[22px] sm:text-[26px] font-bold text-[#2a1f16] tracking-wide mb-2">
+                CLASSIC COFFEE
+              </h3>
+              <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
+            </div>
+            <div className="notebook-menu-grid">
+              {MENU_CLASSIC_COFFEE.map((drink, idx) => (
+                <div
+                  key={`classic-${idx}`}
+                  className="notebook-menu-item"
+                  onClick={() => handleItemClick(drink)}
+                >
+                  <div className="notebook-item-content">
+                    <h3 className="notebook-item-header">{drink.name}</h3>
+                    <p className="notebook-item-details">{drink.description}</p>
+                    <p className="notebook-item-pricing">${drink.price}</p>
+                  </div>
+                  <div className="notebook-item-visual">
+                    <Image
+                      src={drink.imageUrl || "/unsplash/dark-coffee.png"}
+                      alt={drink.name}
+                      fill
+                      className="notebook-item-photo"
+                    />
+                    <button
+                      className={`notebook-add-btn ${addedItems.has(drink.name) ? 'added' : ''}`}
+                      onClick={(e) => handleAddClick(e, drink.name)}
+                      aria-label={`Add ${drink.name}`}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Matcha Section */}
+          <div className="mb-16 pt-12 border-t-2 border-[rgba(201,154,88,0.15)]">
+            <div className="text-center mb-10">
+              <h3 className="text-[22px] sm:text-[26px] font-bold text-[#2a1f16] tracking-wide mb-2">
+                MATCHA
+              </h3>
+              <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
+            </div>
+            <div className="notebook-menu-grid">
+              {MENU_MATCHA.map((drink, idx) => (
+                <div
+                  key={`matcha-${idx}`}
+                  className="notebook-menu-item"
+                  onClick={() => handleItemClick(drink)}
+                >
+                  <div className="notebook-item-content">
+                    <h3 className="notebook-item-header">{drink.name}</h3>
+                    <p className="notebook-item-details">{drink.description}</p>
+                    <p className="notebook-item-pricing">${drink.price}</p>
+                  </div>
+                  <div className="notebook-item-visual">
+                    <Image
+                      src={drink.imageUrl || "/unsplash/dark-coffee.png"}
+                      alt={drink.name}
+                      fill
+                      className="notebook-item-photo"
+                    />
+                    <button
+                      className={`notebook-add-btn ${addedItems.has(drink.name) ? 'added' : ''}`}
+                      onClick={(e) => handleAddClick(e, drink.name)}
+                      aria-label={`Add ${drink.name}`}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Teas & More Section */}
+          <div className="mb-16 pt-12 border-t-2 border-[rgba(201,154,88,0.15)]">
+            <div className="text-center mb-10">
+              <h3 className="text-[22px] sm:text-[26px] font-bold text-[#2a1f16] tracking-wide mb-2">
+                TEAS & MORE
+              </h3>
+              <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
+            </div>
+            <div className="notebook-menu-grid">
+              {MENU_TEAS.map((drink, idx) => (
+                <div
+                  key={`tea-${idx}`}
+                  className="notebook-menu-item"
+                  onClick={() => handleItemClick(drink)}
+                >
+                  <div className="notebook-item-content">
+                    <h3 className="notebook-item-header">{drink.name}</h3>
+                    <p className="notebook-item-details">{drink.description}</p>
+                    <p className="notebook-item-pricing">${drink.price}</p>
+                  </div>
+                  <div className="notebook-item-visual">
+                    <Image
+                      src={drink.imageUrl || "/unsplash/dark-coffee.png"}
+                      alt={drink.name}
+                      fill
+                      className="notebook-item-photo"
+                    />
+                    <button
+                      className={`notebook-add-btn ${addedItems.has(drink.name) ? 'added' : ''}`}
+                      onClick={(e) => handleAddClick(e, drink.name)}
+                      aria-label={`Add ${drink.name}`}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Kids Drinks Section */}
+          <div className="mb-16 pt-12 border-t-2 border-[rgba(201,154,88,0.15)]">
+            <div className="text-center mb-10">
+              <h3 className="text-[22px] sm:text-[26px] font-bold text-[#2a1f16] tracking-wide mb-2">
+                KIDS DRINKS
+              </h3>
+              <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
+            </div>
+            <div className="notebook-menu-grid">
+              {MENU_KIDS.map((drink, idx) => (
+                <div
+                  key={`kids-${idx}`}
+                  className="notebook-menu-item"
+                  onClick={() => handleItemClick(drink)}
+                >
+                  <div className="notebook-item-content">
+                    <h3 className="notebook-item-header">{drink.name}</h3>
+                    <p className="notebook-item-details">{drink.description}</p>
+                    <p className="notebook-item-pricing">${drink.price}</p>
+                  </div>
+                  <div className="notebook-item-visual">
+                    <Image
+                      src={drink.imageUrl || "/unsplash/dark-coffee.png"}
+                      alt={drink.name}
+                      fill
+                      className="notebook-item-photo"
+                    />
+                    <button
+                      className={`notebook-add-btn ${addedItems.has(drink.name) ? 'added' : ''}`}
+                      onClick={(e) => handleAddClick(e, drink.name)}
+                      aria-label={`Add ${drink.name}`}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Specialty/Seasonal Section */}
-          <div className="mt-16 pt-12 border-t-2 border-[rgba(201,154,88,0.15)]">
+          <div className="pt-12 border-t-2 border-[rgba(201,154,88,0.15)]">
             <div className="text-center mb-10">
               <h3 className="text-[22px] sm:text-[26px] font-bold text-[#2a1f16] tracking-wide mb-2">
                 SPECIALTY / SEASONAL
               </h3>
               <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
             </div>
-
             <div className="notebook-menu-grid">
               {MENU_SEASONAL.map((drink, idx) => (
                 <div
@@ -315,14 +664,11 @@ export default function MenuContent({ items }: MenuContentProps) {
                   className="notebook-menu-item"
                   onClick={() => handleItemClick(drink)}
                 >
-                  {/* Text Content - Title, Description, Price */}
                   <div className="notebook-item-content">
                     <h3 className="notebook-item-header">{drink.name}</h3>
                     <p className="notebook-item-details">{drink.description}</p>
                     <p className="notebook-item-pricing">${drink.price}</p>
                   </div>
-
-                  {/* Visual Section - Image + Add Button */}
                   <div className="notebook-item-visual">
                     <Image
                       src={drink.imageUrl || "/unsplash/dark-coffee.png"}
@@ -428,17 +774,6 @@ export default function MenuContent({ items }: MenuContentProps) {
           </div>
         </div>
       )}
-
-      {/* Scroll to Top Button */}
-      <button
-        onClick={scrollToTop}
-        className={`scroll-to-top ${showScrollTop ? 'visible' : ''}`}
-        aria-label="Scroll to top"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
 
       {/* Menu Item Modal */}
       <MenuItemModal
