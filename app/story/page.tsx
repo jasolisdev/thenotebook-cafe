@@ -172,7 +172,7 @@ export default async function StoryPage() {
               {about?.valuesHeading || "What We're Building"}
             </h2>
             <div className="grid sm:grid-cols-2 gap-8 text-left">
-              {bullets.map((val, i) => {
+              {bullets.map((val: string, i: number) => {
                 const Icon = bulletIcons[i % bulletIcons.length];
                 return (
                   <Reveal key={i} delay={i * 100}>
