@@ -6,6 +6,8 @@ interface RevealProps {
   children?: React.ReactNode;
   delay?: number;
   className?: string;
+  /** When true, animation replays every time the element re-enters the viewport. */
+  replay?: boolean;
 }
 
 /**
@@ -29,14 +31,16 @@ interface RevealProps {
  * @param {string} props.className - Additional CSS classes
  * @returns {JSX.Element} Animated wrapper component
  */
-export default function Reveal({ children, delay = 0, className = '' }: RevealProps): JSX.Element {
+export default function Reveal({ children, delay = 0, className = '', replay = true }: RevealProps): JSX.Element {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (replay) {
+          setIsVisible(entry.isIntersecting);
+        } else if (entry.isIntersecting) {
           setIsVisible(true);
           observer.disconnect();
         }
@@ -46,7 +50,7 @@ export default function Reveal({ children, delay = 0, className = '' }: RevealPr
 
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
-  }, []);
+  }, [replay]);
 
   const style = {
     transitionDelay: `${delay}ms`,

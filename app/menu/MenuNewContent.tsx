@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Sparkles, X } from "lucide-react";
+import { X } from "lucide-react";
 import Image from "next/image";
 import SiteFooter from "../components/layout/SiteFooter";
 import Reveal from "../components/ui/Reveal";
@@ -47,98 +47,107 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
   return (
     <div className="min-h-screen pb-20" style={{ backgroundColor: "#FAF9F6" }}>
       {/* Header */}
-      <div
-        className="bg-cafe-black text-white py-24 md:py-32 px-6 text-center"
-        style={{ backgroundColor: "#2C2420", color: "#FFFFFF" }}
-      >
-        <h1 className="font-serif text-5xl md:text-6xl mb-4">Our Menu</h1>
-        <p className="text-cafe-beige font-light max-w-lg mx-auto">
+      <div className="py-16 md:py-20 px-6 text-center" style={{ backgroundColor: "#FAF9F6" }}>
+        <h1 className="font-serif text-5xl md:text-6xl mb-4" style={{ color: "#2C2420" }}>
+          Our Menu
+        </h1>
+        <p className="font-light max-w-2xl mx-auto" style={{ color: "rgba(74, 59, 50, 0.75)", fontSize: "18px" }}>
           Thoughtfully sourced, carefully prepared. We believe in quality over quantity.
         </p>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 -mt-8">
-        {/* Tabs */}
-        <div
-          className="shadow-lg rounded-sm p-2 flex justify-center gap-2 overflow-x-auto"
-          style={{ backgroundColor: "#F4F1EA" }}
-        >
-          {(["drinks", "meals", "desserts"] as MenuSection[]).map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveTab(cat)}
-              className={`px-8 py-3 rounded-sm uppercase text-xs tracking-widest font-semibold transition-all ${
-                activeTab === cat ? "bg-cafe-tan text-white shadow-md" : "text-cafe-brown hover:bg-cafe-mist"
-              }`}
-              style={{
-                backgroundColor: activeTab === cat ? "#A48D78" : "transparent",
-                color: activeTab === cat ? "#FFFFFF" : "#4A3B32",
-              }}
-            >
-              {cat}
-            </button>
-          ))}
+        <div className="max-w-6xl mx-auto px-6 space-y-8">
+          {/* Tabs */}
+        <div className="p-2">
+          <div className="flex justify-center gap-8 border-b border-[rgba(74,59,50,0.15)] pb-2 overflow-x-auto">
+            {(["drinks", "meals", "desserts"] as MenuSection[]).map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveTab(cat)}
+                className={`pb-3 px-6 text-sm font-bold tracking-[0.22em] uppercase transition-all relative ${
+                  activeTab === cat ? "text-cafe-black" : "text-cafe-brown/50 hover:text-cafe-brown"
+                }`}
+              >
+                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                {activeTab === cat && (
+                  <span
+                    className="absolute bottom-0 left-0 w-full h-0.5 animate-fade-in"
+                    style={{ backgroundColor: "#A48D78" }}
+                  ></span>
+                )}
+              </button>
+            ))}
+          </div>
         </div>
+        <div className="border-t border-[rgba(74,59,50,0.12)]"></div>
+
+        {/* Seasonal Highlight (Drinks) */}
+        {activeTab === "drinks" && (
+          <div
+            className="p-8 md:p-10 rounded-sm mb-12 flex flex-col md:flex-row gap-10 items-center animate-fade-in"
+            style={{ backgroundColor: "#F0E9DF", border: "1px solid #E1D6C9" }}
+          >
+            <div className="w-full md:w-1/3 aspect-square rounded-sm overflow-hidden relative" style={{ backgroundColor: "#E7D8C9" }}>
+              <Image
+                src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?auto=format&fit=crop&q=80&w=800"
+                alt="Lavender Honey Oat Latte"
+                fill
+                className="object-cover transition-transform duration-700 hover:scale-105"
+              />
+              <div className="absolute top-3 right-3 bg-[#A48D78] text-white text-[11px] font-bold px-2.5 py-1 rounded-sm uppercase tracking-[0.18em] shadow-sm">
+                Seasonal
+              </div>
+            </div>
+            <div className="w-full md:w-2/3 space-y-5 text-left">
+              <h3 className="font-serif text-3xl text-cafe-brown tracking-tight">Lavender Honey Oat Latte</h3>
+              <p className="text-cafe-black/70 text-lg leading-relaxed">
+                Our house-made syrup infused with dried lavender buds and organic wildflower honey, paired with our signature espresso blend and creamy oat milk.
+              </p>
+              <div className="pt-4">
+                <button
+                  className="px-8 py-3 text-sm font-bold tracking-[0.2em] uppercase transition-colors rounded-sm"
+                  style={{ backgroundColor: "#4A3B32", color: "#FFFFFF" }}
+                >
+                  Try It Today
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Grid */}
-        <div className="grid md:grid-cols-2 gap-x-12 gap-y-12 mt-16">
-          {filteredItems.map((item, index) => (
-            <Reveal key={item.id} delay={index * 100}>
-              <div className="group cursor-pointer flex gap-4 items-start" onClick={() => setSelectedItem(item)}>
-                <div className="flex-1">
-                  <div className="flex justify-between items-baseline mb-2 border-b border-cafe-beige/20 pb-2 group-hover:border-cafe-tan/50 transition-colors">
-                    <h3 className="font-serif text-xl text-cafe-black group-hover:text-cafe-tan transition-colors">
-                      {item.name}
-                    </h3>
-                    <span className="font-sans font-medium text-cafe-brown">{formatPrice(item.price)}</span>
+        <div>
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-12 mt-4">
+            {filteredItems.map((item, index) => (
+              <Reveal key={item.id} delay={index * 100}>
+                <div className="group cursor-pointer flex gap-4 items-start" onClick={() => setSelectedItem(item)}>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-baseline mb-2 border-b border-cafe-beige/20 pb-2 group-hover:border-cafe-tan/50 transition-colors">
+                      <h3 className="font-serif text-xl text-cafe-black group-hover:text-cafe-tan transition-colors">
+                        {item.name}
+                      </h3>
+                      <span className="font-sans font-medium text-cafe-brown">{formatPrice(item.price)}</span>
+                    </div>
+                    <p className="text-cafe-brown/70 text-sm font-light leading-relaxed">{item.description}</p>
+                    {item.tag && (
+                      <span
+                        className="inline-block mt-2 text-[10px] uppercase tracking-wider font-bold text-cafe-tan px-2 py-1 bg-cafe-tan/10 rounded-sm"
+                        style={{
+                          color: "#A48D78",
+                          backgroundColor: "rgba(164, 141, 120, 0.1)",
+                          fontSize: "10px",
+                        }}
+                      >
+                        {item.tag}
+                      </span>
+                    )}
                   </div>
-                  <p className="text-cafe-brown/70 text-sm font-light leading-relaxed">{item.description}</p>
-                  {item.tag && (
-                    <span
-                      className="inline-block mt-2 text-[10px] uppercase tracking-wider font-bold text-cafe-tan px-2 py-1 bg-cafe-tan/10 rounded-sm"
-                      style={{
-                        color: "#A48D78",
-                        backgroundColor: "rgba(164, 141, 120, 0.1)",
-                        fontSize: "10px",
-                      }}
-                    >
-                      {item.tag}
-                    </span>
-                  )}
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
-
-      {/* Seasonal Highlight */}
-      <section className="mt-24 mb-20 max-w-7xl mx-auto px-6">
-        <div
-          className="bg-cafe-mist rounded-sm p-8 md:p-12 flex flex-col md:flex-row gap-8 items-center border border-cafe-beige/30"
-          style={{ backgroundColor: "#F4F1EA" }}
-        >
-          <div className="flex-1 space-y-4">
-            <div className="flex items-center gap-2 text-cafe-tan">
-              <Sparkles size={16} />
-              <span className="uppercase text-xs tracking-widest font-bold">Seasonal Special</span>
-            </div>
-            <h3 className="font-serif text-3xl text-cafe-black">Lavender Honey Oat Latte</h3>
-            <p className="text-cafe-brown/80 font-light">
-              Our house-made syrup infused with dried lavender buds and organic wildflower honey, paired with our
-              signature espresso blend and creamy oat milk.
-            </p>
-          </div>
-          <div className="w-full md:w-1/3 aspect-square rounded-sm overflow-hidden relative">
-            <Image
-              src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?auto=format&fit=crop&q=80&w=800"
-              alt="Lavender Honey Oat Latte"
-              fill
-              className="object-cover hover:scale-105 transition-transform duration-500"
-            />
-          </div>
-        </div>
-      </section>
 
       {/* Modal */}
       {selectedItem && (

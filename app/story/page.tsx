@@ -6,6 +6,8 @@
 import { client } from "@/sanity/lib/client";
 import SiteFooter from "../components/layout/SiteFooter";
 import Reveal from "../components/ui/Reveal";
+import Image from "next/image";
+import { Coffee, Music, Heart, MapPin, Sparkles, BookOpen } from "lucide-react";
 
 type PortableChild = { text?: string };
 type PortableBlock = { _type?: string; children?: PortableChild[] };
@@ -52,39 +54,43 @@ export default async function StoryPage() {
     "A Riverside original — for locals and creatives alike.",
   ];
 
+  const bulletIcons = [Music, Sparkles, Coffee, BookOpen];
+
   return (
     <main className="min-h-screen" style={{ backgroundColor: '#FAF9F6' }}>
       {/* Header */}
-      <div className="relative py-24 md:py-32 px-6" style={{ backgroundColor: '#F4F1EA' }}>
-        <div className="max-w-3xl mx-auto text-center">
-          <h1 className="font-serif text-5xl md:text-7xl mb-8" style={{ color: '#2C2420' }}>Our Story</h1>
+      <div className="relative py-24 md:py-28 px-6" style={{ backgroundColor: '#F4F1EA' }}>
+        <div className="max-w-5xl mx-auto text-center">
+          <h1 className="font-serif text-5xl md:text-7xl mb-6" style={{ color: '#2C2420' }}>Our Story</h1>
           <div className="w-24 h-1 mx-auto" style={{ backgroundColor: '#A48D78' }}></div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-6 py-20 space-y-20">
+      <div className="max-w-6xl mx-auto px-6 py-20 space-y-20">
         {/* Story Text */}
-        <Reveal>
-          {about?.body ? (
-            <PT body={about.body} />
-          ) : (
-            <div className="prose prose-lg mx-auto font-light" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
-              <p className="first-letter:text-5xl first-letter:font-serif first-letter:mr-3 first-letter:float-left" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
-                It started with a simple observation: Riverside needed a place that felt different.
-                Not a quick stop for caffeine, but a destination. A place where the music wasn't an afterthought,
-                where the chairs were actually comfortable, and where the coffee was treated with the reverence it deserves.
-              </p>
-              <p className="mt-6" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
-                The Notebook Café was born from a love of two things: <strong className="font-medium" style={{ color: '#2C2420' }}>specialty coffee</strong> and <strong className="font-medium" style={{ color: '#2C2420' }}>creative solitude</strong>.
-                We wanted to build a space for the writers, the designers, the students, and the dreamers.
-              </p>
-            </div>
-          )}
-        </Reveal>
+        <div>
+          <Reveal>
+            {about?.body ? (
+              <PT body={about.body} />
+            ) : (
+              <div className="prose prose-lg mx-auto font-light" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
+                <p className="first-letter:text-5xl first-letter:font-serif first-letter:mr-3 first-letter:float-left" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
+                  It started with a simple observation: Riverside needed a place that felt different.
+                  Not a quick stop for caffeine, but a destination. A place where the music wasn't an afterthought,
+                  where the chairs were actually comfortable, and where the coffee was treated with the reverence it deserves.
+                </p>
+                <p className="mt-6" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
+                  The Notebook Café was born from a love of two things: <strong className="font-medium" style={{ color: '#2C2420' }}>specialty coffee</strong> and <strong className="font-medium" style={{ color: '#2C2420' }}>creative solitude</strong>.
+                  We wanted to build a space for the writers, the designers, the students, and the dreamers.
+                </p>
+              </div>
+            )}
+          </Reveal>
+        </div>
 
         {/* Two Column Cards */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-10">
           <Reveal delay={100}>
             <div className="p-8 shadow-sm h-full" style={{ backgroundColor: '#FFFFFF', borderTop: '4px solid #A48D78' }}>
               <h3 className="font-serif text-2xl mb-4" style={{ color: '#2C2420' }}>The Coffee</h3>
@@ -105,54 +111,115 @@ export default async function StoryPage() {
           </Reveal>
         </div>
 
-        {/* Riverside Commitment */}
-        <Reveal delay={100}>
-          <div className="prose prose-lg mx-auto font-light" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
-            <h3 className="font-serif text-2xl mb-4" style={{ color: '#2C2420' }}>Our Riverside Commitment</h3>
-            <p style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
-              We chose the vibrant intersection of University Ave and Orange St because it sits at the cross-section of culture, commerce, and creativity. The Notebook Cafe is built to be a true community anchor for students, creatives, and locals—a peaceful hub to find your flow.
-            </p>
-          </div>
-        </Reveal>
-
-        {/* The Craft & The Rhythm */}
-        <Reveal delay={150}>
-          <div className="prose prose-lg mx-auto font-light" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
-            <h3 className="font-serif text-2xl mb-4" style={{ color: '#2C2420' }}>The Craft & The Rhythm</h3>
-            <p style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
-              Our mission extends beyond the cup. We ensure our specialty espresso is ethically sourced and roasted right, prepared on state-of-the-art equipment for consistent, perfect texture. We treat every step of the brewing process with respect.
-            </p>
-          </div>
-        </Reveal>
-
-        {/* Values Grid */}
-        {bullets.length > 0 && (
-          <div>
-            <h3 className="font-serif text-2xl mb-8 text-center" style={{ color: '#2C2420' }}>{about?.valuesHeading || "What We're Building"}</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {bullets.map((bullet: string, i: number) => (
-                <Reveal key={i} delay={i * 100}>
-                  <div className="p-6 rounded-sm" style={{ backgroundColor: '#F4F1EA' }}>
-                    <p style={{ color: 'rgba(74, 59, 50, 0.8)' }}>{bullet}</p>
-                  </div>
-                </Reveal>
-              ))}
+        {/* Commitments & Craft */}
+        <section className="py-12 md:py-16">
+          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center px-2 md:px-0">
+            <Reveal delay={100}>
+              <div className="order-2 md:order-1 relative">
+                <div className="aspect-[3/4] md:aspect-[4/5] rounded-lg overflow-hidden shadow-sm">
+                  <Image
+                    src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&q=80&w=1400"
+                    alt="Riverside Street"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    priority
+                  />
+                </div>
+                <div
+                  className="absolute -bottom-6 right-4 md:right-0 bg-[#A48D78] text-cafe-white px-6 py-4 rounded-md shadow-xl flex flex-col items-center"
+                  style={{ minWidth: "160px" }}
+                >
+                  <span className="font-serif text-3xl leading-none text-white">2024</span>
+                  <span className="text-xs uppercase tracking-[0.2em]" style={{ color: "rgba(255,255,255,0.9)" }}>
+                    Established
+                  </span>
+                </div>
+              </div>
+            </Reveal>
+            <div className="order-1 md:order-2 space-y-12">
+              <Reveal delay={150}>
+                <div>
+                  <h3 className="font-serif text-3xl md:text-4xl text-cafe-black mb-4 flex items-center gap-3">
+                    <MapPin style={{ color: "#A48D78" }} /> Our Riverside Commitment
+                  </h3>
+                  <p className="text-lg leading-relaxed" style={{ color: "rgba(44, 36, 32, 0.75)" }}>
+                    Located at University Ave & Orange St, we are positioned to be a hub for students and creatives. We believe in the potential of this city.
+                  </p>
+                </div>
+              </Reveal>
+              <Reveal delay={230}>
+                <div>
+                  <h3 className="font-serif text-3xl md:text-4xl text-cafe-black mb-4 flex items-center gap-3">
+                    <Heart style={{ color: "#A48D78" }} /> The Craft &amp; The Rhythm
+                  </h3>
+                  <p className="text-lg leading-relaxed" style={{ color: "rgba(44, 36, 32, 0.75)" }}>
+                    From ethical sourcing to our state-of-the-art equipment, we treat every step of the brewing process with respect. It is not just coffee; it is a ritual.
+                  </p>
+                </div>
+              </Reveal>
             </div>
           </div>
-        )}
+        </section>
 
-        {/* Quote Section */}
-        <Reveal delay={300}>
-          <div className="p-10 md:p-16 text-center relative overflow-hidden rounded-sm" style={{ backgroundColor: '#2C2420', color: '#FFFFFF' }}>
-            <div className="relative z-10">
-              <h3 className="font-serif text-3xl mb-6" style={{ color: '#FFFFFF' }}>
-                {about?.founderNote || '"Riverside is growing. We\'re here to fuel the creativity of this city."'}
-              </h3>
-              <p className="font-sans uppercase tracking-widest text-xs" style={{ color: '#CBB9A4' }}>— The Founders</p>
+        {/* What We're Building */}
+        <section
+          className="py-20 w-full"
+          style={{ backgroundColor: "#2C2420", color: "#FAF9F6" }}
+        >
+          <div className="max-w-6xl mx-auto px-6 text-center">
+            <h2 className="font-serif text-4xl md:text-5xl mb-12" style={{ color: "#FFFFFF" }}>
+              {about?.valuesHeading || "What We're Building"}
+            </h2>
+            <div className="grid sm:grid-cols-2 gap-8 text-left">
+              {bullets.map((val, i) => {
+                const Icon = bulletIcons[i % bulletIcons.length];
+                return (
+                  <Reveal key={i} delay={i * 100}>
+                    <div className="flex gap-3 items-start">
+                      <div
+                        className="w-10 h-10 rounded-full flex items-center justify-center"
+                        style={{
+                          backgroundColor: "rgba(255,255,255,0.08)",
+                          border: "1px solid rgba(255,255,255,0.15)",
+                          color: "#A48D78",
+                        }}
+                      >
+                        <Icon size={16} />
+                      </div>
+                      <p className="text-lg font-light" style={{ color: "rgba(255, 255, 255, 0.85)" }}>
+                        {val}
+                      </p>
+                    </div>
+                  </Reveal>
+                );
+              })}
             </div>
-            <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+
+            <Reveal delay={300}>
+              <div
+                className="mt-16 p-8 rounded-lg relative"
+                style={{ border: "1px solid rgba(164, 141, 120, 0.3)" }}
+              >
+                <div
+                  className="absolute -top-4 left-1/2 -translate-x-1/2 px-4"
+                  style={{ backgroundColor: "#2C2420", color: "#A48D78" }}
+                >
+                  <Music size={32} />
+                </div>
+                <blockquote className="font-serif text-2xl italic leading-relaxed" style={{ color: "#FFFFFF" }}>
+                  "Riverside is growing. We're here to fuel the creativity of this city."
+                </blockquote>
+                <footer
+                  className="mt-4 text-sm font-bold tracking-widest uppercase"
+                  style={{ color: "#A48D78" }}
+                >
+                  — The Founders
+                </footer>
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
+        </section>
       </div>
 
       {/* Footer */}
