@@ -31,7 +31,7 @@ interface RevealProps {
  * @param {string} props.className - Additional CSS classes
  * @returns {JSX.Element} Animated wrapper component
  */
-export default function Reveal({ children, delay = 0, className = '', replay = true }: RevealProps): JSX.Element {
+export default function Reveal({ children, delay = 0, className = '', replay = true }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
