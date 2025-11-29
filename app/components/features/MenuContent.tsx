@@ -355,41 +355,41 @@ export default function MenuContent({ items }: MenuContentProps) {
   return (
     <>
       {/* Tabs - Sticky */}
-      <div className="menu-tabs-sticky flex justify-center gap-8 sm:gap-16 mb-3 border-b border-[rgba(201,154,88,0.2)] scroll-reveal">
+      <div className="menu-tabs-sticky flex justify-center gap-8 sm:gap-16 mb-3 scroll-reveal" style={{ borderBottom: '1px solid rgba(164, 141, 120, 0.2)' }}>
         <button
           onClick={() => setActiveTab("drinks")}
-          className={`pb-4 text-[16px] sm:text-[18px] font-semibold uppercase tracking-wider transition-all relative ${activeTab === "drinks"
-            ? "text-[#2a1f16]"
-            : "text-[#8a7a68] hover:text-[#5a4a38]"
-            }`}
+          className="pb-4 text-[16px] sm:text-[18px] font-semibold uppercase tracking-wider transition-all relative"
+          style={{ color: activeTab === "drinks" ? "#2C2420" : "rgba(74, 59, 50, 0.6)" }}
+          onMouseEnter={(e) => activeTab !== "drinks" && (e.currentTarget.style.color = "#4A3B32")}
+          onMouseLeave={(e) => activeTab !== "drinks" && (e.currentTarget.style.color = "rgba(74, 59, 50, 0.6)")}
         >
           DRINKS
           {activeTab === "drinks" && (
-            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[rgba(201,154,88,0.8)]"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ backgroundColor: '#A48D78' }}></div>
           )}
         </button>
         <button
           onClick={() => setActiveTab("meals")}
-          className={`pb-4 text-[16px] sm:text-[18px] font-semibold uppercase tracking-wider transition-all relative ${activeTab === "meals"
-            ? "text-[#2a1f16]"
-            : "text-[#8a7a68] hover:text-[#5a4a38]"
-            }`}
+          className="pb-4 text-[16px] sm:text-[18px] font-semibold uppercase tracking-wider transition-all relative"
+          style={{ color: activeTab === "meals" ? "#2C2420" : "rgba(74, 59, 50, 0.6)" }}
+          onMouseEnter={(e) => activeTab !== "meals" && (e.currentTarget.style.color = "#4A3B32")}
+          onMouseLeave={(e) => activeTab !== "meals" && (e.currentTarget.style.color = "rgba(74, 59, 50, 0.6)")}
         >
           MEALS
           {activeTab === "meals" && (
-            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[rgba(201,154,88,0.8)]"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ backgroundColor: '#A48D78' }}></div>
           )}
         </button>
         <button
           onClick={() => setActiveTab("desserts")}
-          className={`pb-4 text-[16px] sm:text-[18px] font-semibold uppercase tracking-wider transition-all relative ${activeTab === "desserts"
-            ? "text-[#2a1f16]"
-            : "text-[#8a7a68] hover:text-[#5a4a38]"
-            }`}
+          className="pb-4 text-[16px] sm:text-[18px] font-semibold uppercase tracking-wider transition-all relative"
+          style={{ color: activeTab === "desserts" ? "#2C2420" : "rgba(74, 59, 50, 0.6)" }}
+          onMouseEnter={(e) => activeTab !== "desserts" && (e.currentTarget.style.color = "#4A3B32")}
+          onMouseLeave={(e) => activeTab !== "desserts" && (e.currentTarget.style.color = "rgba(74, 59, 50, 0.6)")}
         >
           DESSERTS
           {activeTab === "desserts" && (
-            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[rgba(201,154,88,0.8)]"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ backgroundColor: '#A48D78' }}></div>
           )}
         </button>
       </div>
@@ -400,10 +400,10 @@ export default function MenuContent({ items }: MenuContentProps) {
           {/* Featured Section */}
           <div className="mb-16">
             <div className="text-center mb-10">
-              <h3 className="text-[22px] sm:text-[26px] font-bold text-[#2a1f16] tracking-wide mb-2">
+              <h3 className="text-[22px] sm:text-[26px] font-bold tracking-wide mb-2" style={{ color: '#2C2420' }}>
                 FEATURED
               </h3>
-              <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
+              <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: 'rgba(164, 141, 120, 0.4)' }}></div>
             </div>
             <div className="notebook-menu-grid">
               {MENU_FEATURED.map((drink, idx) => (
@@ -440,12 +440,12 @@ export default function MenuContent({ items }: MenuContentProps) {
           </div>
 
           {/* Espresso Section */}
-          <div className="mb-16 pt-12 border-t-2 border-[rgba(201,154,88,0.15)]">
+          <div className="mb-16 pt-12 border-t-2" style={{ borderTopColor: 'rgba(164, 141, 120, 0.15)' }}>
             <div className="text-center mb-10">
-              <h3 className="text-[22px] sm:text-[26px] font-bold text-[#2a1f16] tracking-wide mb-2">
+              <h3 className="text-[22px] sm:text-[26px] font-bold tracking-wide mb-2" style={{ color: '#2C2420' }}>
                 ESPRESSO
               </h3>
-              <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
+              <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: 'rgba(164, 141, 120, 0.4)' }}></div>
             </div>
             <div className="notebook-menu-grid">
               {MENU_ESPRESSO.map((drink, idx) => (
@@ -482,12 +482,12 @@ export default function MenuContent({ items }: MenuContentProps) {
           </div>
 
           {/* Classic Coffee Section */}
-          <div className="mb-16 pt-12 border-t-2 border-[rgba(201,154,88,0.15)]">
+          <div className="mb-16 pt-12 border-t-2" style={{ borderTopColor: 'rgba(164, 141, 120, 0.15)' }}>
             <div className="text-center mb-10">
-              <h3 className="text-[22px] sm:text-[26px] font-bold text-[#2a1f16] tracking-wide mb-2">
+              <h3 className="text-[22px] sm:text-[26px] font-bold tracking-wide mb-2" style={{ color: '#2C2420' }}>
                 CLASSIC COFFEE
               </h3>
-              <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
+              <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: 'rgba(164, 141, 120, 0.4)' }}></div>
             </div>
             <div className="notebook-menu-grid">
               {MENU_CLASSIC_COFFEE.map((drink, idx) => (
@@ -524,12 +524,12 @@ export default function MenuContent({ items }: MenuContentProps) {
           </div>
 
           {/* Matcha Section */}
-          <div className="mb-16 pt-12 border-t-2 border-[rgba(201,154,88,0.15)]">
+          <div className="mb-16 pt-12 border-t-2" style={{ borderTopColor: 'rgba(164, 141, 120, 0.15)' }}>
             <div className="text-center mb-10">
-              <h3 className="text-[22px] sm:text-[26px] font-bold text-[#2a1f16] tracking-wide mb-2">
+              <h3 className="text-[22px] sm:text-[26px] font-bold tracking-wide mb-2" style={{ color: '#2C2420' }}>
                 MATCHA
               </h3>
-              <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
+              <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: 'rgba(164, 141, 120, 0.4)' }}></div>
             </div>
             <div className="notebook-menu-grid">
               {MENU_MATCHA.map((drink, idx) => (
@@ -566,12 +566,12 @@ export default function MenuContent({ items }: MenuContentProps) {
           </div>
 
           {/* Teas & More Section */}
-          <div className="mb-16 pt-12 border-t-2 border-[rgba(201,154,88,0.15)]">
+          <div className="mb-16 pt-12 border-t-2" style={{ borderTopColor: 'rgba(164, 141, 120, 0.15)' }}>
             <div className="text-center mb-10">
-              <h3 className="text-[22px] sm:text-[26px] font-bold text-[#2a1f16] tracking-wide mb-2">
+              <h3 className="text-[22px] sm:text-[26px] font-bold tracking-wide mb-2" style={{ color: '#2C2420' }}>
                 TEAS & MORE
               </h3>
-              <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
+              <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: 'rgba(164, 141, 120, 0.4)' }}></div>
             </div>
             <div className="notebook-menu-grid">
               {MENU_TEAS.map((drink, idx) => (
@@ -608,12 +608,12 @@ export default function MenuContent({ items }: MenuContentProps) {
           </div>
 
           {/* Kids Drinks Section */}
-          <div className="mb-16 pt-12 border-t-2 border-[rgba(201,154,88,0.15)]">
+          <div className="mb-16 pt-12 border-t-2" style={{ borderTopColor: 'rgba(164, 141, 120, 0.15)' }}>
             <div className="text-center mb-10">
-              <h3 className="text-[22px] sm:text-[26px] font-bold text-[#2a1f16] tracking-wide mb-2">
+              <h3 className="text-[22px] sm:text-[26px] font-bold tracking-wide mb-2" style={{ color: '#2C2420' }}>
                 KIDS DRINKS
               </h3>
-              <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
+              <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: 'rgba(164, 141, 120, 0.4)' }}></div>
             </div>
             <div className="notebook-menu-grid">
               {MENU_KIDS.map((drink, idx) => (
@@ -650,12 +650,12 @@ export default function MenuContent({ items }: MenuContentProps) {
           </div>
 
           {/* Specialty/Seasonal Section */}
-          <div className="pt-12 border-t-2 border-[rgba(201,154,88,0.15)]">
+          <div className="pt-12 border-t-2" style={{ borderTopColor: 'rgba(164, 141, 120, 0.15)' }}>
             <div className="text-center mb-10">
-              <h3 className="text-[22px] sm:text-[26px] font-bold text-[#2a1f16] tracking-wide mb-2">
+              <h3 className="text-[22px] sm:text-[26px] font-bold tracking-wide mb-2" style={{ color: '#2C2420' }}>
                 SPECIALTY / SEASONAL
               </h3>
-              <div className="w-16 h-1 bg-[rgba(201,154,88,0.4)] mx-auto rounded-full"></div>
+              <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: 'rgba(164, 141, 120, 0.4)' }}></div>
             </div>
             <div className="notebook-menu-grid">
               {MENU_SEASONAL.map((drink, idx) => (

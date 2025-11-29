@@ -1,100 +1,97 @@
 "use client";
 
 import Link from "next/link";
-import { Instagram } from "lucide-react";
-import { FaTiktok } from "react-icons/fa";
+import { Instagram, Headphones, Mail } from "lucide-react";
 
-type SiteFooterProps = {
-  showFloatingItems?: boolean;
-  FloatingItemsComponent?: React.ComponentType<{
-    variant: "welcome" | "footer" | "hero" | "cards";
-  }>;
-  vibeCopy?: string;
-};
-
-export default function SiteFooter({
-  showFloatingItems = false,
-  FloatingItemsComponent,
-}: SiteFooterProps): React.JSX.Element {
+/**
+ * SiteFooter Component
+ *
+ * Global footer with business information and navigation.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * import SiteFooter from '@/app/components/layout/SiteFooter';
+ *
+ * <SiteFooter />
+ * ```
+ *
+ * @returns {React.JSX.Element} Rendered footer
+ */
+export default function SiteFooter(): React.JSX.Element {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="site-footer">
-      {showFloatingItems && FloatingItemsComponent && (
-        <FloatingItemsComponent variant="footer" />
-      )}
-
-      {/* Main Footer Content */}
-      <div className="footer-main">
-        <div className="footer-grid">
-          {/* Brand & Contact */}
-          <div className="footer-brand">
-            <h4 className="footer-brand-name">THE NOTEBOOK CAFÉ</h4>
-            <div className="footer-contact">
-              <p>📍 3512 9th St, Riverside, CA 92501</p>
-              <p>📞 (951) 823-0004</p>
-            </div>
-          </div>
-
-          {/* Navigation Column */}
-          <div className="footer-column">
-            <h5 className="footer-column-title">NAVIGATION</h5>
-            <ul className="footer-links">
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/story">Story</Link></li>
-              <li><Link href="/menu">Menu</Link></li>
-              <li><Link href="/contact">Contact Us</Link></li>
-            </ul>
-          </div>
-
-          {/* Information Column */}
-          <div className="footer-column">
-            <h5 className="footer-column-title">INFORMATION</h5>
-            <ul className="footer-links">
-              <li><Link href="/hours">Hours</Link></li>
-              <li><Link href="/contact">Location</Link></li>
-              <li><Link href="/careers">Careers</Link></li>
-            </ul>
-          </div>
-
-          {/* Policies Column */}
-          <div className="footer-column">
-            <h5 className="footer-column-title">POLICIES</h5>
-            <ul className="footer-links">
-              <li><Link href="/privacy">Privacy Policy</Link></li>
-              <li><Link href="/terms">Terms &amp; Conditions</Link></li>
-            </ul>
-          </div>
-
-          {/* Social Media Column */}
-          <div className="footer-column">
-            <h5 className="footer-column-title">SOCIAL MEDIA</h5>
-            <div className="footer-social-icons">
-              <a
-                href="https://instagram.com/notebookcafe"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="footer-social-link"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="https://tiktok.com/@notebookcafe"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="TikTok"
-                className="footer-social-link"
-              >
-                <FaTiktok className="w-5 h-5" />
-              </a>
-            </div>
+    <footer className="pt-20 pb-10" style={{ backgroundColor: '#2C2420', color: '#F4F1EA' }}>
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div className="md:col-span-2 space-y-6">
+          <h3 className="font-serif text-3xl" style={{ color: '#F4F1EA' }}>The Notebook Café</h3>
+          <p className="font-light max-w-md" style={{ color: 'rgba(203, 185, 164, 0.7)' }}>
+            A space for creatives, thinkers, and coffee lovers.
+            Where house music meets premium espresso in the heart of Riverside.
+          </p>
+          <div className="flex gap-4 pt-4">
+            <a
+              href="https://instagram.com/notebookcafe"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="cursor-pointer transition-colors"
+              style={{ color: '#F4F1EA' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#A48D78'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#F4F1EA'}
+            >
+              <Instagram size={24} />
+            </a>
+            <a
+              href="https://open.spotify.com/user/notebookcafe"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Spotify"
+              className="cursor-pointer transition-colors"
+              style={{ color: '#F4F1EA' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#A48D78'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#F4F1EA'}
+            >
+              <Headphones size={24} />
+            </a>
+            <a
+              href="mailto:hello@thenotebookcafe.com"
+              aria-label="Email"
+              className="cursor-pointer transition-colors"
+              style={{ color: '#F4F1EA' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#A48D78'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#F4F1EA'}
+            >
+              <Mail size={24} />
+            </a>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="footer-copyright">
-          © {year} The Notebook Café LLC — Riverside, CA
+        <div className="space-y-4">
+          <h4 className="uppercase text-xs tracking-[0.2em]" style={{ color: '#A48D78' }}>Location</h4>
+          <address className="not-italic font-light leading-relaxed" style={{ color: 'rgba(203, 185, 164, 0.7)' }}>
+            3512 9th St<br />
+            Riverside, CA 92501<br />
+            <a href="tel:9518230004" className="transition-colors mt-2 block" style={{ color: 'rgba(203, 185, 164, 0.7)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(203, 185, 164, 0.7)'}>(951) 823-0004</a>
+          </address>
+        </div>
+
+        <div className="space-y-4">
+          <h4 className="uppercase text-xs tracking-[0.2em]" style={{ color: '#A48D78' }}>Hours</h4>
+          <div className="font-light space-y-1" style={{ color: 'rgba(203, 185, 164, 0.7)' }}>
+            <p><span className="w-12 inline-block">M-Th</span> 6:30am — 4pm</p>
+            <p><span className="w-12 inline-block">F-Sa</span> 6:30am — 6pm</p>
+            <p><span className="w-12 inline-block">Sun</span> 6:30am — 4pm</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs" style={{ borderColor: 'rgba(255, 255, 255, 0.1)', color: 'rgba(255, 255, 255, 0.3)' }}>
+        <p>&copy; {year} The Notebook Café. All rights reserved.</p>
+        <div className="flex gap-6">
+          <Link href="/privacy" className="transition-colors" style={{ color: 'rgba(255, 255, 255, 0.3)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.3)'}>Privacy</Link>
+          <Link href="/terms" className="transition-colors" style={{ color: 'rgba(255, 255, 255, 0.3)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.3)'}>Terms</Link>
         </div>
       </div>
     </footer>

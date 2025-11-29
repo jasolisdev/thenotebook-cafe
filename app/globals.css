@@ -7,97 +7,47 @@
 /* ============================================================
    CUSTOM FONTS
 ============================================================ */
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Thin.otf') format('opentype');
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Light.otf') format('opentype');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Medium.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Black.otf') format('opentype');
-  font-weight: 900;
-  font-style: normal;
-}
+/* DM Serif Display and Outfit fonts loaded via Google Fonts in layout.tsx */
 
 /* ============================================================
    DESIGN TOKENS
 =========================================================== */
 :root {
-  --font-sans: "Torus", system-ui, sans-serif;
-  --font-mono: "Torus", monospace;
-  --font-display: "Alpino", "Torus", system-ui, sans-serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --font-mono: "Outfit", monospace;
+  --font-display: "DM Serif Display", serif;
 
   /* ===============================
-     NEW COLOR PALETTE
-     (Neutral Café Minimalist Set)
+     UPDATED COLOR PALETTE
+     (Premium Café Design System)
   =============================== */
 
-  --desert-rock: #A48D78;
-  /* Medium warm taupe brown */
-  --soft-sandstone: #CBB9A4;
-  /* Soft beige */
-  --creamed-honey: #EDE7D8;
-  /* Light warm cream */
-  --porcelain-mist: #F4F1EA;
-  /* Near-white beige */
-  --feather-white: #FAF9F6;
-  /* Clean soft white */
+  --cafe-black: #2C2420;
+  --cafe-brown: #4A3B32;
+  --cafe-tan: #A48D78;
+  --cafe-beige: #CBB9A4;
+  --cafe-cream: #EDE7D8;
+  --cafe-mist: #F4F1EA;
+  --cafe-white: #FAF9F6;
 
-  /* Core semantic tokens using new palette */
-  --bg-solid: var(--desert-rock);
-  --bg-dark: var(--desert-rock);
-  --bg-cream: var(--creamed-honey);
-  --cream: var(--creamed-honey);
-
-  --offwhite: var(--feather-white);
+  /* Core semantic tokens */
+  --bg-solid: var(--cafe-white);
+  --bg-dark: var(--cafe-black);
+  --bg-cream: var(--cafe-cream);
+  --bg-mist: var(--cafe-mist);
 
   /* Text colors */
-  --text-light: var(--feather-white);
-  --text-light-muted: var(--porcelain-mist);
-
-  /* Panels / borders */
-  --panel: rgba(164, 141, 120, 0.08);
-  /* desert-rock at 8% */
-  --panel-border: rgba(164, 141, 120, 0.12);
-  --glow: 0 0 0.6rem rgba(164, 141, 120, 0.35);
+  --text-dark: var(--cafe-brown);
+  --text-black: var(--cafe-black);
+  --text-light: var(--cafe-mist);
+  --text-light-muted: var(--cafe-beige);
 
   /* Accent colors */
-  --accent-warm: rgba(164, 141, 120, 0.20);
-  --accent-glow: rgba(164, 141, 120, 0.45);
+  --accent-primary: var(--cafe-tan);
+  --accent-dark: var(--cafe-brown);
 
-  /* Legacy (optional) */
-  --ink-cream: var(--text-light);
-  --ink-cream-dim: var(--text-light-muted);
+  /* Glass panel effect */
+  --glass-bg: rgba(250, 249, 246, 0.85);
 
 }
 
@@ -113,12 +63,13 @@ body,
 html,
 body {
   font-family: var(--font-sans);
-  letter-spacing: -0.15px;
+  letter-spacing: 0;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   width: 100%;
   background-color: var(--bg-solid);
+  color: var(--text-dark);
 }
 
 /* GPU acceleration for smoother animations */
@@ -140,6 +91,42 @@ body {
 
 .scrollbar-none {
   scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hero-content {
+  transform: translateY(-16px);
+}
+
+@media (max-width: 400px) {
+  .hero-content {
+    transform: translateY(34px);
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-content {
+    transform: translateY(0);
+  }
+}
+
+.notched-mobile {
+  overflow: visible;
+}
+
+/* Glass panel effect */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 /* ============================================================
@@ -233,6 +220,26 @@ h3 {
 
   50% {
     box-shadow: 0 0 30px rgba(164, 141, 120, 0.2);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
   }
 }
 

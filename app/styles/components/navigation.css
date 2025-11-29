@@ -4,17 +4,18 @@
 
 /* Header container wraps nav + drawer for proper z-index stacking */
 .header-container {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 49;
-  padding-top: var(--announcement-banner-height, 0px);
+  padding-top: 0;
   /* Below announcement banner (z-index: 50), above page content */
   transition: transform 0.15s ease-out;
   /* Fast, smooth transition for live scroll tracking */
   overflow: visible; /* Ensure drawer is not clipped */
   will-change: transform;
+  background: transparent;
 }
 
 /* Legacy nav-glass-wrap (not currently used) */
@@ -168,7 +169,7 @@
 }
 
 .site-nav a.nav-active {
-  color: rgba(201, 154, 88, 1);
+  color: #A48D78;
   font-weight: 600;
 }
 
@@ -261,7 +262,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: #2a1f16;
+  background: #2C2420;
   border-radius: 2px;
   transition:
     transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
@@ -274,7 +275,7 @@
 .icon-btn--dark:hover .burger-lines::before,
 .icon-btn--dark:hover .burger-lines::after,
 .icon-btn--dark:hover .burger-lines span {
-  background: #2a1f16;
+  background: #2C2420;
 }
 
 .burger-lines::before {

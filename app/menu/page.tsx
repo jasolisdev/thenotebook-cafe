@@ -1,75 +1,333 @@
-/**
- * Menu Page - The Notebook Café
- *
- * Displays the full menu with tab navigation for drinks, meals, and desserts.
- */
-import { client } from "@/sanity/lib/client";
-import MenuContent from "../components/features/MenuContent";
-import ScrollReveal from "../components/layout/ScrollReveal";
-import FloatingItems from "../components/decorative/FloatingItems";
-import Image from "next/image";
-import SiteFooter from "../components/layout/SiteFooter";
 import type { Metadata } from "next";
+import MenuNewContent, { type MenuItem } from "./MenuNewContent";
 
 export const metadata: Metadata = {
   title: "Menu | The Notebook Café",
   description: "Explore our menu of specialty coffee, fresh meals, and delicious desserts.",
 };
 
-async function getData() {
-  const [menuItems, settings, home] = await Promise.all([
-    client.fetch(`*[_type=="menuItem"] | order(section asc, sortOrder asc, name asc) {
-      name,
-      description,
-      price,
-      section,
-      category,
-      sortOrder,
-      "imageUrl": image.asset->url
-    }`),
-    client.fetch(
-      `*[_type=="settings"][0]{ social{ instagram, spotify } }`,
-    ),
-    client.fetch(`*[_type=="homePage"][0]{
-      vibeCopy
-    }`),
-  ]);
-  return { menuItems, settings, home };
-}
+const MENU_ITEMS: MenuItem[] = [
+  // Featured Drinks
+  {
+    id: "1",
+    name: "Honey Lavender Latte",
+    description: "Floral lavender and local honey with espresso and steamed milk. Light and aromatic.",
+    price: "$5.75",
+    section: "drinks",
+    tag: "popular",
+    imageUrl: "/menu/honey-lavender-latte.jpg",
+  },
+  {
+    id: "2",
+    name: "Iced Brown Sugar Shaken Espresso",
+    description: "Shaken espresso with brown sugar and oat milk over ice. Smooth and lightly sweet.",
+    price: "$5.50",
+    section: "drinks",
+    tag: "popular",
+    imageUrl: "/menu/iced-brown-sugar-espresso.jpg",
+  },
 
-export default async function MenuPage() {
-  const { menuItems, settings, home } = await getData();
+  // Espresso Drinks
+  {
+    id: "3",
+    name: "Espresso",
+    description: "Rich, concentrated shot of pure coffee excellence. Bold flavor with a smooth crema finish.",
+    price: "$3.50",
+    section: "drinks",
+    imageUrl: "/menu/tnc-menu-expresso-1.png",
+  },
+  {
+    id: "4",
+    name: "Cappuccino",
+    description: "Espresso with velvety steamed milk and thick foam. Perfectly balanced.",
+    price: "$4.50",
+    section: "drinks",
+    imageUrl: "/menu/cappuccino.jpg",
+  },
+  {
+    id: "5",
+    name: "Vanilla Latte",
+    description: "House-made vanilla syrup, espresso, and steamed milk. Sweet and creamy.",
+    price: "$5.00",
+    section: "drinks",
+    imageUrl: "/menu/vanilla-latte.jpg",
+  },
+  {
+    id: "6",
+    name: "Caramel Macchiato",
+    description: "Vanilla-infused milk, espresso, and caramel drizzle. Layered and sweet.",
+    price: "$5.50",
+    section: "drinks",
+    imageUrl: "/menu/caramel-macchiato.jpg",
+  },
 
-  return (
-    <main className="site-layout">
-      <ScrollReveal />
+  // Classic Coffee
+  {
+    id: "7",
+    name: "Drip Coffee",
+    description: "Freshly brewed classic coffee. Available in light, medium, or dark roast.",
+    price: "$3.00",
+    section: "drinks",
+    imageUrl: "/menu/cold-brew.jpg",
+  },
+  {
+    id: "8",
+    name: "Americano",
+    description: "Espresso shots diluted with hot water. Bold yet smooth.",
+    price: "$3.75",
+    section: "drinks",
+    imageUrl: "/menu/cold-brew.jpg",
+  },
+  {
+    id: "9",
+    name: "Cold Brew",
+    description: "Smooth cold brew steeped for 16 hours. Served over ice, naturally sweet.",
+    price: "$4.50",
+    section: "drinks",
+    imageUrl: "/menu/cold-brew.jpg",
+  },
+  {
+    id: "10",
+    name: "Iced Coffee",
+    description: "Chilled brewed coffee over ice. Simple and refreshing.",
+    price: "$3.50",
+    section: "drinks",
+    imageUrl: "/menu/cold-brew.jpg",
+  },
 
-      {/* Menu Section - Cream Background */}
-      <section className="section-cream pb-16 sm:pb-20 relative" style={{ paddingTop: 'calc(var(--announcement-banner-height, 42px) + 60px)' }}>
-        <FloatingItems />
-        <div className="mx-auto max-w-[1200px] px-0 relative z-10">
-          {/* Header */}
-          <div className="text-center mb-12 scroll-reveal">
-            <h1 className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-tight text-[#2a1f16] mb-4">
-              MENU
-            </h1>
-            <p className="text-[15px] sm:text-[16px] text-[#5a4a38] max-w-[600px] mx-auto">
-              Crafted with intention. Brewed with rhythm. Explore our signature drinks, matcha blends, and handcrafted pastries—made fresh, every day.
-            </p>
-          </div>
+  // Matcha
+  {
+    id: "11",
+    name: "Matcha Latte",
+    description: "Premium Japanese matcha whisked with steamed milk. Earthy and smooth.",
+    price: "$5.50",
+    section: "drinks",
+    imageUrl: "/menu/vanilla-latte.jpg",
+  },
+  {
+    id: "12",
+    name: "Iced Matcha Latte",
+    description: "Creamy iced matcha with your choice of milk. Refreshing green goodness.",
+    price: "$5.50",
+    section: "drinks",
+    imageUrl: "/menu/iced-mocha.jpg",
+  },
+  {
+    id: "13",
+    name: "Matcha Lemonade",
+    description: "Vibrant matcha shaken with fresh lemonade. Sweet, tart, and energizing.",
+    price: "$5.75",
+    section: "drinks",
+    imageUrl: "/menu/iced-mocha.jpg",
+  },
+  {
+    id: "14",
+    name: "Vanilla Matcha",
+    description: "Matcha with house-made vanilla syrup and steamed milk. Sweet and balanced.",
+    price: "$6.00",
+    section: "drinks",
+    imageUrl: "/menu/vanilla-latte.jpg",
+  },
+  {
+    id: "15",
+    name: "Coconut Matcha",
+    description: "Matcha with coconut milk and a hint of coconut syrup. Tropical twist.",
+    price: "$6.00",
+    section: "drinks",
+    imageUrl: "/menu/vanilla-latte.jpg",
+  },
+  {
+    id: "16",
+    name: "Strawberry Matcha",
+    description: "Matcha layered with strawberry puree and milk. Instagram-worthy favorite.",
+    price: "$6.25",
+    section: "drinks",
+    imageUrl: "/menu/iced-mocha.jpg",
+  },
 
-          {/* Menu Content with Tabs */}
-          <MenuContent items={menuItems} />
-        </div>
-      </section>
+  // Teas & Other
+  {
+    id: "17",
+    name: "Earl Grey Tea",
+    description: "Classic black tea with bergamot. Aromatic and refined.",
+    price: "$3.50",
+    section: "drinks",
+    imageUrl: "/menu/cappuccino.jpg",
+  },
+  {
+    id: "18",
+    name: "Chamomile Tea",
+    description: "Soothing herbal tea. Naturally caffeine-free and calming.",
+    price: "$3.50",
+    section: "drinks",
+    imageUrl: "/menu/cappuccino.jpg",
+  },
+  {
+    id: "19",
+    name: "Green Tea",
+    description: "Light and refreshing Japanese green tea. Delicate and pure.",
+    price: "$3.50",
+    section: "drinks",
+    imageUrl: "/menu/cappuccino.jpg",
+  },
+  {
+    id: "20",
+    name: "Chai Latte",
+    description: "Spiced black tea with steamed milk. Warm and comforting.",
+    price: "$5.00",
+    section: "drinks",
+    imageUrl: "/menu/vanilla-latte.jpg",
+  },
+  {
+    id: "21",
+    name: "Hot Chocolate",
+    description: "Rich dark chocolate with steamed milk and whipped cream. Kid and adult approved.",
+    price: "$4.50",
+    section: "drinks",
+    imageUrl: "/menu/iced-mocha.jpg",
+  },
 
-      {/* Divider - Wavy transition to dark footer */}
-      <div className="divider-cream">
-        <Image src="/notebook-divider-cream.svg" alt="" width={1440} height={120} />
-      </div>
+  // Kids Drinks
+  {
+    id: "22",
+    name: "Steamed Milk",
+    description: "Warm steamed milk with a choice of vanilla, chocolate, or caramel flavor.",
+    price: "$3.00",
+    section: "drinks",
+    imageUrl: "/menu/vanilla-latte.jpg",
+  },
+  {
+    id: "23",
+    name: "Kids Hot Chocolate",
+    description: "Smaller portion of our rich hot chocolate. Topped with whipped cream and sprinkles.",
+    price: "$3.50",
+    section: "drinks",
+    imageUrl: "/menu/iced-mocha.jpg",
+  },
+  {
+    id: "24",
+    name: "Apple Juice",
+    description: "Fresh pressed apple juice. No added sugar.",
+    price: "$2.50",
+    section: "drinks",
+    imageUrl: "/menu/cold-brew.jpg",
+  },
+  {
+    id: "25",
+    name: "Chocolate Milk",
+    description: "Cold whole milk with premium chocolate syrup. Classic favorite.",
+    price: "$3.00",
+    section: "drinks",
+    imageUrl: "/menu/iced-mocha.jpg",
+  },
 
-      {/* Footer */}
-      <SiteFooter vibeCopy={home?.vibeCopy} />
-    </main>
-  );
+  // Seasonal Drinks
+  {
+    id: "26",
+    name: "Pumpkin Spice Latte",
+    description: "Fall classic with pumpkin, cinnamon, and nutmeg. Topped with whipped cream.",
+    price: "$6.00",
+    section: "drinks",
+    tag: "seasonal",
+    imageUrl: "/menu/pumpkin-spice-latte.jpg",
+  },
+  {
+    id: "27",
+    name: "Peppermint Mocha",
+    description: "Rich chocolate, espresso, and cool peppermint. Holiday favorite, hot or iced.",
+    price: "$6.00",
+    section: "drinks",
+    tag: "seasonal",
+    imageUrl: "/menu/peppermint-mocha.jpg",
+  },
+
+  // Meals
+  {
+    id: "28",
+    name: "Breakfast Sandwich",
+    description: "Egg, cheddar, and bacon on a toasted English muffin. Add avocado +$2.",
+    price: "$8.50",
+    section: "meals",
+    imageUrl: "/menu/breakfast-sandwich.jpg",
+  },
+  {
+    id: "29",
+    name: "Avocado Toast",
+    description: "Smashed avocado on sourdough with cherry tomatoes, feta, and chili flakes.",
+    price: "$9.00",
+    section: "meals",
+    tag: "popular",
+    imageUrl: "/menu/avocado-toast.jpg",
+  },
+  {
+    id: "30",
+    name: "Turkey & Swiss Panini",
+    description: "Sliced turkey, Swiss cheese, spinach, and honey mustard on pressed ciabatta.",
+    price: "$10.50",
+    section: "meals",
+    imageUrl: "/menu/turkey-swiss-panini.jpg",
+  },
+  {
+    id: "31",
+    name: "Grilled Cheese & Tomato Soup",
+    description: "Classic grilled cheese on sourdough with creamy tomato basil soup.",
+    price: "$9.50",
+    section: "meals",
+    imageUrl: "/menu/grilled-cheese-soup.jpg",
+  },
+  {
+    id: "32",
+    name: "Caesar Salad",
+    description: "Crisp romaine, parmesan, croutons, and house Caesar dressing. Add chicken +$3.",
+    price: "$9.00",
+    section: "meals",
+    imageUrl: "/menu/caesar-salad.jpg",
+  },
+  {
+    id: "33",
+    name: "Yogurt Parfait",
+    description: "Greek yogurt layered with granola, fresh berries, and a drizzle of honey.",
+    price: "$7.00",
+    section: "meals",
+    imageUrl: "/menu/yogurt-parfait.jpg",
+  },
+
+  // Desserts
+  {
+    id: "34",
+    name: "New York Cheesecake",
+    description: "Classic creamy cheesecake on a graham cracker crust. Topped with berry compote.",
+    price: "$6.00",
+    section: "desserts",
+    imageUrl: "/menu/new-york-cheesecake.jpg",
+  },
+  {
+    id: "35",
+    name: "Chocolate Brownie",
+    description: "Rich, fudgy brownie with walnuts. Served warm with vanilla ice cream.",
+    price: "$5.00",
+    section: "desserts",
+    tag: "popular",
+    imageUrl: "/menu/chocolate-brownie.jpg",
+  },
+  {
+    id: "36",
+    name: "Chocolate Chip Cookie",
+    description: "Freshly baked, gooey center with semi-sweet chocolate chips. A classic favorite.",
+    price: "$3.50",
+    section: "desserts",
+    imageUrl: "/menu/chocolate-chip-cookie.jpg",
+  },
+  {
+    id: "37",
+    name: "Cinnamon Roll",
+    description: "House-made cinnamon roll with cream cheese frosting. Warm and indulgent.",
+    price: "$5.50",
+    section: "desserts",
+    imageUrl: "/menu/cinnamon-roll.jpg",
+  },
+];
+
+export default function MenuNewPage() {
+  return <MenuNewContent items={MENU_ITEMS} />;
 }
