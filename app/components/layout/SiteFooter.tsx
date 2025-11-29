@@ -23,7 +23,7 @@ export default function SiteFooter(): React.JSX.Element {
 
   return (
     <footer className="pt-20 pb-10" style={{ backgroundColor: '#2C2420', color: '#F4F1EA' }}>
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-12 mb-16">
         <div className="md:col-span-2 space-y-6">
           <h3 className="font-serif text-3xl" style={{ color: '#F4F1EA' }}>The Notebook Café</h3>
           <p className="font-light max-w-md" style={{ color: 'rgba(203, 185, 164, 0.7)' }}>
@@ -83,6 +83,17 @@ export default function SiteFooter(): React.JSX.Element {
             <p><span className="w-12 inline-block">M-Th</span> 6:30am — 4pm</p>
             <p><span className="w-12 inline-block">F-Sa</span> 6:30am — 6pm</p>
             <p><span className="w-12 inline-block">Sun</span> 6:30am — 4pm</p>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <h4 className="uppercase text-xs tracking-[0.2em]" style={{ color: '#A48D78' }}>Navigation</h4>
+          <div className="flex flex-col gap-2 font-light" style={{ color: 'rgba(203, 185, 164, 0.7)' }}>
+            <Link href="/" className="transition-colors" style={{ color: 'rgba(203, 185, 164, 0.7)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(203, 185, 164, 0.7)'}>Home</Link>
+            <Link href="/menu" className="transition-colors" style={{ color: 'rgba(203, 185, 164, 0.7)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(203, 185, 164, 0.7)'}>Menu</Link>
+            <Link href="/story" className="transition-colors" style={{ color: 'rgba(203, 185, 164, 0.7)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(203, 185, 164, 0.7)'}>Story</Link>
+            <Link href="/events" className="transition-colors" style={{ color: 'rgba(203, 185, 164, 0.7)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(203, 185, 164, 0.7)'}>Events</Link>
+            <Link href="/contact" className="transition-colors" style={{ color: 'rgba(203, 185, 164, 0.7)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(203, 185, 164, 0.7)'}>Contact</Link>
           </div>
         </div>
       </div>

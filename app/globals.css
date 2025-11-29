@@ -30,6 +30,15 @@
   --cafe-mist: #F4F1EA;
   --cafe-white: #FAF9F6;
 
+  /* RGB helpers for rgba() usage */
+  --cafe-black-rgb: 44, 36, 32;
+  --cafe-brown-rgb: 74, 59, 50;
+  --cafe-tan-rgb: 164, 141, 120;
+  --cafe-beige-rgb: 203, 185, 164;
+  --cafe-cream-rgb: 237, 231, 216;
+  --cafe-mist-rgb: 244, 241, 234;
+  --cafe-white-rgb: 250, 249, 246;
+
   /* Core semantic tokens */
   --bg-solid: var(--cafe-white);
   --bg-dark: var(--cafe-black);
