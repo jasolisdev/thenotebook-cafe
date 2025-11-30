@@ -28,6 +28,7 @@ import PasswordGate from "./components/ui/PasswordGate";
 import SiteHeader from "./components/layout/SiteHeader";
 import Script from "next/script";
 import { client } from "@/sanity/lib/client";
+import VirtualBarista from "./components/ui/VirtualBarista";
 
 // Google Fonts
 const dmSerif = DM_Serif_Display({
@@ -99,6 +100,7 @@ export default async function RootLayout({
                 spotifyUrl={settings?.social?.spotify}
               />
               {children}
+              <VirtualBarista />
             </>
           )}
         </ThemeProvider>

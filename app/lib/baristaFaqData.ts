@@ -1,0 +1,292 @@
+export type FaqItem = {
+  id: string;
+  question: string;
+  answer: string;
+  keywords: string[];
+};
+
+// Common, non-sensitive questions the barista should answer from local data.
+export const GENERAL_FAQ: FaqItem[] = [
+  {
+    id: "greeting",
+    question: "Hi / hello",
+    answer: "Hey there. Welcome to The Notebook Café. Need a rec or just vibing?",
+    keywords: ["hi", "hello", "hey", "whats up", "how are you"],
+  },
+  {
+    id: "thanks",
+    question: "Thanks / thank you",
+    answer: "Anytime. If you want a rec, just say the vibe you’re after.",
+    keywords: ["thanks", "thank", "thx", "appreciate it"],
+  },
+  {
+    id: "capabilities",
+    question: "What can you do?",
+    answer: "I’m Roxanna, the virtual barista. I can answer questions about our cafe, menu, hours, events, and give recommendations.",
+    keywords: ["what can you do", "help", "abilities", "capabilities", "how can you help", "what do you do"],
+  },
+  {
+    id: "reset",
+    question: "Reset / clear",
+    answer: "I don’t keep long-term memory here. You can just ask a new question and I’ll answer fresh.",
+    keywords: ["reset", "clear", "start over", "forget"],
+  },
+  {
+    id: "identity",
+    question: "Are you an AI?",
+    answer: "Yep, I’m Roxanna, the virtual barista for The Notebook Café. I stick to our cafe details.",
+    keywords: ["ai", "robot", "bot", "virtual", "who are you"],
+  },
+  {
+    id: "privacy",
+    question: "Privacy / data",
+    answer: "I only use what you type to answer your question and I don’t store personal info.",
+    keywords: ["privacy", "data", "collect", "store", "tracking"],
+  },
+  {
+    id: "joke",
+    question: "Tell me a joke",
+    answer: "What do baristas do before making espresso? They get ground-ed. Want a real rec instead?",
+    keywords: ["joke", "funny", "laugh", "humor"],
+  },
+  {
+    id: "stop",
+    question: "Stop / bye",
+    answer: "All good. I’m here when you need me.",
+    keywords: ["stop", "bye", "goodbye", "exit", "leave me alone", "done"],
+  },
+  {
+    id: "who_made_you",
+    question: "Who made you?",
+    answer: "I was built for The Notebook Café as a virtual barista to keep guests in the loop.",
+    keywords: ["who made you", "creator", "built you", "made you"],
+  },
+  {
+    id: "time",
+    question: "What time is it / what day is it?",
+    answer: "I don’t have your clock here—check your device. I can help with hours, menu, or recs though.",
+    keywords: ["time", "day", "date", "clock", "what day", "what time"],
+  },
+  {
+    id: "hours",
+    question: "What are your hours?",
+    answer: "Hours: Mon-Thu 6:30am–4:00pm, Fri-Sat 6:30am–6:00pm, Sun closed.",
+    keywords: ["hours", "open", "close", "closing", "when", "time"],
+  },
+  {
+    id: "location",
+    question: "Where are you located?",
+    answer: "3512 9th St, Riverside, CA 92501. Want directions?",
+    keywords: ["where", "address", "location", "map", "directions"],
+  },
+  {
+    id: "opened",
+    question: "When did you open?",
+    answer: "We opened in 2025 in Riverside—built for creatives, writers, and coffee lovers.",
+    keywords: ["when opened", "since", "est", "how long", "open"],
+  },
+  {
+    id: "popular",
+    question: "Most popular coffee?",
+    answer: "House favorites: Honey Lavender Latte, Iced Brown Sugar Shaken Espresso, Avocado Toast if you’re hungry.",
+    keywords: ["popular", "best", "recommendation", "what should I get", "favorite"],
+  },
+  {
+    id: "seasonal",
+    question: "Seasonal drinks?",
+    answer: "Seasonal now: Pumpkin Spice Latte and Peppermint Mocha. Ask and we’ll confirm what’s on bar.",
+    keywords: ["seasonal", "limited", "special", "holiday", "pumpkin", "peppermint"],
+  },
+  {
+    id: "decaf",
+    question: "Do you have decaf?",
+    answer: "We can pull decaf espresso—just ask for decaf on any espresso drink.",
+    keywords: ["decaf", "decaffeinated", "no caffeine"],
+  },
+  {
+    id: "sugar_free",
+    question: "Sugar-free options?",
+    answer: "We can keep drinks low-sweet or unsweetened; ask for less syrup or no sweetener.",
+    keywords: ["sugar free", "no sugar", "less sweet", "unsweetened"],
+  },
+  {
+    id: "dairy_free",
+    question: "Dairy-free / vegan?",
+    answer: "We have oat milk and can make most drinks dairy-free. For vegan, avoid whipped cream and check pastries for dairy.",
+    keywords: ["dairy free", "non dairy", "vegan", "plant", "oat milk", "almond"],
+  },
+  {
+    id: "gluten_free",
+    question: "Gluten-free?",
+    answer: "We’re not a gluten-free kitchen; some items may be naturally low gluten but we can’t guarantee.",
+    keywords: ["gluten", "gluten free", "celiac"],
+  },
+  {
+    id: "wifi",
+    question: "WiFi / outlets?",
+    answer: "Fast WiFi and outlets along the walls. No hard time limit—just be kind during rush hours.",
+    keywords: ["wifi", "wi-fi", "internet", "outlet", "plug", "power", "work", "study"],
+  },
+  {
+    id: "music",
+    question: "What music do you play?",
+    answer: "Low lights, deep house, neo-soul, and lo-fi. No Top 40—built for focus and chill.",
+    keywords: ["music", "playlist", "vibe", "loud", "quiet", "sound"],
+  },
+  {
+    id: "smalltalk_weather",
+    question: "Weather / small talk",
+    answer: "I can’t see the weather here, but I’ve got you on coffee, menu, and hours.",
+    keywords: ["weather", "rain", "sunny", "outside"],
+  },
+  {
+    id: "hiring",
+    question: "Are you hiring?",
+    answer: "We’re always meeting great people. Drop a note at hello@thenotebookcafe.com with your background.",
+    keywords: ["hiring", "jobs", "work", "careers", "apply", "position"],
+  },
+  {
+    id: "gift_cards",
+    question: "Gift cards?",
+    answer: "We have in-cafe gift cards; ask at the counter.",
+    keywords: ["gift card", "giftcard", "gift", "card"],
+  },
+  {
+    id: "loyalty",
+    question: "Loyalty / rewards?",
+    answer: "We keep it simple right now—no app punches yet, but we’ll let you know when we launch rewards.",
+    keywords: ["loyalty", "rewards", "points", "punch card", "stamp"],
+  },
+  {
+    id: "mobile_order",
+    question: "Mobile order / preorder?",
+    answer: "No mobile ordering yet. For bigger orders, call ahead at (951) 823-0004 and we’ll set it up.",
+    keywords: ["mobile", "order ahead", "preorder", "pickup", "pick up", "online order"],
+  },
+  {
+    id: "parking",
+    question: "Parking?",
+    answer: "Street parking nearby; give yourself a few extra minutes during peak hours.",
+    keywords: ["parking", "park", "car", "lot"],
+  },
+  {
+    id: "pets",
+    question: "Are pets allowed?",
+    answer: "Leashed pups are welcome on the patio. Service animals are welcome inside.",
+    keywords: ["pet", "dog", "dogs", "cat", "animal", "service"],
+  },
+  {
+    id: "allergies",
+    question: "Allergies / milk options?",
+    answer: "We can make most drinks with oat or other non-dairy milk. For allergies, tell us and we’ll guide you; baked goods may contain gluten and dairy.",
+    keywords: ["allergy", "allergies", "allergen", "dairy", "milk", "oat", "gluten", "almond"],
+  },
+  {
+    id: "kids",
+    question: "Options for kids?",
+    answer: "Kid-friendly: steamed milk, kids hot chocolate, chocolate milk, apple juice.",
+    keywords: ["kids", "child", "children", "family", "kid"],
+  },
+  {
+    id: "events",
+    question: "Events?",
+    answer: "Events coming up: Sunday Deep House Sessions (Oct 12, 7:00 PM), Writers’ Block Open Mic (Oct 15, 6:00 PM), Latte Art Throwdown (Oct 20, 10:00 AM).",
+    keywords: ["event", "events", "music", "dj", "open mic", "community", "happening"],
+  },
+  {
+    id: "private_events",
+    question: "Private events / rentals?",
+    answer: "Reach out at hello@thenotebookcafe.com for private events or collaborations—we’ll tailor it.",
+    keywords: ["private", "rent", "rental", "venue", "event space", "host", "party"],
+  },
+  {
+    id: "reservations",
+    question: "Do you take reservations?",
+    answer: "No formal reservations, but email hello@thenotebookcafe.com for groups or collabs and we’ll sort it out.",
+    keywords: ["reservation", "book", "booking", "table", "group"],
+  },
+  {
+    id: "menu_full",
+    question: "Can I see the full menu?",
+    answer: "You can view the full menu on our site. Quick highlights: espresso drinks, cold brew, matcha lineup, avocado toast, paninis, salads, and desserts.",
+    keywords: ["menu", "full menu", "list", "everything", "food", "drinks"],
+  },
+  {
+    id: "contact",
+    question: "How do I contact you?",
+    answer: "Call (951) 823-0004 or email hello@thenotebookcafe.com.",
+    keywords: ["contact", "email", "phone", "call", "reach"],
+  },
+  {
+    id: "payment",
+    question: "What payments do you take?",
+    answer: "We take cards and tap-to-pay; cash is fine too.",
+    keywords: ["payment", "pay", "card", "cash", "apple pay", "tap"],
+  },
+  {
+    id: "wait_time",
+    question: "How long is the line?",
+    answer: "Mornings can stack up, but we move fast. Afternoons are usually breezier.",
+    keywords: ["line", "wait", "busy", "crowded", "rush"],
+  },
+  {
+    id: "bathroom",
+    question: "Restroom?",
+    answer: "Restrooms are available for guests—ask at the counter.",
+    keywords: ["bathroom", "restroom", "toilet", "washroom"],
+  },
+  {
+    id: "water",
+    question: "Water / refills?",
+    answer: "We’re happy to give you water. Coffee refills aren’t free, but we can do a fresh drip to-go.",
+    keywords: ["water", "refill", "refills"],
+  },
+  {
+    id: "catering",
+    question: "Catering / bulk orders?",
+    answer: "For catering or bulk coffee/food, email hello@thenotebookcafe.com with details and timing.",
+    keywords: ["cater", "catering", "bulk", "large order", "group order"],
+  },
+  {
+    id: "beans_retail",
+    question: "Do you sell beans?",
+    answer: "We can bag beans for home; ask which roasts we have on bar.",
+    keywords: ["beans", "bag", "retail", "take home", "coffee beans"],
+  },
+  {
+    id: "brew_methods",
+    question: "Brew methods?",
+    answer: "Espresso, drip, and cold brew on tap. Ask if you want a flavor note rundown.",
+    keywords: ["brew", "method", "pour over", "espresso", "drip", "cold brew"],
+  },
+  {
+    id: "customize",
+    question: "Can I customize my drink?",
+    answer: "Totally—extra shot, less sweet, different milk. Just tell us how you like it.",
+    keywords: ["custom", "customize", "extra shot", "half sweet", "less sweet", "milk swap"],
+  },
+  {
+    id: "sizes",
+    question: "What sizes do you have?",
+    answer: "Standard sizes: 12oz hot, 16oz cold for most drinks.",
+    keywords: ["size", "sizes", "large", "small", "medium", "ounces", "oz"],
+  },
+  {
+    id: "cold_brew_vs_iced",
+    question: "Cold brew vs iced coffee?",
+    answer: "Cold brew is slow-steeped, smooth, and lower acid; iced coffee is brewed hot and cooled—brighter flavor.",
+    keywords: ["cold brew", "iced coffee", "difference", "compare"],
+  },
+  {
+    id: "merch",
+    question: "Do you sell merch?",
+    answer: "We rotate small-batch merch; ask in-store for current drops.",
+    keywords: ["merch", "merchandise", "shirt", "mug", "hat"],
+  },
+  {
+    id: "pricing",
+    question: "How much does it cost?",
+    answer: "Prices vary by item—espresso drinks start around $3.50 and signature drinks are in the $5–6 range.",
+    keywords: ["price", "pricing", "cost", "expensive", "cheap"],
+  },
+];
