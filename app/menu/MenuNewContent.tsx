@@ -67,7 +67,7 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
   return (
     <section
       data-section="Menu Page"
-      className="min-h-screen pb-20"
+      className="min-h-screen"
       style={{ backgroundColor: "#FAF9F6" }}
     >
       {/* Header */}
@@ -243,31 +243,33 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
       {/* Modal */}
       {selectedItem && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-cafe-black/60 backdrop-blur-sm animate-fade-in"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-0 sm:p-4 bg-cafe-black/60 backdrop-blur-sm animate-fade-in"
           onClick={() => setSelectedItem(null)}
         >
           <div
-            className="bg-white rounded-sm w-full max-w-2xl overflow-hidden shadow-2xl animate-slide-up flex flex-col md:flex-row"
+            className="bg-white rounded-none sm:rounded-sm w-full h-full sm:h-auto sm:max-w-2xl overflow-hidden shadow-2xl animate-slide-up flex flex-col md:flex-row"
             onClick={(e) => e.stopPropagation()}
           >
             {selectedItem.imageUrl && (
-              <div className="w-full md:w-1/2 h-64 md:h-auto relative">
+              <div className="w-full md:w-1/2 h-[40vh] sm:h-64 md:h-auto relative">
                 <Image src={selectedItem.imageUrl} alt={selectedItem.name} fill className="object-cover" />
               </div>
             )}
-            <div className="p-8 md:p-10 flex-1 relative flex flex-col justify-center">
+            <div className="p-6 sm:p-8 md:p-10 flex-1 relative flex flex-col justify-between sm:justify-center overflow-y-auto">
               <button
                 onClick={() => setSelectedItem(null)}
-                className="absolute top-4 right-4 text-cafe-brown hover:text-cafe-tan transition-colors"
+                className="absolute top-4 right-4 text-cafe-brown hover:text-cafe-tan transition-colors z-10 bg-white/80 backdrop-blur-sm rounded-full p-2 sm:bg-transparent sm:backdrop-blur-none sm:p-0"
               >
                 <X size={24} />
               </button>
-              <span className="text-cafe-tan text-xs uppercase tracking-widest font-bold mb-2">
-                {selectedItem.section}
-              </span>
-              <h3 className="font-serif text-3xl mb-4 text-cafe-black">{selectedItem.name}</h3>
-              <p className="text-cafe-brown/80 font-light mb-6 leading-relaxed">{selectedItem.description}</p>
-              <div className="flex items-center justify-between mt-auto">
+              <div className="flex-1 sm:flex-none">
+                <span className="text-cafe-tan text-xs uppercase tracking-widest font-bold mb-2 block">
+                  {selectedItem.section}
+                </span>
+                <h3 className="font-serif text-3xl mb-4 text-cafe-black">{selectedItem.name}</h3>
+                <p className="text-cafe-brown/80 font-light mb-6 leading-relaxed">{selectedItem.description}</p>
+              </div>
+              <div className="flex items-center justify-between mt-auto pt-4 border-t border-cafe-beige/20 sm:border-0 sm:pt-0">
                 <span className="text-2xl font-serif text-cafe-black">{formatPrice(selectedItem.price)}</span>
                 <button className="bg-cafe-black text-white px-6 py-2 text-xs uppercase tracking-widest hover:bg-cafe-tan transition-colors">
                   Add to Order

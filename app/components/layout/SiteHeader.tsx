@@ -24,9 +24,10 @@ export default function SiteHeader({
 
   const isActive = (path: string): boolean => pathname === path;
 
-  // Close drawer on route change
+  // Close drawer on route change and scroll to top
   useEffect(() => {
     setIsOpen(false);
+    window.scrollTo(0, 0);
   }, [pathname]);
 
   // Lock body scroll when drawer is open
