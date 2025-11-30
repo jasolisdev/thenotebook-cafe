@@ -56,7 +56,7 @@ const settings = defineType({
           name: "instagram",
           type: "url",
           title: "Instagram URL",
-          description: "https://instagram.com/the.notebookcafe",
+          description: "https://www.instagram.com/thenotebookcafellc/",
         }),
         defineField({
           name: "tiktok",

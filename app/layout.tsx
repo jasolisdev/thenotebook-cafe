@@ -22,12 +22,28 @@ import "./styles/pages/events.css";
 import "./styles/pages/contact.css";
 
 import { ThemeProvider } from "next-themes";
-import { torus } from "./fonts";
+import { DM_Serif_Display, Outfit } from "next/font/google";
 import { cookies } from "next/headers";
 import PasswordGate from "./components/ui/PasswordGate";
 import SiteHeader from "./components/layout/SiteHeader";
 import Script from "next/script";
 import { client } from "@/sanity/lib/client";
+
+// Google Fonts
+const dmSerif = DM_Serif_Display({
+  weight: ["400"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const outfit = Outfit({
+  weight: ["300", "400", "500", "600"],
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "The Notebook Café",
@@ -62,7 +78,7 @@ export default async function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${torus.variable}`}
+      className={`${dmSerif.variable} ${outfit.variable}`}
     >
       <body className="antialiased font-sans">
         <Script

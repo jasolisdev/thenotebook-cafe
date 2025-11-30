@@ -7,106 +7,56 @@
 /* ============================================================
    CUSTOM FONTS
 ============================================================ */
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Thin.otf') format('opentype');
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Light.otf') format('opentype');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Medium.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Black.otf') format('opentype');
-  font-weight: 900;
-  font-style: normal;
-}
+/* DM Serif Display and Outfit fonts loaded via Google Fonts in layout.tsx */
 
 /* ============================================================
    DESIGN TOKENS
 =========================================================== */
 :root {
-  --font-sans: "Torus", system-ui, sans-serif;
-  --font-mono: "Torus", monospace;
-  --font-display: "Alpino", "Torus", system-ui, sans-serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --font-mono: "Outfit", monospace;
+  --font-display: "DM Serif Display", serif;
 
-  /* New café palette */
-  --latte-cream: #ede7d8;
-  /* base background (lightened almond) */
-  --vanilla-beige: #d6bd98;
-  /* Almond */
-  --paper-bag: #c4b59f;
-  /* softened neutral */
-  --warm-taupe: #677d6a;
-  /* Matcha Brew */
-  --coffee-bean: #3D4030;
-  /* Deep olive (matches hero gradient) */
-  --soft-mocha: #40534c;
-  /* Forest Roast (cool green - accent) */
-  --foggy-cappuccino: #b7afa6;
-  /* dividers / outlines */
-  --deep-roast: #0f1c1c;
-  /* extra contrast */
-  --espresso-brown: #2a1f16;
-  /* Primary dark brown for text */
-  --warm-brown: #5a4a38;
-  /* Secondary brown for text on cream */
+  /* ===============================
+     UPDATED COLOR PALETTE
+     (Premium Café Design System)
+  =============================== */
 
-  /* Solid background + neutrals */
-  --bg-solid: var(--coffee-bean);
-  --bg-dark: var(--coffee-bean);
-  --bg-cream: var(--latte-cream);
-  --cream: var(--latte-cream);
-  --offwhite: #f8f3e8;
-  --warm-roast: var(--soft-mocha);
-  --latte: var(--vanilla-beige);
-  --taupe: var(--paper-bag);
+  --cafe-black: #2C2420;
+  --cafe-brown: #4A3B32;
+  --cafe-tan: #A48D78;
+  --cafe-beige: #CBB9A4;
+  --cafe-cream: #EDE7D8;
+  --cafe-mist: #F4F1EA;
+  --cafe-white: #FAF9F6;
 
-  /* Text colors (semantic names) */
-  --text-light: #f8f3e8;
-  /* Primary text on dark backgrounds */
-  --text-light-muted: #e4dbc8;
-  /* Muted text on dark backgrounds */
+  /* RGB helpers for rgba() usage */
+  --cafe-black-rgb: 44, 36, 32;
+  --cafe-brown-rgb: 74, 59, 50;
+  --cafe-tan-rgb: 164, 141, 120;
+  --cafe-beige-rgb: 203, 185, 164;
+  --cafe-cream-rgb: 237, 231, 216;
+  --cafe-mist-rgb: 244, 241, 234;
+  --cafe-white-rgb: 250, 249, 246;
 
-  /* Legacy names (deprecated) */
-  --ink-cream: var(--text-light);
-  --ink-cream-dim: var(--text-light-muted);
+  /* Core semantic tokens */
+  --bg-solid: var(--cafe-white);
+  --bg-dark: var(--cafe-black);
+  --bg-cream: var(--cafe-cream);
+  --bg-mist: var(--cafe-mist);
 
-  /* Panels / borders */
-  --panel: rgba(61, 64, 48, 0.06);
-  --panel-border: rgba(61, 64, 48, 0.08);
-  --glow: 0 0 0.6rem rgba(61, 64, 48, 0.35);
+  /* Text colors */
+  --text-dark: var(--cafe-brown);
+  --text-black: var(--cafe-black);
+  --text-light: var(--cafe-mist);
+  --text-light-muted: var(--cafe-beige);
 
-  /* Accent colors for hover states */
-  --accent-warm: rgba(61, 64, 48, 0.18);
-  --accent-glow: rgba(61, 64, 48, 0.42);
+  /* Accent colors */
+  --accent-primary: var(--cafe-tan);
+  --accent-dark: var(--cafe-brown);
+
+  /* Glass panel effect */
+  --glass-bg: rgba(250, 249, 246, 0.85);
 
 }
 
@@ -122,12 +72,13 @@ body,
 html,
 body {
   font-family: var(--font-sans);
-  letter-spacing: -0.15px;
+  letter-spacing: 0;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   width: 100%;
-  background-color: #3D4030;
+  background-color: var(--bg-solid);
+  color: var(--text-dark);
 }
 
 /* GPU acceleration for smoother animations */
@@ -151,6 +102,42 @@ body {
   scrollbar-width: none;
 }
 
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hero-content {
+  transform: translateY(-16px);
+}
+
+@media (max-width: 400px) {
+  .hero-content {
+    transform: translateY(34px);
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-content {
+    transform: translateY(0);
+  }
+}
+
+.notched-mobile {
+  overflow: visible;
+}
+
+/* Glass panel effect */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
 /* ============================================================
    GLOBAL UTILITIES
 ============================================================ */
@@ -158,22 +145,9 @@ body {
   min-height: 100dvh;
   background: var(--bg-solid);
   color: var(--text-light);
-  padding-top: 106px;
-  /* Banner (42px) + Nav (64px) */
-}
-
-@media (min-width: 375px) {
-  .site-layout {
-    padding-top: 110px;
-    /* Banner (46px) + Nav (64px) */
-  }
-}
-
-@media (min-width: 640px) {
-  .site-layout {
-    padding-top: 112px;
-    /* Banner (48px) + Nav (64px) */
-  }
+  padding-top: calc(var(--announcement-banner-height, 42px) + 80px);
+  transition: padding-top 0.3s ease;
+  /* Dynamic: Banner height + Nav (80px) */
 }
 
 /* Text color utilities for dark backgrounds */
@@ -250,11 +224,31 @@ h3 {
 
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(164, 131, 116, 0.1);
+    box-shadow: 0 0 20px rgba(164, 141, 120, 0.1);
   }
 
   50% {
-    box-shadow: 0 0 30px rgba(164, 131, 116, 0.2);
+    box-shadow: 0 0 30px rgba(164, 141, 120, 0.2);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
   }
 }
 
@@ -309,11 +303,38 @@ h3 {
    ACCESSIBILITY
 ============================================================ */
 ::selection {
-  background: rgba(164, 131, 116, 0.3);
+  background: rgba(164, 141, 120, 0.3);
   color: var(--ink-cream);
 }
 
 *:focus-visible {
-  outline: 2px solid rgba(164, 131, 116, 0.5);
+  outline: 2px solid rgba(164, 141, 120, 0.5);
   outline-offset: 2px;
+}
+
+/* ============================================================
+   DEBUG SECTION HELPERS
+============================================================ */
+.debug-section {
+  position: relative;
+  box-shadow: inset 0 0 0 3px var(--debug-color, #ff6b6b);
+}
+
+.debug-section::before {
+  content: attr(data-section);
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  z-index: 10;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--debug-color, #ff6b6b);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--debug-color, #ff6b6b);
+  border-radius: 4px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  pointer-events: none;
 }

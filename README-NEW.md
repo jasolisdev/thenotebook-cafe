@@ -269,19 +269,30 @@ Components are organized by purpose:
 app/styles/components/
 ├── announcement.css
 ├── buttons.css
+├── card-gallery.css
 ├── footer.css
 ├── hero.css
 ├── modal.css
-└── navigation.css
+├── navigation.css
+├── page-transitions.css
+└── what-to-expect.css
+```
+
+**Layout Styles:**
+```
+app/styles/layout/
+├── animations.css
+└── sections.css
 ```
 
 **Page Styles:**
 ```
 app/styles/pages/
-├── home.css
-├── menu.css
 ├── about.css
-└── events.css
+├── contact.css
+├── events.css
+├── home.css
+└── menu.css
 ```
 
 **Best Practices:**
@@ -376,6 +387,7 @@ Set in Vercel project settings:
 
 - **CLAUDE.md** — Developer guide and AI assistant context
 - **README.md** (this file) — Project overview and quick start
+- **CSS_ORGANIZATION.md** — Complete CSS architecture and organization guide
 - **REFACTORING_SUMMARY.md** — Complete refactoring documentation
 
 ---

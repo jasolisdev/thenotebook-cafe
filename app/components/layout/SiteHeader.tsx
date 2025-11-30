@@ -3,365 +3,287 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
-import { SiSpotify, SiInstagram, SiFacebook } from "react-icons/si";
+import { useEffect, useState } from "react";
+import { Instagram, Menu as MenuIcon, X, Coffee } from "lucide-react";
 import AnnouncementBanner from "../ui/AnnouncementBanner";
 
-// Suppress hydration warnings for client-only components
-const isBrowser = typeof window !== "undefined";
-
-/**
- * Responsive breakpoint types for navigation behavior
- */
-type Breakpoint = "sm" | "md" | "lg" | "xl";
-
-/**
- * Props for the SiteHeader component
- */
 type SiteHeaderProps = {
-  /** Instagram profile URL */
   instagramUrl?: string;
-
-  /** Spotify playlist URL */
   spotifyUrl?: string;
-
-  /**
-   * Breakpoint at which mobile menu switches to desktop navigation
-   * @default "lg"
-   */
-  burgerUntil?: Breakpoint;
-
-  /** Optional custom announcement text */
   announcementText?: string;
 };
 
-/**
- * Breakpoint pixel values for responsive behavior
- */
-const BP_PX: Record<Breakpoint, number> = {
-  sm: 640,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
-};
-
-/**
- * SiteHeader Component
- *
- * Global navigation header with responsive mobile drawer menu.
- * Includes announcement banner, desktop navigation, and full-screen mobile overlay.
- *
- * @component
- * @example
- * ```tsx
- * import SiteHeader from '@/app/components/layout/SiteHeader';
- *
- * // Basic usage
- * <SiteHeader />
- *
- * // With social links
- * <SiteHeader
- *   instagramUrl="https://instagram.com/notebookcafe"
- *   spotifyUrl="https://open.spotify.com/playlist/..."
- * />
- *
- * // Custom breakpoint
- * <SiteHeader burgerUntil="md" />
- * ```
- *
- * @description
- * Features:
- * - Fixed announcement banner at top
- * - Responsive navigation (desktop: horizontal, mobile: full-screen overlay)
- * - Active page highlighting
- * - Mobile drawer with social links and vibe text
- * - Keyboard navigation (ESC to close drawer)
- * - Body scroll lock when drawer is open
- * - Decorative floating coffee beans in drawer
- *
- * Navigation Structure:
- * - Desktop: Home | Menu | Story | Contact
- * - Mobile: HOME | MENU | STORY | CONTACT + social icons + footer
- *
- * @param {SiteHeaderProps} props - Component props
- * @returns {React.JSX.Element} Rendered header
- */
 export default function SiteHeader({
   instagramUrl,
   spotifyUrl,
-  burgerUntil = "lg",
   announcementText,
 }: SiteHeaderProps): React.JSX.Element {
-  const [open, setOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const pathname = usePathname();
 
-  /**
-   * Handles mobile menu toggle button click
-   * Prevents event bubbling and toggles drawer state
-   */
-  const handleToggle = (e: React.MouseEvent): void => {
-    e.preventDefault();
-    e.stopPropagation();
-    const newState = !open;
-    setOpen(newState);
+  const isActive = (path: string): boolean => pathname === path;
+
+  const scrollToTop = () => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
   };
 
-  /**
-   * Close drawer when navigating to a new page
-   */
+  const handleNavClick = () => {
+    setIsOpen(false);
+    scrollToTop();
+  };
+
+  // Close drawer on route change
   useEffect(() => {
-    setOpen(false);
+    setIsOpen(false);
+    scrollToTop();
   }, [pathname]);
 
-  /**
-   * Close drawer on ESC key press
-   */
+  // Lock body scroll when drawer is open
   useEffect(() => {
-    const onKey = (e: KeyboardEvent): void => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  /**
-   * Lock body scroll when drawer is open
-   */
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open]);
-
-  /**
-   * Checks if the given href matches the current pathname
-   * Used for active link highlighting
-   *
-   * @param {string} href - Link href to check
-   * @returns {boolean} True if link is active
-   */
-  const isActive = (href: string): boolean => pathname === href;
-
-  const bpPx = useMemo(() => BP_PX[burgerUntil], [burgerUntil]);
+  }, [isOpen]);
 
   return (
-    <div suppressHydrationWarning>
-      {/* Announcement Banner */}
+    <>
       <AnnouncementBanner text={announcementText} />
 
-      {/* Responsive breakpoint styles */}
-      <style jsx>{`
-        @media (min-width: ${bpPx}px) {
-          .burger-btn {
-            display: none !important;
-          }
-          .nav-desktop-show {
-            display: inline-flex !important;
-          }
-        }
-        @media (max-width: ${bpPx - 0.02}px) {
-          .nav-desktop-show {
-            display: none !important;
-          }
-        }
-      `}</style>
-
-      {/* Header Navigation Bar */}
-      <div className="header-container">
-        <header
-          className={`site-header ${open ? "header-open" : ""}`}
-          role="banner"
-        >
-          {/* Brand Logo */}
-          <Link
-            href="/"
-            className="site-brand brand-inline"
-            aria-label="The Notebook Café - Home"
-          >
+      <nav
+        className="sticky top-0 z-50 border-b border-cafe-beige/20"
+        style={{
+          backgroundColor: "rgba(250, 249, 246, 0.65)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          color: "#4A3B32",
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 group">
             <Image
-              src="/thenotebookcafe-navbar-dark.png"
-              alt="The Notebook Café"
-              width={200}
-              height={68}
+              src="/logo.png"
+              alt="The Notebook Café logo"
+              width={40}
+              height={40}
+              className="w-10 h-10 object-contain rounded-sm transition-transform duration-300 group-hover:rotate-3"
               priority
-              className="brand-logo"
             />
-            <span className="sr-only">The Notebook Café</span>
+            <span
+              className="font-serif text-2xl tracking-tight text-cafe-black"
+              style={{ color: "#2C2420" }}
+            >
+              The Notebook Café
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav
-            className="site-nav nav-desktop-show"
-            aria-label="Primary navigation"
-          >
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-12">
             <Link
-              className={isActive("/") ? "nav-active" : ""}
               href="/"
-              aria-current={isActive("/") ? "page" : undefined}
+              onClick={handleNavClick}
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
             >
               Home
             </Link>
             <Link
-              className={isActive("/menu") ? "nav-active" : ""}
               href="/menu"
-              aria-current={isActive("/menu") ? "page" : undefined}
+              onClick={handleNavClick}
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/menu") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
             >
               Menu
             </Link>
             <Link
-              className={isActive("/story") ? "nav-active" : ""}
               href="/story"
-              aria-current={isActive("/story") ? "page" : undefined}
+              onClick={handleNavClick}
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/story") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
             >
               Story
             </Link>
             <Link
-              className={isActive("/contact") ? "nav-active" : ""}
+              href="/events"
+              onClick={handleNavClick}
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/events") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
+            >
+              Events
+            </Link>
+            <Link
               href="/contact"
-              aria-current={isActive("/contact") ? "page" : undefined}
+              onClick={handleNavClick}
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/contact") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
             >
               Contact
             </Link>
-          </nav>
+          </div>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Desktop Social/Action */}
+          <div className="hidden md:flex items-center gap-4">
+            <a
+              href={instagramUrl || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cafe-brown hover:text-cafe-tan transition-colors"
+              aria-label="Instagram"
+              style={{ color: "#4A3B32" }}
+            >
+              <Instagram size={20} />
+            </a>
+            <a
+              href={spotifyUrl || instagramUrl || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-cafe-tan text-white px-5 py-2 text-xs uppercase tracking-widest rounded-sm hover:bg-cafe-brown transition-colors"
+              style={{ backgroundColor: "#A48D78" }}
+            >
+              Follow
+            </a>
+          </div>
+
+          {/* Mobile Toggle */}
           <button
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            aria-controls="mobile-drawer"
-            className={`icon-btn-primary burger burger-btn ${open ? "is-open" : ""}`}
-            onClick={handleToggle}
-            type="button"
+            className={`md:hidden text-cafe-black burger ${isOpen ? "is-open" : ""}`}
+            onClick={() => setIsOpen((prev) => !prev)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
           >
             <span className="burger-lines">
               <span />
             </span>
           </button>
-        </header>
-      </div>
+        </div>
+      </nav>
 
-      {/* Mobile Drawer - Full-screen overlay */}
-      <aside
-        id="mobile-drawer"
-        className={`drawer ${open ? "open" : ""}`}
-        role="dialog"
-        aria-modal="true"
-        aria-hidden={!open}
-        onClick={() => setOpen(false)}
+      {/* Mobile Drawer */}
+      <div
+        className={`fixed inset-0 z-[80] drawer ${isOpen ? "open" : ""} ${isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        style={{
+          backgroundColor: "#F4F0E9",
+          color: "#2C2420",
+          boxShadow: "0 20px 60px rgba(42,31,22,0.18)",
+          zIndex: 80,
+          top: "0",
+          height: "100vh",
+        }}
       >
-        {/* Drawer Content */}
-        <div className="drawer-content" onClick={(e) => e.stopPropagation()}>
-          {/* Mobile Navigation Links */}
-          <nav className="drawer-nav" aria-label="Mobile navigation">
+        <div className="flex flex-col h-full p-8 pt-20 relative">
+          <button
+            onClick={() => setIsOpen(false)}
+            className="absolute top-6 right-6 text-cafe-black hover:rotate-90 transition-transform duration-300 md:hidden"
+            aria-label="Close menu"
+          >
+            <X size={28} />
+          </button>
+
+          <div className="flex flex-col gap-8 mt-24 items-center text-center">
             <Link
               href="/"
-              onClick={() => setOpen(false)}
-              className={`drawer-nav-item ${open ? "is-visible" : ""} ${isActive("/") ? "nav-active" : ""}`}
-              aria-current={isActive("/") ? "page" : undefined}
+              onClick={handleNavClick}
+              className="font-serif text-4xl text-cafe-black hover:text-cafe-tan transition-colors tracking-wide"
             >
-              HOME
+              Home
             </Link>
             <Link
               href="/menu"
-              onClick={() => setOpen(false)}
-              className={`drawer-nav-item ${open ? "is-visible" : ""} ${isActive("/menu") ? "nav-active" : ""}`}
-              aria-current={isActive("/menu") ? "page" : undefined}
+              onClick={handleNavClick}
+              className="font-serif text-4xl text-cafe-black hover:text-cafe-tan transition-colors tracking-wide"
             >
-              MENU
+              Menu
             </Link>
             <Link
               href="/story"
-              onClick={() => setOpen(false)}
-              className={`drawer-nav-item ${open ? "is-visible" : ""} ${isActive("/story") ? "nav-active" : ""}`}
-              aria-current={isActive("/story") ? "page" : undefined}
+              onClick={handleNavClick}
+              className="font-serif text-4xl text-cafe-black hover:text-cafe-tan transition-colors tracking-wide"
             >
-              STORY
+              Story
+            </Link>
+            <Link
+              href="/events"
+              onClick={handleNavClick}
+              className="font-serif text-4xl text-cafe-black hover:text-cafe-tan transition-colors tracking-wide"
+            >
+              Events
             </Link>
             <Link
               href="/contact"
-              onClick={() => setOpen(false)}
-              className={`drawer-nav-item ${open ? "is-visible" : ""} ${isActive("/contact") ? "nav-active" : ""}`}
-              aria-current={isActive("/contact") ? "page" : undefined}
+              onClick={handleNavClick}
+              className="font-serif text-4xl text-cafe-black hover:text-cafe-tan transition-colors tracking-wide"
             >
-              CONTACT
+              Contact
             </Link>
-          </nav>
+          </div>
 
-          {/* Drawer Footer */}
-          <div className={`drawer-footer ${open ? "is-visible" : ""}`}>
-            {/* Vibe Statement */}
-            <p className="drawer-vibe-text">
+          <div className="mt-auto flex flex-col items-center gap-4 text-center">
+            <p className="font-sans text-sm tracking-widest text-cafe-tan italic">
               Low lights, good sound, better coffee.
             </p>
-
-            {/* Social Links Header */}
-            <p className="drawer-follow-text">Follow us!</p>
-
-            {/* Social Icons */}
-            <div className="drawer-social-icons">
+            <div className="w-12 h-0.5 bg-cafe-beige/50"></div>
+            <div className="flex gap-4 mt-1">
               <a
-                href={
-                  spotifyUrl ||
-                  "https://open.spotify.com/playlist/58qhSWWn3g1QeCKoVFoAJk"
-                }
+                href={spotifyUrl || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Spotify Playlist"
-                className="drawer-social-icon"
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-cafe-cream text-cafe-brown border border-cafe-beige/60 hover:-translate-y-[2px] transition-transform shadow-sm"
+                aria-label="Spotify"
               >
-                <span className="icon-wrapper">
-                  <SiSpotify size={20} />
-                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path d="M12 1.75A10.25 10.25 0 1 0 22.25 12 10.262 10.262 0 0 0 12 1.75zm4.646 14.566a.749.749 0 0 1-1.03.256 7.425 7.425 0 0 0-7.232-.21.75.75 0 0 1-.638-1.36 8.925 8.925 0 0 1 8.7.252.75.75 0 0 1 .2 1.062zm1.373-3.064a.937.937 0 0 1-.33.252.749.749 0 0 1-.61-.04 9.9 9.9 0 0 0-9.63-.28.75.75 0 1 1-.64-1.358 11.4 11.4 0 0 1 11.07.325.75.75 0 0 1 .14 1.1zm.07-3.187a.75.75 0 0 1-.648.425.77.77 0 0 1-.325-.075 12.88 12.88 0 0 0-12.25-.377.75.75 0 0 1-.65-1.354 14.38 14.38 0 0 1 13.66.42.75.75 0 0 1 .213.961z" />
+                </svg>
               </a>
               <a
                 href={instagramUrl || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-cafe-cream text-cafe-brown border border-cafe-beige/60 hover:-translate-y-[2px] transition-transform shadow-sm"
                 aria-label="Instagram"
-                className="drawer-social-icon"
               >
-                <span className="icon-wrapper icon-adjust">
-                  <SiInstagram size={20} />
-                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 5.25A3.75 3.75 0 1 0 15.75 12 3.754 3.754 0 0 0 12 8.25zm0 6.25A2.5 2.5 0 1 1 14.5 12 2.503 2.503 0 0 1 12 14.5zM17.75 7a1 1 0 1 0 1 1 1 1 0 0 0-1-1z" />
+                </svg>
               </a>
               <a
-                href="https://facebook.com"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-cafe-cream text-cafe-brown border border-cafe-beige/60 hover:-translate-y-[2px] transition-transform shadow-sm"
                 aria-label="Facebook"
-                className="drawer-social-icon"
               >
-                <span className="icon-wrapper icon-adjust">
-                  <SiFacebook size={20} />
-                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path d="M13 10h2.5l.5-3H13V5.5c0-.864.22-1.5 1.5-1.5H16V1.14C15.395 1.048 14.292 1 13.75 1 11.178 1 9.5 2.657 9.5 5.3V7H7v3h2.5v9h3.5z" />
+                </svg>
               </a>
             </div>
+            <p className="font-sans text-sm tracking-widest text-cafe-tan">EST. 2025</p>
+          </div>
+
+          {/* Decorative */}
+          <div className="absolute bottom-12 right-12 opacity-10 pointer-events-none animate-float-slow">
+            <Coffee size={120} />
           </div>
         </div>
-
-        {/* Floating Decorative Coffee Beans */}
-        <div className="drawer-floating-items" aria-hidden="true">
-          <Image
-            src="/notebook-coffeebean-up-right.svg"
-            alt=""
-            className="drawer-bean-1"
-            width={160}
-            height={160}
-          />
-          <Image
-            src="/notebook-coffeebean-up-left.svg"
-            alt=""
-            className="drawer-bean-2"
-            width={160}
-            height={160}
-          />
-        </div>
-      </aside>
-    </div>
+      </div>
+    </>
   );
 }

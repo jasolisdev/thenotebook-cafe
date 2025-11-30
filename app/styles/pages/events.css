@@ -6,24 +6,29 @@
    HERO SECTION
 ============================================================ */
 .events-hero {
-  padding: clamp(96px, 12vh, 120px) 0 clamp(48px, 10vh, 72px);
+  padding-top: calc(var(--announcement-banner-height, 42px) + clamp(96px, 12vh, 120px));
+  padding-bottom: clamp(48px, 10vh, 72px);
+  transition: padding-top 0.3s ease;
 }
 
 @media (min-width: 375px) {
   .events-hero {
-    padding: clamp(104px, 13vh, 128px) 0 clamp(56px, 11vh, 84px);
+    padding-top: calc(var(--announcement-banner-height, 46px) + clamp(104px, 13vh, 128px));
+    padding-bottom: clamp(56px, 11vh, 84px);
   }
 }
 
 @media (min-width: 640px) {
   .events-hero {
-    padding: clamp(112px, 14vh, 136px) 0 clamp(64px, 12vh, 96px);
+    padding-top: calc(var(--announcement-banner-height, 48px) + clamp(112px, 14vh, 136px));
+    padding-bottom: clamp(64px, 12vh, 96px);
   }
 }
 
 @media (min-width: 1024px) {
   .events-hero {
-    padding: clamp(120px, 15vh, 144px) 0 clamp(72px, 13vh, 104px);
+    padding-top: calc(var(--announcement-banner-height, 48px) + clamp(120px, 15vh, 144px));
+    padding-bottom: clamp(72px, 13vh, 104px);
   }
 }
 
@@ -36,16 +41,16 @@
   align-items: center;
   gap: 10px;
   padding: 10px 20px;
-  background: linear-gradient(135deg, rgba(164, 131, 116, 0.12), rgba(164, 131, 116, 0.06));
-  border: 1px solid rgba(164, 131, 116, 0.25);
+  background: linear-gradient(135deg, rgba(164, 141, 120, 0.12), rgba(164, 141, 120, 0.06));
+  border: 1px solid rgba(164, 141, 120, 0.25);
   border-radius: 9999px;
   margin-bottom: 24px;
   font-size: 11px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: rgba(164, 131, 116, 0.9);
-  box-shadow: 0 4px 12px rgba(164, 131, 116, 0.12);
+  color: rgba(164, 141, 120, 0.9);
+  box-shadow: 0 4px 12px rgba(164, 141, 120, 0.12);
 }
 
 @media (min-width: 375px) {
@@ -65,7 +70,7 @@
 }
 
 .events-badge-icon {
-  color: rgba(164, 131, 116, 0.9);
+  color: rgba(164, 141, 120, 0.9);
   animation: pulse 3s ease-in-out infinite;
 }
 
@@ -162,7 +167,7 @@
   gap: 12px;
   padding: 16px;
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(164, 131, 116, 0.2);
+  border: 1px solid rgba(164, 141, 120, 0.2);
   border-radius: 14px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.02);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -182,15 +187,15 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top left, rgba(164, 131, 116, 0.06), transparent 60%);
+  background: radial-gradient(circle at top left, rgba(164, 141, 120, 0.06), transparent 60%);
   opacity: 0;
   transition: opacity 0.3s;
 }
 
 .events-detail-item:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 24px rgba(164, 131, 116, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  border-color: rgba(164, 131, 116, 0.3);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 24px rgba(164, 141, 120, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border-color: rgba(164, 141, 120, 0.3);
   background: rgba(255, 255, 255, 0.05);
 }
 
@@ -201,14 +206,14 @@
 .events-detail-icon {
   width: 24px;
   height: 24px;
-  color: rgba(164, 131, 116, 0.8);
+  color: rgba(164, 141, 120, 0.8);
   flex-shrink: 0;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s;
 }
 
 .events-detail-item:hover .events-detail-icon {
   transform: scale(1.15) rotate(-5deg);
-  color: rgba(164, 131, 116, 1);
+  color: rgba(164, 141, 120, 1);
 }
 
 @media (min-width: 640px) {
