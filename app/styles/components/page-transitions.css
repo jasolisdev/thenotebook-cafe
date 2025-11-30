@@ -44,17 +44,7 @@
   }
 }
 
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Prevent scroll jump during transitions */
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
+/* Scroll behavior is handled by Next.js router and globals.css */
 
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {

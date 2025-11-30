@@ -24,13 +24,9 @@ export default function SiteHeader({
 
   const isActive = (path: string): boolean => pathname === path;
 
-  // Close drawer on route change and scroll to top
+  // Close drawer on route change
   useEffect(() => {
     setIsOpen(false);
-    // Use setTimeout to ensure scroll happens after page render
-    setTimeout(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    }, 0);
   }, [pathname]);
 
   // Lock body scroll when drawer is open
