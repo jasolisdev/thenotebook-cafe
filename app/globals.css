@@ -145,9 +145,9 @@ body {
   min-height: 100dvh;
   background: var(--bg-solid);
   color: var(--text-light);
-  padding-top: calc(var(--announcement-banner-height, 42px) + 80px);
+  padding-top: 80px;
   transition: padding-top 0.3s ease;
-  /* Dynamic: Banner height + Nav (80px) */
+  /* Nav height only (banner hidden) */
 }
 
 /* Text color utilities for dark backgrounds */

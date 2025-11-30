@@ -35,7 +35,7 @@ export default function EventsPage() {
       {/* Hero */}
       <section
         data-section="Events Hero"
-        className="py-20"
+        className="pt-28 pb-20 md:pt-32"
         style={{ backgroundColor: "#2C2420", color: "#FFFFFF" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
