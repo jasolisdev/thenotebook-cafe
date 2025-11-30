@@ -16,10 +16,10 @@ import AtmosphereStrip from "./components/AtmosphereStrip";
 import SignaturePoursGrid from "./components/SignaturePoursGrid";
 
 const vibeImages = [
-  "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800"
+  "/unsplash/tnc-placeholder-3.png",
+  "/unsplash/tnc-placeholder-4.png",
+  "/unsplash/tnc-placeholder-5.png",
+  "/unsplash/tnc-placeholder-6.png"
 ];
 
 const signaturePours = [
@@ -213,7 +213,7 @@ export default async function HomePage() {
           <Reveal delay={200}>
             <div className="grid grid-cols-2 gap-4">
               <Image
-                src="https://fastly.picsum.photos/id/317/600/800.jpg?hmac=FUG5I3XLdVPHF10ynppPLQNZrA-9AKByLVsLLdeEC5k"
+                src="/unsplash/tnc-placeholder-1.png"
                 alt="Barista Pouring"
                 width={900}
                 height={1200}
@@ -221,7 +221,7 @@ export default async function HomePage() {
                 priority
               />
               <Image
-                src="https://fastly.picsum.photos/id/454/600/800.jpg?hmac=U5_LTgKSxoPXiJNXT9S1wwsIHNEEc6BuJG0CqBvt4BI"
+                src="/unsplash/tnc-placeholder-2.png"
                 alt="Cafe Corner"
                 width={900}
                 height={1200}
@@ -358,7 +358,7 @@ export default async function HomePage() {
       <section
         data-section="Atmosphere Images"
         className="overflow-visible"
-        style={{ backgroundColor: 'var(--cafe-black)' }}
+        style={{ backgroundColor: 'var(--cafe-white)' }}
       >
         <AtmosphereStrip images={vibeImages} />
       </section>

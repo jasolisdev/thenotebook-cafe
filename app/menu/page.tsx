@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: "Explore our menu of specialty coffee, fresh meals, and delicious desserts.",
 };
 
+const placeholderImage = "/unsplash/tnc-placeholder-menuitem.png";
+
 const MENU_ITEMS: MenuItem[] = [
   // Featured Drinks
   {
@@ -16,7 +18,7 @@ const MENU_ITEMS: MenuItem[] = [
     section: "drinks",
     subcategory: "Featured Drinks",
     tag: "popular",
-    imageUrl: "/menu/honey-lavender-latte.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "2",
@@ -26,7 +28,7 @@ const MENU_ITEMS: MenuItem[] = [
     section: "drinks",
     subcategory: "Featured Drinks",
     tag: "popular",
-    imageUrl: "/menu/iced-brown-sugar-espresso.jpg",
+    imageUrl: placeholderImage,
   },
 
   // Espresso Drinks
@@ -37,7 +39,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$3.50",
     section: "drinks",
     subcategory: "Espresso Drinks",
-    imageUrl: "/menu/tnc-menu-expresso-1.png",
+    imageUrl: placeholderImage,
   },
   {
     id: "4",
@@ -46,7 +48,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$4.50",
     section: "drinks",
     subcategory: "Espresso Drinks",
-    imageUrl: "/menu/cappuccino.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "5",
@@ -55,7 +57,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$5.00",
     section: "drinks",
     subcategory: "Espresso Drinks",
-    imageUrl: "/menu/vanilla-latte.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "6",
@@ -64,7 +66,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$5.50",
     section: "drinks",
     subcategory: "Espresso Drinks",
-    imageUrl: "/menu/caramel-macchiato.jpg",
+    imageUrl: placeholderImage,
   },
 
   // Classic Coffee
@@ -75,7 +77,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$3.00",
     section: "drinks",
     subcategory: "Classic Coffee",
-    imageUrl: "/menu/cold-brew.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "8",
@@ -84,7 +86,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$3.75",
     section: "drinks",
     subcategory: "Classic Coffee",
-    imageUrl: "/menu/cold-brew.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "9",
@@ -93,7 +95,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$4.50",
     section: "drinks",
     subcategory: "Classic Coffee",
-    imageUrl: "/menu/cold-brew.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "10",
@@ -102,7 +104,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$3.50",
     section: "drinks",
     subcategory: "Classic Coffee",
-    imageUrl: "/menu/cold-brew.jpg",
+    imageUrl: placeholderImage,
   },
 
   // Matcha
@@ -113,7 +115,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$5.50",
     section: "drinks",
     subcategory: "Matcha",
-    imageUrl: "/menu/vanilla-latte.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "12",
@@ -122,7 +124,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$5.50",
     section: "drinks",
     subcategory: "Matcha",
-    imageUrl: "/menu/iced-mocha.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "13",
@@ -131,7 +133,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$5.75",
     section: "drinks",
     subcategory: "Matcha",
-    imageUrl: "/menu/iced-mocha.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "14",
@@ -140,7 +142,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$6.00",
     section: "drinks",
     subcategory: "Matcha",
-    imageUrl: "/menu/vanilla-latte.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "15",
@@ -149,7 +151,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$6.00",
     section: "drinks",
     subcategory: "Matcha",
-    imageUrl: "/menu/vanilla-latte.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "16",
@@ -158,7 +160,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$6.25",
     section: "drinks",
     subcategory: "Matcha",
-    imageUrl: "/menu/iced-mocha.jpg",
+    imageUrl: placeholderImage,
   },
 
   // Teas & Other
@@ -169,7 +171,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$3.50",
     section: "drinks",
     subcategory: "Teas & Other",
-    imageUrl: "/menu/cappuccino.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "18",
@@ -178,7 +180,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$3.50",
     section: "drinks",
     subcategory: "Teas & Other",
-    imageUrl: "/menu/cappuccino.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "19",
@@ -187,7 +189,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$3.50",
     section: "drinks",
     subcategory: "Teas & Other",
-    imageUrl: "/menu/cappuccino.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "20",
@@ -196,7 +198,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$5.00",
     section: "drinks",
     subcategory: "Teas & Other",
-    imageUrl: "/menu/vanilla-latte.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "21",
@@ -205,7 +207,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$4.50",
     section: "drinks",
     subcategory: "Teas & Other",
-    imageUrl: "/menu/iced-mocha.jpg",
+    imageUrl: placeholderImage,
   },
 
   // Kids Drinks
@@ -216,7 +218,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$3.00",
     section: "drinks",
     subcategory: "Kids Drinks",
-    imageUrl: "/menu/vanilla-latte.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "23",
@@ -225,7 +227,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$3.50",
     section: "drinks",
     subcategory: "Kids Drinks",
-    imageUrl: "/menu/iced-mocha.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "24",
@@ -234,7 +236,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$2.50",
     section: "drinks",
     subcategory: "Kids Drinks",
-    imageUrl: "/menu/cold-brew.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "25",
@@ -243,7 +245,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$3.00",
     section: "drinks",
     subcategory: "Kids Drinks",
-    imageUrl: "/menu/iced-mocha.jpg",
+    imageUrl: placeholderImage,
   },
 
   // Seasonal Drinks
@@ -255,7 +257,7 @@ const MENU_ITEMS: MenuItem[] = [
     section: "drinks",
     subcategory: "Seasonal Drinks",
     tag: "seasonal",
-    imageUrl: "/menu/pumpkin-spice-latte.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "27",
@@ -265,7 +267,7 @@ const MENU_ITEMS: MenuItem[] = [
     section: "drinks",
     subcategory: "Seasonal Drinks",
     tag: "seasonal",
-    imageUrl: "/menu/peppermint-mocha.jpg",
+    imageUrl: placeholderImage,
   },
 
   // Meals
@@ -275,7 +277,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Egg, cheddar, and bacon on a toasted English muffin. Add avocado +$2.",
     price: "$8.50",
     section: "meals",
-    imageUrl: "/menu/breakfast-sandwich.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "29",
@@ -284,7 +286,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$9.00",
     section: "meals",
     tag: "popular",
-    imageUrl: "/menu/avocado-toast.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "30",
@@ -292,7 +294,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Sliced turkey, Swiss cheese, spinach, and honey mustard on pressed ciabatta.",
     price: "$10.50",
     section: "meals",
-    imageUrl: "/menu/turkey-swiss-panini.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "31",
@@ -300,7 +302,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Classic grilled cheese on sourdough with creamy tomato basil soup.",
     price: "$9.50",
     section: "meals",
-    imageUrl: "/menu/grilled-cheese-soup.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "32",
@@ -308,7 +310,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Crisp romaine, parmesan, croutons, and house Caesar dressing. Add chicken +$3.",
     price: "$9.00",
     section: "meals",
-    imageUrl: "/menu/caesar-salad.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "33",
@@ -316,7 +318,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Greek yogurt layered with granola, fresh berries, and a drizzle of honey.",
     price: "$7.00",
     section: "meals",
-    imageUrl: "/menu/yogurt-parfait.jpg",
+    imageUrl: placeholderImage,
   },
 
   // Desserts
@@ -326,7 +328,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Classic creamy cheesecake on a graham cracker crust. Topped with berry compote.",
     price: "$6.00",
     section: "desserts",
-    imageUrl: "/menu/new-york-cheesecake.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "35",
@@ -335,7 +337,7 @@ const MENU_ITEMS: MenuItem[] = [
     price: "$5.00",
     section: "desserts",
     tag: "popular",
-    imageUrl: "/menu/chocolate-brownie.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "36",
@@ -343,7 +345,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Freshly baked, gooey center with semi-sweet chocolate chips. A classic favorite.",
     price: "$3.50",
     section: "desserts",
-    imageUrl: "/menu/chocolate-chip-cookie.jpg",
+    imageUrl: placeholderImage,
   },
   {
     id: "37",
@@ -351,7 +353,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "House-made cinnamon roll with cream cheese frosting. Warm and indulgent.",
     price: "$5.50",
     section: "desserts",
-    imageUrl: "/menu/cinnamon-roll.jpg",
+    imageUrl: placeholderImage,
   },
 ];
 
