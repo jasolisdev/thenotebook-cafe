@@ -133,7 +133,7 @@ export default async function StoryPage() {
                   className="absolute -bottom-6 right-4 md:right-0 bg-[#A48D78] text-cafe-white px-6 py-4 rounded-md shadow-xl flex flex-col items-center"
                   style={{ minWidth: "160px" }}
                 >
-                  <span className="font-serif text-3xl leading-none text-white">2024</span>
+                  <span className="font-serif text-3xl leading-none text-white">2025</span>
                   <span className="text-xs uppercase tracking-[0.2em]" style={{ color: "rgba(255,255,255,0.9)" }}>
                     Established
                   </span>
