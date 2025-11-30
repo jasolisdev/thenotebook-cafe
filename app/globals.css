@@ -86,7 +86,6 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  scroll-padding-top: 80px; /* Account for sticky navbar height for anchor links */
 }
 
 body {
