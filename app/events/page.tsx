@@ -36,7 +36,7 @@ export default function EventsPage() {
       <section
         data-section="Events Hero"
         className="pt-28 pb-20 md:pt-32"
-        style={{ backgroundColor: "#2C2420", color: "#FFFFFF" }}
+        style={{ backgroundColor: "#F4F1EA" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
@@ -48,10 +48,10 @@ export default function EventsPage() {
             </span>
           </Reveal>
           <Reveal delay={150}>
-            <h1 className="font-serif text-5xl md:text-6xl mb-4">Upcoming Events</h1>
+            <h1 className="font-serif text-5xl md:text-6xl mb-4" style={{ color: "#2C2420" }}>Upcoming Events</h1>
           </Reveal>
           <Reveal delay={250}>
-            <p className="text-xl font-light max-w-xl" style={{ color: "rgba(203, 185, 164, 0.7)" }}>
+            <p className="text-xl font-light max-w-xl" style={{ color: "rgba(74, 59, 50, 0.75)" }}>
               Join us for music, art, and community gatherings.
             </p>
           </Reveal>

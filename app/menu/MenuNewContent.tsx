@@ -74,7 +74,7 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
       <section
         data-section="Menu Hero"
         className="pt-28 pb-16 md:pt-32 md:pb-20 px-6 text-center"
-        style={{ backgroundColor: "#FAF9F6" }}
+        style={{ backgroundColor: "#F4F1EA" }}
       >
         <h1 className="font-serif text-5xl md:text-6xl mb-4" style={{ color: "#2C2420" }}>
           Our Menu

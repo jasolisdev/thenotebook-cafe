@@ -43,9 +43,11 @@ export default function SiteHeader({
       {/* <AnnouncementBanner text={announcementText} /> */}
 
       <nav
-        className="relative z-10 border-b border-cafe-beige/20"
+        className="sticky top-0 z-[120] border-b border-cafe-beige/20"
         style={{
-          backgroundColor: "rgba(250, 249, 246, 0.95)",
+          backgroundColor: "rgba(250, 249, 246, 0.98)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
           color: "#4A3B32",
         }}
       >
