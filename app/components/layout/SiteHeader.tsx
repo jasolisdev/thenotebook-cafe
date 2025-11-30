@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Instagram, Menu as MenuIcon, X, Coffee } from "lucide-react";
@@ -63,17 +64,19 @@ export default function SiteHeader({
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div
-              className="w-8 h-8 bg-cafe-black text-white flex items-center justify-center rounded-sm font-serif text-xl pt-1 transition-transform group-hover:rotate-3"
-              style={{ backgroundColor: "#2C2420", color: "#FFFFFF" }}
-            >
-              N
-            </div>
+            <Image
+              src="/logo.png"
+              alt="The Notebook Café logo"
+              width={40}
+              height={40}
+              className="w-10 h-10 object-contain rounded-sm transition-transform duration-300 group-hover:rotate-3"
+              priority
+            />
             <span
               className="font-serif text-2xl tracking-tight text-cafe-black"
               style={{ color: "#2C2420" }}
             >
-              The Notebook
+              The Notebook Café
             </span>
           </Link>
 
@@ -82,45 +85,40 @@ export default function SiteHeader({
             <Link
               href="/"
               onClick={handleNavClick}
-              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${
-                isActive("/") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
-              }`}
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
             >
               Home
             </Link>
             <Link
               href="/menu"
               onClick={handleNavClick}
-              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${
-                isActive("/menu") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
-              }`}
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/menu") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
             >
               Menu
             </Link>
             <Link
               href="/story"
               onClick={handleNavClick}
-              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${
-                isActive("/story") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
-              }`}
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/story") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
             >
               Story
             </Link>
             <Link
               href="/events"
               onClick={handleNavClick}
-              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${
-                isActive("/events") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
-              }`}
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/events") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
             >
               Events
             </Link>
             <Link
               href="/contact"
               onClick={handleNavClick}
-              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${
-                isActive("/contact") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
-              }`}
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/contact") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
             >
               Contact
             </Link>
@@ -164,9 +162,8 @@ export default function SiteHeader({
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed inset-0 z-[80] drawer ${isOpen ? "open" : ""} ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed inset-0 z-[80] drawer ${isOpen ? "open" : ""} ${isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
         style={{
           backgroundColor: "#F4F0E9",
           color: "#2C2420",

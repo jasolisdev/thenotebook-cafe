@@ -45,6 +45,29 @@ const signaturePours = [
   }
 ];
 
+const atmosphereFeatures = [
+  {
+    title: "Fiber Optic Wi-Fi",
+    description: "Gigabit speeds for heavy workflows.",
+    icon: Wifi
+  },
+  {
+    title: "Power Everywhere",
+    description: "Outlets at every single seat.",
+    icon: PlugZap
+  },
+  {
+    title: "Warm Ambience",
+    description: "2700K lighting for eye comfort.",
+    icon: Armchair
+  },
+  {
+    title: "Acoustics",
+    description: "Sound-treated for conversation.",
+    icon: Music
+  }
+];
+
 async function getData() {
   const [home, settings] = await Promise.all([
     client.fetch(`*[_type=="homePage"][0]{
@@ -65,6 +88,7 @@ export default async function HomePage() {
     <main className="overflow-hidden" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-brown)' }}>
       {/* Hero Section */}
       <section
+        data-section="Hero"
         className="relative min-h-[90vh] flex items-center justify-center px-6 pt-0 md:pt-32 pb-[120px]"
         style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
@@ -116,7 +140,11 @@ export default async function HomePage() {
       </section>
 
       {/* Signature Pours */}
-      <section className="py-24 px-6" style={{ backgroundColor: 'var(--cafe-white)' }}>
+      <section
+        data-section="Signature Pours"
+        className="py-24 px-6"
+        style={{ backgroundColor: 'var(--cafe-white)' }}
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <Reveal>
@@ -154,7 +182,11 @@ export default async function HomePage() {
       </section>
 
       {/* Low Lights Section */}
-      <section className="py-24 md:py-32 px-6" style={{ backgroundColor: 'var(--cafe-white)' }}>
+      <section
+        data-section="Low Lights"
+        className="py-24 md:py-32 px-6"
+        style={{ backgroundColor: 'var(--cafe-white)' }}
+      >
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <Reveal>
@@ -169,7 +201,7 @@ export default async function HomePage() {
             </Reveal>
             <Reveal delay={250}>
               <p className="text-lg md:text-xl font-light leading-relaxed max-w-xl" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
-                We designed The Notebook as a sanctuary for the creatives, the writers, and the dreamers of Riverside. It is not just about the caffeine—it is about the headspace.
+                We designed The Notebook Café as a sanctuary for the creatives, the writers, and the dreamers of Riverside. It is not just about the caffeine—it is about the headspace.
               </p>
             </Reveal>
             <Reveal delay={350}>
@@ -179,35 +211,38 @@ export default async function HomePage() {
           </div>
 
           <Reveal delay={200}>
-              <div className="grid grid-cols-2 gap-4">
-                <Image
-                  src="https://fastly.picsum.photos/id/317/600/800.jpg?hmac=FUG5I3XLdVPHF10ynppPLQNZrA-9AKByLVsLLdeEC5k"
-                  alt="Barista Pouring"
-                  width={900}
-                  height={1200}
-                  className="w-full h-full object-cover rounded-sm translate-y-12 shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
-                  priority
-                />
-                <Image
-                  src="https://fastly.picsum.photos/id/454/600/800.jpg?hmac=U5_LTgKSxoPXiJNXT9S1wwsIHNEEc6BuJG0CqBvt4BI"
-                  alt="Cafe Corner"
-                  width={900}
-                  height={1200}
-                  className="w-full h-full object-cover rounded-sm shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
-                />
-              </div>
+            <div className="grid grid-cols-2 gap-4">
+              <Image
+                src="https://fastly.picsum.photos/id/317/600/800.jpg?hmac=FUG5I3XLdVPHF10ynppPLQNZrA-9AKByLVsLLdeEC5k"
+                alt="Barista Pouring"
+                width={900}
+                height={1200}
+                className="w-full h-full object-cover rounded-sm translate-y-12 shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                priority
+              />
+              <Image
+                src="https://fastly.picsum.photos/id/454/600/800.jpg?hmac=U5_LTgKSxoPXiJNXT9S1wwsIHNEEc6BuJG0CqBvt4BI"
+                alt="Cafe Corner"
+                width={900}
+                height={1200}
+                className="w-full h-full object-cover rounded-sm shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+              />
+            </div>
           </Reveal>
         </div>
       </section>
 
       {/* The Trinity */}
-      <section className="py-20 md:py-24">
+      <section
+        data-section="The Trinity"
+        className="py-20 md:py-24"
+      >
         <div className="max-w-7xl mx-auto px-6">
           <div
             className="hidden md:block mb-10 w-full h-px"
             style={{ background: 'linear-gradient(90deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
           ></div>
-          <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x" style={{ borderColor: 'rgba(var(--cafe-tan-rgb), 0.25)' }}>
+          <div className="grid md:grid-cols-3">
             <Reveal>
               <div className="p-10 text-center">
                 <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-tan)', border: '1px solid rgba(var(--cafe-tan-rgb), 0.35)' }}>
@@ -222,6 +257,7 @@ export default async function HomePage() {
 
             <Reveal delay={150}>
               <div className="relative p-10 text-center">
+                {/* Desktop: Vertical gradient dividers */}
                 <span
                   className="hidden md:block absolute inset-y-6 left-0 w-px"
                   style={{ background: 'linear-gradient(180deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
@@ -230,8 +266,15 @@ export default async function HomePage() {
                   className="hidden md:block absolute inset-y-6 right-0 w-px"
                   style={{ background: 'linear-gradient(180deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
                 ></span>
-                <span className="md:hidden block absolute top-0 inset-x-10 h-px" style={{ background: 'linear-gradient(90deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.25) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}></span>
-                <span className="md:hidden block absolute bottom-0 inset-x-10 h-px" style={{ background: 'linear-gradient(90deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.25) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}></span>
+                {/* Mobile: Horizontal gradient dividers */}
+                <span
+                  className="md:hidden block absolute top-0 inset-x-10 h-px"
+                  style={{ background: 'linear-gradient(90deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
+                ></span>
+                <span
+                  className="md:hidden block absolute bottom-0 inset-x-10 h-px"
+                  style={{ background: 'linear-gradient(90deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
+                ></span>
                 <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-tan)', border: '1px solid rgba(var(--cafe-tan-rgb), 0.35)' }}>
                   <Music size={26} />
                 </div>
@@ -257,42 +300,75 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Atmosphere  */}
-      <section className="py-24 overflow-visible" style={{ backgroundColor: 'var(--cafe-black)', color: 'var(--cafe-white)' }}>
-        <div className="max-w-7xl mx-auto px-6 mb-10 notched-mobile">
-          <Reveal>
-            <h2 className="font-serif text-4xl mb-4" style={{ color: 'var(--cafe-white)' }}>The Atmosphere</h2>
-          </Reveal>
-          <Reveal>
-            <p className="text-lg md:text-xl font-light max-w-5xl" style={{ color: 'rgba(255,255,255,0.8)' }}>
-              A calm, warm space designed for focus, comfort and creativity.
-            </p>
-          </Reveal>
-          <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pb-6 md:pb-8">
-            <div className="flex items-center gap-2 md:gap-3 justify-start px-3 py-2">
-              <Wifi size={18} className="text-white" />
-              <span className="uppercase tracking-widest text-[10px] md:text-xs font-semibold" style={{ color: 'var(--cafe-white)' }}>Fast &amp; stable<br className="md:hidden" /> Wi-Fi</span>
-            </div>
-            <div className="flex items-center gap-2 md:gap-3 justify-start px-3 py-2">
-              <PlugZap size={18} className="text-white" />
-              <span className="uppercase tracking-widest text-[10px] md:text-xs font-semibold" style={{ color: 'var(--cafe-white)' }}>Plenty of outlets</span>
-            </div>
-            <div className="flex items-center gap-2 md:gap-3 justify-start px-3 py-2">
-              <Armchair size={18} className="text-white" />
-              <span className="uppercase tracking-widest text-[10px] md:text-xs font-semibold" style={{ color: 'var(--cafe-white)' }}>Cozy seating</span>
-            </div>
-            <div className="flex items-center gap-2 md:gap-3 justify-start px-3 py-2">
-              <Music size={18} className="text-white" />
-              <span className="uppercase tracking-widest text-[10px] md:text-xs font-semibold" style={{ color: 'var(--cafe-white)' }}>Ambient house music</span>
-            </div>
+      {/* Atmosphere */}
+      <section
+        data-section="Atmosphere"
+        className="py-24 md:py-32 px-6"
+        style={{ backgroundColor: 'var(--cafe-white)' }}
+      >
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Column - Features (order-2 on mobile) */}
+          <div className="order-2 lg:order-1">
+            <Reveal delay={200}>
+              <div className="grid gap-5 md:grid-cols-2 md:gap-6">
+                {atmosphereFeatures.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.title} className="flex items-start gap-4">
+                      <div
+                        className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.1)', color: 'var(--cafe-tan)' }}
+                      >
+                        <Icon size={22} />
+                      </div>
+                      <div>
+                        <div className="font-serif text-xl mb-1" style={{ color: 'var(--cafe-black)' }}>{item.title}</div>
+                        <p className="text-sm md:text-base" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.7)' }}>{item.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Right Column - Heading (order-1 on mobile) */}
+          <div className="space-y-8 order-1 lg:order-2">
+            <Reveal>
+              <h2 className="font-serif text-5xl md:text-6xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
+                The Atmosphere,<br />
+                Designed for<br />
+                <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Focus</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={150}>
+              <div className="w-24 h-[2px]" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
+            </Reveal>
+            <Reveal delay={250}>
+              <p className="text-lg md:text-xl font-light leading-relaxed max-w-xl" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
+                A sanctuary with warm lighting, deep playlists, and Wi-Fi that never drops. Settle in for an hour or stay all day.
+              </p>
+            </Reveal>
+            <div className="w-24 h-px" style={{ backgroundColor: 'rgba(var(--cafe-brown-rgb), 0.3)' }}></div>
           </div>
         </div>
+      </section>
 
+      {/* Atmosphere Images */}
+      <section
+        data-section="Atmosphere Images"
+        className="overflow-visible"
+        style={{ backgroundColor: 'var(--cafe-black)' }}
+      >
         <AtmosphereStrip images={vibeImages} />
       </section>
 
       {/* Newsletter */}
-      <section className="py-24 px-6" style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.1)' }}>
+      <section
+        data-section="Newsletter"
+        className="py-24 px-6"
+        style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.1)' }}
+      >
         <div className="max-w-2xl mx-auto text-center">
           <Reveal>
             <Mail className="mx-auto mb-6" size={32} style={{ color: 'var(--cafe-tan)' }} />

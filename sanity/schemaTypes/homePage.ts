@@ -34,7 +34,7 @@ const homePage = defineType({
       name: "ctaUrl",
       type: "url",
       title: "Button Link URL",
-      description: `Where the button goes. Example: "https://instagram.com/the.notebookcafe"`,
+      description: `Where the button goes. Example: "https://www.instagram.com/thenotebookcafellc/"`,
     }),
     defineField({
       name: "whatToExpectBullets",

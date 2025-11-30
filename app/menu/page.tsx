@@ -14,6 +14,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Floral lavender and local honey with espresso and steamed milk. Light and aromatic.",
     price: "$5.75",
     section: "drinks",
+    subcategory: "Featured Drinks",
     tag: "popular",
     imageUrl: "/menu/honey-lavender-latte.jpg",
   },
@@ -23,6 +24,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Shaken espresso with brown sugar and oat milk over ice. Smooth and lightly sweet.",
     price: "$5.50",
     section: "drinks",
+    subcategory: "Featured Drinks",
     tag: "popular",
     imageUrl: "/menu/iced-brown-sugar-espresso.jpg",
   },
@@ -34,6 +36,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Rich, concentrated shot of pure coffee excellence. Bold flavor with a smooth crema finish.",
     price: "$3.50",
     section: "drinks",
+    subcategory: "Espresso Drinks",
     imageUrl: "/menu/tnc-menu-expresso-1.png",
   },
   {
@@ -42,6 +45,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Espresso with velvety steamed milk and thick foam. Perfectly balanced.",
     price: "$4.50",
     section: "drinks",
+    subcategory: "Espresso Drinks",
     imageUrl: "/menu/cappuccino.jpg",
   },
   {
@@ -50,6 +54,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "House-made vanilla syrup, espresso, and steamed milk. Sweet and creamy.",
     price: "$5.00",
     section: "drinks",
+    subcategory: "Espresso Drinks",
     imageUrl: "/menu/vanilla-latte.jpg",
   },
   {
@@ -58,6 +63,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Vanilla-infused milk, espresso, and caramel drizzle. Layered and sweet.",
     price: "$5.50",
     section: "drinks",
+    subcategory: "Espresso Drinks",
     imageUrl: "/menu/caramel-macchiato.jpg",
   },
 
@@ -68,6 +74,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Freshly brewed classic coffee. Available in light, medium, or dark roast.",
     price: "$3.00",
     section: "drinks",
+    subcategory: "Classic Coffee",
     imageUrl: "/menu/cold-brew.jpg",
   },
   {
@@ -76,6 +83,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Espresso shots diluted with hot water. Bold yet smooth.",
     price: "$3.75",
     section: "drinks",
+    subcategory: "Classic Coffee",
     imageUrl: "/menu/cold-brew.jpg",
   },
   {
@@ -84,6 +92,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Smooth cold brew steeped for 16 hours. Served over ice, naturally sweet.",
     price: "$4.50",
     section: "drinks",
+    subcategory: "Classic Coffee",
     imageUrl: "/menu/cold-brew.jpg",
   },
   {
@@ -92,6 +101,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Chilled brewed coffee over ice. Simple and refreshing.",
     price: "$3.50",
     section: "drinks",
+    subcategory: "Classic Coffee",
     imageUrl: "/menu/cold-brew.jpg",
   },
 
@@ -102,6 +112,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Premium Japanese matcha whisked with steamed milk. Earthy and smooth.",
     price: "$5.50",
     section: "drinks",
+    subcategory: "Matcha",
     imageUrl: "/menu/vanilla-latte.jpg",
   },
   {
@@ -110,6 +121,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Creamy iced matcha with your choice of milk. Refreshing green goodness.",
     price: "$5.50",
     section: "drinks",
+    subcategory: "Matcha",
     imageUrl: "/menu/iced-mocha.jpg",
   },
   {
@@ -118,6 +130,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Vibrant matcha shaken with fresh lemonade. Sweet, tart, and energizing.",
     price: "$5.75",
     section: "drinks",
+    subcategory: "Matcha",
     imageUrl: "/menu/iced-mocha.jpg",
   },
   {
@@ -126,6 +139,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Matcha with house-made vanilla syrup and steamed milk. Sweet and balanced.",
     price: "$6.00",
     section: "drinks",
+    subcategory: "Matcha",
     imageUrl: "/menu/vanilla-latte.jpg",
   },
   {
@@ -134,6 +148,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Matcha with coconut milk and a hint of coconut syrup. Tropical twist.",
     price: "$6.00",
     section: "drinks",
+    subcategory: "Matcha",
     imageUrl: "/menu/vanilla-latte.jpg",
   },
   {
@@ -142,6 +157,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Matcha layered with strawberry puree and milk. Instagram-worthy favorite.",
     price: "$6.25",
     section: "drinks",
+    subcategory: "Matcha",
     imageUrl: "/menu/iced-mocha.jpg",
   },
 
@@ -152,6 +168,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Classic black tea with bergamot. Aromatic and refined.",
     price: "$3.50",
     section: "drinks",
+    subcategory: "Teas & Other",
     imageUrl: "/menu/cappuccino.jpg",
   },
   {
@@ -160,6 +177,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Soothing herbal tea. Naturally caffeine-free and calming.",
     price: "$3.50",
     section: "drinks",
+    subcategory: "Teas & Other",
     imageUrl: "/menu/cappuccino.jpg",
   },
   {
@@ -168,6 +186,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Light and refreshing Japanese green tea. Delicate and pure.",
     price: "$3.50",
     section: "drinks",
+    subcategory: "Teas & Other",
     imageUrl: "/menu/cappuccino.jpg",
   },
   {
@@ -176,6 +195,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Spiced black tea with steamed milk. Warm and comforting.",
     price: "$5.00",
     section: "drinks",
+    subcategory: "Teas & Other",
     imageUrl: "/menu/vanilla-latte.jpg",
   },
   {
@@ -184,6 +204,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Rich dark chocolate with steamed milk and whipped cream. Kid and adult approved.",
     price: "$4.50",
     section: "drinks",
+    subcategory: "Teas & Other",
     imageUrl: "/menu/iced-mocha.jpg",
   },
 
@@ -194,6 +215,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Warm steamed milk with a choice of vanilla, chocolate, or caramel flavor.",
     price: "$3.00",
     section: "drinks",
+    subcategory: "Kids Drinks",
     imageUrl: "/menu/vanilla-latte.jpg",
   },
   {
@@ -202,6 +224,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Smaller portion of our rich hot chocolate. Topped with whipped cream and sprinkles.",
     price: "$3.50",
     section: "drinks",
+    subcategory: "Kids Drinks",
     imageUrl: "/menu/iced-mocha.jpg",
   },
   {
@@ -210,6 +233,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Fresh pressed apple juice. No added sugar.",
     price: "$2.50",
     section: "drinks",
+    subcategory: "Kids Drinks",
     imageUrl: "/menu/cold-brew.jpg",
   },
   {
@@ -218,6 +242,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Cold whole milk with premium chocolate syrup. Classic favorite.",
     price: "$3.00",
     section: "drinks",
+    subcategory: "Kids Drinks",
     imageUrl: "/menu/iced-mocha.jpg",
   },
 
@@ -228,6 +253,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Fall classic with pumpkin, cinnamon, and nutmeg. Topped with whipped cream.",
     price: "$6.00",
     section: "drinks",
+    subcategory: "Seasonal Drinks",
     tag: "seasonal",
     imageUrl: "/menu/pumpkin-spice-latte.jpg",
   },
@@ -237,6 +263,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Rich chocolate, espresso, and cool peppermint. Holiday favorite, hot or iced.",
     price: "$6.00",
     section: "drinks",
+    subcategory: "Seasonal Drinks",
     tag: "seasonal",
     imageUrl: "/menu/peppermint-mocha.jpg",
   },

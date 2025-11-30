@@ -33,7 +33,11 @@ export default function EventsPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: "#FAF9F6" }}>
       {/* Hero */}
-      <section className="py-20" style={{ backgroundColor: "#2C2420", color: "#FFFFFF" }}>
+      <section
+        data-section="Events Hero"
+        className="py-20"
+        style={{ backgroundColor: "#2C2420", color: "#FFFFFF" }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
             <span
@@ -55,7 +59,10 @@ export default function EventsPage() {
       </section>
 
       {/* Events List */}
-      <section className="py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        data-section="Events List"
+        className="py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
         <div className="space-y-8">
           {EVENTS.map((event, index) => (
             <Reveal key={event.id} delay={index * 120}>

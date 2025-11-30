@@ -32,7 +32,7 @@ export default function SiteFooter(): React.JSX.Element {
           </p>
           <div className="flex gap-4 pt-4">
             <a
-              href="https://instagram.com/notebookcafe"
+              href="https://www.instagram.com/thenotebookcafellc/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -82,7 +82,7 @@ export default function SiteFooter(): React.JSX.Element {
           <div className="font-light space-y-1" style={{ color: 'rgba(203, 185, 164, 0.7)' }}>
             <p><span className="w-12 inline-block">M-Th</span> 6:30am — 4pm</p>
             <p><span className="w-12 inline-block">F-Sa</span> 6:30am — 6pm</p>
-            <p><span className="w-12 inline-block">Sun</span> 6:30am — 4pm</p>
+            <p><span className="w-12 inline-block">Sun</span> <span className="italic" style={{ color: 'rgba(203, 185, 164, 0.5)' }}>Closed</span></p>
           </div>
         </div>
 

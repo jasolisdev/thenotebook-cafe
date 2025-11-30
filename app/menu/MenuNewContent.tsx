@@ -15,6 +15,7 @@ export type MenuItem = {
   price?: string;
   section: MenuSection;
   category?: string;
+  subcategory?: string;
   sortOrder?: number;
   imageUrl?: string;
   tag?: "new" | "seasonal" | "popular";
@@ -44,20 +45,50 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
 
   const filteredItems = normalizedItems.filter((item) => item.section === activeTab);
 
+  // Group items by subcategory for drinks
+  const groupedItems = useMemo(() => {
+    if (activeTab !== "drinks" || !filteredItems.some((item) => item.subcategory)) {
+      return { "": filteredItems };
+    }
+
+    const groups: Record<string, MenuItem[]> = {};
+    filteredItems.forEach((item) => {
+      const subcategory = item.subcategory || "Other";
+      if (!groups[subcategory]) {
+        groups[subcategory] = [];
+      }
+      groups[subcategory].push(item);
+    });
+    return groups;
+  }, [filteredItems, activeTab]);
+
+  const hasSubcategories = activeTab === "drinks" && Object.keys(groupedItems).length > 1;
+
   return (
-    <div className="min-h-screen pb-20" style={{ backgroundColor: "#FAF9F6" }}>
+    <section
+      data-section="Menu Page"
+      className="min-h-screen pb-20"
+      style={{ backgroundColor: "#FAF9F6" }}
+    >
       {/* Header */}
-      <div className="py-16 md:py-20 px-6 text-center" style={{ backgroundColor: "#FAF9F6" }}>
+      <section
+        data-section="Menu Hero"
+        className="py-16 md:py-20 px-6 text-center"
+        style={{ backgroundColor: "#FAF9F6" }}
+      >
         <h1 className="font-serif text-5xl md:text-6xl mb-4" style={{ color: "#2C2420" }}>
           Our Menu
         </h1>
         <p className="font-light max-w-2xl mx-auto" style={{ color: "rgba(74, 59, 50, 0.75)", fontSize: "18px" }}>
           Thoughtfully sourced, carefully prepared. We believe in quality over quantity.
         </p>
-      </div>
+      </section>
 
-        <div className="max-w-6xl mx-auto px-6 space-y-8">
-          {/* Tabs */}
+      <section
+        data-section="Menu Body"
+        className="max-w-7xl mx-auto px-4 md:px-12 space-y-8"
+      >
+        {/* Tabs */}
         <div className="p-2">
           <div className="flex justify-center gap-8 border-b border-[rgba(74,59,50,0.15)] pb-2 overflow-x-auto">
             {(["drinks", "meals", "desserts"] as MenuSection[]).map((cat) => (
@@ -83,7 +114,8 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
 
         {/* Seasonal Highlight (Drinks) */}
         {activeTab === "drinks" && (
-          <div
+          <section
+            data-section="Seasonal Highlight"
             className="p-8 md:p-10 rounded-sm mb-12 flex flex-col md:flex-row gap-10 items-center animate-fade-in"
             style={{ backgroundColor: "#F0E9DF", border: "1px solid #E1D6C9" }}
           >
@@ -103,51 +135,110 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
               <p className="text-cafe-black/70 text-lg leading-relaxed">
                 Our house-made syrup infused with dried lavender buds and organic wildflower honey, paired with our signature espresso blend and creamy oat milk.
               </p>
-              <div className="pt-4">
-                <button
-                  className="px-8 py-3 text-sm font-bold tracking-[0.2em] uppercase transition-colors rounded-sm"
-                  style={{ backgroundColor: "#4A3B32", color: "#FFFFFF" }}
-                >
-                  Try It Today
-                </button>
-              </div>
             </div>
-          </div>
+          </section>
         )}
 
         {/* Grid */}
-        <div>
-          <div className="grid md:grid-cols-2 gap-x-12 gap-y-12 mt-4">
-            {filteredItems.map((item, index) => (
-              <Reveal key={item.id} delay={index * 100}>
-                <div className="group cursor-pointer flex gap-4 items-start" onClick={() => setSelectedItem(item)}>
-                  <div className="flex-1">
-                    <div className="flex justify-between items-baseline mb-2 border-b border-cafe-beige/20 pb-2 group-hover:border-cafe-tan/50 transition-colors">
-                      <h3 className="font-serif text-xl text-cafe-black group-hover:text-cafe-tan transition-colors">
-                        {item.name}
-                      </h3>
-                      <span className="font-sans font-medium text-cafe-brown">{formatPrice(item.price)}</span>
-                    </div>
-                    <p className="text-cafe-brown/70 text-sm font-light leading-relaxed">{item.description}</p>
-                    {item.tag && (
-                      <span
-                        className="inline-block mt-2 text-[10px] uppercase tracking-wider font-bold text-cafe-tan px-2 py-1 bg-cafe-tan/10 rounded-sm"
-                        style={{
-                          color: "#A48D78",
-                          backgroundColor: "rgba(164, 141, 120, 0.1)",
-                          fontSize: "10px",
-                        }}
-                      >
-                        {item.tag}
-                      </span>
-                    )}
+        <section
+          data-section="Menu Grid"
+        >
+          {hasSubcategories ? (
+            <div className="space-y-12">
+              {Object.entries(groupedItems).map(([subcategory, subcategoryItems]) => (
+                <div key={subcategory} className="space-y-6">
+                  {/* Subcategory Header */}
+                  <h2 className="font-serif text-2xl text-cafe-black pb-3">
+                    {subcategory}
+                  </h2>
+                  {/* Subcategory Items */}
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+                    {subcategoryItems.map((item, index) => (
+                      <Reveal key={item.id} delay={index * 30} replay={false}>
+                        <div
+                          className="group cursor-pointer flex gap-4 items-start p-4 rounded-lg transition-all duration-300 hover:bg-cafe-tan/5 hover:shadow-md hover:-translate-y-1 relative"
+                          onClick={() => setSelectedItem(item)}
+                        >
+                          <div className="flex-1">
+                            <div className="flex justify-between items-baseline mb-2 border-b border-cafe-beige/20 pb-2 group-hover:border-cafe-tan/50 transition-colors">
+                              <h3 className="font-serif text-xl text-cafe-black group-hover:text-cafe-tan transition-colors">
+                                {item.name}
+                              </h3>
+                              <span className="font-sans font-medium text-cafe-brown">{formatPrice(item.price)}</span>
+                            </div>
+                            <p className="text-cafe-brown/70 text-sm font-light leading-relaxed">{item.description}</p>
+                            {item.tag && (
+                              <span
+                                className="inline-block mt-2 text-[10px] uppercase tracking-wider font-bold text-cafe-tan px-2 py-1 bg-cafe-tan/10 rounded-sm"
+                                style={{
+                                  color: "#A48D78",
+                                  backgroundColor: "rgba(164, 141, 120, 0.1)",
+                                  fontSize: "10px",
+                                }}
+                              >
+                                {item.tag}
+                              </span>
+                            )}
+                          </div>
+                          {/* Click indicator */}
+                          <div className="flex-shrink-0 text-cafe-brown/30 group-hover:text-cafe-tan transition-colors self-center">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <circle cx="12" cy="12" r="10" />
+                              <line x1="12" y1="8" x2="12" y2="16" />
+                              <line x1="8" y1="12" x2="16" y2="12" />
+                            </svg>
+                          </div>
+                        </div>
+                      </Reveal>
+                    ))}
                   </div>
                 </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10 mt-4">
+              {filteredItems.map((item, index) => (
+                <Reveal key={item.id} delay={index * 30} replay={false}>
+                  <div
+                    className="group cursor-pointer flex gap-4 items-start p-4 rounded-lg transition-all duration-300 hover:bg-cafe-tan/5 hover:shadow-md hover:-translate-y-1 relative"
+                    onClick={() => setSelectedItem(item)}
+                  >
+                    <div className="flex-1">
+                      <div className="flex justify-between items-baseline mb-2 border-b border-cafe-beige/20 pb-2 group-hover:border-cafe-tan/50 transition-colors">
+                        <h3 className="font-serif text-xl text-cafe-black group-hover:text-cafe-tan transition-colors">
+                          {item.name}
+                        </h3>
+                        <span className="font-sans font-medium text-cafe-brown">{formatPrice(item.price)}</span>
+                      </div>
+                      <p className="text-cafe-brown/70 text-sm font-light leading-relaxed">{item.description}</p>
+                      {item.tag && (
+                        <span
+                          className="inline-block mt-2 text-[10px] uppercase tracking-wider font-bold text-cafe-tan px-2 py-1 bg-cafe-tan/10 rounded-sm"
+                          style={{
+                            color: "#A48D78",
+                            backgroundColor: "rgba(164, 141, 120, 0.1)",
+                            fontSize: "10px",
+                          }}
+                        >
+                          {item.tag}
+                        </span>
+                      )}
+                    </div>
+                    {/* Click indicator */}
+                    <div className="flex-shrink-0 text-cafe-brown/30 group-hover:text-cafe-tan transition-colors self-center">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="16" />
+                        <line x1="8" y1="12" x2="16" y2="12" />
+                      </svg>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          )}
+        </section>
+      </section>
 
       {/* Modal */}
       {selectedItem && (
@@ -188,6 +279,6 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
       )}
 
       <SiteFooter />
-    </div>
+    </section>
   );
 }

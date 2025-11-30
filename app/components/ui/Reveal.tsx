@@ -60,8 +60,8 @@ export default function Reveal({ children, delay = 0, className = '', replay = t
     <div
       ref={ref}
       style={style}
-      className={`transition-all duration-1000 ease-out transform ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      className={`transition-all duration-500 ease-out transform ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       } ${className}`}
     >
       {children}

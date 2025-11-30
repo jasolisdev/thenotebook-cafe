@@ -29,15 +29,22 @@ export default async function ContactPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: '#FAF9F6' }}>
       {/* Header */}
-      <div className="py-24 md:py-32 px-6 text-center" style={{ backgroundColor: '#F4F1EA' }}>
+      <section
+        data-section="Contact Hero"
+        className="py-24 md:py-32 px-6 text-center"
+        style={{ backgroundColor: '#F4F1EA' }}
+      >
         <h1 className="font-serif text-5xl md:text-7xl mb-6" style={{ color: '#2C2420' }}>Visit Us</h1>
         <p className="font-light max-w-xl mx-auto text-lg" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
-          Stop by for a cup, stay for the vibe.
+          Come write your next chapter with us.
         </p>
-      </div>
+      </section>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-6 py-20">
+      <section
+        data-section="Contact Details"
+        className="max-w-4xl mx-auto px-6 py-20"
+      >
         <div className="grid md:grid-cols-2 gap-16">
           {/* Left Column - Location & Phone */}
           <Reveal>
@@ -76,23 +83,48 @@ export default async function ContactPage() {
 
           {/* Right Column - Hours */}
           <Reveal delay={200}>
-            <div className="p-10 shadow-sm rounded-sm" style={{ backgroundColor: '#FFFFFF', border: '1px solid rgba(203, 185, 164, 0.2)' }}>
-              <div className="flex items-center gap-3 mb-8" style={{ color: '#A48D78' }}>
-                <Clock size={24} />
-                <h3 className="uppercase tracking-widest font-bold text-sm">Business Hours</h3>
-              </div>
-              <div className="space-y-6">
-                <div className="flex justify-between items-baseline pb-4" style={{ borderBottom: '1px solid #F4F1EA' }}>
-                  <span className="font-medium" style={{ color: '#4A3B32' }}>Mon - Thu</span>
-                  <span className="font-serif text-xl" style={{ color: '#2C2420' }}>06:30am – 04:00pm</span>
+            <div className="relative p-10 shadow-lg rounded-sm overflow-hidden" style={{ backgroundColor: '#FFFFFF', borderTop: '4px solid #A48D78' }}>
+              {/* Decorative corner accent */}
+              <div className="absolute top-0 right-0 w-24 h-24 opacity-5" style={{
+                background: 'radial-gradient(circle at top right, #A48D78 0%, transparent 70%)'
+              }}></div>
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-10">
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center"
+                    style={{
+                      backgroundColor: 'rgba(164, 141, 120, 0.1)',
+                      border: '1px solid rgba(164, 141, 120, 0.25)'
+                    }}
+                  >
+                    <Clock size={20} style={{ color: '#A48D78' }} />
+                  </div>
+                  <h3 className="font-serif text-2xl" style={{ color: '#2C2420' }}>Business Hours</h3>
                 </div>
-                <div className="flex justify-between items-baseline pb-4" style={{ borderBottom: '1px solid #F4F1EA' }}>
-                  <span className="font-medium" style={{ color: '#4A3B32' }}>Fri - Sat</span>
-                  <span className="font-serif text-xl" style={{ color: '#2C2420' }}>06:30am – 06:00pm</span>
+
+                <div className="space-y-5">
+                  <div className="flex justify-between items-center py-3 px-4 rounded">
+                    <span className="font-semibold tracking-wide text-sm uppercase" style={{ color: '#4A3B32' }}>Mon - Thu</span>
+                    <span className="font-serif text-lg" style={{ color: '#A48D78' }}>6:30am – 4:00pm</span>
+                  </div>
+
+                  <div className="flex justify-between items-center py-3 px-4 rounded">
+                    <span className="font-semibold tracking-wide text-sm uppercase" style={{ color: '#4A3B32' }}>Fri - Sat</span>
+                    <span className="font-serif text-lg" style={{ color: '#A48D78' }}>6:30am – 6:00pm</span>
+                  </div>
+
+                  <div className="flex justify-between items-center py-3 px-4 rounded">
+                    <span className="font-semibold tracking-wide text-sm uppercase" style={{ color: '#4A3B32' }}>Sunday</span>
+                    <span className="font-serif text-lg italic" style={{ color: 'rgba(74, 59, 50, 0.5)' }}>Closed</span>
+                  </div>
                 </div>
-                <div className="flex justify-between items-baseline">
-                  <span className="font-medium" style={{ color: '#4A3B32' }}>Sun</span>
-                  <span className="font-serif text-xl" style={{ color: '#2C2420' }}>06:30am – 04:00pm</span>
+
+                {/* Decorative footer accent */}
+                <div className="mt-8 pt-6 border-t" style={{ borderColor: 'rgba(164, 141, 120, 0.15)' }}>
+                  <p className="text-xs text-center uppercase tracking-widest" style={{ color: 'rgba(74, 59, 50, 0.5)' }}>
+                    Open Mon - Sat
+                  </p>
                 </div>
               </div>
             </div>
@@ -101,7 +133,11 @@ export default async function ContactPage() {
 
         {/* Map Image */}
         <Reveal delay={400}>
-          <div className="mt-20 w-full h-[400px] rounded-sm overflow-hidden relative group" style={{ backgroundColor: '#F4F1EA' }}>
+          <section
+            data-section="Map"
+            className="mt-20 w-full h-[400px] rounded-sm overflow-hidden relative group"
+            style={{ backgroundColor: '#F4F1EA' }}
+          >
             <Image
               src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=1200"
               alt="Cafe Location"
@@ -119,9 +155,9 @@ export default async function ContactPage() {
                 View on Map
               </a>
             </div>
-          </div>
+          </section>
         </Reveal>
-      </div>
+      </section>
 
       {/* Footer */}
       <SiteFooter />
