@@ -73,7 +73,7 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
       {/* Header */}
       <section
         data-section="Menu Hero"
-        className="py-16 md:py-20 px-6 text-center"
+        className="pt-28 pb-16 md:pt-32 md:pb-20 px-6 text-center"
         style={{ backgroundColor: "#FAF9F6" }}
       >
         <h1 className="font-serif text-5xl md:text-6xl mb-4" style={{ color: "#2C2420" }}>
@@ -90,12 +90,12 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
       >
         {/* Tabs */}
         <div className="p-2">
-          <div className="flex justify-center gap-8 border-b border-[rgba(74,59,50,0.15)] pb-2 overflow-x-auto">
+          <div className="flex justify-center gap-3 sm:gap-6 md:gap-8 border-b border-[rgba(74,59,50,0.15)] pb-2">
             {(["drinks", "meals", "desserts"] as MenuSection[]).map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveTab(cat)}
-                className={`pb-3 px-6 text-sm font-bold tracking-[0.22em] uppercase transition-all relative ${
+                className={`pb-3 px-2 sm:px-4 md:px-6 text-xs sm:text-sm font-bold tracking-[0.12em] sm:tracking-[0.18em] md:tracking-[0.22em] uppercase transition-all relative whitespace-nowrap ${
                   activeTab === cat ? "text-cafe-black" : "text-cafe-brown/50 hover:text-cafe-brown"
                 }`}
               >
