@@ -25,8 +25,8 @@ import { ThemeProvider } from "next-themes";
 import { DM_Serif_Display, Outfit } from "next/font/google";
 import { cookies } from "next/headers";
 import PasswordGate from "./components/ui/PasswordGate";
-// import SiteHeader from "./components/layout/SiteHeader";
-import TestHeader from "./components/layout/TestHeader";  // DEBUG: Testing minimal header
+import SiteHeader from "./components/layout/SiteHeader";
+// import TestHeader from "./components/layout/TestHeader";  // DEBUG: Testing minimal header
 import ScrollDebugger from "./components/debug/ScrollDebugger";  // DEBUG: Scroll position tracker
 import Script from "next/script";
 import { client } from "@/sanity/lib/client";
@@ -98,12 +98,10 @@ export default async function RootLayout({
             <PasswordGate />
           ) : (
             <>
-              {/* DEBUG: Using TestHeader to isolate scroll issues */}
-              <TestHeader />
-              {/* <SiteHeader
+              <SiteHeader
                 instagramUrl={settings?.social?.instagram}
                 spotifyUrl={settings?.social?.spotify}
-              /> */}
+              />
               {children}
               <VirtualBarista />
               <ScrollDebugger />
