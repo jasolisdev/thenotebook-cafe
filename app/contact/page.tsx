@@ -31,7 +31,7 @@ export default async function ContactPage() {
       {/* Header */}
       <section
         data-section="Contact Hero"
-        className="py-24 md:py-32 px-6 text-center"
+        className="pt-28 pb-20 md:pt-32 md:pb-24 px-6 text-center"
         style={{ backgroundColor: '#F4F1EA' }}
       >
         <h1 className="font-serif text-5xl md:text-7xl mb-6" style={{ color: '#2C2420' }}>Visit Us</h1>

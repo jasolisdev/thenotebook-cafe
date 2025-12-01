@@ -3,12 +3,10 @@
    Smooth transitions between pages using View Transitions API
 ============================================================ */
 
-/* Enable view transitions for the root element */
 @view-transition {
   navigation: auto;
 }
 
-/* Default cross-fade transition */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 0.25s;
@@ -21,7 +19,7 @@
 
 ::view-transition-new(root) {
   animation-name: fade-in;
-  animation-delay: 0.05s; /* Slight overlap to prevent white flash */
+  animation-delay: 0.05s;
 }
 
 @keyframes fade-out {
@@ -36,7 +34,7 @@
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(4px); /* Subtle upward movement */
+    transform: translateY(4px);
   }
   to {
     opacity: 1;
@@ -44,17 +42,7 @@
   }
 }
 
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Prevent scroll jump during transitions */
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
+/* Scroll behavior is handled by Next.js router and globals.css */
 
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {

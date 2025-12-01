@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Instagram, Coffee } from "lucide-react";
 import { PiSpotifyLogoFill, PiInstagramLogoFill, PiTiktokLogoFill } from "react-icons/pi";
 import AnnouncementBanner from "../ui/AnnouncementBanner";
@@ -21,11 +21,23 @@ export default function SiteHeader({
 }: SiteHeaderProps): React.JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const pathname = usePathname();
+  const drawerWasOpen = useRef(false);
 
   const isActive = (path: string): boolean => pathname === path;
 
-  // Close drawer on route change
+  // Track drawer state
   useEffect(() => {
+    drawerWasOpen.current = isOpen;
+  }, [isOpen]);
+
+  // Close drawer on route change and scroll to top if drawer was open
+  useEffect(() => {
+    if (drawerWasOpen.current) {
+      // Drawer was open during navigation, ensure proper scroll
+      requestAnimationFrame(() => {
+        window.scrollTo(0, 0);
+      });
+    }
     setIsOpen(false);
   }, [pathname]);
 
@@ -44,7 +56,7 @@ export default function SiteHeader({
       <nav
         className="sticky top-0 z-[120] border-b border-cafe-beige/20"
         style={{
-          backgroundColor: "rgba(250, 249, 246, 0.65)",
+          backgroundColor: "rgba(250, 249, 246, 0.98)",
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
           color: "#4A3B32",

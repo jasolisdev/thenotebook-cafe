@@ -59,7 +59,7 @@ export default async function StoryPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: '#FAF9F6' }}>
       {/* Header */}
-      <div className="relative py-24 md:py-28 px-6" style={{ backgroundColor: '#F4F1EA' }}>
+      <div className="relative pt-28 pb-20 md:pt-32 md:pb-24 px-6" style={{ backgroundColor: '#F4F1EA' }}>
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="font-serif text-5xl md:text-7xl mb-6" style={{ color: '#2C2420' }}>Our Story</h1>
           <div className="w-24 h-1 mx-auto" style={{ backgroundColor: '#A48D78' }}></div>

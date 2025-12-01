@@ -199,6 +199,203 @@
 }
 
 /* ============================================================
+   LOW LIGHTS / READ OUR STORY BLOBS
+============================================================ */
+.story-blob-wrapper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.story-blob {
+  position: absolute;
+  border-radius: 48% 52% 46% 54%;
+  filter: blur(0px);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  opacity: 0;
+  --blob-transform: rotate(0deg);
+  --story-blob-opacity: 0.75;
+  transform: scale(0.9) var(--blob-transform);
+  transition: opacity 900ms ease, transform 1000ms ease;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-play-state: paused;
+  will-change: transform, opacity;
+}
+
+.story-blob-left {
+  width: 572px;
+  height: 572px;
+  top: -6%;
+  left: 40px;
+  --blob-transform: rotate(-10deg);
+  --story-blob-opacity: 0.62;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><defs><radialGradient id='g' cx='50%' cy='40%' r='75%'><stop offset='0%' stop-color='%23EDE7D8' stop-opacity='0.95'/><stop offset='60%' stop-color='%23CBB9A4' stop-opacity='0.7'/><stop offset='100%' stop-color='%23A48D78' stop-opacity='0.45'/></radialGradient></defs><path fill='url(%23g)' d='M52.5,-50.9C68.5,-36.5,82.3,-18.3,81.6,-0.7C80.8,16.8,65.7,33.7,49.7,46.6C33.7,59.4,16.8,68.4,-2.6,71C-22.1,73.6,-44.2,70,-55.4,57.1C-66.6,44.2,-67,22.1,-63.9,3C-60.9,-16.1,-54.6,-32.2,-43.4,-46.6C-32.2,-61,-16.1,-73.7,1.1,-74.8C18.3,-75.8,36.5,-65.3,52.5,-50.9Z' transform='translate(100 100)'/></svg>");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  animation: none !important;
+}
+
+.story-blob-visible {
+  opacity: var(--story-blob-opacity);
+  transform: scale(1) var(--blob-transform);
+  animation-play-state: running;
+}
+
+.blob-marker {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Low Lights Gallery Blob */
+.story-gallery-blob {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .story-gallery-blob {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .story-gallery-blob {
+    position: absolute;
+    width: 519px;
+    height: 519px;
+    left: 50%;
+    top: -120px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><path fill='%23CBB9A4' d='M36,-52.5C45.1,-42.9,49.9,-30.3,51.8,-18.3C53.7,-6.2,52.7,5.3,52.9,21C53,36.7,54.3,56.5,45.6,65.2C37,73.8,18.5,71.3,-0.4,71.8C-19.2,72.2,-38.4,75.8,-50.5,68.3C-62.6,60.7,-67.6,42.2,-73.7,23.8C-79.8,5.5,-87,-12.5,-81.8,-26C-76.6,-39.4,-59.1,-48.3,-43.4,-55.7C-27.7,-63.1,-13.8,-69,-0.2,-68.8C13.4,-68.5,26.9,-62,36,-52.5Z' transform='translate(100 100)'/></svg>");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    mix-blend-mode: multiply;
+    transform: translateX(calc(-50% + 35px)) rotate(-8deg);
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+    display: block;
+  }
+}
+
+/* story-gallery-blob removed */
+
+@media (max-width: 1024px) {
+  .story-blob-left {
+    width: 420px;
+    height: 420px;
+  }
+
+  .story-blob-left {
+    left: -120px;
+    top: 2%;
+  }
+
+  /* story-gallery-blob removed */
+}
+
+@media (max-width: 768px) {
+  .story-blob {
+    opacity: 0.6;
+    mix-blend-mode: normal;
+  }
+
+  .story-blob-left {
+    width: 345px;
+    height: 345px;
+  }
+
+  .story-blob-left {
+    left: -100px;
+  }
+
+  /* story-gallery-blob removed */
+}
+
+@keyframes blobDriftLeft {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.92) rotate(-10deg);
+  }
+
+  50% {
+    transform: translate3d(10px, -12px, 0) scale(1.05) rotate(-8deg);
+  }
+
+  100% {
+    transform: translate3d(-6px, 14px, 0) scale(1.03) rotate(-11deg);
+  }
+}
+
+/* ============================================================
+   ATMOSPHERE BLOB
+============================================================ */
+.atmosphere-blob {
+  position: absolute;
+  width: 820px;
+  height: 520px;
+  right: 10px;
+  top: -50px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><defs><radialGradient id='ag' cx='50%' cy='40%' r='75%'><stop offset='0%' stop-color='%23EDE7D8' stop-opacity='0.95'/><stop offset='60%' stop-color='%23CBB9A4' stop-opacity='0.7'/><stop offset='100%' stop-color='%23A48D78' stop-opacity='0.45'/></radialGradient></defs><path fill='url(%23ag)' d='M38.7,-46.6C54.3,-33.1,74,-24.8,82.4,-9.7C90.7,5.3,87.7,27.1,76.5,42C65.3,56.8,45.9,64.8,26.5,71.1C7.1,77.4,-12.3,82.2,-27.2,76.2C-42,70.1,-52.3,53.1,-57,36.9C-61.6,20.6,-60.6,5.1,-58.7,-11.1C-56.7,-27.3,-53.9,-44,-43.9,-58.6C-34,-73.2,-17,-85.6,-2.7,-82.3C11.6,-79.1,23.1,-60.2,38.7,-46.6Z' transform='translate(100 100)'/></svg>");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transform: scale(0.9) translate3d(0, 12px, 0);
+  transition: opacity 900ms ease, transform 1000ms ease;
+  animation: none !important;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.atmosphere-blob-visible {
+  opacity: 0.6;
+  transform: scale(1) translate3d(0, 0, 0);
+  animation-play-state: running;
+}
+
+@media (max-width: 1024px) {
+  .atmosphere-blob {
+    width: 420px;
+    height: 420px;
+    right: -80px;
+    top: -20px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .atmosphere-blob {
+    width: 388px;
+    height: 388px;
+    right: -80px;
+    left: auto;
+    top: -4px;
+    transform: scale(0.9) translate3d(0, 32px, 0);
+    opacity: 0.5;
+  }
+}
+
+@keyframes blobAtmosphereDrift {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.04) translate3d(-6px, 10px, 0) rotate(1deg);
+  }
+
+  100% {
+    transform: scale(1.02) translate3d(8px, -8px, 0) rotate(-1deg);
+  }
+}
+
+/* ============================================================
    TILT CLASSES - Define rotation angles ONLY
 ============================================================ */
 .transform-01 {
@@ -270,9 +467,11 @@
 .gallery-animated-0 {
   animation: gallerySlideUp 0.8s ease-out forwards;
 }
+
 .gallery-animated-1 {
   animation: gallerySlideUp 0.9s ease-out forwards;
 }
+
 .gallery-animated-2 {
   animation: gallerySlideUp 1s ease-out forwards;
 }
@@ -282,6 +481,7 @@
     opacity: 0;
     transform: translateY(40px) rotate(var(--tilt));
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) rotate(var(--tilt));
@@ -292,9 +492,11 @@
   .gallery-animated-0 {
     animation: gallerySlideRight 0.8s ease-out forwards;
   }
+
   .gallery-animated-1 {
     animation: gallerySlideLeft 0.9s ease-out forwards;
   }
+
   .gallery-animated-2 {
     animation: gallerySlideRight 1s ease-out forwards;
   }
@@ -304,6 +506,7 @@
       opacity: 0;
       transform: translateX(80px) rotate(var(--tilt));
     }
+
     100% {
       opacity: 1;
       transform: translateX(0) rotate(var(--tilt));
@@ -315,6 +518,7 @@
       opacity: 0;
       transform: translateX(-80px) rotate(var(--tilt));
     }
+
     100% {
       opacity: 1;
       transform: translateX(0) rotate(var(--tilt));
@@ -1571,6 +1775,7 @@
 
 /* Desktop styles and animation */
 @media (min-width: 640px) {
+
   /* Change carousel to horizontal layout on desktop */
   .featured-coffee-carousel {
     position: relative;
@@ -1665,11 +1870,13 @@
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .featured-coffee-track::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  display: none;
+  /* Chrome, Safari, Edge */
 }
 
 .featured-coffee-slide {
