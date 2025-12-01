@@ -63,11 +63,16 @@
 /* ============================================================
    BASE ELEMENTS
 ============================================================ */
-html,
-body,
-#__next {
-  height: 100%;
-}
+
+/* CRITICAL FIX: Removed height: 100% constraint
+
+   BEFORE: html, body, #__next { height: 100%; }
+   PROBLEM: Forced body to viewport height, preventing natural document scrolling
+   SYMPTOM: document.scrollHeight === window.innerHeight (663px = 663px)
+   RESULT: Browser couldn't scroll properly, content appeared offset
+
+   NOW: Body grows naturally with content, allowing proper scroll behavior
+*/
 
 html,
 body {
@@ -76,7 +81,9 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  overflow-y: auto;  /* Ensure vertical scrolling works */
   width: 100%;
+  min-height: 100vh; /* Allow body to grow beyond viewport */
   background-color: var(--bg-solid);
   color: var(--text-dark);
 }
@@ -89,8 +96,9 @@ html {
 }
 
 body {
-  /* Prevent layout shifts during page transitions */
-  overflow-anchor: none;
+  /* Re-enabled scroll anchoring for proper scroll restoration
+     overflow-anchor: auto allows browser to maintain scroll position during layout changes */
+  overflow-anchor: auto;
 }
 
 /* Hide horizontal scrollbar for hero gallery track */
@@ -111,21 +119,18 @@ body {
   scrollbar-width: none;
 }
 
-.hero-content {
-  transform: translateY(-16px);
-}
+/* REMOVED: Hero transform shifts
 
-@media (max-width: 400px) {
-  .hero-content {
-    transform: translateY(34px);
-  }
-}
+   BEFORE:
+   .hero-content { transform: translateY(-16px); }
+   @media (max-width: 400px) { transform: translateY(34px); }
 
-@media (min-width: 768px) {
-  .hero-content {
-    transform: translateY(0);
-  }
-}
+   PROBLEM: Transforms shift content VISUALLY but don't affect document flow
+   SYMPTOM: scrollY=0 but content appears 34px lower on mobile
+
+   SOLUTION: Use margin-top/padding-top in hero sections directly instead
+   This ensures layout flow matches visual positioning
+*/
 
 .notched-mobile {
   overflow: visible;

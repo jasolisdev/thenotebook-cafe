@@ -28,6 +28,25 @@ export default function ScrollDebugger() {
       if (nav) {
         setNavbarHeight(nav.offsetHeight);
       }
+
+      // Live logging
+      console.clear();
+      console.log('=== LIVE SCROLL DEBUG ===');
+      console.log('Document scrollHeight:', document.documentElement.scrollHeight);
+      console.log('Body scrollHeight:', document.body.scrollHeight);
+      console.log('Window innerHeight:', window.innerHeight);
+      console.log('');
+      console.log('Window scrollY:', window.scrollY);
+      console.log('Document scrollTop:', document.documentElement.scrollTop);
+      console.log('Body scrollTop:', document.body.scrollTop);
+      console.log('');
+      console.log('HTML overflow:', getComputedStyle(document.documentElement).overflow);
+      console.log('HTML overflow-y:', getComputedStyle(document.documentElement).overflowY);
+      console.log('Body overflow:', getComputedStyle(document.body).overflow);
+      console.log('Body overflow-y:', getComputedStyle(document.body).overflowY);
+      console.log('');
+      console.log('Can scroll?', document.documentElement.scrollHeight > window.innerHeight);
+      console.log('=======================');
     };
 
     updateMeasurements();
@@ -35,14 +54,19 @@ export default function ScrollDebugger() {
     // Update on scroll
     const handleScroll = () => {
       setScrollY(window.scrollY);
+      updateMeasurements(); // Log on every scroll
     };
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', updateMeasurements);
 
+    // Also update every 500ms to catch any changes
+    const interval = setInterval(updateMeasurements, 500);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', updateMeasurements);
+      clearInterval(interval);
     };
   }, []);
 
