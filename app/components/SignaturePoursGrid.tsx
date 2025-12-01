@@ -52,12 +52,12 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
       ([entry]) => {
         if (isMobile) {
           // On mobile: animate in when entering, stay visible while in section
-          // Only reset when completely out of view (ratio = 0)
+          // Only reset when scrolled far away (section height buffer)
           if (entry.isIntersecting && entry.intersectionRatio > 0) {
             setVisible(true);
             hasAnimated.current = true;
-          } else if (entry.intersectionRatio === 0 && hasAnimated.current) {
-            // Completely out of view - reset for next entrance
+          } else if (!entry.isIntersecting && hasAnimated.current) {
+            // Far out of view (beyond buffer zone) - reset for next entrance
             setVisible(false);
             hasAnimated.current = false;
           }
@@ -69,8 +69,8 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
         }
       },
       {
-        threshold: [0, 0.1, 0.2], // Multiple thresholds to detect complete exit
-        rootMargin: "0px" // No extra margin
+        threshold: 0,
+        rootMargin: "100vh 0px 100vh 0px" // Large buffer: must scroll full viewport height away to reset
       }
     );
     if (ref.current) observer.observe(ref.current);
