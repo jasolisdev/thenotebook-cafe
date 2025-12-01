@@ -53,7 +53,7 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
         if (isMobile) {
           // On mobile: animate in when entering, stay visible while in section
           // Only reset when scrolled far away (section height buffer)
-          if (entry.isIntersecting && entry.intersectionRatio > 0) {
+          if (entry.isIntersecting) {
             setVisible(true);
             hasAnimated.current = true;
           } else if (!entry.isIntersecting && hasAnimated.current) {
