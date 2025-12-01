@@ -13,7 +13,6 @@ import HeroButtons from "./components/ui/HeroButtons";
 import StoryLink from "./components/ui/StoryLink";
 import StoryBlobs from "./components/ui/StoryBlobs";
 import AtmosphereBlob from "./components/ui/AtmosphereBlob";
-import StoryGalleryBlob from "./components/ui/StoryGalleryBlob";
 import { Coffee, Music, Mail, Wifi, PlugZap, Armchair } from "lucide-react";
 import AtmosphereStrip from "./components/AtmosphereStrip";
 import SignaturePoursGrid from "./components/SignaturePoursGrid";
