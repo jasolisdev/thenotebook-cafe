@@ -1,70 +1,71 @@
-
 /**
  * Homepage - The Notebook Café
  *
- * Main landing page featuring hero section, welcome content, card gallery,
- * atmosphere carousel, info cards, and newsletter signup.
+ * Redesigned homepage featuring new hero, sanctuary section, vibe carousel, and newsletter.
  */
+import Link from "next/link";
+import Image from "next/image";
 import { client } from "@/sanity/lib/client";
 import NewsletterForm from "./components/features/NewsLetterForm";
-import ScrollReveal from "./components/layout/ScrollReveal";
-import HomeFloatingItems from "./components/decorative/HomeFloatingItems";
 import SiteFooter from "./components/layout/SiteFooter";
-import {
-  Coffee,
-  Music2,
-  MapPin,
-  Clock,
-  Wifi,
-  PlugZap,
-  Armchair,
-} from "lucide-react";
-import {
-  SiSpotify,
-  SiApplemusic,
-  SiSoundcloud,
-} from "react-icons/si";
-import CoffeeDifferenceSection from "./components/features/CoffeeDifferenceSection";
-import AtmosphereCarousel from "./components/features/AtmosphereCarousel";
-import HeroGallery from "./components/features/HeroGallery";
-import WhatToExpectSection from "./components/features/WhatToExpectSection";
-import Image from "next/image";
+import Reveal from "./components/ui/Reveal";
+import HeroButtons from "./components/ui/HeroButtons";
+import StoryLink from "./components/ui/StoryLink";
+import { Coffee, Music, Mail, Wifi, PlugZap, Armchair } from "lucide-react";
+import AtmosphereStrip from "./components/AtmosphereStrip";
+import SignaturePoursGrid from "./components/SignaturePoursGrid";
 
-const mosaicItems = [
-  {
-    src: "/unsplash/coffee-shop-counter.jpg",
-  },
-  {
-    src: "/unsplash/coffee-shop-interior.jpg",
-    span2: true,
-  },
-  {
-    src: "/unsplash/coffee-shop-atmosphere.jpg",
-  }, // coffee bar
-  {
-    src: "/unsplash/coffee-shop-people.jpg",
-  },
-  {
-    src: "/unsplash/coffee-shop-vintage.jpg",
-  },
-  {
-    src: "/unsplash/espresso-pour.jpg",
-  }, // outdoor seating
+const vibeImages = [
+  "/unsplash/tnc-placeholder-3.png",
+  "/unsplash/tnc-placeholder-4.png",
+  "/unsplash/tnc-placeholder-5.png",
+  "/unsplash/tnc-placeholder-6.png"
 ];
 
-const atmosphereImages = [
+const signaturePours = [
   {
-    src: "/unsplash/aesthetic-coffee-1.jpg",
-    alt: "Cafe interior atmosphere"
+    name: "Iced Brown Sugar Oat",
+    description: "Caramelized brown sugar layered with velvety oat milk and slow-steeped espresso.",
+    image: "/unsplash/hero-iced-coffee-1.png"
   },
   {
-    src: "/unsplash/aesthetic-coffee-2.jpg",
-    alt: "Cafe seating area"
+    name: "Matcha Cloud",
+    description: "Ceremonial grade matcha poured over cold foam for a soft, cloudlike finish.",
+    image: "/unsplash/hero-iced-coffee-1.png"
   },
   {
-    src: "/unsplash/coffee-shop-interior.jpg",
-    alt: "Cafe workspace ambiance"
+    name: "Classic Cold Brew",
+    description: "18-hour brew for a chocolatey, low-acid sip served over crystal-clear ice.",
+    image: "/unsplash/hero-iced-coffee-1.png"
   },
+  {
+    name: "Espresso Tonic",
+    description: "Bright espresso lifted by artisanal tonic, citrus oils, and a crack of ice.",
+    image: "/unsplash/hero-iced-coffee-1.png"
+  }
+];
+
+const atmosphereFeatures = [
+  {
+    title: "Fiber Optic Wi-Fi",
+    description: "Gigabit speeds for heavy workflows.",
+    icon: Wifi
+  },
+  {
+    title: "Power Everywhere",
+    description: "Outlets at every single seat.",
+    icon: PlugZap
+  },
+  {
+    title: "Warm Ambience",
+    description: "2700K lighting for eye comfort.",
+    icon: Armchair
+  },
+  {
+    title: "Acoustics",
+    description: "Sound-treated for conversation.",
+    icon: Music
+  }
 ];
 
 async function getData() {
@@ -84,416 +85,303 @@ export default async function HomePage() {
   const { home, settings } = await getData();
 
   return (
-    <main className="site-layout" suppressHydrationWarning>
-      <ScrollReveal />
+    <main className="overflow-hidden" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-brown)' }}>
+      {/* Hero Section */}
+      <section
+        data-section="Hero"
+        className="relative flex items-start md:items-center justify-center px-6 pt-12 md:pt-32 pb-16 md:pb-[120px] min-h-[calc(100vh-80px)] md:min-h-[90vh]"
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
+      >
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cubes.png")' }}></div>
 
-      {/* HERO WRAPPER */}
-      <section className="section-hero">
-        {/* HERO */}
-        <section className="hero hero-gradient relative">
-          <HomeFloatingItems variant="hero" />
-          <div className="hero-copy relative z-10">
-            {/* Screen reader only title for SEO */}
-            <h1 className="sr-only">
-              {home?.heroHeadline || "The Notebook Café"}
-            </h1>
-
-            {/* Logo */}
-            <div className="hero-logo-wrapper">
+        <div className="relative z-10 text-center max-w-4xl mx-auto hero-content">
+          <Reveal>
+            <div className="flex justify-center mb-6">
               <Image
                 src="/logo.png"
                 alt="The Notebook Café"
-                className="hero-logo"
-                width={320}
-                height={100}
+                width={210}
+                height={210}
+                className="w-auto md:h-32 lg:h-36"
+                style={{ height: "106px" }}
                 priority
               />
             </div>
+          </Reveal>
+          <Reveal>
+            <span className="inline-block text-sm md:text-base uppercase tracking-[0.3em] mb-6 font-medium" style={{ color: 'var(--cafe-tan)' }}>Est. Riverside 2024</span>
+          </Reveal>
 
-            {/* Tagline */}
-            <p className="hero-tagline">Where Every Cup Tells a Story</p>
+          <Reveal delay={200}>
+            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.9] mb-8" style={{ color: 'var(--cafe-black)' }}>
+              Where Every Cup <br />
+              <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Tells a Story</span>
+            </h1>
+          </Reveal>
 
-            {/* Descriptive Text */}
-            <p className="hero-description">
-              A new vibe is brewing...
-              <span className="coffee-cup">
-                ☕
-                <span className="coffee-steam">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </span>
+          <Reveal delay={400}>
+            <p className="text-lg md:text-xl max-w-xl mx-auto mb-12 font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.8)' }}>
+              Come for the coffee, stay for the vibe.
+            </p>
+          </Reveal>
+
+          <Reveal delay={600}>
+            <HeroButtons />
+          </Reveal>
+        </div>
+
+        {/* Decorative Floating Elements */}
+        <div className="absolute top-1/4 left-10 md:left-20 opacity-20 pointer-events-none" style={{ animation: 'float 8s ease-in-out infinite' }}>
+          <Coffee size={48} className="text-cafe-tan" />
+        </div>
+        <div className="absolute bottom-1/4 right-10 md:right-20 opacity-20 pointer-events-none" style={{ animation: 'float 6s ease-in-out infinite' }}>
+          <Music size={40} className="text-cafe-tan" />
+        </div>
+      </section>
+
+      {/* Signature Pours */}
+      <section
+        data-section="Signature Pours"
+        className="py-24 px-6"
+        style={{ backgroundColor: 'var(--cafe-white)' }}
+      >
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <Reveal>
+              <span className="text-xs uppercase tracking-[0.25em] font-semibold" style={{ color: 'var(--cafe-tan)' }}>
+                Signature Pours
               </span>
-            </p>
+            </Reveal>
+            <Reveal delay={150}>
+              <h2 className="font-serif text-4xl md:text-5xl mt-4" style={{ color: 'var(--cafe-black)' }}>
+                Crafted With Care
+              </h2>
+            </Reveal>
+            <Reveal delay={250}>
+              <p className="mt-4 text-base md:text-lg font-light" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.75)' }}>
+                Small-batch recipes we obsess over—balanced, nuanced, and poured with a steady hand.
+              </p>
+            </Reveal>
+          </div>
 
-            {/* Primary CTA */}
-            <div className="hero-cta-wrapper">
-              <a
-                href={home?.ctaUrl || (settings?.social?.instagram ?? "#")}
-                target="_blank"
-                rel="noreferrer"
-                className="hero-cta-button"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
+            <SignaturePoursGrid pours={signaturePours} />
+          </div>
+
+          <div className="text-center mt-16">
+            <Reveal delay={200}>
+              <Link
+                href="/menu"
+                className="inline-flex items-center gap-2 px-8 py-3 text-xs uppercase tracking-[0.25em] font-semibold border border-cafe-black rounded-sm transition-all duration-300 hover:bg-cafe-black hover:text-cafe-white"
               >
-                <span>FOLLOW FOR UPDATES</span>
-                <svg
-                  className="hero-cta-arrow"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                >
-                  <path
-                    d="M1 8h14M9 2l6 6-6 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
-            </div>
+                View Our Menu
+              </Link>
+            </Reveal>
           </div>
-        </section>
-      </section>
-
-      {/* Divider - Wavy transition to cream */}
-      <div className="divider-cream" style={{ transform: "scaleY(-1)" }}>
-        <Image src="/notebook-divider-cream.svg" alt="" width={1440} height={120} />
-      </div>
-
-      {/* WELCOME SECTION - CREAM */}
-      <section className="section-cream relative py-16 sm:py-20">
-        <HomeFloatingItems variant="welcome" />
-        {/* Welcome Header */}
-        <div className="mx-auto max-w-[900px] px-4 text-center sm:px-6 scroll-reveal relative z-10">
-          <h2 className="welcome-section-label">
-            WELCOME TO THE NOTEBOOK CAFÉ
-          </h2>
-          <h1 className="welcome-section-description">
-            COME FOR THE COFFEE, STAY FOR THE VIBE
-          </h1>
         </div>
       </section>
 
-      {/* FEATURED DRINKS SECTION */}
-      <section className="section-featured">
-        <div className="featured-card scroll-reveal">
-          {/* Background platter (visible on mobile only) */}
-          <Image
-            src="/unsplash/showcase-platter.jpg"
-            alt="Showcase platter background"
-            width={280}
-            height={350}
-            className="featured-platter-bg"
-          />
-
-          {/* Coffee carousel - swipeable */}
-          <div className="featured-coffee-carousel">
-            <div className="featured-coffee-track">
-              {/* Coffee 1 - slides in on scroll reveal */}
-              <div className="featured-coffee-slide">
-                <Image
-                  src="/unsplash/hero-iced-coffee-1.png"
-                  alt="Featured coffee 1"
-                  width={200}
-                  height={300}
-                  className="featured-iced-coffee"
-                />
-              </div>
-
-              {/* Coffee 2 */}
-              <div className="featured-coffee-slide">
-                <Image
-                  src="/unsplash/hero-iced-coffee-1.png"
-                  alt="Featured coffee 2"
-                  width={200}
-                  height={300}
-                  className="featured-iced-coffee"
-                />
-              </div>
-
-              {/* Coffee 3 */}
-              <div className="featured-coffee-slide">
-                <Image
-                  src="/unsplash/hero-iced-coffee-1.png"
-                  alt="Featured coffee 3"
-                  width={200}
-                  height={300}
-                  className="featured-iced-coffee"
-                />
-              </div>
-
-              {/* Coffee 4 */}
-              <div className="featured-coffee-slide">
-                <Image
-                  src="/unsplash/hero-iced-coffee-1.png"
-                  alt="Featured coffee 4"
-                  width={200}
-                  height={300}
-                  className="featured-iced-coffee"
-                />
-              </div>
-            </div>
+      {/* Low Lights Section */}
+      <section
+        data-section="Low Lights"
+        className="py-24 md:py-32 px-6"
+        style={{ backgroundColor: 'var(--cafe-white)' }}
+      >
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+          <div className="space-y-8">
+            <Reveal>
+              <h2 className="font-serif text-5xl md:text-6xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
+                Low lights,<br />
+                good sound,<br />
+                <span className="italic" style={{ color: 'var(--cafe-tan)' }}>better coffee.</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={150}>
+              <div className="w-24 h-[2px]" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
+            </Reveal>
+            <Reveal delay={250}>
+              <p className="text-lg md:text-xl font-light leading-relaxed max-w-xl" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
+                We designed The Notebook Café as a sanctuary for the creatives, the writers, and the dreamers of Riverside. It is not just about the caffeine—it is about the headspace.
+              </p>
+            </Reveal>
+            <Reveal delay={350}>
+              <StoryLink />
+            </Reveal>
+            <div className="w-24 h-px bg-cafe-brown/30"></div>
           </div>
 
-          {/* Carousel indicators */}
-          <div className="featured-carousel-dots">
-            <span className="carousel-dot active"></span>
-            <span className="carousel-dot"></span>
-            <span className="carousel-dot"></span>
-            <span className="carousel-dot"></span>
-          </div>
-        </div>
-
-        <div className="flex justify-center">
-          <a href="/menu" className="featured-menu-button">
-            <span>View Our Menu</span>
-            <svg
-              className="featured-menu-arrow"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-            >
-              <path
-                d="M1 8h14M9 2l6 6-6 6"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+          <Reveal delay={200}>
+            <div className="grid grid-cols-2 gap-4">
+              <Image
+                src="/unsplash/tnc-placeholder-1.png"
+                alt="Barista Pouring"
+                width={900}
+                height={1200}
+                className="w-full h-full object-cover rounded-sm translate-y-12 shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                priority
               />
-            </svg>
-          </a>
+              <Image
+                src="/unsplash/tnc-placeholder-2.png"
+                alt="Cafe Corner"
+                width={900}
+                height={1200}
+                className="w-full h-full object-cover rounded-sm shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+              />
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* WHAT TO EXPECT SECTION */}
-      <WhatToExpectSection />
-
-      {/* HEAR THE VIBE Section */}
-      <section className="section-cream py-16 sm:py-20 relative">
-        <div className="mx-auto max-w-[900px] px-4 sm:px-6 scroll-reveal relative z-10">
-          {/* Section Label */}
-          <div className="section-label">
-            <div className="welcome-divider-line"></div>
-            <span className="welcome-label-text">Hear the Vibe</span>
-            <div className="welcome-divider-line"></div>
-          </div>
-
-          {/* Content */}
-          <div className="section-label-description">
-            <p className="text-[15px] sm:text-[16px] leading-relaxed max-w-[700px] mx-auto mb-10 text-[var(--desert-rock)]">
-              Ambient house, soul, and groove—setting the perfect backdrop for
-              focus and creation. Tune in to our curated playlist before the
-              doors open.
-            </p>
-            <div className="music-visualizer mx-auto mb-6">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div className="flex items-center justify-center gap-4 sm:gap-6">
-              <a
-                href={settings?.social?.spotify || "#"}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,141,120,0.15)] text-[rgba(164,141,120,0.9)] hover:bg-[rgba(164,141,120,0.25)] hover:text-[rgba(164,141,120,1)] transition"
-                aria-label="Open Spotify"
-              >
-                <SiSpotify className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,141,120,0.15)] text-[rgba(164,141,120,0.9)] hover:bg-[rgba(164,141,120,0.25)] hover:text-[rgba(164,141,120,1)] transition"
-                aria-label="Open Apple Music"
-              >
-                <SiApplemusic className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(164,141,120,0.15)] text-[rgba(164,141,120,0.9)] hover:bg-[rgba(164,141,120,0.25)] hover:text-[rgba(164,141,120,1)] transition"
-                aria-label="Open SoundCloud"
-              >
-                <SiSoundcloud className="w-5 h-5" />
-              </a>
-            </div>
-            <p className="text-[13px] sm:text-[14px] mt-6 mb-4 text-[var(--desert-rock)] opacity-90">
-              Your soundtrack to focus, flow, and creativity.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* DESIGN NOTES / ATMOSPHERE Section */}
-      <section className="section-cream py-16 sm:py-20 relative">
-        <div className="mx-auto max-w-[900px] px-4 sm:px-6 scroll-reveal relative z-10">
-          {/* Section Label */}
-          <div className="section-label">
-            <div className="welcome-divider-line"></div>
-            <span className="welcome-label-text">The Atmosphere</span>
-            <div className="welcome-divider-line"></div>
-          </div>
-
-          {/* Content */}
-          <div className="section-label-description mb-10">
-            <p className="text-[15px] sm:text-[17px] leading-relaxed text-[var(--desert-rock)] max-w-[700px] mx-auto mb-10">
-              A calm, warm space designed for focus, comfort, and creativity.
-            </p>
-
-            {/* Amenities mini grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-[720px] mx-auto text-left">
-              {[
-                { label: "Fast & stable Wi-Fi", Icon: Wifi },
-                { label: "Plenty of outlets", Icon: PlugZap },
-                { label: "Cozy seating for long stays", Icon: Armchair },
-                { label: "Ambient house & soul music", Icon: Music2 },
-              ].map((item, idx) => (
-                <div
-                  key={item.label}
-                  className="flex items-center justify-start gap-2 text-[13.5px] sm:text-[14px] text-[rgba(42,31,22,0.9)]"
-                >
-                  <item.Icon
-                    className="w-5 h-5 amenity-icon"
-                    style={{
-                      animationDelay: `${idx * 0.1}s`,
-                      color: "var(--warm-roast)",
-                    }}
-                  />
-                  <span>{item.label}</span>
+      {/* The Trinity */}
+      <section
+        data-section="The Trinity"
+        className="py-20 md:py-24"
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div
+            className="hidden md:block mb-10 w-full h-px"
+            style={{ background: 'linear-gradient(90deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
+          ></div>
+          <div className="grid md:grid-cols-3">
+            <Reveal>
+              <div className="p-10 text-center">
+                <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-tan)', border: '1px solid rgba(var(--cafe-tan-rgb), 0.35)' }}>
+                  <Coffee size={28} />
                 </div>
-              ))}
-            </div>
-
-            {/* Interior carousel - Horizontal scroll with overlap */}
-            <AtmosphereCarousel images={atmosphereImages} />
-          </div>
-        </div>
-      </section>
-
-      {/* OUR COMMITMENT SECTION */}
-      <section className="section-cream relative py-16 sm:py-20">
-        <CoffeeDifferenceSection />
-      </section>
-
-
-      {/* Divider - Wavy transition back to dark */}
-      <div className="divider-cream">
-        <Image src="/notebook-divider-cream.svg" alt="" width={1440} height={120} />
-      </div>
-
-      {/* CARD GRID - 1 col on mobile, 2 cols on tablet+ */}
-      <section className="section-dark py-20 sm:py-24 lg:py-28 relative">
-        <HomeFloatingItems variant="cards" />
-        <div className="mx-auto max-w-[1120px] px-5 sm:px-6 relative z-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
-            {/* CARD: Craft */}
-            <div
-              className="home-info-card scroll-reveal"
-              style={{ animationDelay: "0s" }}
-            >
-              <div className="flex items-start justify-between mb-2 sm:mb-3">
-                <h3 className="text-[16px] min-[375px]:text-[18px] sm:text-[20px] md:text-[22px] font-semibold tracking-wide ink-cream">
-                  OUR CRAFT.
-                </h3>
-                <div className="home-card-icon">
-                  <Coffee className="w-5 h-5 sm:w-6 sm:h-6" />
-                </div>
+                <h3 className="font-serif text-2xl mb-3" style={{ color: 'var(--cafe-black)' }}>Craft Espresso</h3>
+                <p className="font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
+                  Roasted locally, extracted with precision. We respect the bean and the process.
+                </p>
               </div>
-              <p className="text-[13.5px] min-[375px]:text-[14.5px] sm:text-[15px] leading-6 sm:leading-7 ink-cream-dim">
-                Specialty espresso, ethically sourced, and meticulously prepared
-                beverages.
-              </p>
-            </div>
+            </Reveal>
 
-            {/* CARD: Vibe */}
-            <div
-              className="home-info-card scroll-reveal"
-              style={{ animationDelay: "0.1s" }}
-            >
-              <div className="flex items-start justify-between mb-2 sm:mb-3">
-                <h3 className="text-[16px] min-[375px]:text-[18px] sm:text-[20px] md:text-[22px] font-semibold tracking-wide ink-cream">
-                  THE VIBE.
-                </h3>
-                <div className="home-card-icon">
-                  <Music2 className="w-5 h-5 sm:w-6 sm:h-6" />
+            <Reveal delay={150}>
+              <div className="relative p-10 text-center">
+                {/* Desktop: Vertical gradient dividers */}
+                <span
+                  className="hidden md:block absolute inset-y-6 left-0 w-px"
+                  style={{ background: 'linear-gradient(180deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
+                ></span>
+                <span
+                  className="hidden md:block absolute inset-y-6 right-0 w-px"
+                  style={{ background: 'linear-gradient(180deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
+                ></span>
+                {/* Mobile: Horizontal gradient dividers */}
+                <span
+                  className="md:hidden block absolute top-0 inset-x-10 h-px"
+                  style={{ background: 'linear-gradient(90deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
+                ></span>
+                <span
+                  className="md:hidden block absolute bottom-0 inset-x-10 h-px"
+                  style={{ background: 'linear-gradient(90deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
+                ></span>
+                <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-tan)', border: '1px solid rgba(var(--cafe-tan-rgb), 0.35)' }}>
+                  <Music size={26} />
                 </div>
+                <h3 className="font-serif text-2xl mb-3" style={{ color: 'var(--cafe-black)' }}>Curated Sound</h3>
+                <p className="font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
+                  Deep house, soul, and lo-fi grooves tuned to keep you in flow.
+                </p>
               </div>
-              <p className="text-[13.5px] min-[375px]:text-[14.5px] sm:text-[15px] leading-6 sm:leading-7 ink-cream-dim">
-                Ambient house music, creative energy, and a welcoming space for
-                thinkers &amp; makers.
-              </p>
-            </div>
+            </Reveal>
 
-            {/* CARD: Location */}
-            <div
-              className="home-info-card scroll-reveal"
-              style={{ animationDelay: "0.2s" }}
-            >
-              <div className="flex items-start justify-between mb-2 sm:mb-3">
-                <h3 className="text-[16px] min-[375px]:text-[18px] sm:text-[20px] md:text-[22px] font-semibold tracking-wide ink-cream">
-                  LOCATION.
-                </h3>
-                <div className="home-card-icon">
-                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
+            <Reveal delay={250}>
+              <div className="p-10 text-center">
+                <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-tan)', border: '1px solid rgba(var(--cafe-tan-rgb), 0.35)' }}>
+                  <Armchair size={26} />
                 </div>
+                <h3 className="font-serif text-2xl mb-3" style={{ color: 'var(--cafe-black)' }}>Creative Comfort</h3>
+                <p className="font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
+                  Cozy seating, warm light, plenty of outlets—stay as long as you need.
+                </p>
               </div>
-              <p className="text-[13.5px] min-[375px]:text-[14.5px] sm:text-[15px] leading-6 sm:leading-7 ink-cream-dim">
-                Corner of University Ave &amp; Orange St
-                <br />
-                Riverside, CA • Opening Early 2026
-              </p>
-            </div>
-
-            {/* CARD: Hours */}
-            <div
-              className="home-info-card scroll-reveal"
-              style={{ animationDelay: "0.3s" }}
-            >
-              <div className="flex items-start justify-between mb-2 sm:mb-3">
-                <h3 className="text-[16px] min-[375px]:text-[18px] sm:text-[20px] md:text-[22px] font-semibold tracking-wide ink-cream">
-                  HOURS.
-                </h3>
-                <div className="home-card-icon">
-                  <Clock className="w-5 h-5 sm:w-6 sm:h-6" />
-                </div>
-              </div>
-              <p className="text-[13.5px] min-[375px]:text-[14.5px] sm:text-[15px] leading-6 sm:leading-7 ink-cream-dim">
-                {settings?.hours?.weekday || "Mon–Fri: 7 AM – 9 PM"}
-                <br />
-                {settings?.hours?.weekend || "Sat–Sun: 8 AM – 10 PM"}
-              </p>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Newsletter - Connected to Sanity */}
-      <section className="newsletter-section">
-        <div className="newsletter-box scroll-reveal">
-          <h2 className="newsletter-heading">
-            Join our community; get 10% off your first drink.
-          </h2>
-          <p className="newsletter-subtext">
-            Be the first to know about specials, events, and our grand opening.
-          </p>
+      {/* Atmosphere */}
+      <section
+        data-section="Atmosphere"
+        className="py-24 md:py-32 px-6"
+        style={{ backgroundColor: 'var(--cafe-white)' }}
+      >
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Column - Features (order-2 on mobile) */}
+          <div className="order-2 lg:order-1">
+            <Reveal delay={200}>
+              <div className="grid gap-5 md:grid-cols-2 md:gap-6">
+                {atmosphereFeatures.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.title} className="flex items-start gap-4">
+                      <div
+                        className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.1)', color: 'var(--cafe-tan)' }}
+                      >
+                        <Icon size={22} />
+                      </div>
+                      <div>
+                        <div className="font-serif text-xl mb-1" style={{ color: 'var(--cafe-black)' }}>{item.title}</div>
+                        <p className="text-sm md:text-base" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.7)' }}>{item.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </Reveal>
+          </div>
 
-          <NewsletterForm source="homepage" />
+          {/* Right Column - Heading (order-1 on mobile) */}
+          <div className="space-y-8 order-1 lg:order-2">
+            <Reveal>
+              <h2 className="font-serif text-5xl md:text-6xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
+                The Atmosphere,<br />
+                Designed for<br />
+                <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Focus</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={150}>
+              <div className="w-24 h-[2px]" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
+            </Reveal>
+            <Reveal delay={250}>
+              <p className="text-lg md:text-xl font-light leading-relaxed max-w-xl" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
+                A sanctuary with warm lighting, deep playlists, and Wi-Fi that never drops. Settle in for an hour or stay all day.
+              </p>
+            </Reveal>
+            <div className="w-24 h-px" style={{ backgroundColor: 'rgba(var(--cafe-brown-rgb), 0.3)' }}></div>
+          </div>
         </div>
       </section>
 
-      {/* Divider - Wavy transition to footer */}
-      <div className="divider-cream">
-        <Image src="/notebook-divider-cream.svg" alt="" width={1440} height={120} />
-      </div>
+      {/* Atmosphere Images */}
+      <section
+        data-section="Atmosphere Images"
+        className="overflow-visible"
+        style={{ backgroundColor: 'var(--cafe-white)' }}
+      >
+        <AtmosphereStrip images={vibeImages} />
+      </section>
+
+      {/* Newsletter */}
+      <section
+        data-section="Newsletter"
+        className="py-24 px-6"
+        style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.1)' }}
+      >
+        <div className="max-w-2xl mx-auto text-center">
+          <Reveal>
+            <Mail className="mx-auto mb-6" size={32} style={{ color: 'var(--cafe-tan)' }} />
+            <h2 className="font-serif text-3xl md:text-4xl mb-4" style={{ color: 'var(--cafe-black)' }}>Join the Inner Circle</h2>
+            <p className="mb-8 font-light" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>Be the first to know about our grand opening, special tastings, and secret menu items.</p>
+
+            <NewsletterForm source="homepage" />
+          </Reveal>
+        </div>
+      </section>
 
       {/* Footer */}
-      <SiteFooter
-        showFloatingItems={true}
-        FloatingItemsComponent={HomeFloatingItems}
-        vibeCopy={home?.vibeCopy}
-      />
+      <SiteFooter />
     </main>
   );
 }

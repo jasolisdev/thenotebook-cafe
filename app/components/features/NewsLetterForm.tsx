@@ -42,21 +42,39 @@ export default function NewsletterForm({ source = "homepage" }: { source?: strin
 
   return (
     <div>
-      <form onSubmit={onSubmit} className="newsletter-form-wrapper">
+      <style jsx>{`
+        input::placeholder {
+          color: #CBB9A4;
+        }
+      `}</style>
+      <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-4">
         <input
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
+          placeholder="your@email.com"
           inputMode="email"
           autoComplete="email"
-          className="newsletter-input"
+          className="flex-1 px-6 py-4 outline-none transition-colors placeholder-cafe-beige"
+          style={{
+            backgroundColor: '#FFFFFF',
+            border: '1px solid #CBB9A4',
+            color: '#2C2420'
+          }}
+          onFocus={(e) => e.currentTarget.style.borderColor = '#A48D78'}
+          onBlur={(e) => e.currentTarget.style.borderColor = '#CBB9A4'}
         />
         <button
           type="submit"
           disabled={status === "loading"}
-          className="newsletter-submit-btn"
+          className="px-8 py-4 uppercase tracking-widest text-xs font-semibold transition-colors disabled:opacity-50"
+          style={{
+            backgroundColor: status === "loading" ? '#2C2420' : '#2C2420',
+            color: '#FFFFFF'
+          }}
+          onMouseEnter={(e) => !status || status === "idle" ? e.currentTarget.style.backgroundColor = '#A48D78' : null}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#2C2420'}
         >
           {status === "loading" ? "Subscribing…" : "Subscribe"}
         </button>
@@ -65,7 +83,7 @@ export default function NewsletterForm({ source = "homepage" }: { source?: strin
       {msg && (
         <div
           role="status"
-          className={`text-sm mt-3 ${status === "success" || status === "duplicate"
+          className={`text-sm mt-4 ${status === "success" || status === "duplicate"
               ? "text-green-700"
               : "text-red-700"
             }`}
@@ -73,10 +91,6 @@ export default function NewsletterForm({ source = "homepage" }: { source?: strin
           {msg}
         </div>
       )}
-
-      <p className="newsletter-privacy mt-4">
-        We respect your privacy. Unsubscribe anytime.
-      </p>
     </div>
   );
 }

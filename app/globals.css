@@ -7,130 +7,99 @@
 /* ============================================================
    CUSTOM FONTS
 ============================================================ */
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Thin.otf') format('opentype');
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Light.otf') format('opentype');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Medium.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Black.otf') format('opentype');
-  font-weight: 900;
-  font-style: normal;
-}
+/* DM Serif Display and Outfit fonts loaded via Google Fonts in layout.tsx */
 
 /* ============================================================
    DESIGN TOKENS
 =========================================================== */
 :root {
-  --font-sans: "Torus", system-ui, sans-serif;
-  --font-mono: "Torus", monospace;
-  --font-display: "Alpino", "Torus", system-ui, sans-serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --font-mono: "Outfit", monospace;
+  --font-display: "DM Serif Display", serif;
 
   /* ===============================
-     NEW COLOR PALETTE
-     (Neutral Café Minimalist Set)
+     UPDATED COLOR PALETTE
+     (Premium Café Design System)
   =============================== */
 
-  --desert-rock: #A48D78;
-  /* Medium warm taupe brown */
-  --soft-sandstone: #CBB9A4;
-  /* Soft beige */
-  --creamed-honey: #EDE7D8;
-  /* Light warm cream */
-  --porcelain-mist: #F4F1EA;
-  /* Near-white beige */
-  --feather-white: #FAF9F6;
-  /* Clean soft white */
+  --cafe-black: #2C2420;
+  --cafe-brown: #4A3B32;
+  --cafe-tan: #A48D78;
+  --cafe-beige: #CBB9A4;
+  --cafe-cream: #EDE7D8;
+  --cafe-mist: #F4F1EA;
+  --cafe-white: #FAF9F6;
 
-  /* Core semantic tokens using new palette */
-  --bg-solid: var(--desert-rock);
-  --bg-dark: var(--desert-rock);
-  --bg-cream: var(--creamed-honey);
-  --cream: var(--creamed-honey);
+  /* RGB helpers for rgba() usage */
+  --cafe-black-rgb: 44, 36, 32;
+  --cafe-brown-rgb: 74, 59, 50;
+  --cafe-tan-rgb: 164, 141, 120;
+  --cafe-beige-rgb: 203, 185, 164;
+  --cafe-cream-rgb: 237, 231, 216;
+  --cafe-mist-rgb: 244, 241, 234;
+  --cafe-white-rgb: 250, 249, 246;
 
-  --offwhite: var(--feather-white);
+  /* Core semantic tokens */
+  --bg-solid: var(--cafe-white);
+  --bg-dark: var(--cafe-black);
+  --bg-cream: var(--cafe-cream);
+  --bg-mist: var(--cafe-mist);
 
   /* Text colors */
-  --text-light: var(--feather-white);
-  --text-light-muted: var(--porcelain-mist);
-
-  /* Panels / borders */
-  --panel: rgba(164, 141, 120, 0.08);
-  /* desert-rock at 8% */
-  --panel-border: rgba(164, 141, 120, 0.12);
-  --glow: 0 0 0.6rem rgba(164, 141, 120, 0.35);
+  --text-dark: var(--cafe-brown);
+  --text-black: var(--cafe-black);
+  --text-light: var(--cafe-mist);
+  --text-light-muted: var(--cafe-beige);
 
   /* Accent colors */
-  --accent-warm: rgba(164, 141, 120, 0.20);
-  --accent-glow: rgba(164, 141, 120, 0.45);
+  --accent-primary: var(--cafe-tan);
+  --accent-dark: var(--cafe-brown);
 
-  /* Legacy (optional) */
-  --ink-cream: var(--text-light);
-  --ink-cream-dim: var(--text-light-muted);
+  /* Glass panel effect */
+  --glass-bg: rgba(250, 249, 246, 0.85);
 
 }
 
 /* ============================================================
    BASE ELEMENTS
 ============================================================ */
-html,
-body,
-#__next {
-  height: 100%;
-}
 
-html,
-body {
+/* CRITICAL FIX: Removed height: 100% constraint
+
+   BEFORE: html, body, #__next { height: 100%; }
+   PROBLEM: Forced body to viewport height, preventing natural document scrolling
+   SYMPTOM: document.scrollHeight === window.innerHeight (663px = 663px)
+   RESULT: Browser couldn't scroll properly, content appeared offset
+
+   NOW: Body grows naturally with content, allowing proper scroll behavior
+
+   IMPORTANT: No overflow on html - this allows sticky positioning to work!
+*/
+
+html {
   font-family: var(--font-sans);
-  letter-spacing: -0.15px;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
   width: 100%;
-  background-color: var(--bg-solid);
-}
-
-/* GPU acceleration for smoother animations */
-html {
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* No overflow property - allows position: sticky to work */
 }
 
 body {
-  /* Prevent layout shifts during page transitions */
-  overflow-anchor: none;
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;  /* Only hide horizontal overflow */
+  width: 100%;
+  min-height: 100vh; /* Allow body to grow beyond viewport */
+  background-color: var(--bg-solid);
+  color: var(--text-dark);
+  /* Re-enabled scroll anchoring for proper scroll restoration */
+  overflow-anchor: auto;
 }
 
 /* Hide horizontal scrollbar for hero gallery track */
@@ -142,6 +111,39 @@ body {
   scrollbar-width: none;
 }
 
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* REMOVED: Hero transform shifts
+
+   BEFORE:
+   .hero-content { transform: translateY(-16px); }
+   @media (max-width: 400px) { transform: translateY(34px); }
+
+   PROBLEM: Transforms shift content VISUALLY but don't affect document flow
+   SYMPTOM: scrollY=0 but content appears 34px lower on mobile
+
+   SOLUTION: Use margin-top/padding-top in hero sections directly instead
+   This ensures layout flow matches visual positioning
+*/
+
+.notched-mobile {
+  overflow: visible;
+}
+
+/* Glass panel effect */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
 /* ============================================================
    GLOBAL UTILITIES
 ============================================================ */
@@ -149,9 +151,9 @@ body {
   min-height: 100dvh;
   background: var(--bg-solid);
   color: var(--text-light);
-  padding-top: calc(var(--announcement-banner-height, 42px) + 80px);
+  padding-top: 80px;
   transition: padding-top 0.3s ease;
-  /* Dynamic: Banner height + Nav (80px) */
+  /* Nav height only (banner hidden) */
 }
 
 /* Text color utilities for dark backgrounds */
@@ -236,6 +238,26 @@ h3 {
   }
 }
 
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
 /* ============================================================
    SCROLL REVEAL SYSTEM - Rebuilt from scratch
    Speed: Quick (0.5s)
@@ -294,4 +316,31 @@ h3 {
 *:focus-visible {
   outline: 2px solid rgba(164, 141, 120, 0.5);
   outline-offset: 2px;
+}
+
+/* ============================================================
+   DEBUG SECTION HELPERS
+============================================================ */
+.debug-section {
+  position: relative;
+  box-shadow: inset 0 0 0 3px var(--debug-color, #ff6b6b);
+}
+
+.debug-section::before {
+  content: attr(data-section);
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  z-index: 10;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--debug-color, #ff6b6b);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--debug-color, #ff6b6b);
+  border-radius: 4px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  pointer-events: none;
 }

@@ -3,365 +3,239 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
-import { SiSpotify, SiInstagram, SiFacebook } from "react-icons/si";
+import { useEffect, useState, useRef } from "react";
+import { Instagram, Coffee } from "lucide-react";
+import { PiSpotifyLogoFill, PiInstagramLogoFill, PiTiktokLogoFill } from "react-icons/pi";
 import AnnouncementBanner from "../ui/AnnouncementBanner";
 
-// Suppress hydration warnings for client-only components
-const isBrowser = typeof window !== "undefined";
-
-/**
- * Responsive breakpoint types for navigation behavior
- */
-type Breakpoint = "sm" | "md" | "lg" | "xl";
-
-/**
- * Props for the SiteHeader component
- */
 type SiteHeaderProps = {
-  /** Instagram profile URL */
   instagramUrl?: string;
-
-  /** Spotify playlist URL */
   spotifyUrl?: string;
-
-  /**
-   * Breakpoint at which mobile menu switches to desktop navigation
-   * @default "lg"
-   */
-  burgerUntil?: Breakpoint;
-
-  /** Optional custom announcement text */
   announcementText?: string;
 };
 
-/**
- * Breakpoint pixel values for responsive behavior
- */
-const BP_PX: Record<Breakpoint, number> = {
-  sm: 640,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
-};
-
-/**
- * SiteHeader Component
- *
- * Global navigation header with responsive mobile drawer menu.
- * Includes announcement banner, desktop navigation, and full-screen mobile overlay.
- *
- * @component
- * @example
- * ```tsx
- * import SiteHeader from '@/app/components/layout/SiteHeader';
- *
- * // Basic usage
- * <SiteHeader />
- *
- * // With social links
- * <SiteHeader
- *   instagramUrl="https://instagram.com/notebookcafe"
- *   spotifyUrl="https://open.spotify.com/playlist/..."
- * />
- *
- * // Custom breakpoint
- * <SiteHeader burgerUntil="md" />
- * ```
- *
- * @description
- * Features:
- * - Fixed announcement banner at top
- * - Responsive navigation (desktop: horizontal, mobile: full-screen overlay)
- * - Active page highlighting
- * - Mobile drawer with social links and vibe text
- * - Keyboard navigation (ESC to close drawer)
- * - Body scroll lock when drawer is open
- * - Decorative floating coffee beans in drawer
- *
- * Navigation Structure:
- * - Desktop: Home | Menu | Story | Contact
- * - Mobile: HOME | MENU | STORY | CONTACT + social icons + footer
- *
- * @param {SiteHeaderProps} props - Component props
- * @returns {React.JSX.Element} Rendered header
- */
 export default function SiteHeader({
   instagramUrl,
   spotifyUrl,
-  burgerUntil = "lg",
   announcementText,
 }: SiteHeaderProps): React.JSX.Element {
-  const [open, setOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const pathname = usePathname();
+  const drawerWasOpen = useRef(false);
 
-  /**
-   * Handles mobile menu toggle button click
-   * Prevents event bubbling and toggles drawer state
-   */
-  const handleToggle = (e: React.MouseEvent): void => {
-    e.preventDefault();
-    e.stopPropagation();
-    const newState = !open;
-    setOpen(newState);
-  };
+  const isActive = (path: string): boolean => pathname === path;
 
-  /**
-   * Close drawer when navigating to a new page
-   */
+  // Track drawer state
   useEffect(() => {
-    setOpen(false);
+    drawerWasOpen.current = isOpen;
+  }, [isOpen]);
+
+  // Close drawer on route change and scroll to top if drawer was open
+  useEffect(() => {
+    if (drawerWasOpen.current) {
+      // Drawer was open during navigation, ensure proper scroll
+      requestAnimationFrame(() => {
+        window.scrollTo(0, 0);
+      });
+    }
+    setIsOpen(false);
   }, [pathname]);
 
-  /**
-   * Close drawer on ESC key press
-   */
+  // Lock body scroll when drawer is open
   useEffect(() => {
-    const onKey = (e: KeyboardEvent): void => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  /**
-   * Lock body scroll when drawer is open
-   */
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open]);
-
-  /**
-   * Checks if the given href matches the current pathname
-   * Used for active link highlighting
-   *
-   * @param {string} href - Link href to check
-   * @returns {boolean} True if link is active
-   */
-  const isActive = (href: string): boolean => pathname === href;
-
-  const bpPx = useMemo(() => BP_PX[burgerUntil], [burgerUntil]);
+  }, [isOpen]);
 
   return (
-    <div suppressHydrationWarning>
-      {/* Announcement Banner */}
-      <AnnouncementBanner text={announcementText} />
+    <>
+      {/* <AnnouncementBanner text={announcementText} /> */}
 
-      {/* Responsive breakpoint styles */}
-      <style jsx>{`
-        @media (min-width: ${bpPx}px) {
-          .burger-btn {
-            display: none !important;
-          }
-          .nav-desktop-show {
-            display: inline-flex !important;
-          }
-        }
-        @media (max-width: ${bpPx - 0.02}px) {
-          .nav-desktop-show {
-            display: none !important;
-          }
-        }
-      `}</style>
-
-      {/* Header Navigation Bar */}
-      <div className="header-container">
-        <header
-          className={`site-header ${open ? "header-open" : ""}`}
-          role="banner"
-        >
-          {/* Brand Logo */}
-          <Link
-            href="/"
-            className="site-brand brand-inline"
-            aria-label="The Notebook Café - Home"
-          >
+      <nav
+        className="sticky top-0 z-[120] border-b border-cafe-beige/20"
+        style={{
+          backgroundColor: "rgba(250, 249, 246, 0.98)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          color: "#4A3B32",
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 group">
             <Image
-              src="/thenotebookcafe-navbar-dark.png"
-              alt="The Notebook Café"
-              width={220}
-              height={75}
+              src="/logo.png"
+              alt="The Notebook Café logo"
+              width={40}
+              height={40}
+              className="w-10 h-10 object-contain rounded-sm transition-transform duration-300 group-hover:rotate-3"
               priority
-              className="brand-logo"
             />
-            <span className="sr-only">The Notebook Café</span>
+            <span
+              className="font-serif text-2xl tracking-tight text-cafe-black"
+              style={{ color: "#2C2420" }}
+            >
+              The Notebook Café
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav
-            className="site-nav nav-desktop-show"
-            aria-label="Primary navigation"
-          >
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-12">
             <Link
-              className={isActive("/") ? "nav-active" : ""}
               href="/"
-              aria-current={isActive("/") ? "page" : undefined}
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
             >
               Home
             </Link>
             <Link
-              className={isActive("/menu") ? "nav-active" : ""}
               href="/menu"
-              aria-current={isActive("/menu") ? "page" : undefined}
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/menu") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
             >
               Menu
             </Link>
             <Link
-              className={isActive("/story") ? "nav-active" : ""}
               href="/story"
-              aria-current={isActive("/story") ? "page" : undefined}
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/story") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
             >
               Story
             </Link>
             <Link
-              className={isActive("/contact") ? "nav-active" : ""}
+              href="/events"
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/events") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
+            >
+              Events
+            </Link>
+            <Link
               href="/contact"
-              aria-current={isActive("/contact") ? "page" : undefined}
+              className={`text-sm tracking-widest uppercase transition-colors duration-300 ${isActive("/contact") ? "text-cafe-tan font-semibold" : "text-cafe-brown hover:text-cafe-tan"
+                }`}
             >
               Contact
             </Link>
-          </nav>
+          </div>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Desktop Social/Action */}
+          <div className="hidden md:flex items-center gap-4">
+            <a
+              href={instagramUrl || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cafe-brown hover:text-cafe-tan transition-colors"
+              aria-label="Instagram"
+              style={{ color: "#4A3B32" }}
+            >
+              <Instagram size={20} />
+            </a>
+            <a
+              href={spotifyUrl || instagramUrl || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-cafe-tan text-white px-5 py-2 text-xs uppercase tracking-widest rounded-sm hover:bg-cafe-brown transition-colors"
+              style={{ backgroundColor: "#A48D78" }}
+            >
+              Follow
+            </a>
+          </div>
+
+          {/* Mobile Toggle */}
           <button
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            aria-controls="mobile-drawer"
-            className={`icon-btn-primary burger burger-btn ${open ? "is-open" : ""}`}
-            onClick={handleToggle}
-            type="button"
+            className={`md:hidden text-cafe-black burger ${isOpen ? "is-open" : ""}`}
+            onClick={() => setIsOpen((prev) => !prev)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
           >
             <span className="burger-lines">
               <span />
             </span>
           </button>
-        </header>
-      </div>
+        </div>
+      </nav>
 
-      {/* Mobile Drawer - Full-screen overlay */}
-      <aside
-        id="mobile-drawer"
-        className={`drawer ${open ? "open" : ""}`}
-        role="dialog"
-        aria-modal="true"
-        aria-hidden={!open}
-        onClick={() => setOpen(false)}
+      {/* Mobile Drawer */}
+      <div
+        className={`fixed inset-0 drawer ${isOpen ? "open" : ""}`}
+        style={{
+          backgroundColor: "#F4F0E9",
+          color: "#2C2420",
+          boxShadow: "0 20px 60px rgba(42,31,22,0.18)",
+          zIndex: 90,
+          height: "100vh",
+        }}
       >
-        {/* Drawer Content */}
-        <div className="drawer-content" onClick={(e) => e.stopPropagation()}>
-          {/* Mobile Navigation Links */}
-          <nav className="drawer-nav" aria-label="Mobile navigation">
-            <Link
-              href="/"
-              onClick={() => setOpen(false)}
-              className={`drawer-nav-item ${open ? "is-visible" : ""} ${isActive("/") ? "nav-active" : ""}`}
-              aria-current={isActive("/") ? "page" : undefined}
-            >
-              HOME
-            </Link>
-            <Link
-              href="/menu"
-              onClick={() => setOpen(false)}
-              className={`drawer-nav-item ${open ? "is-visible" : ""} ${isActive("/menu") ? "nav-active" : ""}`}
-              aria-current={isActive("/menu") ? "page" : undefined}
-            >
-              MENU
-            </Link>
-            <Link
-              href="/story"
-              onClick={() => setOpen(false)}
-              className={`drawer-nav-item ${open ? "is-visible" : ""} ${isActive("/story") ? "nav-active" : ""}`}
-              aria-current={isActive("/story") ? "page" : undefined}
-            >
-              STORY
-            </Link>
-            <Link
-              href="/contact"
-              onClick={() => setOpen(false)}
-              className={`drawer-nav-item ${open ? "is-visible" : ""} ${isActive("/contact") ? "nav-active" : ""}`}
-              aria-current={isActive("/contact") ? "page" : undefined}
-            >
-              CONTACT
-            </Link>
-          </nav>
+        <div className="flex flex-col h-full px-8 pb-10 pt-6 relative drawer-shell">
+          <div className="flex flex-col items-center justify-center gap-8">
+            <div className="drawer-links-wrapper">
+              {[
+                { href: "/", label: "Home" },
+                { href: "/menu", label: "Menu" },
+                { href: "/story", label: "Story" },
+                { href: "/events", label: "Events" },
+                { href: "/contact", label: "Contact" },
+              ].map((item, index) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`drawer-link ${isOpen ? "drawer-link-visible" : ""} ${isActive(item.href) ? "drawer-link-active" : ""
+                    }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
 
-          {/* Drawer Footer */}
-          <div className={`drawer-footer ${open ? "is-visible" : ""}`}>
-            {/* Vibe Statement */}
-            <p className="drawer-vibe-text">
-              Low lights, good sound, better coffee.
-            </p>
-
-            {/* Social Links Header */}
-            <p className="drawer-follow-text">Follow us!</p>
-
-            {/* Social Icons */}
-            <div className="drawer-social-icons">
+          <div className="flex flex-col items-center gap-3 text-center drawer-social-block">
+            <div className="w-12 h-0.5 bg-cafe-beige/50"></div>
+            <div className="flex gap-4 mt-1">
               <a
-                href={
-                  spotifyUrl ||
-                  "https://open.spotify.com/playlist/58qhSWWn3g1QeCKoVFoAJk"
-                }
+                href={spotifyUrl || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Spotify Playlist"
                 className="drawer-social-icon"
+                aria-label="Spotify"
               >
-                <span className="icon-wrapper">
-                  <SiSpotify size={20} />
+                <span className="drawer-icon-inner">
+                  <PiSpotifyLogoFill size={22} />
                 </span>
               </a>
               <a
                 href={instagramUrl || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram"
                 className="drawer-social-icon"
+                aria-label="Instagram"
               >
-                <span className="icon-wrapper icon-adjust">
-                  <SiInstagram size={20} />
+                <span className="drawer-icon-inner drawer-icon-offset">
+                  <PiInstagramLogoFill size={22} />
                 </span>
               </a>
               <a
-                href="https://facebook.com"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook"
                 className="drawer-social-icon"
+                aria-label="TikTok"
               >
-                <span className="icon-wrapper icon-adjust">
-                  <SiFacebook size={20} />
+                <span className="drawer-icon-inner drawer-icon-offset">
+                  <PiTiktokLogoFill size={22} />
                 </span>
               </a>
             </div>
+            <p className="font-sans text-sm tracking-widest drawer-est">EST. 2025</p>
+          </div>
+
+          {/* Decorative */}
+          <div className="absolute bottom-12 right-12 opacity-10 pointer-events-none animate-float-slow">
+            <Coffee size={120} />
           </div>
         </div>
-
-        {/* Floating Decorative Coffee Beans */}
-        <div className="drawer-floating-items" aria-hidden="true">
-          <Image
-            src="/notebook-coffeebean-up-right.svg"
-            alt=""
-            className="drawer-bean-1"
-            width={160}
-            height={160}
-          />
-          <Image
-            src="/notebook-coffeebean-up-left.svg"
-            alt=""
-            className="drawer-bean-2"
-            width={160}
-            height={160}
-          />
-        </div>
-      </aside>
-    </div>
+      </div>
+    </>
   );
 }

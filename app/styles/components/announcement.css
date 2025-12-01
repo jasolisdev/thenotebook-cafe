@@ -1,48 +1,29 @@
 /* ============================================================
    ANNOUNCEMENT BANNER
-   Always visible at the top of the page (position: fixed)
+   Sits at the top of the page and scrolls away naturally
 ============================================================ */
 :root {
-  --announcement-banner-height: 42px;
-}
-
-@media (min-width: 375px) {
-  :root {
-    --announcement-banner-height: 46px;
-  }
+  --announcement-banner-height: 32px;
 }
 
 @media (min-width: 640px) {
   :root {
-    --announcement-banner-height: 48px;
+    --announcement-banner-height: 36px;
   }
 }
 
 .announcement-banner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   z-index: 50;
-  /* Above all other content including header (z-index: 40) */
   width: 100%;
-  background: linear-gradient(135deg, rgba(214, 189, 152, 0.98) 0%, rgba(196, 181, 159, 0.98) 100%);
-  border-bottom: 1px solid rgba(42, 31, 22, 0.08);
-  padding: 10px 16px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  /* Banner always stays visible - no transform applied */
-}
-
-@media (min-width: 375px) {
-  .announcement-banner {
-    padding: 12px 20px;
-  }
+  background: var(--cafe-black);
+  border-bottom: none;
+  padding: 8px 16px;
 }
 
 @media (min-width: 640px) {
   .announcement-banner {
-    padding: 14px 24px;
+    padding: 10px 24px;
   }
 }
 
@@ -50,31 +31,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  max-width: 300px;
   margin: 0 auto;
 }
 
-@media (min-width: 375px) {
-  .announcement-content {
-    gap: 10px;
-  }
-}
-
-@media (min-width: 640px) {
-  .announcement-content {
-    gap: 12px;
-  }
-}
-
-/* Coffee Cup Icon Container */
+/* Coffee Cup Icon Container - Hidden in new design */
 .announcement-icon {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transform: translateY(5px);
+  display: none;
 }
 
 .announcement-coffee-cup {
@@ -181,60 +143,23 @@
 /* Announcement Text */
 .announcement-text {
   font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: rgba(42, 31, 22, 0.95);
+  letter-spacing: 0.15em;
+  color: var(--cafe-mist);
   margin: 0;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-@media (min-width: 375px) {
-  .announcement-text {
-    font-size: 14px;
-  }
-}
-
 @media (min-width: 640px) {
   .announcement-text {
-    font-size: 15px;
-    letter-spacing: 0.12em;
+    font-size: 12px;
   }
 }
 
-/* Close Button */
+/* Close Button - Hidden in new design */
 .announcement-close-btn {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-  background: transparent;
-  border: none;
-  color: rgba(42, 31, 22, 0.6);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  padding: 0;
-  border-radius: 4px;
-}
-
-.announcement-close-btn:hover {
-  color: rgba(42, 31, 22, 0.9);
-  background: rgba(42, 31, 22, 0.1);
-}
-
-.announcement-close-btn:active {
-  transform: scale(0.95);
-}
-
-@media (min-width: 640px) {
-  .announcement-close-btn {
-    width: 28px;
-    height: 28px;
-  }
+  display: none;
 }

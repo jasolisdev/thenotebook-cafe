@@ -50,7 +50,7 @@ type AnnouncementBannerProps = {
  * @returns {React.JSX.Element|null} Rendered banner or null if not mounted or dismissed
  */
 export default function AnnouncementBanner({
-  text = "Grand Opening 2026",
+  text = "OPENING SOON 2025 — RIVERSIDE, CA",
 }: AnnouncementBannerProps): React.JSX.Element | null {
   const [mounted, setMounted] = useState<boolean>(false);
   const [isDismissed, setIsDismissed] = useState<boolean>(false);

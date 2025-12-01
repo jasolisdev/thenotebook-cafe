@@ -183,7 +183,7 @@ Global navigation header with responsive mobile drawer.
 import SiteHeader from '@/app/components/layout/SiteHeader';
 
 <SiteHeader
-  instagramUrl="https://instagram.com/notebookcafe"
+  instagramUrl="https://www.instagram.com/thenotebookcafellc/"
   spotifyUrl="https://open.spotify.com/playlist/..."
 />
 ```
