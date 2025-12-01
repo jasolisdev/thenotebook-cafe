@@ -35,7 +35,6 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const hasAnimated = useRef(false); // Track if initial animation has played
 
   useEffect(() => {
     // Check if mobile on mount and window resize
@@ -51,16 +50,8 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (isMobile) {
-          // On mobile: animate in when entering, stay visible while in section
-          // Only reset when scrolled far away (section height buffer)
-          if (entry.isIntersecting) {
-            setVisible(true);
-            hasAnimated.current = true;
-          } else if (!entry.isIntersecting && hasAnimated.current) {
-            // Far out of view (beyond buffer zone) - reset for next entrance
-            setVisible(false);
-            hasAnimated.current = false;
-          }
+          // On mobile: reset animation when leaving viewport
+          setVisible(entry.isIntersecting);
         } else {
           // On desktop: only set visible to true when entering viewport, never back to false
           if (entry.isIntersecting) {
@@ -68,10 +59,7 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
           }
         }
       },
-      {
-        threshold: 0.1,
-        rootMargin: "400px 0px 400px 0px" // Moderate buffer: keeps cards visible while in section
-      }
+      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -88,7 +76,7 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
   // Name slides up after the image starts moving (add 400ms delay)
   const nameDelay = imageDelay + 400;
   const transitionTiming = "cubic-bezier(0.16, 1, 0.3, 1)";
-  const transitionDuration = "2000ms"; // Lengthened for smoother, more visible animation
+  const transitionDuration = "1400ms";
 
   return (
     <div ref={ref} className="h-full flex flex-col items-center gap-4">
