@@ -48,10 +48,6 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
   }, []);
 
   useEffect(() => {
-    // Calculate viewport height in pixels for rootMargin (doesn't support vh units)
-    const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
-    const bufferMargin = `${viewportHeight}px 0px ${viewportHeight}px 0px`;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (isMobile) {
@@ -73,8 +69,8 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
         }
       },
       {
-        threshold: 0,
-        rootMargin: bufferMargin // Large buffer: must scroll viewport height away to reset
+        threshold: 0.1,
+        rootMargin: "400px 0px 400px 0px" // Moderate buffer: keeps cards visible while in section
       }
     );
     if (ref.current) observer.observe(ref.current);
