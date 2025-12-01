@@ -88,7 +88,7 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
   // Name slides up after the image starts moving (add 400ms delay)
   const nameDelay = imageDelay + 400;
   const transitionTiming = "cubic-bezier(0.16, 1, 0.3, 1)";
-  const transitionDuration = "1400ms";
+  const transitionDuration = "2000ms"; // Lengthened for smoother, more visible animation
 
   return (
     <div ref={ref} className="h-full flex flex-col items-center gap-4">
