@@ -3,8 +3,7 @@
    Smooth transitions between pages using View Transitions API
 ============================================================ */
 
-/* DEBUG: Disabled View Transitions API - testing if it interferes with scroll restoration */
-/* @view-transition {
+@view-transition {
   navigation: auto;
 }
 
@@ -41,7 +40,7 @@
     opacity: 1;
     transform: translateY(0);
   }
-} */
+}
 
 /* Scroll behavior is handled by Next.js router and globals.css */
 
