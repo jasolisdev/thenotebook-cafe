@@ -89,7 +89,7 @@ export default async function HomePage() {
       {/* Hero Section */}
       <section
         data-section="Hero"
-        className="relative min-h-[90vh] flex items-center justify-center px-6 pt-28 md:pt-32 pb-[120px]"
+        className="relative flex items-start md:items-center justify-center px-6 pt-20 md:pt-32 pb-16 md:pb-[120px] min-h-[calc(100vh-80px)] md:min-h-[90vh]"
         style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cubes.png")' }}></div>
