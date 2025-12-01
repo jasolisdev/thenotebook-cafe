@@ -35,6 +35,7 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const hasAnimated = useRef(false); // Track if initial animation has played
 
   useEffect(() => {
     // Check if mobile on mount and window resize
@@ -50,8 +51,16 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (isMobile) {
-          // On mobile: reset animation when leaving viewport
-          setVisible(entry.isIntersecting);
+          // On mobile: animate in when entering, stay visible while in section
+          // Only reset when completely out of view (ratio = 0)
+          if (entry.isIntersecting && entry.intersectionRatio > 0) {
+            setVisible(true);
+            hasAnimated.current = true;
+          } else if (entry.intersectionRatio === 0 && hasAnimated.current) {
+            // Completely out of view - reset for next entrance
+            setVisible(false);
+            hasAnimated.current = false;
+          }
         } else {
           // On desktop: only set visible to true when entering viewport, never back to false
           if (entry.isIntersecting) {
@@ -59,7 +68,10 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
           }
         }
       },
-      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
+      {
+        threshold: [0, 0.1, 0.2], // Multiple thresholds to detect complete exit
+        rootMargin: "0px" // No extra margin
+      }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
