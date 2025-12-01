@@ -27,6 +27,7 @@ import { cookies } from "next/headers";
 import PasswordGate from "./components/ui/PasswordGate";
 // import SiteHeader from "./components/layout/SiteHeader";
 import TestHeader from "./components/layout/TestHeader";  // DEBUG: Testing minimal header
+import ScrollDebugger from "./components/debug/ScrollDebugger";  // DEBUG: Scroll position tracker
 import Script from "next/script";
 import { client } from "@/sanity/lib/client";
 import VirtualBarista from "./components/ui/VirtualBarista";
@@ -105,6 +106,7 @@ export default async function RootLayout({
               /> */}
               {children}
               <VirtualBarista />
+              <ScrollDebugger />
             </>
           )}
         </ThemeProvider>
