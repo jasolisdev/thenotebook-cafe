@@ -53,20 +53,32 @@ export default function ScrollDebugger() {
     console.log('Scroll Y:', window.scrollY);
     console.log('Window Height:', window.innerHeight);
     console.log('Document Height:', document.documentElement.scrollHeight);
+    console.log('Body Height:', document.body.scrollHeight);
+    console.log('Body Overflow:', getComputedStyle(document.body).overflow);
+    console.log('HTML Overflow:', getComputedStyle(document.documentElement).overflow);
     console.log('======================');
 
-    // Check scroll position after a delay
+    // Check scroll position after delays
     setTimeout(() => {
       console.log('=== AFTER 100ms ===');
       console.log('Scroll Y:', window.scrollY);
+      console.log('Can Scroll:', document.documentElement.scrollHeight > window.innerHeight);
       console.log('==================');
     }, 100);
 
     setTimeout(() => {
       console.log('=== AFTER 500ms ===');
       console.log('Scroll Y:', window.scrollY);
+      console.log('Doc Height:', document.documentElement.scrollHeight);
       console.log('==================');
     }, 500);
+
+    setTimeout(() => {
+      console.log('=== AFTER 1000ms ===');
+      console.log('Scroll Y:', window.scrollY);
+      console.log('Doc Height:', document.documentElement.scrollHeight);
+      console.log('==================');
+    }, 1000);
   }, [pathname]);
 
   return (
@@ -92,12 +104,23 @@ export default function ScrollDebugger() {
       <div>Scroll Y: <span style={{ color: scrollY === 0 ? '#00ff00' : '#ff0000', fontWeight: 'bold' }}>{scrollY}px</span></div>
       <div>Navbar: {navbarHeight}px</div>
       <div>Window: {windowHeight}px</div>
-      <div>Doc Height: {documentHeight}px</div>
-      <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid #333' }}>
-        Path: {pathname}
+      <div>Doc: {documentHeight}px</div>
+      <div style={{
+        color: documentHeight === windowHeight ? '#ff0000' : '#00ff00',
+        fontWeight: 'bold',
+        fontSize: '10px',
+        marginTop: '4px'
+      }}>
+        {documentHeight === windowHeight ? '⚠️ Doc=Win (WRONG!)' : '✅ Doc > Win'}
       </div>
-      <div style={{ marginTop: '8px', fontSize: '10px', color: '#888' }}>
+      <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid #333', fontSize: '10px' }}>
+        {pathname}
+      </div>
+      <div style={{ marginTop: '4px', fontSize: '10px', color: '#888' }}>
         {scrollY === 0 ? '✅ At top' : `⚠️ ${scrollY}px from top`}
+      </div>
+      <div style={{ marginTop: '4px', fontSize: '9px', color: '#666' }}>
+        Check console logs →
       </div>
     </div>
   );
