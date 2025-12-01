@@ -49,28 +49,27 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (isMobile) {
-          // On mobile: reset animation when leaving viewport
-          setVisible(entry.isIntersecting);
-        } else {
-          // On desktop: only set visible to true when entering viewport, never back to false
-          if (entry.isIntersecting) {
-            setVisible(true);
-          }
+        // Only set visible to true when entering viewport; never reset to false
+        if (entry.isIntersecting) {
+          setVisible(true);
         }
       },
-      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
+      { threshold: 0.25, rootMargin: "0px 0px -10% 0px" }
     );
     if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+    };
   }, [isMobile]);
 
   const mobileStart = index % 2 === 0 ? "translate-x-[115%]" : "-translate-x-[115%]";
   const desktopStart = "md:translate-y-[80%] md:translate-x-0";
   const baseHidden = `${mobileStart} ${desktopStart}`;
   const baseVisible = "translate-x-0 translate-y-0";
-  const nameHidden = `${baseHidden} opacity-0`;
-  const nameVisible = "translate-x-0 translate-y-0 opacity-100";
+  const nameHiddenMobile = "translate-y-6 opacity-0";
+  const nameVisibleMobile = "translate-y-0 opacity-100";
+  const nameHiddenDesktop = `${baseHidden} opacity-0`;
+  const nameVisibleDesktop = "translate-x-0 translate-y-0 opacity-100";
 
   const imageDelay = index * 160;
   // Name slides up after the image starts moving (add 400ms delay)
@@ -81,7 +80,7 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
   return (
     <div ref={ref} className="h-full flex flex-col items-center gap-4">
       <div
-        className={`relative w-full max-w-[75%] sm:max-w-full aspect-[3/4] overflow-hidden rounded-lg transform transition-all ${
+        className={`relative w-full max-w-[75%] sm:max-w-full h-[320px] md:h-[360px] overflow-hidden rounded-lg transform transition-all p-4 md:p-5 flex items-center justify-center ${
           visible ? baseVisible : baseHidden
         }`}
         style={{
@@ -95,13 +94,15 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
           alt={pour.name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover"
+          className={`object-contain ${index === 0 ? "scale-[1.24]" : ""}`}
           priority={index < 2}
         />
       </div>
       <h3
         className={`font-serif text-lg md:text-xl text-cafe-brown text-center transform transition-all ${
-          visible ? nameVisible : nameHidden
+          visible
+            ? `${nameVisibleMobile} md:${nameVisibleDesktop}`
+            : `${nameHiddenMobile} md:${nameHiddenDesktop}`
         }`}
         style={{
           transitionDelay: `${nameDelay}ms`,

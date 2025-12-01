@@ -11,6 +11,9 @@ import SiteFooter from "./components/layout/SiteFooter";
 import Reveal from "./components/ui/Reveal";
 import HeroButtons from "./components/ui/HeroButtons";
 import StoryLink from "./components/ui/StoryLink";
+import StoryBlobs from "./components/ui/StoryBlobs";
+import AtmosphereBlob from "./components/ui/AtmosphereBlob";
+import StoryGalleryBlob from "./components/ui/StoryGalleryBlob";
 import { Coffee, Music, Mail, Wifi, PlugZap, Armchair } from "lucide-react";
 import AtmosphereStrip from "./components/AtmosphereStrip";
 import SignaturePoursGrid from "./components/SignaturePoursGrid";
@@ -26,22 +29,22 @@ const signaturePours = [
   {
     name: "Iced Brown Sugar Oat",
     description: "Caramelized brown sugar layered with velvety oat milk and slow-steeped espresso.",
-    image: "/unsplash/hero-iced-coffee-1.png"
+    image: "/unsplash/tnc-placeholder-featured-1.png"
   },
   {
     name: "Matcha Cloud",
     description: "Ceremonial grade matcha poured over cold foam for a soft, cloudlike finish.",
-    image: "/unsplash/hero-iced-coffee-1.png"
+    image: "/unsplash/tnc-placeholder-featured-2.png"
   },
   {
     name: "Classic Cold Brew",
     description: "18-hour brew for a chocolatey, low-acid sip served over crystal-clear ice.",
-    image: "/unsplash/hero-iced-coffee-1.png"
+    image: "/unsplash/tnc-placeholder-featured-3.png"
   },
   {
     name: "Espresso Tonic",
     description: "Bright espresso lifted by artisanal tonic, citrus oils, and a crack of ice.",
-    image: "/unsplash/hero-iced-coffee-1.png"
+    image: "/unsplash/tnc-placeholder-featured-4.png"
   }
 ];
 
@@ -184,10 +187,12 @@ export default async function HomePage() {
       {/* Low Lights Section */}
       <section
         data-section="Low Lights"
-        className="py-24 md:py-32 px-6"
+        className="relative overflow-visible py-24 md:py-32 px-6"
         style={{ backgroundColor: 'var(--cafe-white)' }}
       >
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+        <StoryBlobs />
+
+        <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <Reveal>
               <h2 className="font-serif text-5xl md:text-6xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
@@ -210,25 +215,28 @@ export default async function HomePage() {
             <div className="w-24 h-px bg-cafe-brown/30"></div>
           </div>
 
-          <Reveal delay={200}>
-            <div className="grid grid-cols-2 gap-4">
-              <Image
-                src="/unsplash/tnc-placeholder-1.png"
-                alt="Barista Pouring"
-                width={900}
-                height={1200}
-                className="w-full h-full object-cover rounded-sm translate-y-12 shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
-                priority
-              />
-              <Image
-                src="/unsplash/tnc-placeholder-2.png"
-                alt="Cafe Corner"
-                width={900}
-                height={1200}
-                className="w-full h-full object-cover rounded-sm shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
-              />
-            </div>
-          </Reveal>
+          <div className="relative">
+            <div className="story-gallery-blob" aria-hidden="true"></div>
+            <Reveal delay={200}>
+              <div className="grid grid-cols-2 gap-4 relative">
+                <Image
+                  src="/unsplash/tnc-placeholder-1.png"
+                  alt="Barista Pouring"
+                  width={900}
+                  height={1200}
+                  className="w-full h-full object-cover rounded-sm translate-y-12 shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                  priority
+                />
+                <Image
+                  src="/unsplash/tnc-placeholder-2.png"
+                  alt="Cafe Corner"
+                  width={900}
+                  height={1200}
+                  className="w-full h-full object-cover rounded-sm shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                />
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -303,10 +311,11 @@ export default async function HomePage() {
       {/* Atmosphere */}
       <section
         data-section="Atmosphere"
-        className="py-24 md:py-32 px-6"
+        className="relative py-24 md:py-32 px-6 overflow-visible"
         style={{ backgroundColor: 'var(--cafe-white)' }}
       >
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+        <AtmosphereBlob />
+        <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Features (order-2 on mobile) */}
           <div className="order-2 lg:order-1">
             <Reveal delay={200}>
@@ -333,7 +342,7 @@ export default async function HomePage() {
           </div>
 
           {/* Right Column - Heading (order-1 on mobile) */}
-          <div className="space-y-8 order-1 lg:order-2">
+          <div className="space-y-8 order-1 lg:order-2 text-right items-end lg:pl-10">
             <Reveal>
               <h2 className="font-serif text-5xl md:text-6xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
                 The Atmosphere,<br />
@@ -342,14 +351,13 @@ export default async function HomePage() {
               </h2>
             </Reveal>
             <Reveal delay={150}>
-              <div className="w-24 h-[2px]" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
+              <div className="w-24 h-[2px] ml-auto" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
             </Reveal>
             <Reveal delay={250}>
               <p className="text-lg md:text-xl font-light leading-relaxed max-w-xl" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
                 A sanctuary with warm lighting, deep playlists, and Wi-Fi that never drops. Settle in for an hour or stay all day.
               </p>
             </Reveal>
-            <div className="w-24 h-px" style={{ backgroundColor: 'rgba(var(--cafe-brown-rgb), 0.3)' }}></div>
           </div>
         </div>
       </section>
