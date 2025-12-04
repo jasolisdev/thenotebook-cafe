@@ -33,7 +33,7 @@
 /* Blob that appears behind each image after it slides in */
 .signature-pour-blob {
   position: absolute;
-  inset: -25%; /* Extra bold on mobile - dramatic presence */
+  inset: -30%; /* Extra bold on mobile - dramatic presence - Increased by 20% */
   z-index: 0;
   opacity: 0;
   transform: scale(0.3);
@@ -47,7 +47,7 @@
 /* Desktop - even bigger blobs (40% increase total) */
 @media (min-width: 768px) {
   .signature-pour-blob {
-    inset: -18%; /* 40% larger than original for desktop presence */
+    inset: -21.6%; /* 40% larger than original for desktop presence - Increased by 20% */
   }
 }
 
