@@ -1,362 +1,218 @@
-import type { Metadata } from "next";
-import MenuNewContent, { type MenuItem } from "./MenuNewContent";
+'use client';
 
-export const metadata: Metadata = {
-  title: "Menu | The Notebook Café",
-  description: "Explore our menu of specialty coffee, fresh meals, and delicious desserts.",
+import { useState, useRef, useEffect } from 'react';
+import { Coffee, Search, ArrowRight, ShoppingBag } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { MenuItem as MenuItemType, CartItem, SelectedModifier } from '@/app/types';
+import { MENU_ITEMS } from '@/app/constants';
+import { ProductModal } from '@/app/components/features/ProductModal';
+import { useCart } from '@/app/components/providers/CartProvider';
+
+const colors = {
+  black: '#2C2420',
+  brown: '#4A3B32',
+  tan: '#A48D78',
+  beige: '#CBB9A4',
+  cream: '#EDE7D8',
+  mist: '#F4F1EA',
+  white: '#FAF9F6',
 };
 
-const placeholderImage = "/unsplash/tnc-placeholder-menuitem.png";
+export default function MenuPage() {
+  const [selectedItem, setSelectedItem] = useState<MenuItemType | null>(null);
+  const { items: cart, open: openCart, addItem, isOpen: cartOpen } = useCart();
+  const [activeSection, setActiveSection] = useState<'drinks' | 'meals' | 'desserts'>('drinks');
+  const [searchQuery, setSearchQuery] = useState('');
+  const menuRef = useRef<HTMLDivElement>(null);
+  const cartLength = cart.length;
 
-const MENU_ITEMS: MenuItem[] = [
-  // Featured Drinks
-  {
-    id: "1",
-    name: "Honey Lavender Latte",
-    description: "Floral lavender and local honey with espresso and steamed milk. Light and aromatic.",
-    price: "$5.75",
-    section: "drinks",
-    subcategory: "Featured Drinks",
-    tag: "popular",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "2",
-    name: "Iced Brown Sugar Shaken Espresso",
-    description: "Shaken espresso with brown sugar and oat milk over ice. Smooth and lightly sweet.",
-    price: "$5.50",
-    section: "drinks",
-    subcategory: "Featured Drinks",
-    tag: "popular",
-    imageUrl: placeholderImage,
-  },
+  const filteredItems = MENU_ITEMS.filter(item => {
+    const matchesSection = item.section === activeSection;
+    const matchesSearch =
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesSection && matchesSearch;
+  });
 
-  // Espresso Drinks
-  {
-    id: "3",
-    name: "Espresso",
-    description: "Rich, concentrated shot of pure coffee excellence. Bold flavor with a smooth crema finish.",
-    price: "$3.50",
-    section: "drinks",
-    subcategory: "Espresso Drinks",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "4",
-    name: "Cappuccino",
-    description: "Espresso with velvety steamed milk and thick foam. Perfectly balanced.",
-    price: "$4.50",
-    section: "drinks",
-    subcategory: "Espresso Drinks",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "5",
-    name: "Vanilla Latte",
-    description: "House-made vanilla syrup, espresso, and steamed milk. Sweet and creamy.",
-    price: "$5.00",
-    section: "drinks",
-    subcategory: "Espresso Drinks",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "6",
-    name: "Caramel Macchiato",
-    description: "Vanilla-infused milk, espresso, and caramel drizzle. Layered and sweet.",
-    price: "$5.50",
-    section: "drinks",
-    subcategory: "Espresso Drinks",
-    imageUrl: placeholderImage,
-  },
+  const groupedItems = filteredItems.reduce((acc, item) => {
+    const key = item.subcategory || 'General';
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(item);
+    return acc;
+  }, {} as Record<string, MenuItemType[]>);
 
-  // Classic Coffee
-  {
-    id: "7",
-    name: "Drip Coffee",
-    description: "Freshly brewed classic coffee. Available in light, medium, or dark roast.",
-    price: "$3.00",
-    section: "drinks",
-    subcategory: "Classic Coffee",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "8",
-    name: "Americano",
-    description: "Espresso shots diluted with hot water. Bold yet smooth.",
-    price: "$3.75",
-    section: "drinks",
-    subcategory: "Classic Coffee",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "9",
-    name: "Cold Brew",
-    description: "Smooth cold brew steeped for 16 hours. Served over ice, naturally sweet.",
-    price: "$4.50",
-    section: "drinks",
-    subcategory: "Classic Coffee",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "10",
-    name: "Iced Coffee",
-    description: "Chilled brewed coffee over ice. Simple and refreshing.",
-    price: "$3.50",
-    section: "drinks",
-    subcategory: "Classic Coffee",
-    imageUrl: placeholderImage,
-  },
+  const handleAddToCart = (item: MenuItemType, quantity: number, modifiers: SelectedModifier[], notes?: string, totalPrice?: number) => {
+    addItem(item, quantity, modifiers, notes, totalPrice);
+  };
 
-  // Matcha
-  {
-    id: "11",
-    name: "Matcha Latte",
-    description: "Premium Japanese matcha whisked with steamed milk. Earthy and smooth.",
-    price: "$5.50",
-    section: "drinks",
-    subcategory: "Matcha",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "12",
-    name: "Iced Matcha Latte",
-    description: "Creamy iced matcha with your choice of milk. Refreshing green goodness.",
-    price: "$5.50",
-    section: "drinks",
-    subcategory: "Matcha",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "13",
-    name: "Matcha Lemonade",
-    description: "Vibrant matcha shaken with fresh lemonade. Sweet, tart, and energizing.",
-    price: "$5.75",
-    section: "drinks",
-    subcategory: "Matcha",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "14",
-    name: "Vanilla Matcha",
-    description: "Matcha with house-made vanilla syrup and steamed milk. Sweet and balanced.",
-    price: "$6.00",
-    section: "drinks",
-    subcategory: "Matcha",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "15",
-    name: "Coconut Matcha",
-    description: "Matcha with coconut milk and a hint of coconut syrup. Tropical twist.",
-    price: "$6.00",
-    section: "drinks",
-    subcategory: "Matcha",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "16",
-    name: "Strawberry Matcha",
-    description: "Matcha layered with strawberry puree and milk. Instagram-worthy favorite.",
-    price: "$6.25",
-    section: "drinks",
-    subcategory: "Matcha",
-    imageUrl: placeholderImage,
-  },
+  return (
+    <>
+      <div
+        className="min-h-screen pb-32"
+        ref={menuRef}
+        style={{ backgroundColor: colors.mist, color: colors.brown }}
+      >
+        {/* Menu Header */}
+        <div
+          className="pt-24 pb-32 px-4 rounded-b-[3rem] relative overflow-hidden text-center"
+          style={{ backgroundColor: colors.black, color: colors.cream }}
+        >
+          <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+            <div
+              className="absolute right-0 top-0 w-96 h-96 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2"
+              style={{ backgroundColor: colors.tan }}
+            ></div>
+          </div>
+          <div className="max-w-4xl mx-auto text-center relative z-10">
+            <span
+              className="font-bold tracking-[0.2em] uppercase text-sm mb-5 block"
+              style={{ color: colors.tan }}
+            >
+              The Menu
+            </span>
+            <h1 className="font-serif text-[70px] md:text-[90px] leading-[0.9] mb-7">Curated Selection</h1>
+            <p
+              className="text-lg max-w-xl mx-auto font-light leading-relaxed"
+              style={{ color: `${colors.beige}CC` }}
+            >
+              Everything we serve is made with intention. From our single-origin espressos to our locally sourced pastries.
+            </p>
+          </div>
+        </div>
 
-  // Teas & Other
-  {
-    id: "17",
-    name: "Earl Grey Tea",
-    description: "Classic black tea with bergamot. Aromatic and refined.",
-    price: "$3.50",
-    section: "drinks",
-    subcategory: "Teas & Other",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "18",
-    name: "Chamomile Tea",
-    description: "Soothing herbal tea. Naturally caffeine-free and calming.",
-    price: "$3.50",
-    section: "drinks",
-    subcategory: "Teas & Other",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "19",
-    name: "Green Tea",
-    description: "Light and refreshing Japanese green tea. Delicate and pure.",
-    price: "$3.50",
-    section: "drinks",
-    subcategory: "Teas & Other",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "20",
-    name: "Chai Latte",
-    description: "Spiced black tea with steamed milk. Warm and comforting.",
-    price: "$5.00",
-    section: "drinks",
-    subcategory: "Teas & Other",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "21",
-    name: "Hot Chocolate",
-    description: "Rich dark chocolate with steamed milk and whipped cream. Kid and adult approved.",
-    price: "$4.50",
-    section: "drinks",
-    subcategory: "Teas & Other",
-    imageUrl: placeholderImage,
-  },
+        <div className="sticky top-20 z-30 px-4 -mt-8">
+          <div className="max-w-4xl mx-auto">
+            <div
+              className="rounded-2xl shadow-xl p-2 flex flex-col sm:flex-row items-center gap-4 border"
+              style={{ backgroundColor: colors.white, borderColor: `${colors.beige}33` }}
+            >
+              {/* Section Tabs */}
+              <div className="flex gap-1 w-full sm:w-auto justify-center sm:justify-start overflow-visible p-1">
+                {(['drinks', 'meals', 'desserts'] as const).map(section => {
+                  const isActive = activeSection === section;
+                  return (
+                    <button
+                      key={section}
+                      onClick={() => setActiveSection(section)}
+                      aria-pressed={isActive}
+                      className="basis-1/3 sm:flex-none px-6 py-2 rounded-lg text-[10px] font-bold uppercase tracking-[0.22em] whitespace-nowrap transition-all duration-300 border"
+                      style={{
+                        backgroundColor: isActive ? colors.black : 'transparent',
+                        color: isActive ? colors.white : colors.brown,
+                        borderColor: isActive ? colors.black : 'transparent',
+                        boxShadow: isActive ? '0 12px 24px rgba(0,0,0,0.16)' : 'none',
+                      }}
+                    >
+                      {section}
+                    </button>
+                  );
+                })}
+              </div>
 
-  // Kids Drinks
-  {
-    id: "22",
-    name: "Steamed Milk",
-    description: "Warm steamed milk with a choice of vanilla, chocolate, or caramel flavor.",
-    price: "$3.00",
-    section: "drinks",
-    subcategory: "Kids Drinks",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "23",
-    name: "Kids Hot Chocolate",
-    description: "Smaller portion of our rich hot chocolate. Topped with whipped cream and sprinkles.",
-    price: "$3.50",
-    section: "drinks",
-    subcategory: "Kids Drinks",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "24",
-    name: "Apple Juice",
-    description: "Fresh pressed apple juice. No added sugar.",
-    price: "$2.50",
-    section: "drinks",
-    subcategory: "Kids Drinks",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "25",
-    name: "Chocolate Milk",
-    description: "Cold whole milk with premium chocolate syrup. Classic favorite.",
-    price: "$3.00",
-    section: "drinks",
-    subcategory: "Kids Drinks",
-    imageUrl: placeholderImage,
-  },
+              <div
+                className="h-8 w-px hidden sm:block"
+                style={{ backgroundColor: `${colors.beige}80` }}
+              ></div>
 
-  // Seasonal Drinks
-  {
-    id: "26",
-    name: "Pumpkin Spice Latte",
-    description: "Fall classic with pumpkin, cinnamon, and nutmeg. Topped with whipped cream.",
-    price: "$6.00",
-    section: "drinks",
-    subcategory: "Seasonal Drinks",
-    tag: "seasonal",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "27",
-    name: "Peppermint Mocha",
-    description: "Rich chocolate, espresso, and cool peppermint. Holiday favorite, hot or iced.",
-    price: "$6.00",
-    section: "drinks",
-    subcategory: "Seasonal Drinks",
-    tag: "seasonal",
-    imageUrl: placeholderImage,
-  },
+              {/* Search */}
+              <div className="relative w-full flex-1">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2" size={18} color={colors.tan} />
+                <input
+                  type="text"
+                  placeholder="Search for latte, croissant..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3 rounded-xl border-none text-sm transition-all"
+                  style={{
+                    backgroundColor: `${colors.mist}99`,
+                    color: colors.black,
+                    fontSize: '16px',
+                  }}
+                  onFocus={(e) => (e.currentTarget.style.backgroundColor = colors.white)}
+                  onBlur={(e) => (e.currentTarget.style.backgroundColor = `${colors.mist}99`)}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
 
-  // Meals
-  {
-    id: "28",
-    name: "Breakfast Sandwich",
-    description: "Egg, cheddar, and bacon on a toasted English muffin. Add avocado +$2.",
-    price: "$8.50",
-    section: "meals",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "29",
-    name: "Avocado Toast",
-    description: "Smashed avocado on sourdough with cherry tomatoes, feta, and chili flakes.",
-    price: "$9.00",
-    section: "meals",
-    tag: "popular",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "30",
-    name: "Turkey & Swiss Panini",
-    description: "Sliced turkey, Swiss cheese, spinach, and honey mustard on pressed ciabatta.",
-    price: "$10.50",
-    section: "meals",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "31",
-    name: "Grilled Cheese & Tomato Soup",
-    description: "Classic grilled cheese on sourdough with creamy tomato basil soup.",
-    price: "$9.50",
-    section: "meals",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "32",
-    name: "Caesar Salad",
-    description: "Crisp romaine, parmesan, croutons, and house Caesar dressing. Add chicken +$3.",
-    price: "$9.00",
-    section: "meals",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "33",
-    name: "Yogurt Parfait",
-    description: "Greek yogurt layered with granola, fresh berries, and a drizzle of honey.",
-    price: "$7.00",
-    section: "meals",
-    imageUrl: placeholderImage,
-  },
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+          {Object.entries(groupedItems).length === 0 ? (
+            <div className="text-center py-32 opacity-50">
+              <Coffee size={64} className="mx-auto mb-6" color={colors.tan} strokeWidth={1} />
+              <p className="font-serif text-3xl mb-2" style={{ color: colors.black }}>No items found.</p>
+              <p style={{ color: colors.brown }}>Try adjusting your search terms.</p>
+              <button onClick={() => { setSearchQuery(''); setActiveSection('drinks') }} className="font-bold uppercase tracking-widest text-xs mt-8 border-b pb-1" style={{ color: colors.black, borderColor: colors.black }}>Clear filters</button>
+            </div>
+          ) : (
+            Object.entries(groupedItems).map(([subcategory, items]) => (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                key={subcategory}
+                className="mb-16"
+              >
+                <div className="flex items-end gap-4 mb-8 pb-4 border-b" style={{ borderColor: `${colors.beige}80` }}>
+                  <h2 className="font-serif text-3xl" style={{ color: colors.black }}>{subcategory}</h2>
+                  <span className="text-sm mb-1.5 font-medium" style={{ color: `${colors.brown}66` }}>{items.length} items</span>
+                </div>
 
-  // Desserts
-  {
-    id: "34",
-    name: "New York Cheesecake",
-    description: "Classic creamy cheesecake on a graham cracker crust. Topped with berry compote.",
-    price: "$6.00",
-    section: "desserts",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "35",
-    name: "Chocolate Brownie",
-    description: "Rich, fudgy brownie with walnuts. Served warm with vanilla ice cream.",
-    price: "$5.00",
-    section: "desserts",
-    tag: "popular",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "36",
-    name: "Chocolate Chip Cookie",
-    description: "Freshly baked, gooey center with semi-sweet chocolate chips. A classic favorite.",
-    price: "$3.50",
-    section: "desserts",
-    imageUrl: placeholderImage,
-  },
-  {
-    id: "37",
-    name: "Cinnamon Roll",
-    description: "House-made cinnamon roll with cream cheese frosting. Warm and indulgent.",
-    price: "$5.50",
-    section: "desserts",
-    imageUrl: placeholderImage,
-  },
-];
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {items.map((item) => (
+                    <div
+                      key={item.id}
+                      className="group rounded-2xl p-3 transition-all duration-300 border cursor-pointer flex gap-4 items-center"
+                      style={{ backgroundColor: colors.white, borderColor: 'transparent' }}
+                      onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${colors.beige}80`)}
+                      onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'transparent')}
+                      onClick={() => setSelectedItem(item)}
+                    >
+                      <div className="w-24 h-24 rounded-xl overflow-hidden shrink-0" style={{ backgroundColor: colors.mist }}>
+                        <img
+                          src={`https://picsum.photos/seed/${item.id}/400/400`}
+                          alt={item.name}
+                          className="w-full h-full object-cover transition-transform duration-500"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0 pr-2">
+                        <div className="flex justify-between items-start mb-1">
+                          <h3 className="font-serif text-lg truncate pr-2 transition-colors" style={{ color: colors.black }}>{item.name}</h3>
+                          <span className="font-medium text-sm whitespace-nowrap" style={{ color: colors.black }}>{item.price}</span>
+                        </div>
+                        <p className="text-xs line-clamp-2 mb-2 leading-relaxed" style={{ color: `${colors.brown}B3` }}>{item.description}</p>
+                        <div className="flex items-center justify-between">
+                          <div className="flex gap-2">
+                            {item.tag && (
+                              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
+                                style={item.tag === 'seasonal'
+                                  ? { backgroundColor: '#FFEDD5', color: '#C05621' }
+                                  : { backgroundColor: colors.mist, color: colors.black }}
+                              >
+                                {item.tag}
+                              </span>
+                            )}
+                          </div>
+                          <div className="w-6 h-6 rounded-full flex items-center justify-center transition-colors" style={{ backgroundColor: colors.mist, color: colors.black }}>
+                            <ArrowRight size={12} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))
+          )}
+        </div>
+      </div>
 
-export default function MenuNewPage() {
-  return <MenuNewContent items={MENU_ITEMS} />;
+      <ProductModal
+        item={selectedItem}
+        onClose={() => setSelectedItem(null)}
+        onAddToOrder={(cartItem) =>
+          handleAddToCart(cartItem, cartItem.quantity || 1, cartItem.modifiers || [], cartItem.notes, cartItem.totalPrice)}
+      />
+    </>
+  );
 }

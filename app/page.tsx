@@ -7,13 +7,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
 import NewsletterForm from "./components/features/NewsLetterForm";
-import SiteFooter from "./components/layout/SiteFooter";
 import Reveal from "./components/ui/Reveal";
 import HeroButtons from "./components/ui/HeroButtons";
 import StoryLink from "./components/ui/StoryLink";
 import StoryBlobs from "./components/ui/StoryBlobs";
 import AtmosphereBlob from "./components/ui/AtmosphereBlob";
-import StoryGalleryBlob from "./components/ui/StoryGalleryBlob";
+import PhilosophyBlob from "./components/ui/PhilosophyBlob";
 import { Coffee, Music, Mail, Wifi, PlugZap, Armchair } from "lucide-react";
 import AtmosphereStrip from "./components/AtmosphereStrip";
 import SignaturePoursGrid from "./components/SignaturePoursGrid";
@@ -184,12 +183,104 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Our Philosophy */}
+      <section
+        data-section="Our Philosophy"
+        className="py-24 bg-cafe-mist relative overflow-hidden"
+      >
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-cafe-cream/50 -skew-x-12 translate-x-1/4 pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <PhilosophyBlob />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div className="order-2 lg:order-1 relative">
+              <Reveal>
+                <div className="grid grid-cols-2 gap-4">
+                  <Image
+                    src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=900&auto=format&fit=crop"
+                    alt="Latte art"
+                    width={900}
+                    height={900}
+                    className="w-full h-80 object-cover rounded-2xl shadow-xl mt-12"
+                  />
+                  <Image
+                    src="https://images.unsplash.com/photo-1442512595331-e89e7385a861?q=80&w=900&auto=format&fit=crop"
+                    alt="Pastry"
+                    width={900}
+                    height={900}
+                    className="w-full h-80 object-cover rounded-2xl shadow-xl"
+                  />
+                </div>
+              </Reveal>
+              <Reveal delay={150}>
+                <div className="absolute -bottom-6 -left-6 bg-cafe-black text-cafe-cream p-8 rounded-tr-3xl shadow-2xl max-w-[200px]">
+                  <p className="font-serif text-3xl mb-1">4.9</p>
+                  <div className="flex text-cafe-tan mb-2">★★★★★</div>
+                  <p className="text-xs uppercase tracking-widest opacity-60">
+                    Customer Rating
+                  </p>
+                </div>
+              </Reveal>
+            </div>
+
+            <div className="order-1 lg:order-2 space-y-6 text-right items-end lg:pl-10 relative">
+              <div className="philosophy-blob hidden lg:block" aria-hidden="true"></div>
+              <Reveal>
+                <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+                  Our Philosophy
+                </span>
+              </Reveal>
+              <Reveal delay={120}>
+                <h2 className="font-serif text-5xl sm:text-6xl text-cafe-black mb-8 leading-none">
+                  Crafted for <br />
+                  <span className="italic text-cafe-brown">Creatives</span>
+                </h2>
+              </Reveal>
+              <Reveal delay={180}>
+                <div className="w-24 h-[2px] ml-auto" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
+              </Reveal>
+              <Reveal delay={200}>
+                <p className="text-lg text-cafe-brown/80 mb-6 font-light leading-relaxed">
+                  We believe that great ideas start with great coffee. Whether you're sketching your next masterpiece, writing the next great novel, or just enjoying a moment of silence.
+                </p>
+              </Reveal>
+              <Reveal delay={260}>
+                <p className="text-lg text-cafe-brown/80 mb-10 font-light leading-relaxed">
+                  Our beans are ethically sourced, roasted in small batches, and brewed with precision to fuel your inspiration.
+                </p>
+              </Reveal>
+
+              <Reveal delay={320}>
+                <div className="flex gap-10 justify-end border-t border-cafe-beige pt-8">
+                  <div>
+                    <h4 className="font-serif text-2xl text-cafe-black mb-1">
+                      100%
+                    </h4>
+                    <p className="text-xs text-cafe-brown uppercase tracking-wider">
+                      Organic Beans
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-serif text-2xl text-cafe-black mb-1">
+                      Daily
+                    </h4>
+                    <p className="text-xs text-cafe-brown uppercase tracking-wider">
+                      Fresh Pastries
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Low Lights Section */}
       <section
         data-section="Low Lights"
         className="relative overflow-visible py-24 md:py-32 px-6"
-        style={{ backgroundColor: 'var(--cafe-white)' }}
+        style={{ backgroundColor: 'var(--cafe-cream)' }}
       >
+        <div className="absolute top-0 left-0 w-1/3 h-full bg-cafe-mist/40 skew-x-12 -translate-x-1/4 pointer-events-none"></div>
         <StoryBlobs />
 
         <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
@@ -312,8 +403,9 @@ export default async function HomePage() {
       <section
         data-section="Atmosphere"
         className="relative py-24 md:py-32 px-6 overflow-visible"
-        style={{ backgroundColor: 'var(--cafe-white)' }}
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
+        <div className="absolute bottom-0 left-0 w-1/2 h-2/3 bg-cafe-cream/30 -skew-y-3 -translate-y-1/4 pointer-events-none"></div>
         <AtmosphereBlob />
         <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Features (order-2 on mobile) */}
@@ -342,12 +434,16 @@ export default async function HomePage() {
           </div>
 
           {/* Right Column - Heading (order-1 on mobile) */}
-          <div className="space-y-8 order-1 lg:order-2 text-right items-end lg:pl-10">
+          <div className="space-y-6 order-1 lg:order-2 text-right items-end lg:pl-10">
             <Reveal>
+              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+                The Atmosphere
+              </span>
+            </Reveal>
+            <Reveal delay={120}>
               <h2 className="font-serif text-5xl md:text-6xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
-                The Atmosphere,<br />
-                Designed for<br />
-                <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Focus</span>
+                <span className="italic" style={{ color: 'var(--cafe-brown)' }}>Designed for</span><br />
+                <span className="italic" style={{ color: 'var(--cafe-brown)' }}>Focus</span>
               </h2>
             </Reveal>
             <Reveal delay={150}>
@@ -388,8 +484,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <SiteFooter />
     </main>
   );
 }

@@ -52,7 +52,7 @@
 }
 
 .section-cream .home-highlight-item:hover .home-highlight-icon {
-  color: var(--cafe-tan);
+  color: rgba(164, 141, 120, 1);
 }
 
 /* Dark section background */

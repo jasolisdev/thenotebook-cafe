@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+/* Tailwind v4 Theme Configuration */
+@theme {
+  --color-cafe-black: #2C2420;
+  --color-cafe-brown: #4A3B32;
+  --color-cafe-tan: #A48D78;
+  --color-cafe-beige: #CBB9A4;
+  --color-cafe-cream: #EDE7D8;
+  --color-cafe-mist: #F4F1EA;
+  --color-cafe-white: #FAF9F6;
+  --color-cafe-red: #ef4444;
+}
+
 /* Component Styles */
 @import "./styles/components/card-gallery.css";
 @import "./styles/components/modal.css";
@@ -22,6 +34,7 @@
      (Premium Café Design System)
   =============================== */
 
+  /* Core palette */
   --cafe-black: #2C2420;
   --cafe-brown: #4A3B32;
   --cafe-tan: #A48D78;
@@ -29,6 +42,21 @@
   --cafe-cream: #EDE7D8;
   --cafe-mist: #F4F1EA;
   --cafe-white: #FAF9F6;
+
+  /* Extended palette - frequently used colors */
+  --espresso-brown: #2a1f16;     /* Dark brown text */
+  --warm-brown: #5a4a38;         /* Warm brown text */
+  --medium-brown: #6b5a48;       /* Medium brown buttons */
+  --cream-light: #f4f0e9;        /* Light cream backgrounds */
+  --pearl-white: #fffcf9;        /* Off-white for modals */
+  --latte-cream: #f6ebdf;        /* Events page light cream */
+
+  /* Gold accent family */
+  --gold-primary: #c99a58;       /* RGB: 201, 154, 88 */
+  --gold-darker: #b48a4e;        /* Darker gold variant */
+
+  /* Debug color */
+  --debug-red: #ff0000;          /* Bright red for testing */
 
   /* RGB helpers for rgba() usage */
   --cafe-black-rgb: 44, 36, 32;
@@ -38,6 +66,12 @@
   --cafe-cream-rgb: 237, 231, 216;
   --cafe-mist-rgb: 244, 241, 234;
   --cafe-white-rgb: 250, 249, 246;
+
+  /* Extended RGB helpers */
+  --espresso-brown-rgb: 42, 31, 22;
+  --warm-brown-rgb: 90, 74, 56;
+  --gold-primary-rgb: 201, 154, 88;
+  --cream-light-rgb: 244, 240, 233;
 
   /* Core semantic tokens */
   --bg-solid: var(--cafe-white);
@@ -57,6 +91,29 @@
 
   /* Glass panel effect */
   --glass-bg: rgba(250, 249, 246, 0.85);
+
+  /* Opacity levels for consistent transparency */
+  --opacity-subtle: 0.08;
+  --opacity-light: 0.12;
+  --opacity-medium: 0.25;
+  --opacity-strong: 0.5;
+  --opacity-heavy: 0.75;
+
+  /* Common transparency combinations */
+  --tan-subtle: rgba(var(--cafe-tan-rgb), var(--opacity-subtle));
+  --tan-light: rgba(var(--cafe-tan-rgb), var(--opacity-light));
+  --tan-medium: rgba(var(--cafe-tan-rgb), var(--opacity-medium));
+  --tan-strong: rgba(var(--cafe-tan-rgb), var(--opacity-strong));
+
+  --gold-subtle: rgba(var(--gold-primary-rgb), var(--opacity-subtle));
+  --gold-light: rgba(var(--gold-primary-rgb), var(--opacity-light));
+  --gold-medium: rgba(var(--gold-primary-rgb), var(--opacity-medium));
+  --gold-strong: rgba(var(--gold-primary-rgb), var(--opacity-strong));
+
+  --dark-overlay: rgba(0, 0, 0, var(--opacity-medium));
+  --white-overlay: rgba(255, 255, 255, var(--opacity-light));
+  --black-overlay-subtle: rgba(0, 0, 0, var(--opacity-subtle));
+  --white-overlay-subtle: rgba(255, 255, 255, var(--opacity-subtle));
 
 }
 
@@ -116,6 +173,15 @@ body {
 }
 
 .scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }

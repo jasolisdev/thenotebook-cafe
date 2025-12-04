@@ -1,4 +1,3 @@
-import SiteFooter from "../components/layout/SiteFooter";
 import Reveal from "../components/ui/Reveal";
 import { Clock, Music, Coffee, User } from "lucide-react";
 
@@ -126,8 +125,6 @@ export default function EventsPage() {
           More events announced weekly. Follow our Instagram for updates.
         </div>
       </section>
-
-      <SiteFooter />
     </main>
   );
 }

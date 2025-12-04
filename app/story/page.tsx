@@ -4,7 +4,6 @@
  * Redesigned about page featuring the café's story, values, and mission.
  */
 import { client } from "@/sanity/lib/client";
-import SiteFooter from "../components/layout/SiteFooter";
 import Reveal from "../components/ui/Reveal";
 import Image from "next/image";
 import { Coffee, Music, Heart, MapPin, Sparkles, BookOpen } from "lucide-react";
@@ -226,8 +225,6 @@ export default async function StoryPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <SiteFooter />
     </main>
   );
 }

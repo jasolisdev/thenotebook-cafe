@@ -9,15 +9,6 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        'cafe-black': '#2C2420',
-        'cafe-brown': '#4A3B32',
-        'cafe-tan': '#A48D78',
-        'cafe-beige': '#CBB9A4',
-        'cafe-cream': '#EDE7D8',
-        'cafe-mist': '#F4F1EA',
-        'cafe-white': '#FAF9F6',
-      },
       fontFamily: {
         sans: ["var(--font-sans)", "Outfit", "system-ui", "sans-serif"],
         serif: ["var(--font-display)", "DM Serif Display", "serif"],

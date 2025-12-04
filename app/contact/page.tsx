@@ -4,7 +4,6 @@
  * Redesigned contact page with new layout and design.
  */
 import { client } from "@/sanity/lib/client";
-import SiteFooter from "../components/layout/SiteFooter";
 import Reveal from "../components/ui/Reveal";
 import { MapPin, Clock, Phone } from "lucide-react";
 import Image from "next/image";
@@ -160,7 +159,6 @@ export default async function ContactPage() {
       </section>
 
       {/* Footer */}
-      <SiteFooter />
     </main>
   );
 }

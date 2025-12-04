@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
-import SiteFooter from "../components/layout/SiteFooter";
 import Reveal from "../components/ui/Reveal";
 
 type MenuSection = "drinks" | "meals" | "desserts";
@@ -279,8 +278,6 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
           </div>
         </div>
       )}
-
-      <SiteFooter />
     </section>
   );
 }

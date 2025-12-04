@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="grad-atmosphere" cx="50%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#EDE7D8" stop-opacity="0.95"/>
+      <stop offset="60%" stop-color="#CBB9A4" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#A48D78" stop-opacity="0.45"/>
+    </radialGradient>
+  </defs>
+  <path fill="url(#grad-atmosphere)"
+    d="M38.7,-46.6C54.3,-33.1,74,-24.8,82.4,-9.7C90.7,5.3,87.7,27.1,76.5,42C65.3,56.8,45.9,64.8,26.5,71.1C7.1,77.4,-12.3,82.2,-27.2,76.2C-42,70.1,-52.3,53.1,-57,36.9C-61.6,20.6,-60.6,5.1,-58.7,-11.1C-56.7,-27.3,-53.9,-44,-43.9,-58.6C-34,-73.2,-17,-85.6,-2.7,-82.3C11.6,-79.1,23.1,-60.2,38.7,-46.6Z"
+    transform="translate(100 100)" />
+</svg>

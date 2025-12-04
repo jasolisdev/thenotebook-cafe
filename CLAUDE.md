@@ -352,30 +352,46 @@ import HomeFloatingItems from '@/app/components/decorative/HomeFloatingItems';
 - **Body Font (Torus)**: Paragraphs, navigation, UI elements
 
 #### Color Palette
+
+**Tailwind v4 Configuration:**
+The site uses Tailwind CSS v4 with colors registered via the `@theme` directive in `globals.css`:
+
 ```css
-/* === NEUTRAL TONES === */
---cream: #f4f0e9;              /* Light section background */
---latte-cream: #ede7d8;        /* Lighter cream variant */
---vanilla-beige: #d6bd98;      /* Almond tone */
+/* Tailwind v4 Theme - generates bg-cafe-*, text-cafe-* utilities */
+@theme {
+  --color-cafe-black: #2C2420;    /* Dark brown, primary text */
+  --color-cafe-brown: #4A3B32;    /* Medium brown, body text */
+  --color-cafe-tan: #A48D78;      /* Gold/tan accent color */
+  --color-cafe-beige: #CBB9A4;    /* Beige for borders/muted elements */
+  --color-cafe-cream: #EDE7D8;    /* Light cream backgrounds */
+  --color-cafe-mist: #F4F1EA;     /* Lightest warm background */
+  --color-cafe-white: #FAF9F6;    /* Off-white, main background */
+  --color-cafe-red: #ef4444;      /* Danger/delete actions */
+}
+```
 
-/* === BROWN TONES (primary text) === */
---espresso-brown: #2a1f16;     /* Primary dark text on light */
---warm-brown: #5a4a38;         /* Secondary text on cream */
+**CSS Variables** (for inline styles):
+```css
+/* Core palette */
+--cafe-black: #2C2420;
+--cafe-brown: #4A3B32;
+--cafe-tan: #A48D78;
+--cafe-beige: #CBB9A4;
+--cafe-cream: #EDE7D8;
+--cafe-mist: #F4F1EA;
+--cafe-white: #FAF9F6;
 
-/* === COOL ACCENTS === */
---coffee-bean: #1a3636;        /* Dark sections (cool teal) */
---soft-mocha: #40534c;         /* Forest roast */
+/* Extended palette */
+--espresso-brown: #2a1f16;
+--warm-brown: #5a4a38;
+--gold-primary: #c99a58;
 
-/* === GOLD ACCENTS === */
---gold-primary: rgba(201, 154, 88, 1);
---gold-light: rgba(201, 154, 88, 0.85);
---gold-muted: rgba(164, 131, 116, 0.9);
-
-/* === SEMANTIC COLORS === */
---bg-dark: var(--coffee-bean);     /* Dark section background */
---bg-cream: var(--cream);          /* Light section background */
---text-light: #f8f3e8;             /* Text on dark backgrounds */
---text-light-muted: #e4dbc8;       /* Muted text on dark */
+/* Semantic tokens */
+--bg-solid: var(--cafe-white);
+--bg-dark: var(--cafe-black);
+--bg-cream: var(--cafe-cream);
+--text-dark: var(--cafe-brown);
+--text-light: var(--cafe-mist);
 ```
 
 #### Responsive Breakpoints
@@ -397,11 +413,43 @@ import HomeFloatingItems from '@/app/components/decorative/HomeFloatingItems';
 
 ### **CSS Architecture**
 
+#### Visual Rhythm: Alternating Background Pattern
+
+The homepage uses an intentional alternating background pattern to create visual flow and guide the user's eye:
+
+**Homepage Section Flow:**
+1. **Hero** - `cafe-mist` - Warm welcome
+2. **Signature Pours** - `cafe-white` - Clean product showcase
+3. **Our Philosophy** - `cafe-mist` + skewed cream accent (right) - Premium layered
+4. **Low Lights** - `cafe-cream` + skewed mist accent (left) - Inverted warmth
+5. **Trinity** - `cafe-white` - Breathing room
+6. **Atmosphere** - `cafe-mist` + skewed cream accent (bottom) - Echoes philosophy
+7. **Atmosphere Images** - `cafe-white` - Clean transition
+8. **Newsletter** - Light tan tint - Warm close
+
+**Design Principle:**
+- Alternating warm/clean creates natural scroll rhythm
+- Skewed decorative elements vary in direction (right, left, bottom) for dynamic interest
+- Warm sections feel intimate and story-driven
+- White sections provide visual breathing room
+- Mirrors the layered aesthetic of coffee (crema, espresso, milk)
+
+**Example Pattern:**
+```tsx
+<section
+  className="relative overflow-visible py-24 px-6"
+  style={{ backgroundColor: 'var(--cafe-cream)' }}
+>
+  <div className="absolute top-0 left-0 w-1/3 h-full bg-cafe-mist/40 skew-x-12 -translate-x-1/4 pointer-events-none"></div>
+  {/* Content */}
+</section>
+```
+
 #### Global Utility Classes
 
 ```css
 /* Layout */
-.site-layout          /* Main page container (replaces .page-dark) */
+.site-layout          /* Main page container */
 .section-cream        /* Light/cream section background */
 .section-dark         /* Dark section background */
 
@@ -412,26 +460,6 @@ import HomeFloatingItems from '@/app/components/decorative/HomeFloatingItems';
 
 /* Visibility */
 .sr-only              /* Screen reader only (hidden visually) */
-```
-
-#### Section Pattern
-```tsx
-{/* Dark to Cream transition */}
-<section className="section-dark">
-  {/* Dark content */}
-</section>
-
-<div className="divider-cream" style={{ transform: "scaleY(-1)" }}>
-  <Image src="/notebook-divider-cream.svg" alt="" width={1440} height={120} />
-</div>
-
-<section className="section-cream">
-  {/* Light content */}
-</section>
-
-<div className="divider-cream">
-  <Image src="/notebook-divider-cream.svg" alt="" width={1440} height={120} />
-</div>
 ```
 
 ---
@@ -717,6 +745,16 @@ All components must include JSDoc:
 ---
 
 ## Recent Updates
+
+### **December 2025 - Tailwind v4 Migration & Visual Rhythm**
+- ✅ Fixed Tailwind v4 color generation using `@theme` directive
+- ✅ Registered all cafe-* colors for proper utility class generation
+- ✅ Implemented alternating background pattern for visual flow
+- ✅ Added directional skewed accent elements (right, left, bottom)
+- ✅ Updated navbar to cafe-mist/85 with tan border for cohesion
+- ✅ Fixed cart delete button visibility (always visible, theme color)
+- ✅ Increased navbar logo by 5% and "Café" text by 10%
+- ✅ Created systematic color documentation in COLORS.ts
 
 ### **November 2025 - Major Refactoring**
 - ✅ Reorganized components into `layout/`, `ui/`, `features/`, `decorative/`
