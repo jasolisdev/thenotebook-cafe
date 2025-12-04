@@ -128,16 +128,16 @@ export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAdd
         />
 
         <motion.div
-          initial={{ y: '100%' }}
-          animate={{ y: 0 }}
-          exit={{ y: '100%' }}
-          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+          initial={{ y: 32, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 32, opacity: 0 }}
+          transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}
           className="pointer-events-auto w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-xl sm:rounded-2xl shadow-2xl flex flex-col relative z-10 overflow-hidden"
-          style={{ backgroundColor: colors.cream, border: `1px solid ${colors.beige}` }}
+          style={{ backgroundColor: colors.cream }}
         >
           <div className="relative h-64 sm:h-56 overflow-hidden shrink-0 group" style={{ backgroundColor: colors.brown }}>
             <img
-              src={`https://picsum.photos/seed/${item.id}/800/600`}
+              src="/unsplash/tnc-placeholder-menuitem.png"
               alt={item.name}
               className="w-full h-full object-cover opacity-95"
             />

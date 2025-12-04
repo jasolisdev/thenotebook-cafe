@@ -7,6 +7,7 @@ import { MenuItem as MenuItemType, CartItem, SelectedModifier } from '@/app/type
 import { MENU_ITEMS } from '@/app/constants';
 import { ProductModal } from '@/app/components/features/ProductModal';
 import { useCart } from '@/app/components/providers/CartProvider';
+import Reveal from '../components/ui/Reveal';
 
 const colors = {
   black: '#2C2420',
@@ -24,6 +25,9 @@ export default function MenuPage() {
   const [activeSection, setActiveSection] = useState<'drinks' | 'meals' | 'desserts'>('drinks');
   const [searchQuery, setSearchQuery] = useState('');
   const menuRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+  const hasMountedRef = useRef(false);
+  const tabClickedRef = useRef(false);
   const cartLength = cart.length;
 
   const filteredItems = MENU_ITEMS.filter(item => {
@@ -45,6 +49,22 @@ export default function MenuPage() {
     addItem(item, quantity, modifiers, notes, totalPrice);
   };
 
+  // Scroll list into view when switching tabs to keep context
+  useEffect(() => {
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true;
+      return;
+    }
+    if (!tabClickedRef.current) return; // only scroll after a user clicks a tab
+    if (typeof window === 'undefined' || !listRef.current) return;
+    const rect = listRef.current.getBoundingClientRect();
+    const targetY = Math.max(rect.top + window.scrollY - 220, 0); // pull list higher; leave ~10px of hero visible
+    const delta = Math.abs(window.scrollY - targetY);
+    if (delta > 8) {
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+    }
+  }, [activeSection]);
+
   return (
     <>
       <div
@@ -54,7 +74,7 @@ export default function MenuPage() {
       >
         {/* Menu Header */}
         <div
-          className="pt-24 pb-32 px-4 rounded-b-[3rem] relative overflow-hidden text-center"
+          className="pt-24 pb-32 px-4 relative overflow-hidden text-center"
           style={{ backgroundColor: colors.black, color: colors.cream }}
         >
           <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
@@ -64,19 +84,25 @@ export default function MenuPage() {
             ></div>
           </div>
           <div className="max-w-4xl mx-auto text-center relative z-10">
-            <span
-              className="font-bold tracking-[0.2em] uppercase text-sm mb-5 block"
-              style={{ color: colors.tan }}
-            >
-              The Menu
-            </span>
-            <h1 className="font-serif text-[70px] md:text-[90px] leading-[0.9] mb-7">Curated Selection</h1>
-            <p
-              className="text-lg max-w-xl mx-auto font-light leading-relaxed"
-              style={{ color: `${colors.beige}CC` }}
-            >
-              Everything we serve is made with intention. From our single-origin espressos to our locally sourced pastries.
-            </p>
+            <Reveal>
+              <span
+                className="font-bold tracking-[0.2em] uppercase text-sm mb-5 block"
+                style={{ color: colors.tan }}
+              >
+                The Menu
+              </span>
+            </Reveal>
+            <Reveal delay={120}>
+              <h1 className="font-serif text-[70px] md:text-[90px] leading-[0.9] mb-7">Curated Selection</h1>
+            </Reveal>
+            <Reveal delay={220}>
+              <p
+                className="text-lg max-w-xl mx-auto font-light leading-relaxed"
+                style={{ color: `${colors.beige}CC` }}
+              >
+                Everything we serve is made with intention. From our single-origin espressos to our locally sourced pastries.
+              </p>
+            </Reveal>
           </div>
         </div>
 
@@ -93,14 +119,17 @@ export default function MenuPage() {
                   return (
                     <button
                       key={section}
-                      onClick={() => setActiveSection(section)}
+                      onClick={() => {
+                        tabClickedRef.current = true;
+                        setActiveSection(section);
+                      }}
                       aria-pressed={isActive}
-                      className="basis-1/3 sm:flex-none px-6 py-2 rounded-lg text-[10px] font-bold uppercase tracking-[0.22em] whitespace-nowrap transition-all duration-300 border"
+                      className="basis-1/3 sm:flex-none px-6 py-2 rounded-lg text-[10px] font-bold uppercase tracking-[0.22em] whitespace-nowrap transition-colors duration-150 ease-out border"
                       style={{
-                        backgroundColor: isActive ? colors.black : 'transparent',
+                        backgroundColor: isActive ? colors.black : `${colors.mist}CC`,
                         color: isActive ? colors.white : colors.brown,
-                        borderColor: isActive ? colors.black : 'transparent',
-                        boxShadow: isActive ? '0 12px 24px rgba(0,0,0,0.16)' : 'none',
+                        borderColor: isActive ? colors.black : `${colors.beige}80`,
+                        boxShadow: isActive ? '0 8px 18px rgba(0,0,0,0.12)' : 'none',
                       }}
                     >
                       {section}
@@ -136,7 +165,7 @@ export default function MenuPage() {
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+        <div ref={listRef} className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
           {Object.entries(groupedItems).length === 0 ? (
             <div className="text-center py-32 opacity-50">
               <Coffee size={64} className="mx-auto mb-6" color={colors.tan} strokeWidth={1} />
@@ -170,7 +199,7 @@ export default function MenuPage() {
                     >
                       <div className="w-24 h-24 rounded-xl overflow-hidden shrink-0" style={{ backgroundColor: colors.mist }}>
                         <img
-                          src={`https://picsum.photos/seed/${item.id}/400/400`}
+                          src="/unsplash/tnc-placeholder-menuitem.png"
                           alt={item.name}
                           className="w-full h-full object-cover transition-transform duration-500"
                         />

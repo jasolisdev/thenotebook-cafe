@@ -13,7 +13,7 @@ import StoryLink from "./components/ui/StoryLink";
 import StoryBlobs from "./components/ui/StoryBlobs";
 import AtmosphereBlob from "./components/ui/AtmosphereBlob";
 import PhilosophyBlob from "./components/ui/PhilosophyBlob";
-import { Coffee, Music, Mail, Wifi, PlugZap, Armchair } from "lucide-react";
+import { Coffee, Music, Mail, Wifi, PlugZap, Armchair, Sparkles } from "lucide-react";
 import AtmosphereStrip from "./components/AtmosphereStrip";
 import SignaturePoursGrid from "./components/SignaturePoursGrid";
 
@@ -98,13 +98,13 @@ export default async function HomePage() {
 
         <div className="relative z-10 text-center max-w-4xl mx-auto hero-content">
           <Reveal>
-            <div className="flex justify-center mb-6">
+            <div className="flex justify-center mb-6 hero-logo-wrapper">
               <Image
                 src="/logo.png"
                 alt="The Notebook Café"
                 width={210}
                 height={210}
-                className="w-auto md:h-32 lg:h-36"
+                className="w-auto md:h-32 lg:h-36 hero-logo"
                 style={{ height: "106px" }}
                 priority
               />
@@ -133,21 +133,29 @@ export default async function HomePage() {
         </div>
 
         {/* Decorative Floating Elements */}
-        <div className="absolute top-1/4 left-10 md:left-20 opacity-20 pointer-events-none" style={{ animation: 'float 8s ease-in-out infinite' }}>
-          <Coffee size={48} className="text-cafe-tan" />
+        <div className="absolute top-1/4 left-6 md:left-20 opacity-[0.12] md:opacity-[0.15] pointer-events-none hero-float-icon" style={{ animation: 'floatGentle 8s ease-in-out infinite' }}>
+          <Coffee size={56} className="text-cafe-tan" strokeWidth={1.5} />
         </div>
-        <div className="absolute bottom-1/4 right-10 md:right-20 opacity-20 pointer-events-none" style={{ animation: 'float 6s ease-in-out infinite' }}>
-          <Music size={40} className="text-cafe-tan" />
+        <div className="absolute bottom-1/4 right-6 md:right-20 opacity-[0.12] md:opacity-[0.15] pointer-events-none hero-float-icon" style={{ animation: 'floatGentle 7s ease-in-out infinite 1s' }}>
+          <Music size={48} className="text-cafe-tan" strokeWidth={1.5} />
         </div>
       </section>
 
       {/* Signature Pours */}
       <section
         data-section="Signature Pours"
-        className="py-24 px-6"
+        className="relative py-24 px-6 overflow-hidden"
         style={{ backgroundColor: 'var(--cafe-white)' }}
       >
-        <div className="max-w-6xl mx-auto">
+        {/* Subtle Floating Decorations */}
+        <div className="absolute top-20 right-10 md:right-20 opacity-[0.05] pointer-events-none signature-float" style={{ animation: 'floatGentle 10s ease-in-out infinite' }}>
+          <Coffee size={64} className="text-cafe-tan" strokeWidth={1.5} />
+        </div>
+        <div className="absolute bottom-32 left-10 md:left-24 opacity-[0.05] pointer-events-none signature-float" style={{ animation: 'floatGentle 12s ease-in-out infinite 2s' }}>
+          <Coffee size={52} className="text-cafe-tan" strokeWidth={1.5} />
+        </div>
+
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <Reveal>
               <span className="text-xs uppercase tracking-[0.25em] font-semibold" style={{ color: 'var(--cafe-tan)' }}>
@@ -174,9 +182,13 @@ export default async function HomePage() {
             <Reveal delay={200}>
               <Link
                 href="/menu"
-                className="inline-flex items-center gap-2 px-8 py-3 text-xs uppercase tracking-[0.25em] font-semibold border border-cafe-black rounded-sm transition-all duration-300 hover:bg-cafe-black hover:text-cafe-white"
+                className="group inline-flex items-center gap-2 px-8 py-3 text-xs uppercase tracking-[0.25em] font-semibold border-2 border-cafe-black rounded-sm transition-all duration-300 hover:bg-cafe-black hover:text-cafe-white hover:-translate-y-0.5 hover:shadow-lg"
+                style={{
+                  boxShadow: '0 4px 12px rgba(44, 36, 32, 0.08)',
+                }}
               >
                 View Our Menu
+                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>
             </Reveal>
           </div>
@@ -186,11 +198,20 @@ export default async function HomePage() {
       {/* Our Philosophy */}
       <section
         data-section="Our Philosophy"
-        className="py-24 bg-cafe-mist relative overflow-hidden"
+        className="py-24 relative overflow-visible"
+        style={{ backgroundColor: 'var(--cafe-white)' }}
       >
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-cafe-cream/50 -skew-x-12 translate-x-1/4 pointer-events-none"></div>
+        <PhilosophyBlob />
+        <div className="section-deco" style={{ top: '6%', right: '12%', animationDuration: '13s' }} aria-hidden="true">
+          <Coffee strokeWidth={1.4} />
+        </div>
+        <div className="section-deco section-deco-dark" style={{ bottom: '10%', left: '6%', animationDuration: '10s', transform: 'rotate(-10deg)' }} aria-hidden="true">
+          <Sparkles strokeWidth={1.6} />
+        </div>
+        <div className="section-deco-mobile" style={{ top: '6%', right: '10%' }} aria-hidden="true">
+          <Coffee strokeWidth={1.4} />
+        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <PhilosophyBlob />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="order-2 lg:order-1 relative">
               <Reveal>
@@ -203,7 +224,7 @@ export default async function HomePage() {
                     className="w-full h-80 object-cover rounded-2xl shadow-xl mt-12"
                   />
                   <Image
-                    src="https://images.unsplash.com/photo-1442512595331-e89e7385a861?q=80&w=900&auto=format&fit=crop"
+                    src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=900&auto=format&fit=crop"
                     alt="Pastry"
                     width={900}
                     height={900}
@@ -278,10 +299,18 @@ export default async function HomePage() {
       <section
         data-section="Low Lights"
         className="relative overflow-visible py-24 md:py-32 px-6"
-        style={{ backgroundColor: 'var(--cafe-cream)' }}
+        style={{ backgroundColor: 'var(--cafe-white)' }}
       >
-        <div className="absolute top-0 left-0 w-1/3 h-full bg-cafe-mist/40 skew-x-12 -translate-x-1/4 pointer-events-none"></div>
         <StoryBlobs />
+        <div className="section-deco" style={{ top: '8%', left: '6%', animationDuration: '12s', animationDelay: '0.4s' }} aria-hidden="true">
+          <Music strokeWidth={1.4} />
+        </div>
+        <div className="section-deco section-deco-dark" style={{ bottom: '12%', right: '8%', animationDuration: '11s' }} aria-hidden="true">
+          <Coffee strokeWidth={1.4} />
+        </div>
+        <div className="section-deco-mobile" style={{ top: '10%', left: '10%' }} aria-hidden="true">
+          <Music strokeWidth={1.4} />
+        </div>
 
         <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
@@ -334,8 +363,18 @@ export default async function HomePage() {
       {/* The Trinity */}
       <section
         data-section="The Trinity"
-        className="py-20 md:py-24"
+        className="py-20 md:py-24 relative overflow-hidden"
+        style={{ backgroundColor: 'var(--cafe-white)' }}
       >
+        <div className="section-deco" style={{ top: '12%', right: '16%', animationDuration: '10s' }} aria-hidden="true">
+          <Sparkles strokeWidth={1.6} />
+        </div>
+        <div className="section-deco section-deco-dark" style={{ bottom: '6%', left: '10%', animationDuration: '12s', animationDelay: '0.6s' }} aria-hidden="true">
+          <Armchair strokeWidth={1.4} />
+        </div>
+        <div className="section-deco-mobile" style={{ top: '8%', right: '12%' }} aria-hidden="true">
+          <Sparkles strokeWidth={1.6} />
+        </div>
         <div className="max-w-7xl mx-auto px-6">
           <div
             className="hidden md:block mb-10 w-full h-px"
@@ -344,8 +383,19 @@ export default async function HomePage() {
           <div className="grid md:grid-cols-3">
             <Reveal>
               <div className="p-10 text-center">
-                <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-tan)', border: '1px solid rgba(var(--cafe-tan-rgb), 0.35)' }}>
-                  <Coffee size={28} />
+                <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full trinity-icon" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-tan)', border: '1px solid rgba(var(--cafe-tan-rgb), 0.35)' }}>
+                  <svg viewBox="0 0 24 24" className="trinity-cup" aria-hidden="true" focusable="false">
+                    <path
+                      d="M17 10V8C17 6.89543 16.1046 6 15 6H5C3.89543 6 3 6.89543 3 8V10M17 10V16C17 17.1046 16.1046 18 15 18H5C3.89543 18 3 17.1046 3 16V10M17 10H18C19.1046 10 20 10.8954 20 12C20 13.1046 19.1046 14 18 14H17M3 18H17"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
+                  </svg>
+                  <div className="trinity-steam-line trinity-steam-line-1" aria-hidden="true"></div>
+                  <div className="trinity-steam-line trinity-steam-line-2" aria-hidden="true"></div>
+                  <div className="trinity-steam-line trinity-steam-line-3" aria-hidden="true"></div>
                 </div>
                 <h3 className="font-serif text-2xl mb-3" style={{ color: 'var(--cafe-black)' }}>Craft Espresso</h3>
                 <p className="font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
@@ -375,7 +425,13 @@ export default async function HomePage() {
                   style={{ background: 'linear-gradient(90deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
                 ></span>
                 <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-tan)', border: '1px solid rgba(var(--cafe-tan-rgb), 0.35)' }}>
-                  <Music size={26} />
+                  <div className="music-visualizer" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
                 </div>
                 <h3 className="font-serif text-2xl mb-3" style={{ color: 'var(--cafe-black)' }}>Curated Sound</h3>
                 <p className="font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
@@ -387,7 +443,7 @@ export default async function HomePage() {
             <Reveal delay={250}>
               <div className="p-10 text-center">
                 <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-tan)', border: '1px solid rgba(var(--cafe-tan-rgb), 0.35)' }}>
-                  <Armchair size={26} />
+                  <Armchair size={26} className="couch-bounce" />
                 </div>
                 <h3 className="font-serif text-2xl mb-3" style={{ color: 'var(--cafe-black)' }}>Creative Comfort</h3>
                 <p className="font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
@@ -403,10 +459,18 @@ export default async function HomePage() {
       <section
         data-section="Atmosphere"
         className="relative py-24 md:py-32 px-6 overflow-visible"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
+        style={{ backgroundColor: 'var(--cafe-white)' }}
       >
-        <div className="absolute bottom-0 left-0 w-1/2 h-2/3 bg-cafe-cream/30 -skew-y-3 -translate-y-1/4 pointer-events-none"></div>
         <AtmosphereBlob />
+        <div className="section-deco" style={{ top: '10%', left: '8%', animationDuration: '11s' }} aria-hidden="true">
+          <Wifi strokeWidth={1.4} />
+        </div>
+        <div className="section-deco section-deco-dark" style={{ bottom: '8%', right: '12%', animationDuration: '12s', animationDelay: '0.8s' }} aria-hidden="true">
+          <PlugZap strokeWidth={1.4} />
+        </div>
+        <div className="section-deco-mobile" style={{ top: '12%', left: '10%' }} aria-hidden="true">
+          <Wifi strokeWidth={1.4} />
+        </div>
         <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Features (order-2 on mobile) */}
           <div className="order-2 lg:order-1">
@@ -461,18 +525,36 @@ export default async function HomePage() {
       {/* Atmosphere Images */}
       <section
         data-section="Atmosphere Images"
-        className="overflow-visible"
+        className="overflow-visible relative"
         style={{ backgroundColor: 'var(--cafe-white)' }}
       >
+        <div className="section-deco" style={{ top: '6%', left: '10%', animationDuration: '13s' }} aria-hidden="true">
+          <Sparkles strokeWidth={1.6} />
+        </div>
+        <div className="section-deco section-deco-dark" style={{ bottom: '6%', right: '10%', animationDuration: '10s', animationDelay: '0.5s' }} aria-hidden="true">
+          <Coffee strokeWidth={1.4} />
+        </div>
+        <div className="section-deco-mobile" style={{ top: '8%', right: '12%' }} aria-hidden="true">
+          <Coffee strokeWidth={1.4} />
+        </div>
         <AtmosphereStrip images={vibeImages} />
       </section>
 
       {/* Newsletter */}
       <section
         data-section="Newsletter"
-        className="py-24 px-6"
-        style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.1)' }}
+        className="py-24 px-6 relative overflow-hidden"
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
+        <div className="section-deco" style={{ top: '10%', left: '12%', animationDuration: '11s' }} aria-hidden="true">
+          <Mail strokeWidth={1.4} />
+        </div>
+        <div className="section-deco section-deco-dark" style={{ bottom: '10%', right: '14%', animationDuration: '12s', animationDelay: '0.7s' }} aria-hidden="true">
+          <Sparkles strokeWidth={1.6} />
+        </div>
+        <div className="section-deco-mobile" style={{ top: '10%', left: '10%' }} aria-hidden="true">
+          <Mail strokeWidth={1.4} />
+        </div>
         <div className="max-w-2xl mx-auto text-center">
           <Reveal>
             <Mail className="mx-auto mb-6" size={32} style={{ color: 'var(--cafe-tan)' }} />
