@@ -34,24 +34,32 @@ export default function EventsPage() {
       {/* Hero */}
       <section
         data-section="Events Hero"
-        className="pt-28 pb-20 md:pt-32"
-        style={{ backgroundColor: "#F4F1EA" }}
+        className="relative pt-28 pb-28 md:pt-32 md:pb-32 overflow-hidden text-center px-6"
+        style={{ backgroundColor: "#2C2420", color: "#FAF9F6" }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div
+            className="absolute right-0 top-0 w-96 h-96 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2"
+            style={{ backgroundColor: "#A48D78" }}
+          ></div>
+        </div>
+        <div className="max-w-4xl mx-auto relative z-10 space-y-6">
           <Reveal>
             <span
-              className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest rounded-full mb-4"
-              style={{ backgroundColor: "rgba(164, 141, 120, 0.2)", color: "#A48D78" }}
+              className="font-bold tracking-[0.2em] uppercase text-sm block"
+              style={{ color: "#A48D78" }}
             >
-              Community
+              Events
             </span>
           </Reveal>
           <Reveal delay={150}>
-            <h1 className="font-serif text-5xl md:text-6xl mb-4" style={{ color: "#2C2420" }}>Upcoming Events</h1>
+            <h1 className="font-serif text-[64px] md:text-[86px] leading-[0.9]" style={{ color: "#FAF9F6" }}>
+              Nights To Remember
+            </h1>
           </Reveal>
           <Reveal delay={250}>
-            <p className="text-xl font-light max-w-xl" style={{ color: "rgba(74, 59, 50, 0.75)" }}>
-              Join us for music, art, and community gatherings.
+            <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: "rgba(203, 185, 164, 0.85)" }}>
+              Deep house sets, open mics, and café takeovers—bookmark what resonates and meet your people.
             </p>
           </Reveal>
         </div>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { BookOpen, ShoppingBag, Menu } from "lucide-react";
+import { BookOpen, ShoppingBag, Menu, Coffee, Music } from "lucide-react";
 import { PiSpotifyLogoFill, PiInstagramLogoFill, PiTiktokLogoFill } from "react-icons/pi";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -79,6 +79,8 @@ export default function SiteHeader({
   }, []);
 
   const handleCartClick = () => {
+    // Close mobile nav if open before toggling cart
+    if (isOpen) setIsOpen(false);
     if (onCartClick) {
       onCartClick();
       return;
@@ -91,7 +93,7 @@ export default function SiteHeader({
     <>
       {/* <AnnouncementBanner text={announcementText} /> */}
 
-      <nav className="sticky top-0 z-40 bg-cafe-mist/85 backdrop-blur-xl border-b border-cafe-tan/10">
+      <nav className="sticky top-0 z-50 bg-cafe-mist/85 backdrop-blur-xl border-b border-cafe-tan/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <Link
@@ -126,39 +128,53 @@ export default function SiteHeader({
             <div className="hidden md:flex items-center space-x-10">
               <Link
                 href="/"
-                className={`text-sm tracking-[0.22em] uppercase transition-all ${isActive("/")
-                  ? "font-bold text-cafe-black border-b border-cafe-black pb-1"
-                  : "text-cafe-brown hover:text-cafe-black"
+                className={`nav-link text-sm tracking-[0.22em] uppercase transition-all duration-300 relative ${isActive("/")
+                  ? "font-bold text-cafe-black"
+                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
                   }`}
               >
                 Home
+                {isActive("/") && <span className="nav-underline" />}
               </Link>
               <Link
                 href="/menu"
-                className={`text-sm tracking-[0.22em] uppercase transition-all ${isActive("/menu")
-                  ? "font-bold text-cafe-black border-b border-cafe-black pb-1"
-                  : "text-cafe-brown hover:text-cafe-black"
+                className={`nav-link text-sm tracking-[0.22em] uppercase transition-all duration-300 relative ${isActive("/menu")
+                  ? "font-bold text-cafe-black"
+                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
                   }`}
               >
                 Menu
+                {isActive("/menu") && <span className="nav-underline" />}
               </Link>
               <Link
                 href="/story"
-                className={`text-sm tracking-[0.22em] uppercase transition-all ${isActive("/story")
-                  ? "font-bold text-cafe-black border-b border-cafe-black pb-1"
-                  : "text-cafe-brown hover:text-cafe-black"
+                className={`nav-link text-sm tracking-[0.22em] uppercase transition-all duration-300 relative ${isActive("/story")
+                  ? "font-bold text-cafe-black"
+                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
                   }`}
               >
                 Story
+                {isActive("/story") && <span className="nav-underline" />}
               </Link>
               <Link
                 href="/events"
-                className={`text-sm tracking-[0.22em] uppercase transition-all ${isActive("/events")
-                  ? "font-bold text-cafe-black border-b border-cafe-black pb-1"
-                  : "text-cafe-brown hover:text-cafe-black"
+                className={`nav-link text-sm tracking-[0.22em] uppercase transition-all duration-300 relative ${isActive("/events")
+                  ? "font-bold text-cafe-black"
+                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
                   }`}
               >
                 Events
+                {isActive("/events") && <span className="nav-underline" />}
+              </Link>
+              <Link
+                href="/contact"
+                className={`nav-link text-sm tracking-[0.22em] uppercase transition-all duration-300 relative ${isActive("/contact")
+                  ? "font-bold text-cafe-black"
+                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
+                  }`}
+              >
+                Contact
+                {isActive("/contact") && <span className="nav-underline" />}
               </Link>
 
               <div className="h-4 w-px bg-cafe-beige/50"></div>
@@ -202,55 +218,121 @@ export default function SiteHeader({
                   </span>
                 )}
               </button>
-              <button onClick={() => setIsOpen(!isOpen)}>
-                <Menu className="text-cafe-black" size={24} strokeWidth={1.5} />
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="relative w-12 h-12 flex items-center justify-center"
+                aria-label={isOpen ? "Close menu" : "Open menu"}
+                type="button"
+              >
+                <span className="hamburger-icon">
+                  <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>
+                  <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>
+                  <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>
+                </span>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Full Screen Overlay */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="md:hidden bg-cafe-mist border-t border-cafe-tan/20 overflow-hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              className="fixed left-0 right-0 bottom-0 md:hidden bg-cafe-mist"
+              style={{
+                top: '80px',
+                zIndex: 40,
+                minHeight: 'calc(100vh - 80px)',
+                width: '100vw',
+                height: 'calc(100vh - 80px)'
+              }}
             >
-              <div className="px-4 py-8 space-y-6">
-                <Link
-                  href="/"
-                  onClick={() => setIsOpen(false)}
-                  className="block w-full text-left font-serif text-3xl text-cafe-black hover:text-cafe-tan transition-colors"
+              {/* Content */}
+              <div className="relative w-full h-full flex flex-col items-center justify-center px-8 py-16 overflow-y-auto" style={{ minHeight: 'calc(100vh - 80px)' }}>
+                {/* Navigation Links */}
+                <nav className="flex flex-col items-center gap-6 mb-12">
+                  {[
+                    { href: '/', label: 'Home' },
+                    { href: '/menu', label: 'Menu' },
+                    { href: '/story', label: 'Story' },
+                    { href: '/events', label: 'Events' },
+                    { href: '/contact', label: 'Contact' }
+                  ].map((link, index) => (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        delay: 0.1 + index * 0.08,
+                        duration: 0.5,
+                        ease: [0.4, 0, 0.2, 1]
+                      }}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className={`block font-serif text-4xl sm:text-5xl tracking-tight transition-all duration-300 ${
+                          isActive(link.href)
+                            ? 'text-cafe-tan'
+                            : 'text-cafe-black hover:text-cafe-tan hover:translate-x-2'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </nav>
+
+                {/* Footer Info */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.5 }}
+                  className="text-center space-y-3"
                 >
-                  Home
-                </Link>
-                <Link
-                  href="/menu"
-                  onClick={() => setIsOpen(false)}
-                  className="block w-full text-left font-serif text-3xl text-cafe-black hover:text-cafe-tan transition-colors"
-                >
-                  Menu
-                </Link>
-                <Link
-                  href="/story"
-                  onClick={() => setIsOpen(false)}
-                  className="block w-full text-left font-serif text-3xl text-cafe-black hover:text-cafe-tan transition-colors"
-                >
-                  Story
-                </Link>
-                <Link
-                  href="/events"
-                  onClick={() => setIsOpen(false)}
-                  className="block w-full text-left font-serif text-3xl text-cafe-black hover:text-cafe-tan transition-colors"
-                >
-                  Events
-                </Link>
-                <div className="pt-8 border-t border-cafe-beige">
-                  <p className="text-sm text-cafe-brown mb-2 font-medium">3838 11th St, Riverside, CA 92501</p>
-                  <p className="text-sm text-cafe-brown font-medium">Mon-Sun: 7am - 7pm</p>
-                </div>
+                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-cafe-tan to-transparent mx-auto mb-6" />
+
+                  <p className="text-sm text-cafe-brown/80 font-medium leading-relaxed">
+                    3838 11th St<br />
+                    Riverside, CA 92501
+                  </p>
+
+                  <p className="text-sm text-cafe-brown/70 font-light">
+                    Mon-Sun: 7am - 7pm
+                  </p>
+
+                  {/* Social Icons */}
+                  {(instagramUrl || spotifyUrl) && (
+                    <div className="flex items-center justify-center gap-4 pt-6">
+                      {instagramUrl && (
+                        <a
+                          href={instagramUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 rounded-full bg-cafe-tan/10 border border-cafe-tan/20 flex items-center justify-center text-cafe-tan hover:bg-cafe-tan hover:text-cafe-white transition-all duration-300 hover:scale-110"
+                          aria-label="Instagram"
+                        >
+                          <PiInstagramLogoFill size={20} />
+                        </a>
+                      )}
+                      {spotifyUrl && (
+                        <a
+                          href={spotifyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 rounded-full bg-cafe-tan/10 border border-cafe-tan/20 flex items-center justify-center text-cafe-tan hover:bg-cafe-tan hover:text-cafe-white transition-all duration-300 hover:scale-110"
+                          aria-label="Spotify"
+                        >
+                          <PiSpotifyLogoFill size={20} />
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </motion.div>
               </div>
             </motion.div>
           )}

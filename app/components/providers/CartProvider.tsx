@@ -11,6 +11,7 @@ type CartContextType = {
   toggle: () => void;
   addItem: (item: MenuItem, quantity: number, modifiers: SelectedModifier[], notes?: string, totalPrice?: number) => void;
   removeItem: (cartId: string) => void;
+  updateQuantity: (cartId: string, quantity: number) => void;
   clear: () => void;
 };
 
@@ -54,6 +55,26 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems((prev) => prev.filter((item) => item.cartId !== cartId));
   };
 
+  const updateQuantity = (cartId: string, quantity: number) => {
+    setItems((prev) => {
+      return prev.reduce<CartItem[]>((acc, item) => {
+        if (item.cartId !== cartId) {
+          acc.push(item);
+          return acc;
+        }
+        const nextQty = Math.max(0, quantity);
+        if (nextQty < 1) {
+          return acc; // remove item if quantity drops below 1
+        }
+        const basePrice = parseFloat(item.price.replace("$", ""));
+        const modifierTotal = item.modifiers.reduce((sum, mod) => sum + mod.priceDelta, 0);
+        const totalPrice = (basePrice + modifierTotal) * nextQty;
+        acc.push({ ...item, quantity: nextQty, totalPrice });
+        return acc;
+      }, []);
+    });
+  };
+
   const clear = () => setItems([]);
 
   // Body flags for overlays / scroll lock / barista suppression
@@ -83,6 +104,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       toggle,
       addItem,
       removeItem,
+      updateQuantity,
       clear,
     }),
     [items, isOpen],

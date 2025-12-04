@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { ShoppingBag, X, Trash2 } from 'lucide-react';
+import { ShoppingBag, X, Trash2, Minus, Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { useCart } from '../providers/CartProvider';
@@ -11,7 +11,7 @@ import { COLORS } from '@/app/lib/colors';
 const colors = COLORS;
 
 export const CartDrawer: React.FC = () => {
-  const { items: cart, isOpen, open, close, removeItem } = useCart();
+  const { items: cart, isOpen, open, close, removeItem, updateQuantity } = useCart();
   const subtotal = cart.reduce((acc, item) => acc + item.totalPrice, 0);
 
   useEffect(() => {
@@ -99,9 +99,11 @@ export const CartDrawer: React.FC = () => {
                   <p className="text-sm" style={{ color: colors.brown }}>
                     Looks like you haven&apos;t added any treats yet.
                   </p>
-                  <Button variant="outline" className="mt-8" onClick={close}>
-                    Browse Menu
-                  </Button>
+                  <a href="/menu" className="mt-8 inline-block">
+                    <Button variant="outline">
+                      Browse Menu
+                    </Button>
+                  </a>
                 </div>
               ) : (
                 cart.map((item, idx) => (
@@ -121,7 +123,7 @@ export const CartDrawer: React.FC = () => {
                       style={{ backgroundColor: colors.mist }}
                     >
                       <img
-                        src={`https://picsum.photos/seed/${item.id}/200/200`}
+                        src="/unsplash/tnc-placeholder-menuitem.png"
                         className="w-full h-full object-cover"
                         alt={item.name}
                       />
@@ -163,14 +165,44 @@ export const CartDrawer: React.FC = () => {
                         </p>
                       )}
 
-                      <div className="mt-2 flex justify-end">
+                      <div className="mt-3 flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-2">
                           <button
-                            className="text-xs flex items-center gap-1 transition-colors hover:opacity-80"
-                            style={{ color: colors.red }}
-                            onClick={() => removeItem(item.cartId)}
+                            className="w-8 h-8 rounded-full flex items-center justify-center border transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                            style={{
+                              borderColor: `${colors.beige}80`,
+                              backgroundColor: colors.white,
+                              color: colors.black
+                            }}
+                            aria-label="Decrease quantity"
+                            disabled={item.quantity <= 1}
+                            onClick={() => updateQuantity(item.cartId, item.quantity - 1)}
                           >
-                            <Trash2 size={12} /> Remove
+                            <Minus size={14} />
                           </button>
+                          <span className="text-sm font-semibold min-w-[24px] text-center" style={{ color: colors.black }}>
+                            {item.quantity}
+                          </span>
+                          <button
+                            className="w-8 h-8 rounded-full flex items-center justify-center border transition-colors"
+                            style={{
+                              borderColor: `${colors.beige}80`,
+                              backgroundColor: colors.white,
+                              color: colors.black
+                            }}
+                            aria-label="Increase quantity"
+                            onClick={() => updateQuantity(item.cartId, item.quantity + 1)}
+                          >
+                            <Plus size={14} />
+                          </button>
+                        </div>
+                        <button
+                          className="text-xs flex items-center gap-1 transition-colors hover:opacity-80"
+                          style={{ color: colors.red }}
+                          onClick={() => removeItem(item.cartId)}
+                        >
+                          <Trash2 size={12} /> Remove
+                        </button>
                       </div>
                     </div>
                   </motion.div>

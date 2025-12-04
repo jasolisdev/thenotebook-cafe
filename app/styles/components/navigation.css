@@ -2,6 +2,111 @@
    NAVIGATION
 ============================================================ */
 
+/* ============================================================
+   ANIMATED HAMBURGER ICON
+============================================================ */
+.hamburger-icon {
+  width: 22px;
+  height: 16px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  gap: 5px;
+}
+
+.hamburger-line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #2C2420;
+  border-radius: 1px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+  will-change: transform, opacity;
+  position: absolute;
+  left: 0;
+}
+
+/* Position lines in hamburger state */
+.hamburger-line:nth-child(1) {
+  top: 0;
+}
+
+.hamburger-line:nth-child(2) {
+  top: 7px;
+}
+
+.hamburger-line:nth-child(3) {
+  top: 14px;
+}
+
+/* Transform to X */
+.hamburger-line:nth-child(1).open {
+  top: 7px;
+  transform: rotate(45deg);
+}
+
+.hamburger-line:nth-child(2).open {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger-line:nth-child(3).open {
+  top: 7px;
+  transform: rotate(-45deg);
+}
+
+/* ============================================================
+   REFINED DESKTOP NAVIGATION
+============================================================ */
+.nav-link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+/* Animated underline for active page */
+.nav-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cafe-black), transparent);
+  animation: underlineGrow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes underlineGrow {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* Hover underline effect */
+.nav-link:not(.font-bold)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 100%;
+  height: 1px;
+  background: var(--cafe-tan);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:not(.font-bold):hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
 /* Header container wraps nav + drawer for proper z-index stacking */
 .header-container {
   position: sticky;
@@ -615,68 +720,4 @@
 
 .drawer-est {
   color: var(--cafe-tan);
-}
-
-/* Floating Coffee Beans in Drawer */
-.drawer-floating-items {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.drawer-bean-1,
-.drawer-bean-2 {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  opacity: 0.15;
-  will-change: transform;
-}
-
-@media (min-width: 640px) {
-
-  .drawer-bean-1,
-  .drawer-bean-2 {
-    width: 80px;
-    height: 80px;
-  }
-}
-
-.drawer-bean-1 {
-  top: 15%;
-  left: 8%;
-  animation: drawerFloatBean1 8s ease-in-out infinite;
-  transform: rotate(-15deg);
-}
-
-.drawer-bean-2 {
-  bottom: 12%;
-  right: 10%;
-  animation: drawerFloatBean2 9s ease-in-out infinite;
-  transform: rotate(25deg);
-}
-
-@keyframes drawerFloatBean1 {
-
-  0%,
-  100% {
-    transform: translateY(0) rotate(-15deg);
-  }
-
-  50% {
-    transform: translateY(-15px) rotate(-20deg);
-  }
-}
-
-@keyframes drawerFloatBean2 {
-
-  0%,
-  100% {
-    transform: translateY(0) rotate(25deg);
-  }
-
-  50% {
-    transform: translateY(-12px) rotate(30deg);
-  }
 }

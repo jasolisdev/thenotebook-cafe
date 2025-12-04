@@ -15,6 +15,7 @@
 /* Component Styles */
 @import "./styles/components/card-gallery.css";
 @import "./styles/components/modal.css";
+@import "./styles/components/SiteHeader.css";
 
 /* ============================================================
    CUSTOM FONTS
