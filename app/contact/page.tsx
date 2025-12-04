@@ -4,7 +4,6 @@
  * Redesigned contact page with new layout and design.
  */
 import { client } from "@/sanity/lib/client";
-import SiteFooter from "../components/layout/SiteFooter";
 import Reveal from "../components/ui/Reveal";
 import { MapPin, Clock, Phone } from "lucide-react";
 import Image from "next/image";
@@ -31,13 +30,33 @@ export default async function ContactPage() {
       {/* Header */}
       <section
         data-section="Contact Hero"
-        className="py-24 md:py-32 px-6 text-center"
-        style={{ backgroundColor: '#F4F1EA' }}
+        className="relative pt-28 pb-28 md:pt-32 md:pb-32 px-6 text-center overflow-hidden"
+        style={{ backgroundColor: '#2C2420', color: '#FAF9F6' }}
       >
-        <h1 className="font-serif text-5xl md:text-7xl mb-6" style={{ color: '#2C2420' }}>Visit Us</h1>
-        <p className="font-light max-w-xl mx-auto text-lg" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
-          Come write your next chapter with us.
-        </p>
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div
+            className="absolute right-0 top-0 w-96 h-96 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2"
+            style={{ backgroundColor: '#A48D78' }}
+          ></div>
+        </div>
+        <div className="max-w-4xl mx-auto relative z-10 space-y-6">
+          <Reveal>
+            <span
+              className="font-bold tracking-[0.2em] uppercase text-sm block"
+              style={{ color: '#A48D78' }}
+            >
+              Contact
+            </span>
+          </Reveal>
+          <Reveal delay={120}>
+            <h1 className="font-serif text-[64px] md:text-[86px] leading-[0.9]" style={{ color: '#FAF9F6' }}>Visit Us</h1>
+          </Reveal>
+          <Reveal delay={220}>
+            <p className="font-light max-w-2xl mx-auto text-lg leading-relaxed" style={{ color: 'rgba(203, 185, 164, 0.85)' }}>
+              Come write your next chapter with us—walk in, call ahead, or plan your next meetup here.
+            </p>
+          </Reveal>
+        </div>
       </section>
 
       {/* Content */}
@@ -160,7 +179,6 @@ export default async function ContactPage() {
       </section>
 
       {/* Footer */}
-      <SiteFooter />
     </main>
   );
 }

@@ -1,0 +1,85 @@
+/* ============================================================
+   SECTIONS & DIVIDERS
+============================================================ */
+
+/* Dividers */
+.divider-cream {
+  width: 100vw;
+  height: auto;
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  overflow: hidden;
+  position: relative;
+  /* Remove any spacing */
+  font-size: 0;
+  /* Ensure full width on mobile */
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.divider-cream img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+  padding: 0;
+  vertical-align: bottom;
+  /* Prevent any subpixel gaps */
+  transform: translateZ(0) scale(1.03);
+  -webkit-transform: translateZ(0) scale(1.03);
+  /* Anti-aliasing for smooth edges */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Cream section background */
+.section-cream {
+  background-color: var(--cream);
+  position: relative;
+  margin: 0;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  overflow-x: hidden;
+}
+
+/* Adjust icon colors in cream section */
+.section-cream .home-highlight-icon {
+  color: rgba(164, 141, 120, 0.8);
+}
+
+.section-cream .home-highlight-item:hover .home-highlight-icon {
+  color: rgba(164, 141, 120, 1);
+}
+
+/* Dark section background */
+.section-dark {
+  background-color: var(--bg-solid);
+  position: relative;
+  margin: 0;
+}
+
+/* Hero wrapper section - dark background with rounded corner and padding */
+.section-hero {
+  background-color: var(--bg-dark);
+  padding: 10px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  position: relative;
+}
+
+/* Featured drinks section */
+.section-featured {
+  background-color: var(--cream);
+  padding: 60px 20px;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .section-featured {
+    padding: 80px 24px;
+  }
+}

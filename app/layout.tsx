@@ -17,7 +17,6 @@ import "./styles/layout/animations.css";
 // Page styles
 import "./styles/pages/home.css";
 import "./styles/pages/about.css";
-import "./styles/pages/menu.css";
 import "./styles/pages/events.css";
 import "./styles/pages/contact.css";
 
@@ -26,9 +25,12 @@ import { DM_Serif_Display, Outfit } from "next/font/google";
 import { cookies } from "next/headers";
 import PasswordGate from "./components/ui/PasswordGate";
 import SiteHeader from "./components/layout/SiteHeader";
+import SiteFooter from "./components/layout/SiteFooter";
 import Script from "next/script";
 import { client } from "@/sanity/lib/client";
 import VirtualBarista from "./components/ui/VirtualBarista";
+import { CartProvider } from "./components/providers/CartProvider";
+import { CartDrawer } from "./components/features/CartDrawer";
 
 // Google Fonts
 const dmSerif = DM_Serif_Display({
@@ -82,27 +84,29 @@ export default async function RootLayout({
       className={`${dmSerif.variable} ${outfit.variable}`}
     >
       <body className="antialiased font-sans">
-        <Script
-          src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=67a7bd102e5819b79ce969d0"
-          strategy="beforeInteractive"
-        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
         >
-          {showPasswordGate ? (
-            <PasswordGate />
-          ) : (
-            <>
-              <SiteHeader
-                instagramUrl={settings?.social?.instagram}
-                spotifyUrl={settings?.social?.spotify}
-              />
-              {children}
-              <VirtualBarista />
-            </>
-          )}
+          <CartProvider>
+            {showPasswordGate ? (
+              <PasswordGate />
+            ) : (
+              <>
+                <SiteHeader
+                  instagramUrl={settings?.social?.instagram}
+                  spotifyUrl={settings?.social?.spotify}
+                />
+                <div className="page-content">
+                  {children}
+                </div>
+                <SiteFooter />
+                <VirtualBarista />
+                <CartDrawer />
+              </>
+            )}
+          </CartProvider>
         </ThemeProvider>
       </body>
     </html>

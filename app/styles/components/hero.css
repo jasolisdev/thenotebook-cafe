@@ -251,8 +251,8 @@
   align-items: center;
   gap: 8px;
   padding: 12px 28px;
-  background: rgba(164, 141, 120, 0.25);
-  color: #6b5a48;
+  background: var(--tan-medium);
+  color: var(--medium-brown);
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 500;
@@ -267,7 +267,7 @@
     transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(164, 141, 120, 0.08);
+  box-shadow: 0 2px 8px var(--tan-subtle);
   position: relative;
   overflow: hidden;
 }
@@ -301,8 +301,8 @@
 .hero-cta-button:hover {
   transform: translateY(-2px);
   background: rgba(164, 141, 120, 0.35);
-  border-color: rgba(164, 141, 120, 0.5);
-  box-shadow: 0 4px 12px rgba(164, 141, 120, 0.15);
+  border-color: var(--tan-strong);
+  box-shadow: 0 4px 12px var(--tan-light);
 }
 
 .hero-cta-button:active {
@@ -325,7 +325,7 @@
   margin-top: 18px;
   padding: 8px 18px;
   background: rgba(164, 141, 120, 0.1);
-  border: 1.5px solid rgba(164, 141, 120, 0.3);
+  border: 1.5px solid var(--tan-medium);
   border-radius: 50px;
   color: rgba(164, 141, 120, 0.95);
   font-family: var(--font-sans);

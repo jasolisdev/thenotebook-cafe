@@ -1,11 +1,33 @@
 /* ============================================================
    BUTTONS
 ============================================================ */
+
+/* Hero button styles */
+.hero-button-primary {
+  background-color: var(--cafe-black);
+  color: var(--cafe-white);
+}
+
+.hero-button-primary:hover {
+  background-color: var(--cafe-tan);
+}
+
+.hero-button-secondary {
+  border: 1px solid var(--cafe-brown);
+  background-color: transparent;
+  color: var(--cafe-black);
+}
+
+.hero-button-secondary:hover {
+  background-color: var(--cafe-brown);
+  color: var(--cafe-white);
+}
+
 .btn-pill {
   display: inline-block;
   padding: 0.7rem 1.2rem;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--white-overlay-subtle);
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: var(--ink-cream);
   font-size: 15px;
@@ -34,13 +56,13 @@
   display: inline-block;
   padding: 8px 20px;
   border-radius: 9999px;
-  background: linear-gradient(135deg, rgba(164, 141, 120, 0.15), rgba(164, 141, 120, 0.08));
-  border: 1px solid rgba(164, 141, 120, 0.3);
+  background: linear-gradient(135deg, var(--tan-light), var(--tan-subtle));
+  border: 1px solid var(--tan-medium);
   color: var(--ink-cream);
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 12px rgba(164, 141, 120, 0.15);
+  box-shadow: 0 4px 12px var(--tan-light);
   animation: pulseGlow 3s ease-in-out infinite;
 }

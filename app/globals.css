@@ -1,8 +1,21 @@
 @import "tailwindcss";
 
+/* Tailwind v4 Theme Configuration */
+@theme {
+  --color-cafe-black: #2C2420;
+  --color-cafe-brown: #4A3B32;
+  --color-cafe-tan: #A48D78;
+  --color-cafe-beige: #CBB9A4;
+  --color-cafe-cream: #EDE7D8;
+  --color-cafe-mist: #F4F1EA;
+  --color-cafe-white: #FAF9F6;
+  --color-cafe-red: #ef4444;
+}
+
 /* Component Styles */
 @import "./styles/components/card-gallery.css";
 @import "./styles/components/modal.css";
+@import "./styles/components/SiteHeader.css";
 
 /* ============================================================
    CUSTOM FONTS
@@ -22,6 +35,7 @@
      (Premium Café Design System)
   =============================== */
 
+  /* Core palette */
   --cafe-black: #2C2420;
   --cafe-brown: #4A3B32;
   --cafe-tan: #A48D78;
@@ -29,6 +43,21 @@
   --cafe-cream: #EDE7D8;
   --cafe-mist: #F4F1EA;
   --cafe-white: #FAF9F6;
+
+  /* Extended palette - frequently used colors */
+  --espresso-brown: #2a1f16;     /* Dark brown text */
+  --warm-brown: #5a4a38;         /* Warm brown text */
+  --medium-brown: #6b5a48;       /* Medium brown buttons */
+  --cream-light: #f4f0e9;        /* Light cream backgrounds */
+  --pearl-white: #fffcf9;        /* Off-white for modals */
+  --latte-cream: #f6ebdf;        /* Events page light cream */
+
+  /* Gold accent family */
+  --gold-primary: #c99a58;       /* RGB: 201, 154, 88 */
+  --gold-darker: #b48a4e;        /* Darker gold variant */
+
+  /* Debug color */
+  --debug-red: #ff0000;          /* Bright red for testing */
 
   /* RGB helpers for rgba() usage */
   --cafe-black-rgb: 44, 36, 32;
@@ -38,6 +67,12 @@
   --cafe-cream-rgb: 237, 231, 216;
   --cafe-mist-rgb: 244, 241, 234;
   --cafe-white-rgb: 250, 249, 246;
+
+  /* Extended RGB helpers */
+  --espresso-brown-rgb: 42, 31, 22;
+  --warm-brown-rgb: 90, 74, 56;
+  --gold-primary-rgb: 201, 154, 88;
+  --cream-light-rgb: 244, 240, 233;
 
   /* Core semantic tokens */
   --bg-solid: var(--cafe-white);
@@ -58,39 +93,71 @@
   /* Glass panel effect */
   --glass-bg: rgba(250, 249, 246, 0.85);
 
+  /* Opacity levels for consistent transparency */
+  --opacity-subtle: 0.08;
+  --opacity-light: 0.12;
+  --opacity-medium: 0.25;
+  --opacity-strong: 0.5;
+  --opacity-heavy: 0.75;
+
+  /* Common transparency combinations */
+  --tan-subtle: rgba(var(--cafe-tan-rgb), var(--opacity-subtle));
+  --tan-light: rgba(var(--cafe-tan-rgb), var(--opacity-light));
+  --tan-medium: rgba(var(--cafe-tan-rgb), var(--opacity-medium));
+  --tan-strong: rgba(var(--cafe-tan-rgb), var(--opacity-strong));
+
+  --gold-subtle: rgba(var(--gold-primary-rgb), var(--opacity-subtle));
+  --gold-light: rgba(var(--gold-primary-rgb), var(--opacity-light));
+  --gold-medium: rgba(var(--gold-primary-rgb), var(--opacity-medium));
+  --gold-strong: rgba(var(--gold-primary-rgb), var(--opacity-strong));
+
+  --dark-overlay: rgba(0, 0, 0, var(--opacity-medium));
+  --white-overlay: rgba(255, 255, 255, var(--opacity-light));
+  --black-overlay-subtle: rgba(0, 0, 0, var(--opacity-subtle));
+  --white-overlay-subtle: rgba(255, 255, 255, var(--opacity-subtle));
+
 }
 
 /* ============================================================
    BASE ELEMENTS
 ============================================================ */
-html,
-body,
-#__next {
-  height: 100%;
+
+/* CRITICAL FIX: Removed height: 100% constraint
+
+   BEFORE: html, body, #__next { height: 100%; }
+   PROBLEM: Forced body to viewport height, preventing natural document scrolling
+   SYMPTOM: document.scrollHeight === window.innerHeight (663px = 663px)
+   RESULT: Browser couldn't scroll properly, content appeared offset
+
+   NOW: Body grows naturally with content, allowing proper scroll behavior
+
+   IMPORTANT: No overflow on html - this allows sticky positioning to work!
+*/
+
+html {
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* No overflow property - allows position: sticky to work */
 }
 
-html,
 body {
   font-family: var(--font-sans);
   letter-spacing: 0;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow-x: hidden;  /* Only hide horizontal overflow */
   width: 100%;
+  min-height: 100vh; /* Allow body to grow beyond viewport */
   background-color: var(--bg-solid);
   color: var(--text-dark);
-}
-
-/* GPU acceleration for smoother animations */
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-body {
-  /* Prevent layout shifts during page transitions */
-  overflow-anchor: none;
+  /* Re-enabled scroll anchoring for proper scroll restoration */
+  overflow-anchor: auto;
 }
 
 /* Hide horizontal scrollbar for hero gallery track */
@@ -111,21 +178,27 @@ body {
   scrollbar-width: none;
 }
 
-.hero-content {
-  transform: translateY(-16px);
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
-@media (max-width: 400px) {
-  .hero-content {
-    transform: translateY(34px);
-  }
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-@media (min-width: 768px) {
-  .hero-content {
-    transform: translateY(0);
-  }
-}
+/* REMOVED: Hero transform shifts
+
+   BEFORE:
+   .hero-content { transform: translateY(-16px); }
+   @media (max-width: 400px) { transform: translateY(34px); }
+
+   PROBLEM: Transforms shift content VISUALLY but don't affect document flow
+   SYMPTOM: scrollY=0 but content appears 34px lower on mobile
+
+   SOLUTION: Use margin-top/padding-top in hero sections directly instead
+   This ensures layout flow matches visual positioning
+*/
 
 .notched-mobile {
   overflow: visible;

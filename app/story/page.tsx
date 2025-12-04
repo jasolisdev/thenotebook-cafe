@@ -4,7 +4,6 @@
  * Redesigned about page featuring the café's story, values, and mission.
  */
 import { client } from "@/sanity/lib/client";
-import SiteFooter from "../components/layout/SiteFooter";
 import Reveal from "../components/ui/Reveal";
 import Image from "next/image";
 import { Coffee, Music, Heart, MapPin, Sparkles, BookOpen } from "lucide-react";
@@ -59,10 +58,35 @@ export default async function StoryPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: '#FAF9F6' }}>
       {/* Header */}
-      <div className="relative py-24 md:py-28 px-6" style={{ backgroundColor: '#F4F1EA' }}>
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="font-serif text-5xl md:text-7xl mb-6" style={{ color: '#2C2420' }}>Our Story</h1>
-          <div className="w-24 h-1 mx-auto" style={{ backgroundColor: '#A48D78' }}></div>
+      <div className="relative pt-28 pb-28 md:pt-32 md:pb-32 px-6 text-center overflow-hidden" style={{ backgroundColor: '#2C2420', color: '#FAF9F6' }}>
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div
+            className="absolute right-0 top-0 w-96 h-96 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2"
+            style={{ backgroundColor: '#A48D78' }}
+          ></div>
+        </div>
+        <div className="max-w-4xl mx-auto relative z-10 space-y-6">
+          <Reveal>
+            <span
+              className="font-bold tracking-[0.2em] uppercase text-sm block"
+              style={{ color: '#A48D78' }}
+            >
+              The Story
+            </span>
+          </Reveal>
+          <Reveal delay={120}>
+            <h1 className="font-serif text-[64px] md:text-[86px] leading-[0.9]" style={{ color: '#FAF9F6' }}>
+              Our Riverside Origin
+            </h1>
+          </Reveal>
+          <Reveal delay={220}>
+            <p
+              className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed"
+              style={{ color: 'rgba(203, 185, 164, 0.85)' }}
+            >
+              A café built for writers, designers, and night thinkers—where house music meets hand-crafted coffee.
+            </p>
+          </Reveal>
         </div>
       </div>
 
@@ -226,8 +250,6 @@ export default async function StoryPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <SiteFooter />
     </main>
   );
 }
