@@ -13,7 +13,7 @@
 .footer-email-section {
   background-color: var(--cream);
   padding: 60px 20px;
-  border-bottom: 1px solid var(--tan-light);
+  border-bottom: 1px solid rgba(164, 141, 120, 0.15);
 }
 
 @media (min-width: 640px) {
@@ -29,8 +29,8 @@
   padding: 40px 28px;
   border-radius: 20px;
   box-shadow:
-    0 4px 20px var(--tan-light),
-    0 1px 4px var(--tan-subtle);
+    0 4px 20px rgba(164, 141, 120, 0.12),
+    0 1px 4px rgba(164, 141, 120, 0.08);
   text-align: center;
 }
 
@@ -227,14 +227,14 @@
   height: 40px;
   border-radius: 50%;
   background: rgba(164, 141, 120, 0.1);
-  border: 1px solid var(--tan-medium);
+  border: 1px solid rgba(164, 141, 120, 0.2);
   color: var(--text-light-muted);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
 }
 
 .footer-social-link:hover {
-  background: var(--tan-medium);
+  background: rgba(164, 141, 120, 0.2);
   border-color: rgba(164, 141, 120, 0.4);
   color: var(--text-light);
   transform: translateY(-2px);
@@ -244,7 +244,7 @@
 .footer-copyright {
   text-align: center;
   padding-top: 40px;
-  border-top: 1px solid var(--tan-light);
+  border-top: 1px solid rgba(164, 141, 120, 0.15);
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 400;
@@ -284,7 +284,7 @@ a[aria-label="Instagram"]:hover,
 a[aria-label="TikTok"]:hover {
   transform: translateY(-2px) scale(1.1);
   opacity: 1;
-  filter: drop-shadow(0 4px 8px var(--tan-medium));
+  filter: drop-shadow(0 4px 8px rgba(164, 141, 120, 0.3));
 }
 
 /* Footer Navigation */

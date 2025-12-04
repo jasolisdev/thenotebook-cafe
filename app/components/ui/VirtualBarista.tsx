@@ -17,12 +17,23 @@ export default function VirtualBarista() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isBlocked, setIsBlocked] = useState(false);
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages, isOpen]);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const body = document.body;
+    const update = () => setIsBlocked(body.dataset.modalOpen === "true" || body.dataset.cartOpen === "true");
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(body, { attributes: true, attributeFilter: ["data-modal-open", "data-cart-open"] });
+    return () => observer.disconnect();
+  }, []);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -43,6 +54,8 @@ export default function VirtualBarista() {
     setMessages((prev) => [...prev, { role: "model", text: replyText }]);
     setLoading(false);
   };
+
+  if (isBlocked) return null;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">

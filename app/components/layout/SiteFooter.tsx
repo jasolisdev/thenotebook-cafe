@@ -22,11 +22,11 @@ export default function SiteFooter(): React.JSX.Element {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="pt-20 pb-10" style={{ backgroundColor: '#2C2420', color: '#F4F1EA' }}>
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-12 mb-16">
+    <footer className="pt-20 pb-10 bg-cafe-black text-cafe-mist">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-6 gap-12 mb-16">
         <div className="md:col-span-2 space-y-6">
-          <h3 className="font-serif text-3xl" style={{ color: '#F4F1EA' }}>The Notebook Café</h3>
-          <p className="font-light max-w-md" style={{ color: 'rgba(203, 185, 164, 0.7)' }}>
+          <h3 className="font-serif text-3xl text-cafe-mist">The Notebook Café</h3>
+          <p className="font-light max-w-md text-cafe-beige/70">
             A space for creatives, thinkers, and coffee lovers.
             Where house music meets premium espresso in the heart of Riverside.
           </p>
@@ -36,73 +36,55 @@ export default function SiteFooter(): React.JSX.Element {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="cursor-pointer transition-colors"
-              style={{ color: '#F4F1EA' }}
-              onMouseEnter={(e) => e.currentTarget.style.color = '#A48D78'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#F4F1EA'}
+              className="text-cafe-mist hover:text-cafe-tan transition-colors cursor-pointer"
             >
               <Instagram size={24} />
-            </a>
-            <a
-              href="https://open.spotify.com/user/notebookcafe"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Spotify"
-              className="cursor-pointer transition-colors"
-              style={{ color: '#F4F1EA' }}
-              onMouseEnter={(e) => e.currentTarget.style.color = '#A48D78'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#F4F1EA'}
-            >
-              <Headphones size={24} />
-            </a>
-            <a
-              href="mailto:hello@thenotebookcafe.com"
-              aria-label="Email"
-              className="cursor-pointer transition-colors"
-              style={{ color: '#F4F1EA' }}
-              onMouseEnter={(e) => e.currentTarget.style.color = '#A48D78'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#F4F1EA'}
-            >
-              <Mail size={24} />
             </a>
           </div>
         </div>
 
         <div className="space-y-4">
-          <h4 className="uppercase text-xs tracking-[0.2em]" style={{ color: '#A48D78' }}>Location</h4>
-          <address className="not-italic font-light leading-relaxed" style={{ color: 'rgba(203, 185, 164, 0.7)' }}>
+          <h4 className="uppercase text-xs tracking-[0.2em] text-cafe-tan">Contact</h4>
+          <div className="font-light leading-relaxed text-cafe-beige/70 space-y-1">
+            <a href="tel:9518230004" className="text-cafe-beige/70 hover:text-white transition-colors mt-2 block">(951) 823-0004</a>
+            <a href="mailto:hello@notebook.cafe" className="text-cafe-beige/70 hover:text-white transition-colors">hello@notebook.cafe</a>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <h4 className="uppercase text-xs tracking-[0.2em] text-cafe-tan">Location</h4>
+          <address className="not-italic font-light leading-relaxed text-cafe-beige/70">
             3512 9th St<br />
             Riverside, CA 92501<br />
-            <a href="tel:9518230004" className="transition-colors mt-2 block" style={{ color: 'rgba(203, 185, 164, 0.7)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(203, 185, 164, 0.7)'}>(951) 823-0004</a>
           </address>
         </div>
 
         <div className="space-y-4">
-          <h4 className="uppercase text-xs tracking-[0.2em]" style={{ color: '#A48D78' }}>Hours</h4>
-          <div className="font-light space-y-1" style={{ color: 'rgba(203, 185, 164, 0.7)' }}>
+          <h4 className="uppercase text-xs tracking-[0.2em] text-cafe-tan">Hours</h4>
+          <div className="font-light space-y-1 text-cafe-beige/70">
             <p><span className="w-12 inline-block">M-Th</span> 6:30am — 4pm</p>
             <p><span className="w-12 inline-block">F-Sa</span> 6:30am — 6pm</p>
-            <p><span className="w-12 inline-block">Sun</span> <span className="italic" style={{ color: 'rgba(203, 185, 164, 0.5)' }}>Closed</span></p>
+            <p><span className="w-12 inline-block">Sun</span> <span className="italic text-cafe-beige/50">Closed</span></p>
           </div>
         </div>
 
         <div className="space-y-4">
-          <h4 className="uppercase text-xs tracking-[0.2em]" style={{ color: '#A48D78' }}>Navigation</h4>
-          <div className="flex flex-col gap-2 font-light" style={{ color: 'rgba(203, 185, 164, 0.7)' }}>
-            <Link href="/" className="transition-colors" style={{ color: 'rgba(203, 185, 164, 0.7)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(203, 185, 164, 0.7)'}>Home</Link>
-            <Link href="/menu" className="transition-colors" style={{ color: 'rgba(203, 185, 164, 0.7)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(203, 185, 164, 0.7)'}>Menu</Link>
-            <Link href="/story" className="transition-colors" style={{ color: 'rgba(203, 185, 164, 0.7)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(203, 185, 164, 0.7)'}>Story</Link>
-            <Link href="/events" className="transition-colors" style={{ color: 'rgba(203, 185, 164, 0.7)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(203, 185, 164, 0.7)'}>Events</Link>
-            <Link href="/contact" className="transition-colors" style={{ color: 'rgba(203, 185, 164, 0.7)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(203, 185, 164, 0.7)'}>Contact</Link>
+          <h4 className="uppercase text-xs tracking-[0.2em] text-cafe-tan">Navigation</h4>
+          <div className="flex flex-col gap-2 font-light text-cafe-beige/70">
+            <Link href="/" className="text-cafe-beige/70 hover:text-white transition-colors">Home</Link>
+            <Link href="/menu" className="text-cafe-beige/70 hover:text-white transition-colors">Menu</Link>
+            <Link href="/story" className="text-cafe-beige/70 hover:text-white transition-colors">Story</Link>
+            <Link href="/events" className="text-cafe-beige/70 hover:text-white transition-colors">Events</Link>
+            <Link href="/contact" className="text-cafe-beige/70 hover:text-white transition-colors">Contact</Link>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs" style={{ borderColor: 'rgba(255, 255, 255, 0.1)', color: 'rgba(255, 255, 255, 0.3)' }}>
+      <div className="max-w-7xl mx-auto px-6 border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/30">
         <p>&copy; {year} The Notebook Café. All rights reserved.</p>
         <div className="flex gap-6">
-          <Link href="/privacy" className="transition-colors" style={{ color: 'rgba(255, 255, 255, 0.3)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.3)'}>Privacy</Link>
-          <Link href="/terms" className="transition-colors" style={{ color: 'rgba(255, 255, 255, 0.3)' }} onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'} onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.3)'}>Terms</Link>
+          <Link href="/privacy" className="text-white/30 hover:text-white transition-colors">Privacy</Link>
+          <Link href="/terms" className="text-white/30 hover:text-white transition-colors">Terms</Link>
         </div>
       </div>
     </footer>

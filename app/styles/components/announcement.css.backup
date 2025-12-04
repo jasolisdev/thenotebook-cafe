@@ -63,7 +63,7 @@
   position: absolute;
   width: 2px;
   height: 10px;
-  background: linear-gradient(to top, rgba(var(--espresso-brown-rgb), 0.5), transparent);
+  background: linear-gradient(to top, rgba(42, 31, 22, 0.5), transparent);
   border-radius: 50%;
   opacity: 0;
   animation: announcement-steam-rise 2s ease-in-out infinite;
