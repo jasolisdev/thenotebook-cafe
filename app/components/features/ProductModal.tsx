@@ -16,10 +16,11 @@ interface ProductModalProps {
   item: MenuItem | null;
   onClose: () => void;
   onAddToOrder?: (item: CartItem) => void;
+  editingItem?: CartItem | null;
 }
 
-export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAddToOrder }) => {
-  const { addItem } = useCart();
+export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAddToOrder, editingItem }) => {
+  const { addItem, updateItem } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [notes, setNotes] = useState('');
   const [selections, setSelections] = useState<Record<string, Set<string>>>({});
@@ -54,19 +55,40 @@ export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAdd
 
   useEffect(() => {
     if (item) {
-      setQuantity(1);
-      setNotes('');
-      const initialSelections: Record<string, Set<string>> = {};
-      modifierGroups.forEach(group => {
-        if (group.type === 'radio' && group.required && group.options.length > 0) {
-          initialSelections[group.id] = new Set([group.options[0].label]);
-        } else {
-          initialSelections[group.id] = new Set();
-        }
-      });
-      setSelections(initialSelections);
+      // If editing, pre-fill with existing values
+      if (editingItem) {
+        setQuantity(editingItem.quantity);
+        setNotes(editingItem.notes || '');
+
+        // Rebuild selections from existing modifiers
+        const initialSelections: Record<string, Set<string>> = {};
+        modifierGroups.forEach(group => {
+          const groupModifiers = editingItem.modifiers.filter(m => m.groupId === group.id);
+          if (groupModifiers.length > 0) {
+            initialSelections[group.id] = new Set(groupModifiers.map(m => m.optionLabel));
+          } else if (group.type === 'radio' && group.required && group.options.length > 0) {
+            initialSelections[group.id] = new Set([group.options[0].label]);
+          } else {
+            initialSelections[group.id] = new Set();
+          }
+        });
+        setSelections(initialSelections);
+      } else {
+        // Adding new item - use defaults
+        setQuantity(1);
+        setNotes('');
+        const initialSelections: Record<string, Set<string>> = {};
+        modifierGroups.forEach(group => {
+          if (group.type === 'radio' && group.required && group.options.length > 0) {
+            initialSelections[group.id] = new Set([group.options[0].label]);
+          } else {
+            initialSelections[group.id] = new Set();
+          }
+        });
+        setSelections(initialSelections);
+      }
     }
-  }, [item, modifierGroups]);
+  }, [item, modifierGroups, editingItem]);
 
   const toggleSelection = (groupId: string, optionLabel: string, type: 'select' | 'radio' | 'checkbox', maxSelections?: number) => {
     setSelections(prev => {
@@ -326,24 +348,31 @@ export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAdd
                       });
                     }
                   });
-                  const cartItem: CartItem = {
-                    ...item,
-                    cartId: Math.random().toString(36).substr(2, 9),
-                    modifiers,
-                    notes,
-                    totalPrice: finalPrice,
-                    quantity,
-                  };
-                  if (onAddToOrder) {
-                    onAddToOrder(cartItem);
+
+                  if (editingItem) {
+                    // Update existing cart item
+                    updateItem(editingItem.cartId, quantity, modifiers, notes);
                   } else {
-                    addItem(item, quantity, modifiers, notes, finalPrice);
+                    // Add new item
+                    const cartItem: CartItem = {
+                      ...item,
+                      cartId: Math.random().toString(36).substr(2, 9),
+                      modifiers,
+                      notes,
+                      totalPrice: finalPrice,
+                      quantity,
+                    };
+                    if (onAddToOrder) {
+                      onAddToOrder(cartItem);
+                    } else {
+                      addItem(item, quantity, modifiers, notes, finalPrice);
+                    }
                   }
                   close();
                 }}
                 className="h-12 sm:h-14 flex justify-between px-6 text-sm sm:text-base"
               >
-                <span>Add to Order</span>
+                <span>{editingItem ? 'Update Order' : 'Add to Order'}</span>
                 <span>${finalPrice.toFixed(2)}</span>
               </Button>
             </div>
