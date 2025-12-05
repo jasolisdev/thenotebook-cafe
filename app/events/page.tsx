@@ -78,13 +78,13 @@ export default function EventsPage() {
                 style={{ border: "1px solid rgba(203, 185, 164, 0.25)" }}
               >
                 <div
-                  className="text-cafe-white p-6 md:w-48 flex flex-col items-center justify-center text-center shrink-0"
-                  style={{ backgroundColor: "#2C2420" }}
+                  className="p-6 md:w-48 flex flex-col items-center justify-center text-center shrink-0"
+                  style={{ backgroundColor: "rgba(203, 185, 164, 0.72)" }}
                 >
-                  <span className="text-sm font-bold uppercase tracking-widest" style={{ color: "#A48D78" }}>
+                  <span className="text-sm font-bold uppercase tracking-widest" style={{ color: "#2C2420" }}>
                     {event.date.split(" ")[0]}
                   </span>
-                  <span className="font-serif text-4xl" style={{ color: "#FFFFFF" }}>
+                  <span className="font-serif text-4xl" style={{ color: "#2C2420" }}>
                     {event.date.split(" ")[1]}
                   </span>
                 </div>

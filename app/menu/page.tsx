@@ -107,13 +107,13 @@ export default function MenuPage() {
         </div>
 
         <div className="sticky top-20 z-30 px-4 -mt-8">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-md mx-auto">
             <div
-              className="rounded-2xl shadow-xl p-2 flex flex-col sm:flex-row items-center gap-4 border"
-              style={{ backgroundColor: colors.white, borderColor: `${colors.beige}33` }}
+              className="rounded-2xl shadow-xl p-2 flex flex-col sm:flex-row items-center gap-3 border"
+              style={{ backgroundColor: colors.white, borderColor: `${colors.beige}33`, justifyContent: 'center' }}
             >
               {/* Section Tabs */}
-              <div className="flex gap-1 w-full sm:w-auto justify-center sm:justify-start overflow-visible p-1">
+              <div className="flex gap-2 sm:gap-4 w-full sm:w-auto justify-center sm:justify-center overflow-visible p-1">
                 {(['drinks', 'meals', 'desserts'] as const).map(section => {
                   const isActive = activeSection === section;
                   return (
@@ -124,7 +124,7 @@ export default function MenuPage() {
                         setActiveSection(section);
                       }}
                       aria-pressed={isActive}
-                      className="basis-1/3 sm:flex-none px-6 py-2 rounded-lg text-[10px] font-bold uppercase tracking-[0.22em] whitespace-nowrap transition-colors duration-150 ease-out border"
+                      className="basis-1/3 sm:flex-none px-6 py-2 rounded-lg text-[11px] md:text-xs font-bold uppercase tracking-[0.22em] whitespace-nowrap transition-colors duration-150 ease-out border"
                       style={{
                         backgroundColor: isActive ? colors.black : `${colors.mist}CC`,
                         color: isActive ? colors.white : colors.brown,
@@ -138,13 +138,8 @@ export default function MenuPage() {
                 })}
               </div>
 
-              <div
-                className="h-8 w-px hidden sm:block"
-                style={{ backgroundColor: `${colors.beige}80` }}
-              ></div>
-
-              {/* Search */}
-              <div className="relative w-full flex-1">
+              {/* Search temporarily hidden per request; keeping structure for future use */}
+              {/* <div className="relative w-full flex-1">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2" size={18} color={colors.tan} />
                 <input
                   type="text"
@@ -160,7 +155,7 @@ export default function MenuPage() {
                   onFocus={(e) => (e.currentTarget.style.backgroundColor = colors.white)}
                   onBlur={(e) => (e.currentTarget.style.backgroundColor = `${colors.mist}99`)}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

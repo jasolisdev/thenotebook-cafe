@@ -10,7 +10,7 @@ export default function HeroButtons() {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+    <div className="flex flex-col gap-3 justify-center items-center">
       <Link
         href="/menu"
         className="group relative bg-cafe-black text-cafe-white px-6 py-3 sm:px-8 sm:py-4 rounded-sm uppercase tracking-[0.2em] text-[10px] sm:text-xs font-semibold transition-all duration-300 hover:bg-cafe-brown hover:shadow-lg hover:-translate-y-0.5 overflow-hidden"

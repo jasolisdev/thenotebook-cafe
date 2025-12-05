@@ -76,8 +76,8 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
     }
   }, [visible, index]);
 
-  const mobileStart = index % 2 === 0 ? "translate-x-[115%]" : "-translate-x-[115%]";
-  const desktopStart = "md:translate-y-[80%] md:translate-x-0";
+  const mobileStart = index % 2 === 0 ? "translate-x-[130%]" : "-translate-x-[130%]";
+  const desktopStart = "md:translate-y-[110%] md:translate-x-0";
   const baseHidden = `${mobileStart} ${desktopStart}`;
   const baseVisible = "translate-x-0 translate-y-0";
   const nameHiddenMobile = "translate-y-6 opacity-0";
@@ -105,7 +105,7 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
   return (
     <div ref={ref} className="h-full flex flex-col items-center gap-4 signature-pour-card">
       <div
-        className={`relative w-full max-w-[75%] sm:max-w-full h-[320px] md:h-[360px] overflow-visible rounded-lg transform transition-all p-4 md:p-5 flex items-center justify-center signature-pour-image-wrapper ${
+        className={`relative w-full max-w-[68%] sm:max-w-full h-[288px] md:h-[360px] overflow-visible rounded-lg transform transition-all p-4 md:p-5 flex items-center justify-center signature-pour-image-wrapper ${
           visible ? baseVisible : baseHidden
         }`}
         style={{

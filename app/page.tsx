@@ -98,7 +98,7 @@ export default async function HomePage() {
 
         <div className="relative z-10 text-center max-w-4xl mx-auto hero-content">
           <Reveal>
-            <div className="flex justify-center mb-6 hero-logo-wrapper">
+            <div className="flex justify-center mb-6 pb-[10px] hero-logo-wrapper">
               <Image
                 src="/logo.png"
                 alt="The Notebook Café"
@@ -111,7 +111,7 @@ export default async function HomePage() {
             </div>
           </Reveal>
           <Reveal>
-            <span className="inline-block text-sm md:text-base uppercase tracking-[0.3em] mb-6 font-medium" style={{ color: 'var(--cafe-tan)' }}>Est. Riverside 2024</span>
+            <span className="inline-block text-sm md:text-base uppercase tracking-[0.3em] mb-[11px] font-medium pt-[20px]" style={{ color: 'var(--cafe-tan)' }}>Est. Riverside 2025</span>
           </Reveal>
 
           <Reveal delay={200}>
@@ -217,27 +217,27 @@ export default async function HomePage() {
               <Reveal>
                 <div className="grid grid-cols-2 gap-4">
                   <Image
-                    src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=900&auto=format&fit=crop"
-                    alt="Latte art"
+                    src="/unsplash/tnc-placeholder-philosophy-1.png"
+                    alt="Cafe bar espresso"
                     width={900}
                     height={900}
-                    className="w-full h-80 object-cover rounded-2xl shadow-xl mt-12"
+                    className="w-full aspect-[3/4] object-cover rounded-2xl shadow-xl -mt-6 md:mt-12"
                   />
                   <Image
-                    src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=900&auto=format&fit=crop"
-                    alt="Pastry"
+                    src="/unsplash/tnc-placeholder-philosophy-2.png"
+                    alt="Cafe pastry display"
                     width={900}
                     height={900}
-                    className="w-full h-80 object-cover rounded-2xl shadow-xl"
+                    className="w-full aspect-[3/4] object-cover rounded-2xl shadow-xl mt-10 md:mt-0"
                   />
                 </div>
               </Reveal>
-              <Reveal delay={150}>
-                <div className="absolute -bottom-6 -left-6 bg-cafe-black text-cafe-cream p-8 rounded-tr-3xl shadow-2xl max-w-[200px]">
-                  <p className="font-serif text-3xl mb-1">4.9</p>
-                  <div className="flex text-cafe-tan mb-2">★★★★★</div>
-                  <p className="text-xs uppercase tracking-widest opacity-60">
-                    Customer Rating
+              <Reveal delay={150} replay={false}>
+                <div className="absolute -bottom-6 -left-6 bg-cafe-black text-cafe-cream p-5 md:p-6 rounded-tr-3xl shadow-2xl max-w-[180px] md:max-w-[220px]">
+                  <p className="font-serif text-2xl md:text-2xl mb-1">Grand Opening</p>
+                  <div className="text-xs md:text-xs text-cafe-tan mb-2">Coming Soon 2025</div>
+                  <p className="text-[10px] md:text-[11px] uppercase tracking-widest opacity-60">
+                    Save the date
                   </p>
                 </div>
               </Reveal>
@@ -253,7 +253,7 @@ export default async function HomePage() {
               <Reveal delay={120}>
                 <h2 className="font-serif text-5xl sm:text-6xl text-cafe-black mb-8 leading-none">
                   Crafted for <br />
-                  <span className="italic text-cafe-brown">Creatives</span>
+                  <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Creatives</span>
                 </h2>
               </Reveal>
               <Reveal delay={180}>
@@ -336,8 +336,7 @@ export default async function HomePage() {
           </div>
 
           <div className="relative">
-            <div className="story-gallery-blob" aria-hidden="true"></div>
-            <Reveal delay={200}>
+            <Reveal delay={200} effect="slide">
               <div className="grid grid-cols-2 gap-4 relative">
                 <Image
                   src="/unsplash/tnc-placeholder-1.png"
@@ -458,7 +457,7 @@ export default async function HomePage() {
       {/* Atmosphere */}
       <section
         data-section="Atmosphere"
-        className="relative py-24 md:py-32 px-6 overflow-visible"
+        className="relative pt-24 md:pt-32 pb-[calc(6rem+20px)] md:pb-[calc(8rem+20px)] px-6 overflow-visible"
         style={{ backgroundColor: 'var(--cafe-white)' }}
       >
         <AtmosphereBlob />
@@ -507,7 +506,7 @@ export default async function HomePage() {
             <Reveal delay={120}>
               <h2 className="font-serif text-5xl md:text-6xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
                 <span className="italic" style={{ color: 'var(--cafe-brown)' }}>Designed for</span><br />
-                <span className="italic" style={{ color: 'var(--cafe-brown)' }}>Focus</span>
+                <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Focus</span>
               </h2>
             </Reveal>
             <Reveal delay={150}>
@@ -525,7 +524,7 @@ export default async function HomePage() {
       {/* Atmosphere Images */}
       <section
         data-section="Atmosphere Images"
-        className="overflow-visible relative"
+        className="overflow-visible relative pb-24 md:pb-28"
         style={{ backgroundColor: 'var(--cafe-white)' }}
       >
         <div className="section-deco" style={{ top: '6%', left: '10%', animationDuration: '13s' }} aria-hidden="true">

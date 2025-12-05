@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { BookOpen, ShoppingBag, Menu, Coffee, Music } from "lucide-react";
+import { BookOpen, ShoppingBag, Menu, Coffee, Music, Instagram as InstagramIcon } from "lucide-react";
 import { PiSpotifyLogoFill, PiInstagramLogoFill, PiTiktokLogoFill } from "react-icons/pi";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -125,11 +125,11 @@ export default function SiteHeader({
               </div>
             </Link>
 
-            <div className="hidden md:flex items-center space-x-10">
+            <div className="hidden md:flex items-center space-x-7">
               <Link
                 href="/"
-                className={`nav-link text-sm tracking-[0.22em] uppercase transition-all duration-300 relative ${isActive("/")
-                  ? "font-bold text-cafe-black"
+                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/")
+                  ? "font-semibold text-cafe-black"
                   : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
                   }`}
               >
@@ -138,8 +138,8 @@ export default function SiteHeader({
               </Link>
               <Link
                 href="/menu"
-                className={`nav-link text-sm tracking-[0.22em] uppercase transition-all duration-300 relative ${isActive("/menu")
-                  ? "font-bold text-cafe-black"
+                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/menu")
+                  ? "font-semibold text-cafe-black"
                   : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
                   }`}
               >
@@ -148,8 +148,8 @@ export default function SiteHeader({
               </Link>
               <Link
                 href="/story"
-                className={`nav-link text-sm tracking-[0.22em] uppercase transition-all duration-300 relative ${isActive("/story")
-                  ? "font-bold text-cafe-black"
+                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/story")
+                  ? "font-semibold text-cafe-black"
                   : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
                   }`}
               >
@@ -158,8 +158,8 @@ export default function SiteHeader({
               </Link>
               <Link
                 href="/events"
-                className={`nav-link text-sm tracking-[0.22em] uppercase transition-all duration-300 relative ${isActive("/events")
-                  ? "font-bold text-cafe-black"
+                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/events")
+                  ? "font-semibold text-cafe-black"
                   : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
                   }`}
               >
@@ -168,8 +168,8 @@ export default function SiteHeader({
               </Link>
               <Link
                 href="/contact"
-                className={`nav-link text-sm tracking-[0.22em] uppercase transition-all duration-300 relative ${isActive("/contact")
-                  ? "font-bold text-cafe-black"
+                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/contact")
+                  ? "font-semibold text-cafe-black"
                   : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
                   }`}
               >
@@ -252,7 +252,10 @@ export default function SiteHeader({
               }}
             >
               {/* Content */}
-              <div className="relative w-full h-full flex flex-col items-center justify-center px-8 py-16 overflow-y-auto" style={{ minHeight: 'calc(100vh - 80px)' }}>
+              <div
+                className="relative w-full h-full flex flex-col items-center justify-center px-8 py-16 overflow-y-auto"
+                style={{ minHeight: 'calc(100vh - 80px)', transform: 'translateY(-40px)' }}
+              >
                 {/* Navigation Links */}
                 <nav className="flex flex-col items-center gap-6 mb-12">
                   {[
@@ -267,19 +270,18 @@ export default function SiteHeader({
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
-                        delay: 0.1 + index * 0.08,
-                        duration: 0.5,
+                        delay: 0.06 + index * 0.04,
+                        duration: 0.35,
                         ease: [0.4, 0, 0.2, 1]
                       }}
                     >
                       <Link
                         href={link.href}
                         onClick={() => setIsOpen(false)}
-                        className={`block font-serif text-4xl sm:text-5xl tracking-tight transition-all duration-300 ${
-                          isActive(link.href)
-                            ? 'text-cafe-tan'
-                            : 'text-cafe-black hover:text-cafe-tan hover:translate-x-2'
-                        }`}
+                        className={`block font-medium uppercase tracking-[0.18em] text-lg sm:text-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive(link.href)
+                          ? 'text-cafe-tan'
+                          : 'text-cafe-black hover:text-cafe-tan hover:translate-x-1'
+                          }`}
                       >
                         {link.label}
                       </Link>
@@ -294,20 +296,15 @@ export default function SiteHeader({
                   transition={{ delay: 0.4, duration: 0.5 }}
                   className="text-center space-y-3"
                 >
-                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-cafe-tan to-transparent mx-auto mb-6" />
+                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-cafe-tan to-transparent mx-auto mb-3" />
 
                   <p className="text-sm text-cafe-brown/80 font-medium leading-relaxed">
-                    3838 11th St<br />
-                    Riverside, CA 92501
-                  </p>
-
-                  <p className="text-sm text-cafe-brown/70 font-light">
-                    Mon-Sun: 7am - 7pm
+                    Follow Us!
                   </p>
 
                   {/* Social Icons */}
                   {(instagramUrl || spotifyUrl) && (
-                    <div className="flex items-center justify-center gap-4 pt-6">
+                    <div className="flex items-center justify-center gap-4 pt-3">
                       {instagramUrl && (
                         <a
                           href={instagramUrl}
@@ -316,7 +313,10 @@ export default function SiteHeader({
                           className="w-10 h-10 rounded-full bg-cafe-tan/10 border border-cafe-tan/20 flex items-center justify-center text-cafe-tan hover:bg-cafe-tan hover:text-cafe-white transition-all duration-300 hover:scale-110"
                           aria-label="Instagram"
                         >
-                          <PiInstagramLogoFill size={20} />
+                          <PiInstagramLogoFill
+                            size={20}
+                            className="translate-x-[10px] translate-y-[10px]"
+                          />
                         </a>
                       )}
                       {spotifyUrl && (
@@ -327,9 +327,24 @@ export default function SiteHeader({
                           className="w-10 h-10 rounded-full bg-cafe-tan/10 border border-cafe-tan/20 flex items-center justify-center text-cafe-tan hover:bg-cafe-tan hover:text-cafe-white transition-all duration-300 hover:scale-110"
                           aria-label="Spotify"
                         >
-                          <PiSpotifyLogoFill size={20} />
+                          <PiSpotifyLogoFill
+                            size={20}
+                            className="translate-x-[10px] translate-y-[10px]"
+                          />
                         </a>
                       )}
+                      <a
+                        href="https://www.tiktok.com/@thenotebookcafe"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-full bg-cafe-tan/10 border border-cafe-tan/20 flex items-center justify-center text-cafe-tan hover:bg-cafe-tan hover:text-cafe-white transition-all duration-300 hover:scale-110"
+                        aria-label="TikTok"
+                      >
+                        <PiTiktokLogoFill
+                          size={18}
+                          className="translate-x-[10px] translate-y-[10px]"
+                        />
+                      </a>
                     </div>
                   )}
                 </motion.div>
