@@ -21,11 +21,12 @@ import "./styles/pages/events.css";
 import "./styles/pages/contact.css";
 
 import { ThemeProvider } from "next-themes";
-import { DM_Serif_Display, Outfit } from "next/font/google";
+import { DM_Serif_Display, Outfit, Caveat } from "next/font/google";
 import { cookies } from "next/headers";
 import PasswordGate from "./components/ui/PasswordGate";
 import SiteHeader from "./components/layout/SiteHeader";
 import SiteFooter from "./components/layout/SiteFooter";
+import AnnouncementBanner from "./components/ui/AnnouncementBanner";
 import Script from "next/script";
 import { client } from "@/sanity/lib/client";
 import VirtualBarista from "./components/ui/VirtualBarista";
@@ -45,6 +46,13 @@ const outfit = Outfit({
   weight: ["300", "400", "500", "600"],
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+const caveat = Caveat({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-handwritten",
   display: "swap",
 });
 
@@ -81,7 +89,7 @@ export default async function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${dmSerif.variable} ${outfit.variable}`}
+      className={`${dmSerif.variable} ${outfit.variable} ${caveat.variable}`}
     >
       <body className="antialiased font-sans">
         <ThemeProvider
@@ -94,6 +102,7 @@ export default async function RootLayout({
               <PasswordGate />
             ) : (
               <>
+                <AnnouncementBanner />
                 <SiteHeader
                   instagramUrl={settings?.social?.instagram}
                   spotifyUrl={settings?.social?.spotify}
