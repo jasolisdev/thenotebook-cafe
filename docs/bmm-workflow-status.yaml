@@ -24,7 +24,7 @@ workflow_path: "method-brownfield"
 
 workflow_status:
   # Prerequisites - Brownfield Documentation
-  document-project: required
+  document-project: docs/index.md
 
   # Phase 0 - Discovery (Optional)
   brainstorm-project: optional
@@ -32,7 +32,8 @@ workflow_status:
   product-brief: skipped
 
   # Phase 1 - Planning
-  prd: required
+  prd: docs/prd.md
+  create-ux-design: docs/ux-design-specification.md
   validate-prd: optional
   create-design: conditional
 

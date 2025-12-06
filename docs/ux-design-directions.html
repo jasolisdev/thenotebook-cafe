@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Notebook Café - Design Directions (Enhanced)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&family=Caveat:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Abril+Fatface&family=Raleway:wght@200;400;700;900&family=Crimson+Pro:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --cafe-black: #2C2420;
+      --cafe-brown: #4A3B32;
+      --cafe-tan: #A48D78;
+      --cafe-beige: #CBB9A4;
+      --cafe-cream: #EDE7D8;
+      --cafe-mist: #F4F1EA;
+      --cafe-white: #FAF9F6;
+      --gold-primary: #c99a58;
+    }
+
+    body {
+      font-family: "Outfit", sans-serif;
+      background: var(--cafe-white);
+      color: var(--cafe-brown);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Enhanced Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, rgba(44, 36, 32, 0.98) 0%, rgba(74, 59, 50, 0.98) 100%);
+      backdrop-filter: blur(20px);
+      padding: 1.5rem 2rem;
+      z-index: 1000;
+      border-bottom: 3px solid var(--gold-primary);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    nav h1 {
+      font-family: "DM Serif Display", serif;
+      font-size: 1.75rem;
+      color: var(--cafe-white);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    nav p {
+      font-size: 0.875rem;
+      color: var(--cafe-cream);
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .nav-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    .nav-btn {
+      padding: 0.75rem 1rem;
+      background: rgba(237, 231, 216, 0.1);
+      border: 1px solid rgba(201, 154, 88, 0.3);
+      border-radius: 0;
+      font-family: "Outfit", sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--cafe-cream);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(201, 154, 88, 0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .nav-btn:hover::before {
+      left: 100%;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active {
+      background: var(--gold-primary);
+      color: var(--cafe-black);
+      border-color: var(--gold-primary);
+      transform: translateX(4px);
+    }
+
+    .nav-btn.active::after {
+      content: '◆';
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.75rem;
+    }
+
+    /* Main Content */
+    main {
+      margin-top: 200px;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .direction {
+      display: none;
+      max-width: 100%;
+      margin: 0 auto 4rem;
+      background: white;
+      border-radius: 0;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(44, 36, 32, 0.15);
+      position: relative;
+    }
+
+    .direction.active {
+      display: block;
+      animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .direction-header {
+      padding: 3rem 2rem;
+      background: linear-gradient(135deg, var(--cafe-black) 0%, var(--cafe-brown) 100%);
+      border-bottom: 4px solid var(--gold-primary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .direction-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(201, 154, 88, 0.15) 0%, transparent 70%);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .direction-header h2 {
+      font-family: "DM Serif Display", serif;
+      font-size: 3rem;
+      color: var(--cafe-white);
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .direction-header p {
+      font-size: 1.125rem;
+      color: var(--cafe-cream);
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      line-height: 1.7;
+    }
+
+    .direction-header strong {
+      color: var(--gold-primary);
+      font-weight: 600;
+    }
+
+    .direction-content {
+      padding: 0;
+      min-height: 600px;
+    }
+
+    /* Direction 1: Brutalist Honesty */
+    .dir-1 .mockup {
+      background: var(--cafe-white);
+      padding: 0;
+      font-family: "Space Mono", monospace;
+    }
+
+    .dir-1 .hero {
+      background: var(--cafe-black);
+      color: var(--cafe-white);
+      padding: 6rem 3rem;
+      border: 12px solid var(--gold-primary);
+      margin: 0;
+    }
+
+    .dir-1 .hero h1 {
+      font-family: "Abril Fatface", serif;
+      font-size: 7rem;
+      line-height: 0.9;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+      word-break: break-word;
+    }
+
+    .dir-1 .hero p {
+      font-family: "Space Mono", monospace;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-left: 4px solid var(--gold-primary);
+      padding-left: 1.5rem;
+      max-width: 600px;
+    }
+
+    .dir-1 .grid-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .dir-1 .grid-item {
+      padding: 4rem 2rem;
+      border: 1px solid var(--cafe-black);
+      background: var(--cafe-cream);
+      transition: all 0.3s ease;
+    }
+
+    .dir-1 .grid-item:hover {
+      background: var(--gold-primary);
+      transform: scale(1.05);
+      z-index: 10;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .dir-1 .grid-item h3 {
+      font-family: "Abril Fatface", serif;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    /* Direction 2: Maximalist Warmth */
+    .dir-2 .mockup {
+      background: linear-gradient(45deg, var(--cafe-cream) 0%, var(--cafe-mist) 50%, var(--cafe-beige) 100%);
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dir-2 .mockup::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(201, 154, 88, 0.03) 10px, rgba(201, 154, 88, 0.03) 20px),
+        repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(44, 36, 32, 0.02) 10px, rgba(44, 36, 32, 0.02) 20px);
+      pointer-events: none;
+    }
+
+    .dir-2 .ornate-box {
+      background: var(--cafe-white);
+      border: 8px double var(--gold-primary);
+      padding: 4rem 3rem;
+      margin: 2rem auto;
+      max-width: 1000px;
+      box-shadow:
+        0 0 0 1px var(--cafe-brown),
+        inset 0 0 0 1px var(--cafe-cream),
+        0 20px 60px rgba(44, 36, 32, 0.2);
+      position: relative;
+    }
+
+    .dir-2 .ornate-box::before,
+    .dir-2 .ornate-box::after {
+      content: '◆';
+      position: absolute;
+      font-size: 2rem;
+      color: var(--gold-primary);
+    }
+
+    .dir-2 .ornate-box::before {
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .dir-2 .ornate-box::after {
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%) rotate(180deg);
+    }
+
+    .dir-2 h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 5rem;
+      color: var(--cafe-black);
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+      line-height: 1.1;
+    }
+
+    .dir-2 .decorative-text {
+      font-family: "Caveat", cursive;
+      font-size: 2.5rem;
+      color: var(--gold-primary);
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .dir-2 .content-blocks {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .dir-2 .content-block {
+      background: linear-gradient(135deg, var(--cafe-cream) 0%, var(--cafe-mist) 100%);
+      padding: 2.5rem;
+      border-radius: 20px;
+      border: 3px solid var(--gold-primary);
+      box-shadow: 0 10px 30px rgba(201, 154, 88, 0.2);
+    }
+
+    /* Direction 3: Retro-Futuristic */
+    .dir-3 .mockup {
+      background: linear-gradient(to bottom, #1a1410 0%, var(--cafe-brown) 100%);
+      padding: 4rem 2rem;
+      color: var(--cafe-cream);
+    }
+
+    .dir-3 .hero {
+      text-align: center;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .dir-3 .hero h1 {
+      font-family: "Raleway", sans-serif;
+      font-size: 6rem;
+      font-weight: 900;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      text-shadow:
+        0 0 20px rgba(201, 154, 88, 0.8),
+        0 0 40px rgba(201, 154, 88, 0.5),
+        0 0 60px rgba(201, 154, 88, 0.3);
+      animation: glow 2s ease-in-out infinite alternate;
+      margin-bottom: 2rem;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow:
+          0 0 20px rgba(201, 154, 88, 0.8),
+          0 0 40px rgba(201, 154, 88, 0.5),
+          0 0 60px rgba(201, 154, 88, 0.3);
+      }
+      to {
+        text-shadow:
+          0 0 30px rgba(201, 154, 88, 1),
+          0 0 50px rgba(201, 154, 88, 0.7),
+          0 0 80px rgba(201, 154, 88, 0.5);
+      }
+    }
+
+    .dir-3 .scanlines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(201, 154, 88, 0.05) 2px,
+        rgba(201, 154, 88, 0.05) 4px
+      );
+      pointer-events: none;
+      animation: scan 10s linear infinite;
+    }
+
+    @keyframes scan {
+      from { transform: translateY(0); }
+      to { transform: translateY(20px); }
+    }
+
+    .dir-3 .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--gold-primary);
+      border: 2px solid var(--gold-primary);
+    }
+
+    .dir-3 .tech-cell {
+      background: var(--cafe-black);
+      padding: 3rem 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .dir-3 .tech-cell:hover {
+      background: var(--gold-primary);
+      color: var(--cafe-black);
+      transform: scale(1.05);
+    }
+
+    /* Direction 4: Art Deco Geometry */
+    .dir-4 .mockup {
+      background: linear-gradient(to bottom, #1a1410 0%, var(--cafe-black) 50%, #1a1410 100%);
+      padding: 0;
+      position: relative;
+    }
+
+    .dir-4 .geometric-header {
+      background: linear-gradient(135deg, var(--gold-primary) 0%, #d4a959 100%);
+      padding: 5rem 3rem;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .dir-4 .geometric-header h1 {
+      font-family: "Abril Fatface", serif;
+      font-size: 6rem;
+      color: var(--cafe-black);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+
+    .dir-4 .diamond-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      padding: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .dir-4 .diamond {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--cafe-cream) 0%, var(--cafe-mist) 100%);
+      transform: rotate(45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--gold-primary);
+      box-shadow: 0 10px 30px rgba(201, 154, 88, 0.3);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dir-4 .diamond:hover {
+      transform: rotate(45deg) scale(1.15);
+      background: linear-gradient(135deg, var(--gold-primary) 0%, #d4a959 100%);
+      z-index: 10;
+    }
+
+    .dir-4 .diamond-content {
+      transform: rotate(-45deg);
+      text-align: center;
+      padding: 1rem;
+      color: var(--cafe-black);
+    }
+
+    .dir-4 .diamond h3 {
+      font-family: "Raleway", sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+    }
+
+    /* Direction 5: Organic Chaos */
+    .dir-5 .mockup {
+      background: var(--cafe-white);
+      padding: 2rem;
+      position: relative;
+    }
+
+    .dir-5 .blob {
+      position: absolute;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      opacity: 0.6;
+      animation: morph 8s ease-in-out infinite;
+    }
+
+    .dir-5 .blob-1 {
+      width: 400px;
+      height: 400px;
+      background: var(--cafe-cream);
+      top: 10%;
+      right: 10%;
+    }
+
+    .dir-5 .blob-2 {
+      width: 300px;
+      height: 300px;
+      background: var(--cafe-mist);
+      bottom: 20%;
+      left: 5%;
+      animation-delay: -2s;
+    }
+
+    .dir-5 .blob-3 {
+      width: 250px;
+      height: 250px;
+      background: rgba(201, 154, 88, 0.3);
+      top: 50%;
+      left: 50%;
+      animation-delay: -4s;
+    }
+
+    @keyframes morph {
+      0%, 100% {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        transform: rotate(0deg) scale(1);
+      }
+      25% {
+        border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
+        transform: rotate(90deg) scale(1.1);
+      }
+      50% {
+        border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+        transform: rotate(180deg) scale(0.9);
+      }
+      75% {
+        border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%;
+        transform: rotate(270deg) scale(1.05);
+      }
+    }
+
+    .dir-5 .content {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      margin: 4rem auto;
+      background: rgba(250, 249, 246, 0.9);
+      backdrop-filter: blur(20px);
+      padding: 4rem 3rem;
+      border-radius: 40px;
+      box-shadow: 0 20px 60px rgba(44, 36, 32, 0.15);
+    }
+
+    .dir-5 h1 {
+      font-family: "Crimson Pro", serif;
+      font-size: 5rem;
+      font-style: italic;
+      color: var(--cafe-black);
+      margin-bottom: 2rem;
+      line-height: 1.1;
+    }
+
+    .dir-5 p {
+      font-size: 1.25rem;
+      color: var(--cafe-brown);
+      line-height: 1.8;
+    }
+
+    /* Direction 6: Editorial Noir */
+    .dir-6 .mockup {
+      background: var(--cafe-black);
+      color: var(--cafe-cream);
+      padding: 0;
+    }
+
+    .dir-6 .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 700px;
+    }
+
+    .dir-6 .left {
+      background: linear-gradient(135deg, #1a1410 0%, var(--cafe-black) 100%);
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 4px solid var(--gold-primary);
+    }
+
+    .dir-6 .right {
+      background: var(--cafe-cream);
+      color: var(--cafe-black);
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .dir-6 h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 6rem;
+      line-height: 0.95;
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+
+    .dir-6 .subtitle {
+      font-family: "Outfit", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 200;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .dir-6 .pullquote {
+      font-family: "Playfair Display", serif;
+      font-size: 2.5rem;
+      font-style: italic;
+      line-height: 1.4;
+      border-left: 6px solid var(--gold-primary);
+      padding-left: 2rem;
+      margin: 3rem 0;
+    }
+
+    /* Direction 7: Soft Pastel Dreams */
+    .dir-7 .mockup {
+      background: linear-gradient(135deg, #f5e6d3 0%, #e8d4c1 25%, #dbc5b3 50%, #f0e0d0 75%, #f5e6d3 100%);
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dir-7 .mockup::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(201, 154, 88, 0.15) 0%, transparent 50%);
+      animation: float 15s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(30px, -30px) rotate(120deg); }
+      66% { transform: translate(-20px, 20px) rotate(240deg); }
+    }
+
+    .dir-7 .dreamy-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(30px);
+      padding: 5rem 4rem;
+      border-radius: 60px;
+      box-shadow:
+        0 20px 60px rgba(201, 154, 88, 0.2),
+        inset 0 0 60px rgba(255, 255, 255, 0.5);
+      position: relative;
+      z-index: 1;
+    }
+
+    .dir-7 h1 {
+      font-family: "Crimson Pro", serif;
+      font-size: 5.5rem;
+      font-weight: 400;
+      color: var(--cafe-brown);
+      text-align: center;
+      margin-bottom: 2rem;
+      line-height: 1.1;
+    }
+
+    .dir-7 .dreamy-text {
+      font-family: "Caveat", cursive;
+      font-size: 3rem;
+      color: var(--gold-primary);
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .dir-7 .soft-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .dir-7 .soft-card {
+      background: rgba(255, 255, 255, 0.6);
+      padding: 2.5rem 2rem;
+      border-radius: 30px;
+      text-align: center;
+      transition: all 0.4s ease;
+      border: 2px solid rgba(201, 154, 88, 0.2);
+    }
+
+    .dir-7 .soft-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 20px 40px rgba(201, 154, 88, 0.3);
+    }
+
+    /* Direction 8: Industrial Warmth */
+    .dir-8 .mockup {
+      background: #2a2420;
+      color: var(--cafe-cream);
+      padding: 0;
+      font-family: "Space Mono", monospace;
+    }
+
+    .dir-8 .industrial-header {
+      background: linear-gradient(to bottom, var(--cafe-black) 0%, #3a3230 100%);
+      padding: 5rem 3rem;
+      border-bottom: 8px solid var(--gold-primary);
+      position: relative;
+    }
+
+    .dir-8 .industrial-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--gold-primary),
+        var(--gold-primary) 10px,
+        transparent 10px,
+        transparent 20px
+      );
+    }
+
+    .dir-8 h1 {
+      font-family: "Raleway", sans-serif;
+      font-size: 6rem;
+      font-weight: 900;
+      color: var(--cafe-white);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      text-shadow: 4px 4px 0 var(--gold-primary);
+    }
+
+    .dir-8 .metal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--gold-primary);
+      margin: 3rem;
+    }
+
+    .dir-8 .metal-cell {
+      background: linear-gradient(135deg, #3a3230 0%, #2a2420 100%);
+      padding: 4rem 3rem;
+      border: 2px solid rgba(201, 154, 88, 0.3);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .dir-8 .metal-cell::before {
+      content: '';
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      width: 20px;
+      height: 20px;
+      background: var(--gold-primary);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(201, 154, 88, 0.5);
+    }
+
+    .dir-8 .metal-cell:hover {
+      background: linear-gradient(135deg, var(--gold-primary) 0%, #d4a959 100%);
+      color: var(--cafe-black);
+      transform: scale(1.02);
+    }
+
+    .dir-8 h3 {
+      font-family: "Space Mono", monospace;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .dir-1 .grid-section,
+      .dir-2 .content-blocks,
+      .dir-3 .tech-grid,
+      .dir-4 .diamond-grid,
+      .dir-6 .split,
+      .dir-7 .soft-cards,
+      .dir-8 .metal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dir-1 .hero h1,
+      .dir-3 .hero h1,
+      .dir-4 .geometric-header h1,
+      .dir-6 h1,
+      .dir-8 h1 {
+        font-size: 3.5rem;
+      }
+
+      .dir-2 h1,
+      .dir-5 h1,
+      .dir-7 h1 {
+        font-size: 3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem;
+      }
+
+      main {
+        margin-top: 250px;
+        padding: 1rem;
+      }
+
+      .direction-header h2 {
+        font-size: 2rem;
+      }
+
+      .nav-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <h1>🎨 The Notebook Café - Design Direction Explorer</h1>
+    <p>8 BOLD visual directions • Each one breaks coffee shop clichés • Click to experience</p>
+    <div class="nav-buttons">
+      <button class="nav-btn active" onclick="showDirection(1)">1. Brutalist Honesty</button>
+      <button class="nav-btn" onclick="showDirection(2)">2. Maximalist Warmth</button>
+      <button class="nav-btn" onclick="showDirection(3)">3. Retro-Futuristic</button>
+      <button class="nav-btn" onclick="showDirection(4)">4. Art Deco Geometry</button>
+      <button class="nav-btn" onclick="showDirection(5)">5. Organic Chaos</button>
+      <button class="nav-btn" onclick="showDirection(6)">6. Editorial Noir</button>
+      <button class="nav-btn" onclick="showDirection(7)">7. Soft Pastel Dreams</button>
+      <button class="nav-btn" onclick="showDirection(8)">8. Industrial Warmth</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- Direction 1: Brutalist Honesty -->
+    <div class="direction dir-1 active" id="direction-1">
+      <div class="direction-header">
+        <h2>Direction 1: Brutalist Honesty</h2>
+        <p><strong>Concept:</strong> Raw, unapologetic, structural. Exposed grids, bold borders, monospace typography. Honest design that doesn't hide behind decoration.</p>
+        <p><strong>Emotional Impact:</strong> Confidence, authenticity, anti-pretension. "This is who we are, no bullshit."</p>
+        <p><strong>Best For:</strong> Standing out from generic coffee aesthetics, appealing to design-forward audiences who value honesty over polish.</p>
+      </div>
+      <div class="direction-content">
+        <div class="mockup">
+          <div class="hero">
+            <h1>THE NOTEBOOK CAFÉ</h1>
+            <p>Coffee • Culture • Community<br>Opening 2026 • Riverside Art District</p>
+          </div>
+          <div class="grid-section">
+            <div class="grid-item">
+              <h3>Mexican Beans</h3>
+              <p>Single-origin. Direct trade. No shortcuts.</p>
+            </div>
+            <div class="grid-item">
+              <h3>Custom Design</h3>
+              <p>Every piece hand-crafted by our co-founder.</p>
+            </div>
+            <div class="grid-item">
+              <h3>All Welcome</h3>
+              <p>Art lovers. Workers. Coffee nerds. You.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Direction 2: Maximalist Warmth -->
+    <div class="direction dir-2" id="direction-2">
+      <div class="direction-header">
+        <h2>Direction 2: Maximalist Warmth</h2>
+        <p><strong>Concept:</strong> Abundant detail, layered textures, ornate borders. Rich visual experience that rewards exploration.</p>
+        <p><strong>Emotional Impact:</strong> Luxurious, welcoming, abundant. "There's so much here to discover and enjoy."</p>
+        <p><strong>Best For:</strong> Creating sensory richness, emphasizing craft and attention to detail, luxury positioning without coldness.</p>
+      </div>
+      <div class="direction-content">
+        <div class="mockup">
+          <div class="ornate-box">
+            <h1>The Notebook Café</h1>
+            <div class="decorative-text">Where Every Sip Tells a Story</div>
+            <p style="text-align: center; font-size: 1.125rem; line-height: 1.8; color: var(--cafe-brown);">
+              Riverside's first custom-crafted coffee haven, lovingly designed by a husband-wife team.
+              Every bench, every table, every detail tells the story of two locals building something genuine for their community.
+            </p>
+            <div class="content-blocks">
+              <div class="content-block">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; margin-bottom: 1rem;">Exceptional Coffee</h3>
+                <p>Single-origin Mexican beans, sourced with care, roasted with precision, brewed with love.</p>
+              </div>
+              <div class="content-block">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; margin-bottom: 1rem;">Handcrafted Beauty</h3>
+                <p>Custom-designed furniture and aesthetic details that make every visit Instagram-worthy.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Direction 3: Retro-Futuristic -->
+    <div class="direction dir-3" id="direction-3">
+      <div class="direction-header">
+        <h2>Direction 3: Retro-Futuristic</h2>
+        <p><strong>Concept:</strong> 1970s meets 2050. Glowing text, scanlines, neon aesthetics. Nostalgic yet forward-looking.</p>
+        <p><strong>Emotional Impact:</strong> Unexpected, playful, memorable. "This coffee shop just transported me to another dimension."</p>
+        <p><strong>Best For:</strong> Maximum differentiation, younger tech-savvy audience, creating viral social moments.</p>
+      </div>
+      <div class="direction-content">
+        <div class="mockup">
+          <div class="hero">
+            <div class="scanlines"></div>
+            <h1>NOTEBOOK</h1>
+            <p style="font-family: 'Space Mono', monospace; font-size: 1.25rem; letter-spacing: 0.15em; text-transform: uppercase;">
+              INITIALIZING COFFEE EXPERIENCE • 2026
+            </p>
+          </div>
+          <div class="tech-grid">
+            <div class="tech-cell">
+              <h3 style="font-family: 'Space Mono', monospace; font-size: 1rem; letter-spacing: 0.1em; margin-bottom: 1rem;">MEXICAN.COFFEE</h3>
+              <p style="font-size: 0.875rem;">Direct source protocol</p>
+            </div>
+            <div class="tech-cell">
+              <h3 style="font-family: 'Space Mono', monospace; font-size: 1rem; letter-spacing: 0.1em; margin-bottom: 1rem;">CUSTOM.DESIGN</h3>
+              <p style="font-size: 0.875rem;">Hand-crafted matrix</p>
+            </div>
+            <div class="tech-cell">
+              <h3 style="font-family: 'Space Mono', monospace; font-size: 1rem; letter-spacing: 0.1em; margin-bottom: 1rem;">COMMUNITY.HUB</h3>
+              <p style="font-size: 0.875rem;">All users welcome</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Direction 4: Art Deco Geometry -->
+    <div class="direction dir-4" id="direction-4">
+      <div class="direction-header">
+        <h2>Direction 4: Art Deco Geometry</h2>
+        <p><strong>Concept:</strong> Precise angles, luxury patterns, golden age elegance. Geometric perfection with sophisticated charm.</p>
+        <p><strong>Emotional Impact:</strong> Timeless, refined, aspirational. "This is premium coffee for discerning tastes."</p>
+        <p><strong>Best For:</strong> Luxury positioning, design enthusiast appeal, creating aspirational brand perception.</p>
+      </div>
+      <div class="direction-content">
+        <div class="mockup">
+          <div class="geometric-header">
+            <h1>NOTEBOOK</h1>
+            <p style="font-family: 'Raleway', sans-serif; font-size: 1.25rem; font-weight: 300; letter-spacing: 0.2em; color: var(--cafe-black);">
+              RIVERSIDE • 2026
+            </p>
+          </div>
+          <div class="diamond-grid">
+            <div class="diamond">
+              <div class="diamond-content">
+                <h3>Coffee</h3>
+              </div>
+            </div>
+            <div class="diamond">
+              <div class="diamond-content">
+                <h3>Culture</h3>
+              </div>
+            </div>
+            <div class="diamond">
+              <div class="diamond-content">
+                <h3>Craft</h3>
+              </div>
+            </div>
+            <div class="diamond">
+              <div class="diamond-content">
+                <h3>Community</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Direction 5: Organic Chaos -->
+    <div class="direction dir-5" id="direction-5">
+      <div class="direction-header">
+        <h2>Direction 5: Organic Chaos</h2>
+        <p><strong>Concept:</strong> Flowing blobs, irregular spacing, controlled wildness. Natural forms create dynamic, living feel.</p>
+        <p><strong>Emotional Impact:</strong> Playful, alive, authentic. "This place feels warm and unpredictable, like real life."</p>
+        <p><strong>Best For:</strong> Creating warmth through organic forms, approachable brand, standing out from rigid coffee shop design.</p>
+      </div>
+      <div class="direction-content">
+        <div class="mockup">
+          <div class="blob blob-1"></div>
+          <div class="blob blob-2"></div>
+          <div class="blob blob-3"></div>
+          <div class="content">
+            <h1>Where warmth flows freely</h1>
+            <p>
+              The Notebook Café isn't built on grids and rules. It's shaped by hand, by heart, by the organic rhythm of coffee culture.
+              Single-origin Mexican beans meet custom-crafted furniture in Riverside's most welcoming space.
+            </p>
+            <p style="font-family: 'Caveat', cursive; font-size: 2rem; color: var(--gold-primary); margin-top: 2rem; text-align: center;">
+              Opening 2026 • All walks of life welcome ☕
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Direction 6: Editorial Noir -->
+    <div class="direction dir-6" id="direction-6">
+      <div class="direction-header">
+        <h2>Direction 6: Editorial Noir</h2>
+        <p><strong>Concept:</strong> High contrast, dramatic shadows, editorial magazine aesthetic. Sophisticated storytelling with visual tension.</p>
+        <p><strong>Emotional Impact:</strong> Intriguing, sophisticated, narrative-driven. "There's a story here I need to discover."</p>
+        <p><strong>Best For:</strong> Emphasizing narrative journey, creating mystery and intrigue, design-forward positioning.</p>
+      </div>
+      <div class="direction-content">
+        <div class="mockup">
+          <div class="split">
+            <div class="left">
+              <div class="subtitle">Riverside • 2026</div>
+              <h1>The<br>Notebook<br>Café</h1>
+              <p style="font-size: 1.25rem; line-height: 1.7; margin-top: 2rem;">
+                Where Mexican coffee meets<br>custom-crafted design in<br>Riverside's art district.
+              </p>
+            </div>
+            <div class="right">
+              <div class="pullquote">
+                "Every bench designed by hand. Every cup brewed with intention. This is coffee with a story."
+              </div>
+              <p style="font-size: 1.125rem; line-height: 1.8;">
+                A husband-wife team building their first business together.
+                Single-origin beans. Custom furniture. All walks of life welcome.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Direction 7: Soft Pastel Dreams -->
+    <div class="direction dir-7" id="direction-7">
+      <div class="direction-header">
+        <h2>Direction 7: Soft Pastel Dreams</h2>
+        <p><strong>Concept:</strong> Unexpected lightness, dreamy gradients, ethereal softness. Warm pastels create calm, inviting atmosphere.</p>
+        <p><strong>Emotional Impact:</strong> Gentle, welcoming, peaceful. "This space feels like a warm hug."</p>
+        <p><strong>Best For:</strong> Creating maximum warmth and approachability, standing out from dark/harsh coffee aesthetics.</p>
+      </div>
+      <div class="direction-content">
+        <div class="mockup">
+          <div class="dreamy-container">
+            <h1>The Notebook Café</h1>
+            <div class="dreamy-text">Where every sip feels like coming home</div>
+            <p style="text-align: center; font-size: 1.125rem; line-height: 1.8; color: var(--cafe-brown); max-width: 600px; margin: 0 auto;">
+              Riverside's warmest welcome. Custom-designed spaces meet single-origin Mexican coffee in a haven built for community, creativity, and connection.
+            </p>
+            <div class="soft-cards">
+              <div class="soft-card">
+                <h3 style="font-family: 'Crimson Pro', serif; font-size: 1.5rem; color: var(--cafe-brown); margin-bottom: 1rem;">Quality Coffee</h3>
+                <p style="font-size: 0.95rem;">Sourced with care</p>
+              </div>
+              <div class="soft-card">
+                <h3 style="font-family: 'Crimson Pro', serif; font-size: 1.5rem; color: var(--cafe-brown); margin-bottom: 1rem;">Crafted Spaces</h3>
+                <p style="font-size: 0.95rem;">Designed with love</p>
+              </div>
+              <div class="soft-card">
+                <h3 style="font-family: 'Crimson Pro', serif; font-size: 1.5rem; color: var(--cafe-brown); margin-bottom: 1rem;">All Welcome</h3>
+                <p style="font-size: 0.95rem;">Your community hub</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Direction 8: Industrial Warmth -->
+    <div class="direction dir-8" id="direction-8">
+      <div class="direction-header">
+        <h2>Direction 8: Industrial Warmth</h2>
+        <p><strong>Concept:</strong> Raw materials meet cozy vibes. Metal grids, monospace fonts, industrial edges softened by warm colors.</p>
+        <p><strong>Emotional Impact:</strong> Honest, grounded, authentic. "Built by real people, for real people."</p>
+        <p><strong>Best For:</strong> Balancing craft with approachability, appealing to makers and creators, warehouse/loft aesthetic.</p>
+      </div>
+      <div class="direction-content">
+        <div class="mockup">
+          <div class="industrial-header">
+            <h1>NOTEBOOK</h1>
+            <p style="font-family: 'Space Mono', monospace; font-size: 1rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-primary);">
+              EST. 2026 • RIVERSIDE, CA
+            </p>
+          </div>
+          <div class="metal-grid">
+            <div class="metal-cell">
+              <h3>SINGLE-ORIGIN<br>MEXICAN COFFEE</h3>
+              <p style="font-size: 0.95rem; margin-top: 1rem;">Direct trade. No middlemen. Pure quality.</p>
+            </div>
+            <div class="metal-cell">
+              <h3>CUSTOM-BUILT<br>FURNITURE</h3>
+              <p style="font-size: 0.95rem; margin-top: 1rem;">Every piece hand-designed by our co-founder.</p>
+            </div>
+            <div class="metal-cell">
+              <h3>COMMUNITY<br>FIRST</h3>
+              <p style="font-size: 0.95rem; margin-top: 1rem;">Art lovers. Workers. Coffee nerds. All walks welcome.</p>
+            </div>
+            <div class="metal-cell">
+              <h3>OPENING<br>SOON</h3>
+              <p style="font-size: 0.95rem; margin-top: 1rem;">Follow @thenotebookcafellc for the journey.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    function showDirection(num) {
+      document.querySelectorAll('.direction').forEach(dir => {
+        dir.classList.remove('active');
+      });
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      document.getElementById('direction-' + num).classList.add('active');
+      event.target.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>

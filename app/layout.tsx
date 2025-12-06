@@ -77,6 +77,7 @@ export default async function RootLayout({
 
   // Show password gate if password is set and user is not authenticated
   const showPasswordGate = sitePassword && !isAuthenticated;
+  const showAnnouncement = false; // temporarily hide banner
 
   // Fetch settings for header (only if not showing password gate)
   const settings = !showPasswordGate ? await client.fetch(`
@@ -102,7 +103,7 @@ export default async function RootLayout({
               <PasswordGate />
             ) : (
               <>
-                <AnnouncementBanner />
+                {showAnnouncement && <AnnouncementBanner />}
                 <SiteHeader
                   instagramUrl={settings?.social?.instagram}
                   spotifyUrl={settings?.social?.spotify}
