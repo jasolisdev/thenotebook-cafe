@@ -62,8 +62,7 @@ export default function SiteFooter(): React.JSX.Element {
         <div className="space-y-4">
           <h4 className="uppercase text-xs tracking-[0.2em] text-cafe-tan">Hours</h4>
           <div className="font-light space-y-1 text-cafe-beige/70">
-            <p><span className="w-12 inline-block">M-Th</span> 6:30am — 4pm</p>
-            <p><span className="w-12 inline-block">F-Sa</span> 6:30am — 6pm</p>
+            <p><span className="w-12 inline-block">Mon–Sat</span> 7:00am — 6pm</p>
             <p><span className="w-12 inline-block">Sun</span> <span className="italic text-cafe-beige/50">Closed</span></p>
           </div>
         </div>
@@ -76,6 +75,7 @@ export default function SiteFooter(): React.JSX.Element {
             <Link href="/story" className="text-cafe-beige/70 hover:text-white transition-colors">Story</Link>
             <Link href="/events" className="text-cafe-beige/70 hover:text-white transition-colors">Events</Link>
             <Link href="/contact" className="text-cafe-beige/70 hover:text-white transition-colors">Contact</Link>
+            <Link href="/careers" className="text-cafe-beige/70 hover:text-white transition-colors">Careers</Link>
           </div>
         </div>
       </div>

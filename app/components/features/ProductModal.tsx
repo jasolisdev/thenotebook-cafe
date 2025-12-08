@@ -48,8 +48,16 @@ export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAdd
 
   const modifierGroups = useMemo(() => {
     if (!item) return [];
-    if (item.subcategory === 'Bowls') return MODIFIERS.bowls;
     if (item.section === 'drinks') return MODIFIERS.drinks;
+    if (item.subcategory === 'Açaí Bowls') {
+      // The Classic Chapter only has extra toppings
+      if (item.name === 'The Classic Chapter') return MODIFIERS.classicBowl;
+      // Build Your Own Bowl has all options
+      return MODIFIERS.bowls;
+    }
+    if (item.subcategory === 'Bowls') return MODIFIERS.bowls;
+    if (item.subcategory === 'Bagels') return MODIFIERS.bagels;
+    if (item.subcategory === 'Panini Press') return MODIFIERS.paninis;
     return MODIFIERS.food;
   }, [item]);
 
@@ -289,7 +297,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAdd
                 <textarea
                   value={notes}
                   onChange={e => setNotes(e.target.value)}
-                  placeholder="Extra hot, allergy info, etc..."
+                  placeholder={item.section === 'desserts' ? "Warmed, allergy info, etc..." : "Extra hot, allergy info, etc..."}
                   className="w-full p-4 rounded-xl border outline-none resize-none h-24 text-base"
                   style={{
                     borderColor: `${colors.beige}80`,

@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 import { client } from "@/sanity/lib/client";
 import { writeClient } from "@/sanity/lib/writeClient";
@@ -7,6 +8,8 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export async function POST(req: Request) {
   try {
     const { email, source } = await req.json().catch(() => ({}));
+
+    const token = randomUUID();
 
     // Validate
     if (!email || typeof email !== "string" || !EMAIL_RE.test(email)) {
@@ -18,10 +21,16 @@ export async function POST(req: Request) {
 
     // Check duplicate (case-insensitive)
     const existing = await client.fetch(
-      `*[_type=="subscriber" && lower(email) == lower($email)][0]{_id}`,
+      `*[_type=="subscriber" && lower(email) == lower($email)][0]{_id,status,unsubscribeToken}`,
       { email }
     );
     if (existing?._id) {
+      if (!existing.unsubscribeToken) {
+        await writeClient
+          .patch(existing._id)
+          .set({ unsubscribeToken: token })
+          .commit({ autoGenerateArrayKeys: true, returnDocuments: false });
+      }
       return NextResponse.json({ ok: true, duplicate: true });
     }
 
@@ -31,6 +40,7 @@ export async function POST(req: Request) {
       email,
       source: source || "homepage",
       status: "subscribed",
+      unsubscribeToken: token,
       createdAt: new Date().toISOString(),
     });
 
