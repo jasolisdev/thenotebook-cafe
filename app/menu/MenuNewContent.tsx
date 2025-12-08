@@ -151,7 +151,7 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
                     {subcategory}
                   </h2>
                   {/* Subcategory Items */}
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
                     {subcategoryItems.map((item, index) => (
                       <Reveal key={item.id} delay={index * 30} replay={false}>
                         <div
@@ -180,7 +180,7 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
                             )}
                           </div>
                           {/* Click indicator */}
-                          <div className="flex-shrink-0 text-cafe-brown/30 group-hover:text-cafe-tan transition-colors self-center">
+                          <div className="flex-shrink-0 text-cafe-brown/30 group-hover:text-cafe-black transition-colors self-center">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                               <circle cx="12" cy="12" r="10" />
                               <line x1="12" y1="8" x2="12" y2="16" />
@@ -195,7 +195,7 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
               ))}
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10 mt-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12 mt-4">
               {filteredItems.map((item, index) => (
                 <Reveal key={item.id} delay={index * 30} replay={false}>
                   <div

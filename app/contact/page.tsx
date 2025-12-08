@@ -5,27 +5,15 @@
  * Features business hours, location map, contact info, and social links.
  */
 import Reveal from "../components/ui/Reveal";
+import ParallaxHero from "../components/features/ParallaxHero";
 import { MapPin, Clock, Phone, Instagram, Mail, Coffee } from "lucide-react";
 
 export default function ContactPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--cafe-mist)' }}>
       {/* Hero Section */}
-      <section
-        data-section="Contact Hero"
-        className="relative pt-28 pb-28 md:pt-32 md:pb-32 overflow-hidden text-center px-6"
-        style={{ background: 'var(--hero-gradient-espresso)' }}
-      >
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'var(--hero-espresso-overlay)',
-            opacity: 0.78,
-            mixBlendMode: 'screen'
-          }}
-        />
-
-        <div className="max-w-4xl mx-auto relative z-10 space-y-6">
+      <ParallaxHero backgroundImage="/unsplash/placeholder-interior-shop.png">
+        <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
           <Reveal>
             <span className="font-bold tracking-[0.2em] uppercase text-sm block" style={{ color: 'var(--cafe-tan)' }}>
               Get in Touch
@@ -45,7 +33,7 @@ export default function ContactPage() {
             </p>
           </Reveal>
         </div>
-      </section>
+      </ParallaxHero>
 
       {/* Contact Information Grid */}
       <section

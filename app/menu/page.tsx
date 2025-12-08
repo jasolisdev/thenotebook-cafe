@@ -8,6 +8,7 @@ import { MENU_ITEMS } from '@/app/constants';
 import { ProductModal } from '@/app/components/features/ProductModal';
 import { useCart } from '@/app/components/providers/CartProvider';
 import Reveal from '../components/ui/Reveal';
+import ParallaxHero from '../components/features/ParallaxHero';
 
 const colors = {
   black: '#2C2420',
@@ -73,17 +74,8 @@ export default function MenuPage() {
         style={{ backgroundColor: colors.mist, color: colors.brown }}
       >
         {/* Menu Header */}
-        <div
-          className="pt-24 pb-32 px-4 relative overflow-hidden text-center"
-          style={{ backgroundColor: colors.black, color: colors.cream }}
-        >
-          <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
-            <div
-              className="absolute right-0 top-0 w-96 h-96 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2"
-              style={{ backgroundColor: colors.tan }}
-            ></div>
-          </div>
-          <div className="max-w-4xl mx-auto text-center relative z-10">
+        <ParallaxHero backgroundImage="/unsplash/tnc-menu-hero-bg.png">
+          <div className="max-w-4xl mx-auto text-center relative z-10 px-4 py-24">
             <Reveal>
               <span
                 className="font-bold tracking-[0.2em] uppercase text-sm mb-5 block"
@@ -93,7 +85,9 @@ export default function MenuPage() {
               </span>
             </Reveal>
             <Reveal delay={120}>
-              <h1 className="font-serif text-[70px] md:text-[90px] leading-[0.9] mb-7">Curated Selection</h1>
+              <h1 className="font-serif text-[70px] md:text-[90px] leading-[0.9] mb-7" style={{ color: colors.cream }}>
+                Curated Selection
+              </h1>
             </Reveal>
             <Reveal delay={220}>
               <p
@@ -104,7 +98,7 @@ export default function MenuPage() {
               </p>
             </Reveal>
           </div>
-        </div>
+        </ParallaxHero>
 
         <div className="sticky top-20 z-30 px-4 -mt-8">
           <div className="max-w-md mx-auto">

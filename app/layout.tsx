@@ -8,6 +8,7 @@ import "./styles/components/hero.css";
 import "./styles/components/buttons.css";
 import "./styles/components/footer.css";
 import "./styles/components/announcement.css";
+import "./styles/components/consent-banner.css";
 import "./styles/components/what-to-expect.css";
 
 // Layout styles
@@ -32,6 +33,9 @@ import { client } from "@/sanity/lib/client";
 import VirtualBarista from "./components/ui/VirtualBarista";
 import { CartProvider } from "./components/providers/CartProvider";
 import { CartDrawer } from "./components/features/CartDrawer";
+import { AccessibilityWidget } from "./components/features/Accessibility/AccessibilityWidget";
+import ConsentBanner from "./components/ui/ConsentBanner";
+import AnalyticsLoader from "./components/ui/AnalyticsLoader";
 
 // Google Fonts
 const dmSerif = DM_Serif_Display({
@@ -112,7 +116,11 @@ export default async function RootLayout({
                   {children}
                 </div>
                 <SiteFooter />
-                <VirtualBarista />
+                <ConsentBanner />
+                <AnalyticsLoader />
+                {/* VirtualBarista temporarily hidden for hero debugging */}
+                {/* <VirtualBarista /> */}
+                <AccessibilityWidget />
                 <CartDrawer />
               </>
             )}

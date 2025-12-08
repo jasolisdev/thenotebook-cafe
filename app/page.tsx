@@ -9,11 +9,12 @@ import { client } from "@/sanity/lib/client";
 import NewsletterForm from "./components/features/NewsLetterForm";
 import Reveal from "./components/ui/Reveal";
 import HeroButtons from "./components/ui/HeroButtons";
+import KenBurnsHero from "./components/features/KenBurnsHero";
+import HeroHeart from "./components/ui/HeroHeart";
 import StoryLink from "./components/ui/StoryLink";
 import StoryBlobs from "./components/ui/StoryBlobs";
 import AtmosphereBlob from "./components/ui/AtmosphereBlob";
 import PhilosophyBlob from "./components/ui/PhilosophyBlob";
-import KenBurnsHero from "./components/features/KenBurnsHero";
 import { Coffee, Music, Mail, Wifi, PlugZap, Armchair, Sparkles } from "lucide-react";
 import AtmosphereStrip from "./components/AtmosphereStrip";
 import SignaturePoursGrid from "./components/SignaturePoursGrid";
@@ -90,54 +91,73 @@ export default async function HomePage() {
   return (
     <main className="overflow-hidden" style={{ backgroundColor: 'var(--cafe-mist)', color: 'var(--cafe-brown)' }}>
       {/* Hero Section */}
-      <KenBurnsHero>
-        <Reveal>
-          <div className="flex justify-center mb-6">
-            <Image
-              src="/logo.png"
-              alt="The Notebook Café logo"
-              width={124}
-              height={124}
-              className="h-[90px] w-[90px] sm:h-[112px] sm:w-[112px]"
-              priority
-            />
+      <KenBurnsHero
+        backgroundImage="/unsplash/tnc-home-hero-cup.jpg"
+        contentClassName="home-hero-shell"
+      >
+        <div className="home-hero-grid">
+          <div className="home-hero-copy">
+            <Reveal>
+              <div className="home-hero-pill">
+                Est. Riverside 2026
+              </div>
+            </Reveal>
+
+            <Reveal delay={120}>
+              <h1 className="home-hero-title">
+                Where Every Cup <span className="home-hero-title-accent">Tells a Story</span>
+              </h1>
+            </Reveal>
+
+            <Reveal delay={240}>
+              <p className="home-hero-subtitle">
+                Come For The Coffee, <br className="hero-subtitle-break" />
+                Stay For The Vibe.
+              </p>
+            </Reveal>
+
+            <Reveal delay={360}>
+              <div className="home-hero-cta">
+                <HeroButtons />
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
 
-        <Reveal>
-          <div className="flex items-center justify-center gap-4 md:gap-5 mb-[6px] pt-[6px] sm:pt-[10px]">
-            <span
-              className="h-[2px] w-12 md:w-16 rounded-full"
-              style={{ background: 'linear-gradient(90deg, transparent, rgba(var(--cafe-cream-rgb), 0.55), transparent)' }}
-              aria-hidden
-            />
-            <span className="inline-block text-sm md:text-base uppercase tracking-[0.3em] font-medium" style={{ color: 'var(--cafe-tan)' }}>
-              Est. Riverside 2025
-            </span>
-            <span
-              className="h-[2px] w-12 md:w-16 rounded-full"
-              style={{ background: 'linear-gradient(90deg, transparent, rgba(var(--cafe-cream-rgb), 0.55), transparent)' }}
-              aria-hidden
-            />
-          </div>
-        </Reveal>
+          <Reveal delay={120} className="home-hero-visual-wrap">
+            <div className="home-hero-visual">
+              <div className="hero-latte-wrapper">
+                <div className="hero-latte-aura" aria-hidden />
 
-        <Reveal delay={200}>
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.9] mb-6" style={{ color: 'var(--cafe-cream)' }}>
-            Where Every Cup <br />
-            <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Tells a Story</span>
-          </h1>
-        </Reveal>
+                <div className="relative animate-float">
+                  <div className="hero-latte-image shadow-2xl">
+                    <Image
+                      src="/unsplash/tnc-hero-coffee-cup.png"
+                      alt="Signature latte art"
+                      width={460}
+                      height={460}
+                      className="w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] md:w-[400px] md:h-[400px] object-cover rounded-full border-[12px] relative z-10"
+                      style={{ borderColor: "rgba(var(--cafe-cream-rgb), 0.96)" }}
+                      priority
+                    />
+                  </div>
 
-        <Reveal delay={400}>
-          <p className="text-lg md:text-xl max-w-xl mx-auto mb-8 font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}>
-            Come for the coffee, stay for the vibe.
-          </p>
-        </Reveal>
+                  <div className="hero-latte-card">
+                    <span className="hero-latte-pill">Signature</span>
+                    <span className="font-display font-bold text-sm text-cafe-brown">Latte</span>
+                    <div className="flex gap-[4px] mt-1 text-cafe-tan text-[12px]">
+                      <span aria-hidden>★</span>
+                      <span aria-hidden>★</span>
+                      <span aria-hidden>★</span>
+                      <span aria-hidden>★</span>
+                    </div>
+                  </div>
 
-        <Reveal delay={600}>
-          <HeroButtons />
-        </Reveal>
+                  <HeroHeart />
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
       </KenBurnsHero>
 
       {/* Signature Pours */}
@@ -192,6 +212,7 @@ export default async function HomePage() {
             </Reveal>
           </div>
         </div>
+        <div />
       </section>
 
       {/* Our Philosophy */}
@@ -311,11 +332,11 @@ export default async function HomePage() {
           <Music strokeWidth={1.4} />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <Reveal>
-              <h2 className="font-serif text-5xl md:text-6xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
-                Low lights,<br />
+          <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <Reveal>
+                <h2 className="font-serif text-5xl md:text-6xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
+                  Low lights,<br />
                 good sound,<br />
                 <span className="italic" style={{ color: 'var(--cafe-tan)' }}>better coffee.</span>
               </h2>
@@ -355,13 +376,12 @@ export default async function HomePage() {
             </Reveal>
           </div>
         </div>
-      </section>
+    </section>
 
       {/* The Trinity */}
       <section
         data-section="The Trinity"
-        className="py-20 md:py-24 relative overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
+        className="py-20 md:py-24 relative overflow-hidden trinity-slab"
       >
         <div className="section-deco" style={{ top: '12%', right: '16%', animationDuration: '10s' }} aria-hidden="true">
           <Sparkles strokeWidth={1.6} />
@@ -373,10 +393,6 @@ export default async function HomePage() {
           <Sparkles strokeWidth={1.6} />
         </div>
         <div className="max-w-7xl mx-auto px-6">
-          <div
-            className="hidden md:block mb-10 w-full h-px"
-            style={{ background: 'linear-gradient(90deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
-          ></div>
           <div className="grid md:grid-cols-3">
             <Reveal>
               <div className="p-10 text-center">
@@ -455,7 +471,7 @@ export default async function HomePage() {
       {/* Atmosphere */}
       <section
         data-section="Atmosphere"
-        className="relative pt-24 md:pt-32 pb-[calc(6rem+20px)] md:pb-[calc(8rem+20px)] px-6 overflow-visible"
+        className="relative pt-24 md:pt-32 pb-[calc(6rem+20px)] md:pb-[calc(8rem+20px)] px-6 overflow-visible mb-16 md:mb-24"
         style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <AtmosphereBlob />

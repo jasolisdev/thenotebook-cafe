@@ -6,6 +6,7 @@
 import { client } from "@/sanity/lib/client";
 import Reveal from "../components/ui/Reveal";
 import Image from "next/image";
+import ParallaxHero from "../components/features/ParallaxHero";
 import NewsletterForm from "../components/features/NewsLetterForm";
 import { Coffee, Music, Heart, MapPin, Sparkles, BookOpen, Users, Home as HomeIcon, Award } from "lucide-react";
 
@@ -59,21 +60,8 @@ export default async function StoryPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--cafe-mist)' }}>
       {/* Hero Section (from prototype) */}
-      <section
-        data-section="Story Hero"
-        className="relative pt-28 pb-28 md:pt-32 md:pb-32 overflow-hidden text-center px-6"
-        style={{ background: 'var(--hero-gradient-espresso)' }}
-      >
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'var(--hero-espresso-overlay)',
-            opacity: 0.78,
-            mixBlendMode: 'screen'
-          }}
-        />
-
-        <div className="max-w-4xl mx-auto relative z-10 space-y-6">
+      <ParallaxHero backgroundImage="/unsplash/tnc-placeholder-4.png">
+        <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
           <Reveal>
             <span className="font-bold tracking-[0.2em] uppercase text-sm block" style={{ color: 'var(--cafe-tan)' }}>
               Our Story
@@ -93,7 +81,7 @@ export default async function StoryPage() {
             </p>
           </Reveal>
         </div>
-      </section>
+      </ParallaxHero>
 
       {/* Main Content */}
       <section

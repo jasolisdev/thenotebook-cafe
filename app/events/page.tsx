@@ -6,6 +6,7 @@
  */
 import Reveal from "../components/ui/Reveal";
 import NewsletterForm from "../components/features/NewsLetterForm";
+import ParallaxHero from "../components/features/ParallaxHero";
 import { Clock, Users, Instagram, Calendar, Coffee, Music, Sparkles, Heart } from "lucide-react";
 import Image from "next/image";
 
@@ -51,21 +52,8 @@ export default function EventsPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--cafe-mist)' }}>
       {/* Hero Section */}
-      <section
-        data-section="Events Hero"
-        className="relative pt-28 pb-28 md:pt-32 md:pb-32 overflow-hidden text-center px-6"
-        style={{ background: 'var(--hero-gradient-espresso)' }}
-      >
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'var(--hero-espresso-overlay)',
-            opacity: 0.78,
-            mixBlendMode: 'screen'
-          }}
-        />
-
-        <div className="max-w-4xl mx-auto relative z-10 space-y-6">
+      <ParallaxHero backgroundImage="/unsplash/tnc-events-hero-bg.jpg">
+        <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6">
           <Reveal>
             <div className="flex items-center justify-center gap-3 mb-4">
               <Calendar size={28} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
@@ -102,166 +90,165 @@ export default function EventsPage() {
             </div>
           </Reveal>
         </div>
-      </section>
+      </ParallaxHero>
 
-      {/* Events Listing - Editorial Grid with Alternating Backgrounds */}
-      {EVENTS.map((event, index) => {
-        const Icon = event.icon;
-        const isEven = index % 2 === 0;
-        const [month, ...restOfDate] = event.date.split(" ");
-        const dayPart = restOfDate.join(" ");
+      <section
+        data-section="Events Listing"
+        className="relative py-24 md:py-32"
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
+      >
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-14 md:mb-18">
+            <Reveal>
+              <span className="text-xs uppercase tracking-[0.24em] font-semibold block mb-4" style={{ color: 'var(--cafe-tan)' }}>
+                December Lineup
+              </span>
+            </Reveal>
+            <Reveal delay={120}>
+              <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[0.95]" style={{ color: 'var(--cafe-black)' }}>
+                Gatherings, Markets, Runs, & More
+              </h2>
+            </Reveal>
+          </div>
 
-        return (
-          <section
-            key={event.id}
-            data-section={`Event ${index + 1}`}
-            className="relative py-24 md:py-32 overflow-hidden"
-            style={{ backgroundColor: 'var(--cafe-mist)' }}
-          >
-            {/* Floating Decorative Icons */}
-            <div
-              className="section-deco"
-              style={{
-                top: '10%',
-                left: isEven ? '8%' : 'auto',
-                right: isEven ? 'auto' : '8%',
-                animationDuration: '12s',
-                animationDelay: `${index * 0.3}s`
-              }}
-              aria-hidden="true"
-            >
-              <Coffee strokeWidth={1.4} />
-            </div>
-            <div
-              className="section-deco section-deco-dark"
-              style={{
-                bottom: '10%',
-                right: isEven ? '10%' : 'auto',
-                left: isEven ? 'auto' : '10%',
-                animationDuration: '11s',
-                animationDelay: `${index * 0.5}s`
-              }}
-              aria-hidden="true"
-            >
-              <Sparkles strokeWidth={1.6} />
-            </div>
+          <div className="flex flex-col gap-10">
+            {EVENTS.map((event, index) => {
+              const [month, ...restOfDate] = event.date.split(" ");
+              const dayPart = restOfDate.join(" ");
+              return (
+                <Reveal key={event.id} delay={index * 120}>
+                  <article
+                    className="group relative overflow-hidden rounded-3xl border flex flex-col lg:grid lg:grid-cols-5"
+                    style={{
+                      borderColor: 'rgba(var(--cafe-tan-rgb), 0.2)',
+                      background: 'linear-gradient(135deg, rgba(250,249,246,0.95), rgba(244,241,234,0.92))',
+                      boxShadow: '0 25px 50px rgba(0,0,0,0.08)',
+                    }}
+                  >
+                    <div className="absolute -top-10 -left-10 w-40 h-40 rounded-full blur-3xl opacity-30" style={{ backgroundColor: 'var(--cafe-tan)' }} aria-hidden />
+                    <div className="absolute -bottom-12 -right-10 w-48 h-48 rounded-full blur-3xl opacity-25" style={{ backgroundColor: 'rgba(var(--cafe-brown-rgb),0.5)' }} aria-hidden />
 
-            <div className="max-w-6xl mx-auto px-6 relative z-10">
-              <div className="grid lg:grid-cols-2 gap-16 items-center">
-                {/* Event Details */}
-                <Reveal>
-                  <div className={isEven ? "" : "lg:order-2"}>
-                    {/* Date Badge */}
-                    <div className="flex items-center gap-4 mb-8">
-                      <div
-                        className="w-14 h-14 rounded-sm flex items-center justify-center"
-                        style={{
-                          backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.12)',
-                          border: '1px solid rgba(var(--cafe-tan-rgb), 0.25)'
-                        }}
-                      >
-                        <Icon size={24} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
-                      </div>
-                      <div>
-                        <div
-                          className="text-xs uppercase tracking-[0.25em] font-bold mb-1"
-                          style={{ color: 'rgba(var(--cafe-brown-rgb), 0.6)' }}
-                        >
-                          {month}
-                        </div>
-                        <div
-                          className="font-serif text-4xl"
-                          style={{ color: 'var(--cafe-black)' }}
-                        >
-                          {dayPart}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Title & Description */}
-                    <div className="mb-8">
-                      <div className="w-16 h-[2px] mb-6" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
-                      <h2
-                        className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[0.95] mb-6"
-                        style={{ color: 'var(--cafe-black)' }}
-                      >
-                        {event.title}
-                      </h2>
-                      <p
-                        className="text-xl md:text-2xl font-light leading-relaxed max-w-lg"
-                        style={{ color: 'rgba(var(--cafe-brown-rgb), 0.8)' }}
-                      >
-                        {event.description}
-                      </p>
-                    </div>
-
-                    {/* Meta Info */}
-                    <div className="flex flex-wrap items-center gap-6">
-                      <div className="flex items-center gap-2">
-                        <Clock size={18} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
-                        <span
-                          className="text-sm font-medium"
-                          style={{ color: 'rgba(var(--cafe-brown-rgb), 0.7)' }}
-                        >
-                          {event.time}
-                        </span>
-                      </div>
-                      <span
-                        className="px-3 py-1 rounded-sm text-xs uppercase tracking-wider font-bold"
-                        style={{
-                          backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.1)',
-                          color: 'var(--cafe-tan)',
-                          border: '1px solid rgba(var(--cafe-tan-rgb), 0.25)'
-                        }}
-                      >
-                        {event.type}
-                      </span>
-                      {event.link && (
-                        <a
-                          href={event.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm font-medium underline-offset-4 hover:underline transition-all"
-                          style={{ color: 'var(--cafe-tan)' }}
-                        >
-                          More info →
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </Reveal>
-
-                {/* Event Image */}
-                <Reveal delay={150}>
-                  <div className={isEven ? "" : "lg:order-1"}>
-                    <div
-                      className={`relative w-full overflow-hidden rounded-2xl ${
-                        event.imageFit === "contain"
-                          ? event.imageAspect ?? "aspect-[16/9]"
-                          : "aspect-[4/5]"
-                      }`}
-                      style={{
-                        border: '1px solid rgba(var(--cafe-tan-rgb), 0.15)',
-                        boxShadow: '0 10px 30px rgba(var(--cafe-black-rgb), 0.08)',
-                      }}
-                    >
+                    <div className="relative lg:col-span-2 aspect-[4/5] md:aspect-[5/6] lg:aspect-auto min-h-[320px] overflow-hidden">
                       <Image
                         src={event.image}
                         alt={event.title}
                         fill
-                        className={`grayscale-[20%] hover:grayscale-0 transition-all duration-700 ${
-                          event.imageFit === "contain" ? "object-contain bg-transparent" : "object-cover"
-                        }`}
-                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className={`${event.imageFit === "contain" ? "object-contain bg-white" : "object-cover"} transition-transform duration-700 ease-out hover:scale-105`}
+                        sizes="(min-width: 1024px) 40vw, 100vw"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/25 to-black/60" />
+                      <div className="absolute top-4 left-4 flex flex-wrap items-center gap-3">
+                        <span
+                          className="px-3 py-2 rounded-md text-[11px] uppercase tracking-[0.2em] font-semibold"
+                          style={{
+                            backgroundColor: 'rgba(var(--cafe-cream-rgb), 0.9)',
+                            color: 'var(--cafe-black)',
+                            border: '1px solid rgba(var(--cafe-brown-rgb), 0.1)'
+                          }}
+                        >
+                          {event.type}
+                        </span>
+                        <span
+                          className="px-3 py-2 rounded-md text-[11px] uppercase tracking-[0.2em] font-bold"
+                          style={{
+                            backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.95)',
+                            color: 'white',
+                            border: '1px solid rgba(var(--cafe-tan-rgb), 0.3)'
+                          }}
+                        >
+                          {month} {dayPart}
+                        </span>
+                      </div>
+                      <div className="absolute bottom-4 left-4 right-4 flex items-center gap-4 text-sm font-medium text-white/90">
+                        <span className="flex items-center gap-2">
+                          <Clock size={16} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.6} />
+                          <span>{event.time}</span>
+                        </span>
+                        {event.link && (
+                          <a
+                            href={event.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 underline-offset-4 hover:underline transition"
+                            style={{ color: 'var(--cafe-cream)' }}
+                          >
+                            Details <span aria-hidden>→</span>
+                          </a>
+                        )}
+                      </div>
                     </div>
-                  </div>
+
+                    <div className="relative lg:col-span-3 p-6 md:p-8 lg:p-10 flex flex-col gap-6">
+                      <div className="flex items-start gap-4">
+                        <div
+                          className="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0"
+                          style={{
+                            backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.14)',
+                            border: '1px solid rgba(var(--cafe-tan-rgb), 0.25)'
+                          }}
+                        >
+                          <span className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>
+                            {month}
+                            <br />
+                            <span className="text-2xl font-bold" style={{ color: 'var(--cafe-tan)' }}>{dayPart}</span>
+                          </span>
+                        </div>
+                        <div className="flex-1 space-y-4">
+                          <h3 className="font-serif text-3xl md:text-4xl leading-tight" style={{ color: 'var(--cafe-black)' }}>
+                            {event.title}
+                          </h3>
+                          <p className="text-base md:text-lg font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.82)' }}>
+                            {event.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap gap-3">
+                        <span
+                          className="px-4 py-2 rounded-full text-xs uppercase tracking-[0.18em] font-semibold"
+                          style={{
+                            backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.12)',
+                            color: 'var(--cafe-tan)',
+                            border: '1px solid rgba(var(--cafe-tan-rgb), 0.3)'
+                          }}
+                        >
+                          {event.type}
+                        </span>
+                        <span
+                          className="px-4 py-2 rounded-full text-xs uppercase tracking-[0.18em] font-semibold"
+                          style={{
+                            backgroundColor: 'rgba(var(--cafe-brown-rgb), 0.06)',
+                            color: 'var(--cafe-brown)',
+                            border: '1px solid rgba(var(--cafe-brown-rgb), 0.12)'
+                          }}
+                        >
+                          {event.time}
+                        </span>
+                        {event.link && (
+                          <a
+                            href={event.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 py-2 rounded-full text-xs uppercase tracking-[0.18em] font-semibold inline-flex items-center gap-2 transition-colors"
+                            style={{
+                              backgroundColor: 'rgba(var(--cafe-black-rgb), 0.86)',
+                              color: 'white',
+                              border: '1px solid rgba(var(--cafe-black-rgb), 0.15)'
+                            }}
+                          >
+                            Details
+                            <span aria-hidden>→</span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </article>
                 </Reveal>
-              </div>
-            </div>
-          </section>
-        );
-      })}
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* Stay Updated - Instagram CTA */}
       <section
@@ -323,63 +310,6 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section
-        data-section="Newsletter"
-        className="relative py-24 md:py-32 px-6 overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
-      >
-        <div className="section-deco" style={{ top: '10%', left: '12%', animationDuration: '11s' }} aria-hidden="true">
-          <Calendar strokeWidth={1.4} />
-        </div>
-        <div className="section-deco section-deco-dark" style={{ bottom: '10%', right: '14%', animationDuration: '12s', animationDelay: '0.7s' }} aria-hidden="true">
-          <Music strokeWidth={1.4} />
-        </div>
-
-        <div className="relative max-w-5xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left - Editorial Heading */}
-            <Reveal>
-              <div className="space-y-6">
-                <div className="w-12 h-[2px]" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
-                <h3
-                  className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[0.95]"
-                  style={{ color: 'var(--cafe-black)' }}
-                >
-                  Join Our{" "}
-                  <span className="italic" style={{ color: 'var(--cafe-tan)' }}>
-                    Community
-                  </span>
-                </h3>
-                <p
-                  className="text-lg md:text-xl font-light leading-relaxed"
-                  style={{ color: 'rgba(var(--cafe-brown-rgb), 0.8)' }}
-                >
-                  Event invites, seasonal menu previews, and opening announcements delivered to your inbox.
-                </p>
-              </div>
-            </Reveal>
-
-            {/* Right - Newsletter Form */}
-            <Reveal delay={150}>
-              <div
-                className="relative p-10 md:p-12 bg-white/80 backdrop-blur shadow-lg"
-                style={{
-                  border: '1px solid rgba(var(--cafe-tan-rgb), 0.18)',
-                  borderRadius: '18px'
-                }}
-              >
-                <div className="space-y-3">
-                  <NewsletterForm source="events-page" />
-                  <p className="text-xs text-center font-light" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.55)' }}>
-                    No spam. Unsubscribe anytime.
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

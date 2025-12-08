@@ -9,12 +9,14 @@ type KenBurnsHeroProps = {
   headline?: string;
   subheadline?: string;
   children: ReactNode;
+  contentClassName?: string;
 };
 
 export default function KenBurnsHero({
   backgroundImage,
   headline,
   subheadline,
+  contentClassName,
   children,
 }: KenBurnsHeroProps) {
   const hasImage = Boolean(backgroundImage);
@@ -28,7 +30,7 @@ export default function KenBurnsHero({
     mediaQuery.addEventListener("change", onChange);
 
     const onScroll = () => {
-      const threshold = window.innerWidth < 768 ? 360 : 500;
+      const threshold = window.innerWidth < 768 ? 520 : 500;
       const y = window.scrollY || window.pageYOffset;
       setIsHidden(y > threshold);
     };
@@ -62,7 +64,7 @@ export default function KenBurnsHero({
       )}
       <div className="kb-hero__overlay" aria-hidden data-variant={hasImage ? "image" : "gradient"} />
 
-      <div className="kb-hero__content">
+      <div className={cx("kb-hero__content", contentClassName)}>
         {headline && <p className="kb-hero__headline">{headline}</p>}
         {subheadline && <p className="kb-hero__subheadline">{subheadline}</p>}
         {children}

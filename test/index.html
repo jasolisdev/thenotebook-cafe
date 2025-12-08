@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Notebook Café</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Latte Palette
+              latte: {
+                50: '#FDFBF7',  // Main Background (Cream)
+                100: '#F3EFE0', // Secondary Background
+                200: '#E8DCCA', // Borders / Accents
+                300: '#DCC8B3', // Soft Tan
+                400: '#C99A7A', // Warm Accent
+                800: '#6B5646', // Text secondary
+                900: '#4A3B32', // Text primary (Dark Brown)
+              },
+              white: '#FFFFFF',
+            },
+            fontFamily: {
+              sans: ['Outfit', 'sans-serif'],
+              display: ['Quicksand', 'sans-serif'],
+            },
+            borderRadius: {
+              '4xl': '2rem',
+              '5xl': '2.5rem',
+            },
+            animation: {
+              'float': 'float 6s ease-in-out infinite',
+              'blob': 'blob 7s infinite',
+              'equalize': 'equalize 1s infinite',
+              'marquee': 'marquee 25s linear infinite',
+              'slide-in-left': 'slideInLeft 0.3s ease-out forwards',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-20px)' },
+              },
+              blob: {
+                '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                '100%': { transform: 'translate(0px, 0px) scale(1)' },
+              },
+              equalize: {
+                '0%, 100%': { height: '4px' },
+                '50%': { height: '12px' },
+              },
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-100%)' },
+              },
+              slideInLeft: {
+                '0%': { transform: 'translateX(-100%)' },
+                '100%': { transform: 'translateX(0)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        -webkit-font-smoothing: antialiased;
+        background-color: #FDFBF7;
+        color: #4A3B32;
+        transition: filter 0.3s ease, font-size 0.3s ease;
+      }
+      .font-display { font-family: 'Quicksand', sans-serif; }
+      
+      /* Paper Grain Texture */
+      .bg-noise {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 50;
+        opacity: 0.04;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      }
+
+      /* Accessibility Overrides */
+      html.acc-grayscale {
+        filter: grayscale(100%) !important;
+      }
+      
+      html.acc-contrast {
+        filter: contrast(130%) brightness(110%) !important;
+      }
+      
+      html.acc-invert {
+        filter: invert(100%) !important;
+      }
+      
+      /* Granular Text Sizes */
+      html.acc-text-md { font-size: 110% !important; }
+      html.acc-text-lg { font-size: 125% !important; }
+      html.acc-text-xl { font-size: 140% !important; }
+
+      html.acc-readable-font * {
+        font-family: Arial, Helvetica, sans-serif !important;
+        letter-spacing: 0.05em !important;
+      }
+
+      /* OpenDyslexic Font fallback */
+      @font-face {
+        font-family: 'OpenDyslexic';
+        src: url('https://cdn.jsdelivr.net/npm/opendyslexic@2.1.0-beta.1/open-dyslexic-regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      html.acc-dyslexia-font * {
+        font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important;
+      }
+      
+      html.acc-hide-images img, 
+      html.acc-hide-images .bg-noise {
+        opacity: 0 !important;
+        visibility: hidden !important;
+      }
+
+      /* Cursor Size */
+      html.acc-cursor-lg, html.acc-cursor-lg * {
+        cursor: url('data:image/svg+xml;utf8,<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 L0,26 L7,20 L14,32 L18,29 L11,18 L20,18 L0,0 Z" fill="black" stroke="white" stroke-width="2"/></svg>') 0 0, auto !important;
+      }
+
+      /* Highlight Links */
+      html.acc-highlight-links a {
+        text-decoration: underline !important;
+        background-color: #ffeb3b !important;
+        color: #000 !important;
+        border-radius: 2px;
+        padding: 0 2px;
+      }
+
+      /* Stop Animations */
+      html.acc-stop-animations * {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      /* Reading Guide */
+      #reading-guide-line {
+        position: fixed;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: rgba(255, 0, 0, 0.5);
+        z-index: 9999;
+        pointer-events: none;
+        display: none;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      }
+      
+      html.acc-reading-guide #reading-guide-line {
+        display: block;
+      }
+
+      /* Bionic Reading */
+      b.bionic-bold {
+        font-weight: 800;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <div id="reading-guide-line"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

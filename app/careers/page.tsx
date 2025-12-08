@@ -6,9 +6,10 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import Image from "next/image";
 import Reveal from "../components/ui/Reveal";
-import { Coffee, Heart, TrendingUp, Users, MessageCircle, CheckCircle, Upload, Briefcase, Clock, ChefHat } from "lucide-react";
+import ParallaxHero from "../components/features/ParallaxHero";
+import { Coffee, Heart, TrendingUp, CheckCircle, Upload, Briefcase, Clock, ChefHat } from "lucide-react";
+import "../styles/pages/careers.css";
 
 export default function CareersPage() {
   const [formData, setFormData] = useState({
@@ -104,45 +105,29 @@ export default function CareersPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--cafe-mist)' }}>
       {/* Hero Section */}
-      <section
-        data-section="Careers Hero"
-        className="relative pt-28 pb-28 md:pt-32 md:pb-32 overflow-hidden text-center px-6"
-        style={{ background: 'var(--hero-gradient-espresso)' }}
-      >
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'var(--hero-espresso-overlay)',
-            opacity: 0.78,
-            mixBlendMode: 'screen'
-          }}
-        />
+      <div className="careers-hero-wrapper">
+        <ParallaxHero
+          backgroundImage="/unsplash/tnc-career-hero.png"
+          headline="Join Our Team"
+          contentClassName="text-center"
+        >
+          <div className="max-w-4xl mx-auto space-y-6">
 
-        <div className="max-w-4xl mx-auto relative z-10 space-y-6">
-          <Reveal>
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Coffee size={28} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
-              <span className="font-bold tracking-[0.2em] uppercase text-sm" style={{ color: 'var(--cafe-tan)' }}>
-                Join Our Team
-              </span>
-              <Coffee size={28} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
-            </div>
-          </Reveal>
+            <Reveal delay={200}>
+              <h1 className="font-serif text-[56px] md:text-[86px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
+                Be Part of<br />
+                <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Something Special</span>
+              </h1>
+            </Reveal>
 
-          <Reveal delay={200}>
-            <h1 className="font-serif text-[56px] md:text-[86px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
-              Be Part of<br />
-              <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Something Special</span>
-            </h1>
-          </Reveal>
-
-          <Reveal delay={400}>
-            <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}>
-              Help us build Riverside's first truly genuine coffee community hub. We're looking for passionate, driven people who love great coffee and warm vibes.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+            <Reveal delay={400}>
+              <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}>
+                Help us build Riverside's first truly genuine coffee community hub. We're looking for passionate, driven people who love great coffee and warm vibes.
+              </p>
+            </Reveal>
+          </div>
+        </ParallaxHero>
+      </div>
 
       {/* Culture Section */}
       <section
@@ -163,10 +148,9 @@ export default function CareersPage() {
               </h2>
             </Reveal>
             <Reveal delay={180}>
-              <p className="text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto" style={{ color: 'rgba(74, 59, 50, 0.82)' }}>
-                We're locally-owned, family-oriented, and all about creating a space where people actually want to spend time. Think lofi house music, specialty coffee, fresh acai bowls, and a team that genuinely cares about the craft.
-              </p>
-            </Reveal>
+                              <p className="text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto" style={{ color: 'rgba(74, 59, 50, 0.82)' }}>
+                                We&apos;re locally-owned, family-oriented, and all about creating a space where people actually want to spend time. Think lofi house music, specialty coffee, fresh acai bowls, and a team that genuinely cares about the craft.
+                              </p>            </Reveal>
           </div>
 
           <div className="grid md:grid-cols-3 gap-10 mt-16">
@@ -179,7 +163,7 @@ export default function CareersPage() {
                   Family Vibes
                 </h3>
                 <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  Locally-owned by a husband-wife team. This is our dream, and we want to grow it with people who share our passion.
+                  Locally-owned by a husband-wife team. This is our dream, and we want to grow it with people who&apos;re passionate about what we do.
                 </p>
               </div>
             </Reveal>
@@ -454,7 +438,7 @@ export default function CareersPage() {
                   Connect
                 </h3>
                 <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  We'll set up a casual conversation—think of it as getting to know each other over coffee. You'll learn about our café, our culture, and the role. We'll learn about you, your goals, and what you bring to the table.
+                  We&apos;ll set up a casual conversation—think of it as getting to know each other over coffee. You&apos;ll learn about our café, our culture, and the role. We&apos;ll learn about you, your goals, and what you bring to the table.
                 </p>
               </div>
             </Reveal>
@@ -669,7 +653,7 @@ export default function CareersPage() {
                 Work Availability <span style={{ color: 'var(--cafe-tan)' }}>*</span>
               </label>
               <p className="text-sm mb-3" style={{ color: 'rgba(74, 59, 50, 0.7)' }}>
-                Select all days you're available. Saturday availability may be required (we're closed Sundays).
+                Select all days you&apos;re available. Saturday availability may be required (we&apos;re closed Sundays).
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {[
