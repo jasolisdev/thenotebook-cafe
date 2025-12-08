@@ -23,12 +23,14 @@
 }
 
 .hero-gradient {
-  background-color: var(--cream);
+  position: relative;
+  background: var(--hero-gradient-espresso);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 520px;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 @media (min-width: 375px) {
@@ -48,7 +50,9 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: none;
+  background: var(--hero-espresso-overlay);
+  mix-blend-mode: screen;
+  opacity: 0.8;
   pointer-events: none;
 }
 

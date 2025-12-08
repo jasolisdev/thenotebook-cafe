@@ -75,7 +75,7 @@
   --cream-light-rgb: 244, 240, 233;
 
   /* Core semantic tokens */
-  --bg-solid: var(--cafe-white);
+  --bg-solid: var(--cafe-mist);
   --bg-dark: var(--cafe-black);
   --bg-cream: var(--cafe-cream);
   --bg-mist: var(--cafe-mist);
@@ -110,6 +110,16 @@
   --gold-light: rgba(var(--gold-primary-rgb), var(--opacity-light));
   --gold-medium: rgba(var(--gold-primary-rgb), var(--opacity-medium));
   --gold-strong: rgba(var(--gold-primary-rgb), var(--opacity-strong));
+
+  /* Hero gradients */
+  --hero-gradient-espresso:
+    radial-gradient(ellipse at 78% 0%, rgba(var(--cafe-tan-rgb), 0.34), rgba(var(--cafe-tan-rgb), 0) 56%),
+    radial-gradient(ellipse at 18% 22%, rgba(var(--cafe-tan-rgb), 0.2), rgba(var(--cafe-tan-rgb), 0) 50%),
+    linear-gradient(145deg, #1a120e 0%, #2c2420 55%, #1a120e 100%);
+  --hero-espresso-overlay:
+    radial-gradient(ellipse at 82% 18%, rgba(var(--cafe-cream-rgb), 0.22), rgba(var(--cafe-cream-rgb), 0) 52%),
+    radial-gradient(ellipse at 18% 10%, rgba(var(--cafe-tan-rgb), 0.16), rgba(var(--cafe-tan-rgb), 0) 50%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55));
 
   --dark-overlay: rgba(0, 0, 0, var(--opacity-medium));
   --white-overlay: rgba(255, 255, 255, var(--opacity-light));

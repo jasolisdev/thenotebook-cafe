@@ -176,6 +176,16 @@ export default function SiteHeader({
                 Contact
                 {isActive("/contact") && <span className="nav-underline" />}
               </Link>
+              <Link
+                href="/careers"
+                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/careers")
+                  ? "font-semibold text-cafe-black"
+                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
+                  }`}
+              >
+                Careers
+                {isActive("/careers") && <span className="nav-underline" />}
+              </Link>
 
               <div className="h-4 w-px bg-cafe-beige/50"></div>
 
@@ -263,7 +273,8 @@ export default function SiteHeader({
                     { href: '/menu', label: 'Menu' },
                     { href: '/story', label: 'Story' },
                     { href: '/events', label: 'Events' },
-                    { href: '/contact', label: 'Contact' }
+                    { href: '/contact', label: 'Contact' },
+                    { href: '/careers', label: 'Careers' }
                   ].map((link, index) => (
                     <motion.div
                       key={link.href}
@@ -333,18 +344,6 @@ export default function SiteHeader({
                           />
                         </a>
                       )}
-                      <a
-                        href="https://www.tiktok.com/@thenotebookcafe"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-cafe-tan/10 border border-cafe-tan/20 flex items-center justify-center text-cafe-tan hover:bg-cafe-tan hover:text-cafe-white transition-all duration-300 hover:scale-110"
-                        aria-label="TikTok"
-                      >
-                        <PiTiktokLogoFill
-                          size={18}
-                          className="translate-x-[10px] translate-y-[10px]"
-                        />
-                      </a>
                     </div>
                   )}
                 </motion.div>

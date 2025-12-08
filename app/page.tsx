@@ -88,7 +88,7 @@ export default async function HomePage() {
   const { home, settings } = await getData();
 
   return (
-    <main className="overflow-hidden" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-brown)' }}>
+    <main className="overflow-hidden" style={{ backgroundColor: 'var(--cafe-mist)', color: 'var(--cafe-brown)' }}>
       {/* Hero Section */}
       <KenBurnsHero>
         <Reveal>
@@ -108,7 +108,7 @@ export default async function HomePage() {
           <div className="flex items-center justify-center gap-4 md:gap-5 mb-[6px] pt-[6px] sm:pt-[10px]">
             <span
               className="h-[2px] w-12 md:w-16 rounded-full"
-              style={{ background: 'linear-gradient(90deg, transparent, rgba(var(--cafe-brown-rgb), 0.45), transparent)' }}
+              style={{ background: 'linear-gradient(90deg, transparent, rgba(var(--cafe-cream-rgb), 0.55), transparent)' }}
               aria-hidden
             />
             <span className="inline-block text-sm md:text-base uppercase tracking-[0.3em] font-medium" style={{ color: 'var(--cafe-tan)' }}>
@@ -116,21 +116,21 @@ export default async function HomePage() {
             </span>
             <span
               className="h-[2px] w-12 md:w-16 rounded-full"
-              style={{ background: 'linear-gradient(90deg, transparent, rgba(var(--cafe-brown-rgb), 0.45), transparent)' }}
+              style={{ background: 'linear-gradient(90deg, transparent, rgba(var(--cafe-cream-rgb), 0.55), transparent)' }}
               aria-hidden
             />
           </div>
         </Reveal>
 
         <Reveal delay={200}>
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.9] mb-6" style={{ color: 'var(--cafe-black)' }}>
+          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.9] mb-6" style={{ color: 'var(--cafe-cream)' }}>
             Where Every Cup <br />
             <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Tells a Story</span>
           </h1>
         </Reveal>
 
         <Reveal delay={400}>
-          <p className="text-lg md:text-xl max-w-xl mx-auto mb-8 font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
+          <p className="text-lg md:text-xl max-w-xl mx-auto mb-8 font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}>
             Come for the coffee, stay for the vibe.
           </p>
         </Reveal>
@@ -144,7 +144,7 @@ export default async function HomePage() {
       <section
         data-section="Signature Pours"
         className="relative py-24 px-6 overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-white)' }}
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         {/* Subtle Floating Decorations */}
         <div className="absolute top-20 right-10 md:right-20 opacity-[0.05] pointer-events-none signature-float" style={{ animation: 'floatGentle 10s ease-in-out infinite' }}>
@@ -198,7 +198,7 @@ export default async function HomePage() {
       <section
         data-section="Our Philosophy"
         className="py-24 relative overflow-visible"
-        style={{ backgroundColor: 'var(--cafe-white)' }}
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <PhilosophyBlob />
         <div className="section-deco" style={{ top: '6%', right: '12%', animationDuration: '13s' }} aria-hidden="true">
@@ -298,7 +298,7 @@ export default async function HomePage() {
       <section
         data-section="Low Lights"
         className="relative overflow-visible py-24 md:py-32 px-6"
-        style={{ backgroundColor: 'var(--cafe-white)' }}
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <StoryBlobs />
         <div className="section-deco" style={{ top: '8%', left: '6%', animationDuration: '12s', animationDelay: '0.4s' }} aria-hidden="true">
@@ -361,7 +361,7 @@ export default async function HomePage() {
       <section
         data-section="The Trinity"
         className="py-20 md:py-24 relative overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-white)' }}
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <div className="section-deco" style={{ top: '12%', right: '16%', animationDuration: '10s' }} aria-hidden="true">
           <Sparkles strokeWidth={1.6} />
@@ -456,7 +456,7 @@ export default async function HomePage() {
       <section
         data-section="Atmosphere"
         className="relative pt-24 md:pt-32 pb-[calc(6rem+20px)] md:pb-[calc(8rem+20px)] px-6 overflow-visible"
-        style={{ backgroundColor: 'var(--cafe-white)' }}
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <AtmosphereBlob />
         <div className="section-deco" style={{ top: '10%', left: '8%', animationDuration: '11s' }} aria-hidden="true">
@@ -523,7 +523,7 @@ export default async function HomePage() {
       <section
         data-section="Atmosphere Images"
         className="overflow-visible relative pb-24 md:pb-28"
-        style={{ backgroundColor: 'var(--cafe-white)' }}
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <div className="section-deco" style={{ top: '6%', left: '10%', animationDuration: '13s' }} aria-hidden="true">
           <Sparkles strokeWidth={1.6} />

@@ -57,28 +57,18 @@ export default async function StoryPage() {
   const bulletIcons = [Music, Sparkles, Coffee, BookOpen];
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: '#FAF9F6' }}>
+    <main className="min-h-screen" style={{ backgroundColor: 'var(--cafe-mist)' }}>
       {/* Hero Section (from prototype) */}
       <section
         data-section="Story Hero"
         className="relative pt-28 pb-28 md:pt-32 md:pb-32 overflow-hidden text-center px-6"
-        style={{
-          background: `
-            radial-gradient(circle at 18% 22%, rgba(255, 251, 245, 0.9), rgba(255, 251, 245, 0) 34%),
-            radial-gradient(circle at 78% 12%, rgba(245, 225, 199, 0.45), rgba(245, 225, 199, 0) 40%),
-            linear-gradient(140deg, #fffaf3 0%, #f6efe5 48%, #e9ddcb 100%)
-          `
-        }}
+        style={{ background: 'var(--hero-gradient-espresso)' }}
       >
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: `
-              radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 34%),
-              radial-gradient(circle at 82% 16%, rgba(240, 215, 182, 0.55), rgba(240, 215, 182, 0) 40%),
-              linear-gradient(180deg, rgba(250, 239, 224, 0.65), rgba(232, 213, 187, 0.4))
-            `,
-            opacity: 0.92,
+            background: 'var(--hero-espresso-overlay)',
+            opacity: 0.78,
             mixBlendMode: 'screen'
           }}
         />
@@ -91,14 +81,14 @@ export default async function StoryPage() {
           </Reveal>
 
           <Reveal delay={200}>
-            <h1 className="font-serif text-[64px] md:text-[86px] leading-[0.9]" style={{ color: 'var(--cafe-black)' }}>
+            <h1 className="font-serif text-[64px] md:text-[86px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
               Built by Locals,<br />
               <span className="italic" style={{ color: 'var(--cafe-tan)' }}>For Locals</span>
             </h1>
           </Reveal>
 
           <Reveal delay={400}>
-            <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
+            <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}>
               The story of a husband-wife dream to create Riverside's first truly genuine coffee community hub.
             </p>
           </Reveal>
@@ -247,7 +237,7 @@ export default async function StoryPage() {
       <section
         data-section="Why Riverside"
         className="py-24 md:py-32 relative overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-white)' }}
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <div className="section-deco" style={{ top: '8%', right: '10%', animationDuration: '11s' }} aria-hidden="true">
           <MapPin strokeWidth={1.4} />
@@ -354,7 +344,7 @@ export default async function StoryPage() {
       <section
         data-section="What Sets Us Apart"
         className="py-24 md:py-32 relative overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-white)' }}
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <div className="section-deco" style={{ top: '8%', right: '10%', animationDuration: '13s' }} aria-hidden="true">
           <Sparkles strokeWidth={1.6} />

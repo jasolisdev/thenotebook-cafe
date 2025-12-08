@@ -9,28 +9,18 @@ import { MapPin, Clock, Phone, Instagram, Mail, Coffee } from "lucide-react";
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen" style={{ backgroundColor: '#FAF9F6' }}>
+    <main className="min-h-screen" style={{ backgroundColor: 'var(--cafe-mist)' }}>
       {/* Hero Section */}
       <section
         data-section="Contact Hero"
         className="relative pt-28 pb-28 md:pt-32 md:pb-32 overflow-hidden text-center px-6"
-        style={{
-          background: `
-            radial-gradient(circle at 18% 22%, rgba(255, 251, 245, 0.9), rgba(255, 251, 245, 0) 34%),
-            radial-gradient(circle at 78% 12%, rgba(245, 225, 199, 0.45), rgba(245, 225, 199, 0) 40%),
-            linear-gradient(140deg, #fffaf3 0%, #f6efe5 48%, #e9ddcb 100%)
-          `
-        }}
+        style={{ background: 'var(--hero-gradient-espresso)' }}
       >
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: `
-              radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 34%),
-              radial-gradient(circle at 82% 16%, rgba(240, 215, 182, 0.55), rgba(240, 215, 182, 0) 40%),
-              linear-gradient(180deg, rgba(250, 239, 224, 0.65), rgba(232, 213, 187, 0.4))
-            `,
-            opacity: 0.92,
+            background: 'var(--hero-espresso-overlay)',
+            opacity: 0.78,
             mixBlendMode: 'screen'
           }}
         />
@@ -43,14 +33,14 @@ export default function ContactPage() {
           </Reveal>
 
           <Reveal delay={200}>
-            <h1 className="font-serif text-[64px] md:text-[86px] leading-[0.9]" style={{ color: 'var(--cafe-black)' }}>
+            <h1 className="font-serif text-[64px] md:text-[86px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
               Visit Us<br />
               <span className="italic" style={{ color: 'var(--cafe-tan)' }}>In Riverside</span>
             </h1>
           </Reveal>
 
           <Reveal delay={400}>
-            <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.78)' }}>
+            <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}>
               Come write your next chapter with us. Walk in, call ahead, or plan your next creative session here.
             </p>
           </Reveal>
@@ -61,7 +51,7 @@ export default function ContactPage() {
       <section
         data-section="Contact Info"
         className="py-24 md:py-32 relative overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-white)' }}
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <div className="section-deco" style={{ top: '10%', right: '12%', animationDuration: '11s' }} aria-hidden="true">
           <Phone strokeWidth={1.4} />
@@ -243,7 +233,7 @@ export default function ContactPage() {
       <section
         data-section="Connect Online"
         className="py-24 md:py-32 relative overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-white)' }}
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <div className="section-deco" style={{ top: '10%', right: '12%', animationDuration: '11s' }} aria-hidden="true">
           <Instagram strokeWidth={1.4} />
