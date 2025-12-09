@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
+import Image from "next/image";
 import { X, Plus, Minus, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MenuItem, CartItem, SelectedModifier } from '@/app/types';
@@ -20,83 +21,107 @@ interface ProductModalProps {
 }
 
 export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAddToOrder, editingItem }) => {
+  if (!item) return null;
+
+  const modalKey = `${item.id}-${editingItem ? 'edit' : 'new'}`;
+  return (
+    <ProductModalContent
+      key={modalKey}
+      item={item}
+      onClose={onClose}
+      onAddToOrder={onAddToOrder}
+      editingItem={editingItem}
+    />
+  );
+};
+
+const buildInitialSelections = (
+  groups: ReturnType<typeof deriveModifierGroups>,
+  editingItem?: CartItem | null,
+) => {
+  const initial: Record<string, Set<string>> = {};
+
+  groups.forEach(group => {
+    if (editingItem) {
+      const groupModifiers = editingItem.modifiers.filter(m => m.groupId === group.id);
+      if (groupModifiers.length > 0) {
+        initial[group.id] = new Set(groupModifiers.map(m => m.optionLabel));
+        return;
+      }
+    }
+
+    if (group.type === 'radio' && group.required && group.options.length > 0) {
+      initial[group.id] = new Set([group.options[0].label]);
+    } else {
+      initial[group.id] = new Set();
+    }
+  });
+
+  return initial;
+};
+
+const deriveModifierGroups = (item: MenuItem) => {
+  if (item.section === 'drinks') return MODIFIERS.drinks;
+  if (item.subcategory === 'Açaí Bowls') {
+    if (item.name === 'The Classic Chapter') return MODIFIERS.classicBowl;
+    return MODIFIERS.bowls;
+  }
+  if (item.subcategory === 'Bowls') return MODIFIERS.bowls;
+  if (item.subcategory === 'Bagels') return MODIFIERS.bagels;
+  if (item.subcategory === 'Panini Press') return MODIFIERS.paninis;
+  return MODIFIERS.food;
+};
+
+type ProductModalContentProps = {
+  item: MenuItem;
+  onClose: () => void;
+  onAddToOrder?: (item: CartItem) => void;
+  editingItem?: CartItem | null;
+};
+
+const ProductModalContent: React.FC<ProductModalContentProps> = ({
+  item,
+  onClose,
+  onAddToOrder,
+  editingItem,
+}) => {
   const { addItem, updateItem } = useCart();
-  const [quantity, setQuantity] = useState(1);
-  const [notes, setNotes] = useState('');
-  const [selections, setSelections] = useState<Record<string, Set<string>>>({});
-  const modalOpen = !!item;
+  const modifierGroups = useMemo(() => deriveModifierGroups(item), [item]);
+  const [quantity, setQuantity] = useState(() => editingItem?.quantity ?? 1);
+  const [notes, setNotes] = useState(() => editingItem?.notes ?? '');
+  const [selections, setSelections] = useState<Record<string, Set<string>>>(() =>
+    buildInitialSelections(modifierGroups, editingItem)
+  );
+  const [hideImages, setHideImages] = useState(false);
+
+  // Track accessibility "hide images" toggle by watching the root class list.
+  useEffect(() => {
+    const updateHideImages = () => {
+      if (typeof document === 'undefined') return;
+      setHideImages(document.documentElement.classList.contains('acc-hide-images'));
+    };
+
+    updateHideImages();
+
+    const observer = new MutationObserver(updateHideImages);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (typeof document === 'undefined') return;
     const body = document.body;
-    if (modalOpen) {
-      body.dataset.modalOpen = 'true';
-      body.style.overflow = 'hidden';
-    } else {
-      body.dataset.modalOpen = 'false';
-      if (body.dataset.cartOpen !== 'true' && body.dataset.navOpen !== 'true') {
-        body.style.overflow = '';
-      }
-    }
+    body.dataset.modalOpen = 'true';
+    body.style.overflow = 'hidden';
+
     return () => {
       body.dataset.modalOpen = 'false';
       if (body.dataset.cartOpen !== 'true' && body.dataset.navOpen !== 'true') {
         body.style.overflow = '';
       }
     };
-  }, [modalOpen]);
-
-  const modifierGroups = useMemo(() => {
-    if (!item) return [];
-    if (item.section === 'drinks') return MODIFIERS.drinks;
-    if (item.subcategory === 'Açaí Bowls') {
-      // The Classic Chapter only has extra toppings
-      if (item.name === 'The Classic Chapter') return MODIFIERS.classicBowl;
-      // Build Your Own Bowl has all options
-      return MODIFIERS.bowls;
-    }
-    if (item.subcategory === 'Bowls') return MODIFIERS.bowls;
-    if (item.subcategory === 'Bagels') return MODIFIERS.bagels;
-    if (item.subcategory === 'Panini Press') return MODIFIERS.paninis;
-    return MODIFIERS.food;
-  }, [item]);
-
-  useEffect(() => {
-    if (item) {
-      // If editing, pre-fill with existing values
-      if (editingItem) {
-        setQuantity(editingItem.quantity);
-        setNotes(editingItem.notes || '');
-
-        // Rebuild selections from existing modifiers
-        const initialSelections: Record<string, Set<string>> = {};
-        modifierGroups.forEach(group => {
-          const groupModifiers = editingItem.modifiers.filter(m => m.groupId === group.id);
-          if (groupModifiers.length > 0) {
-            initialSelections[group.id] = new Set(groupModifiers.map(m => m.optionLabel));
-          } else if (group.type === 'radio' && group.required && group.options.length > 0) {
-            initialSelections[group.id] = new Set([group.options[0].label]);
-          } else {
-            initialSelections[group.id] = new Set();
-          }
-        });
-        setSelections(initialSelections);
-      } else {
-        // Adding new item - use defaults
-        setQuantity(1);
-        setNotes('');
-        const initialSelections: Record<string, Set<string>> = {};
-        modifierGroups.forEach(group => {
-          if (group.type === 'radio' && group.required && group.options.length > 0) {
-            initialSelections[group.id] = new Set([group.options[0].label]);
-          } else {
-            initialSelections[group.id] = new Set();
-          }
-        });
-        setSelections(initialSelections);
-      }
-    }
-  }, [item, modifierGroups, editingItem]);
+  }, []);
 
   const toggleSelection = (groupId: string, optionLabel: string, type: 'select' | 'radio' | 'checkbox', maxSelections?: number) => {
     setSelections(prev => {
@@ -165,21 +190,36 @@ export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAdd
           className="pointer-events-auto w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-xl sm:rounded-2xl shadow-2xl flex flex-col relative z-10 overflow-hidden"
           style={{ backgroundColor: colors.cream }}
         >
-          <div className="relative h-64 sm:h-56 overflow-hidden shrink-0 group" style={{ backgroundColor: colors.brown }}>
-            <img
-              src="/unsplash/tnc-placeholder-menuitem.png"
-              alt={item.name}
-              className="w-full h-full object-cover opacity-95"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent sm:from-black/40" />
-            <button
-              onClick={close}
-              className="absolute top-4 right-4 p-2 rounded-full text-white transition-colors z-20"
-              style={{ backgroundColor: 'rgba(0,0,0,0.35)' }}
-            >
-              <X size={24} />
-            </button>
-          </div>
+          {hideImages ? (
+            <div className="flex justify-end p-4 sm:p-5" style={{ backgroundColor: colors.white }}>
+              <button
+                onClick={close}
+                className="p-2 rounded-full transition-colors"
+                style={{ backgroundColor: `${colors.mist}CC`, color: colors.black }}
+              >
+                <X size={24} />
+              </button>
+            </div>
+          ) : (
+            <div className="relative h-64 sm:h-56 overflow-hidden shrink-0 group" style={{ backgroundColor: colors.brown }}>
+              <Image
+                src="/unsplash/tnc-placeholder-menuitem.png"
+                alt={item.name}
+                fill
+                sizes="(min-width: 640px) 720px, 100vw"
+                className="object-cover opacity-95"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent sm:from-black/40" />
+              <button
+                onClick={close}
+                className="absolute top-4 right-4 p-2 rounded-full text-white transition-colors z-20"
+                style={{ backgroundColor: 'rgba(0,0,0,0.35)' }}
+              >
+                <X size={24} />
+              </button>
+            </div>
+          )}
 
           <div className="flex-1 overflow-y-auto scroll-smooth pb-32" style={{ backgroundColor: colors.white }}>
             <div className="p-6 space-y-6">

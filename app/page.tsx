@@ -5,7 +5,6 @@
  */
 import Link from "next/link";
 import Image from "next/image";
-import { client } from "@/sanity/lib/client";
 import Reveal from "./components/ui/Reveal";
 import HeroButtons from "./components/ui/HeroButtons";
 import KenBurnsHero from "./components/features/KenBurnsHero";
@@ -71,27 +70,12 @@ const atmosphereFeatures = [
   }
 ];
 
-async function getData() {
-  const [home, settings] = await Promise.all([
-    client.fetch(`*[_type=="homePage"][0]{
-      heroHeadline, heroTagline, statusLine, ctaText, ctaUrl,
-      whatToExpectBullets, vibeCopy
-    }`),
-    client.fetch(
-      `*[_type=="settings"][0]{ social{ instagram, spotify }, address, hours }`
-    ),
-  ]);
-  return { home, settings };
-}
-
 export default async function HomePage() {
-  const { home, settings } = await getData();
-
   return (
     <main className="overflow-hidden" style={{ backgroundColor: 'var(--cafe-mist)', color: 'var(--cafe-brown)' }}>
       {/* Hero Section */}
       <KenBurnsHero
-        backgroundImage="/home/hero-bg.png"
+        backgroundImage="/home/hero-bg-2.png"
         contentClassName="home-hero-shell"
       >
         <div className="home-hero-grid">
@@ -278,7 +262,7 @@ export default async function HomePage() {
               </Reveal>
               <Reveal delay={200}>
                 <p className="text-xl md:text-2xl text-cafe-brown/80 mb-6 font-light leading-relaxed">
-                  We believe that great ideas start with great coffee. Whether you're sketching your next masterpiece, writing the next great novel, or just enjoying a moment of silence.
+                  We believe that great ideas start with great coffee. Whether you&apos;re sketching your next masterpiece, writing the next great novel, or just enjoying a moment of silence.
                 </p>
               </Reveal>
               <Reveal delay={260}>

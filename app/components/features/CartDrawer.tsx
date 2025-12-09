@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from "next/image";
+import Link from "next/link";
 import { ShoppingBag, X, Trash2, Minus, Plus, Edit2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/Button';
@@ -88,11 +90,11 @@ export const CartDrawer: React.FC = () => {
                   <p className="text-sm" style={{ color: colors.brown }}>
                     Looks like you haven&apos;t added any treats yet.
                   </p>
-                  <a href="/menu" className="mt-8 inline-block">
+                  <Link href="/menu" className="mt-8 inline-block" onClick={close}>
                     <Button variant="outline">
                       Browse Menu
                     </Button>
-                  </a>
+                  </Link>
                 </div>
               ) : (
                 <>
@@ -109,13 +111,15 @@ export const CartDrawer: React.FC = () => {
                       }}
                     >
                       <div
-                        className="w-16 h-16 rounded-lg shrink-0 overflow-hidden relative"
+                        className="relative w-16 h-16 rounded-lg shrink-0 overflow-hidden"
                         style={{ backgroundColor: colors.mist }}
                       >
-                        <img
+                        <Image
                           src="/unsplash/tnc-placeholder-menuitem.png"
-                          className="w-full h-full object-cover"
                           alt={item.name}
+                          fill
+                          sizes="64px"
+                          className="object-cover"
                         />
                         <div
                           className="absolute bottom-0 right-0 text-[10px] font-bold px-1.5 py-0.5 rounded-tl-md"
@@ -211,7 +215,7 @@ export const CartDrawer: React.FC = () => {
                   ))}
 
                   {/* Add More Items Link */}
-                  <a
+                  <Link
                     href="/menu"
                     className="flex items-center justify-center gap-2 p-4 rounded-xl border-2 border-dashed transition-all hover:border-solid"
                     style={{
@@ -219,10 +223,11 @@ export const CartDrawer: React.FC = () => {
                       color: colors.tan,
                       backgroundColor: `${colors.cream}40`
                     }}
+                    onClick={close}
                   >
                     <Plus size={16} />
                     <span className="font-medium">Add More Items</span>
-                  </a>
+                  </Link>
                 </>
               )}
             </div>

@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Coffee, Search, ArrowRight, ShoppingBag } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { MenuItem as MenuItemType, CartItem, SelectedModifier } from '@/app/types';
+import Image from "next/image";
+import { Coffee, ArrowRight } from 'lucide-react';
+import { MenuItem as MenuItemType, SelectedModifier } from '@/app/types';
 import { MENU_ITEMS } from '@/app/constants';
 import { ProductModal } from '@/app/components/features/ProductModal';
 import { useCart } from '@/app/components/providers/CartProvider';
@@ -22,14 +22,13 @@ const colors = {
 
 export default function MenuPage() {
   const [selectedItem, setSelectedItem] = useState<MenuItemType | null>(null);
-  const { items: cart, open: openCart, addItem, isOpen: cartOpen } = useCart();
+  const { addItem } = useCart();
   const [activeSection, setActiveSection] = useState<'drinks' | 'meals' | 'desserts'>('drinks');
   const [searchQuery, setSearchQuery] = useState('');
   const menuRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const hasMountedRef = useRef(false);
   const tabClickedRef = useRef(false);
-  const cartLength = cart.length;
 
   const filteredItems = MENU_ITEMS.filter(item => {
     const matchesSection = item.section === activeSection;
@@ -183,11 +182,13 @@ export default function MenuPage() {
                       onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'transparent')}
                       onClick={() => setSelectedItem(item)}
                     >
-                      <div className="w-[60px] h-[60px] md:w-24 md:h-24 rounded-lg md:rounded-xl overflow-hidden shrink-0" style={{ backgroundColor: colors.mist }}>
-                        <img
+                      <div className="relative w-[60px] h-[60px] md:w-24 md:h-24 rounded-lg md:rounded-xl overflow-hidden shrink-0 menu-card-image" style={{ backgroundColor: colors.mist }}>
+                        <Image
                           src="/unsplash/tnc-placeholder-menuitem.png"
                           alt={item.name}
-                          className="w-full h-full object-cover transition-transform duration-500"
+                          fill
+                          sizes="96px"
+                          className="object-cover transition-transform duration-500"
                         />
                       </div>
                       <div className="flex-1 min-w-0 pr-2">
@@ -208,7 +209,7 @@ export default function MenuPage() {
                               </span>
                             )}
                           </div>
-                          <div className="w-6 h-6 rounded-full flex items-center justify-center transition-colors" style={{ backgroundColor: colors.mist, color: colors.black }}>
+                          <div className="w-6 h-6 rounded-full flex items-center justify-center transition-colors acc-icon-only" style={{ backgroundColor: colors.mist, color: colors.black }}>
                             <ArrowRight size={12} />
                           </div>
                         </div>

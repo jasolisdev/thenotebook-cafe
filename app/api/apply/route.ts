@@ -132,7 +132,31 @@ export async function POST(req: Request) {
     }
 
     // Create job application document
-    const applicationData: any = {
+    type FileReference = {
+      _type: "file";
+      asset: {
+        _type: "reference";
+        _ref: string;
+      };
+    };
+
+    const applicationData: {
+      _type: "jobApplication";
+      fullName: string;
+      email: string;
+      phone: string;
+      positions: string[];
+      resume: FileReference;
+      employmentType: string;
+      daysAvailable: string;
+      startDate: string;
+      hoursPerWeek: string;
+      commitmentLength: string;
+      message: string;
+      status: "new";
+      appliedAt: string;
+      supplementalApplication?: FileReference;
+    } = {
       _type: "jobApplication",
       fullName,
       email,

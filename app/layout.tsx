@@ -17,9 +17,6 @@ import "./styles/layout/animations.css";
 
 // Page styles
 import "./styles/pages/home.css";
-import "./styles/pages/about.css";
-import "./styles/pages/events.css";
-import "./styles/pages/contact.css";
 
 import { ThemeProvider } from "next-themes";
 import { DM_Serif_Display, Outfit, Caveat } from "next/font/google";
@@ -28,14 +25,14 @@ import PasswordGate from "./components/ui/PasswordGate";
 import SiteHeader from "./components/layout/SiteHeader";
 import SiteFooter from "./components/layout/SiteFooter";
 import AnnouncementBanner from "./components/ui/AnnouncementBanner";
-import Script from "next/script";
 import { client } from "@/sanity/lib/client";
-import VirtualBarista from "./components/ui/VirtualBarista";
 import { CartProvider } from "./components/providers/CartProvider";
 import { CartDrawer } from "./components/features/CartDrawer";
 import { AccessibilityWidget } from "./components/features/Accessibility/AccessibilityWidget";
 import ConsentBanner from "./components/ui/ConsentBanner";
 import AnalyticsLoader from "./components/ui/AnalyticsLoader";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 
 // Google Fonts
 const dmSerif = DM_Serif_Display({
@@ -88,7 +85,7 @@ export default async function RootLayout({
     *[_type=="settings"][0]{
       social
     }
-  `) : null;
+  `, {}, { next: { revalidate: 3600 } }) : null;
 
   return (
     <html
@@ -122,6 +119,8 @@ export default async function RootLayout({
                 {/* <VirtualBarista /> */}
                 <AccessibilityWidget />
                 <CartDrawer />
+                <Analytics />
+                <SpeedInsights />
               </>
             )}
           </CartProvider>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { X, Mail, Sparkles } from 'lucide-react';
 import NewsletterForm from './NewsLetterForm';
 
@@ -22,14 +22,23 @@ interface NewsletterModalProps {
 export default function NewsletterModal({ isOpen, onClose, source = "modal" }: NewsletterModalProps) {
   // Lock body scroll when modal is open
   useEffect(() => {
+    const body = document.body;
+
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      body.dataset.modalOpen = 'true';
+      body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      body.dataset.modalOpen = 'false';
+      if (body.dataset.cartOpen !== 'true' && body.dataset.navOpen !== 'true') {
+        body.style.overflow = '';
+      }
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
+      body.dataset.modalOpen = 'false';
+      if (body.dataset.cartOpen !== 'true' && body.dataset.navOpen !== 'true') {
+        body.style.overflow = '';
+      }
     };
   }, [isOpen]);
 

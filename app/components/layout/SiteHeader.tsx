@@ -4,8 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { BookOpen, ShoppingBag, Menu, Coffee, Music, Instagram as InstagramIcon } from "lucide-react";
-import { PiSpotifyLogoFill, PiInstagramLogoFill, PiTiktokLogoFill } from "react-icons/pi";
+import { ShoppingBag } from "lucide-react";
+import { PiSpotifyLogoFill, PiInstagramLogoFill } from "react-icons/pi";
 import { motion, AnimatePresence } from "framer-motion";
 
 const badgeColors = {
@@ -16,7 +16,6 @@ const badgeColors = {
 type SiteHeaderProps = {
   instagramUrl?: string;
   spotifyUrl?: string;
-  announcementText?: string;
   cartCount?: number;
   onCartClick?: () => void;
 };
@@ -24,7 +23,6 @@ type SiteHeaderProps = {
 export default function SiteHeader({
   instagramUrl,
   spotifyUrl,
-  announcementText,
   cartCount = 0,
   onCartClick,
 }: SiteHeaderProps): React.JSX.Element {
@@ -33,6 +31,7 @@ export default function SiteHeader({
   const [isVisible, setIsVisible] = useState<boolean>(true);
   const [showSolidBg, setShowSolidBg] = useState<boolean>(false);
   const [isAtTop, setIsAtTop] = useState<boolean>(true);
+  const [forceHighContrast, setForceHighContrast] = useState<boolean>(false);
   const pathname = usePathname();
   const forceSolidRoutes = ["/terms", "/privacy", "/refunds"];
   const forceSolidBg = forceSolidRoutes.some((route) => pathname?.startsWith(route));
@@ -43,7 +42,7 @@ export default function SiteHeader({
   const isActive = (path: string): boolean => pathname === path;
   const navLinkBase =
     "nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist";
-  const solidBg = showSolidBg || forceSolidBg || isOpen;
+  const solidBg = showSolidBg || forceSolidBg || isOpen || forceHighContrast;
   const activeLinkClass = solidBg ? "font-semibold text-cafe-black" : "font-semibold text-cafe-cream";
   const inactiveLinkClass = solidBg
     ? "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
@@ -106,7 +105,9 @@ export default function SiteHeader({
         window.scrollTo(0, 0);
       });
     }
+    /* eslint-disable react-hooks/set-state-in-effect */
     setIsOpen(false);
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [pathname]);
 
   // Lock body scroll when drawer is open
@@ -119,8 +120,26 @@ export default function SiteHeader({
 
   // Sync cart count from global events when not passed explicitly
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
     setCartBadge(cartCount ?? 0);
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [cartCount]);
+
+  // Respect accessibility hide-images toggle for nav contrast/logo
+  useEffect(() => {
+    const updateContrast = () => {
+      if (typeof document === "undefined") return;
+      const isHideImages = document.documentElement.classList.contains("acc-hide-images");
+      setForceHighContrast(isHideImages);
+      forceSolidRef.current = forceSolidBg || isHideImages;
+      setShowSolidBg((prev) => (isHideImages ? true : prev));
+    };
+
+    updateContrast();
+    const observer = new MutationObserver(updateContrast);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, [forceSolidBg]);
 
   // Keep forceSolidBg available inside scroll handler without changing deps length
   useEffect(() => {
@@ -157,7 +176,7 @@ export default function SiteHeader({
       {/* <AnnouncementBanner text={announcementText} /> */}
 
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 ${isOpen ? '' : (showSolidBg ? 'backdrop-blur-xl' : 'backdrop-blur-none')} border-b transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 right-0 z-50 ${isOpen ? '' : (solidBg ? 'backdrop-blur-xl' : 'backdrop-blur-none')} border-b transition-all duration-300 ease-in-out ${
           isOpen
             ? 'bg-cafe-mist border-cafe-tan/10'
             : solidBg

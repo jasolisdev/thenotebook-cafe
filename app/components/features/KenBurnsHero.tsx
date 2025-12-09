@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
@@ -21,12 +20,13 @@ export default function KenBurnsHero({
 }: KenBurnsHeroProps) {
   const hasImage = Boolean(backgroundImage);
   const [isHidden, setIsHidden] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const onChange = () => setPrefersReducedMotion(mediaQuery.matches);
-    setPrefersReducedMotion(mediaQuery.matches);
     mediaQuery.addEventListener("change", onChange);
 
     const onScroll = () => {

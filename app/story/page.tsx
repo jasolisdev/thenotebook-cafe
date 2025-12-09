@@ -7,26 +7,17 @@ import { client } from "@/sanity/lib/client";
 import Reveal from "../components/ui/Reveal";
 import Image from "next/image";
 import ParallaxHero from "../components/features/ParallaxHero";
-import NewsletterForm from "../components/features/NewsLetterForm";
 import { Coffee, Music, Heart, MapPin, Sparkles, BookOpen, Users, Home as HomeIcon, Award } from "lucide-react";
 
 type PortableChild = { text?: string };
 type PortableBlock = { _type?: string; children?: PortableChild[] };
 
-/** Fetch "aboutPage" + "settings" + "homePage" from Sanity */
+/** Fetch "aboutPage" from Sanity */
 async function getAboutData() {
-  const [about, settings, home] = await Promise.all([
-    client.fetch(`*[_type=="aboutPage"][0]{
-      title, body, valuesHeading, valuesBullets, missionHeading, founderNote
-    }`),
-    client.fetch(`*[_type=="settings"][0]{
-      social{ instagram, spotify }
-    }`),
-    client.fetch(`*[_type=="homePage"][0]{
-      vibeCopy
-    }`),
-  ]);
-  return { about, settings, home };
+  const about = await client.fetch(`*[_type=="aboutPage"][0]{
+    title, body, valuesHeading, valuesBullets, missionHeading, founderNote
+  }`);
+  return { about };
 }
 
 /** Very small portable text renderer */
@@ -46,16 +37,7 @@ function PT({ body }: { body: PortableBlock[] }) {
 }
 
 export default async function StoryPage() {
-  const { about, settings, home } = await getAboutData();
-
-  const bullets = about?.valuesBullets ?? [
-    "A café that plays house, soul, and groove — not top 40 radio.",
-    "A space you can actually sit in. Stay, settle, think, create.",
-    "Coffee treated with respect — from beans to texture.",
-    "A Riverside original — for locals and creatives alike.",
-  ];
-
-  const bulletIcons = [Music, Sparkles, Coffee, BookOpen];
+  const { about } = await getAboutData();
 
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--cafe-mist)' }}>
@@ -77,7 +59,7 @@ export default async function StoryPage() {
 
           <Reveal delay={400}>
             <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}>
-              The story of a husband-wife dream to create Riverside's first truly genuine coffee community hub.
+              The story of a husband-wife dream to create Riverside&apos;s first truly genuine coffee community hub.
             </p>
           </Reveal>
         </div>
@@ -116,7 +98,7 @@ export default async function StoryPage() {
               <div className="prose prose-xl mx-auto font-light" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
                 <p className="text-lg md:text-xl first-letter:text-5xl first-letter:font-serif first-letter:mr-3 first-letter:float-left" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
                   It started with a simple observation: Riverside needed a place that felt different.
-                  Not a quick stop for caffeine, but a destination. A place where the music wasn't an afterthought,
+                  Not a quick stop for caffeine, but a destination. A place where the music wasn&apos;t an afterthought,
                   where the chairs were actually comfortable, and where the coffee was treated with the reverence it deserves.
                 </p>
                 <p className="text-lg md:text-xl mt-6" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>
@@ -203,7 +185,7 @@ export default async function StoryPage() {
               </Reveal>
               <Reveal delay={200}>
                 <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.82)' }}>
-                  Riverside needed a place that felt different. Not a quick stop for caffeine, but a <strong style={{ color: 'var(--cafe-black)', fontWeight: 600 }}>destination</strong>. Somewhere the music wasn't an afterthought, the chairs were actually comfortable, and the coffee was treated with reverence.
+                  Riverside needed a place that felt different. Not a quick stop for caffeine, but a <strong style={{ color: 'var(--cafe-black)', fontWeight: 600 }}>destination</strong>. Somewhere the music wasn&apos;t an afterthought, the chairs were actually comfortable, and the coffee was treated with reverence.
                 </p>
               </Reveal>
               <Reveal delay={260}>
@@ -213,7 +195,7 @@ export default async function StoryPage() {
               </Reveal>
               <Reveal delay={320}>
                 <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.82)' }}>
-                  From single-origin Mexican beans to custom-designed furniture, every detail intentional. This isn't a corporate playbook—it's a husband-wife team building their <em className="italic" style={{ color: 'var(--cafe-tan)' }}>first business together</em>, pouring everything into creating something genuinely special.
+                  From single-origin Mexican beans to custom-designed furniture, every detail intentional. This isn&apos;t a corporate playbook—it&apos;s a husband-wife team building their <em className="italic" style={{ color: 'var(--cafe-tan)' }}>first business together</em>, pouring everything into creating something genuinely special.
                 </p>
               </Reveal>
             </div>
@@ -294,12 +276,12 @@ export default async function StoryPage() {
               </Reveal>
               <Reveal delay={200}>
                 <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.82)' }}>
-                  Positioned near the art district and University Drive nightlife, we're at the intersection where Riverside's diverse communities meet. Remote workers, art enthusiasts, students, pre-club crews—everyone belongs here.
+                  Positioned near the art district and University Drive nightlife, we&apos;re at the intersection where Riverside&apos;s diverse communities meet. Remote workers, art enthusiasts, students, pre-club crews—everyone belongs here.
                 </p>
               </Reveal>
               <Reveal delay={260}>
                 <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.82)' }}>
-                  We believe in Riverside's potential. This city deserves a coffee shop that reflects its creative spirit, its diversity, its energy. We're not just opening a café—we're investing in our community's future.
+                  We believe in Riverside&apos;s potential. This city deserves a coffee shop that reflects its creative spirit, its diversity, its energy. We&apos;re not just opening a café—we&apos;re investing in our community&apos;s future.
                 </p>
               </Reveal>
 
@@ -440,7 +422,7 @@ export default async function StoryPage() {
                 </h3>
                 <div className="w-16 h-[2px]" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
                 <p className="text-lg font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.85)' }}>
-                  Riverside's living room—stay as long as you like. Students, creatives, neighbors: everyone is welcome, always.
+                  Riverside&apos;s living room—stay as long as you like. Students, creatives, neighbors: everyone is welcome, always.
                 </p>
               </div>
             </Reveal>
@@ -528,7 +510,7 @@ export default async function StoryPage() {
                     <div className="w-20 h-[2px]" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
 
                     <p className="text-base md:text-lg leading-relaxed font-light" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.85)' }}>
-                      With years of experience in specialty coffee and a deep connection to Mexican coffee culture, they bring expertise in sourcing, roasting, and extraction science. Every dial-in, every pour—it's personal.
+                      With years of experience in specialty coffee and a deep connection to Mexican coffee culture, they bring expertise in sourcing, roasting, and extraction science. Every dial-in, every pour—it&apos;s personal.
                     </p>
 
                     <div className="flex flex-wrap gap-3 pt-2">
@@ -649,7 +631,7 @@ export default async function StoryPage() {
                 Building Together
               </h3>
               <p className="text-lg md:text-xl leading-relaxed font-light max-w-3xl mx-auto" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.82)' }}>
-                This is more than a business venture—it's our first shared creative project, a culmination of our individual passions converging into something we hope Riverside will love as much as we do.
+                This is more than a business venture—it&apos;s our first shared creative project, a culmination of our individual passions converging into something we hope Riverside will love as much as we do.
               </p>
             </div>
           </Reveal>

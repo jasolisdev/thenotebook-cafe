@@ -29,7 +29,7 @@ export default function CareersPage() {
   const [supplementalFile, setSupplementalFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
-  const [availabilityError, setAvailabilityError] = useState("");
+  const [availabilityError] = useState("");
 
   const handlePositionToggle = (position: string) => {
     setFormData(prev => ({
@@ -127,7 +127,7 @@ export default function CareersPage() {
 
             <Reveal delay={400}>
               <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}>
-                Help us build Riverside's first truly genuine coffee community hub. We're looking for passionate, driven people who love great coffee and warm vibes.
+                Help us build Riverside&apos;s first truly genuine coffee community hub. We&apos;re looking for passionate, driven people who love great coffee and warm vibes.
               </p>
             </Reveal>
           </div>
@@ -279,7 +279,7 @@ export default function CareersPage() {
           <div className="text-center mb-16">
             <Reveal>
               <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
-                We're Hiring
+                We&apos;re Hiring
               </span>
             </Reveal>
             <Reveal delay={100}>
@@ -352,7 +352,7 @@ export default function CareersPage() {
                   <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>Closing Shift Lead</h3>
                 </div>
                 <p className="font-light leading-relaxed mb-4" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  Close the café, clean and reset for the next day, and lead the evening team. Ensure all closing checklists are completed and the space is ready for tomorrow's service.
+                  Close the café, clean and reset for the next day, and lead the evening team. Ensure all closing checklists are completed and the space is ready for tomorrow&apos;s service.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <span className="px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(164, 141, 120, 0.1)', color: 'var(--cafe-brown)' }}>
@@ -458,7 +458,7 @@ export default function CareersPage() {
                   Decision
                 </h3>
                 <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  We know waiting is tough, so we move fast. Whether it's a yes or not quite right now, we'll keep you in the loop every step of the way.
+                  We know waiting is tough, so we move fast. Whether it&apos;s a yes or not quite right now, we&apos;ll keep you in the loop every step of the way.
                 </p>
               </div>
             </Reveal>
@@ -481,7 +481,7 @@ export default function CareersPage() {
             </Reveal>
             <Reveal delay={100}>
               <p className="text-lg font-light" style={{ color: 'rgba(74, 59, 50, 0.82)' }}>
-                We're excited to meet you! Fill out the form below and we'll be in touch soon.
+                We&apos;re excited to meet you! Fill out the form below and we&apos;ll be in touch soon.
               </p>
             </Reveal>
           </div>

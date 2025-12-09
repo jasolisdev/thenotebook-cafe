@@ -16,8 +16,6 @@
 }
 
 /* Component Styles */
-@import "./styles/components/card-gallery.css";
-@import "./styles/components/modal.css";
 @import "./styles/components/SiteHeader.css";
 
 /* ============================================================
@@ -28,7 +26,7 @@
 /* OpenDyslexic Font for Accessibility */
 @font-face {
   font-family: 'OpenDyslexic';
-  src: url('https://cdn.jsdelivr.net/npm/opendyslexic@2.0.1/fonts/OpenDyslexic-Regular.woff') format('woff');
+  src: url('/fonts/OpenDyslexic-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -36,7 +34,7 @@
 
 @font-face {
   font-family: 'OpenDyslexic';
-  src: url('https://cdn.jsdelivr.net/npm/opendyslexic@2.0.1/fonts/OpenDyslexic-Bold.woff') format('woff');
+  src: url('/fonts/OpenDyslexic-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -44,7 +42,7 @@
 
 @font-face {
   font-family: 'OpenDyslexic';
-  src: url('https://cdn.jsdelivr.net/npm/opendyslexic@2.0.1/fonts/OpenDyslexic-Italic.woff') format('woff');
+  src: url('/fonts/OpenDyslexic-Italic.woff') format('woff');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -473,13 +471,59 @@ h3 {
   visibility: hidden;
 }
 
+/* Hide decorative blobs/shapes for reduced visual noise */
+.acc-hide-images .signature-pour-blob,
+.acc-hide-images .philosophy-blob,
+.acc-hide-images .story-blob,
+.acc-hide-images .story-gallery-blob,
+.acc-hide-images .atmosphere-blob,
+.acc-hide-images .blob-marker,
+.acc-hide-images .menu-card-image {
+  display: none !important;
+}
+
+/* When images are hidden, force hero text to dark for readability */
+.acc-hide-images .home-hero-title,
+.acc-hide-images .home-hero-subtitle,
+.acc-hide-images .home-hero-pill,
+.acc-hide-images .home-hero-cta,
+.acc-hide-images .home-hero-copy,
+.acc-hide-images .home-hero-grid,
+.acc-hide-images .hero-latte-card,
+.acc-hide-images .hero-latte-pill {
+  color: var(--cafe-black) !important;
+  fill: var(--cafe-black) !important;
+}
+.acc-hide-images .home-hero-pill,
+.acc-hide-images .hero-latte-card {
+  background-color: rgba(var(--cafe-cream-rgb), 0.9) !important;
+  border-color: rgba(var(--cafe-brown-rgb), 0.2) !important;
+}
+
+/* Navigation readability when images are hidden */
+.acc-hide-images .site-header {
+  background: rgba(var(--cafe-cream-rgb), 0.92) !important;
+  border-bottom-color: rgba(var(--cafe-brown-rgb), 0.12) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.acc-hide-images .nav-link,
+.acc-hide-images .site-header a,
+.acc-hide-images .site-header span {
+  color: var(--cafe-black) !important;
+  fill: var(--cafe-black) !important;
+}
+.acc-hide-images .hamburger-line {
+  background-color: var(--cafe-black) !important;
+}
+
 /* Ensure navigation, accessibility widget, and UI icons remain visible */
 .acc-hide-images nav svg,
 .acc-hide-images nav img,
 .acc-hide-images [class*="accessibility"] svg,
 .acc-hide-images [id*="accessibility"] svg,
 .acc-hide-images button svg,
-.acc-hide-images [role="button"] svg {
+.acc-hide-images [role="button"] svg,
+.acc-hide-images .acc-icon-only svg {
   visibility: visible !important;
 }
 .acc-cursor-lg,
@@ -521,6 +565,10 @@ h3 {
   font-family: 'Arial', sans-serif !important;
 }
 .acc-dyslexia-font {
+  font-family: 'OpenDyslexic', sans-serif !important;
+}
+.acc-dyslexia-font body,
+.acc-dyslexia-font body * {
   font-family: 'OpenDyslexic', sans-serif !important;
 }
 .acc-stop-animations * {
