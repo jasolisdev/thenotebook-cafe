@@ -8,6 +8,8 @@ interface RevealProps {
   className?: string;
   /** When true, animation replays every time the element re-enters the viewport. */
   replay?: boolean;
+  /** Animation style: default fade + slide, or slide-only (no fade). */
+  effect?: 'fade-slide' | 'slide';
 }
 
 /**
@@ -31,7 +33,7 @@ interface RevealProps {
  * @param {string} props.className - Additional CSS classes
  * @returns {JSX.Element} Animated wrapper component
  */
-export default function Reveal({ children, delay = 0, className = '', replay = true }: RevealProps) {
+export default function Reveal({ children, delay = 0, className = '', replay = true, effect = 'fade-slide' }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -56,12 +58,15 @@ export default function Reveal({ children, delay = 0, className = '', replay = t
     transitionDelay: `${delay}ms`,
   };
 
+  const hiddenClass = effect === 'slide' ? 'opacity-100 translate-y-8' : 'opacity-0 translate-y-8';
+  const visibleClass = 'opacity-100 translate-y-0';
+
   return (
     <div
       ref={ref}
       style={style}
       className={`transition-all duration-500 ease-out transform ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        isVisible ? visibleClass : hiddenClass
       } ${className}`}
     >
       {children}

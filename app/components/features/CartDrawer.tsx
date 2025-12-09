@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { ShoppingBag, X, Trash2, Minus, Plus } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ShoppingBag, X, Trash2, Minus, Plus, Edit2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { useCart } from '../providers/CartProvider';
+import { ProductModal } from './ProductModal';
+import { CartItem } from '@/app/types';
 import { COLORS } from '@/app/lib/colors';
 
 // Use shared colors for consistency across the app
@@ -12,7 +14,9 @@ const colors = COLORS;
 
 export const CartDrawer: React.FC = () => {
   const { items: cart, isOpen, open, close, removeItem, updateQuantity } = useCart();
+  const [editingItem, setEditingItem] = useState<CartItem | null>(null);
   const subtotal = cart.reduce((acc, item) => acc + item.totalPrice, 0);
+  const totalItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   useEffect(() => {
     if (typeof document === 'undefined') return;
@@ -72,7 +76,7 @@ export const CartDrawer: React.FC = () => {
                   className="text-xs font-bold px-2 py-0.5 rounded-full"
                   style={{ backgroundColor: colors.tan, color: colors.white }}
                 >
-                  {cart.length}
+                  {totalItemCount}
                 </span>
               </div>
               <button
@@ -196,13 +200,22 @@ export const CartDrawer: React.FC = () => {
                             <Plus size={14} />
                           </button>
                         </div>
-                        <button
-                          className="text-xs flex items-center gap-1 transition-colors hover:opacity-80"
-                          style={{ color: colors.red }}
-                          onClick={() => removeItem(item.cartId)}
-                        >
-                          <Trash2 size={12} /> Remove
-                        </button>
+                        <div className="flex items-center gap-2">
+                          <button
+                            className="text-xs flex items-center gap-1 transition-colors hover:opacity-80"
+                            style={{ color: colors.tan }}
+                            onClick={() => setEditingItem(item)}
+                          >
+                            <Edit2 size={12} /> Edit
+                          </button>
+                          <button
+                            className="text-xs flex items-center gap-1 transition-colors hover:opacity-80"
+                            style={{ color: colors.red }}
+                            onClick={() => removeItem(item.cartId)}
+                          >
+                            <Trash2 size={12} /> Remove
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </motion.div>
@@ -256,6 +269,15 @@ export const CartDrawer: React.FC = () => {
             </div>
           </motion.div>
         </>
+      )}
+
+      {/* Edit Modal */}
+      {editingItem && (
+        <ProductModal
+          item={editingItem}
+          editingItem={editingItem}
+          onClose={() => setEditingItem(null)}
+        />
       )}
     </AnimatePresence>
   );

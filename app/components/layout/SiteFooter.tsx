@@ -1,12 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { Instagram, Headphones, Mail } from "lucide-react";
+import { Instagram } from "lucide-react";
+import { PiInstagramLogoFill, PiTwitterLogoFill } from "react-icons/pi";
+import { FaFacebookF } from "react-icons/fa";
+import NewsletterForm from "../features/NewsLetterForm";
+import { useCallback } from "react";
 
 /**
  * SiteFooter Component
  *
- * Global footer with business information and navigation.
+ * Global footer with business information, newsletter, and navigation.
  *
  * @component
  * @example
@@ -20,71 +24,106 @@ import { Instagram, Headphones, Mail } from "lucide-react";
  */
 export default function SiteFooter(): React.JSX.Element {
   const year = new Date().getFullYear();
+  const openConsent = useCallback(() => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("tnc-open-consent"));
+    }
+  }, []);
 
   return (
-    <footer className="pt-20 pb-10 bg-cafe-black text-cafe-mist">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-6 gap-12 mb-16">
-        <div className="md:col-span-2 space-y-6">
-          <h3 className="font-serif text-3xl text-cafe-mist">The Notebook Café</h3>
-          <p className="font-light max-w-md text-cafe-beige/70">
-            A space for creatives, thinkers, and coffee lovers.
-            Where house music meets premium espresso in the heart of Riverside.
-          </p>
-          <div className="flex gap-4 pt-4">
-            <a
-              href="https://www.instagram.com/thenotebookcafellc/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="text-cafe-mist hover:text-cafe-tan transition-colors cursor-pointer"
+    <footer className="bg-cafe-charcoal text-cafe-mist pt-20 pb-10">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+
+          {/* Brand Column */}
+          <div className="col-span-1 md:col-span-1">
+            <h3 className="font-serif text-2xl font-bold text-white mb-6">The Notebook Café</h3>
+            <p className="text-sm leading-relaxed opacity-80">
+              Crafting moments of clarity and connection through exceptional coffee.
+            </p>
+          </div>
+
+          {/* Navigation Column */}
+          <div>
+            <h4 className="text-cafe-terracotta font-serif text-lg mb-6">Explore</h4>
+            <ul className="space-y-3 text-sm">
+              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
+              <li><Link href="/menu" className="hover:text-white transition-colors">Menu</Link></li>
+              <li><Link href="/story" className="hover:text-white transition-colors">Our Story</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><Link href="/careers" className="hover:text-white transition-colors">Careers</Link></li>
+            </ul>
+          </div>
+
+          {/* Visit Us Column */}
+          <div>
+            <h4 className="text-cafe-terracotta font-serif text-lg mb-6">Visit Us</h4>
+            <ul className="space-y-3 text-sm opacity-80">
+              <li>3512 9th St</li>
+              <li>Riverside, CA 92501</li>
+              <li className="pt-2">Mon-Sat: 7am - 6pm</li>
+              <li>Sun: <span className="italic opacity-70">Closed</span></li>
+            </ul>
+          </div>
+
+          {/* Newsletter Column */}
+          <div>
+            <h4 className="text-cafe-terracotta font-serif text-lg mb-6">Stay Connected</h4>
+            <p className="text-xs mb-4 opacity-70">Join our newsletter for brewing tips and events.</p>
+
+            {/* Newsletter Form - Inline */}
+            <NewsletterForm source="footer" inline={true} />
+
+            {/* Social Icons */}
+            <div className="flex gap-4 mt-6">
+              <a
+                href="https://www.instagram.com/thenotebookcafellc/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="hover:text-white cursor-pointer transition-colors"
+              >
+                <PiInstagramLogoFill className="w-5 h-5" />
+              </a>
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="hover:text-white cursor-pointer transition-colors"
+              >
+                <FaFacebookF className="w-5 h-5" />
+              </a>
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+                className="hover:text-white cursor-pointer transition-colors"
+              >
+                <PiTwitterLogoFill className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs opacity-50 gap-3 md:gap-6">
+          <div className="flex flex-wrap items-center gap-4 md:gap-6">
+            <button
+              type="button"
+              onClick={openConsent}
+              className="hover:text-white transition-colors"
             >
-              <Instagram size={24} />
-            </a>
+              Cookies
+            </button>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+            <Link href="/refunds" className="hover:text-white transition-colors">Refunds</Link>
           </div>
-        </div>
-
-        <div className="space-y-4">
-          <h4 className="uppercase text-xs tracking-[0.2em] text-cafe-tan">Contact</h4>
-          <div className="font-light leading-relaxed text-cafe-beige/70 space-y-1">
-            <a href="tel:9518230004" className="text-cafe-beige/70 hover:text-white transition-colors mt-2 block">(951) 823-0004</a>
-            <a href="mailto:hello@notebook.cafe" className="text-cafe-beige/70 hover:text-white transition-colors">hello@notebook.cafe</a>
+          <div className="text-center md:text-right">
+            <p>&copy; {year} The Notebook Café. All rights reserved.</p>
+            <p className="mt-1 md:mt-0">Made with ♥ in Riverside.</p>
           </div>
-        </div>
-
-        <div className="space-y-4">
-          <h4 className="uppercase text-xs tracking-[0.2em] text-cafe-tan">Location</h4>
-          <address className="not-italic font-light leading-relaxed text-cafe-beige/70">
-            3512 9th St<br />
-            Riverside, CA 92501<br />
-          </address>
-        </div>
-
-        <div className="space-y-4">
-          <h4 className="uppercase text-xs tracking-[0.2em] text-cafe-tan">Hours</h4>
-          <div className="font-light space-y-1 text-cafe-beige/70">
-            <p><span className="w-12 inline-block">M-Th</span> 6:30am — 4pm</p>
-            <p><span className="w-12 inline-block">F-Sa</span> 6:30am — 6pm</p>
-            <p><span className="w-12 inline-block">Sun</span> <span className="italic text-cafe-beige/50">Closed</span></p>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <h4 className="uppercase text-xs tracking-[0.2em] text-cafe-tan">Navigation</h4>
-          <div className="flex flex-col gap-2 font-light text-cafe-beige/70">
-            <Link href="/" className="text-cafe-beige/70 hover:text-white transition-colors">Home</Link>
-            <Link href="/menu" className="text-cafe-beige/70 hover:text-white transition-colors">Menu</Link>
-            <Link href="/story" className="text-cafe-beige/70 hover:text-white transition-colors">Story</Link>
-            <Link href="/events" className="text-cafe-beige/70 hover:text-white transition-colors">Events</Link>
-            <Link href="/contact" className="text-cafe-beige/70 hover:text-white transition-colors">Contact</Link>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/30">
-        <p>&copy; {year} The Notebook Café. All rights reserved.</p>
-        <div className="flex gap-6">
-          <Link href="/privacy" className="text-white/30 hover:text-white transition-colors">Privacy</Link>
-          <Link href="/terms" className="text-white/30 hover:text-white transition-colors">Terms</Link>
         </div>
       </div>
     </footer>

@@ -8,6 +8,7 @@ import { MENU_ITEMS } from '@/app/constants';
 import { ProductModal } from '@/app/components/features/ProductModal';
 import { useCart } from '@/app/components/providers/CartProvider';
 import Reveal from '../components/ui/Reveal';
+import ParallaxHero from '../components/features/ParallaxHero';
 
 const colors = {
   black: '#2C2420',
@@ -73,47 +74,40 @@ export default function MenuPage() {
         style={{ backgroundColor: colors.mist, color: colors.brown }}
       >
         {/* Menu Header */}
-        <div
-          className="pt-24 pb-32 px-4 relative overflow-hidden text-center"
-          style={{ backgroundColor: colors.black, color: colors.cream }}
-        >
-          <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
-            <div
-              className="absolute right-0 top-0 w-96 h-96 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2"
-              style={{ backgroundColor: colors.tan }}
-            ></div>
-          </div>
-          <div className="max-w-4xl mx-auto text-center relative z-10">
+        <ParallaxHero backgroundImage="/unsplash/tnc-menu-hero-bg.png">
+          <div className="max-w-4xl mx-auto text-center relative z-10 px-6 space-y-6">
             <Reveal>
               <span
-                className="font-bold tracking-[0.2em] uppercase text-sm mb-5 block"
+                className="font-bold tracking-[0.2em] uppercase text-sm block"
                 style={{ color: colors.tan }}
               >
                 The Menu
               </span>
             </Reveal>
             <Reveal delay={120}>
-              <h1 className="font-serif text-[70px] md:text-[90px] leading-[0.9] mb-7">Curated Selection</h1>
+              <h1 className="font-serif text-[70px] md:text-[90px] leading-[0.9]" style={{ color: colors.cream }}>
+                Curated Selection
+              </h1>
             </Reveal>
             <Reveal delay={220}>
               <p
-                className="text-lg max-w-xl mx-auto font-light leading-relaxed"
+                className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed"
                 style={{ color: `${colors.beige}CC` }}
               >
                 Everything we serve is made with intention. From our single-origin espressos to our locally sourced pastries.
               </p>
             </Reveal>
           </div>
-        </div>
+        </ParallaxHero>
 
-        <div className="sticky top-20 z-30 px-4 -mt-8">
-          <div className="max-w-4xl mx-auto">
+        <div className="px-4">
+          <div className="max-w-md mx-auto">
             <div
-              className="rounded-2xl shadow-xl p-2 flex flex-col sm:flex-row items-center gap-4 border"
-              style={{ backgroundColor: colors.white, borderColor: `${colors.beige}33` }}
+              className="rounded-2xl shadow-xl p-2 flex flex-col sm:flex-row items-center gap-3 border"
+              style={{ backgroundColor: colors.white, borderColor: `${colors.beige}33`, justifyContent: 'center' }}
             >
               {/* Section Tabs */}
-              <div className="flex gap-1 w-full sm:w-auto justify-center sm:justify-start overflow-visible p-1">
+              <div className="flex gap-2 sm:gap-4 w-full sm:w-auto justify-center sm:justify-center overflow-visible p-1">
                 {(['drinks', 'meals', 'desserts'] as const).map(section => {
                   const isActive = activeSection === section;
                   return (
@@ -124,7 +118,7 @@ export default function MenuPage() {
                         setActiveSection(section);
                       }}
                       aria-pressed={isActive}
-                      className="basis-1/3 sm:flex-none px-6 py-2 rounded-lg text-[10px] font-bold uppercase tracking-[0.22em] whitespace-nowrap transition-colors duration-150 ease-out border"
+                      className="basis-1/3 sm:flex-none px-6 py-2 rounded-lg text-[11px] md:text-xs font-bold uppercase tracking-[0.22em] whitespace-nowrap transition-colors duration-150 ease-out border"
                       style={{
                         backgroundColor: isActive ? colors.black : `${colors.mist}CC`,
                         color: isActive ? colors.white : colors.brown,
@@ -138,13 +132,8 @@ export default function MenuPage() {
                 })}
               </div>
 
-              <div
-                className="h-8 w-px hidden sm:block"
-                style={{ backgroundColor: `${colors.beige}80` }}
-              ></div>
-
-              {/* Search */}
-              <div className="relative w-full flex-1">
+              {/* Search temporarily hidden per request; keeping structure for future use */}
+              {/* <div className="relative w-full flex-1">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2" size={18} color={colors.tan} />
                 <input
                   type="text"
@@ -160,7 +149,7 @@ export default function MenuPage() {
                   onFocus={(e) => (e.currentTarget.style.backgroundColor = colors.white)}
                   onBlur={(e) => (e.currentTarget.style.backgroundColor = `${colors.mist}99`)}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -175,10 +164,7 @@ export default function MenuPage() {
             </div>
           ) : (
             Object.entries(groupedItems).map(([subcategory, items]) => (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+              <div
                 key={subcategory}
                 className="mb-16"
               >
@@ -230,7 +216,7 @@ export default function MenuPage() {
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             ))
           )}
         </div>

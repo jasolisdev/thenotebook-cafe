@@ -23,6 +23,7 @@ export default function StoryBlobs() {
       <div className="blob-marker blob-marker-left">
         <div className={`story-blob story-blob-left ${visibleClass}`} />
       </div>
+      <div className={`story-gallery-blob ${visibleClass}`} />
     </div>
   );
 }

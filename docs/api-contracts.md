@@ -1,88 +1,40 @@
-# API Contracts Documentation
-**The Notebook Café - API Endpoint Specifications**
+# API Contracts - The Notebook Café
 
-Generated: 2025-11-23
-Total Endpoints: 2
-Framework: Next.js 16 Route Handlers
+**Generated:** 2025-12-05 | **Scan Mode:** Exhaustive | **API Count:** 2
 
 ---
 
 ## Overview
 
-The Notebook Café uses Next.js Route Handlers (App Router) for serverless API endpoints. All endpoints are deployed as serverless functions on Vercel.
-
-**Base URL (Development):** `http://localhost:3000/api`
-**Base URL (Production):** `https://[your-domain]/api`
-
-**Authentication:** None required for public endpoints (Sanity token used server-side only)
+The Notebook Café uses Next.js 16 API Routes for server-side logic. All endpoints are located in `app/api/` and handle newsletter subscriptions and password authentication.
 
 ---
 
-## Table of Contents
+## API Endpoints
 
-1. [Newsletter Subscription](#1-newsletter-subscription-post-apisubscribe)
-2. [Password Verification](#2-password-verification-post-apiauthverify)
+### 1. Newsletter Subscription
 
----
+**Endpoint:** `POST /api/subscribe`
 
-## 1. Newsletter Subscription: `POST /api/subscribe`
+**Purpose:** Subscribe users to the newsletter mailing list
 
-**Purpose:** Subscribe email addresses to the newsletter and store them in Sanity CMS
-
-**File:** `app/api/subscribe/route.ts`
-
-**Authentication:** None required (public endpoint)
-
-### Request
-
-**Method:** `POST`
-
-**Headers:**
-```http
-Content-Type: application/json
-```
-
-**Body:**
-```typescript
-{
-  email: string;      // Required: Valid email address
-  source?: string;    // Optional: Source identifier (default: "homepage")
-}
-```
-
-**Body Example:**
+**Request Body:**
 ```json
 {
   "email": "user@example.com",
-  "source": "footer"
+  "source": "homepage"  // optional: defaults to "homepage"
 }
 ```
 
-**Validation:**
-- Email is required
-- Email must be a string
-- Email must match pattern: `/^[^\s@]+@[^\s@]+\.[^\s@]+$/`
-- Source is optional (defaults to "homepage")
-
-### Response
-
-**Success (New Subscriber):**
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-```
+**Response (Success):**
 ```json
 {
   "ok": true,
-  "id": "draft-abc123..."
+  "id": "draft-123abc"  // Sanity document ID
 }
 ```
 
-**Success (Duplicate Email):**
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-```
+**Response (Duplicate):**
 ```json
 {
   "ok": true,
@@ -90,528 +42,241 @@ Content-Type: application/json
 }
 ```
 
-**Error (Invalid Email):**
-```http
-HTTP/1.1 400 Bad Request
-Content-Type: application/json
-```
+**Response (Error):**
 ```json
 {
   "ok": false,
-  "error": "Invalid email"
+  "error": "Invalid email"  // or "Server error"
 }
 ```
 
-**Error (Server Error):**
-```http
-HTTP/1.1 500 Internal Server Error
-Content-Type: application/json
-```
-```json
-{
-  "ok": false,
-  "error": "Server error"
-}
-```
+**Status Codes:**
+- `200` - Success (subscribed or duplicate)
+- `400` - Invalid email format
+- `500` - Server error
 
-### Implementation Details
+**Implementation Details:**
+- Email validation using regex: `/^[^\s@]+@[^\s@]+\.[^\s@]+$/`
+- Duplicate detection (case-insensitive GROQ query)
+- Creates `subscriber` document in Sanity CMS
+- Uses write client for mutations
+- Stores: email, source, status ("subscribed"), createdAt timestamp
 
-**Flow:**
-1. Parse request body (email, source)
-2. Validate email format using regex
-3. Query Sanity for existing subscriber (case-insensitive)
-4. If duplicate → Return `{ ok: true, duplicate: true }`
-5. If new → Create subscriber document in Sanity
-6. Return success with document ID
+**Security:**
+- Email sanitization
+- Duplicate prevention
+- Error handling with generic messages
 
-**Sanity Integration:**
-- **Read Client** (`client`) - Check for duplicates
-- **Write Client** (`writeClient`) - Create new subscriber
-- **Document Type:** `subscriber`
-
-**Created Document Structure:**
-```typescript
-{
-  _type: "subscriber",
-  email: string,
-  source: string,
-  status: "subscribed",
-  createdAt: string (ISO 8601)
-}
-```
-
-**Duplicate Detection:**
-- Case-insensitive email comparison
-- GROQ query: `*[_type=="subscriber" && lower(email) == lower($email)][0]`
-
-**Error Handling:**
-- Invalid JSON → 400 Bad Request
-- Invalid email format → 400 Bad Request
-- Sanity errors → 500 Internal Server Error
-- Errors logged to console
-
-### Usage Example
-
-**JavaScript/TypeScript:**
-```typescript
-async function subscribeToNewsletter(email: string, source: string = "homepage") {
-  const response = await fetch('/api/subscribe', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email, source }),
-  });
-
-  const data = await response.json();
-
-  if (data.ok && data.duplicate) {
-    console.log('Already subscribed');
-  } else if (data.ok) {
-    console.log('Successfully subscribed:', data.id);
-  } else {
-    console.error('Subscription failed:', data.error);
-  }
-}
-```
-
-**cURL:**
-```bash
-curl -X POST http://localhost:3000/api/subscribe \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","source":"footer"}'
-```
-
-### Security Considerations
-
-- ✅ Email validation prevents malformed inputs
-- ✅ Duplicate check prevents spam
-- ✅ Sanity write token kept server-side (not exposed to client)
-- ✅ Rate limiting recommended for production (not implemented)
-- ⚠️ No CAPTCHA protection (vulnerable to bot submissions)
-- ⚠️ No email verification (subscribers not confirmed)
-
-### Frontend Integration
-
-**Used By:**
-- `app/components/features/NewsLetterForm.tsx`
-
-**Form Component Example:**
-```tsx
-"use client";
-import { useState } from "react";
-
-export default function NewsletterForm({ source = "homepage" }) {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("idle");
-
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setStatus("loading");
-
-    const res = await fetch("/api/subscribe", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, source }),
-    });
-
-    const data = await res.json();
-
-    if (data.ok && data.duplicate) {
-      setStatus("duplicate");
-    } else if (data.ok) {
-      setStatus("success");
-      setEmail("");
-    } else {
-      setStatus("error");
-    }
-  }
-
-  return (
-    <form onSubmit={onSubmit}>
-      <input
-        type="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
-      <button type="submit" disabled={status === "loading"}>
-        {status === "loading" ? "Subscribing..." : "Subscribe"}
-      </button>
-      {status === "success" && <p>Thanks! You're subscribed.</p>}
-      {status === "duplicate" && <p>You're already subscribed!</p>}
-      {status === "error" && <p>Something went wrong.</p>}
-    </form>
-  );
-}
-```
+**File:** `app/api/subscribe/route.ts`
 
 ---
 
-## 2. Password Verification: `POST /api/auth/verify`
+### 2. Password Authentication
 
-**Purpose:** Verify site-wide password for dev/staging environment protection
+**Endpoint:** `POST /api/auth/verify`
 
-**File:** `app/api/auth/verify/route.ts`
+**Purpose:** Verify site password for dev/staging environment protection
 
-**Authentication:** None required (public endpoint, but checks password)
-
-**Security Note:** This is a simple password gate for development/staging only. NOT suitable for production security.
-
-### Request
-
-**Method:** `POST`
-
-**Headers:**
-```http
-Content-Type: application/json
-```
-
-**Body:**
-```typescript
-{
-  password: string;   // Required: Password to verify
-}
-```
-
-**Body Example:**
+**Request Body:**
 ```json
 {
-  "password": "my-secret-password"
+  "password": "your-password"
 }
 ```
 
-### Response
-
-**Success (Correct Password):**
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-Set-Cookie: site-auth=authenticated; HttpOnly; Secure; SameSite=Strict; Max-Age=60; Path=/
-```
+**Response (Success):**
 ```json
 {
   "success": true
 }
 ```
 
-**Error (Incorrect Password):**
-```http
-HTTP/1.1 401 Unauthorized
-Content-Type: application/json
-```
+**Response (Error):**
 ```json
 {
   "success": false,
-  "message": "Incorrect password"
+  "message": "Incorrect password"  // or "Password not configured" or "Server error"
 }
 ```
 
-**Error (Password Not Configured):**
-```http
-HTTP/1.1 500 Internal Server Error
-Content-Type: application/json
-```
-```json
-{
-  "success": false,
-  "message": "Password not configured"
-}
-```
+**Status Codes:**
+- `200` - Correct password (cookie set)
+- `401` - Incorrect password
+- `500` - Password not configured or server error
 
-**Error (Server Error):**
-```http
-HTTP/1.1 500 Internal Server Error
-Content-Type: application/json
-```
-```json
-{
-  "success": false,
-  "message": "Server error"
-}
-```
+**Implementation Details:**
+- Compares against `SITE_PASSWORD` environment variable
+- Sets `site-auth` cookie on successful authentication
+- Cookie configuration:
+  - `httpOnly: true` - JavaScript cannot access
+  - `secure: true` - HTTPS only in production
+  - `sameSite: "strict"` - CSRF protection
+  - `maxAge: 60` - 1 minute (testing mode; production should be 7 days)
+  - `path: "/"` - Site-wide
 
-### Implementation Details
+**Security:**
+- Environment variable for password (not hardcoded)
+- httpOnly cookie prevents XSS attacks
+- Secure cookie for HTTPS in production
+- sameSite strict prevents CSRF
+- Generic error messages (no password hints)
 
-**Flow:**
-1. Parse request body (password)
-2. Check if `SITE_PASSWORD` environment variable is set
-3. If not set → Return 500 "Password not configured"
-4. Compare submitted password with `SITE_PASSWORD`
-5. If match → Set `site-auth` cookie and return success
-6. If no match → Return 401 "Incorrect password"
+**Notes:**
+⚠️ **Testing Mode Active:** Cookie expires in 1 minute. For production, change `maxAge` to `60 * 60 * 24 * 7` (7 days)
 
-**Cookie Details:**
+**File:** `app/api/auth/verify/route.ts`
+
+---
+
+## Authentication Flow
+
+### Password Protection (Optional)
+1. User visits site
+2. If `SITE_PASSWORD` env var is set, password prompt appears
+3. User submits password via `/api/auth/verify`
+4. On success, `site-auth` cookie is set
+5. Cookie expires after configured duration
+6. User can access site while cookie is valid
+
+### Newsletter Subscription
+1. User enters email in newsletter form
+2. Frontend validates email format
+3. POST request to `/api/subscribe`
+4. Server validates and checks for duplicates
+5. Creates subscriber document in Sanity
+6. Returns success/duplicate/error response
+7. Frontend displays appropriate message
+
+---
+
+## Data Integration
+
+### Sanity CMS
+
+**Read Operations** (via `client`):
+- Duplicate email check: `*[_type=="subscriber" && lower(email) == lower($email)][0]{_id}`
+
+**Write Operations** (via `writeClient`):
+- Create subscriber: Creates document with `_type: "subscriber"`
+
+**Environment Variables Required:**
+- `NEXT_PUBLIC_SANITY_PROJECT_ID` - Sanity project ID
+- `NEXT_PUBLIC_SANITY_DATASET` - Dataset name (production)
+- `SANITY_WRITE_TOKEN` - API token for mutations
+- `SITE_PASSWORD` - Optional password for dev/staging protection
+
+---
+
+## Error Handling
+
+### Global Error Strategy
+- Try-catch blocks on all routes
+- Generic error messages to prevent information leakage
+- Console logging for server-side debugging
+- Appropriate HTTP status codes
+- JSON responses for all outcomes
+
+### Common Error Responses
 ```typescript
-{
-  name: "site-auth",
-  value: "authenticated",
-  httpOnly: true,                          // Not accessible via JavaScript
-  secure: process.env.NODE_ENV === "production",  // HTTPS only in production
-  sameSite: "strict",                      // CSRF protection
-  maxAge: 60,                              // 60 seconds (testing - should be 604800 for 7 days)
-  path: "/"                                // Valid for entire site
-}
+// 400 - Client Error
+{ ok: false, error: "Invalid email" }
+
+// 401 - Unauthorized
+{ success: false, message: "Incorrect password" }
+
+// 500 - Server Error
+{ ok: false, error: "Server error" }
+{ success: false, message: "Password not configured" }
 ```
 
-**Environment Configuration:**
+---
+
+## Testing
+
+### Manual Testing Checklist
+
+**POST /api/subscribe**
+- [ ] Valid email → Returns success with ID
+- [ ] Invalid email → Returns 400 error
+- [ ] Duplicate email → Returns success with duplicate flag
+- [ ] Missing email → Returns 400 error
+- [ ] Sanity write failure → Returns 500 error
+
+**POST /api/auth/verify**
+- [ ] Correct password → Returns success, sets cookie
+- [ ] Incorrect password → Returns 401 error
+- [ ] No SITE_PASSWORD env var → Returns 500 error
+- [ ] Cookie expires correctly (check maxAge)
+
+### Example Requests
+
+**Subscribe to Newsletter:**
 ```bash
-# .env.local
-SITE_PASSWORD=your-secret-password
-
-# Leave empty to disable password protection
-SITE_PASSWORD=
+curl -X POST http://localhost:3000/api/subscribe \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","source":"footer"}'
 ```
 
-**Security Warning:**
-- ⚠️ No session management
-- ⚠️ No password hashing (plain text comparison)
-- ⚠️ Cookie expires in 60 seconds (testing mode)
-- ⚠️ Not suitable for production use
-- ⚠️ No brute-force protection
-
-### Usage Example
-
-**JavaScript/TypeScript:**
-```typescript
-async function verifyPassword(password: string) {
-  const response = await fetch('/api/auth/verify', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ password }),
-  });
-
-  const data = await response.json();
-
-  if (data.success) {
-    console.log('Password verified - cookie set');
-    // Reload or redirect to access protected content
-    window.location.reload();
-  } else {
-    console.error('Verification failed:', data.message);
-  }
-}
-```
-
-**cURL:**
+**Verify Password:**
 ```bash
 curl -X POST http://localhost:3000/api/auth/verify \
   -H "Content-Type: application/json" \
-  -d '{"password":"my-secret-password"}' \
-  -c cookies.txt
-```
-
-### Frontend Integration
-
-**Used By:**
-- `app/components/ui/PasswordGate.tsx`
-
-**Component Example:**
-```tsx
-"use client";
-import { useState, useEffect } from "react";
-
-export default function PasswordGate({ children }) {
-  const [authed, setAuthed] = useState(false);
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  // Check if already authenticated (cookie exists)
-  useEffect(() => {
-    const isAuthed = document.cookie.includes("site-auth=authenticated");
-    setAuthed(isAuthed);
-  }, []);
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError("");
-
-    const res = await fetch("/api/auth/verify", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    });
-
-    const data = await res.json();
-
-    if (data.success) {
-      setAuthed(true);
-    } else {
-      setError(data.message || "Incorrect password");
-    }
-  }
-
-  if (authed) {
-    return <>{children}</>;
-  }
-
-  return (
-    <div className="password-gate">
-      <h1>Password Protected</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter password"
-          required
-        />
-        <button type="submit">Access Site</button>
-        {error && <p className="error">{error}</p>}
-      </form>
-    </div>
-  );
-}
+  -d '{"password":"your-password"}' \
+  -c cookies.txt  # Save cookies
 ```
 
 ---
 
-## API Patterns & Best Practices
-
-### Error Handling Pattern
-
-All endpoints follow consistent error response format:
-
-```typescript
-// Success
-{
-  ok: true,
-  // ... additional data
-}
-
-// Error
-{
-  ok: false,
-  error: string  // Human-readable error message
-}
-
-// OR
-
-{
-  success: boolean,
-  message?: string
-}
-```
-
-### Response Status Codes
-
-| Code | Meaning | Usage |
-|------|---------|-------|
-| 200 | OK | Successful request (even if duplicate) |
-| 400 | Bad Request | Invalid input (email format, missing fields) |
-| 401 | Unauthorized | Incorrect password |
-| 500 | Internal Server Error | Server/Sanity errors, missing config |
-
-### Serverless Function Characteristics
-
-- **Cold Start:** First request may be slower (~1-2 seconds)
-- **Warm State:** Subsequent requests faster (~100-300ms)
-- **Timeout:** Default 10 seconds (Vercel Hobby plan)
-- **Memory:** Default 1024 MB
-- **Regions:** Deployed globally (Vercel Edge Network)
-
----
-
-## Future API Endpoints (Planned)
+## Future Enhancements
 
 ### Potential Additions
-
-1. **`POST /api/contact`** - Contact form submission
-2. **`GET /api/menu`** - Fetch menu items from Sanity
-3. **`POST /api/reservation`** - Event/table reservation
-4. **`POST /api/order`** - Online ordering (future)
-5. **`GET /api/events`** - Fetch upcoming events
-
----
-
-## Testing APIs
-
-### Manual Testing (Browser)
-
-**Using Browser DevTools Console:**
-```javascript
-// Test Newsletter Subscription
-fetch('/api/subscribe', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ email: 'test@example.com', source: 'test' })
-})
-  .then(res => res.json())
-  .then(data => console.log(data));
-
-// Test Password Verification
-fetch('/api/auth/verify', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ password: 'test-password' })
-})
-  .then(res => res.json())
-  .then(data => console.log(data));
-```
-
-### Automated Testing (Recommended)
-
-**Example using Jest + Node.js fetch:**
-```typescript
-describe('POST /api/subscribe', () => {
-  it('should subscribe new email', async () => {
-    const res = await fetch('http://localhost:3000/api/subscribe', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: 'new@example.com' }),
-    });
-
-    const data = await res.json();
-    expect(data.ok).toBe(true);
-    expect(data.id).toBeDefined();
-  });
-
-  it('should detect duplicate email', async () => {
-    // Subscribe once
-    await fetch('http://localhost:3000/api/subscribe', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: 'duplicate@example.com' }),
-    });
-
-    // Try again
-    const res = await fetch('http://localhost:3000/api/subscribe', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: 'duplicate@example.com' }),
-    });
-
-    const data = await res.json();
-    expect(data.ok).toBe(true);
-    expect(data.duplicate).toBe(true);
-  });
-});
-```
+- [ ] GET /api/health - Health check endpoint
+- [ ] POST /api/contact - Contact form submission
+- [ ] GET /api/menu - Menu items API (currently Sanity-only)
+- [ ] POST /api/events/rsvp - Event RSVP system
+- [ ] GET /api/hours - Business hours API
+- [ ] Rate limiting middleware
+- [ ] Request logging
+- [ ] API versioning (/api/v1/)
 
 ---
 
-## Related Documentation
+## Security Considerations
 
-- [Architecture](./architecture.md) - System architecture overview
-- [Data Models](./data-models.md) - Sanity schema documentation
-- [Development Guide](./development-guide.md) - Local development setup
+### Current Measures
+✅ Environment variables for secrets
+✅ httpOnly cookies
+✅ HTTPS in production
+✅ CSRF protection (sameSite)
+✅ Email validation
+✅ Generic error messages
+✅ Server-side API token handling
+
+### Recommended Additions
+- [ ] Rate limiting (prevent abuse)
+- [ ] Request validation library (Zod/Yup)
+- [ ] CORS configuration
+- [ ] API authentication tokens (for future mobile app)
+- [ ] Request logging/monitoring
+- [ ] Extend cookie expiry for production auth
 
 ---
 
-## API Versioning
+## Dependencies
 
-**Current Version:** v1 (implicit, no version prefix)
+### Used in API Routes
+- `next/server` - NextResponse, cookies
+- `@/sanity/lib/client` - Read-only Sanity client (CDN)
+- `@/sanity/lib/writeClient` - Write Sanity client (mutations)
 
-**Future Versioning Strategy:**
-- When breaking changes needed, use `/api/v2/` prefix
-- Maintain v1 endpoints for backward compatibility
-- Document migration guide
+### Environment Access
+- `process.env.SITE_PASSWORD` - Optional site password
+- `process.env.NODE_ENV` - Environment detection
 
 ---
 
-**Document Version:** 1.0.0
-**Last Updated:** 2025-11-23
+**API Documentation Complete** ✓
 **Total Endpoints:** 2
+**Authentication:** Cookie-based (optional)
+**Data Layer:** Sanity CMS
+**Framework:** Next.js 16 API Routes

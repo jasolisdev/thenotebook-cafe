@@ -1,0 +1,11 @@
+/* Story Prototype Page - Custom Hero Styling */
+
+/* Hero section uses simple padding (pt-28 pb-28 md:pt-32 md:pb-32) */
+/* No additional CSS overrides needed - gradient applied inline */
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .story-prototype-page section {
+    animation: none;
+  }
+}

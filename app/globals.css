@@ -3,12 +3,15 @@
 /* Tailwind v4 Theme Configuration */
 @theme {
   --color-cafe-black: #2C2420;
+  --color-cafe-charcoal: #2A2622;
   --color-cafe-brown: #4A3B32;
   --color-cafe-tan: #A48D78;
+  --color-cafe-terracotta: #9A4C32;
   --color-cafe-beige: #CBB9A4;
   --color-cafe-cream: #EDE7D8;
   --color-cafe-mist: #F4F1EA;
   --color-cafe-white: #FAF9F6;
+  --color-cafe-olive: #4A4F41;
   --color-cafe-red: #ef4444;
 }
 
@@ -37,12 +40,15 @@
 
   /* Core palette */
   --cafe-black: #2C2420;
+  --cafe-charcoal: #2A2622;
   --cafe-brown: #4A3B32;
   --cafe-tan: #A48D78;
+  --cafe-terracotta: #9A4C32;
   --cafe-beige: #CBB9A4;
   --cafe-cream: #EDE7D8;
   --cafe-mist: #F4F1EA;
   --cafe-white: #FAF9F6;
+  --cafe-olive: #4A4F41;
 
   /* Extended palette - frequently used colors */
   --espresso-brown: #2a1f16;     /* Dark brown text */
@@ -67,6 +73,7 @@
   --cafe-cream-rgb: 237, 231, 216;
   --cafe-mist-rgb: 244, 241, 234;
   --cafe-white-rgb: 250, 249, 246;
+  --cafe-olive-rgb: 74, 79, 65;
 
   /* Extended RGB helpers */
   --espresso-brown-rgb: 42, 31, 22;
@@ -75,7 +82,7 @@
   --cream-light-rgb: 244, 240, 233;
 
   /* Core semantic tokens */
-  --bg-solid: var(--cafe-white);
+  --bg-solid: var(--cafe-mist);
   --bg-dark: var(--cafe-black);
   --bg-cream: var(--cafe-cream);
   --bg-mist: var(--cafe-mist);
@@ -110,6 +117,23 @@
   --gold-light: rgba(var(--gold-primary-rgb), var(--opacity-light));
   --gold-medium: rgba(var(--gold-primary-rgb), var(--opacity-medium));
   --gold-strong: rgba(var(--gold-primary-rgb), var(--opacity-strong));
+
+  /* Hero gradients */
+  --hero-gradient-espresso:
+    radial-gradient(ellipse at 78% 0%, rgba(var(--cafe-tan-rgb), 0.34), rgba(var(--cafe-tan-rgb), 0) 56%),
+    radial-gradient(ellipse at 18% 22%, rgba(var(--cafe-tan-rgb), 0.2), rgba(var(--cafe-tan-rgb), 0) 50%),
+    linear-gradient(145deg, #1a120e 0%, #2c2420 55%, #1a120e 100%);
+  --hero-espresso-overlay:
+    radial-gradient(ellipse at 82% 18%, rgba(var(--cafe-cream-rgb), 0.22), rgba(var(--cafe-cream-rgb), 0) 52%),
+    radial-gradient(ellipse at 18% 10%, rgba(var(--cafe-tan-rgb), 0.16), rgba(var(--cafe-tan-rgb), 0) 50%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55));
+  --hero-gradient-cream:
+    radial-gradient(ellipse at 22% 30%, rgba(var(--cafe-tan-rgb), 0.22), rgba(var(--cafe-tan-rgb), 0) 55%),
+    radial-gradient(ellipse at 68% 70%, rgba(var(--cafe-cream-rgb), 0.32), rgba(var(--cafe-cream-rgb), 0) 58%),
+    linear-gradient(145deg, #faf7f1 0%, #f5eee5 50%, #f9f5ee 100%);
+  --hero-cream-overlay:
+    radial-gradient(ellipse at 70% 40%, rgba(var(--cafe-tan-rgb), 0.12), rgba(var(--cafe-tan-rgb), 0) 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.8));
 
   --dark-overlay: rgba(0, 0, 0, var(--opacity-medium));
   --white-overlay: rgba(255, 255, 255, var(--opacity-light));
@@ -218,9 +242,7 @@ body {
   min-height: 100dvh;
   background: var(--bg-solid);
   color: var(--text-light);
-  padding-top: 80px;
-  transition: padding-top 0.3s ease;
-  /* Nav height only (banner hidden) */
+  /* No padding-top needed - navbar is fixed and doesn't take up space */
 }
 
 /* Text color utilities for dark backgrounds */
@@ -410,4 +432,53 @@ h3 {
   border-radius: 4px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
   pointer-events: none;
+}
+
+/* Accessibility Widget Styles */
+.acc-grayscale {
+  filter: grayscale(100%);
+}
+.acc-contrast {
+  filter: contrast(125%);
+}
+.acc-hide-images img, .acc-hide-images svg, .acc-hide-images [style*="background-image"] {
+  visibility: hidden;
+}
+.acc-cursor-lg {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'><path fill='black' d='M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5M8.288 11.487l6.913-6.913'/></svg>") 16 16, auto;
+}
+.acc-highlight-links a {
+  background-color: var(--cafe-tan) !important;
+  color: var(--cafe-black) !important;
+  text-decoration: underline !important;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+.bionic-bold {
+  font-weight: 700;
+}
+#reading-guide-line {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background-color: rgba(var(--cafe-tan-rgb), 0.6);
+  pointer-events: none;
+  z-index: 9999;
+}
+.acc-text-lg {
+  font-size: 1.25rem;
+}
+.acc-text-xl {
+  font-size: 1.5rem;
+}
+.acc-readable-font {
+  font-family: 'Arial', sans-serif !important;
+}
+.acc-dyslexia-font {
+  font-family: 'OpenDyslexic', sans-serif !important;
+}
+.acc-stop-animations * {
+  animation: none !important;
+  transition: none !important;
 }

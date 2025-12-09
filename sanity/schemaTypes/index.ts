@@ -4,5 +4,6 @@ import aboutPage from "./aboutPage";
 import menuItem from "./menuItem";
 import post from "./post";
 import subscriber from "./subscriber";
+import jobApplication from "./jobApplication";
 
-export const schemaTypes = [settings, homePage, aboutPage, menuItem, post, subscriber];
+export const schemaTypes = [settings, homePage, aboutPage, menuItem, post, subscriber, jobApplication];

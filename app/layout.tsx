@@ -8,6 +8,7 @@ import "./styles/components/hero.css";
 import "./styles/components/buttons.css";
 import "./styles/components/footer.css";
 import "./styles/components/announcement.css";
+import "./styles/components/consent-banner.css";
 import "./styles/components/what-to-expect.css";
 
 // Layout styles
@@ -21,16 +22,20 @@ import "./styles/pages/events.css";
 import "./styles/pages/contact.css";
 
 import { ThemeProvider } from "next-themes";
-import { DM_Serif_Display, Outfit } from "next/font/google";
+import { DM_Serif_Display, Outfit, Caveat } from "next/font/google";
 import { cookies } from "next/headers";
 import PasswordGate from "./components/ui/PasswordGate";
 import SiteHeader from "./components/layout/SiteHeader";
 import SiteFooter from "./components/layout/SiteFooter";
+import AnnouncementBanner from "./components/ui/AnnouncementBanner";
 import Script from "next/script";
 import { client } from "@/sanity/lib/client";
 import VirtualBarista from "./components/ui/VirtualBarista";
 import { CartProvider } from "./components/providers/CartProvider";
 import { CartDrawer } from "./components/features/CartDrawer";
+import { AccessibilityWidget } from "./components/features/Accessibility/AccessibilityWidget";
+import ConsentBanner from "./components/ui/ConsentBanner";
+import AnalyticsLoader from "./components/ui/AnalyticsLoader";
 
 // Google Fonts
 const dmSerif = DM_Serif_Display({
@@ -45,6 +50,13 @@ const outfit = Outfit({
   weight: ["300", "400", "500", "600"],
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+const caveat = Caveat({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-handwritten",
   display: "swap",
 });
 
@@ -69,6 +81,7 @@ export default async function RootLayout({
 
   // Show password gate if password is set and user is not authenticated
   const showPasswordGate = sitePassword && !isAuthenticated;
+  const showAnnouncement = false; // temporarily hide banner
 
   // Fetch settings for header (only if not showing password gate)
   const settings = !showPasswordGate ? await client.fetch(`
@@ -81,7 +94,7 @@ export default async function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${dmSerif.variable} ${outfit.variable}`}
+      className={`${dmSerif.variable} ${outfit.variable} ${caveat.variable}`}
     >
       <body className="antialiased font-sans">
         <ThemeProvider
@@ -94,6 +107,7 @@ export default async function RootLayout({
               <PasswordGate />
             ) : (
               <>
+                {showAnnouncement && <AnnouncementBanner />}
                 <SiteHeader
                   instagramUrl={settings?.social?.instagram}
                   spotifyUrl={settings?.social?.spotify}
@@ -102,7 +116,11 @@ export default async function RootLayout({
                   {children}
                 </div>
                 <SiteFooter />
-                <VirtualBarista />
+                <ConsentBanner />
+                <AnalyticsLoader />
+                {/* VirtualBarista temporarily hidden for hero debugging */}
+                {/* <VirtualBarista /> */}
+                <AccessibilityWidget />
                 <CartDrawer />
               </>
             )}

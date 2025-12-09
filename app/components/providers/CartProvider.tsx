@@ -12,6 +12,7 @@ type CartContextType = {
   addItem: (item: MenuItem, quantity: number, modifiers: SelectedModifier[], notes?: string, totalPrice?: number) => void;
   removeItem: (cartId: string) => void;
   updateQuantity: (cartId: string, quantity: number) => void;
+  updateItem: (cartId: string, quantity: number, modifiers: SelectedModifier[], notes?: string) => void;
   clear: () => void;
 };
 
@@ -38,15 +39,53 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         (parseFloat(item.price.replace("$", "")) +
           modifiers.reduce((acc, m) => acc + m.priceDelta, 0));
 
-    const cartItem: CartItem = {
-      ...item,
-      cartId: Math.random().toString(36).slice(2, 11),
-      modifiers,
-      notes: notes || '',
-      totalPrice,
-      quantity,
-    };
-    setItems((prev) => [...prev, cartItem]);
+    // Check if identical item already exists (same id, modifiers, and notes)
+    setItems((prev) => {
+      // Helper to compare modifiers
+      const modifiersMatch = (a: SelectedModifier[], b: SelectedModifier[]) => {
+        if (a.length !== b.length) return false;
+        const aSorted = [...a].sort((x, y) => `${x.groupId}${x.optionLabel}`.localeCompare(`${y.groupId}${y.optionLabel}`));
+        const bSorted = [...b].sort((x, y) => `${x.groupId}${x.optionLabel}`.localeCompare(`${y.groupId}${y.optionLabel}`));
+        return aSorted.every((mod, i) =>
+          mod.groupId === bSorted[i].groupId &&
+          mod.optionLabel === bSorted[i].optionLabel &&
+          mod.priceDelta === bSorted[i].priceDelta
+        );
+      };
+
+      // Find existing identical item
+      const existingIndex = prev.findIndex((cartItem) =>
+        cartItem.id === item.id &&
+        (cartItem.notes || '') === (notes || '') &&
+        modifiersMatch(cartItem.modifiers, modifiers)
+      );
+
+      if (existingIndex !== -1) {
+        // Identical item exists - increment quantity
+        const updated = [...prev];
+        const existing = updated[existingIndex];
+        const newQuantity = existing.quantity + quantity;
+        const basePrice = parseFloat(existing.price.replace("$", ""));
+        const modifierTotal = existing.modifiers.reduce((sum, mod) => sum + mod.priceDelta, 0);
+        updated[existingIndex] = {
+          ...existing,
+          quantity: newQuantity,
+          totalPrice: (basePrice + modifierTotal) * newQuantity,
+        };
+        return updated;
+      } else {
+        // New unique item - add to cart
+        const cartItem: CartItem = {
+          ...item,
+          cartId: Math.random().toString(36).slice(2, 11),
+          modifiers,
+          notes: notes || '',
+          totalPrice,
+          quantity,
+        };
+        return [...prev, cartItem];
+      }
+    });
     // Cart badge will update automatically via cart-count-change event
     // User can open cart manually via cart icon
   };
@@ -75,6 +114,26 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
+  const updateItem = (cartId: string, quantity: number, modifiers: SelectedModifier[], notes?: string) => {
+    setItems((prev) => {
+      return prev.map((item) => {
+        if (item.cartId !== cartId) {
+          return item;
+        }
+        const basePrice = parseFloat(item.price.replace("$", ""));
+        const modifierTotal = modifiers.reduce((sum, mod) => sum + mod.priceDelta, 0);
+        const totalPrice = (basePrice + modifierTotal) * quantity;
+        return {
+          ...item,
+          quantity,
+          modifiers,
+          notes: notes || '',
+          totalPrice,
+        };
+      });
+    });
+  };
+
   const clear = () => setItems([]);
 
   // Body flags for overlays / scroll lock / barista suppression
@@ -91,9 +150,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   // Broadcast cart count for header badge fallback
   useEffect(() => {
     const body = document.body;
-    body.dataset.cartCount = String(items.length);
-    window.dispatchEvent(new CustomEvent("cart-count-change", { detail: items.length }));
-  }, [items.length]);
+    const totalCount = items.reduce((sum, item) => sum + item.quantity, 0);
+    body.dataset.cartCount = String(totalCount);
+    window.dispatchEvent(new CustomEvent("cart-count-change", { detail: totalCount }));
+  }, [items]);
 
   const value = useMemo(
     () => ({
@@ -105,6 +165,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       addItem,
       removeItem,
       updateQuantity,
+      updateItem,
       clear,
     }),
     [items, isOpen],

@@ -1,0 +1,33 @@
+/**
+ * Careers Page Styles
+ * Parallax hero scoped to the careers page only
+ */
+
+.careers-hero-wrapper {
+  position: relative;
+  background: var(--cafe-mist);
+}
+
+.careers-hero-wrapper .parallax-hero {
+  min-height: 70vh;
+}
+
+.careers-hero-wrapper .parallax-hero__content h1 {
+  color: #ffffff;
+  text-shadow: 0 6px 28px rgba(0, 0, 0, 0.65);
+}
+
+.careers-hero-wrapper .parallax-hero__content h1 span {
+  color: var(--cafe-tan);
+}
+
+.careers-hero-wrapper .parallax-hero__content p {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 4px 22px rgba(0, 0, 0, 0.55);
+}
+
+@media (min-width: 768px) {
+  .careers-hero-wrapper .parallax-hero__content {
+    padding: 8rem 1.5rem;
+  }
+}

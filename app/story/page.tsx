@@ -6,7 +6,9 @@
 import { client } from "@/sanity/lib/client";
 import Reveal from "../components/ui/Reveal";
 import Image from "next/image";
-import { Coffee, Music, Heart, MapPin, Sparkles, BookOpen } from "lucide-react";
+import ParallaxHero from "../components/features/ParallaxHero";
+import NewsletterForm from "../components/features/NewsLetterForm";
+import { Coffee, Music, Heart, MapPin, Sparkles, BookOpen, Users, Home as HomeIcon, Award } from "lucide-react";
 
 type PortableChild = { text?: string };
 type PortableBlock = { _type?: string; children?: PortableChild[] };
@@ -56,42 +58,55 @@ export default async function StoryPage() {
   const bulletIcons = [Music, Sparkles, Coffee, BookOpen];
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: '#FAF9F6' }}>
-      {/* Header */}
-      <div className="relative pt-28 pb-28 md:pt-32 md:pb-32 px-6 text-center overflow-hidden" style={{ backgroundColor: '#2C2420', color: '#FAF9F6' }}>
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-          <div
-            className="absolute right-0 top-0 w-96 h-96 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2"
-            style={{ backgroundColor: '#A48D78' }}
-          ></div>
-        </div>
-        <div className="max-w-4xl mx-auto relative z-10 space-y-6">
+    <main className="min-h-screen" style={{ backgroundColor: 'var(--cafe-mist)' }}>
+      {/* Hero Section (from prototype) */}
+      <ParallaxHero backgroundImage="/unsplash/tnc-placeholder-4.png">
+        <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
           <Reveal>
-            <span
-              className="font-bold tracking-[0.2em] uppercase text-sm block"
-              style={{ color: '#A48D78' }}
-            >
-              The Story
+            <span className="font-bold tracking-[0.2em] uppercase text-sm block" style={{ color: 'var(--cafe-tan)' }}>
+              Our Story
             </span>
           </Reveal>
-          <Reveal delay={120}>
-            <h1 className="font-serif text-[64px] md:text-[86px] leading-[0.9]" style={{ color: '#FAF9F6' }}>
-              Our Riverside Origin
+
+          <Reveal delay={200}>
+            <h1 className="font-serif text-[64px] md:text-[86px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
+              Built by Locals,<br />
+              <span className="italic" style={{ color: 'var(--cafe-tan)' }}>For Locals</span>
             </h1>
           </Reveal>
-          <Reveal delay={220}>
-            <p
-              className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed"
-              style={{ color: 'rgba(203, 185, 164, 0.85)' }}
-            >
-              A café built for writers, designers, and night thinkers—where house music meets hand-crafted coffee.
+
+          <Reveal delay={400}>
+            <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}>
+              The story of a husband-wife dream to create Riverside's first truly genuine coffee community hub.
             </p>
           </Reveal>
         </div>
-      </div>
+      </ParallaxHero>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 py-20 space-y-20">
+      <section
+        data-section="Story Main Content"
+        className="max-w-6xl mx-auto px-6 py-20 space-y-20"
+      >
+        {/* Cafe Name with Coffee Cup Decoration */}
+        <div className="text-center mb-16">
+          <Reveal>
+            <h2
+              className="font-serif text-4xl md:text-5xl mb-6"
+              style={{ color: '#2C2420' }}
+            >
+              The Notebook Café
+            </h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="flex items-center justify-center gap-4">
+              <div className="w-12 md:w-20 h-[2px]" style={{ backgroundColor: 'rgba(164, 141, 120, 0.3)' }}></div>
+              <Coffee size={24} style={{ color: '#A48D78' }} strokeWidth={1.5} />
+              <div className="w-12 md:w-20 h-[2px]" style={{ backgroundColor: 'rgba(164, 141, 120, 0.3)' }}></div>
+            </div>
+          </Reveal>
+        </div>
+
         {/* Story Text */}
         <div>
           <Reveal>
@@ -112,141 +127,721 @@ export default async function StoryPage() {
             )}
           </Reveal>
         </div>
+      </section>
 
-        {/* Two Column Cards */}
-        <div className="grid md:grid-cols-2 gap-10">
-          <Reveal delay={100}>
-            <div className="p-8 shadow-sm h-full" style={{ backgroundColor: '#FFFFFF', borderTop: '4px solid #A48D78' }}>
-              <h3 className="font-serif text-2xl md:text-3xl mb-4" style={{ color: '#2C2420' }}>The Coffee</h3>
-              <p className="text-base md:text-lg leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.7)' }}>
-                We partner with sustainable, direct-trade roasters who care about the farmers as much as the bean.
-                Our espresso is dialed in every morning, ensuring the perfect extraction ratio.
-              </p>
+
+      {/* The Origin Story - Two Column Layout */}
+      <section
+        data-section="The Origin"
+        className="py-24 md:py-32 relative overflow-hidden"
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
+      >
+        <div className="section-deco" style={{ top: '10%', left: '8%', animationDuration: '13s' }} aria-hidden="true">
+          <BookOpen strokeWidth={1.4} />
+        </div>
+        <div className="section-deco section-deco-dark" style={{ bottom: '12%', right: '10%', animationDuration: '11s', animationDelay: '0.6s' }} aria-hidden="true">
+          <Coffee strokeWidth={1.4} />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            {/* Image - Left Side */}
+            <div className="relative">
+              <Reveal>
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/unsplash/tnc-placeholder-philosophy-1.png"
+                    alt="Our origin story"
+                    fill
+                    className="object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                  />
+                  <div
+                    className="absolute inset-0 opacity-30"
+                    style={{ background: 'linear-gradient(135deg, rgba(44, 36, 32, 0.5) 0%, transparent 60%)' }}
+                  ></div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={150} replay={false}>
+                <div
+                  className="absolute -bottom-6 -right-6 shadow-2xl"
+                  style={{
+                    backgroundColor: 'var(--cafe-tan)',
+                    color: 'var(--cafe-white)',
+                    borderRadius: '0.5rem',
+                    padding: '0.75rem 1.25rem',
+                    border: '1px solid rgba(255,255,255,0.32)',
+                    fontFamily: 'var(--font-serif)',
+                    boxShadow: '0 20px 25px -5px rgba(0,0,0,0.12), 0 8px 10px -6px rgba(0,0,0,0.12)',
+                    letterSpacing: '0.02em'
+                  }}
+                >
+                  <p className="text-xl md:text-2xl leading-tight">Built by</p>
+                  <p className="text-xl md:text-2xl leading-tight">Dreamers</p>
+                  <p className="text-[0.7rem] uppercase tracking-[0.18em] mt-2 opacity-90">
+                    For Dreamers
+                  </p>
+                </div>
+              </Reveal>
             </div>
-          </Reveal>
-          <Reveal delay={200}>
-            <div className="p-8 shadow-sm h-full" style={{ backgroundColor: '#FFFFFF', borderTop: '4px solid #2C2420' }}>
-              <h3 className="font-serif text-2xl md:text-3xl mb-4" style={{ color: '#2C2420' }}>The Music</h3>
-              <p className="text-base md:text-lg leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.7)' }}>
-                You won't hear Top 40 hits here. We curate daily playlists of deep house, neo-soul, and lo-fi beats
-                that provide the perfect backdrop for focus and flow.
+
+            {/* Content - Right Side */}
+            <div className="space-y-6">
+              <Reveal>
+                <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+                  Our Story
+                </span>
+              </Reveal>
+              <Reveal delay={120}>
+                <h2 className="font-serif text-5xl sm:text-6xl mb-8 leading-none" style={{ color: 'var(--cafe-black)' }}>
+                  How It <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Began</span>
+                </h2>
+              </Reveal>
+              <Reveal delay={180}>
+                <div className="w-24 h-[2px]" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
+              </Reveal>
+              <Reveal delay={200}>
+                <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.82)' }}>
+                  Riverside needed a place that felt different. Not a quick stop for caffeine, but a <strong style={{ color: 'var(--cafe-black)', fontWeight: 600 }}>destination</strong>. Somewhere the music wasn't an afterthought, the chairs were actually comfortable, and the coffee was treated with reverence.
+                </p>
+              </Reveal>
+              <Reveal delay={260}>
+                <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.82)' }}>
+                  A space born from a love of <strong style={{ color: 'var(--cafe-black)', fontWeight: 600 }}>specialty coffee</strong> and <strong style={{ color: 'var(--cafe-black)', fontWeight: 600 }}>creative solitude</strong>. For writers, designers, students, and dreamers. A third place—somewhere between home and work where ideas take root.
+                </p>
+              </Reveal>
+              <Reveal delay={320}>
+                <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.82)' }}>
+                  From single-origin Mexican beans to custom-designed furniture, every detail intentional. This isn't a corporate playbook—it's a husband-wife team building their <em className="italic" style={{ color: 'var(--cafe-tan)' }}>first business together</em>, pouring everything into creating something genuinely special.
+                </p>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Riverside - Location & Community */}
+      <section
+        data-section="Why Riverside"
+        className="py-24 md:py-32 relative overflow-hidden"
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
+      >
+        <div className="section-deco" style={{ top: '8%', right: '10%', animationDuration: '11s' }} aria-hidden="true">
+          <MapPin strokeWidth={1.4} />
+        </div>
+        <div className="section-deco section-deco-dark" style={{ bottom: '10%', left: '8%', animationDuration: '12s', animationDelay: '0.4s' }} aria-hidden="true">
+          <HomeIcon strokeWidth={1.4} />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            {/* Image */}
+            <div className="relative">
+              <Reveal>
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/unsplash/placeholder-interior-shop.png"
+                    alt="Riverside location"
+                    fill
+                    className="object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                  />
+                  <div
+                    className="absolute inset-0 opacity-30"
+                    style={{ background: 'linear-gradient(135deg, rgba(44, 36, 32, 0.5) 0%, transparent 60%)' }}
+                  ></div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={150} replay={false}>
+                <div
+                  className="absolute -bottom-6 -right-6 shadow-2xl"
+                  style={{
+                    backgroundColor: 'var(--cafe-tan)',
+                    color: 'var(--cafe-white)',
+                    borderRadius: '0.5rem',
+                    padding: '0.75rem 1.25rem',
+                    border: '1px solid rgba(255,255,255,0.32)',
+                    fontFamily: 'var(--font-serif)',
+                    boxShadow: '0 20px 25px -5px rgba(0,0,0,0.12), 0 8px 10px -6px rgba(0,0,0,0.12)',
+                    letterSpacing: '0.02em'
+                  }}
+                >
+                  <p className="text-xl md:text-2xl leading-tight">2025</p>
+                  <p className="text-xl md:text-2xl leading-tight">Establised</p>
+                  <p className="text-[0.7rem] uppercase tracking-[0.18em] mt-2 opacity-90">
+                    Heart of Riverside
+                  </p>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* Content */}
+            <div className="space-y-6">
+              <Reveal>
+                <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+                  Our Riverside Home
+                </span>
+              </Reveal>
+              <Reveal delay={120}>
+                <h2 className="font-serif text-5xl sm:text-6xl mb-8 leading-none" style={{ color: 'var(--cafe-black)' }}>
+                  Why <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Here?</span>
+                </h2>
+              </Reveal>
+              <Reveal delay={180}>
+                <div className="w-24 h-[2px]" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
+              </Reveal>
+              <Reveal delay={200}>
+                <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.82)' }}>
+                  Positioned near the art district and University Drive nightlife, we're at the intersection where Riverside's diverse communities meet. Remote workers, art enthusiasts, students, pre-club crews—everyone belongs here.
+                </p>
+              </Reveal>
+              <Reveal delay={260}>
+                <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.82)' }}>
+                  We believe in Riverside's potential. This city deserves a coffee shop that reflects its creative spirit, its diversity, its energy. We're not just opening a café—we're investing in our community's future.
+                </p>
+              </Reveal>
+
+              <Reveal delay={320}>
+                <div className="flex gap-10 border-t border-cafe-beige pt-8">
+                  <div>
+                    <h4 className="font-serif text-2xl mb-1" style={{ color: 'var(--cafe-black)' }}>
+                      2026
+                    </h4>
+                    <p className="text-xs uppercase tracking-wider" style={{ color: 'var(--cafe-brown)' }}>
+                      Grand Opening
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-serif text-2xl mb-1" style={{ color: 'var(--cafe-black)' }}>
+                      100%
+                    </h4>
+                    <p className="text-xs uppercase tracking-wider" style={{ color: 'var(--cafe-brown)' }}>
+                      Local Owned
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What Sets Us Apart - Editorial Grid */}
+      <section
+        data-section="What Sets Us Apart"
+        className="py-24 md:py-32 relative overflow-hidden"
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
+      >
+        <div className="section-deco" style={{ top: '8%', right: '10%', animationDuration: '13s' }} aria-hidden="true">
+          <Sparkles strokeWidth={1.6} />
+        </div>
+        <div className="section-deco section-deco-dark" style={{ bottom: '10%', left: '12%', animationDuration: '11s', animationDelay: '0.7s' }} aria-hidden="true">
+          <Award strokeWidth={1.4} />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Header Section */}
+          <div className="mb-24">
+            <Reveal>
+              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+                The Difference
+              </span>
+            </Reveal>
+            <Reveal delay={100}>
+              <h2 className="font-serif text-5xl sm:text-6xl mb-6 leading-none" style={{ color: 'var(--cafe-black)' }}>
+                What Makes Us <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Unique</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={150}>
+              <div className="w-24 h-[2px]" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
+            </Reveal>
+          </div>
+
+          {/* Grid of Differentiators */}
+          <div className="grid md:grid-cols-2 gap-16 md:gap-20">
+            {/* 1. Mexican Coffee */}
+            <Reveal delay={200}>
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.12)' }}>
+                    <Coffee size={22} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+                  </div>
+                  <span className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'var(--cafe-tan)' }}>
+                    Origin
+                  </span>
+                </div>
+                <h3 className="font-serif text-3xl md:text-4xl leading-tight" style={{ color: 'var(--cafe-black)' }}>
+                  Single-Origin Mexican Coffee
+                </h3>
+                <div className="w-16 h-[2px]" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
+                <p className="text-lg font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.85)' }}>
+                  Direct-trade Chiapas and Oaxaca lots, roasted to honor sweetness and terroir. Every cup carries a cultural story and a transparent supply chain.
+                </p>
+              </div>
+            </Reveal>
+
+            {/* 2. Custom Design */}
+            <Reveal delay={260}>
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.12)' }}>
+                    <Users size={22} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+                  </div>
+                  <span className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'var(--cafe-tan)' }}>
+                    Design
+                  </span>
+                </div>
+                <h3 className="font-serif text-3xl md:text-4xl leading-tight" style={{ color: 'var(--cafe-black)' }}>
+                  100% Custom-Designed Space
+                </h3>
+                <div className="w-16 h-[2px]" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
+                <p className="text-lg font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.85)' }}>
+                  Built-by-hand furniture, lighting, and layout designed by our founder. Nothing off-the-shelf—only intentional pieces that invite you to linger.
+                </p>
+              </div>
+            </Reveal>
+
+            {/* 3. Soundscapes */}
+            <Reveal delay={320}>
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.12)' }}>
+                    <Music size={22} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+                  </div>
+                  <span className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'var(--cafe-tan)' }}>
+                    Atmosphere
+                  </span>
+                </div>
+                <h3 className="font-serif text-3xl md:text-4xl leading-tight" style={{ color: 'var(--cafe-black)' }}>
+                  Curated Soundscapes
+                </h3>
+                <div className="w-16 h-[2px]" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
+                <p className="text-lg font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.85)' }}>
+                  Deep house, neo-soul, and lo-fi playlists scored for focus and calm. No generic radio, just sound that matches the craft in your cup.
+                </p>
+              </div>
+            </Reveal>
+
+            {/* 4. Community */}
+            <Reveal delay={380}>
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.12)' }}>
+                    <Heart size={22} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+                  </div>
+                  <span className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'var(--cafe-tan)' }}>
+                    Hospitality
+                  </span>
+                </div>
+                <h3 className="font-serif text-3xl md:text-4xl leading-tight" style={{ color: 'var(--cafe-black)' }}>
+                  Community First
+                </h3>
+                <div className="w-16 h-[2px]" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
+                <p className="text-lg font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.85)' }}>
+                  Riverside's living room—stay as long as you like. Students, creatives, neighbors: everyone is welcome, always.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Meet the Founders - Personal Profiles */}
+      <section
+        data-section="Meet the Founders"
+        className="relative py-24 md:py-32 overflow-hidden"
+        style={{ backgroundColor: 'var(--cafe-mist)' }}
+      >
+        <div className="section-deco" style={{ top: '10%', left: '10%', animationDuration: '12s' }} aria-hidden="true">
+          <Heart strokeWidth={1.4} />
+        </div>
+        <div className="section-deco section-deco-dark" style={{ bottom: '8%', right: '12%', animationDuration: '11s', animationDelay: '0.5s' }} aria-hidden="true">
+          <Users strokeWidth={1.4} />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <Reveal>
+              <span className="text-xs uppercase tracking-[0.25em] font-semibold" style={{ color: 'var(--cafe-tan)' }}>
+                The People Behind the Pour
+              </span>
+            </Reveal>
+            <Reveal delay={120}>
+              <h2 className="font-serif text-4xl md:text-6xl mt-4" style={{ color: 'var(--cafe-black)' }}>
+                Meet the <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Founders</span>
+              </h2>
+            </Reveal>
+          </div>
+
+          <div className="space-y-16">
+            {/* Founder 1 - Coffee Visionary */}
+            <Reveal delay={200}>
+              <div
+                className="relative rounded-3xl overflow-hidden p-8 md:p-10 lg:p-12"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(237, 230, 216, 0.4) 0%, rgba(244, 241, 234, 0.6) 100%)',
+                  border: '2px solid rgba(var(--cafe-tan-rgb), 0.25)'
+                }}
+              >
+                {/* Ornate corner decorations */}
+                <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 rounded-tl-3xl" style={{ borderColor: 'var(--cafe-tan)' }}></div>
+                <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 rounded-br-3xl" style={{ borderColor: 'var(--cafe-tan)' }}></div>
+
+                <div className="grid lg:grid-cols-[320px_1fr] gap-8 lg:gap-12 items-center relative z-10">
+                  {/* Portrait Frame */}
+                  <div className="relative w-full max-w-[280px] lg:max-w-none mx-auto lg:mx-0">
+                    {/* Industrial grid border */}
+                    <div
+                      className="absolute -inset-3 rounded-2xl opacity-30 pointer-events-none"
+                      style={{
+                        background: `
+                          repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(var(--cafe-tan-rgb), 0.15) 8px, rgba(var(--cafe-tan-rgb), 0.15) 9px),
+                          repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(var(--cafe-tan-rgb), 0.15) 8px, rgba(var(--cafe-tan-rgb), 0.15) 9px)
+                        `
+                      }}
+                    ></div>
+
+                    <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/50">
+                      <Image
+                        src="/unsplash/tnc-placeholder-philosophy-1.png"
+                        alt="Founder - Coffee Expert"
+                        fill
+                        className="object-cover grayscale-[30%] hover:grayscale-0 hover:scale-105 transition-all duration-700"
+                        sizes="(min-width: 1024px) 320px, 280px"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="space-y-5">
+                    <div>
+                      <h3 className="font-serif text-3xl md:text-4xl mb-2" style={{ color: 'var(--cafe-black)' }}>
+                        The Coffee Visionary
+                      </h3>
+                      <p className="text-xs uppercase tracking-[0.25em] font-semibold" style={{ color: 'var(--cafe-tan)' }}>
+                        Founder & Head of Coffee
+                      </p>
+                    </div>
+
+                    <div className="w-20 h-[2px]" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
+
+                    <p className="text-base md:text-lg leading-relaxed font-light" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.85)' }}>
+                      With years of experience in specialty coffee and a deep connection to Mexican coffee culture, they bring expertise in sourcing, roasting, and extraction science. Every dial-in, every pour—it's personal.
+                    </p>
+
+                    <div className="flex flex-wrap gap-3 pt-2">
+                      <div
+                        className="px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm"
+                        style={{
+                          backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.2)',
+                          color: 'var(--cafe-brown)',
+                          border: '1px solid rgba(var(--cafe-tan-rgb), 0.3)'
+                        }}
+                      >
+                        Q Grader Certified
+                      </div>
+                      <div
+                        className="px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm"
+                        style={{
+                          backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.2)',
+                          color: 'var(--cafe-brown)',
+                          border: '1px solid rgba(var(--cafe-tan-rgb), 0.3)'
+                        }}
+                      >
+                        Direct Trade Advocate
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Founder 2 - Creative Architect */}
+            <Reveal delay={300}>
+              <div
+                className="relative rounded-3xl overflow-hidden p-8 md:p-10 lg:p-12"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(244, 241, 234, 0.6) 0%, rgba(237, 230, 216, 0.4) 100%)',
+                  border: '2px solid rgba(var(--cafe-tan-rgb), 0.25)'
+                }}
+              >
+                {/* Ornate corner decorations */}
+                <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 rounded-tr-3xl" style={{ borderColor: 'var(--cafe-tan)' }}></div>
+                <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 rounded-bl-3xl" style={{ borderColor: 'var(--cafe-tan)' }}></div>
+
+                <div className="grid lg:grid-cols-[1fr_320px] gap-8 lg:gap-12 items-center relative z-10">
+                  {/* Content - comes first on desktop for alternating layout */}
+                  <div className="space-y-5 order-2 lg:order-1">
+                    <div>
+                      <h3 className="font-serif text-3xl md:text-4xl mb-2" style={{ color: 'var(--cafe-black)' }}>
+                        The Creative Architect
+                      </h3>
+                      <p className="text-xs uppercase tracking-[0.25em] font-semibold" style={{ color: 'var(--cafe-tan)' }}>
+                        Founder & Design Director
+                      </p>
+                    </div>
+
+                    <div className="w-20 h-[2px]" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
+
+                    <p className="text-base md:text-lg leading-relaxed font-light" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.85)' }}>
+                      A designer with an eye for detail and a passion for creating spaces that inspire. Every bench, table, and light fixture in The Notebook Café is custom-designed—no catalog orders, just intentional craft.
+                    </p>
+
+                    <div className="flex flex-wrap gap-3 pt-2">
+                      <div
+                        className="px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm"
+                        style={{
+                          backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.2)',
+                          color: 'var(--cafe-brown)',
+                          border: '1px solid rgba(var(--cafe-tan-rgb), 0.3)'
+                        }}
+                      >
+                        Interior Design
+                      </div>
+                      <div
+                        className="px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm"
+                        style={{
+                          backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.2)',
+                          color: 'var(--cafe-brown)',
+                          border: '1px solid rgba(var(--cafe-tan-rgb), 0.3)'
+                        }}
+                      >
+                        Furniture Maker
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Portrait Frame */}
+                  <div className="relative w-full max-w-[280px] lg:max-w-none mx-auto lg:mx-0 order-1 lg:order-2">
+                    {/* Industrial grid border */}
+                    <div
+                      className="absolute -inset-3 rounded-2xl opacity-30 pointer-events-none"
+                      style={{
+                        background: `
+                          repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(var(--cafe-tan-rgb), 0.15) 8px, rgba(var(--cafe-tan-rgb), 0.15) 9px),
+                          repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(var(--cafe-tan-rgb), 0.15) 8px, rgba(var(--cafe-tan-rgb), 0.15) 9px)
+                        `
+                      }}
+                    ></div>
+
+                    <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/50">
+                      <Image
+                        src="/unsplash/tnc-placeholder-philosophy-2.png"
+                        alt="Founder - Designer"
+                        fill
+                        className="object-cover grayscale-[30%] hover:grayscale-0 hover:scale-105 transition-all duration-700"
+                        sizes="(min-width: 1024px) 320px, 280px"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Together Section */}
+          <Reveal delay={400}>
+            <div className="mt-20 p-10 md:p-12 rounded-2xl text-center" style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.08)', border: '1px solid rgba(var(--cafe-tan-rgb), 0.2)' }}>
+              <Heart size={32} className="mx-auto mb-6" style={{ color: 'var(--cafe-tan)' }} />
+              <h3 className="font-serif text-3xl md:text-4xl mb-4" style={{ color: 'var(--cafe-black)' }}>
+                Building Together
+              </h3>
+              <p className="text-lg md:text-xl leading-relaxed font-light max-w-3xl mx-auto" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.82)' }}>
+                This is more than a business venture—it's our first shared creative project, a culmination of our individual passions converging into something we hope Riverside will love as much as we do.
               </p>
             </div>
           </Reveal>
         </div>
+      </section>
 
-        {/* Commitments & Craft */}
-        <section
-          data-section="Commitments & Craft"
-          className="py-12 md:py-16"
-        >
-          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center px-2 md:px-0">
+      <section
+        data-section="Three Promises Alternative"
+        className="py-24 w-full"
+        style={{ backgroundColor: "var(--cafe-mist)", color: "#2C2420" }}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Header */}
+          <div className="text-center mb-20">
+            <Reveal>
+              <h2 className="font-serif text-4xl md:text-6xl mb-6" style={{ color: "#2C2420" }}>
+                Our Three Promises
+              </h2>
+            </Reveal>
             <Reveal delay={100}>
-              <div className="order-2 md:order-1 relative">
-                <div className="aspect-[3/4] md:aspect-[4/5] rounded-lg overflow-hidden shadow-sm">
+              <p className="text-xl md:text-2xl font-light max-w-3xl mx-auto" style={{ color: "rgba(44, 36, 32, 0.72)" }}>
+                What you can expect from us, every single visit.
+              </p>
+            </Reveal>
+          </div>
+
+          {/* Promise 1: The Coffee */}
+          <div className="mb-24">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <Reveal delay={150} className="order-2 md:order-1">
+                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
                   <Image
-                    src="/unsplash/placeholder-interior-shop.png"
-                    alt="Cafe interior"
+                    src="/unsplash/tnc-placeholder-philosophy-1.png"
+                    alt="Exceptional coffee"
                     fill
                     className="object-cover"
                     sizes="(min-width: 768px) 50vw, 100vw"
-                    priority
                   />
-                </div>
-                <div
-                  className="absolute -bottom-6 right-4 md:right-0 bg-[#A48D78] text-cafe-white px-6 py-4 rounded-md shadow-xl flex flex-col items-center"
-                  style={{ minWidth: "160px" }}
-                >
-                  <span className="font-serif text-3xl leading-none text-white">2025</span>
-                  <span className="text-xs uppercase tracking-[0.2em]" style={{ color: "rgba(255,255,255,0.9)" }}>
-                    Established
-                  </span>
-                </div>
-              </div>
-            </Reveal>
-            <div className="order-1 md:order-2 space-y-12">
-              <Reveal delay={150}>
-                <div>
-                  <h3 className="font-serif text-3xl md:text-4xl text-cafe-black mb-4 flex items-center gap-3">
-                    <MapPin style={{ color: "#A48D78" }} /> Our Riverside Commitment
-                  </h3>
-                  <p className="text-lg md:text-xl leading-relaxed" style={{ color: "rgba(44, 36, 32, 0.75)" }}>
-                    Located at University Ave & Orange St, we are positioned to be a hub for students and creatives. We believe in the potential of this city.
-                  </p>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#2C2420]/60 to-transparent"></div>
+                  <div className="absolute bottom-8 left-8">
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ backgroundColor: "#A48D78" }}>
+                      <Coffee className="text-white" size={32} />
+                    </div>
+                  </div>
                 </div>
               </Reveal>
-              <Reveal delay={230}>
-                <div>
-                  <h3 className="font-serif text-3xl md:text-4xl text-cafe-black mb-4 flex items-center gap-3">
-                    <Heart style={{ color: "#A48D78" }} /> The Craft &amp; The Rhythm
+              <Reveal delay={200} className="order-1 md:order-2">
+                <div className="space-y-6">
+                  <h3 className="font-serif text-4xl md:text-5xl leading-tight" style={{ color: "#2C2420" }}>
+                    The Coffee Will Be Exceptional
                   </h3>
-                  <p className="text-lg md:text-xl leading-relaxed" style={{ color: "rgba(44, 36, 32, 0.75)" }}>
-                    From ethical sourcing to our state-of-the-art equipment, we treat every step of the brewing process with respect. It is not just coffee; it is a ritual.
+                  <p className="text-lg md:text-xl leading-relaxed" style={{ color: "rgba(44, 36, 32, 0.78)" }}>
+                    We source directly from farmers who care about sustainability. Every morning, we dial in our espresso twice—once before opening, once mid-shift. Your latte isn't just a drink; it's a commitment to craft.
                   </p>
+                  <div className="flex flex-wrap gap-3 pt-4">
+                    <span className="px-4 py-2 rounded-full text-sm" style={{ backgroundColor: "rgba(164, 141, 120, 0.1)", color: "#CBB9A4" }}>
+                      Single-origin beans
+                    </span>
+                    <span className="px-4 py-2 rounded-full text-sm" style={{ backgroundColor: "rgba(164, 141, 120, 0.1)", color: "#CBB9A4" }}>
+                      Twice-daily dial-ins
+                    </span>
+                    <span className="px-4 py-2 rounded-full text-sm" style={{ backgroundColor: "rgba(164, 141, 120, 0.1)", color: "#CBB9A4" }}>
+                      Perfect extraction
+                    </span>
+                  </div>
                 </div>
               </Reveal>
             </div>
           </div>
-        </section>
-      </div>
 
-      {/* What We're Building - Full Width Section */}
-      <section
-        data-section="What We're Building"
-        className="py-20 w-full"
-        style={{ backgroundColor: "#FAF9F6", color: "#2C2420" }}
-      >
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="font-serif text-4xl md:text-5xl mb-12" style={{ color: "#2C2420" }}>
-            {about?.valuesHeading || "What We're Building"}
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-8 text-left">
-            {bullets.map((val: string, i: number) => {
-              const Icon = bulletIcons[i % bulletIcons.length];
-              return (
-                <Reveal key={i} delay={i * 100}>
-                  <div className="flex gap-3 items-start">
-                    <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center"
-                      style={{
-                        backgroundColor: "rgba(164, 141, 120, 0.1)",
-                        border: "1px solid rgba(164, 141, 120, 0.25)",
-                        color: "#A48D78",
-                      }}
-                    >
-                      <Icon size={16} />
-                    </div>
-                    <p className="text-lg md:text-xl font-light" style={{ color: "rgba(44, 36, 32, 0.8)" }}>
-                      {val}
-                    </p>
+          {/* Promise 2: The Vibe */}
+          <div className="mb-24">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <Reveal delay={250}>
+                <div className="space-y-6">
+                  <h3 className="font-serif text-4xl md:text-5xl leading-tight" style={{ color: "#2C2420" }}>
+                    The Vibe Will Be Curated
+                  </h3>
+                  <p className="text-lg md:text-xl leading-relaxed" style={{ color: "rgba(44, 36, 32, 0.78)" }}>
+                    No generic playlists. We hand-pick every track—deep house, neo-soul, lo-fi beats—to create an atmosphere that helps you focus, create, or just vibe. Plus, rotating art from local Riverside creatives on our walls.
+                  </p>
+                  <div className="flex flex-wrap gap-3 pt-4">
+                    <span className="px-4 py-2 rounded-full text-sm" style={{ backgroundColor: "rgba(164, 141, 120, 0.1)", color: "#CBB9A4" }}>
+                      Curated playlists
+                    </span>
+                    <span className="px-4 py-2 rounded-full text-sm" style={{ backgroundColor: "rgba(164, 141, 120, 0.1)", color: "#CBB9A4" }}>
+                      Local artist features
+                    </span>
+                    <span className="px-4 py-2 rounded-full text-sm" style={{ backgroundColor: "rgba(164, 141, 120, 0.1)", color: "#CBB9A4" }}>
+                      Creative energy
+                    </span>
                   </div>
-                </Reveal>
-              );
-            })}
+                </div>
+              </Reveal>
+              <Reveal delay={300}>
+                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/unsplash/placeholder-interior-shop.png"
+                    alt="Curated atmosphere"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-tl from-[#2C2420]/60 to-transparent"></div>
+                  <div className="absolute bottom-8 right-8">
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ backgroundColor: "#A48D78" }}>
+                      <Music className="text-white" size={32} />
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
           </div>
 
-          <Reveal delay={300}>
-            <div
-              className="mt-16 p-8 rounded-lg relative"
-              style={{ border: "1px solid rgba(164, 141, 120, 0.3)" }}
-            >
-              <div
-                className="absolute -top-4 left-1/2 -translate-x-1/2 px-4"
-                style={{ backgroundColor: "#FAF9F6", color: "#A48D78" }}
-              >
-                <Music size={32} />
-              </div>
-              <blockquote className="font-serif text-2xl md:text-3xl italic leading-relaxed" style={{ color: "#2C2420" }}>
-                "Riverside is growing. We're here to fuel the creativity of this city."
+          {/* Promise 3: You'll Want to Stay */}
+          <div className="mb-12">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <Reveal delay={350} className="order-2 md:order-1">
+                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/unsplash/tnc-placeholder-philosophy-2.png"
+                    alt="Comfortable seating"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#2C2420]/60 to-transparent"></div>
+                  <div className="absolute bottom-8 left-8">
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ backgroundColor: "#A48D78" }}>
+                      <Heart className="text-white" size={32} />
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+              <Reveal delay={400} className="order-1 md:order-2">
+                <div className="space-y-6">
+                  <h3 className="font-serif text-4xl md:text-5xl leading-tight" style={{ color: "#2C2420" }}>
+                    You'll Want to Stay
+                  </h3>
+                  <p className="text-lg md:text-xl leading-relaxed" style={{ color: "rgba(44, 36, 32, 0.78)" }}>
+                    Comfortable seating, plenty of outlets, fast WiFi, and natural light. Whether you're here for 20 minutes or 2 hours, you're welcome. We built this space for thinkers, makers, and anyone who needs a place to just *be*.
+                  </p>
+                  <div className="flex flex-wrap gap-3 pt-4">
+                    <span className="px-4 py-2 rounded-full text-sm" style={{ backgroundColor: "rgba(164, 141, 120, 0.1)", color: "#CBB9A4" }}>
+                      All-day seating
+                    </span>
+                    <span className="px-4 py-2 rounded-full text-sm" style={{ backgroundColor: "rgba(164, 141, 120, 0.1)", color: "#CBB9A4" }}>
+                      Power + WiFi
+                    </span>
+                    <span className="px-4 py-2 rounded-full text-sm" style={{ backgroundColor: "rgba(164, 141, 120, 0.1)", color: "#CBB9A4" }}>
+                      Natural light
+                    </span>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+
+          {/* Bottom Quote */}
+          <Reveal delay={450}>
+            <div className="text-center pt-12 border-t" style={{ borderColor: "rgba(164, 141, 120, 0.2)" }}>
+              <blockquote className="font-serif text-2xl md:text-3xl italic leading-relaxed max-w-3xl mx-auto" style={{ color: "#A48D78" }}>
+                "We're not just opening a coffee shop. We're creating a third place—somewhere between home and work where creativity happens."
               </blockquote>
-              <footer
-                className="mt-4 text-sm font-bold tracking-widest uppercase"
-                style={{ color: "#A48D78" }}
-              >
+              <footer className="mt-6 text-sm font-bold tracking-widest uppercase" style={{ color: "rgba(250, 249, 246, 0.6)" }}>
                 — The Founders
               </footer>
             </div>
           </Reveal>
+
+          {/* Hero Image */}
+          <Reveal delay={400}>
+            <div className="relative aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl mb-12">
+              <Image
+                src="/unsplash/placeholder-interior-shop.png"
+                alt="Cafe under construction"
+                fill
+                className="object-cover"
+                sizes="100vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+              <div className="absolute bottom-10 left-10 right-10 text-white">
+                <p className="text-3xl md:text-5xl font-serif leading-tight mb-4">
+                  "Every detail, every decision—it all leads to creating a space worth spending time in."
+                </p>
+                <p className="text-lg" style={{ color: "rgba(250, 249, 246, 0.8)" }}>
+                  — The Founders
+                </p>
+              </div>
+            </div>
+          </Reveal>
+
         </div>
       </section>
 
