@@ -107,11 +107,15 @@ export default function CareersPage() {
       {/* Hero Section */}
       <div className="careers-hero-wrapper">
         <ParallaxHero
-          backgroundImage="/unsplash/tnc-career-hero.png"
-          headline="Join Our Team"
+          backgroundImage="/careers/tnc-career-hero-bg.png"
           contentClassName="text-center"
         >
           <div className="max-w-4xl mx-auto space-y-6">
+            <Reveal>
+              <span className="font-bold tracking-[0.2em] uppercase text-sm block" style={{ color: 'var(--cafe-tan)' }}>
+                Join Our Team
+              </span>
+            </Reveal>
 
             <Reveal delay={200}>
               <h1 className="font-serif text-[56px] md:text-[86px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
@@ -148,9 +152,9 @@ export default function CareersPage() {
               </h2>
             </Reveal>
             <Reveal delay={180}>
-                              <p className="text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto" style={{ color: 'rgba(74, 59, 50, 0.82)' }}>
-                                We&apos;re locally-owned, family-oriented, and all about creating a space where people actually want to spend time. Think lofi house music, specialty coffee, fresh acai bowls, and a team that genuinely cares about the craft.
-                              </p>            </Reveal>
+              <p className="text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto" style={{ color: 'rgba(74, 59, 50, 0.82)' }}>
+                We&apos;re locally-owned, family-oriented, and all about creating a space where people actually want to spend time. Think lofi house music, specialty coffee, fresh acai bowls, and a team that genuinely cares about the craft.
+              </p>            </Reveal>
           </div>
 
           <div className="grid md:grid-cols-3 gap-10 mt-16">

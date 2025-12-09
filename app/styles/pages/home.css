@@ -33,7 +33,8 @@
 /* Blob that appears behind each image after it slides in */
 .signature-pour-blob {
   position: absolute;
-  inset: -30%; /* Extra bold on mobile - dramatic presence - Increased by 20% */
+  inset: -30%;
+  /* Extra bold on mobile - dramatic presence - Increased by 20% */
   z-index: 0;
   opacity: 0;
   transform: scale(0.3);
@@ -62,9 +63,11 @@
     opacity: 0;
     transform: scale(0.3);
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -73,6 +76,7 @@
 
 /* Hover state - lift and enhance shadow (NO transition on wrapper to not interfere with scroll animation) */
 @media (hover: hover) {
+
   /* Only apply hover transform, let inline styles handle transition */
   .signature-pour-card:hover .signature-pour-image-wrapper {
     transform: translateY(-6px) scale(1.02) !important;
@@ -184,6 +188,7 @@
     opacity: 0;
     transform: scale(0.92);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -492,9 +497,11 @@
   0% {
     transform: scale(0.94);
   }
+
   55% {
     transform: scale(1.12);
   }
+
   100% {
     transform: scale(1);
   }
@@ -505,10 +512,12 @@
     opacity: 0.85;
     transform: scale(0.65);
   }
+
   60% {
     opacity: 0.45;
     transform: scale(1.35);
   }
+
   100% {
     opacity: 0;
     transform: scale(1.6);
@@ -610,18 +619,24 @@
 }
 
 @keyframes floatGentle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   50% {
     transform: translateY(-12px) rotate(2deg);
   }
 }
 
 @keyframes floatHero {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-20px);
   }
@@ -678,9 +693,11 @@
     opacity: 0;
     transform: translateY(0) scaleX(1);
   }
+
   40% {
     opacity: 0.95;
   }
+
   100% {
     opacity: 0;
     transform: translateY(-14px) scaleX(1.2);
@@ -696,15 +713,19 @@
   0% {
     transform: translateY(0) rotate(0deg);
   }
+
   25% {
     transform: translateY(-2px) rotate(-1.5deg);
   }
+
   50% {
     transform: translateY(0) rotate(0.5deg);
   }
+
   75% {
     transform: translateY(-3px) rotate(1.25deg);
   }
+
   100% {
     transform: translateY(0) rotate(0deg);
   }
@@ -1034,8 +1055,10 @@
   position: absolute;
   width: 540px;
   height: 540px;
-  top: -110px; /* Dropped another 20px for desktop */
-  right: 100px; /* Shifted left another 20px for desktop */
+  top: -110px;
+  /* Dropped another 20px for desktop */
+  right: 100px;
+  /* Shifted left another 20px for desktop */
   background: url("/philosophy-blob.svg");
   background-repeat: no-repeat;
   background-size: contain;
@@ -1076,7 +1099,8 @@
     width: 352px;
     height: 352px;
     right: -100px;
-    top: -20px; /* Raised another 15px on mobile */
+    top: -20px;
+    /* Raised another 15px on mobile */
     --phi-blob-opacity: 0.45;
     mix-blend-mode: multiply;
   }
@@ -1145,7 +1169,8 @@
     height: 388px;
     right: -80px;
     left: auto;
-    top: -54px; /* Moved up 50px for mobile */
+    top: -54px;
+    /* Moved up 50px for mobile */
     transform: scale(0.9) translate3d(0, 32px, 0);
     opacity: 0.5;
   }

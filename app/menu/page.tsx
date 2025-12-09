@@ -74,25 +74,25 @@ export default function MenuPage() {
         style={{ backgroundColor: colors.mist, color: colors.brown }}
       >
         {/* Menu Header */}
-        <ParallaxHero backgroundImage="/unsplash/tnc-menu-hero-bg.png">
+        <ParallaxHero backgroundImage="/menu/tnc-menu-hero-bg.png">
           <div className="max-w-4xl mx-auto text-center relative z-10 px-6 space-y-6">
             <Reveal>
               <span
                 className="font-bold tracking-[0.2em] uppercase text-sm block"
-                style={{ color: colors.tan }}
+                style={{ color: 'var(--cafe-tan)' }}
               >
                 The Menu
               </span>
             </Reveal>
             <Reveal delay={120}>
-              <h1 className="font-serif text-[70px] md:text-[90px] leading-[0.9]" style={{ color: colors.cream }}>
+              <h1 className="font-serif text-[70px] md:text-[90px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
                 Curated Selection
               </h1>
             </Reveal>
             <Reveal delay={220}>
               <p
                 className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed"
-                style={{ color: `${colors.beige}CC` }}
+                style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}
               >
                 Everything we serve is made with intention. From our single-origin espressos to our locally sourced pastries.
               </p>
