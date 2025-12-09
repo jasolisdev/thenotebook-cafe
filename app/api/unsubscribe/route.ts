@@ -20,9 +20,13 @@ export async function GET(req: Request) {
     return htmlResponse("Unsubscribe token missing.", 400);
   }
 
-  const subscriber = await client.fetch(
+  const subscriber = await client.fetch<{
+    _id: string;
+    email: string;
+    status: string;
+  } | null>(
     `*[_type=="subscriber" && unsubscribeToken == $token][0]{_id,email,status}`,
-    { token }
+    { token } as Record<string, unknown>
   );
 
   if (!subscriber?._id) {
