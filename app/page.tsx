@@ -91,7 +91,7 @@ export default async function HomePage() {
     <main className="overflow-hidden" style={{ backgroundColor: 'var(--cafe-mist)', color: 'var(--cafe-brown)' }}>
       {/* Hero Section */}
       <KenBurnsHero
-        backgroundImage="/unsplash/tnc-home-hero-bg-v2.png"
+        backgroundImage="/home/tnc-home-hero-bg.png"
         contentClassName="home-hero-shell"
       >
         <div className="home-hero-grid">
