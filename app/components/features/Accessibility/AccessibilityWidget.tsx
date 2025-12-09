@@ -2,8 +2,9 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { 
-  AccessibilityHumanIcon, XMarkIcon, TypeIcon, 
+import { usePathname } from 'next/navigation';
+import {
+  AccessibilityHumanIcon, XMarkIcon, TypeIcon,
   ContrastIcon, EyeIcon, ResetIcon, ChevronLeftIcon,
   MousePointerIcon, LinkIcon, RulerIcon, PauseIcon, BrainIcon
 } from '@/app/components/ui/AccessibilityIcons';
@@ -37,9 +38,27 @@ const defaultSettings: AccessibilitySettings = {
 };
 
 export const AccessibilityWidget: React.FC = () => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState<'settings' | 'statement'>('settings');
-  const [settings, setSettings] = useState<AccessibilitySettings>(defaultSettings);
+  const [settings, setSettings] = useState<AccessibilitySettings>(() => {
+    if (typeof window === 'undefined') return defaultSettings;
+    const saved = localStorage.getItem('accessibility-settings');
+    if (!saved) return defaultSettings;
+    try {
+      return JSON.parse(saved) as AccessibilitySettings;
+    } catch (e) {
+      console.error('Failed to load accessibility settings:', e);
+      return defaultSettings;
+    }
+  });
+
+  // Save settings to localStorage whenever they change
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('accessibility-settings', JSON.stringify(settings));
+    }
+  }, [settings]);
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -79,31 +98,67 @@ export const AccessibilityWidget: React.FC = () => {
 
   // Bionic Reading Logic
   useEffect(() => {
+    const applyBionicReading = () => {
+      if (settings.bionicReading) {
+        const textElements = document.querySelectorAll('main p, main h1, main h2, main h3, main h4, main h5, main h6, main li, main a, main button, main span:not(.bionic-skip)');
+        textElements.forEach(el => {
+          const element = el as HTMLElement;
+          // Skip elements that are already processed or should be skipped
+          if (!element.getAttribute('data-bionic-original') && element.textContent && element.textContent.trim().length > 0) {
+            element.setAttribute('data-bionic-original', element.innerHTML);
+            const words = element.innerText.split(' ');
+            const newHtml = words.map(word => {
+              const mid = Math.ceil(word.length / 2);
+              return `<b class="bionic-bold">${word.slice(0, mid)}</b>${word.slice(mid)}`;
+            }).join(' ');
+            element.innerHTML = newHtml;
+          }
+        });
+      } else {
+        const textElements = document.querySelectorAll('main [data-bionic-original]');
+        textElements.forEach(element => {
+          const original = element.getAttribute('data-bionic-original');
+          if (original) {
+             element.innerHTML = original;
+             element.removeAttribute('data-bionic-original');
+          }
+        });
+      }
+    };
+
+    // Delay to ensure page content is fully rendered after navigation
+    const timeoutId = setTimeout(() => {
+      applyBionicReading();
+    }, 50);
+
+    // Watch for DOM changes (dynamic content)
+    let observer: MutationObserver | null = null;
     if (settings.bionicReading) {
-      const pTags = document.querySelectorAll('main p');
-      pTags.forEach(el => {
-        const p = el as HTMLElement;
-        if (!p.getAttribute('data-bionic-original')) {
-          p.setAttribute('data-bionic-original', p.innerHTML);
-          const words = p.innerText.split(' ');
-          const newHtml = words.map(word => {
-            const mid = Math.ceil(word.length / 2);
-            return `<b class="bionic-bold">${word.slice(0, mid)}</b>${word.slice(mid)}`;
-          }).join(' ');
-          p.innerHTML = newHtml;
+      observer = new MutationObserver((mutations) => {
+        // Check if new content was added
+        const hasNewContent = mutations.some(mutation =>
+          mutation.type === 'childList' && mutation.addedNodes.length > 0
+        );
+        if (hasNewContent) {
+          // Delay to ensure content is fully rendered
+          setTimeout(applyBionicReading, 100);
         }
       });
-    } else {
-      const pTags = document.querySelectorAll('main p[data-bionic-original]');
-      pTags.forEach(p => {
-        const original = p.getAttribute('data-bionic-original');
-        if (original) {
-           p.innerHTML = original;
-           p.removeAttribute('data-bionic-original');
-        }
-      });
+
+      const mainElement = document.querySelector('main');
+      if (mainElement) {
+        observer.observe(mainElement, {
+          childList: true,
+          subtree: true
+        });
+      }
     }
-  }, [settings.bionicReading]);
+
+    return () => {
+      clearTimeout(timeoutId);
+      if (observer) observer.disconnect();
+    };
+  }, [settings.bionicReading, pathname]);
 
   // Reading Guide Logic
   useEffect(() => {
@@ -170,6 +225,7 @@ export const AccessibilityWidget: React.FC = () => {
           <button 
             onClick={() => setIsOpen(false)}
             className="w-10 h-10 rounded-full hover:bg-cafe-mist flex items-center justify-center text-cafe-brown transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
+            aria-label="Close accessibility panel"
           >
             <XMarkIcon className="w-6 h-6" />
           </button>
@@ -297,22 +353,21 @@ export const AccessibilityWidget: React.FC = () => {
               </button>
               
               <h3 className="font-display font-bold text-lg text-cafe-black mb-2">Our Commitment to Accessibility</h3>
-              <p className="mb-4">We are committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone, and applying the relevant accessibility standards to help users with various disabilities access our website effectively.</p>
+              <p className="mb-4">We want everyone to enjoy The Notebook Café online. We aim for WCAG 2.1 AA alignment and keep iterating with feedback from our community.</p>
 
-              <h3 className="font-display font-bold text-lg text-cafe-black mb-2">New Features</h3>
+              <h3 className="font-display font-bold text-lg text-cafe-black mb-2">Features Available</h3>
               <ul className="list-disc pl-5 mb-4 space-y-1">
-                <li><strong>Bionic Reading:</strong> Emphasizes the start of words to guide the eye.</li>
-                <li><strong>Reading Guide:</strong> A horizontal line to help focus on specific text.</li>
-                <li><strong>Dyslexia Friendly Font:</strong> Improved legibility for users with dyslexia.</li>
-                <li><strong>Text Sizing:</strong> Granular control over font size.</li>
-                <li><strong>Animation Control:</strong> Option to stop all moving elements.</li>
+                <li><strong>Text Options:</strong> Adjustable sizes and high-contrast mode.</li>
+                <li><strong>Reading Aids:</strong> Dyslexia-friendly font, bionic reading, and a reading guide line.</li>
+                <li><strong>Visual Controls:</strong> Grayscale, hide images, pause animations.</li>
+                <li><strong>Focus Helpers:</strong> Larger cursor, link highlights.</li>
               </ul>
 
-              <h3 className="font-display font-bold text-lg text-cafe-black mb-2">Compliance Status</h3>
-              <p className="mb-4">Our website strives to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards.</p>
+              <h3 className="font-display font-bold text-lg text-cafe-black mb-2">How We Test</h3>
+              <p className="mb-4">We review pages with keyboard-only navigation, screen magnifiers, and automated checks, and we welcome your feedback to improve further.</p>
 
-              <h3 className="font-display font-bold text-lg text-cafe-black mb-2">Contact Us</h3>
-              <p className="mb-8">If you experience any difficulty in accessing any part of this website, please contact us for assistance.</p>
+              <h3 className="font-display font-bold text-lg text-cafe-black mb-2">Need Assistance?</h3>
+              <p className="mb-8">If any part of this site is hard to use, email us at <a href="mailto:hello@thenotebook.cafe" className="font-semibold text-cafe-black underline">hello@thenotebook.cafe</a> and we’ll work with you directly.</p>
             </div>
           )}
         </div>
@@ -330,6 +385,23 @@ export const AccessibilityWidget: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Reading Guide Line */}
+      {settings.readingGuide && (
+        <div
+          id="reading-guide-line"
+          style={{
+            position: 'fixed',
+            left: 0,
+            right: 0,
+            height: '3px',
+            backgroundColor: 'rgba(164, 141, 120, 0.7)',
+            pointerEvents: 'none',
+            zIndex: 9999,
+            boxShadow: '0 0 10px rgba(164, 141, 120, 0.5)',
+          }}
+        />
+      )}
     </>
   );
 };

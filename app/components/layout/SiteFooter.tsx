@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Instagram } from "lucide-react";
 import { PiInstagramLogoFill, PiTwitterLogoFill } from "react-icons/pi";
 import { FaFacebookF } from "react-icons/fa";
 import NewsletterForm from "../features/NewsLetterForm";

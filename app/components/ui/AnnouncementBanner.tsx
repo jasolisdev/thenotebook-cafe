@@ -61,6 +61,7 @@ export default function AnnouncementBanner({
    * Prevents hydration mismatch issues
    */
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
     setMounted(true);
     // Check if banner was dismissed in this session
     const dismissed = sessionStorage.getItem("announcement-banner-dismissed");
@@ -69,6 +70,7 @@ export default function AnnouncementBanner({
       // Update CSS variable to 0 when banner is dismissed
       document.documentElement.style.setProperty('--announcement-banner-height', '0px');
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
 
   /**

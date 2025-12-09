@@ -25,7 +25,7 @@ export default function ThankYouPage() {
 
         <Reveal delay={200}>
           <p className="text-xl md:text-2xl font-light leading-relaxed mb-8" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-            Thanks for applying to join our team! We've received your application and will review it carefully.
+            Thanks for applying to join our team! We&apos;ve received your application and will review it carefully.
           </p>
         </Reveal>
 
@@ -36,7 +36,7 @@ export default function ThankYouPage() {
               What Happens Next?
             </h2>
             <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-              We'll review all applications and reach out to qualified candidates within <strong>3-5 business days</strong>.
+              We&apos;ll review all applications and reach out to qualified candidates within <strong>3-5 business days</strong>.
               Keep an eye on your email (and check your spam folder, just in case).
             </p>
           </div>

@@ -5,9 +5,8 @@
  * Features editorial event listings with alternating backgrounds and floating decorative elements.
  */
 import Reveal from "../components/ui/Reveal";
-import NewsletterForm from "../components/features/NewsLetterForm";
 import ParallaxHero from "../components/features/ParallaxHero";
-import { Clock, Users, Instagram, Calendar, Coffee, Music, Sparkles, Heart } from "lucide-react";
+import { Clock, Users, Instagram, Calendar, Heart } from "lucide-react";
 import Image from "next/image";
 
 const EVENTS = [

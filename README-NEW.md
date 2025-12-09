@@ -28,13 +28,13 @@ The Notebook Café is a Next.js-powered website for a specialty coffee shop in R
 
 ### **Core Features**
 
-✅ **Dynamic Content Management** - Sanity CMS integration with embedded studio
-✅ **Responsive Design** - Mobile-first, optimized for all devices (320px+)
-✅ **Premium Animations** - Scroll-triggered reveals and smooth transitions
-✅ **Newsletter System** - Email subscription with duplicate detection
-✅ **Menu System** - Tab-based navigation with seasonal drinks section
-✅ **Spotify Integration** - Embedded playlist showcasing café vibes
-✅ **Password Protection** - Optional site-wide password gate for development
+✅ **Dynamic Sanity CMS** - Homepage, story content, settings, and subscribers editable in the embedded Studio  
+✅ **Cinematic Hero & Reveals** - Ken Burns hero, parallax hero, and Framer Motion-powered scroll reveals  
+✅ **Menu + Cart Prototype** - Tabbed menu, product modal with modifiers, add-to-cart, and cart drawer  
+✅ **Accessibility & Privacy** - Accessibility widget (text size, contrast, dyslexia font, bionic reading) plus consent banner  
+✅ **Newsletter System** - Email subscription with duplicate detection saved to Sanity  
+✅ **Password Protection** - Optional site-wide gate for development/previews  
+✅ **Spotify Integration** - Embedded playlist to surface the café vibe
 
 ---
 
@@ -44,9 +44,10 @@ The Notebook Café is a Next.js-powered website for a specialty coffee shop in R
 |-------|-----------|
 | **Framework** | [Next.js 16](https://nextjs.org/) (App Router) |
 | **Language** | [TypeScript](https://www.typescriptlang.org/) |
-| **CMS** | [Sanity v4](https://www.sanity.io/) |
-| **Styling** | Custom CSS + [Tailwind CSS](https://tailwindcss.com/) |
-| **Fonts** | Alpino (display) + Torus (body) |
+| **CMS** | [Sanity v4](https://www.sanity.io/) (embedded Studio) |
+| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) + custom CSS architecture |
+| **Animations** | [Framer Motion](https://www.framer.com/motion/) + bespoke CSS keyframes |
+| **Fonts** | DM Serif Display (display) + Outfit (body) + Caveat (handwritten accents) + OpenDyslexic (accessibility) |
 | **Icons** | [Lucide React](https://lucide.dev/) + [React Icons](https://react-icons.github.io/react-icons/) |
 | **Deployment** | [Vercel](https://vercel.com/) |
 
@@ -58,23 +59,23 @@ The Notebook Café is a Next.js-powered website for a specialty coffee shop in R
 thenotebook-cafe/
 ├── app/                              # Next.js App Router
 │   ├── components/
-│   │   ├── layout/                   # Global layout (Header, Footer, ScrollReveal)
-│   │   ├── ui/                       # Reusable UI (Banner, Buttons, Modals)
-│   │   ├── features/                 # Page features (Menu, Newsletter, Carousel)
-│   │   └── decorative/               # Floating decorations (coffee beans, plants)
+│   │   ├── layout/                   # SiteHeader, SiteFooter
+│   │   ├── ui/                       # AnnouncementBanner, ConsentBanner, Buttons, PasswordGate, VirtualBarista, etc.
+│   │   ├── features/                 # KenBurnsHero, ParallaxHero, ProductModal, CartDrawer, AccessibilityWidget, NewsletterForm
+│   │   └── providers/                # CartProvider (global cart state)
 │   ├── styles/
-│   │   ├── components/               # Component-specific styles
-│   │   ├── layout/                   # Layout & animations
+│   │   ├── components/               # Component-specific styles (heroes, banners, nav, etc.)
+│   │   ├── layout/                   # Layout primitives & floating animations
 │   │   └── pages/                    # Page-specific styles
-│   ├── api/                          # API routes (newsletter, auth)
-│   ├── (pages)/                      # Route pages (menu, story, events)
-│   └── globals.css                   # Global styles & design tokens
+│   ├── api/                          # API routes (newsletter, auth/password gate)
+│   ├── (routes)/                     # page.tsx, menu/, story/, events/, contact/, careers/, privacy/, terms/, refunds/
+│   └── globals.css                   # Tailwind + design tokens and base styles
 ├── sanity/                           # Sanity CMS configuration
-│   ├── schemaTypes/                  # Content models
+│   ├── schemaTypes/                  # homePage, aboutPage, settings, menuItem, subscriber, post, jobApplication
 │   ├── lib/                          # Client utilities
 │   └── sanity.config.ts              # CMS config
 ├── public/                           # Static assets (fonts, images, icons)
-└── (docs)/                           # Documentation
+└── docs/                             # Documentation hub (architecture, specs, workflows)
 ```
 
 ---
@@ -82,22 +83,26 @@ thenotebook-cafe/
 ## 🎨 Design System
 
 ### **Typography**
-- **Display Font:** Alpino — Headlines, hero text, branding
-- **Body Font:** Torus — Paragraphs, navigation, UI elements
+- **Display:** DM Serif Display — Headlines, hero text, branding
+- **Body:** Outfit — Paragraphs, navigation, UI elements
+- **Accent:** Caveat — Handwritten/hand-drawn flourishes
+- **Accessibility:** OpenDyslexic — Opt-in via the accessibility widget
 
 ### **Color Palette**
 
 ```css
-/* Neutral Tones */
---cream: #f4f0e9;              /* Light section background */
---espresso-brown: #2a1f16;     /* Primary dark text */
+--cafe-black: #2c2420;
+--cafe-brown: #4a3b32;
+--cafe-tan: #a48d78;
+--cafe-beige: #cbb9a4;
+--cafe-cream: #ede7d8;
+--cafe-mist: #f4f1ea;
+--cafe-white: #faf9f6;
+--cafe-olive: #4a4f41;
+--gold-primary: #c99a58;
+--gold-darker: #b48a4e;
 
-/* Cool Accents */
---coffee-bean: #1a3636;        /* Dark section background (cool teal) */
-
-/* Gold Accents */
---gold-primary: rgba(201, 154, 88, 1);
---gold-muted: rgba(164, 131, 116, 0.9);
+/* Hero gradients and overlay helpers live in globals.css */
 ```
 
 ### **Responsive Breakpoints**
@@ -106,105 +111,50 @@ thenotebook-cafe/
 - **640px** — Tablet (sm)
 - **768px** — Desktop (md)
 - **1024px** — Large desktop (lg)
+- **1280px** — Wide desktop (xl)
 
 ---
 
 ## ✨ Key Features
 
 ### **1. Content Management (Sanity CMS)**
-
-Access the embedded CMS at `/studio` to manage:
-- Homepage hero, tagline, and highlights
-- About/Story page content and values
-- Menu items (future integration)
-- Global settings (social links, business hours)
-- Newsletter subscribers
-
-**Two-Client Architecture:**
-- **Read Client:** CDN-enabled for fast public data fetching
-- **Write Client:** Authenticated for mutations (newsletter, etc.)
+- Studio available at `/studio` for homepage hero/tagline/status line/CTA, story copy/values, vibe copy, and global settings (social, hours, address).
+- Newsletter subscribers saved to the `subscriber` schema; posts (`post`) and hiring (`jobApplication`) documents are captured for updates and careers submissions.
+- `menuItem` schema is ready for future dynamic menu sourcing; current menu data lives in `app/constants.ts`.
 
 ---
 
-### **2. Menu System**
-
-**Tab Navigation:**
-- Drinks | Meals | Desserts
-- Seasonal/Specialty drinks section
-- Two-column grid layout with card design
-- Modal for item details
-
-**Data:** Currently hardcoded in `MenuContent.tsx` (Sanity schema exists for future integration)
+### **2. Menu + Cart Prototype**
+- `/menu` features a parallax hero, tab navigation (drinks | meals | desserts), and search-ready filtering.
+- Product modal supports modifiers (size, temperature, milk, toppings) with price deltas and note capture.
+- `CartProvider` manages global cart state; `CartDrawer` handles quantity edits, modifier review, and removal with Framer Motion animations.
+- Checkout action is intentionally a stub (“coming soon”) so the ordering flow stays non-transactional.
 
 ---
 
-### **3. Newsletter Subscription**
-
-**Flow:**
-1. User enters email in form
-2. Client-side validation
-3. POST to `/api/subscribe`
-4. Duplicate check in Sanity
-5. Create subscriber document
-6. Return success/error status
-
-**Integration:** Saves to Sanity CMS `subscriber` schema
+### **3. Homepage Experience**
+- Ken Burns hero (scroll-hide) with CTA buttons, latte accent card, and signature pours grid.
+- `Reveal` component + Framer Motion deliver staggered scroll reveals; floating decor comes from `animations.css`.
+- Sections cover philosophy, “Low lights, good sound, better coffee,” and a three-pillar “Trinity” block to reinforce brand voice.
 
 ---
 
-### **4. Scroll Animations**
-
-**System:** Intersection Observer API
-
-**Usage:**
-```tsx
-import ScrollReveal from '@/app/components/layout/ScrollReveal';
-
-<ScrollReveal />
-<div className="scroll-reveal">
-  This content animates when scrolled into view
-</div>
-```
-
-**Behavior:**
-- Above-fold: 0.3s quick fade
-- Below-fold: 0.5s scale + fade
-- Triggers 50px before viewport entry
+### **4. Accessibility & Privacy**
+- Accessibility widget toggles text scaling, grayscale, high-contrast mode, readable font, OpenDyslexic font, hide images, link highlighting, large cursor, animation kill switch, reading guide, and bionic reading.
+- Consent banner provides cookie/analytics opt-in with warm café styling.
+- Optional site password gate controlled by `SITE_PASSWORD` (middleware + HTTP-only cookie).
 
 ---
 
-### **5. Mobile Navigation**
-
-**Desktop (640px+):**
-- Horizontal nav bar (Home | Menu | Story | Events)
-- Fixed announcement banner
-
-**Mobile (< 640px):**
-- Full-screen overlay drawer
-- Fade + scale animation
-- Navigation links + social icons + vibe text
-- Decorative floating coffee beans
-- Body scroll lock when open
-- Closes on route change or ESC key
+### **5. Newsletter Subscription**
+- Flow: client form → `/api/subscribe` → duplicate check → Sanity `subscriber` document → success/error status.
+- Duplicate detection prevents noisy submissions; restart server after changing env vars or tokens.
 
 ---
 
-### **6. Password Protection** *(Optional)*
-
-Enable site-wide password protection for development/preview:
-
-```bash
-# .env.local
-SITE_PASSWORD=your_password_here
-```
-
-**Features:**
-- Middleware-based authentication
-- HTTP-only cookie (7-day expiration)
-- Excludes `/studio` from protection
-- Clean password gate UI
-
-**To disable:** Remove or leave `SITE_PASSWORD` empty
+### **6. Navigation & Media**
+- Glass header plus mobile overlay drawer with vibe text and social links; body scroll lock and auto-close on route change/ESC.
+- Spotify playlist embed showcases the café’s sound palette.
 
 ---
 
@@ -236,6 +186,7 @@ SANITY_WRITE_TOKEN=your_write_token
 
 # === Optional Features ===
 SITE_PASSWORD=              # Leave empty to disable password protection
+NEXT_PUBLIC_SITE_URL=       # Optional: canonical URL used by sitemap/robots
 ```
 
 **Important:** Restart server after changing environment variables.
@@ -247,59 +198,27 @@ SITE_PASSWORD=              # Leave empty to disable password protection
 Components are organized by purpose:
 
 **Layout** (`app/components/layout/`):
-- `SiteHeader.tsx` — Global navigation
+- `SiteHeader.tsx` — Global navigation + cart trigger
 - `SiteFooter.tsx` — Global footer
-- `ScrollReveal.tsx` — Animation system
+- `AtmosphereStrip.tsx`, `SignaturePoursGrid.tsx` — Standalone homepage slices
 
 **UI** (`app/components/ui/`):
-- Reusable components (Banner, Buttons, Cards, Modals)
+- Buttons, Reveal (scroll animations), AnnouncementBanner, ConsentBanner, PasswordGate, VirtualBarista, Story/Philosophy blobs, Hero buttons
 
 **Features** (`app/components/features/`):
-- Page-specific features (Menu, Newsletter, Carousel)
+- KenBurnsHero, ParallaxHero, HeroGallery, NewsletterForm/Modal, ProductModal, CartDrawer, AccessibilityWidget
 
-**Decorative** (`app/components/decorative/`):
-- Floating items (coffee beans, plants)
+**Providers** (`app/components/providers/`):
+- `CartProvider.tsx` — Cart context for menu interactions
 
 ---
 
 ### **CSS Architecture**
 
-**Component Styles:**
-```
-app/styles/components/
-├── announcement.css
-├── buttons.css
-├── card-gallery.css
-├── footer.css
-├── hero.css
-├── modal.css
-├── navigation.css
-├── page-transitions.css
-└── what-to-expect.css
-```
-
-**Layout Styles:**
-```
-app/styles/layout/
-├── animations.css
-└── sections.css
-```
-
-**Page Styles:**
-```
-app/styles/pages/
-├── about.css
-├── contact.css
-├── events.css
-├── home.css
-└── menu.css
-```
-
-**Best Practices:**
-- Mobile-first responsive design
-- Use existing classes before creating new ones
-- Semantic class names (no `.test-*` or `.temp-*`)
-- Follow established naming conventions
+- Global cascade (see `app/layout.tsx`): `globals.css` → navigation/hero/buttons/footer/announcement/consent/what-to-expect → layout sections/animations → page styles (home, about, events, contact).
+- Hero-specific CSS (`kenburns-hero.css`, `parallax-hero.css`) is imported inside the React components; additional page styles (menu, careers, story-prototype) are opt-in as those routes evolve.
+- Full breakdown and file purposes live in `CSS_ORGANIZATION.md`.
+- Guidelines: stay mobile-first, prefer existing classes/tokens, keep semantic class names, and mirror CSS variables when styling inline.
 
 ---
 
@@ -309,10 +228,11 @@ app/styles/pages/
 Homepage content management.
 
 **Fields:**
-- `heroHeadline` — Main title (hidden, logo shown)
-- `heroTagline` — Tagline text
-- `whatToExpectBullets` — Array of 3 highlights
-- `vibeCopy` — Quote section text
+- `heroHeadline`, `heroTagline`, `statusLine`
+- `ctaText`, `ctaUrl`
+- `whatToExpectBullets` — Array of highlights
+- `vibeCopy` — Quote/mission text
+- `heroImage` (future use)
 
 ---
 
@@ -321,22 +241,9 @@ Story/about page content.
 
 **Fields:**
 - `title` — Page title
-- `body` — Portable text content
-- `valuesBullets` — Array of values
-- `founderNote` — Mission statement
-
----
-
-### **menuItem**
-Menu system items (future integration).
-
-**Fields:**
-- `section` — "drinks" | "meals" | "desserts"
-- `category` — Icon type
-- `name` — Item name
-- `description` — Item description
-- `price` — Price string
-- `sortOrder` — Display order
+- `body` — Portable text + optional inline images
+- `valuesHeading`, `valuesBullets`
+- `missionHeading`, `founderNote`
 
 ---
 
@@ -344,9 +251,11 @@ Menu system items (future integration).
 Global site settings.
 
 **Fields:**
-- `social` — Instagram, Spotify URLs
+- `businessName`, `address`, `phone`, `email`
 - `hours` — Weekday, weekend hours
-- `address` — Business address
+- `social` — Instagram, TikTok, Spotify URLs
+- `announcementBanner` — Toggle + text
+- `seo` — Default meta + OG image
 
 ---
 
@@ -357,6 +266,27 @@ Newsletter subscribers.
 - `email` — Subscriber email
 - `source` — Source page
 - `subscribedAt` — Timestamp
+
+---
+
+### **menuItem** *(future menu integration)*
+- `section` — "drinks" | "meals" | "desserts"
+- `category`, `name`, `description`, `price`, `sortOrder`
+
+---
+
+### **post**
+- `title`, `slug`, `coverImage`, `publishedAt`
+- `body` (blocks + images), `tags`
+
+---
+
+### **jobApplication**
+- `fullName`, `email`, `phone`
+- `positions` (multi-select) + required Saturday availability
+- `resume` upload, `employmentType`, `hoursPerWeek`, `commitmentLength`
+- `startDate`, optional supplemental application, motivator `message`
+- `status`, `notes`, `appliedAt`
 
 ---
 
@@ -372,6 +302,7 @@ Set in Vercel project settings:
 - `NEXT_PUBLIC_SANITY_DATASET`
 - `SANITY_WRITE_TOKEN`
 - `SITE_PASSWORD` (optional)
+- `NEXT_PUBLIC_SITE_URL` (optional; used by sitemap/robots)
 
 **Branches:**
 - `master` — Production branch
@@ -386,9 +317,9 @@ Set in Vercel project settings:
 ## 📚 Documentation
 
 - **CLAUDE.md** — Developer guide and AI assistant context
-- **README.md** (this file) — Project overview and quick start
+- **README-NEW.md** (root README) — Project overview and quick start
 - **CSS_ORGANIZATION.md** — Complete CSS architecture and organization guide
-- **REFACTORING_SUMMARY.md** — Complete refactoring documentation
+- **docs/index.md** — Docs hub with links to architecture, UX specs, and component inventory
 
 ---
 
@@ -401,6 +332,8 @@ Set in Vercel project settings:
 - ✅ Events page
 - ✅ Newsletter integration
 - ✅ Password protection
+- ✅ Cart drawer + product modal prototype
+- ✅ Accessibility widget + consent banner
 
 ### **Phase 2 (Planned)**
 - [ ] Sanity integration for menu items
@@ -445,7 +378,8 @@ Set in Vercel project settings:
 
 For development questions or issues, refer to:
 - **CLAUDE.md** for technical details
-- **REFACTORING_SUMMARY.md** for architecture changes
+- **docs/architecture.md** for system overview and decisions
+- **CSS_ORGANIZATION.md** for styling structure
 - [Sanity Documentation](https://www.sanity.io/docs)
 - [Next.js Documentation](https://nextjs.org/docs)
 

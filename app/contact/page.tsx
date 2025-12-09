@@ -6,13 +6,13 @@
  */
 import Reveal from "../components/ui/Reveal";
 import ParallaxHero from "../components/features/ParallaxHero";
-import { MapPin, Clock, Phone, Instagram, Mail, Coffee } from "lucide-react";
+import { MapPin, Clock, Phone, Mail, Coffee } from "lucide-react";
 
 export default function ContactPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--cafe-mist)' }}>
       {/* Hero Section */}
-      <ParallaxHero backgroundImage="/contact/tnc-contact-hero-bg.png">
+      <ParallaxHero backgroundImage="/contact/tnc-contact-hero-bg.png" focusPercent={150} overlayVariant="light" >
         <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
           <Reveal>
             <span className="font-bold tracking-[0.2em] uppercase text-sm block" style={{ color: 'var(--cafe-tan)' }}>
@@ -80,7 +80,7 @@ export default function ContactPage() {
                   </span>
                 </div>
                 <h3 className="font-serif text-3xl md:text-4xl leading-tight" style={{ color: 'var(--cafe-black)' }}>
-                  When We're Open
+                  When We&apos;re Open
                 </h3>
                 <div className="w-16 h-[2px]" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
 
@@ -173,7 +173,7 @@ export default function ContactPage() {
                 </a>
 
                 <p className="text-base font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.7)' }}>
-                  Give us a ring during business hours. We're happy to answer questions, take orders, or just chat about coffee.
+                  Give us a ring during business hours. We&apos;re happy to answer questions, take orders, or just chat about coffee.
                 </p>
               </div>
             </Reveal>
@@ -195,15 +195,15 @@ export default function ContactPage() {
                 <div className="w-16 h-[2px]" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
 
                 <a
-                  href="mailto:hello@thenotebookcafe.com"
+                  href="mailto:hello@thenotebook.cafe"
                   className="font-serif text-2xl md:text-3xl block transition-colors duration-300 hover:opacity-70"
                   style={{ color: 'var(--cafe-black)' }}
                 >
-                  hello@thenotebookcafe.com
+                  hello@thenotebook.cafe
                 </a>
 
                 <p className="text-base font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.7)' }}>
-                  Questions, feedback, or partnership inquiries welcome. We'll get back to you within 24 hours.
+                  Questions, feedback, or partnership inquiries welcome. We&apos;ll get back to you within 24 hours.
                 </p>
               </div>
             </Reveal>
@@ -275,7 +275,7 @@ export default function ContactPage() {
                   className="font-serif text-2xl md:text-3xl italic max-w-2xl mx-auto leading-relaxed mb-4"
                   style={{ color: 'rgba(74, 59, 50, 0.8)' }}
                 >
-                  "We can't wait to meet you. Come as you are."
+                  &ldquo;We can&apos;t wait to meet you. Come as you are.&rdquo;
                 </blockquote>
                 <footer className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'var(--cafe-tan)' }}>
                   — The Notebook Café Team

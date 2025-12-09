@@ -5,7 +5,6 @@
  */
 import Link from "next/link";
 import Image from "next/image";
-import { client } from "@/sanity/lib/client";
 import Reveal from "./components/ui/Reveal";
 import HeroButtons from "./components/ui/HeroButtons";
 import KenBurnsHero from "./components/features/KenBurnsHero";
@@ -71,27 +70,12 @@ const atmosphereFeatures = [
   }
 ];
 
-async function getData() {
-  const [home, settings] = await Promise.all([
-    client.fetch(`*[_type=="homePage"][0]{
-      heroHeadline, heroTagline, statusLine, ctaText, ctaUrl,
-      whatToExpectBullets, vibeCopy
-    }`),
-    client.fetch(
-      `*[_type=="settings"][0]{ social{ instagram, spotify }, address, hours }`
-    ),
-  ]);
-  return { home, settings };
-}
-
 export default async function HomePage() {
-  const { home, settings } = await getData();
-
   return (
     <main className="overflow-hidden" style={{ backgroundColor: 'var(--cafe-mist)', color: 'var(--cafe-brown)' }}>
       {/* Hero Section */}
       <KenBurnsHero
-        backgroundImage="/home/tnc-home-hero-bg.png"
+        backgroundImage="/home/hero-bg-2.png"
         contentClassName="home-hero-shell"
       >
         <div className="home-hero-grid">
@@ -179,12 +163,12 @@ export default async function HomePage() {
               </span>
             </Reveal>
             <Reveal delay={150}>
-              <h2 className="font-serif text-4xl md:text-5xl mt-4" style={{ color: 'var(--cafe-black)' }}>
+              <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl mt-4" style={{ color: 'var(--cafe-black)' }}>
                 Crafted With Care
               </h2>
             </Reveal>
             <Reveal delay={250}>
-              <p className="mt-4 text-base md:text-lg font-light" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.75)' }}>
+              <p className="mt-4 text-xl md:text-2xl font-light" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.75)' }}>
                 Small-batch recipes we obsess over—balanced, nuanced, and poured with a steady hand.
               </p>
             </Reveal>
@@ -268,7 +252,7 @@ export default async function HomePage() {
                 </span>
               </Reveal>
               <Reveal delay={120}>
-                <h2 className="font-serif text-5xl sm:text-6xl text-cafe-black mb-8 leading-none">
+                <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl text-cafe-black mb-8 leading-none">
                   Crafted for <br />
                   <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Creatives</span>
                 </h2>
@@ -277,12 +261,12 @@ export default async function HomePage() {
                 <div className="w-24 h-[2px] ml-auto" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
               </Reveal>
               <Reveal delay={200}>
-                <p className="text-lg text-cafe-brown/80 mb-6 font-light leading-relaxed">
-                  We believe that great ideas start with great coffee. Whether you're sketching your next masterpiece, writing the next great novel, or just enjoying a moment of silence.
+                <p className="text-xl md:text-2xl text-cafe-brown/80 mb-6 font-light leading-relaxed">
+                  We believe that great ideas start with great coffee. Whether you&apos;re sketching your next masterpiece, writing the next great novel, or just enjoying a moment of silence.
                 </p>
               </Reveal>
               <Reveal delay={260}>
-                <p className="text-lg text-cafe-brown/80 mb-10 font-light leading-relaxed">
+                <p className="text-xl md:text-2xl text-cafe-brown/80 mb-10 font-light leading-relaxed">
                   Our beans are ethically sourced, roasted in small batches, and brewed with precision to fuel your inspiration.
                 </p>
               </Reveal>
@@ -332,7 +316,7 @@ export default async function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <Reveal>
-              <h2 className="font-serif text-5xl md:text-6xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
+              <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
                 Low lights,<br />
                 good sound,<br />
                 <span className="italic" style={{ color: 'var(--cafe-tan)' }}>better coffee.</span>
@@ -342,7 +326,7 @@ export default async function HomePage() {
               <div className="w-24 h-[2px]" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
             </Reveal>
             <Reveal delay={250}>
-              <p className="text-lg md:text-xl font-light leading-relaxed max-w-xl" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
+              <p className="text-xl md:text-2xl font-light leading-relaxed max-w-xl" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
                 We designed The Notebook Café as a sanctuary for the creatives, the writers, and the dreamers of Riverside. It is not just about the caffeine—it is about the headspace.
               </p>
             </Reveal>
@@ -408,7 +392,7 @@ export default async function HomePage() {
                   <div className="trinity-steam-line trinity-steam-line-3" aria-hidden="true"></div>
                 </div>
                 <h3 className="font-serif text-2xl mb-3" style={{ color: 'var(--cafe-black)' }}>Craft Espresso</h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
+                <p className="text-base md:text-lg font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
                   Roasted locally, extracted with precision. We respect the bean and the process.
                 </p>
               </div>
@@ -444,7 +428,7 @@ export default async function HomePage() {
                   </div>
                 </div>
                 <h3 className="font-serif text-2xl mb-3" style={{ color: 'var(--cafe-black)' }}>Curated Sound</h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
+                <p className="text-base md:text-lg font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
                   Deep house, soul, and lo-fi grooves tuned to keep you in flow.
                 </p>
               </div>
@@ -456,7 +440,7 @@ export default async function HomePage() {
                   <Armchair size={26} className="couch-bounce" />
                 </div>
                 <h3 className="font-serif text-2xl mb-3" style={{ color: 'var(--cafe-black)' }}>Creative Comfort</h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
+                <p className="text-base md:text-lg font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
                   Cozy seating, warm light, plenty of outlets—stay as long as you need.
                 </p>
               </div>
@@ -498,7 +482,7 @@ export default async function HomePage() {
                       </div>
                       <div>
                         <div className="font-serif text-xl mb-1" style={{ color: 'var(--cafe-black)' }}>{item.title}</div>
-                        <p className="text-sm md:text-base" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.7)' }}>{item.description}</p>
+                        <p className="text-base md:text-lg" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.7)' }}>{item.description}</p>
                       </div>
                     </div>
                   );
@@ -515,7 +499,7 @@ export default async function HomePage() {
               </span>
             </Reveal>
             <Reveal delay={120}>
-              <h2 className="font-serif text-5xl md:text-6xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
+              <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
                 <span className="italic" style={{ color: 'var(--cafe-brown)' }}>Designed for</span><br />
                 <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Focus</span>
               </h2>
@@ -524,7 +508,7 @@ export default async function HomePage() {
               <div className="w-24 h-[2px] ml-auto" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
             </Reveal>
             <Reveal delay={250}>
-              <p className="text-lg md:text-xl font-light leading-relaxed max-w-xl" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
+              <p className="text-xl md:text-2xl font-light leading-relaxed max-w-xl" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
                 A sanctuary with warm lighting, deep playlists, and Wi-Fi that never drops. Settle in for an hour or stay all day.
               </p>
             </Reveal>

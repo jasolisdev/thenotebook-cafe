@@ -38,7 +38,7 @@ export default function PasswordGate() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f4f0e9] px-6 py-20">
+    <main className="min-h-screen flex items-center justify-center bg-[#f4f0e9] px-6 py-20">
       <div className="max-w-[500px] w-full mx-auto">
         {/* Lock Icon */}
         <div className="text-center mb-8">
@@ -104,6 +104,6 @@ export default function PasswordGate() {
           </p>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

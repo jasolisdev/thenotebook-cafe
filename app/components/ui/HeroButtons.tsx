@@ -4,11 +4,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export default function HeroButtons() {
-  const openCart = () => {
-    if (typeof window === "undefined") return;
-    window.dispatchEvent(new CustomEvent("open-cart"));
-  };
-
   return (
     <div className="flex flex-col gap-3 justify-center items-center">
       <Link
