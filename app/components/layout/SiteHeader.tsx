@@ -30,10 +30,68 @@ export default function SiteHeader({
 }: SiteHeaderProps): React.JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [cartBadge, setCartBadge] = useState<number>(cartCount ?? 0);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [showSolidBg, setShowSolidBg] = useState<boolean>(false);
+  const [isAtTop, setIsAtTop] = useState<boolean>(true);
   const pathname = usePathname();
+  const forceSolidRoutes = ["/terms", "/privacy", "/refunds"];
+  const forceSolidBg = forceSolidRoutes.some((route) => pathname?.startsWith(route));
   const drawerWasOpen = useRef(false);
+  const lastScrollY = useRef(0);
+  const forceSolidRef = useRef(forceSolidBg);
 
   const isActive = (path: string): boolean => pathname === path;
+  const navLinkBase =
+    "nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist";
+  const solidBg = showSolidBg || forceSolidBg;
+  const activeLinkClass = solidBg ? "font-semibold text-cafe-black" : "font-semibold text-cafe-cream";
+  const inactiveLinkClass = solidBg
+    ? "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
+    : "text-cafe-cream/80 hover:text-cafe-cream hover:-translate-y-0.5";
+  const logoSrc = solidBg ? "/tnc-navbar-logo.png" : "/tnc-navbar-logo-light.png";
+
+  // Hide on scroll down, show on scroll up, transparent at top
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const atTop = currentScrollY < 10;
+          const scrollingDown = currentScrollY > lastScrollY.current;
+          const scrollingUp = currentScrollY < lastScrollY.current;
+
+          setIsAtTop(atTop);
+
+          // Show/hide navbar based on scroll direction
+          if (scrollingDown) {
+            // Keep nav transparent while it is on its way out
+            setShowSolidBg(forceSolidRef.current);
+
+            if (currentScrollY > 100) {
+              setIsVisible(false);
+            }
+          } else if (scrollingUp) {
+            // Scrolling up - show navbar with solid background
+            setIsVisible(true);
+            setShowSolidBg(forceSolidRef.current || !atTop);
+          } else if (atTop) {
+            // At the very top - show transparent
+            setIsVisible(true);
+            setShowSolidBg(forceSolidRef.current ? true : false);
+          }
+
+          lastScrollY.current = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []); // deps intentionally empty; forceSolidBg read via ref
 
   // Track drawer state
   useEffect(() => {
@@ -64,6 +122,11 @@ export default function SiteHeader({
     setCartBadge(cartCount ?? 0);
   }, [cartCount]);
 
+  // Keep forceSolidBg available inside scroll handler without changing deps length
+  useEffect(() => {
+    forceSolidRef.current = forceSolidBg;
+  }, [forceSolidBg]);
+
   useEffect(() => {
     const handleCartCount = (e: Event) => {
       const detail = (e as CustomEvent).detail;
@@ -93,7 +156,17 @@ export default function SiteHeader({
     <>
       {/* <AnnouncementBanner text={announcementText} /> */}
 
-      <nav className="sticky top-0 z-50 bg-cafe-mist/85 backdrop-blur-xl border-b border-cafe-tan/10">
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 ${showSolidBg ? 'backdrop-blur-xl' : 'backdrop-blur-none'} border-b transition-all duration-300 ease-in-out ${
+          solidBg
+            ? 'bg-cafe-mist/85 border-cafe-tan/10'
+            : 'bg-transparent border-transparent'
+        }`}
+        data-at-top={isAtTop}
+        style={{
+          transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
+        }}
+      >
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             <Link
@@ -102,7 +175,7 @@ export default function SiteHeader({
               style={{ color: 'inherit', textDecoration: 'none' }}
             >
               <Image
-                src="/tnc-navbar-logo.png"
+                src={logoSrc}
                 alt="The Notebook Café Logo"
                 width={65}
                 height={65}
@@ -112,13 +185,17 @@ export default function SiteHeader({
               <div className="flex flex-col">
                 <span
                   className="font-serif text-2xl sm:text-3xl leading-none tracking-tight"
-                  style={{ color: 'var(--cafe-black)' }}
+                  style={{ color: showSolidBg ? 'var(--cafe-black)' : 'var(--cafe-cream)' }}
                 >
                   The Notebook
                 </span>
                 <span
                   className="text-[12px] uppercase tracking-[0.22em] leading-none"
-                  style={{ color: 'var(--cafe-tan)' }}
+                  style={{
+                    color: showSolidBg
+                      ? 'var(--cafe-tan)'
+                      : 'var(--cafe-terracotta)'
+                  }}
                 >
                   Café
                 </span>
@@ -128,63 +205,63 @@ export default function SiteHeader({
             <div className="hidden md:flex items-center space-x-7">
               <Link
                 href="/"
-                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/")
-                  ? "font-semibold text-cafe-black"
-                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
-                  }`}
+                className={`${navLinkBase} ${isActive("/") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Home
-                {isActive("/") && <span className="nav-underline" />}
+                {isActive("/") && (
+                  <span
+                    className="nav-underline"
+                    style={!showSolidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
+                  />
+                )}
               </Link>
               <Link
                 href="/menu"
-                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/menu")
-                  ? "font-semibold text-cafe-black"
-                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
-                  }`}
+                className={`${navLinkBase} ${isActive("/menu") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Menu
-                {isActive("/menu") && <span className="nav-underline" />}
+                {isActive("/menu") && (
+                  <span
+                    className="nav-underline"
+                    style={!showSolidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
+                  />
+                )}
               </Link>
               <Link
                 href="/story"
-                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/story")
-                  ? "font-semibold text-cafe-black"
-                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
-                  }`}
+                className={`${navLinkBase} ${isActive("/story") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Story
-                {isActive("/story") && <span className="nav-underline" />}
-              </Link>
-              <Link
-                href="/events"
-                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/events")
-                  ? "font-semibold text-cafe-black"
-                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
-                  }`}
-              >
-                Events
-                {isActive("/events") && <span className="nav-underline" />}
+                {isActive("/story") && (
+                  <span
+                    className="nav-underline"
+                    style={!showSolidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
+                  />
+                )}
               </Link>
               <Link
                 href="/contact"
-                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/contact")
-                  ? "font-semibold text-cafe-black"
-                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
-                  }`}
+                className={`${navLinkBase} ${isActive("/contact") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Contact
-                {isActive("/contact") && <span className="nav-underline" />}
+                {isActive("/contact") && (
+                  <span
+                    className="nav-underline"
+                    style={!showSolidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
+                  />
+                )}
               </Link>
               <Link
                 href="/careers"
-                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/careers")
-                  ? "font-semibold text-cafe-black"
-                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
-                  }`}
+                className={`${navLinkBase} ${isActive("/careers") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Careers
-                {isActive("/careers") && <span className="nav-underline" />}
+                {isActive("/careers") && (
+                  <span
+                    className="nav-underline"
+                    style={!showSolidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
+                  />
+                )}
               </Link>
 
               <div className="h-4 w-px bg-cafe-beige/50"></div>
@@ -196,7 +273,7 @@ export default function SiteHeader({
                 aria-label="Open cart"
               >
                 <ShoppingBag
-                  className="text-cafe-black group-hover:text-cafe-tan transition-colors"
+                  className={`transition-colors ${showSolidBg ? 'text-cafe-black group-hover:text-cafe-tan' : 'text-cafe-cream group-hover:text-cafe-cream'}`}
                   strokeWidth={1.5}
                   size={22}
                 />
@@ -218,7 +295,7 @@ export default function SiteHeader({
                 onClick={handleCartClick}
                 aria-label="Open cart"
               >
-                <ShoppingBag className="text-cafe-black" size={24} strokeWidth={1.5} />
+                <ShoppingBag className={showSolidBg ? "text-cafe-black" : "text-cafe-cream"} size={24} strokeWidth={1.5} />
                 {cartBadge > 0 && (
                   <span
                     className="absolute -bottom-2 -right-2 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full leading-none shadow-[0_2px_6px_rgba(0,0,0,0.25)] ring-1 ring-white/70"
@@ -234,7 +311,7 @@ export default function SiteHeader({
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 type="button"
               >
-                <span className="hamburger-icon">
+                <span className={`hamburger-icon ${showSolidBg ? '' : 'hamburger-light'}`}>
                   <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>
                   <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>
                   <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>
@@ -255,7 +332,7 @@ export default function SiteHeader({
               className="fixed left-0 right-0 bottom-0 md:hidden bg-cafe-mist"
               style={{
                 top: '80px',
-                zIndex: 40,
+                zIndex: 120,
                 minHeight: 'calc(100vh - 80px)',
                 width: '100vw',
                 height: 'calc(100vh - 80px)'
@@ -272,7 +349,6 @@ export default function SiteHeader({
                     { href: '/', label: 'Home' },
                     { href: '/menu', label: 'Menu' },
                     { href: '/story', label: 'Story' },
-                    { href: '/events', label: 'Events' },
                     { href: '/contact', label: 'Contact' },
                     { href: '/careers', label: 'Careers' }
                   ].map((link, index) => (

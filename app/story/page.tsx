@@ -842,25 +842,6 @@ export default async function StoryPage() {
             </div>
           </Reveal>
 
-          {/* Join CTA */}
-          <Reveal delay={450}>
-            <div className="text-center p-12 rounded-3xl relative overflow-hidden" style={{ backgroundColor: "var(--cafe-mist)", color: "#2C2420" }}>
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-[120px]" style={{ backgroundColor: "rgba(164, 141, 120, 0.35)" }}></div>
-              </div>
-              <div className="relative z-10">
-                <h3 className="font-serif text-3xl md:text-4xl mb-4" style={{ color: "#2C2420" }}>
-                  Be Part of the Journey
-                </h3>
-                <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto" style={{ color: "rgba(44, 36, 32, 0.78)" }}>
-                  Get exclusive construction updates, opening announcements, and be the first to know when we pour our first cup.
-                </p>
-                <div className="max-w-xl mx-auto">
-                  <NewsletterForm source="story-page" />
-                </div>
-              </div>
-            </div>
-          </Reveal>
         </div>
       </section>
 

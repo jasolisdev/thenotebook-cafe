@@ -43,6 +43,10 @@
   top: 14px;
 }
 
+.hamburger-light .hamburger-line {
+  background-color: var(--cafe-cream);
+}
+
 /* Transform to X */
 .hamburger-line:nth-child(1).open {
   top: 7px;

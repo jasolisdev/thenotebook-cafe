@@ -41,10 +41,24 @@ export const AccessibilityWidget: React.FC = () => {
   const [view, setView] = useState<'settings' | 'statement'>('settings');
   const [settings, setSettings] = useState<AccessibilitySettings>(defaultSettings);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   // Apply settings to document
   useEffect(() => {
     const html = document.documentElement;
-    
+
     // Text Size
     html.classList.remove('acc-text-md', 'acc-text-lg', 'acc-text-xl');
     if (settings.textSize === 'large') html.classList.add('acc-text-lg');
@@ -129,9 +143,9 @@ export const AccessibilityWidget: React.FC = () => {
   return (
     <>
       {/* Floating Toggle Button */}
-      <button 
+      <button
         onClick={toggleOpen}
-        className="fixed bottom-6 right-6 z-[60] w-14 h-14 bg-cafe-black text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-brown transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border border-cafe-tan/40"
+        className="fixed bottom-6 right-6 z-[110] w-14 h-14 bg-cafe-black text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-brown transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border border-cafe-tan/40"
         aria-label="Accessibility Options"
       >
         <AccessibilityHumanIcon className="w-8 h-8" />
@@ -139,14 +153,14 @@ export const AccessibilityWidget: React.FC = () => {
 
       {/* Backdrop */}
       {isOpen && (
-        <div 
-          className="fixed inset-0 bg-cafe-black/40 z-50"
+        <div
+          className="fixed inset-0 bg-cafe-black/40 z-[100]"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Drawer */}
-      <div className={`fixed inset-y-0 right-0 z-[70] w-full md:w-96 bg-cafe-white shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? 'translate-x-0' : 'translate-x-full'} flex flex-col border-l border-cafe-tan/20`}>
+      <div className={`fixed inset-y-0 right-0 z-[110] w-full md:w-96 bg-cafe-white shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? 'translate-x-0' : 'translate-x-full'} flex flex-col border-l border-cafe-tan/20`}>
         
         {/* Header */}
         <div className="p-6 border-b border-cafe-tan/20 bg-cafe-cream flex items-center justify-between shrink-0">

@@ -6,7 +6,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
-import NewsletterForm from "./components/features/NewsLetterForm";
 import Reveal from "./components/ui/Reveal";
 import HeroButtons from "./components/ui/HeroButtons";
 import KenBurnsHero from "./components/features/KenBurnsHero";
@@ -15,7 +14,7 @@ import StoryLink from "./components/ui/StoryLink";
 import StoryBlobs from "./components/ui/StoryBlobs";
 import AtmosphereBlob from "./components/ui/AtmosphereBlob";
 import PhilosophyBlob from "./components/ui/PhilosophyBlob";
-import { Coffee, Music, Mail, Wifi, PlugZap, Armchair, Sparkles } from "lucide-react";
+import { Coffee, Music, Wifi, PlugZap, Armchair, Sparkles } from "lucide-react";
 import AtmosphereStrip from "./components/AtmosphereStrip";
 import SignaturePoursGrid from "./components/SignaturePoursGrid";
 
@@ -92,7 +91,7 @@ export default async function HomePage() {
     <main className="overflow-hidden" style={{ backgroundColor: 'var(--cafe-mist)', color: 'var(--cafe-brown)' }}>
       {/* Hero Section */}
       <KenBurnsHero
-        backgroundImage="/unsplash/tnc-home-hero-cup.jpg"
+        backgroundImage="/unsplash/tnc-home-hero-bg-v2.png"
         contentClassName="home-hero-shell"
       >
         <div className="home-hero-grid">
@@ -126,12 +125,10 @@ export default async function HomePage() {
           <Reveal delay={120} className="home-hero-visual-wrap">
             <div className="home-hero-visual">
               <div className="hero-latte-wrapper">
-                <div className="hero-latte-aura" aria-hidden />
-
                 <div className="relative animate-float">
-                  <div className="hero-latte-image shadow-2xl">
+                  <div className="hero-latte-image">
                     <Image
-                      src="/unsplash/tnc-hero-coffee-cup.png"
+                      src="/unsplash/tnc-hero-cup-v2.png"
                       alt="Signature latte art"
                       width={460}
                       height={460}
@@ -332,11 +329,11 @@ export default async function HomePage() {
           <Music strokeWidth={1.4} />
         </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <Reveal>
-                <h2 className="font-serif text-5xl md:text-6xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
-                  Low lights,<br />
+        <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+          <div className="space-y-8">
+            <Reveal>
+              <h2 className="font-serif text-5xl md:text-6xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
+                Low lights,<br />
                 good sound,<br />
                 <span className="italic" style={{ color: 'var(--cafe-tan)' }}>better coffee.</span>
               </h2>
@@ -376,7 +373,7 @@ export default async function HomePage() {
             </Reveal>
           </div>
         </div>
-    </section>
+      </section>
 
       {/* The Trinity */}
       <section
@@ -553,28 +550,62 @@ export default async function HomePage() {
         <AtmosphereStrip images={vibeImages} />
       </section>
 
-      {/* Newsletter */}
+      {/* Stay in the Loop - Instagram CTA */}
       <section
-        data-section="Newsletter"
-        className="py-24 px-6 relative overflow-hidden"
+        data-section="Stay in the Loop"
+        className="relative py-24 md:py-32 overflow-hidden"
         style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
-        <div className="section-deco" style={{ top: '10%', left: '12%', animationDuration: '11s' }} aria-hidden="true">
-          <Mail strokeWidth={1.4} />
+        <div className="section-deco" style={{ top: '12%', left: '10%', animationDuration: '11s' }} aria-hidden="true">
+          <Coffee strokeWidth={1.4} />
         </div>
-        <div className="section-deco section-deco-dark" style={{ bottom: '10%', right: '14%', animationDuration: '12s', animationDelay: '0.7s' }} aria-hidden="true">
-          <Sparkles strokeWidth={1.6} />
+        <div className="section-deco section-deco-dark" style={{ bottom: '10%', right: '12%', animationDuration: '12s', animationDelay: '0.6s' }} aria-hidden="true">
+          <Music strokeWidth={1.4} />
         </div>
-        <div className="section-deco-mobile" style={{ top: '10%', left: '10%' }} aria-hidden="true">
-          <Mail strokeWidth={1.4} />
-        </div>
-        <div className="max-w-2xl mx-auto text-center">
-          <Reveal>
-            <Mail className="mx-auto mb-6" size={32} style={{ color: 'var(--cafe-tan)' }} />
-            <h2 className="font-serif text-3xl md:text-4xl mb-4" style={{ color: 'var(--cafe-black)' }}>Join the Inner Circle</h2>
-            <p className="mb-8 font-light" style={{ color: 'rgba(74, 59, 50, 0.8)' }}>Be the first to know about our grand opening, special tastings, and secret menu items.</p>
 
-            <NewsletterForm source="homepage" />
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          <Reveal>
+            <div className="w-16 h-[2px] mx-auto mb-8" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <h2
+              className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] mb-8"
+              style={{ color: 'var(--cafe-black)' }}
+            >
+              Stay in the{" "}
+              <span className="italic" style={{ color: 'var(--cafe-tan)' }}>
+                Loop
+              </span>
+            </h2>
+          </Reveal>
+
+          <Reveal delay={200}>
+            <p
+              className="text-xl md:text-2xl font-light leading-relaxed mb-12 max-w-2xl mx-auto"
+              style={{ color: 'rgba(var(--cafe-brown-rgb), 0.8)' }}
+            >
+              New events announced weekly. Follow us for updates, behind-the-scenes moments, and spontaneous gatherings.
+            </p>
+          </Reveal>
+
+          <Reveal delay={300}>
+            <a
+              href="https://instagram.com/thenotebookcafellc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-3 px-8 md:px-12 py-4 md:py-5 text-xs md:text-sm uppercase tracking-[0.25em] font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              style={{
+                backgroundColor: 'var(--cafe-black)',
+                color: 'var(--cafe-white)',
+                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
+                borderRadius: '4px'
+              }}
+            >
+              <Coffee size={20} strokeWidth={2} />
+              <span>@thenotebookcafellc</span>
+              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </a>
           </Reveal>
         </div>
       </section>

@@ -75,23 +75,23 @@ export default function MenuPage() {
       >
         {/* Menu Header */}
         <ParallaxHero backgroundImage="/unsplash/tnc-menu-hero-bg.png">
-          <div className="max-w-4xl mx-auto text-center relative z-10 px-4 py-24">
+          <div className="max-w-4xl mx-auto text-center relative z-10 px-6 space-y-6">
             <Reveal>
               <span
-                className="font-bold tracking-[0.2em] uppercase text-sm mb-5 block"
+                className="font-bold tracking-[0.2em] uppercase text-sm block"
                 style={{ color: colors.tan }}
               >
                 The Menu
               </span>
             </Reveal>
             <Reveal delay={120}>
-              <h1 className="font-serif text-[70px] md:text-[90px] leading-[0.9] mb-7" style={{ color: colors.cream }}>
+              <h1 className="font-serif text-[70px] md:text-[90px] leading-[0.9]" style={{ color: colors.cream }}>
                 Curated Selection
               </h1>
             </Reveal>
             <Reveal delay={220}>
               <p
-                className="text-lg max-w-xl mx-auto font-light leading-relaxed"
+                className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed"
                 style={{ color: `${colors.beige}CC` }}
               >
                 Everything we serve is made with intention. From our single-origin espressos to our locally sourced pastries.
@@ -100,7 +100,7 @@ export default function MenuPage() {
           </div>
         </ParallaxHero>
 
-        <div className="sticky top-20 z-30 px-4 -mt-8">
+        <div className="px-4">
           <div className="max-w-md mx-auto">
             <div
               className="rounded-2xl shadow-xl p-2 flex flex-col sm:flex-row items-center gap-3 border"
@@ -164,10 +164,7 @@ export default function MenuPage() {
             </div>
           ) : (
             Object.entries(groupedItems).map(([subcategory, items]) => (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+              <div
                 key={subcategory}
                 className="mb-16"
               >
@@ -219,7 +216,7 @@ export default function MenuPage() {
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             ))
           )}
         </div>

@@ -62,7 +62,6 @@ export default function KenBurnsHero({
           aria-hidden
         />
       )}
-      <div className="kb-hero__overlay" aria-hidden data-variant={hasImage ? "image" : "gradient"} />
 
       <div className={cx("kb-hero__content", contentClassName)}>
         {headline && <p className="kb-hero__headline">{headline}</p>}

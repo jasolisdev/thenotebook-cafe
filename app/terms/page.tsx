@@ -1,6 +1,6 @@
 export default function TermsPage() {
   return (
-    <main className="max-w-4xl mx-auto px-6 py-16 space-y-8" style={{ color: 'var(--cafe-brown)' }}>
+    <main className="max-w-4xl mx-auto px-6 py-24 space-y-8 md:pt-40" style={{ color: 'var(--cafe-brown)' }}>
       <h1 className="font-serif text-4xl mb-4" style={{ color: 'var(--cafe-black)' }}>Terms of Service</h1>
       <p className="text-sm uppercase tracking-[0.18em]" style={{ color: 'rgba(var(--cafe-brown-rgb),0.65)' }}>
         Last updated: {new Date().getFullYear()}

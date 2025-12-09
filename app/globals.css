@@ -3,12 +3,15 @@
 /* Tailwind v4 Theme Configuration */
 @theme {
   --color-cafe-black: #2C2420;
+  --color-cafe-charcoal: #2A2622;
   --color-cafe-brown: #4A3B32;
   --color-cafe-tan: #A48D78;
+  --color-cafe-terracotta: #9A4C32;
   --color-cafe-beige: #CBB9A4;
   --color-cafe-cream: #EDE7D8;
   --color-cafe-mist: #F4F1EA;
   --color-cafe-white: #FAF9F6;
+  --color-cafe-olive: #4A4F41;
   --color-cafe-red: #ef4444;
 }
 
@@ -37,12 +40,15 @@
 
   /* Core palette */
   --cafe-black: #2C2420;
+  --cafe-charcoal: #2A2622;
   --cafe-brown: #4A3B32;
   --cafe-tan: #A48D78;
+  --cafe-terracotta: #9A4C32;
   --cafe-beige: #CBB9A4;
   --cafe-cream: #EDE7D8;
   --cafe-mist: #F4F1EA;
   --cafe-white: #FAF9F6;
+  --cafe-olive: #4A4F41;
 
   /* Extended palette - frequently used colors */
   --espresso-brown: #2a1f16;     /* Dark brown text */
@@ -67,6 +73,7 @@
   --cafe-cream-rgb: 237, 231, 216;
   --cafe-mist-rgb: 244, 241, 234;
   --cafe-white-rgb: 250, 249, 246;
+  --cafe-olive-rgb: 74, 79, 65;
 
   /* Extended RGB helpers */
   --espresso-brown-rgb: 42, 31, 22;
@@ -235,9 +242,7 @@ body {
   min-height: 100dvh;
   background: var(--bg-solid);
   color: var(--text-light);
-  padding-top: 80px;
-  transition: padding-top 0.3s ease;
-  /* Nav height only (banner hidden) */
+  /* No padding-top needed - navbar is fixed and doesn't take up space */
 }
 
 /* Text color utilities for dark backgrounds */

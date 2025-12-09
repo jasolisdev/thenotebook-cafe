@@ -149,7 +149,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAdd
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-end sm:items-center justify-center pointer-events-none"
+        className="fixed inset-0 z-[130] flex items-end sm:items-center justify-center pointer-events-none"
       >
         <div
           className="absolute inset-0 pointer-events-auto"
@@ -378,7 +378,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAdd
                   }
                   close();
                 }}
-                className="h-12 sm:h-14 flex justify-between px-6 text-sm sm:text-base"
+                className="h-12 sm:h-14 flex justify-center items-center gap-2 px-6 text-sm sm:text-base"
               >
                 <span>{editingItem ? 'Update Order' : 'Add to Order'}</span>
                 <span>${finalPrice.toFixed(2)}</span>

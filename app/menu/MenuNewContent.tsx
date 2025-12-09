@@ -94,9 +94,8 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
               <button
                 key={cat}
                 onClick={() => setActiveTab(cat)}
-                className={`pb-3 px-2 sm:px-4 md:px-6 text-xs sm:text-sm font-bold tracking-[0.12em] sm:tracking-[0.18em] md:tracking-[0.22em] uppercase transition-all relative whitespace-nowrap ${
-                  activeTab === cat ? "text-cafe-black" : "text-cafe-brown/50 hover:text-cafe-brown"
-                }`}
+                className={`pb-3 px-2 sm:px-4 md:px-6 text-xs sm:text-sm font-bold tracking-[0.12em] sm:tracking-[0.18em] md:tracking-[0.22em] uppercase transition-all relative whitespace-nowrap ${activeTab === cat ? "text-cafe-black" : "text-cafe-brown/50 hover:text-cafe-brown"
+                  }`}
               >
                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
                 {activeTab === cat && (
@@ -271,7 +270,7 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
               <div className="flex items-center justify-between mt-auto pt-4 border-t border-cafe-beige/20 sm:border-0 sm:pt-0">
                 <span className="text-2xl font-serif text-cafe-black">{formatPrice(selectedItem.price)}</span>
                 <button className="bg-cafe-black text-white px-6 py-2 text-xs uppercase tracking-widest hover:bg-cafe-tan transition-colors">
-                  Add to Order
+                  Add to Order {formatPrice(selectedItem.price)}
                 </button>
               </div>
             </div>

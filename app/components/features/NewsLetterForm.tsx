@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 
-export default function NewsletterForm({ source = "homepage" }: { source?: string }) {
+export default function NewsletterForm({ source = "homepage", inline = false }: { source?: string; inline?: boolean }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "duplicate" | "error"
@@ -25,10 +25,10 @@ export default function NewsletterForm({ source = "homepage" }: { source?: strin
 
       if (data.ok && data.duplicate) {
         setStatus("duplicate");
-        setMsg("You’re already on the list — thank you!");
+        setMsg("You're already on the list — thank you!");
       } else if (data.ok) {
         setStatus("success");
-        setMsg("Thanks! You’re subscribed.");
+        setMsg("Thanks! You're subscribed.");
         setEmail("");
       } else {
         setStatus("error");
@@ -40,6 +40,46 @@ export default function NewsletterForm({ source = "homepage" }: { source?: strin
     }
   }
 
+  // Inline footer style (like test footer)
+  if (inline) {
+    return (
+      <div>
+        <form onSubmit={onSubmit} className="flex">
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email address"
+            inputMode="email"
+            autoComplete="email"
+            className="bg-white/10 border-none outline-none text-white px-4 py-2 text-sm w-full rounded-l-sm focus:bg-white/20 transition-colors placeholder-white/50"
+          />
+          <button
+            type="submit"
+            disabled={status === "loading"}
+            className="bg-cafe-tan text-white px-4 py-2 text-xs uppercase font-bold tracking-wider hover:bg-cafe-tan/80 transition-colors rounded-r-sm whitespace-nowrap"
+          >
+            {status === "loading" ? "Joining..." : "Join"}
+          </button>
+        </form>
+
+        {msg && (
+          <div
+            role="status"
+            className={`text-xs mt-2 ${status === "success" || status === "duplicate"
+                ? "text-green-400"
+                : "text-red-400"
+              }`}
+          >
+            {msg}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Default homepage style
   return (
     <div>
       <style jsx>{`
