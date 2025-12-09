@@ -68,13 +68,13 @@ export default function MenuPage() {
 
   return (
     <>
-      <div
+      <main
         className="min-h-screen pb-32"
         ref={menuRef}
         style={{ backgroundColor: colors.mist, color: colors.brown }}
       >
         {/* Menu Header */}
-        <ParallaxHero backgroundImage="/menu/tnc-menu-hero-bg.png">
+        <ParallaxHero backgroundImage="/menu/tnc-menu-hero-bg.png" overlayVariant="lighter">
           <div className="max-w-4xl mx-auto text-center relative z-10 px-6 space-y-6">
             <Reveal>
               <span
@@ -154,7 +154,7 @@ export default function MenuPage() {
           </div>
         </div>
 
-        <div ref={listRef} className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+        <div ref={listRef} className="mx-auto px-4 sm:px-6 py-12" style={{ maxWidth: '1200px' }}>
           {Object.entries(groupedItems).length === 0 ? (
             <div className="text-center py-32 opacity-50">
               <Coffee size={64} className="mx-auto mb-6" color={colors.tan} strokeWidth={1} />
@@ -177,13 +177,13 @@ export default function MenuPage() {
                   {items.map((item) => (
                     <div
                       key={item.id}
-                      className="group rounded-2xl p-3 transition-all duration-300 border cursor-pointer flex gap-4 items-center"
+                      className="group rounded-2xl p-3 md:p-4 transition-all duration-300 border cursor-pointer flex gap-3.5 md:gap-4 items-center"
                       style={{ backgroundColor: colors.white, borderColor: 'transparent' }}
                       onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${colors.beige}80`)}
                       onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'transparent')}
                       onClick={() => setSelectedItem(item)}
                     >
-                      <div className="w-24 h-24 rounded-xl overflow-hidden shrink-0" style={{ backgroundColor: colors.mist }}>
+                      <div className="w-[60px] h-[60px] md:w-24 md:h-24 rounded-lg md:rounded-xl overflow-hidden shrink-0" style={{ backgroundColor: colors.mist }}>
                         <img
                           src="/unsplash/tnc-placeholder-menuitem.png"
                           alt={item.name}
@@ -192,10 +192,10 @@ export default function MenuPage() {
                       </div>
                       <div className="flex-1 min-w-0 pr-2">
                         <div className="flex justify-between items-start mb-1">
-                          <h3 className="font-serif text-lg truncate pr-2 transition-colors" style={{ color: colors.black }}>{item.name}</h3>
-                          <span className="font-medium text-sm whitespace-nowrap" style={{ color: colors.black }}>{item.price}</span>
+                          <h3 className="font-serif pr-2 transition-colors" style={{ color: colors.black, fontSize: 'clamp(1.0625rem, 2vw, 1.25rem)' }}>{item.name}</h3>
+                          <span className="font-medium whitespace-nowrap" style={{ color: colors.black, fontSize: 'clamp(1.0625rem, 2vw, 1.25rem)' }}>{item.price}</span>
                         </div>
-                        <p className="text-xs line-clamp-2 mb-2 leading-relaxed" style={{ color: `${colors.brown}B3` }}>{item.description}</p>
+                        <p className="line-clamp-2 mb-2 leading-relaxed" style={{ color: `${colors.brown}B3`, fontSize: '0.875rem' }}>{item.description}</p>
                         <div className="flex items-center justify-between">
                           <div className="flex gap-2">
                             {item.tag && (
@@ -220,7 +220,7 @@ export default function MenuPage() {
             ))
           )}
         </div>
-      </div>
+      </main>
 
       <ProductModal
         item={selectedItem}

@@ -43,7 +43,7 @@ export default function SiteHeader({
   const isActive = (path: string): boolean => pathname === path;
   const navLinkBase =
     "nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist";
-  const solidBg = showSolidBg || forceSolidBg;
+  const solidBg = showSolidBg || forceSolidBg || isOpen;
   const activeLinkClass = solidBg ? "font-semibold text-cafe-black" : "font-semibold text-cafe-cream";
   const inactiveLinkClass = solidBg
     ? "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
@@ -157,8 +157,10 @@ export default function SiteHeader({
       {/* <AnnouncementBanner text={announcementText} /> */}
 
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 ${showSolidBg ? 'backdrop-blur-xl' : 'backdrop-blur-none'} border-b transition-all duration-300 ease-in-out ${
-          solidBg
+        className={`fixed top-0 left-0 right-0 z-50 ${isOpen ? '' : (showSolidBg ? 'backdrop-blur-xl' : 'backdrop-blur-none')} border-b transition-all duration-300 ease-in-out ${
+          isOpen
+            ? 'bg-cafe-mist border-cafe-tan/10'
+            : solidBg
             ? 'bg-cafe-mist/85 border-cafe-tan/10'
             : 'bg-transparent border-transparent'
         }`}
@@ -185,14 +187,14 @@ export default function SiteHeader({
               <div className="flex flex-col">
                 <span
                   className="font-serif text-2xl sm:text-3xl leading-none tracking-tight"
-                  style={{ color: showSolidBg ? 'var(--cafe-black)' : 'var(--cafe-cream)' }}
+                  style={{ color: solidBg ? 'var(--cafe-black)' : 'var(--cafe-cream)' }}
                 >
                   The Notebook
                 </span>
                 <span
                   className="text-[12px] uppercase tracking-[0.22em] leading-none"
                   style={{
-                    color: showSolidBg
+                    color: solidBg
                       ? 'var(--cafe-tan)'
                       : 'var(--cafe-terracotta)'
                   }}
@@ -211,7 +213,7 @@ export default function SiteHeader({
                 {isActive("/") && (
                   <span
                     className="nav-underline"
-                    style={!showSolidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
+                    style={!solidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
                   />
                 )}
               </Link>
@@ -223,7 +225,7 @@ export default function SiteHeader({
                 {isActive("/menu") && (
                   <span
                     className="nav-underline"
-                    style={!showSolidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
+                    style={!solidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
                   />
                 )}
               </Link>
@@ -235,7 +237,7 @@ export default function SiteHeader({
                 {isActive("/story") && (
                   <span
                     className="nav-underline"
-                    style={!showSolidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
+                    style={!solidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
                   />
                 )}
               </Link>
@@ -247,7 +249,7 @@ export default function SiteHeader({
                 {isActive("/contact") && (
                   <span
                     className="nav-underline"
-                    style={!showSolidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
+                    style={!solidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
                   />
                 )}
               </Link>
@@ -259,7 +261,7 @@ export default function SiteHeader({
                 {isActive("/careers") && (
                   <span
                     className="nav-underline"
-                    style={!showSolidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
+                    style={!solidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
                   />
                 )}
               </Link>
@@ -273,7 +275,7 @@ export default function SiteHeader({
                 aria-label="Open cart"
               >
                 <ShoppingBag
-                  className={`transition-colors ${showSolidBg ? 'text-cafe-black group-hover:text-cafe-tan' : 'text-cafe-cream group-hover:text-cafe-cream'}`}
+                  className={`transition-colors ${solidBg ? 'text-cafe-black group-hover:text-cafe-tan' : 'text-cafe-cream group-hover:text-cafe-cream'}`}
                   strokeWidth={1.5}
                   size={22}
                 />
@@ -295,7 +297,7 @@ export default function SiteHeader({
                 onClick={handleCartClick}
                 aria-label="Open cart"
               >
-                <ShoppingBag className={showSolidBg ? "text-cafe-black" : "text-cafe-cream"} size={24} strokeWidth={1.5} />
+                <ShoppingBag className={solidBg ? "text-cafe-black" : "text-cafe-cream"} size={24} strokeWidth={1.5} />
                 {cartBadge > 0 && (
                   <span
                     className="absolute -bottom-2 -right-2 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full leading-none shadow-[0_2px_6px_rgba(0,0,0,0.25)] ring-1 ring-white/70"
@@ -311,7 +313,7 @@ export default function SiteHeader({
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 type="button"
               >
-                <span className={`hamburger-icon ${showSolidBg ? '' : 'hamburger-light'}`}>
+                <span className={`hamburger-icon ${solidBg ? '' : 'hamburger-light'}`}>
                   <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>
                   <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>
                   <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>

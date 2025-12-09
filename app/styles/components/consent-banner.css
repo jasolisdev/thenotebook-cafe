@@ -3,7 +3,7 @@
   position: fixed;
   inset-inline: 0;
   bottom: 16px;
-  z-index: 60;
+  z-index: 120;
   display: flex;
   justify-content: center;
   pointer-events: auto;

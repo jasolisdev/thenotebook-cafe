@@ -154,14 +154,14 @@ export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAdd
         <div
           className="absolute inset-0 pointer-events-auto"
           onClick={close}
-          style={{ backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(6px)' }}
+          style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
         />
 
         <motion.div
-          initial={{ y: 32, opacity: 0 }}
+          initial={{ y: '100%', opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 32, opacity: 0 }}
-          transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}
+          exit={{ y: '100%', opacity: 0 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="pointer-events-auto w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-xl sm:rounded-2xl shadow-2xl flex flex-col relative z-10 overflow-hidden"
           style={{ backgroundColor: colors.cream }}
         >
@@ -179,30 +179,23 @@ export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAdd
             >
               <X size={24} />
             </button>
-            <div className="absolute bottom-6 left-6 right-6 sm:hidden">
-              <h2 className="font-serif text-3xl text-white leading-tight drop-shadow-md mb-2">{item.name}</h2>
-              <span className="font-serif text-2xl" style={{ color: colors.tan }}>
-                {item.price}
-              </span>
-            </div>
           </div>
 
           <div className="flex-1 overflow-y-auto scroll-smooth pb-32" style={{ backgroundColor: colors.white }}>
-            <div className="p-6 space-y-8">
-              <div className="hidden sm:block">
-                <div className="flex justify-between items-start gap-4">
-                  <h2 className="font-serif text-3xl leading-tight" style={{ color: colors.black }}>
+            <div className="p-6 space-y-6">
+              <div>
+                <div className="mb-4">
+                  <h2 className="font-serif text-xl sm:text-2xl leading-tight mb-2" style={{ color: colors.black }}>
                     {item.name}
                   </h2>
                   <span className="font-serif text-2xl" style={{ color: colors.tan }}>
                     {item.price}
                   </span>
                 </div>
+                <p className="text-lg font-light leading-relaxed" style={{ color: `${colors.brown}CC` }}>
+                  {item.description}
+                </p>
               </div>
-
-              <p className="text-lg font-light leading-relaxed" style={{ color: `${colors.brown}CC` }}>
-                {item.description}
-              </p>
 
               <div className="space-y-8">
                 {modifierGroups.map(group => (

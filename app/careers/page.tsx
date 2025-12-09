@@ -108,7 +108,8 @@ export default function CareersPage() {
       <div className="careers-hero-wrapper">
         <ParallaxHero
           backgroundImage="/careers/tnc-career-hero-bg.png"
-          contentClassName="text-center"
+          focusPercent={150}
+          overlayVariant="light"
         >
           <div className="max-w-4xl mx-auto space-y-6">
             <Reveal>

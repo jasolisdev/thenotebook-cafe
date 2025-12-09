@@ -60,7 +60,7 @@ export default async function StoryPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--cafe-mist)' }}>
       {/* Hero Section (from prototype) */}
-      <ParallaxHero backgroundImage="/story/tnc-story-hero-bg.png">
+      <ParallaxHero backgroundImage="/story/tnc-story-hero-bg.png" overlayVariant="light">
         <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
           <Reveal>
             <span className="font-bold tracking-[0.2em] uppercase text-sm block" style={{ color: 'var(--cafe-tan)' }}>

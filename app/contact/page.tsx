@@ -12,7 +12,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--cafe-mist)' }}>
       {/* Hero Section */}
-      <ParallaxHero backgroundImage="/contact/tnc-contact-hero-bg.png">
+      <ParallaxHero backgroundImage="/contact/tnc-contact-hero-bg.png" focusPercent={150} overlayVariant="light" >
         <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
           <Reveal>
             <span className="font-bold tracking-[0.2em] uppercase text-sm block" style={{ color: 'var(--cafe-tan)' }}>

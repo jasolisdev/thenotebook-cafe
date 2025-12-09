@@ -2,8 +2,9 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { 
-  AccessibilityHumanIcon, XMarkIcon, TypeIcon, 
+import { usePathname } from 'next/navigation';
+import {
+  AccessibilityHumanIcon, XMarkIcon, TypeIcon,
   ContrastIcon, EyeIcon, ResetIcon, ChevronLeftIcon,
   MousePointerIcon, LinkIcon, RulerIcon, PauseIcon, BrainIcon
 } from '@/app/components/ui/AccessibilityIcons';
@@ -37,9 +38,31 @@ const defaultSettings: AccessibilitySettings = {
 };
 
 export const AccessibilityWidget: React.FC = () => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState<'settings' | 'statement'>('settings');
   const [settings, setSettings] = useState<AccessibilitySettings>(defaultSettings);
+
+  // Load settings from localStorage on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('accessibility-settings');
+      if (saved) {
+        try {
+          setSettings(JSON.parse(saved));
+        } catch (e) {
+          console.error('Failed to load accessibility settings:', e);
+        }
+      }
+    }
+  }, []);
+
+  // Save settings to localStorage whenever they change
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('accessibility-settings', JSON.stringify(settings));
+    }
+  }, [settings]);
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -79,31 +102,67 @@ export const AccessibilityWidget: React.FC = () => {
 
   // Bionic Reading Logic
   useEffect(() => {
+    const applyBionicReading = () => {
+      if (settings.bionicReading) {
+        const textElements = document.querySelectorAll('main p, main h1, main h2, main h3, main h4, main h5, main h6, main li, main a, main button, main span:not(.bionic-skip)');
+        textElements.forEach(el => {
+          const element = el as HTMLElement;
+          // Skip elements that are already processed or should be skipped
+          if (!element.getAttribute('data-bionic-original') && element.textContent && element.textContent.trim().length > 0) {
+            element.setAttribute('data-bionic-original', element.innerHTML);
+            const words = element.innerText.split(' ');
+            const newHtml = words.map(word => {
+              const mid = Math.ceil(word.length / 2);
+              return `<b class="bionic-bold">${word.slice(0, mid)}</b>${word.slice(mid)}`;
+            }).join(' ');
+            element.innerHTML = newHtml;
+          }
+        });
+      } else {
+        const textElements = document.querySelectorAll('main [data-bionic-original]');
+        textElements.forEach(element => {
+          const original = element.getAttribute('data-bionic-original');
+          if (original) {
+             element.innerHTML = original;
+             element.removeAttribute('data-bionic-original');
+          }
+        });
+      }
+    };
+
+    // Delay to ensure page content is fully rendered after navigation
+    const timeoutId = setTimeout(() => {
+      applyBionicReading();
+    }, 50);
+
+    // Watch for DOM changes (dynamic content)
+    let observer: MutationObserver | null = null;
     if (settings.bionicReading) {
-      const pTags = document.querySelectorAll('main p');
-      pTags.forEach(el => {
-        const p = el as HTMLElement;
-        if (!p.getAttribute('data-bionic-original')) {
-          p.setAttribute('data-bionic-original', p.innerHTML);
-          const words = p.innerText.split(' ');
-          const newHtml = words.map(word => {
-            const mid = Math.ceil(word.length / 2);
-            return `<b class="bionic-bold">${word.slice(0, mid)}</b>${word.slice(mid)}`;
-          }).join(' ');
-          p.innerHTML = newHtml;
+      observer = new MutationObserver((mutations) => {
+        // Check if new content was added
+        const hasNewContent = mutations.some(mutation =>
+          mutation.type === 'childList' && mutation.addedNodes.length > 0
+        );
+        if (hasNewContent) {
+          // Delay to ensure content is fully rendered
+          setTimeout(applyBionicReading, 100);
         }
       });
-    } else {
-      const pTags = document.querySelectorAll('main p[data-bionic-original]');
-      pTags.forEach(p => {
-        const original = p.getAttribute('data-bionic-original');
-        if (original) {
-           p.innerHTML = original;
-           p.removeAttribute('data-bionic-original');
-        }
-      });
+
+      const mainElement = document.querySelector('main');
+      if (mainElement) {
+        observer.observe(mainElement, {
+          childList: true,
+          subtree: true
+        });
+      }
     }
-  }, [settings.bionicReading]);
+
+    return () => {
+      clearTimeout(timeoutId);
+      if (observer) observer.disconnect();
+    };
+  }, [settings.bionicReading, pathname]);
 
   // Reading Guide Logic
   useEffect(() => {
@@ -330,6 +389,23 @@ export const AccessibilityWidget: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Reading Guide Line */}
+      {settings.readingGuide && (
+        <div
+          id="reading-guide-line"
+          style={{
+            position: 'fixed',
+            left: 0,
+            right: 0,
+            height: '3px',
+            backgroundColor: 'rgba(164, 141, 120, 0.7)',
+            pointerEvents: 'none',
+            zIndex: 9999,
+            boxShadow: '0 0 10px rgba(164, 141, 120, 0.5)',
+          }}
+        />
+      )}
     </>
   );
 };
