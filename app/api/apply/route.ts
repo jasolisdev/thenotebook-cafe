@@ -148,7 +148,7 @@ export async function POST(req: Request) {
       positions: string[];
       resume: FileReference;
       employmentType: string;
-      daysAvailable: string;
+      daysAvailable: string[];
       startDate: string;
       hoursPerWeek: string;
       commitmentLength: string;
