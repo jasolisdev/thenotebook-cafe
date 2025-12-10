@@ -6,10 +6,16 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
-      name: "fullName",
-      title: "Full Name",
+      name: "firstName",
+      title: "First Name",
       type: "string",
-      validation: (Rule) => Rule.required().error("Full name is required"),
+      validation: (Rule) => Rule.required().error("First name is required"),
+    }),
+    defineField({
+      name: "lastName",
+      title: "Last Name",
+      type: "string",
+      validation: (Rule) => Rule.required().error("Last name is required"),
     }),
     defineField({
       name: "email",
@@ -179,14 +185,16 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: "fullName",
+      firstName: "firstName",
+      lastName: "lastName",
       subtitle: "email",
       positions: "positions",
       status: "status",
     },
-    prepare({ title, subtitle, positions, status }) {
+    prepare({ firstName, lastName, subtitle, positions, status }) {
+      const fullName = [firstName, lastName].filter(Boolean).join(" ");
       return {
-        title: title || "No name",
+        title: fullName || "No name",
         subtitle: `${subtitle} • ${positions?.join(", ") || "No position"} • ${status}`,
       };
     },

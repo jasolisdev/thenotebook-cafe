@@ -13,7 +13,8 @@ import "../styles/pages/careers.css";
 
 export default function CareersPage() {
   const [formData, setFormData] = useState({
-    fullName: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
     birthdate: "",
@@ -60,8 +61,11 @@ export default function CareersPage() {
     const errors: string[] = [];
 
     // Validate required fields
-    if (!formData.fullName.trim()) {
-      errors.push("Full Name is required");
+    if (!formData.firstName.trim()) {
+      errors.push("First Name is required");
+    }
+    if (!formData.lastName.trim()) {
+      errors.push("Last Name is required");
     }
     if (!formData.email.trim()) {
       errors.push("Email is required");
@@ -94,8 +98,13 @@ export default function CareersPage() {
     // If there are validation errors, show them and don't submit
     if (errors.length > 0) {
       setValidationErrors(errors);
-      // Scroll to top of form to show errors
-      window.scrollTo({ top: document.querySelector('form')?.offsetTop, behavior: 'smooth' });
+      // Scroll to beginning of form (accounting for navbar height)
+      const formElement = document.querySelector('form');
+      if (formElement) {
+        const formTop = formElement.getBoundingClientRect().top + window.pageYOffset;
+        const offset = 180; // Navbar height + some spacing
+        window.scrollTo({ top: formTop - offset, behavior: 'smooth' });
+      }
       return;
     }
 
@@ -107,7 +116,8 @@ export default function CareersPage() {
     try {
       // Create FormData for file upload
       const data = new FormData();
-      data.append("fullName", formData.fullName);
+      data.append("firstName", formData.firstName);
+      data.append("lastName", formData.lastName);
       data.append("email", formData.email);
       data.append("phone", formData.phone);
       data.append("birthdate", formData.birthdate);
@@ -558,24 +568,43 @@ export default function CareersPage() {
               </div>
             )}
 
-            {/* Full Name */}
+            {/* First Name */}
             <div>
-              <label htmlFor="fullName" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Full Name <span style={{ color: 'var(--cafe-tan)' }}>*</span>
+              <label htmlFor="firstName" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
+                First Name <span style={{ color: 'var(--cafe-tan)' }}>*</span>
               </label>
               <input
                 type="text"
-                id="fullName"
-                required
-                value={formData.fullName}
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                id="firstName"
+                value={formData.firstName}
+                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                 className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                 style={{
                   backgroundColor: 'var(--cafe-mist)',
                   border: '1px solid rgba(164, 141, 120, 0.2)',
                   color: 'var(--cafe-black)'
                 }}
-                placeholder="Your full name"
+                placeholder="Your first name"
+              />
+            </div>
+
+            {/* Last Name */}
+            <div>
+              <label htmlFor="lastName" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
+                Last Name <span style={{ color: 'var(--cafe-tan)' }}>*</span>
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                value={formData.lastName}
+                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                style={{
+                  backgroundColor: 'var(--cafe-mist)',
+                  border: '1px solid rgba(164, 141, 120, 0.2)',
+                  color: 'var(--cafe-black)'
+                }}
+                placeholder="Your last name"
               />
             </div>
 

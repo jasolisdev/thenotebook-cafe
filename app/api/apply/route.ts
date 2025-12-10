@@ -7,7 +7,8 @@ export async function POST(req: Request) {
   try {
     const formData = await req.formData();
 
-    const fullName = formData.get("fullName") as string;
+    const firstName = formData.get("firstName") as string;
+    const lastName = formData.get("lastName") as string;
     const email = formData.get("email") as string;
     const phone = formData.get("phone") as string;
     const birthdate = formData.get("birthdate") as string;
@@ -22,7 +23,7 @@ export async function POST(req: Request) {
     const supplementalFile = formData.get("supplementalApplication") as File | null;
 
     // Validate required fields
-    if (!fullName || !email || !phone || !birthdate || !positionsRaw || !employmentType || !daysAvailableRaw || !startDate || !hoursPerWeek || !commitmentLength) {
+    if (!firstName || !lastName || !email || !phone || !birthdate || !positionsRaw || !employmentType || !daysAvailableRaw || !startDate || !hoursPerWeek || !commitmentLength) {
       return NextResponse.json(
         { ok: false, error: "Missing required fields" },
         { status: 400 }
@@ -131,7 +132,8 @@ export async function POST(req: Request) {
 
     const applicationData: {
       _type: "jobApplication";
-      fullName: string;
+      firstName: string;
+      lastName: string;
       email: string;
       phone: string;
       birthdate: string;
@@ -148,7 +150,8 @@ export async function POST(req: Request) {
       supplementalApplication?: FileReference;
     } = {
       _type: "jobApplication",
-      fullName,
+      firstName,
+      lastName,
       email,
       phone,
       birthdate,
