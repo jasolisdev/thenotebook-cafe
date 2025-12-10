@@ -86,3 +86,15 @@ input[type="radio"]:focus {
   outline: 2px solid var(--cafe-tan);
   outline-offset: 2px;
 }
+
+/* Thank you page spacing */
+.careers-thank-you-page {
+  padding-top: calc(112px + 50px); /* 32px announcement + 80px header + 50px spacing */
+  padding-bottom: 50px;
+}
+
+@media (min-width: 768px) {
+  .careers-thank-you-page {
+    padding-top: calc(116px + 50px); /* 36px announcement + 80px header + 50px spacing */
+  }
+}
