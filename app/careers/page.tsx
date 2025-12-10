@@ -57,6 +57,8 @@ export default function CareersPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
+    console.log("Form submitted", formData);
+
     // Reset validation errors
     const errors: string[] = [];
 
@@ -95,16 +97,20 @@ export default function CareersPage() {
       errors.push("Commitment Length is required");
     }
 
+    console.log("Validation errors:", errors);
+
     // If there are validation errors, show them and don't submit
     if (errors.length > 0) {
       setValidationErrors(errors);
       // Scroll to beginning of form (accounting for navbar height)
-      const formElement = document.querySelector('form');
-      if (formElement) {
-        const formTop = formElement.getBoundingClientRect().top + window.pageYOffset;
-        const offset = 180; // Navbar height + some spacing
-        window.scrollTo({ top: formTop - offset, behavior: 'smooth' });
-      }
+      setTimeout(() => {
+        const formElement = document.querySelector('form');
+        if (formElement) {
+          const formTop = formElement.getBoundingClientRect().top + window.scrollY;
+          const offset = 180; // Navbar height + some spacing
+          window.scrollTo({ top: formTop - offset, behavior: 'smooth' });
+        }
+      }, 100);
       return;
     }
 
