@@ -65,8 +65,17 @@ export default function MenuPage() {
 
           const currentScrollY = window.scrollY;
 
-          // Navbar shows when scrolling up, hides when scrolling down
-          if (currentScrollY < lastScrollY || currentScrollY < 100) {
+          // If at top position, lock navbar to visible and skip further checks
+          // This prevents flash when switching tabs at top
+          if (currentScrollY < 150) {
+            setIsNavbarVisible(true);
+            lastScrollY = currentScrollY;
+            ticking = false;
+            return;
+          }
+
+          // Normal show/hide logic for scrolled positions
+          if (currentScrollY < lastScrollY) {
             setIsNavbarVisible(true);
           } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
             setIsNavbarVisible(false);
