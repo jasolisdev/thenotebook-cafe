@@ -70,6 +70,14 @@
   font-size: 0.9rem;
   font-family: var(--font-inter);
   opacity: 0.6;
+
+  /* Limit to 2 lines with ellipsis */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5;
 }
 
 .menu-item-editorial .price {

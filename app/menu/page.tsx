@@ -206,7 +206,7 @@ export default function MenuPage() {
                 </h2>
 
                 {/* Menu Items - Clean List Layout */}
-                <div className="space-y-8 mt-8">
+                <div className="space-y-4 mt-8">
                   {items.map((item) => (
                     <div
                       key={item.id}
