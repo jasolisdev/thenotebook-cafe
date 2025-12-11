@@ -31,32 +31,32 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: 0 0 12px 0; /* Match card's bottom-right corner radius */
-  border: 1px solid rgba(164, 141, 120, 0.3); /* Tan border */
-  background-color: var(--cafe-cream); /* Cream background */
+  width: 43px; /* Reduced by 10% from 48px */
+  height: 43px;
+  border-radius: 6px 0 12px 0; /* Top-left corner rounded, bottom-right matches card */
+  border: 1px solid rgba(164, 141, 120, 0.2); /* Tan at 20% opacity */
+  background-color: #F4F1EA; /* Mist - matches page background */
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 1; /* Always visible */
   transform: scale(1); /* No initial scale */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  color: var(--cafe-black); /* Dark icon */
+  color: #2C2420; /* Soft black icon */
   cursor: pointer;
 }
 
 .menu-item-editorial:hover .add-button {
-  background-color: var(--cafe-olive); /* Olive on hover */
-  border-color: var(--cafe-olive); /* Olive border on hover */
-  color: var(--cafe-white); /* White icon on hover */
+  background-color: #4A4F41; /* Olive on hover */
+  border-color: #4A4F41; /* Olive border on hover */
+  color: #F4F1EA; /* Mist/white icon on hover */
   transform: scale(1.05); /* Slight scale on hover */
 }
 
 .menu-item-editorial .add-button:hover {
-  background-color: var(--cafe-olive); /* Olive when button hovered */
-  border-color: var(--cafe-olive); /* Olive border when hovered */
-  color: var(--cafe-white);
+  background-color: #4A4F41; /* Olive when button hovered */
+  border-color: #4A4F41; /* Olive border when hovered */
+  color: #F4F1EA; /* Mist/white icon */
   transform: scale(1.08);
 }
 
@@ -110,7 +110,7 @@
   .menu-item-editorial .add-button {
     bottom: 0;
     right: 0;
-    width: 48px; /* Maintain size on mobile for easier tapping */
-    height: 48px;
+    width: 43px; /* Reduced by 10% */
+    height: 43px;
   }
 }
