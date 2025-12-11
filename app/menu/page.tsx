@@ -137,8 +137,8 @@ export default function MenuPage() {
                         setActiveSection(section);
                         // Scroll to menu content
                         if (menuContentRef.current) {
-                          // Account for navbar (80px) + sticky tabs (~90px) + breathing room (20px)
-                          const yOffset = isNavbarVisible ? -190 : -110; // Adjust based on navbar visibility
+                          // Adjust to show 1px of hero + navbar (80px) + sticky tabs (~90px)
+                          const yOffset = isNavbarVisible ? -171 : -91; // Shows 1px of hero section
                           const element = menuContentRef.current;
                           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
                           window.scrollTo({ top: y, behavior: 'smooth' });
