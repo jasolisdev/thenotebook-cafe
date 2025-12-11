@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from "next/image";
-import { Coffee, ArrowRight } from 'lucide-react';
+import { Coffee, ArrowRight, Plus } from 'lucide-react';
 import { MenuItem as MenuItemType, SelectedModifier } from '@/app/types';
 import { MENU_ITEMS } from '@/app/constants';
 import { ProductModal } from '@/app/components/features/ProductModal';
@@ -213,13 +213,9 @@ export default function MenuPage() {
                       className={`menu-item-editorial menu-item-${item.section} cursor-pointer group`}
                       onClick={() => setSelectedItem(item)}
                     >
-                      {/* Item Row - Baseline Aligned */}
-                      <div className="flex justify-between items-baseline gap-4 mb-2">
-                        {/* Left: Name */}
-                        <h3
-                          className="font-sans text-lg md:text-xl font-medium transition-colors"
-                          style={{ color: colors.black }}
-                        >
+                      {/* Left Side: Title & Description */}
+                      <div className="flex-1 pr-4">
+                        <h3 style={{ color: colors.black }}>
                           {item.name}
                           {item.tag && (
                             <span
@@ -232,24 +228,27 @@ export default function MenuPage() {
                             </span>
                           )}
                         </h3>
-                        {/* Right: Price - Serif for Contrast */}
-                        <span
-                          className="font-serif text-lg md:text-xl whitespace-nowrap"
-                          style={{ color: colors.black }}
-                        >
+                        <p style={{ color: colors.brown }}>
+                          {item.description}
+                        </p>
+                      </div>
+
+                      {/* Right Side: Price & Plus Button */}
+                      <div className="price-with-action">
+                        <span className="price" style={{ color: colors.black }}>
                           {item.price}
                         </span>
+                        <button
+                          className="add-button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedItem(item);
+                          }}
+                          aria-label={`Add ${item.name} to cart`}
+                        >
+                          <Plus size={16} strokeWidth={2.5} />
+                        </button>
                       </div>
-                      {/* Description - Muted */}
-                      <p
-                        className="font-sans text-sm md:text-base leading-relaxed max-w-2xl"
-                        style={{
-                          color: colors.brown,
-                          opacity: 0.65
-                        }}
-                      >
-                        {item.description}
-                      </p>
                     </div>
                   ))}
                 </div>

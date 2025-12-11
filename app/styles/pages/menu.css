@@ -1,51 +1,98 @@
-/* Menu Item Hover Effects - Testing Different Styles */
+/* Menu Item Component - Minimal Aesthetic Design */
 
-/* Base menu item styling */
+/* Base menu item styling - matches reference design */
 .menu-item-editorial {
-  transition: all 0.25s ease;
-  padding: 1.25rem;
-  margin: -1.25rem;
-  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(164, 141, 120, 0.2); /* Tan at 20% opacity */
+  background-color: transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0; /* Reset negative margins from previous version */
 }
 
-/* Option 1: Thin Border + Subtle Background (Drinks) */
-.menu-item-drinks {
-  border: 1px solid transparent;
+/* Hover State - Subtle and Elegant */
+.menu-item-editorial:hover {
+  background-color: rgba(164, 141, 120, 0.08); /* Subtle tan wash */
+  border-color: rgba(164, 141, 120, 0.4); /* Darken border to 40% */
 }
 
-.menu-item-drinks:hover {
+/* Title color change on hover - Changes to Olive */
+.menu-item-editorial:hover h3 {
+  color: var(--cafe-olive) !important;
+}
+
+/* Plus button animation - Initially scaled down, fades in on hover */
+.menu-item-editorial .price-with-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-item-editorial .add-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(164, 141, 120, 0.3);
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--cafe-tan);
+  cursor: pointer;
+}
+
+.menu-item-editorial:hover .add-button {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.menu-item-editorial .add-button:hover {
+  background-color: var(--cafe-tan);
   border-color: var(--cafe-tan);
-  background-color: var(--cafe-cream);
-  transform: translateY(-1px);
+  color: var(--cafe-white);
+  transform: scale(1.1);
 }
 
-/* Option 2: Left Accent Border (Meals) */
-.menu-item-meals {
-  border-left: 3px solid transparent;
-  padding-left: 1rem;
-  margin-left: -1rem;
+/* Typography adjustments to match reference */
+.menu-item-editorial h3 {
+  font-size: 1.2rem;
+  font-family: var(--font-display);
+  transition: color 0.3s ease;
 }
 
-.menu-item-meals:hover {
-  border-left-color: var(--cafe-tan);
-  background-color: rgba(237, 231, 216, 0.4); /* cafe-cream with opacity */
+.menu-item-editorial p {
+  font-size: 0.9rem;
+  font-family: var(--font-inter);
+  opacity: 0.6;
 }
 
-/* Option 5: Combined Deluxe (Desserts) */
-.menu-item-desserts {
-  border: 1px solid transparent;
+.menu-item-editorial .price {
+  font-size: 1.1rem;
+  font-family: var(--font-display);
+  white-space: nowrap;
 }
 
-.menu-item-desserts:hover {
-  border-color: var(--cafe-beige);
-  background-color: var(--cafe-cream);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(44, 36, 32, 0.08);
-}
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .menu-item-editorial {
+    padding: 16px;
+  }
 
-/* Ensure smooth transitions for all elements */
-.menu-item-editorial h3,
-.menu-item-editorial p,
-.menu-item-editorial span {
-  transition: color 0.25s ease;
+  .menu-item-editorial h3 {
+    font-size: 1.1rem;
+  }
+
+  .menu-item-editorial p {
+    font-size: 0.85rem;
+  }
+
+  .menu-item-editorial .price {
+    font-size: 1rem;
+  }
 }
