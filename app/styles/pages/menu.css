@@ -29,13 +29,13 @@
 /* Plus button - Always visible in bottom right */
 .menu-item-editorial .add-button {
   position: absolute;
-  bottom: 16px;
-  right: 16px;
+  bottom: 0;
+  right: 0;
   width: 48px;
   height: 48px;
-  border-radius: 8px; /* Rounded square, not circle */
-  border: none;
-  background-color: rgba(244, 241, 234, 0.8); /* Light mist background */
+  border-radius: 0 0 12px 0; /* Match card's bottom-right corner radius */
+  border: 1px solid rgba(164, 141, 120, 0.3); /* Tan border */
+  background-color: var(--cafe-cream); /* Cream background */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,12 +48,14 @@
 
 .menu-item-editorial:hover .add-button {
   background-color: var(--cafe-olive); /* Olive on hover */
+  border-color: var(--cafe-olive); /* Olive border on hover */
   color: var(--cafe-white); /* White icon on hover */
   transform: scale(1.05); /* Slight scale on hover */
 }
 
 .menu-item-editorial .add-button:hover {
   background-color: var(--cafe-olive); /* Olive when button hovered */
+  border-color: var(--cafe-olive); /* Olive border when hovered */
   color: var(--cafe-white);
   transform: scale(1.08);
 }
@@ -106,8 +108,8 @@
   }
 
   .menu-item-editorial .add-button {
-    bottom: 12px;
-    right: 12px;
+    bottom: 0;
+    right: 0;
     width: 48px; /* Maintain size on mobile for easier tapping */
     height: 48px;
   }
