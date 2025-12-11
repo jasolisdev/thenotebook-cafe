@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Image from "next/image";
 import { Coffee, ArrowRight } from 'lucide-react';
 import { MenuItem as MenuItemType, SelectedModifier } from '@/app/types';
@@ -26,7 +26,6 @@ export default function MenuPage() {
   const [activeSection, setActiveSection] = useState<'drinks' | 'meals' | 'desserts'>('drinks');
   const [searchQuery, setSearchQuery] = useState('');
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
-  const menuRef = useRef<HTMLDivElement>(null);
 
   const filteredItems = MENU_ITEMS.filter(item => {
     const matchesSection = item.section === activeSection;
@@ -79,7 +78,6 @@ export default function MenuPage() {
     <>
       <main
         className="min-h-screen pb-32"
-        ref={menuRef}
         style={{ backgroundColor: colors.mist, color: colors.brown }}
       >
         {/* Menu Header */}
@@ -171,7 +169,7 @@ export default function MenuPage() {
           </div>
         </div>
 
-        <div ref={listRef} className="mx-auto px-4 sm:px-6 py-12" style={{ maxWidth: '900px' }}>
+        <div className="mx-auto px-4 sm:px-6 py-12" style={{ maxWidth: '900px' }}>
           {Object.entries(groupedItems).length === 0 ? (
             <div className="text-center py-32 opacity-50">
               <Coffee size={64} className="mx-auto mb-6" color={colors.tan} strokeWidth={1} />
