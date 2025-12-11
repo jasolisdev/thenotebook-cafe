@@ -152,17 +152,16 @@ export default function MenuPage() {
                       onClick={() => {
                         setActiveSection(section);
 
-                        // If at menu viewing position, trigger tiny scroll to maintain navbar state
                         const currentScrollY = window.scrollY;
-                        if (currentScrollY < 250) {
-                          // Tiny 1px scroll to activate scroll handler and ensure navbar consistency
-                          setTimeout(() => {
-                            window.scrollBy({ top: 1, behavior: 'auto' });
-                          }, 0);
+
+                        // Only allow simple tab switch if navbar is already visible
+                        // This prevents flash from inconsistent navbar state
+                        if (currentScrollY < 250 && isNavbarVisible) {
+                          // Navbar is showing, safe to switch tabs without any scroll
                           return;
                         }
 
-                        // Scroll to menu content (only when scrolled down)
+                        // If navbar hidden or scrolled down, use full scroll logic
                         if (menuContentRef.current) {
                           // Set flag to prevent navbar changes during scroll
                           setIsProgrammaticScroll(true);
