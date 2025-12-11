@@ -560,7 +560,7 @@ export default async function HomePage() {
       <section
         data-section="Stay in the Loop"
         className="relative py-24 md:py-32 overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
+        style={{ backgroundColor: '#6B7456' }}
       >
         <div className="section-deco" style={{ top: '12%', left: '10%', animationDuration: '11s' }} aria-hidden="true">
           <Coffee strokeWidth={1.4} />
@@ -577,7 +577,7 @@ export default async function HomePage() {
           <Reveal delay={100}>
             <h2
               className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] mb-8"
-              style={{ color: 'var(--cafe-black)' }}
+              style={{ color: 'var(--cafe-cream)' }}
             >
               Stay in the{" "}
               <span className="italic" style={{ color: 'var(--cafe-tan)' }}>
@@ -589,7 +589,7 @@ export default async function HomePage() {
           <Reveal delay={200}>
             <p
               className="text-xl md:text-2xl font-light leading-relaxed mb-12 max-w-2xl mx-auto"
-              style={{ color: 'rgba(var(--cafe-brown-rgb), 0.8)' }}
+              style={{ color: 'rgba(237, 231, 216, 0.9)' }}
             >
               New events announced weekly. Follow us for updates, behind-the-scenes moments, and spontaneous gatherings.
             </p>

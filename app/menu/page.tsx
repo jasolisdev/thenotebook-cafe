@@ -93,7 +93,7 @@ export default function MenuPage() {
                 className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed"
                 style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}
               >
-                Everything we serve is made with intention. From our single-origin espressos to our locally sourced pastries.
+                Small-batch roasts, house-made syrups, and locally sourced ingredients.
               </p>
             </Reveal>
           </div>
@@ -153,7 +153,7 @@ export default function MenuPage() {
           </div>
         </div>
 
-        <div ref={listRef} className="mx-auto px-4 sm:px-6 py-12" style={{ maxWidth: '1200px' }}>
+        <div ref={listRef} className="mx-auto px-4 sm:px-6 py-12" style={{ maxWidth: '900px' }}>
           {Object.entries(groupedItems).length === 0 ? (
             <div className="text-center py-32 opacity-50">
               <Coffee size={64} className="mx-auto mb-6" color={colors.tan} strokeWidth={1} />
@@ -167,53 +167,62 @@ export default function MenuPage() {
                 key={subcategory}
                 className="mb-16"
               >
-                <div className="flex items-end gap-4 mb-8 pb-4 border-b" style={{ borderColor: `${colors.beige}80` }}>
-                  <h2 className="font-serif text-3xl" style={{ color: colors.black }}>{subcategory}</h2>
-                  <span className="text-sm mb-1.5 font-medium" style={{ color: `${colors.brown}66` }}>{items.length} items</span>
-                </div>
+                {/* Category Header - Editorial Style */}
+                <h2
+                  className="font-serif text-3xl md:text-4xl mb-2 pb-3 border-b"
+                  style={{
+                    color: colors.black,
+                    borderColor: colors.tan
+                  }}
+                >
+                  {subcategory}
+                </h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Menu Items - Clean List Layout */}
+                <div className="space-y-8 mt-8">
                   {items.map((item) => (
                     <div
                       key={item.id}
-                      className="group rounded-2xl p-3 md:p-4 transition-all duration-300 border cursor-pointer flex gap-3.5 md:gap-4 items-center"
-                      style={{ backgroundColor: colors.white, borderColor: 'transparent' }}
-                      onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${colors.beige}80`)}
-                      onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'transparent')}
+                      className="menu-item-editorial cursor-pointer group"
                       onClick={() => setSelectedItem(item)}
                     >
-                      <div className="relative w-[60px] h-[60px] md:w-24 md:h-24 rounded-lg md:rounded-xl overflow-hidden shrink-0 menu-card-image" style={{ backgroundColor: colors.mist }}>
-                        <Image
-                          src="/unsplash/tnc-placeholder-menuitem.png"
-                          alt={item.name}
-                          fill
-                          sizes="96px"
-                          className="object-cover transition-transform duration-500"
-                        />
+                      {/* Item Row - Baseline Aligned */}
+                      <div className="flex justify-between items-baseline gap-4 mb-2">
+                        {/* Left: Name */}
+                        <h3
+                          className="font-sans text-lg md:text-xl font-medium transition-colors"
+                          style={{ color: colors.black }}
+                        >
+                          {item.name}
+                          {item.tag && (
+                            <span
+                              className="ml-3 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full inline-block"
+                              style={item.tag === 'seasonal'
+                                ? { backgroundColor: '#FFEDD5', color: '#C05621' }
+                                : { backgroundColor: colors.mist, color: colors.black }}
+                            >
+                              {item.tag}
+                            </span>
+                          )}
+                        </h3>
+                        {/* Right: Price - Serif for Contrast */}
+                        <span
+                          className="font-serif text-lg md:text-xl whitespace-nowrap"
+                          style={{ color: colors.black }}
+                        >
+                          {item.price}
+                        </span>
                       </div>
-                      <div className="flex-1 min-w-0 pr-2">
-                        <div className="flex justify-between items-start mb-1">
-                          <h3 className="font-serif pr-2 transition-colors" style={{ color: colors.black, fontSize: 'clamp(1.0625rem, 2vw, 1.25rem)' }}>{item.name}</h3>
-                          <span className="font-medium whitespace-nowrap" style={{ color: colors.black, fontSize: 'clamp(1.0625rem, 2vw, 1.25rem)' }}>{item.price}</span>
-                        </div>
-                        <p className="line-clamp-2 mb-2 leading-relaxed" style={{ color: `${colors.brown}B3`, fontSize: '0.875rem' }}>{item.description}</p>
-                        <div className="flex items-center justify-between">
-                          <div className="flex gap-2">
-                            {item.tag && (
-                              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
-                                style={item.tag === 'seasonal'
-                                  ? { backgroundColor: '#FFEDD5', color: '#C05621' }
-                                  : { backgroundColor: colors.mist, color: colors.black }}
-                              >
-                                {item.tag}
-                              </span>
-                            )}
-                          </div>
-                          <div className="w-6 h-6 rounded-full flex items-center justify-center transition-colors acc-icon-only" style={{ backgroundColor: colors.mist, color: colors.black }}>
-                            <ArrowRight size={12} />
-                          </div>
-                        </div>
-                      </div>
+                      {/* Description - Muted */}
+                      <p
+                        className="font-sans text-sm md:text-base leading-relaxed max-w-2xl"
+                        style={{
+                          color: colors.brown,
+                          opacity: 0.65
+                        }}
+                      >
+                        {item.description}
+                      </p>
                     </div>
                   ))}
                 </div>
