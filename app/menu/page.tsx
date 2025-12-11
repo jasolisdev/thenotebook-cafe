@@ -156,11 +156,14 @@ export default function MenuPage() {
 
                           // Clear flag after smooth scroll completes, then trigger tiny scroll
                           setTimeout(() => {
-                            setIsProgrammaticScroll(false);
-                            // Only trigger 1px scroll if not already at top position
-                            // At position < 100px, navbar naturally shows without trigger
                             const currentScrollY = window.scrollY;
-                            if (currentScrollY >= 100) {
+                            setIsProgrammaticScroll(false);
+
+                            // If at top position, ensure navbar stays visible without triggering scroll
+                            if (currentScrollY < 100) {
+                              setIsNavbarVisible(true);
+                            } else {
+                              // Only trigger 1px scroll if scrolled down to activate navbar
                               setTimeout(() => {
                                 window.scrollBy({ top: -1, behavior: 'auto' }); // -1 = scroll up to show navbar
                               }, 50);
