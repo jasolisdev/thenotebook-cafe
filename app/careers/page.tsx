@@ -6,6 +6,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import Image from "next/image";
 import Reveal from "../components/ui/Reveal";
 import ParallaxHero from "../components/features/ParallaxHero";
 import { Coffee, Heart, TrendingUp, CheckCircle, Upload, Briefcase, Clock, ChefHat } from "lucide-react";
