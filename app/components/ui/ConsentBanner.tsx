@@ -10,16 +10,21 @@ type ConsentValue = "accepted" | "declined";
 
 export default function ConsentBanner() {
   const [visible, setVisible] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     const stored = localStorage.getItem(STORAGE_KEY);
     if (!stored) {
+      setShouldRender(true);
       const timer = setTimeout(() => setVisible(true), 1500);
       return () => clearTimeout(timer);
     }
 
-    const handleOpen = () => setVisible(true);
+    const handleOpen = () => {
+      setShouldRender(true);
+      setTimeout(() => setVisible(true), 10); // Small delay for animation
+    };
     window.addEventListener("tnc-open-consent", handleOpen as EventListener);
     return () => window.removeEventListener("tnc-open-consent", handleOpen as EventListener);
   }, []);
@@ -29,7 +34,9 @@ export default function ConsentBanner() {
     if (typeof window !== "undefined") {
       window.dispatchEvent(new CustomEvent("tnc-consent-change", { detail: { choice: value, analytics } }));
     }
+    // Trigger slide-out animation before unmounting
     setVisible(false);
+    setTimeout(() => setShouldRender(false), 500); // Match animation duration
   };
 
   const handleAcceptAll = () => {
@@ -40,7 +47,7 @@ export default function ConsentBanner() {
     persist("declined", false);
   };
 
-  if (!visible) return null;
+  if (!shouldRender) return null;
 
   return (
     <div
