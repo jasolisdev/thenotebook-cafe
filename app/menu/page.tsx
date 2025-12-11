@@ -113,7 +113,7 @@ export default function MenuPage() {
           className="px-4 md:relative md:static transition-all duration-300"
           style={{
             position: 'sticky',
-            top: isNavbarVisible ? '112px' : '0', // 112px = announcement (32px) + navbar (80px), 0 when navbar hidden
+            top: isNavbarVisible ? '80px' : '0', // 80px = navbar height (h-20), 0 when navbar hidden
             zIndex: 40,
             backgroundColor: colors.mist,
             paddingTop: '1rem',
