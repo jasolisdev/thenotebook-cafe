@@ -73,73 +73,95 @@ const atmosphereFeatures = [
 export default async function HomePage() {
   return (
     <main className="overflow-hidden" style={{ backgroundColor: 'var(--cafe-mist)', color: 'var(--cafe-brown)' }}>
-      {/* Hero Section */}
-      <KenBurnsHero
-        backgroundImage="/home/hero-bg-2.png"
-        contentClassName="home-hero-shell"
+      {/* Hero Section - Editorial Minimalist */}
+      <section
+        className="editorial-hero"
+        style={{
+          position: 'relative',
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#F4F1EA',
+          overflow: 'hidden'
+        }}
       >
-        <div className="home-hero-grid">
-          <div className="home-hero-copy">
-            <Reveal>
-              <div className="home-hero-pill">
-                Est. Riverside 2026
-              </div>
-            </Reveal>
+        {/* Subtle Coffee Texture Background */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=2000&q=80)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.12,
+            filter: 'sepia(25%) saturate(70%) brightness(95%) hue-rotate(10deg)',
+            zIndex: 0
+          }}
+        />
 
-            <Reveal delay={120}>
-              <h1 className="home-hero-title">
-                Where Every Cup <span className="home-hero-title-accent">Tells a Story</span>
-              </h1>
-            </Reveal>
+        {/* Content */}
+        <div
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            textAlign: 'center',
+            maxWidth: '1100px',
+            padding: '0 2rem'
+          }}
+        >
+          <Reveal>
+            <p
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                letterSpacing: '0.3em',
+                textTransform: 'uppercase',
+                color: '#6B5A4D',
+                marginBottom: 'clamp(2.5rem, 5vw, 4rem)',
+                fontWeight: 500
+              }}
+            >
+              EST. RIVERSIDE 2026
+            </p>
+          </Reveal>
 
-            <Reveal delay={240}>
-              <p className="home-hero-subtitle">
-                Come For The Coffee, <br className="hero-subtitle-break" />
-                Stay For The Vibe.
-              </p>
-            </Reveal>
+          <Reveal delay={120}>
+            <h1
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(3.5rem, 9vw, 8rem)',
+                lineHeight: 1.05,
+                color: 'var(--cafe-black)',
+                marginBottom: 'clamp(3rem, 6vw, 5rem)',
+                fontWeight: 400,
+                letterSpacing: '-0.02em'
+              }}
+            >
+              Where Every Cup<br />Tells a Story
+            </h1>
+          </Reveal>
 
-            <Reveal delay={360}>
-              <div className="home-hero-cta">
-                <HeroButtons />
-              </div>
-            </Reveal>
-          </div>
-
-          <Reveal delay={120} className="home-hero-visual-wrap">
-            <div className="home-hero-visual">
-              <div className="hero-latte-wrapper">
-                <div className="relative animate-float">
-                  <div className="hero-latte-image">
-                    <Image
-                      src="/unsplash/tnc-hero-cup-v2.png"
-                      alt="Signature latte art"
-                      width={460}
-                      height={460}
-                      className="w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] md:w-[400px] md:h-[400px] object-cover rounded-full border-[12px] relative z-10"
-                      style={{ borderColor: "rgba(var(--cafe-cream-rgb), 0.96)" }}
-                      priority
-                    />
-                  </div>
-
-                  <div className="hero-latte-card">
-                    <span className="hero-latte-pill">Signature</span>
-                    <span className="font-display font-bold text-sm text-cafe-brown">Latte</span>
-                    <div className="flex gap-[4px] mt-1 text-cafe-tan text-[12px]">
-                      <span aria-hidden>★</span>
-                      <span aria-hidden>★</span>
-                      <span aria-hidden>★</span>
-                      <span aria-hidden>★</span>
-                    </div>
-                  </div>
-
-                  <HeroHeart />
-                </div>
-              </div>
-            </div>
+          <Reveal delay={240}>
+            <p
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 'clamp(0.875rem, 2vw, 1.125rem)',
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: '#6B5A4D',
+                fontWeight: 400,
+                opacity: 0.9
+              }}
+            >
+              COME FOR THE COFFEE, STAY FOR THE VIBE.
+            </p>
           </Reveal>
         </div>
-      </KenBurnsHero>
+      </section>
 
       {/* Signature Pours */}
       <section
@@ -538,7 +560,7 @@ export default async function HomePage() {
       <section
         data-section="Stay in the Loop"
         className="relative py-24 md:py-32 overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
+        style={{ backgroundColor: '#6B7456' }}
       >
         <div className="section-deco" style={{ top: '12%', left: '10%', animationDuration: '11s' }} aria-hidden="true">
           <Coffee strokeWidth={1.4} />
@@ -555,7 +577,7 @@ export default async function HomePage() {
           <Reveal delay={100}>
             <h2
               className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] mb-8"
-              style={{ color: 'var(--cafe-black)' }}
+              style={{ color: 'var(--cafe-cream)' }}
             >
               Stay in the{" "}
               <span className="italic" style={{ color: 'var(--cafe-tan)' }}>
@@ -567,7 +589,7 @@ export default async function HomePage() {
           <Reveal delay={200}>
             <p
               className="text-xl md:text-2xl font-light leading-relaxed mb-12 max-w-2xl mx-auto"
-              style={{ color: 'rgba(var(--cafe-brown-rgb), 0.8)' }}
+              style={{ color: 'rgba(237, 231, 216, 0.9)' }}
             >
               New events announced weekly. Follow us for updates, behind-the-scenes moments, and spontaneous gatherings.
             </p>

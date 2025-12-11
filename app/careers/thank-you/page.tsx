@@ -6,10 +6,14 @@
 import Link from "next/link";
 import Reveal from "../../components/ui/Reveal";
 import { CheckCircle, Home, Mail } from "lucide-react";
+import "../../styles/pages/careers.css";
 
 export default function ThankYouPage() {
   return (
-    <main className="min-h-screen flex items-center justify-center px-6" style={{ backgroundColor: 'var(--cafe-mist)' }}>
+    <main
+      className="min-h-screen flex items-center justify-center px-6 careers-thank-you-page"
+      style={{ backgroundColor: 'var(--cafe-mist)' }}
+    >
       <div className="max-w-2xl w-full text-center">
         <Reveal>
           <div className="w-24 h-24 rounded-full mx-auto mb-8 flex items-center justify-center" style={{ backgroundColor: 'var(--cafe-tan)' }}>
@@ -58,7 +62,7 @@ export default function ThankYouPage() {
             </Link>
 
             <p className="text-sm font-light" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>
-              Questions? Email us at <a href="mailto:hello@thenotebookcafe.com" className="underline" style={{ color: 'var(--cafe-tan)' }}>hello@thenotebookcafe.com</a>
+              Questions? Email us at <a href="mailto:hello@thenotebook.cafe" className="underline" style={{ color: 'var(--cafe-tan)' }}>hello@thenotebook.cafe</a>
             </p>
           </div>
         </Reveal>

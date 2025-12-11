@@ -7,9 +7,11 @@ export async function POST(req: Request) {
   try {
     const formData = await req.formData();
 
-    const fullName = formData.get("fullName") as string;
+    const firstName = formData.get("firstName") as string;
+    const lastName = formData.get("lastName") as string;
     const email = formData.get("email") as string;
     const phone = formData.get("phone") as string;
+    const birthdate = formData.get("birthdate") as string;
     const positionsRaw = formData.get("positions") as string;
     const employmentType = formData.get("employmentType") as string;
     const daysAvailableRaw = formData.get("daysAvailable") as string;
@@ -21,7 +23,7 @@ export async function POST(req: Request) {
     const supplementalFile = formData.get("supplementalApplication") as File | null;
 
     // Validate required fields
-    if (!fullName || !email || !phone || !positionsRaw || !employmentType || !daysAvailableRaw || !startDate || !hoursPerWeek || !commitmentLength || !message || !resumeFile) {
+    if (!firstName || !lastName || !email || !phone || !birthdate || !positionsRaw || !employmentType || !daysAvailableRaw || !startDate || !hoursPerWeek || !commitmentLength) {
       return NextResponse.json(
         { ok: false, error: "Missing required fields" },
         { status: 400 }
@@ -57,53 +59,41 @@ export async function POST(req: Request) {
       if (!Array.isArray(daysAvailable) || daysAvailable.length === 0) {
         throw new Error("Invalid days available");
       }
-      // Validate Saturday requirement (café is closed Sunday)
-      const hasSaturday = daysAvailable.includes("saturday");
-      if (!hasSaturday) {
-        return NextResponse.json(
-          { ok: false, error: "Saturday availability is required" },
-          { status: 400 }
-        );
-      }
-    } catch (e) {
-      if (e instanceof Error && e.message.includes("weekend")) {
-        return NextResponse.json(
-          { ok: false, error: e.message },
-          { status: 400 }
-        );
-      }
+    } catch {
       return NextResponse.json(
         { ok: false, error: "Invalid days available data" },
         { status: 400 }
       );
     }
 
-    // Validate resume file
-    const allowedTypes = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
-    if (!allowedTypes.includes(resumeFile.type)) {
-      return NextResponse.json(
-        { ok: false, error: "Resume must be PDF, DOC, or DOCX" },
-        { status: 400 }
-      );
+    // Upload resume to Sanity (if provided)
+    let resumeAsset = null;
+    if (resumeFile) {
+      const allowedTypes = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+      if (!allowedTypes.includes(resumeFile.type)) {
+        return NextResponse.json(
+          { ok: false, error: "Resume must be PDF, DOC, or DOCX" },
+          { status: 400 }
+        );
+      }
+
+      // Check file size (5MB limit)
+      const maxSize = 5 * 1024 * 1024; // 5MB
+      if (resumeFile.size > maxSize) {
+        return NextResponse.json(
+          { ok: false, error: "Resume file size must be under 5MB" },
+          { status: 400 }
+        );
+      }
+
+      const arrayBuffer = await resumeFile.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+
+      resumeAsset = await writeClient.assets.upload("file", buffer, {
+        filename: resumeFile.name,
+        contentType: resumeFile.type,
+      });
     }
-
-    // Check file size (5MB limit)
-    const maxSize = 5 * 1024 * 1024; // 5MB
-    if (resumeFile.size > maxSize) {
-      return NextResponse.json(
-        { ok: false, error: "Resume file size must be under 5MB" },
-        { status: 400 }
-      );
-    }
-
-    // Upload resume to Sanity
-    const arrayBuffer = await resumeFile.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-
-    const resumeAsset = await writeClient.assets.upload("file", buffer, {
-      filename: resumeFile.name,
-      contentType: resumeFile.type,
-    });
 
     // Upload supplemental application if provided
     let supplementalAsset = null;
@@ -142,42 +132,52 @@ export async function POST(req: Request) {
 
     const applicationData: {
       _type: "jobApplication";
-      fullName: string;
+      firstName: string;
+      lastName: string;
       email: string;
       phone: string;
+      birthdate: string;
       positions: string[];
-      resume: FileReference;
       employmentType: string;
       daysAvailable: string[];
       startDate: string;
       hoursPerWeek: string;
       commitmentLength: string;
-      message: string;
+      message?: string;
       status: "new";
       appliedAt: string;
+      resume?: FileReference;
       supplementalApplication?: FileReference;
     } = {
       _type: "jobApplication",
-      fullName,
+      firstName,
+      lastName,
       email,
       phone,
+      birthdate,
       positions,
-      resume: {
-        _type: "file",
-        asset: {
-          _type: "reference",
-          _ref: resumeAsset._id,
-        },
-      },
       employmentType,
       daysAvailable,
       startDate,
       hoursPerWeek,
       commitmentLength,
-      message,
       status: "new",
       appliedAt: new Date().toISOString(),
     };
+
+    // Add optional fields if provided
+    if (message) {
+      applicationData.message = message;
+    }
+    if (resumeAsset) {
+      applicationData.resume = {
+        _type: "file",
+        asset: {
+          _type: "reference",
+          _ref: resumeAsset._id,
+        },
+      };
+    }
 
     // Add supplemental application if uploaded
     if (supplementalAsset) {

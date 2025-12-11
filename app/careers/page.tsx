@@ -13,7 +13,8 @@ import "../styles/pages/careers.css";
 
 export default function CareersPage() {
   const [formData, setFormData] = useState({
-    fullName: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
     birthdate: "",
@@ -29,7 +30,7 @@ export default function CareersPage() {
   const [supplementalFile, setSupplementalFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
-  const [availabilityError] = useState("");
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
   const handlePositionToggle = (position: string) => {
     setFormData(prev => ({
@@ -56,13 +57,73 @@ export default function CareersPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
+    console.log("Form submitted", formData);
+
+    // Reset validation errors
+    const errors: string[] = [];
+
+    // Validate required fields
+    if (!formData.firstName.trim()) {
+      errors.push("First Name is required");
+    }
+    if (!formData.lastName.trim()) {
+      errors.push("Last Name is required");
+    }
+    if (!formData.email.trim()) {
+      errors.push("Email is required");
+    }
+    if (!formData.phone.trim()) {
+      errors.push("Phone Number is required");
+    }
+    if (!formData.birthdate) {
+      errors.push("Date of Birth is required");
+    }
+    if (formData.positions.length === 0) {
+      errors.push("At least one Position must be selected");
+    }
+    if (!formData.employmentType) {
+      errors.push("Employment Type is required");
+    }
+    if (formData.daysAvailable.length === 0) {
+      errors.push("At least one day of Work Availability must be selected");
+    }
+    if (!formData.startDate) {
+      errors.push("Start Date is required");
+    }
+    if (!formData.hoursPerWeek) {
+      errors.push("Hours Per Week is required");
+    }
+    if (!formData.commitmentLength) {
+      errors.push("Commitment Length is required");
+    }
+
+    console.log("Validation errors:", errors);
+
+    // If there are validation errors, show them and don't submit
+    if (errors.length > 0) {
+      setValidationErrors(errors);
+      // Scroll to beginning of form (accounting for navbar height)
+      setTimeout(() => {
+        const formElement = document.querySelector('form');
+        if (formElement) {
+          const formTop = formElement.getBoundingClientRect().top + window.scrollY;
+          const offset = 180; // Navbar height + some spacing
+          window.scrollTo({ top: formTop - offset, behavior: 'smooth' });
+        }
+      }, 100);
+      return;
+    }
+
+    // Clear validation errors
+    setValidationErrors([]);
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
     try {
       // Create FormData for file upload
       const data = new FormData();
-      data.append("fullName", formData.fullName);
+      data.append("firstName", formData.firstName);
+      data.append("lastName", formData.lastName);
       data.append("email", formData.email);
       data.append("phone", formData.phone);
       data.append("birthdate", formData.birthdate);
@@ -491,24 +552,65 @@ export default function CareersPage() {
             className="p-8 md:p-10 rounded-3xl space-y-6"
             style={{ backgroundColor: 'var(--cafe-white)', border: '2px solid rgba(164, 141, 120, 0.2)' }}
           >
-            {/* Full Name */}
+            {/* Validation Errors */}
+            {validationErrors.length > 0 && (
+              <div
+                className="p-5 rounded-lg"
+                style={{
+                  backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                  border: '2px solid rgba(239, 68, 68, 0.3)'
+                }}
+              >
+                <h3 className="font-serif text-lg mb-3" style={{ color: '#ef4444' }}>
+                  Please fix the following errors:
+                </h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  {validationErrors.map((error, index) => (
+                    <li key={index} className="text-sm" style={{ color: '#ef4444' }}>
+                      {error}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* First Name */}
             <div>
-              <label htmlFor="fullName" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Full Name <span style={{ color: 'var(--cafe-tan)' }}>*</span>
+              <label htmlFor="firstName" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
+                First Name <span style={{ color: 'var(--cafe-tan)' }}>*</span>
               </label>
               <input
                 type="text"
-                id="fullName"
-                required
-                value={formData.fullName}
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                id="firstName"
+                value={formData.firstName}
+                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                 className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                 style={{
                   backgroundColor: 'var(--cafe-mist)',
                   border: '1px solid rgba(164, 141, 120, 0.2)',
                   color: 'var(--cafe-black)'
                 }}
-                placeholder="Your full name"
+                placeholder="Your first name"
+              />
+            </div>
+
+            {/* Last Name */}
+            <div>
+              <label htmlFor="lastName" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
+                Last Name <span style={{ color: 'var(--cafe-tan)' }}>*</span>
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                value={formData.lastName}
+                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                style={{
+                  backgroundColor: 'var(--cafe-mist)',
+                  border: '1px solid rgba(164, 141, 120, 0.2)',
+                  color: 'var(--cafe-black)'
+                }}
+                placeholder="Your last name"
               />
             </div>
 
@@ -602,7 +704,6 @@ export default function CareersPage() {
                       checked={formData.positions.includes(position.value)}
                       onChange={() => handlePositionToggle(position.value)}
                       className="w-5 h-5"
-                      style={{ accentColor: 'var(--cafe-tan)' }}
                     />
                     <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
                       {position.label}
@@ -641,8 +742,6 @@ export default function CareersPage() {
                       checked={formData.employmentType === option.value}
                       onChange={(e) => setFormData({ ...formData, employmentType: e.target.value })}
                       className="w-5 h-5"
-                      style={{ accentColor: 'var(--cafe-tan)' }}
-                      required
                     />
                     <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
                       {option.label}
@@ -684,7 +783,6 @@ export default function CareersPage() {
                       checked={formData.daysAvailable.includes(day.value)}
                       onChange={() => handleDayToggle(day.value)}
                       className="w-5 h-5"
-                      style={{ accentColor: 'var(--cafe-tan)' }}
                     />
                     <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
                       {day.label}
@@ -692,11 +790,6 @@ export default function CareersPage() {
                   </label>
                 ))}
               </div>
-              {availabilityError && (
-                <p className="text-sm mt-2" style={{ color: '#ef4444' }}>
-                  {availabilityError}
-                </p>
-              )}
             </div>
 
             {/* When Can You Start */}
@@ -749,8 +842,6 @@ export default function CareersPage() {
                       checked={formData.hoursPerWeek === option.value}
                       onChange={(e) => setFormData({ ...formData, hoursPerWeek: e.target.value })}
                       className="w-5 h-5"
-                      style={{ accentColor: 'var(--cafe-tan)' }}
-                      required
                     />
                     <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
                       {option.label}
@@ -789,8 +880,6 @@ export default function CareersPage() {
                       checked={formData.commitmentLength === option.value}
                       onChange={(e) => setFormData({ ...formData, commitmentLength: e.target.value })}
                       className="w-5 h-5"
-                      style={{ accentColor: 'var(--cafe-tan)' }}
-                      required
                     />
                     <div className="flex flex-col">
                       <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
@@ -810,11 +899,10 @@ export default function CareersPage() {
             {/* Message */}
             <div>
               <label htmlFor="message" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Why The Notebook Café? <span style={{ color: 'var(--cafe-tan)' }}>*</span>
+                Why The Notebook Café? <span className="text-sm font-normal" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>(Optional)</span>
               </label>
               <textarea
                 id="message"
-                required
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 rows={5}
@@ -831,7 +919,7 @@ export default function CareersPage() {
             {/* Resume Upload */}
             <div>
               <label htmlFor="resume" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Resume <span style={{ color: 'var(--cafe-tan)' }}>*</span>
+                Resume <span className="text-sm font-normal" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>(Optional)</span>
               </label>
               <div
                 className="relative p-8 rounded-lg border-2 border-dashed text-center cursor-pointer transition-all hover:border-cafe-tan"
@@ -843,7 +931,6 @@ export default function CareersPage() {
                 <input
                   type="file"
                   id="resume"
-                  required
                   accept=".pdf,.doc,.docx"
                   onChange={(e) => setResumeFile(e.target.files?.[0] || null)}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
