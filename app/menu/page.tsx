@@ -156,10 +156,10 @@ export default function MenuPage() {
                           // Clear flag after smooth scroll completes, then trigger tiny scroll
                           setTimeout(() => {
                             setIsProgrammaticScroll(false);
-                            // Tiny 1px scroll down to activate scroll detection
+                            // Tiny 1px scroll UP to activate scroll detection
                             // This makes navbar appear and pushes tabs down slightly
                             setTimeout(() => {
-                              window.scrollBy({ top: 1, behavior: 'auto' });
+                              window.scrollBy({ top: -1, behavior: 'auto' }); // -1 = scroll up to show navbar
                             }, 50);
                           }, 600);
                         }
