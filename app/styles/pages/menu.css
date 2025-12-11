@@ -35,7 +35,7 @@
   height: 43px;
   border-radius: 6px 0 12px 0; /* Top-left corner rounded, bottom-right matches card */
   border: 1px solid rgba(164, 141, 120, 0.2); /* Tan at 20% opacity */
-  background-color: #F4F1EA; /* Mist - matches page background */
+  background-color: rgba(164, 141, 120, 0.08); /* Subtle tan wash - matches menu item hover */
   display: flex;
   align-items: center;
   justify-content: center;
