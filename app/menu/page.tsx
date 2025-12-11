@@ -137,7 +137,8 @@ export default function MenuPage() {
                         setActiveSection(section);
                         // Scroll to menu content
                         if (menuContentRef.current) {
-                          const yOffset = 0; // Scroll so the top of the section touches viewport
+                          // Account for navbar (80px) + sticky tabs (~90px) + breathing room (20px)
+                          const yOffset = isNavbarVisible ? -190 : -110; // Adjust based on navbar visibility
                           const element = menuContentRef.current;
                           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
                           window.scrollTo({ top: y, behavior: 'smooth' });
