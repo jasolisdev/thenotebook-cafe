@@ -233,22 +233,22 @@ export default function MenuPage() {
                         </p>
                       </div>
 
-                      {/* Right Side: Price & Plus Button */}
-                      <div className="price-with-action">
-                        <span className="price" style={{ color: colors.black }}>
-                          {item.price}
-                        </span>
-                        <button
-                          className="add-button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setSelectedItem(item);
-                          }}
-                          aria-label={`Add ${item.name} to cart`}
-                        >
-                          <Plus size={16} strokeWidth={2.5} />
-                        </button>
-                      </div>
+                      {/* Right Side: Price (top right) */}
+                      <span className="price" style={{ color: colors.black }}>
+                        {item.price}
+                      </span>
+
+                      {/* Plus Button (bottom right - absolutely positioned) */}
+                      <button
+                        className="add-button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedItem(item);
+                        }}
+                        aria-label={`Add ${item.name} to cart`}
+                      >
+                        <Plus size={16} strokeWidth={2.5} />
+                      </button>
                     </div>
                   ))}
                 </div>

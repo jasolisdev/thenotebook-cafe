@@ -2,10 +2,12 @@
 
 /* Base menu item styling - matches reference design */
 .menu-item-editorial {
+  position: relative; /* For absolute positioning of plus button */
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding: 20px;
+  padding-bottom: 24px; /* Extra padding for bottom-right plus button */
   border-radius: 12px;
   border: 1px solid rgba(164, 141, 120, 0.2); /* Tan at 20% opacity */
   background-color: transparent;
@@ -24,14 +26,11 @@
   color: var(--cafe-olive) !important;
 }
 
-/* Plus button animation - Initially scaled down, fades in on hover */
-.menu-item-editorial .price-with-action {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
+/* Plus button - Always visible in bottom right */
 .menu-item-editorial .add-button {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -40,8 +39,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transform: scale(0.8);
+  opacity: 1; /* Always visible */
+  transform: scale(1); /* No initial scale */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   color: var(--cafe-tan);
   cursor: pointer;
@@ -49,14 +48,14 @@
 
 .menu-item-editorial:hover .add-button {
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1.05); /* Slight scale on hover */
 }
 
 .menu-item-editorial .add-button:hover {
   background-color: var(--cafe-tan);
   border-color: var(--cafe-tan);
   color: var(--cafe-white);
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 /* Typography adjustments to match reference */
@@ -90,6 +89,7 @@
 @media (max-width: 640px) {
   .menu-item-editorial {
     padding: 16px;
+    padding-bottom: 48px; /* Extra bottom padding on mobile for breathing room */
   }
 
   .menu-item-editorial h3 {
@@ -102,5 +102,12 @@
 
   .menu-item-editorial .price {
     font-size: 1rem;
+  }
+
+  .menu-item-editorial .add-button {
+    bottom: 12px;
+    right: 12px;
+    width: 36px; /* Slightly larger on mobile for easier tapping */
+    height: 36px;
   }
 }
