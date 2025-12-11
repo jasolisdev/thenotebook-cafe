@@ -142,7 +142,15 @@ export default function MenuPage() {
                       key={section}
                       onClick={() => {
                         setActiveSection(section);
-                        // Scroll to menu content
+
+                        // If already at top position, skip all scroll logic to prevent navbar flash
+                        const currentScrollY = window.scrollY;
+                        if (currentScrollY < 200) {
+                          // Just switch tabs, navbar stays as is
+                          return;
+                        }
+
+                        // Scroll to menu content (only when scrolled down)
                         if (menuContentRef.current) {
                           // Set flag to prevent navbar changes during scroll
                           setIsProgrammaticScroll(true);
@@ -156,18 +164,11 @@ export default function MenuPage() {
 
                           // Clear flag after smooth scroll completes, then trigger tiny scroll
                           setTimeout(() => {
-                            const currentScrollY = window.scrollY;
                             setIsProgrammaticScroll(false);
-
-                            // If at top position, ensure navbar stays visible without triggering scroll
-                            if (currentScrollY < 100) {
-                              setIsNavbarVisible(true);
-                            } else {
-                              // Only trigger 1px scroll if scrolled down to activate navbar
-                              setTimeout(() => {
-                                window.scrollBy({ top: -1, behavior: 'auto' }); // -1 = scroll up to show navbar
-                              }, 50);
-                            }
+                            // Trigger 1px scroll to activate navbar when scrolling from down
+                            setTimeout(() => {
+                              window.scrollBy({ top: -1, behavior: 'auto' });
+                            }, 50);
                           }, 600);
                         }
                       }}
