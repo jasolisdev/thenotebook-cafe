@@ -1,0 +1,51 @@
+/* Menu Item Hover Effects - Testing Different Styles */
+
+/* Base menu item styling */
+.menu-item-editorial {
+  transition: all 0.25s ease;
+  padding: 1.25rem;
+  margin: -1.25rem;
+  border-radius: 8px;
+}
+
+/* Option 1: Thin Border + Subtle Background (Drinks) */
+.menu-item-drinks {
+  border: 1px solid transparent;
+}
+
+.menu-item-drinks:hover {
+  border-color: var(--cafe-tan);
+  background-color: var(--cafe-cream);
+  transform: translateY(-1px);
+}
+
+/* Option 2: Left Accent Border (Meals) */
+.menu-item-meals {
+  border-left: 3px solid transparent;
+  padding-left: 1rem;
+  margin-left: -1rem;
+}
+
+.menu-item-meals:hover {
+  border-left-color: var(--cafe-tan);
+  background-color: rgba(237, 231, 216, 0.4); /* cafe-cream with opacity */
+}
+
+/* Option 5: Combined Deluxe (Desserts) */
+.menu-item-desserts {
+  border: 1px solid transparent;
+}
+
+.menu-item-desserts:hover {
+  border-color: var(--cafe-beige);
+  background-color: var(--cafe-cream);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(44, 36, 32, 0.08);
+}
+
+/* Ensure smooth transitions for all elements */
+.menu-item-editorial h3,
+.menu-item-editorial p,
+.menu-item-editorial span {
+  transition: color 0.25s ease;
+}

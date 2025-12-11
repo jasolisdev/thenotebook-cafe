@@ -9,6 +9,7 @@ import { ProductModal } from '@/app/components/features/ProductModal';
 import { useCart } from '@/app/components/providers/CartProvider';
 import Reveal from '../components/ui/Reveal';
 import ParallaxHero from '../components/features/ParallaxHero';
+import '../styles/pages/menu.css';
 
 const colors = {
   black: '#2C2420',
@@ -209,7 +210,7 @@ export default function MenuPage() {
                   {items.map((item) => (
                     <div
                       key={item.id}
-                      className="menu-item-editorial cursor-pointer group"
+                      className={`menu-item-editorial menu-item-${item.section} cursor-pointer group`}
                       onClick={() => setSelectedItem(item)}
                     >
                       {/* Item Row - Baseline Aligned */}
