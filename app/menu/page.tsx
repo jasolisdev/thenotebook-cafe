@@ -147,8 +147,9 @@ export default function MenuPage() {
                           // Set flag to prevent navbar changes during scroll
                           setIsProgrammaticScroll(true);
 
-                          // Adjust to show 1px of hero + navbar (80px) + sticky tabs (~90px)
-                          const yOffset = isNavbarVisible ? -171 : -91; // Shows 1px of hero section
+                          // Always account for navbar (80px) since it will appear after scroll
+                          // This prevents content jump when navbar appears
+                          const yOffset = -171; // navbar (80px) + sticky tabs (90px) + 1px hero
                           const element = menuContentRef.current;
                           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
                           window.scrollTo({ top: y, behavior: 'smooth' });
