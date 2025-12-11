@@ -25,10 +25,8 @@ export default function MenuPage() {
   const { addItem } = useCart();
   const [activeSection, setActiveSection] = useState<'drinks' | 'meals' | 'desserts'>('drinks');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
   const menuRef = useRef<HTMLDivElement>(null);
-  const listRef = useRef<HTMLDivElement>(null);
-  const hasMountedRef = useRef(false);
-  const tabClickedRef = useRef(false);
 
   const filteredItems = MENU_ITEMS.filter(item => {
     const matchesSection = item.section === activeSection;
@@ -49,21 +47,33 @@ export default function MenuPage() {
     addItem(item, quantity, modifiers, notes, totalPrice);
   };
 
-  // Scroll list into view when switching tabs to keep context
+  // Detect navbar visibility for sticky tabs positioning
   useEffect(() => {
-    if (!hasMountedRef.current) {
-      hasMountedRef.current = true;
-      return;
-    }
-    if (!tabClickedRef.current) return; // only scroll after a user clicks a tab
-    if (typeof window === 'undefined' || !listRef.current) return;
-    const rect = listRef.current.getBoundingClientRect();
-    const targetY = Math.max(rect.top + window.scrollY - 220, 0); // pull list higher; leave ~10px of hero visible
-    const delta = Math.abs(window.scrollY - targetY);
-    if (delta > 8) {
-      window.scrollTo({ top: targetY, behavior: 'smooth' });
-    }
-  }, [activeSection]);
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+
+          // Navbar shows when scrolling up, hides when scrolling down
+          if (currentScrollY < lastScrollY || currentScrollY < 100) {
+            setIsNavbarVisible(true);
+          } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            setIsNavbarVisible(false);
+          }
+
+          lastScrollY = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
@@ -99,7 +109,18 @@ export default function MenuPage() {
           </div>
         </ParallaxHero>
 
-        <div className="px-4">
+        {/* Sticky Tabs Container */}
+        <div
+          className="px-4 md:relative md:static transition-all duration-300"
+          style={{
+            position: 'sticky',
+            top: isNavbarVisible ? '112px' : '0', // 112px = announcement (32px) + navbar (80px), 0 when navbar hidden
+            zIndex: 40,
+            backgroundColor: colors.mist,
+            paddingTop: '1rem',
+            paddingBottom: '1rem'
+          }}
+        >
           <div className="max-w-md mx-auto">
             <div
               className="rounded-2xl shadow-xl p-2 flex flex-col sm:flex-row items-center gap-3 border"
@@ -112,10 +133,7 @@ export default function MenuPage() {
                   return (
                     <button
                       key={section}
-                      onClick={() => {
-                        tabClickedRef.current = true;
-                        setActiveSection(section);
-                      }}
+                      onClick={() => setActiveSection(section)}
                       aria-pressed={isActive}
                       className="basis-1/3 sm:flex-none px-6 py-2 rounded-lg text-[11px] md:text-xs font-bold uppercase tracking-[0.22em] whitespace-nowrap transition-colors duration-150 ease-out border"
                       style={{
