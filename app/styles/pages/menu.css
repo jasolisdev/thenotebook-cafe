@@ -12,7 +12,7 @@
   border: 1px solid rgba(164, 141, 120, 0.2); /* Tan at 20% opacity */
   background-color: transparent;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin: 0; /* Reset negative margins from previous version */
+  margin: 10px; /* 10px spacing outside the border */
 }
 
 /* Hover State - Subtle and Elegant */
@@ -89,7 +89,8 @@
 @media (max-width: 640px) {
   .menu-item-editorial {
     padding: 16px;
-    padding-bottom: 48px; /* Extra bottom padding on mobile for breathing room */
+    padding-bottom: 20px; /* Just enough padding for plus button */
+    margin: 10px; /* Maintain 10px spacing on mobile */
   }
 
   .menu-item-editorial h3 {
