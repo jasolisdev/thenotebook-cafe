@@ -31,31 +31,31 @@
   position: absolute;
   bottom: 16px;
   right: 16px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid rgba(164, 141, 120, 0.3);
-  background-color: transparent;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px; /* Rounded square, not circle */
+  border: none;
+  background-color: rgba(244, 241, 234, 0.8); /* Light mist background */
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 1; /* Always visible */
   transform: scale(1); /* No initial scale */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  color: var(--cafe-tan);
+  color: var(--cafe-black); /* Dark icon */
   cursor: pointer;
 }
 
 .menu-item-editorial:hover .add-button {
-  opacity: 1;
+  background-color: var(--cafe-olive); /* Olive on hover */
+  color: var(--cafe-white); /* White icon on hover */
   transform: scale(1.05); /* Slight scale on hover */
 }
 
 .menu-item-editorial .add-button:hover {
-  background-color: var(--cafe-tan);
-  border-color: var(--cafe-tan);
+  background-color: var(--cafe-olive); /* Olive when button hovered */
   color: var(--cafe-white);
-  transform: scale(1.15);
+  transform: scale(1.08);
 }
 
 /* Typography adjustments to match reference */
@@ -108,7 +108,7 @@
   .menu-item-editorial .add-button {
     bottom: 12px;
     right: 12px;
-    width: 36px; /* Slightly larger on mobile for easier tapping */
-    height: 36px;
+    width: 48px; /* Maintain size on mobile for easier tapping */
+    height: 48px;
   }
 }

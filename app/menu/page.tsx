@@ -220,9 +220,21 @@ export default function MenuPage() {
                           {item.tag && (
                             <span
                               className="ml-3 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full inline-block"
-                              style={item.tag === 'seasonal'
-                                ? { backgroundColor: '#FFEDD5', color: '#C05621' }
-                                : { backgroundColor: colors.mist, color: colors.black }}
+                              style={
+                                item.tag === 'seasonal'
+                                  ? {
+                                      backgroundColor: 'transparent',
+                                      color: 'var(--cafe-olive)',
+                                      border: '1px solid var(--cafe-olive)'
+                                    }
+                                  : item.tag === 'popular'
+                                  ? {
+                                      backgroundColor: 'transparent',
+                                      color: 'var(--cafe-tan)',
+                                      border: '1px solid var(--cafe-tan)'
+                                    }
+                                  : { backgroundColor: colors.mist, color: colors.black }
+                              }
                             >
                               {item.tag}
                             </span>
@@ -247,7 +259,7 @@ export default function MenuPage() {
                         }}
                         aria-label={`Add ${item.name} to cart`}
                       >
-                        <Plus size={16} strokeWidth={2.5} />
+                        <Plus size={20} strokeWidth={2.5} />
                       </button>
                     </div>
                   ))}
