@@ -198,76 +198,71 @@ export default function CareersPage() {
         style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-16">
+          <div className="text-center mb-16">
             <Reveal>
-              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block text-left md:text-left">
+              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
                 Not Your Typical Coffee Shop
               </span>
             </Reveal>
-
-            {/* Two column layout on desktop */}
-            <div className="grid md:grid-cols-2 gap-12 items-start">
-              <div className="text-left">
-                <Reveal delay={180}>
-                  <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.82)' }}>
-                    We're locally-owned, family-oriented, and all about creating a space where people actually want to spend time. Think lofi house music, specialty coffee, fresh acai bowls, and a team that genuinely cares about the craft.
-                  </p>
-                </Reveal>
-              </div>
-
-              {/* Image on desktop (below text), hidden on mobile initially */}
-              <div className="hidden md:block">
-                <Reveal delay={280}>
-                  <Image
-                    src="/careers/coffee-shop-interior.png"
-                    alt="Coffee shop interior"
-                    width={600}
-                    height={400}
-                    className="w-full aspect-[3/2] object-cover rounded-lg shadow-lg"
-                  />
-                </Reveal>
-              </div>
-            </div>
+            <Reveal delay={120}>
+              <h2 className="font-serif text-5xl sm:text-6xl mb-8 leading-none" style={{ color: 'var(--cafe-black)' }}>
+                A <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Different</span> Kind of Café
+              </h2>
+            </Reveal>
+            <Reveal delay={180}>
+              <p className="text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto" style={{ color: 'rgba(74, 59, 50, 0.82)' }}>
+                We&apos;re locally-owned, family-oriented, and all about creating a space where people actually want to spend time. Think lofi house music, specialty coffee, fresh acai bowls, and a team that genuinely cares about the craft.
+              </p>
+            </Reveal>
           </div>
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-3 gap-10 mt-16">
+      {/* Culture Values Section */}
+      <section
+        data-section="Culture Values"
+        className="py-24 md:py-32 relative overflow-hidden"
+        style={{ backgroundColor: 'var(--cafe-olive)' }}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-3 gap-10">
             <Reveal delay={200}>
-              <div className="text-left md:text-center space-y-4">
-                <div className="w-16 h-16 rounded-full md:mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}>
-                  <Heart size={28} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(237, 231, 216, 0.2)' }}>
+                  <Heart size={28} style={{ color: 'var(--cafe-cream)' }} strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>
+                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-cream)' }}>
                   Family Vibes
                 </h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                <p className="font-light leading-relaxed" style={{ color: 'rgba(237, 231, 216, 0.9)' }}>
                   Locally-owned by a husband-wife team. This is our dream, and we want to grow it with people who're passionate about what we do.
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={280}>
-              <div className="text-left md:text-center space-y-4">
-                <div className="w-16 h-16 rounded-full md:mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}>
-                  <Coffee size={28} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(237, 231, 216, 0.2)' }}>
+                  <Coffee size={28} style={{ color: 'var(--cafe-cream)' }} strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>
+                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-cream)' }}>
                   Craft-Focused
                 </h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                <p className="font-light leading-relaxed" style={{ color: 'rgba(237, 231, 216, 0.9)' }}>
                   From espresso to acai bowls, we take pride in every detail. Learn barista skills, food prep, and the art of hospitality.
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={360}>
-              <div className="text-left md:text-center space-y-4">
-                <div className="w-16 h-16 rounded-full md:mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}>
-                  <TrendingUp size={28} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(237, 231, 216, 0.2)' }}>
+                  <TrendingUp size={28} style={{ color: 'var(--cafe-cream)' }} strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>
+                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-cream)' }}>
                   Room to Grow
                 </h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                <p className="font-light leading-relaxed" style={{ color: 'rgba(237, 231, 216, 0.9)' }}>
                   This is a new café with big ambitions. Grow with us—leadership opportunities, skill development, and career advancement.
                 </p>
               </div>

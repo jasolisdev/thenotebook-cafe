@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { PiInstagramLogoFill, PiTwitterLogoFill } from "react-icons/pi";
-import { FaFacebookF } from "react-icons/fa";
+import { PiInstagramLogoFill } from "react-icons/pi";
 import NewsletterForm from "../features/NewsLetterForm";
 import { useCallback } from "react";
 
@@ -83,24 +82,6 @@ export default function SiteFooter(): React.JSX.Element {
                 className="hover:text-white cursor-pointer transition-colors"
               >
                 <PiInstagramLogoFill className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="hover:text-white cursor-pointer transition-colors"
-              >
-                <FaFacebookF className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-                className="hover:text-white cursor-pointer transition-colors"
-              >
-                <PiTwitterLogoFill className="w-5 h-5" />
               </a>
             </div>
           </div>

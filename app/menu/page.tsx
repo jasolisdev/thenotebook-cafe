@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from "next/image";
 import { Coffee, ArrowRight } from 'lucide-react';
 import { MenuItem as MenuItemType, SelectedModifier } from '@/app/types';
@@ -26,6 +26,7 @@ export default function MenuPage() {
   const [activeSection, setActiveSection] = useState<'drinks' | 'meals' | 'desserts'>('drinks');
   const [searchQuery, setSearchQuery] = useState('');
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const menuContentRef = useRef<HTMLDivElement>(null);
 
   const filteredItems = MENU_ITEMS.filter(item => {
     const matchesSection = item.section === activeSection;
@@ -131,7 +132,16 @@ export default function MenuPage() {
                   return (
                     <button
                       key={section}
-                      onClick={() => setActiveSection(section)}
+                      onClick={() => {
+                        setActiveSection(section);
+                        // Scroll to menu content
+                        if (menuContentRef.current) {
+                          const yOffset = 0; // Scroll so the top of the section touches viewport
+                          const element = menuContentRef.current;
+                          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                          window.scrollTo({ top: y, behavior: 'smooth' });
+                        }
+                      }}
                       aria-pressed={isActive}
                       className="basis-1/3 sm:flex-none px-6 py-2 rounded-lg text-[11px] md:text-xs font-bold uppercase tracking-[0.22em] whitespace-nowrap transition-colors duration-150 ease-out border"
                       style={{
@@ -169,7 +179,7 @@ export default function MenuPage() {
           </div>
         </div>
 
-        <div className="mx-auto px-4 sm:px-6 py-12" style={{ maxWidth: '900px' }}>
+        <div ref={menuContentRef} className="mx-auto px-4 sm:px-6 py-12" style={{ maxWidth: '900px' }}>
           {Object.entries(groupedItems).length === 0 ? (
             <div className="text-center py-32 opacity-50">
               <Coffee size={64} className="mx-auto mb-6" color={colors.tan} strokeWidth={1} />
