@@ -153,8 +153,15 @@ export default function MenuPage() {
                           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
                           window.scrollTo({ top: y, behavior: 'smooth' });
 
-                          // Clear flag after smooth scroll completes (~600ms)
-                          setTimeout(() => setIsProgrammaticScroll(false), 600);
+                          // Clear flag after smooth scroll completes, then trigger tiny scroll
+                          setTimeout(() => {
+                            setIsProgrammaticScroll(false);
+                            // Tiny 1px scroll down to activate scroll detection
+                            // This makes navbar appear and pushes tabs down slightly
+                            setTimeout(() => {
+                              window.scrollBy({ top: 1, behavior: 'auto' });
+                            }, 50);
+                          }, 600);
                         }
                       }}
                       aria-pressed={isActive}
