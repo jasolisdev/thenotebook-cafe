@@ -1,14 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from "next/image";
-import { Coffee, ArrowRight } from 'lucide-react';
+import { Coffee, ArrowRight, Plus } from 'lucide-react';
 import { MenuItem as MenuItemType, SelectedModifier } from '@/app/types';
 import { MENU_ITEMS } from '@/app/constants';
 import { ProductModal } from '@/app/components/features/ProductModal';
 import { useCart } from '@/app/components/providers/CartProvider';
 import Reveal from '../components/ui/Reveal';
 import ParallaxHero from '../components/features/ParallaxHero';
+import '../styles/pages/menu.css';
 
 const colors = {
   black: '#2C2420',
@@ -26,6 +27,8 @@ export default function MenuPage() {
   const [activeSection, setActiveSection] = useState<'drinks' | 'meals' | 'desserts'>('drinks');
   const [searchQuery, setSearchQuery] = useState('');
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const [isProgrammaticScroll, setIsProgrammaticScroll] = useState(false);
+  const menuContentRef = useRef<HTMLDivElement>(null);
 
   const filteredItems = MENU_ITEMS.filter(item => {
     const matchesSection = item.section === activeSection;
@@ -54,10 +57,25 @@ export default function MenuPage() {
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
+          // Skip navbar logic during programmatic scroll
+          if (isProgrammaticScroll) {
+            ticking = false;
+            return;
+          }
+
           const currentScrollY = window.scrollY;
 
-          // Navbar shows when scrolling up, hides when scrolling down
-          if (currentScrollY < lastScrollY || currentScrollY < 100) {
+          // If at menu viewing position, lock navbar to visible and skip further checks
+          // This prevents flash when switching tabs while viewing menu
+          if (currentScrollY < 250) {
+            setIsNavbarVisible(true);
+            lastScrollY = currentScrollY;
+            ticking = false;
+            return;
+          }
+
+          // Normal show/hide logic for scrolled positions
+          if (currentScrollY < lastScrollY) {
             setIsNavbarVisible(true);
           } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
             setIsNavbarVisible(false);
@@ -72,7 +90,7 @@ export default function MenuPage() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isProgrammaticScroll]);
 
   return (
     <>
@@ -112,7 +130,7 @@ export default function MenuPage() {
           className="px-4 md:relative md:static transition-all duration-300"
           style={{
             position: 'sticky',
-            top: isNavbarVisible ? '112px' : '0', // 112px = announcement (32px) + navbar (80px), 0 when navbar hidden
+            top: isNavbarVisible ? '80px' : '0', // 80px = navbar height (h-20), 0 when navbar hidden
             zIndex: 40,
             backgroundColor: colors.mist,
             paddingTop: '1rem',
@@ -131,7 +149,38 @@ export default function MenuPage() {
                   return (
                     <button
                       key={section}
-                      onClick={() => setActiveSection(section)}
+                      onClick={() => {
+                        setActiveSection(section);
+
+                        // If at menu viewing position, skip all scroll logic to prevent navbar flash
+                        const currentScrollY = window.scrollY;
+                        if (currentScrollY < 250) {
+                          // Just switch tabs, navbar stays as is
+                          return;
+                        }
+
+                        // Scroll to menu content (only when scrolled down)
+                        if (menuContentRef.current) {
+                          // Set flag to prevent navbar changes during scroll
+                          setIsProgrammaticScroll(true);
+
+                          // Always account for navbar (80px) since it will appear after scroll
+                          // This prevents content jump when navbar appears
+                          const yOffset = -171; // navbar (80px) + sticky tabs (90px) + 1px hero
+                          const element = menuContentRef.current;
+                          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                          window.scrollTo({ top: y, behavior: 'smooth' });
+
+                          // Clear flag after smooth scroll completes, then trigger tiny scroll
+                          setTimeout(() => {
+                            setIsProgrammaticScroll(false);
+                            // Trigger 1px scroll to activate navbar when scrolling from down
+                            setTimeout(() => {
+                              window.scrollBy({ top: -1, behavior: 'auto' });
+                            }, 50);
+                          }, 600);
+                        }
+                      }}
                       aria-pressed={isActive}
                       className="basis-1/3 sm:flex-none px-6 py-2 rounded-lg text-[11px] md:text-xs font-bold uppercase tracking-[0.22em] whitespace-nowrap transition-colors duration-150 ease-out border"
                       style={{
@@ -169,7 +218,7 @@ export default function MenuPage() {
           </div>
         </div>
 
-        <div className="mx-auto px-4 sm:px-6 py-12" style={{ maxWidth: '900px' }}>
+        <div ref={menuContentRef} className="mx-auto px-4 sm:px-6 py-12" style={{ maxWidth: '900px' }}>
           {Object.entries(groupedItems).length === 0 ? (
             <div className="text-center py-32 opacity-50">
               <Coffee size={64} className="mx-auto mb-6" color={colors.tan} strokeWidth={1} />
@@ -195,50 +244,61 @@ export default function MenuPage() {
                 </h2>
 
                 {/* Menu Items - Clean List Layout */}
-                <div className="space-y-8 mt-8">
+                <div className="space-y-4 mt-8">
                   {items.map((item) => (
                     <div
                       key={item.id}
-                      className="menu-item-editorial cursor-pointer group"
+                      className={`menu-item-editorial menu-item-${item.section} cursor-pointer group`}
                       onClick={() => setSelectedItem(item)}
                     >
-                      {/* Item Row - Baseline Aligned */}
-                      <div className="flex justify-between items-baseline gap-4 mb-2">
-                        {/* Left: Name */}
-                        <h3
-                          className="font-sans text-lg md:text-xl font-medium transition-colors"
-                          style={{ color: colors.black }}
-                        >
+                      {/* Left Side: Title & Description */}
+                      <div className="flex-1 pr-4">
+                        <h3 style={{ color: colors.black }}>
                           {item.name}
                           {item.tag && (
                             <span
                               className="ml-3 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full inline-block"
-                              style={item.tag === 'seasonal'
-                                ? { backgroundColor: '#FFEDD5', color: '#C05621' }
-                                : { backgroundColor: colors.mist, color: colors.black }}
+                              style={
+                                item.tag === 'seasonal'
+                                  ? {
+                                      backgroundColor: 'transparent',
+                                      color: 'var(--cafe-olive)',
+                                      border: '1px solid var(--cafe-olive)'
+                                    }
+                                  : item.tag === 'popular'
+                                  ? {
+                                      backgroundColor: 'transparent',
+                                      color: 'var(--cafe-tan)',
+                                      border: '1px solid var(--cafe-tan)'
+                                    }
+                                  : { backgroundColor: colors.mist, color: colors.black }
+                              }
                             >
                               {item.tag}
                             </span>
                           )}
                         </h3>
-                        {/* Right: Price - Serif for Contrast */}
-                        <span
-                          className="font-serif text-lg md:text-xl whitespace-nowrap"
-                          style={{ color: colors.black }}
-                        >
-                          {item.price}
-                        </span>
+                        <p style={{ color: colors.brown }}>
+                          {item.description}
+                        </p>
                       </div>
-                      {/* Description - Muted */}
-                      <p
-                        className="font-sans text-sm md:text-base leading-relaxed max-w-2xl"
-                        style={{
-                          color: colors.brown,
-                          opacity: 0.65
+
+                      {/* Right Side: Price (top right) */}
+                      <span className="price" style={{ color: colors.black }}>
+                        {item.price}
+                      </span>
+
+                      {/* Plus Button (bottom right - absolutely positioned) */}
+                      <button
+                        className="add-button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedItem(item);
                         }}
+                        aria-label={`Add ${item.name} to cart`}
                       >
-                        {item.description}
-                      </p>
+                        <Plus size={20} strokeWidth={2.5} />
+                      </button>
                     </div>
                   ))}
                 </div>

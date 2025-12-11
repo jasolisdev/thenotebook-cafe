@@ -6,10 +6,12 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import Image from "next/image";
 import Reveal from "../components/ui/Reveal";
 import ParallaxHero from "../components/features/ParallaxHero";
 import { Coffee, Heart, TrendingUp, CheckCircle, Upload, Briefcase, Clock, ChefHat } from "lucide-react";
 import "../styles/pages/careers.css";
+import "../styles/components/application-form.css";
 
 export default function CareersPage() {
   const [formData, setFormData] = useState({
@@ -174,21 +176,15 @@ export default function CareersPage() {
         >
           <div className="max-w-4xl mx-auto space-y-6">
             <Reveal>
-              <span className="font-bold tracking-[0.2em] uppercase text-sm block" style={{ color: 'var(--cafe-tan)' }}>
-                Join Our Team
-              </span>
-            </Reveal>
-
-            <Reveal delay={200}>
-              <h1 className="font-serif text-[56px] md:text-[86px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
-                Be Part of<br />
-                <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Something Special</span>
+              <h1 className="font-serif text-[56px] md:text-[86px] leading-[0.95]" style={{ color: 'var(--cafe-cream)' }}>
+                Join The Team<br />
+                <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Build The Culture</span>
               </h1>
             </Reveal>
 
             <Reveal delay={400}>
               <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}>
-                Help us build Riverside&apos;s first truly genuine coffee community hub. We&apos;re looking for passionate, driven people who love great coffee and warm vibes.
+                We're looking for baristas, creatives, and morning people who want to shape Riverside&apos;s coffee scene.
               </p>
             </Reveal>
           </div>
@@ -216,33 +212,43 @@ export default function CareersPage() {
             <Reveal delay={180}>
               <p className="text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto" style={{ color: 'rgba(74, 59, 50, 0.82)' }}>
                 We&apos;re locally-owned, family-oriented, and all about creating a space where people actually want to spend time. Think lofi house music, specialty coffee, fresh acai bowls, and a team that genuinely cares about the craft.
-              </p>            </Reveal>
+              </p>
+            </Reveal>
           </div>
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-3 gap-10 mt-16">
+      {/* Culture Values Section */}
+      <section
+        data-section="Culture Values"
+        className="py-24 md:py-32 relative overflow-hidden"
+        style={{ backgroundColor: 'var(--cafe-olive)' }}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-3 gap-10">
             <Reveal delay={200}>
               <div className="text-center space-y-4">
-                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}>
-                  <Heart size={28} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(237, 231, 216, 0.2)' }}>
+                  <Heart size={28} style={{ color: 'var(--cafe-cream)' }} strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>
+                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-cream)' }}>
                   Family Vibes
                 </h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  Locally-owned by a husband-wife team. This is our dream, and we want to grow it with people who&apos;re passionate about what we do.
+                <p className="font-light leading-relaxed" style={{ color: 'rgba(237, 231, 216, 0.9)' }}>
+                  Locally-owned by a husband-wife team. This is our dream, and we want to grow it with people who're passionate about what we do.
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={280}>
               <div className="text-center space-y-4">
-                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}>
-                  <Coffee size={28} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(237, 231, 216, 0.2)' }}>
+                  <Coffee size={28} style={{ color: 'var(--cafe-cream)' }} strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>
+                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-cream)' }}>
                   Craft-Focused
                 </h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                <p className="font-light leading-relaxed" style={{ color: 'rgba(237, 231, 216, 0.9)' }}>
                   From espresso to acai bowls, we take pride in every detail. Learn barista skills, food prep, and the art of hospitality.
                 </p>
               </div>
@@ -250,13 +256,13 @@ export default function CareersPage() {
 
             <Reveal delay={360}>
               <div className="text-center space-y-4">
-                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}>
-                  <TrendingUp size={28} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(237, 231, 216, 0.2)' }}>
+                  <TrendingUp size={28} style={{ color: 'var(--cafe-cream)' }} strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>
+                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-cream)' }}>
                   Room to Grow
                 </h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                <p className="font-light leading-relaxed" style={{ color: 'rgba(237, 231, 216, 0.9)' }}>
                   This is a new café with big ambitions. Grow with us—leadership opportunities, skill development, and career advancement.
                 </p>
               </div>
@@ -489,7 +495,7 @@ export default function CareersPage() {
                   Apply
                 </h3>
                 <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  If you vibe with our mission and love great coffee, we want to hear from you. Fill out the form below and show us who you are.
+                  If you vibe with our mission and love great coffee, we want to hear from you. Fill out the form below.
                 </p>
               </div>
             </Reveal>
@@ -504,7 +510,7 @@ export default function CareersPage() {
                   Connect
                 </h3>
                 <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  We&apos;ll set up a casual conversation—think of it as getting to know each other over coffee. You&apos;ll learn about our café, our culture, and the role. We&apos;ll learn about you, your goals, and what you bring to the table.
+                  We'll set up a casual conversation—think of it as getting to know each other over coffee.
                 </p>
               </div>
             </Reveal>
@@ -519,7 +525,7 @@ export default function CareersPage() {
                   Decision
                 </h3>
                 <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  We know waiting is tough, so we move fast. Whether it&apos;s a yes or not quite right now, we&apos;ll keep you in the loop every step of the way.
+                  We know waiting is tough, so we move fast. We'll keep you in the loop every step of the way.
                 </p>
               </div>
             </Reveal>
@@ -549,8 +555,7 @@ export default function CareersPage() {
 
           <form
             onSubmit={handleSubmit}
-            className="p-8 md:p-10 rounded-3xl space-y-6"
-            style={{ backgroundColor: 'var(--cafe-white)', border: '2px solid rgba(164, 141, 120, 0.2)' }}
+            className="editorial-form-container"
           >
             {/* Validation Errors */}
             {validationErrors.length > 0 && (
@@ -574,428 +579,161 @@ export default function CareersPage() {
               </div>
             )}
 
-            {/* First Name */}
-            <div>
-              <label htmlFor="firstName" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                First Name <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
+            {/* Row 1: Name & DOB */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
               <input
                 type="text"
-                id="firstName"
-                value={formData.firstName}
-                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                style={{
-                  backgroundColor: 'var(--cafe-mist)',
-                  border: '1px solid rgba(164, 141, 120, 0.2)',
-                  color: 'var(--cafe-black)'
+                placeholder="Full Name *"
+                className="input-field"
+                value={`${formData.firstName} ${formData.lastName}`}
+                onChange={(e) => {
+                  const names = e.target.value.split(' ');
+                  setFormData({
+                    ...formData,
+                    firstName: names[0] || '',
+                    lastName: names.slice(1).join(' ') || ''
+                  });
                 }}
-                placeholder="Your first name"
               />
-            </div>
-
-            {/* Last Name */}
-            <div>
-              <label htmlFor="lastName" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Last Name <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
               <input
                 type="text"
-                id="lastName"
-                value={formData.lastName}
-                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                style={{
-                  backgroundColor: 'var(--cafe-mist)',
-                  border: '1px solid rgba(164, 141, 120, 0.2)',
-                  color: 'var(--cafe-black)'
-                }}
-                placeholder="Your last name"
-              />
-            </div>
-
-            {/* Email */}
-            <div>
-              <label htmlFor="email" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Email <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <input
-                type="email"
-                id="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                style={{
-                  backgroundColor: 'var(--cafe-mist)',
-                  border: '1px solid rgba(164, 141, 120, 0.2)',
-                  color: 'var(--cafe-black)'
-                }}
-                placeholder="your@email.com"
-              />
-            </div>
-
-            {/* Phone */}
-            <div>
-              <label htmlFor="phone" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Phone Number <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                required
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                style={{
-                  backgroundColor: 'var(--cafe-mist)',
-                  border: '1px solid rgba(164, 141, 120, 0.2)',
-                  color: 'var(--cafe-black)'
-                }}
-                placeholder="(555) 123-4567"
-              />
-            </div>
-
-            {/* Birthdate */}
-            <div>
-              <label htmlFor="birthdate" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Date of Birth <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <input
-                type="date"
-                id="birthdate"
-                required
+                placeholder="Date of Birth *"
+                className="input-field"
                 value={formData.birthdate}
                 onChange={(e) => setFormData({ ...formData, birthdate: e.target.value })}
-                max={new Date().toISOString().split('T')[0]}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                style={{
-                  backgroundColor: 'var(--cafe-mist)',
-                  border: '1px solid rgba(164, 141, 120, 0.2)',
-                  color: 'var(--cafe-black)'
-                }}
+                onFocus={(e) => e.target.type = 'date'}
+                onBlur={(e) => e.target.type = 'text'}
               />
             </div>
 
-            {/* Position(s) Interested In */}
-            <div>
-              <label className="block mb-3 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Position(s) Interested In <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <div className="space-y-3">
-                {[
-                  { value: "barista", label: "Barista" },
-                  { value: "opening-lead", label: "Opening Shift Lead" },
-                  { value: "closing-lead", label: "Closing Shift Lead" },
-                  { value: "kitchen-prep", label: "Kitchen Prep / Barista" },
-                ].map((position) => (
-                  <label
-                    key={position.value}
-                    className="flex items-center gap-3 p-4 rounded-lg cursor-pointer transition-all"
-                    style={{
-                      backgroundColor: formData.positions.includes(position.value)
-                        ? 'rgba(164, 141, 120, 0.15)'
-                        : 'rgba(244, 241, 234, 0.5)',
-                      border: `2px solid ${formData.positions.includes(position.value) ? 'var(--cafe-tan)' : 'transparent'}`
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={formData.positions.includes(position.value)}
-                      onChange={() => handlePositionToggle(position.value)}
-                      className="w-5 h-5"
-                    />
-                    <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
-                      {position.label}
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Employment Type */}
-            <div>
-              <label className="block mb-3 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Employment Type <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { value: "full-time", label: "Full-time" },
-                  { value: "part-time", label: "Part-time" },
-                  { value: "weekends", label: "Weekends Only" },
-                  { value: "flexible", label: "Flexible" },
-                ].map((option) => (
-                  <label
-                    key={option.value}
-                    className="flex items-center gap-3 p-4 rounded-lg cursor-pointer transition-all"
-                    style={{
-                      backgroundColor: formData.employmentType === option.value
-                        ? 'rgba(164, 141, 120, 0.15)'
-                        : 'rgba(244, 241, 234, 0.5)',
-                      border: `2px solid ${formData.employmentType === option.value ? 'var(--cafe-tan)' : 'transparent'}`
-                    }}
-                  >
-                    <input
-                      type="radio"
-                      name="employmentType"
-                      value={option.value}
-                      checked={formData.employmentType === option.value}
-                      onChange={(e) => setFormData({ ...formData, employmentType: e.target.value })}
-                      className="w-5 h-5"
-                    />
-                    <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
-                      {option.label}
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Work Availability - Days */}
-            <div>
-              <label className="block mb-3 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Work Availability <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <p className="text-sm mb-3" style={{ color: 'rgba(74, 59, 50, 0.7)' }}>
-                Select all days you&apos;re available. Saturday availability may be required (we&apos;re closed Sundays).
-              </p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {[
-                  { value: "monday", label: "Monday" },
-                  { value: "tuesday", label: "Tuesday" },
-                  { value: "wednesday", label: "Wednesday" },
-                  { value: "thursday", label: "Thursday" },
-                  { value: "friday", label: "Friday" },
-                  { value: "saturday", label: "Saturday" },
-                ].map((day) => (
-                  <label
-                    key={day.value}
-                    className="flex items-center gap-3 p-4 rounded-lg cursor-pointer transition-all"
-                    style={{
-                      backgroundColor: formData.daysAvailable.includes(day.value)
-                        ? 'rgba(164, 141, 120, 0.15)'
-                        : 'rgba(244, 241, 234, 0.5)',
-                      border: `2px solid ${formData.daysAvailable.includes(day.value) ? 'var(--cafe-tan)' : 'transparent'}`
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={formData.daysAvailable.includes(day.value)}
-                      onChange={() => handleDayToggle(day.value)}
-                      className="w-5 h-5"
-                    />
-                    <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
-                      {day.label}
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* When Can You Start */}
-            <div>
-              <label htmlFor="startDate" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                When Can You Start? <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
+            {/* Row 2: Contact */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '10px' }}>
               <input
-                type="date"
-                id="startDate"
-                required
-                value={formData.startDate}
-                onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-                min={new Date().toISOString().split('T')[0]}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                style={{
-                  backgroundColor: 'var(--cafe-mist)',
-                  border: '1px solid rgba(164, 141, 120, 0.2)',
-                  color: 'var(--cafe-black)'
-                }}
+                type="email"
+                placeholder="Email *"
+                className="input-field"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              />
+              <input
+                type="text"
+                placeholder="Phone Number *"
+                className="input-field"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               />
             </div>
 
-            {/* Hours Per Week */}
-            <div>
-              <label className="block mb-3 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Hours Per Week Desired <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { value: "0-16", label: "0-16 Hours" },
-                  { value: "16-20", label: "16-20 Hours" },
-                  { value: "20-35", label: "20-35 Hours" },
-                  { value: "35-40", label: "35-40 Hours" },
-                ].map((option) => (
-                  <label
-                    key={option.value}
-                    className="flex items-center gap-3 p-4 rounded-lg cursor-pointer transition-all"
-                    style={{
-                      backgroundColor: formData.hoursPerWeek === option.value
-                        ? 'rgba(164, 141, 120, 0.15)'
-                        : 'rgba(244, 241, 234, 0.5)',
-                      border: `2px solid ${formData.hoursPerWeek === option.value ? 'var(--cafe-tan)' : 'transparent'}`
-                    }}
-                  >
-                    <input
-                      type="radio"
-                      name="hoursPerWeek"
-                      value={option.value}
-                      checked={formData.hoursPerWeek === option.value}
-                      onChange={(e) => setFormData({ ...formData, hoursPerWeek: e.target.value })}
-                      className="w-5 h-5"
-                    />
-                    <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
-                      {option.label}
-                    </span>
-                  </label>
-                ))}
-              </div>
+            {/* Checkbox Section: Positions */}
+            <label className="form-group-label">Position(s) Interested In *</label>
+            <div className="checkbox-grid">
+              {['Barista', 'Shift Lead', 'Kitchen Prep'].map((opt) => (
+                <label key={opt} className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    className="checkbox-input"
+                    checked={formData.positions.includes(opt.toLowerCase().replace(' ', '-'))}
+                    onChange={() => handlePositionToggle(opt.toLowerCase().replace(' ', '-'))}
+                  />
+                  {opt}
+                </label>
+              ))}
             </div>
 
-            {/* Commitment Length */}
-            <div>
-              <label className="block mb-3 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                How Long Do You Plan to Work Here? <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {[
-                  { value: "3-6-months", label: "3-6 months", sublabel: "Seasonal/Short-term" },
-                  { value: "6-12-months", label: "6-12 months", sublabel: "" },
-                  { value: "1-2-years", label: "1-2 years", sublabel: "" },
-                  { value: "2plus-years", label: "2+ years", sublabel: "Long-term/Career" },
-                ].map((option) => (
-                  <label
-                    key={option.value}
-                    className="flex items-center gap-3 p-4 rounded-lg cursor-pointer transition-all"
-                    style={{
-                      backgroundColor: formData.commitmentLength === option.value
-                        ? 'rgba(164, 141, 120, 0.15)'
-                        : 'rgba(244, 241, 234, 0.5)',
-                      border: `2px solid ${formData.commitmentLength === option.value ? 'var(--cafe-tan)' : 'transparent'}`
-                    }}
-                  >
-                    <input
-                      type="radio"
-                      name="commitmentLength"
-                      value={option.value}
-                      checked={formData.commitmentLength === option.value}
-                      onChange={(e) => setFormData({ ...formData, commitmentLength: e.target.value })}
-                      className="w-5 h-5"
-                    />
-                    <div className="flex flex-col">
-                      <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
-                        {option.label}
-                      </span>
-                      {option.sublabel && (
-                        <span className="text-xs" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>
-                          {option.sublabel}
-                        </span>
-                      )}
-                    </div>
-                  </label>
-                ))}
-              </div>
+            {/* Checkbox Section: Employment Type */}
+            <label className="form-group-label">Employment Type *</label>
+            <div className="checkbox-grid">
+              {['Full-time', 'Part-time', 'Weekends Only', 'Flexible'].map((opt) => (
+                <label key={opt} className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    className="checkbox-input"
+                    checked={formData.employmentType === opt.toLowerCase().replace(/ /g, '-')}
+                    onChange={() => setFormData({ ...formData, employmentType: opt.toLowerCase().replace(/ /g, '-') })}
+                  />
+                  {opt}
+                </label>
+              ))}
             </div>
 
-            {/* Message */}
-            <div>
-              <label htmlFor="message" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Why The Notebook Café? <span className="text-sm font-normal" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>(Optional)</span>
-              </label>
-              <textarea
-                id="message"
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                rows={5}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 resize-none"
-                style={{
-                  backgroundColor: 'var(--cafe-mist)',
-                  border: '1px solid rgba(164, 141, 120, 0.2)',
-                  color: 'var(--cafe-black)'
-                }}
-                placeholder="Tell us about yourself and why you want to work here..."
-              />
+            {/* Checkbox Section: Availability */}
+            <label className="form-group-label">Days Available (Closed Sundays) *</label>
+            <div className="checkbox-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))' }}>
+              {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((opt) => (
+                <label key={opt} className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    className="checkbox-input"
+                    checked={formData.daysAvailable.includes(opt.toLowerCase())}
+                    onChange={() => handleDayToggle(opt.toLowerCase())}
+                  />
+                  {opt}
+                </label>
+              ))}
             </div>
 
-            {/* Resume Upload */}
-            <div>
-              <label htmlFor="resume" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Resume <span className="text-sm font-normal" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>(Optional)</span>
-              </label>
-              <div
-                className="relative p-8 rounded-lg border-2 border-dashed text-center cursor-pointer transition-all hover:border-cafe-tan"
-                style={{
-                  borderColor: resumeFile ? 'var(--cafe-tan)' : 'rgba(164, 141, 120, 0.3)',
-                  backgroundColor: resumeFile ? 'rgba(164, 141, 120, 0.05)' : 'var(--cafe-mist)'
-                }}
-              >
+            {/* Row 3: Start Date & Hours */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '20px' }}>
+              <div>
+                <label className="form-group-label" style={{ marginTop: '10px' }}>When Can You Start? *</label>
                 <input
-                  type="file"
-                  id="resume"
-                  accept=".pdf,.doc,.docx"
-                  onChange={(e) => setResumeFile(e.target.files?.[0] || null)}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  type="text"
+                  className="input-field"
+                  placeholder="MM/DD/YYYY"
+                  value={formData.startDate}
+                  onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
                 />
-                <Upload size={32} className="mx-auto mb-3" style={{ color: 'var(--cafe-tan)' }} />
-                <p className="font-medium mb-1" style={{ color: 'var(--cafe-black)' }}>
-                  {resumeFile ? resumeFile.name : "Click to upload resume"}
-                </p>
-                <p className="text-sm" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>
-                  PDF, DOC, or DOCX (Max 5MB)
-                </p>
+              </div>
+              <div>
+                <label className="form-group-label" style={{ marginTop: '10px' }}>Hours Per Week Desired *</label>
+                <div className="checkbox-grid" style={{ gridTemplateColumns: '1fr', gap: '5px' }}>
+                  {['0-16 Hours', '16-20 Hours', '20-35 Hours', '35-40 Hours'].map((opt) => (
+                    <label key={opt} className="checkbox-label" style={{ fontSize: '0.9rem' }}>
+                      <input
+                        type="checkbox"
+                        className="checkbox-input"
+                        checked={formData.hoursPerWeek === opt.toLowerCase().replace(/ /g, '-')}
+                        onChange={() => setFormData({ ...formData, hoursPerWeek: opt.toLowerCase().replace(/ /g, '-') })}
+                      />
+                      {opt}
+                    </label>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Optional Supplemental Application PDF */}
-            <div>
-              <label htmlFor="supplemental" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Supplemental Application <span className="text-sm font-normal" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>(Optional)</span>
-              </label>
-              <p className="text-sm mb-3" style={{ color: 'rgba(74, 59, 50, 0.7)' }}>
-                If you have additional information to provide, you may upload a completed application form (PDF only).{' '}
-                <a
-                  href="/application-template.html"
-                  target="_blank"
-                  className="font-medium underline"
-                  style={{ color: 'var(--cafe-tan)' }}
-                >
-                  Download our application template here
-                </a>
-                {' '}(open in browser, fill out, and print to PDF).
+            {/* Textarea */}
+            <label className="form-group-label">Why Us? *</label>
+            <textarea
+              className="input-field"
+              placeholder="Tell us why you're a good fit..."
+              style={{ minHeight: '80px', resize: 'vertical' }}
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            ></textarea>
+
+            {/* File Upload */}
+            <label className="form-group-label">Resume *</label>
+            <div className="file-upload-zone" onClick={() => document.getElementById('resume-input')?.click()}>
+              <Upload size={24} style={{ color: 'var(--cafe-tan)' }} />
+              <p style={{ margin: '10px 0 0', fontSize: '0.9rem' }}>
+                {resumeFile ? resumeFile.name : 'Click to upload resume'}
               </p>
-              <div
-                className="relative p-8 rounded-lg border-2 border-dashed text-center cursor-pointer transition-all hover:border-cafe-tan"
-                style={{
-                  borderColor: supplementalFile ? 'var(--cafe-tan)' : 'rgba(164, 141, 120, 0.3)',
-                  backgroundColor: supplementalFile ? 'rgba(164, 141, 120, 0.05)' : 'var(--cafe-mist)'
-                }}
-              >
-                <input
-                  type="file"
-                  id="supplemental"
-                  accept=".pdf"
-                  onChange={(e) => setSupplementalFile(e.target.files?.[0] || null)}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                />
-                <Upload size={28} className="mx-auto mb-3" style={{ color: 'var(--cafe-tan)' }} />
-                <p className="font-medium mb-1" style={{ color: 'var(--cafe-black)' }}>
-                  {supplementalFile ? supplementalFile.name : "Click to upload supplemental application"}
-                </p>
-                <p className="text-sm" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>
-                  PDF only (Max 5MB)
-                </p>
-              </div>
+              <span style={{ fontSize: '0.75rem', opacity: 0.6 }}>PDF, DOC, or DOCX (Max 5MB)</span>
+              <input
+                id="resume-input"
+                type="file"
+                style={{ display: 'none' }}
+                accept=".pdf,.doc,.docx"
+                onChange={(e) => setResumeFile(e.target.files?.[0] || null)}
+              />
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={isSubmitting || submitStatus === "success"}
-              className="w-full py-4 rounded-lg font-serif text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02]"
-              style={{
-                backgroundColor: 'var(--cafe-tan)',
-                color: 'white',
-                border: 'none'
-              }}
+              className="btn-primary"
+              style={{ marginTop: '30px' }}
             >
               {isSubmitting ? "Submitting..." : submitStatus === "success" ? "Application Sent! Redirecting..." : "Submit Application"}
             </button>

@@ -19,7 +19,7 @@ import "./styles/layout/animations.css";
 import "./styles/pages/home.css";
 
 import { ThemeProvider } from "next-themes";
-import { DM_Serif_Display, Outfit, Caveat } from "next/font/google";
+import { DM_Serif_Display, Outfit, Caveat, Inter } from "next/font/google";
 import { cookies } from "next/headers";
 import PasswordGate from "./components/ui/PasswordGate";
 import SiteHeader from "./components/layout/SiteHeader";
@@ -57,6 +57,13 @@ const caveat = Caveat({
   display: "swap",
 });
 
+const inter = Inter({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "The Notebook Café",
   description: "Coffee. Culture. House Music.",
@@ -91,7 +98,7 @@ export default async function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${dmSerif.variable} ${outfit.variable} ${caveat.variable}`}
+      className={`${dmSerif.variable} ${outfit.variable} ${caveat.variable} ${inter.variable}`}
     >
       <body className="antialiased font-sans">
         <ThemeProvider

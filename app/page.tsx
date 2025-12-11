@@ -560,7 +560,7 @@ export default async function HomePage() {
       <section
         data-section="Stay in the Loop"
         className="relative py-24 md:py-32 overflow-hidden"
-        style={{ backgroundColor: '#6B7456' }}
+        style={{ backgroundColor: 'var(--cafe-olive)' }}
       >
         <div className="section-deco" style={{ top: '12%', left: '10%', animationDuration: '11s' }} aria-hidden="true">
           <Coffee strokeWidth={1.4} />
