@@ -27,6 +27,7 @@ export default function MenuPage() {
   const [activeSection, setActiveSection] = useState<'drinks' | 'meals' | 'desserts'>('drinks');
   const [searchQuery, setSearchQuery] = useState('');
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const [isProgrammaticScroll, setIsProgrammaticScroll] = useState(false);
   const menuContentRef = useRef<HTMLDivElement>(null);
 
   const filteredItems = MENU_ITEMS.filter(item => {
@@ -56,6 +57,12 @@ export default function MenuPage() {
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
+          // Skip navbar logic during programmatic scroll
+          if (isProgrammaticScroll) {
+            ticking = false;
+            return;
+          }
+
           const currentScrollY = window.scrollY;
 
           // Navbar shows when scrolling up, hides when scrolling down
@@ -74,7 +81,7 @@ export default function MenuPage() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isProgrammaticScroll]);
 
   return (
     <>
@@ -137,11 +144,17 @@ export default function MenuPage() {
                         setActiveSection(section);
                         // Scroll to menu content
                         if (menuContentRef.current) {
+                          // Set flag to prevent navbar changes during scroll
+                          setIsProgrammaticScroll(true);
+
                           // Adjust to show 1px of hero + navbar (80px) + sticky tabs (~90px)
                           const yOffset = isNavbarVisible ? -171 : -91; // Shows 1px of hero section
                           const element = menuContentRef.current;
                           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
                           window.scrollTo({ top: y, behavior: 'smooth' });
+
+                          // Clear flag after smooth scroll completes (~600ms)
+                          setTimeout(() => setIsProgrammaticScroll(false), 600);
                         }
                       }}
                       aria-pressed={isActive}
