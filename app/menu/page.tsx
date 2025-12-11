@@ -65,9 +65,9 @@ export default function MenuPage() {
 
           const currentScrollY = window.scrollY;
 
-          // If at top position, lock navbar to visible and skip further checks
-          // This prevents flash when switching tabs at top
-          if (currentScrollY < 150) {
+          // If at menu viewing position, lock navbar to visible and skip further checks
+          // This prevents flash when switching tabs while viewing menu
+          if (currentScrollY < 250) {
             setIsNavbarVisible(true);
             lastScrollY = currentScrollY;
             ticking = false;
@@ -152,9 +152,9 @@ export default function MenuPage() {
                       onClick={() => {
                         setActiveSection(section);
 
-                        // If already at top position, skip all scroll logic to prevent navbar flash
+                        // If at menu viewing position, skip all scroll logic to prevent navbar flash
                         const currentScrollY = window.scrollY;
-                        if (currentScrollY < 200) {
+                        if (currentScrollY < 250) {
                           // Just switch tabs, navbar stays as is
                           return;
                         }
