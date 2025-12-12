@@ -169,6 +169,15 @@ export default function SiteHeader({
     window.dispatchEvent(new CustomEvent("open-cart"));
   };
 
+  // Handle mobile drawer link clicks with delayed close for smooth page transition
+  const handleMobileNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Don't prevent default - let Next.js handle navigation immediately
+    // Just delay the drawer close so page loads while drawer is still open
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 200); // 200ms delay allows page/image to start loading before drawer closes
+  };
+
   // Prefetch hero images on hover for instant page transitions
   const prefetchPageImage = (route: string) => {
     const heroImages: Record<string, string> = {
@@ -391,7 +400,7 @@ export default function SiteHeader({
                 <div className={`menu-link-text ${isActive(link.href) ? 'active' : ''}`}>
                   <Link
                     href={link.href}
-                    onClick={() => setIsOpen(false)}
+                    onClick={(e) => handleMobileNavClick(e, link.href)}
                     style={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     {link.label}
