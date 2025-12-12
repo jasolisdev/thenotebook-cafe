@@ -29,7 +29,8 @@ export default function ImagePreloader() {
 
     // Preload each image
     heroImages.forEach((src) => {
-      const img = new Image();
+      // Use window.Image to avoid conflict with Next.js Image component
+      const img = new window.Image();
       img.src = src;
       // Optional: Add to cache with higher priority
       img.loading = 'eager';

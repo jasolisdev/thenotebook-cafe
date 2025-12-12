@@ -181,7 +181,8 @@ export default function SiteHeader({
     const imageSrc = heroImages[route];
     if (imageSrc) {
       // Create image object to trigger browser cache
-      const img = new Image();
+      // Use window.Image to avoid conflict with Next.js Image component
+      const img = new window.Image();
       img.src = imageSrc;
     }
   };
