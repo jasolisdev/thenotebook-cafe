@@ -829,6 +829,83 @@
   color: var(--cafe-tan);
 }
 
+/* Close button in drawer */
+.menu-drawer-close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid var(--cafe-cream);
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.8) rotate(-90deg);
+  transition: opacity 0.6s cubic-bezier(0.19, 1, 0.22, 1),
+              transform 0.6s cubic-bezier(0.19, 1, 0.22, 1),
+              border-color 0.3s ease,
+              background 0.3s ease;
+  transition-delay: 0.5s;
+  z-index: 10;
+}
+
+.menu-drawer-cinematic.open .menu-drawer-close {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.menu-drawer-close:hover {
+  background: var(--cafe-tan);
+  border-color: var(--cafe-tan);
+}
+
+.menu-drawer-close:hover .menu-drawer-close-icon {
+  color: var(--cafe-charcoal);
+}
+
+.menu-drawer-close-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--cafe-cream);
+  transition: color 0.3s ease;
+}
+
+/* Close button X lines */
+.menu-drawer-close-x {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.menu-drawer-close-x::before,
+.menu-drawer-close-x::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--cafe-cream);
+  transition: background 0.3s ease;
+}
+
+.menu-drawer-close-x::before {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.menu-drawer-close-x::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.menu-drawer-close:hover .menu-drawer-close-x::before,
+.menu-drawer-close:hover .menu-drawer-close-x::after {
+  background: var(--cafe-charcoal);
+}
+
 /* Footer / Copyright in drawer */
 .menu-drawer-footer {
   position: absolute;

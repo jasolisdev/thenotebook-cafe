@@ -346,6 +346,16 @@ export default function SiteHeader({
 
         {/* Layer 2: Main Drawer (Charcoal) */}
         <div className={`menu-drawer-cinematic md:hidden ${isOpen ? 'open' : ''}`}>
+          {/* Close Button */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="menu-drawer-close"
+            aria-label="Close menu"
+            type="button"
+          >
+            <div className="menu-drawer-close-x" />
+          </button>
+
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4vh' }}>
             {/* Navigation Links */}
             {[
