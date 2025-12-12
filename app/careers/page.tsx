@@ -8,6 +8,8 @@
 import { useState, FormEvent } from "react";
 import Image from "next/image";
 import Reveal from "../components/ui/Reveal";
+import RevealText from "../components/ui/RevealText";
+import FadeInSection from "../components/ui/FadeInSection";
 import ParallaxHero from "../components/features/ParallaxHero";
 import { Coffee, Heart, TrendingUp, CheckCircle, Upload, Briefcase, Clock, ChefHat } from "lucide-react";
 import "../styles/pages/careers.css";
@@ -175,18 +177,20 @@ export default function CareersPage() {
           overlayVariant="light"
         >
           <div className="max-w-4xl mx-auto space-y-6">
-            <Reveal>
+            {/* Main Headline - Instant reveal */}
+            <RevealText delay="0ms">
               <h1 className="font-serif text-[56px] md:text-[86px] leading-[0.95]" style={{ color: 'var(--cafe-cream)' }}>
                 Join The Team<br />
                 <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Build The Culture</span>
               </h1>
-            </Reveal>
+            </RevealText>
 
-            <Reveal delay={400}>
+            {/* Body Content - 400ms delay */}
+            <FadeInSection delay="400ms">
               <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}>
                 We're looking for baristas, creatives, and morning people who want to shape Riverside&apos;s coffee scene.
               </p>
-            </Reveal>
+            </FadeInSection>
           </div>
         </ParallaxHero>
       </div>

@@ -17,8 +17,8 @@ import { useEffect, useRef, useState } from 'react';
  * return <div ref={ref} className={isVisible ? 'visible' : ''}>Content</div>
  * ```
  */
-export function useOnScreen(options?: IntersectionObserverInit): [React.RefObject<HTMLDivElement>, boolean] {
-  const ref = useRef<HTMLDivElement>(null);
+export function useOnScreen(options?: IntersectionObserverInit): [React.RefObject<HTMLDivElement | null>, boolean] {
+  const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
