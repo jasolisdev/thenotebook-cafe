@@ -6,6 +6,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import Reveal from "./components/ui/Reveal";
+import RevealText from "./components/ui/RevealText";
+import FadeInSection from "./components/ui/FadeInSection";
 import HeroButtons from "./components/ui/HeroButtons";
 import KenBurnsHero from "./components/features/KenBurnsHero";
 import HeroHeart from "./components/ui/HeroHeart";
@@ -113,7 +115,8 @@ export default async function HomePage() {
             padding: '0 2rem'
           }}
         >
-          <Reveal>
+          {/* Eyebrow - Instant reveal (0ms) */}
+          <RevealText delay="0ms">
             <p
               style={{
                 fontFamily: 'var(--font-sans)',
@@ -127,9 +130,10 @@ export default async function HomePage() {
             >
               EST. RIVERSIDE 2026
             </p>
-          </Reveal>
+          </RevealText>
 
-          <Reveal delay={120}>
+          {/* Main Headline - 200ms delay */}
+          <RevealText delay="200ms">
             <h1
               style={{
                 fontFamily: 'var(--font-display)',
@@ -143,9 +147,10 @@ export default async function HomePage() {
             >
               Where Every Cup<br />Tells a Story
             </h1>
-          </Reveal>
+          </RevealText>
 
-          <Reveal delay={240}>
+          {/* Body Content - 400ms delay (waits for headline) */}
+          <FadeInSection delay="400ms">
             <p
               style={{
                 fontFamily: 'var(--font-sans)',
@@ -159,7 +164,7 @@ export default async function HomePage() {
             >
               COME FOR THE COFFEE, STAY FOR THE VIBE.
             </p>
-          </Reveal>
+          </FadeInSection>
         </div>
       </section>
 
