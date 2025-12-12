@@ -169,6 +169,23 @@ export default function SiteHeader({
     window.dispatchEvent(new CustomEvent("open-cart"));
   };
 
+  // Prefetch hero images on hover for instant page transitions
+  const prefetchPageImage = (route: string) => {
+    const heroImages: Record<string, string> = {
+      '/menu': '/menu/tnc-menu-hero-bg.png',
+      '/story': '/story/tnc-story-hero-bg.png',
+      '/contact': '/contact/tnc-contact-hero-bg.png',
+      '/careers': '/careers/tnc-career-hero-bg.png',
+    };
+
+    const imageSrc = heroImages[route];
+    if (imageSrc) {
+      // Create image object to trigger browser cache
+      const img = new Image();
+      img.src = imageSrc;
+    }
+  };
+
   return (
     <>
       {/* <AnnouncementBanner text={announcementText} /> */}
@@ -236,6 +253,7 @@ export default function SiteHeader({
               </Link>
               <Link
                 href="/menu"
+                onMouseEnter={() => prefetchPageImage('/menu')}
                 className={`${navLinkBase} ${isActive("/menu") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Menu
@@ -248,6 +266,7 @@ export default function SiteHeader({
               </Link>
               <Link
                 href="/story"
+                onMouseEnter={() => prefetchPageImage('/story')}
                 className={`${navLinkBase} ${isActive("/story") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Story
@@ -260,6 +279,7 @@ export default function SiteHeader({
               </Link>
               <Link
                 href="/contact"
+                onMouseEnter={() => prefetchPageImage('/contact')}
                 className={`${navLinkBase} ${isActive("/contact") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Contact
@@ -272,6 +292,7 @@ export default function SiteHeader({
               </Link>
               <Link
                 href="/careers"
+                onMouseEnter={() => prefetchPageImage('/careers')}
                 className={`${navLinkBase} ${isActive("/careers") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Careers

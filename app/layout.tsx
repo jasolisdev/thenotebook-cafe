@@ -24,6 +24,7 @@ import { cookies } from "next/headers";
 import PasswordGate from "./components/ui/PasswordGate";
 import SiteHeader from "./components/layout/SiteHeader";
 import SiteFooter from "./components/layout/SiteFooter";
+import ImagePreloader from "./components/layout/ImagePreloader";
 import AnnouncementBanner from "./components/ui/AnnouncementBanner";
 import { client } from "@/sanity/lib/client";
 import { CartProvider } from "./components/providers/CartProvider";
@@ -111,6 +112,8 @@ export default async function RootLayout({
               <PasswordGate />
             ) : (
               <>
+                {/* Preload critical hero images for smooth page transitions */}
+                <ImagePreloader />
                 {showAnnouncement && <AnnouncementBanner />}
                 <SiteHeader
                   instagramUrl={settings?.social?.instagram}
