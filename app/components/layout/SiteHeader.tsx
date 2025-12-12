@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { ShoppingBag } from "lucide-react";
@@ -31,6 +31,7 @@ export default function SiteHeader({
   const [isAtTop, setIsAtTop] = useState<boolean>(true);
   const [forceHighContrast, setForceHighContrast] = useState<boolean>(false);
   const pathname = usePathname();
+  const router = useRouter();
   const forceSolidRoutes = ["/terms", "/privacy", "/refunds"];
   const forceSolidBg = forceSolidRoutes.some((route) => pathname?.startsWith(route));
   const drawerWasOpen = useRef(false);
@@ -169,13 +170,24 @@ export default function SiteHeader({
     window.dispatchEvent(new CustomEvent("open-cart"));
   };
 
-  // Handle mobile drawer link clicks with delayed close for smooth page transition
+  // Handle mobile drawer link clicks - close drawer THEN navigate
   const handleMobileNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // Don't prevent default - let Next.js handle navigation immediately
-    // Just delay the drawer close so page loads while drawer is still open
-    setTimeout(() => {
+    // Prevent default navigation
+    e.preventDefault();
+
+    // Don't navigate if already on this page
+    if (pathname === href) {
       setIsOpen(false);
-    }, 200); // 200ms delay allows page/image to start loading before drawer closes
+      return;
+    }
+
+    // Close the drawer first
+    setIsOpen(false);
+
+    // Wait for drawer animation to complete, then navigate
+    setTimeout(() => {
+      router.push(href);
+    }, 900); // 900ms = drawer slide animation duration (0.8s) + small buffer
   };
 
   // Prefetch hero images on hover for instant page transitions
