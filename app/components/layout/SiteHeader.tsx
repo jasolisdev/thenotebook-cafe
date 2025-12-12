@@ -1,12 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { ShoppingBag } from "lucide-react";
-import { PiSpotifyLogoFill, PiInstagramLogoFill } from "react-icons/pi";
-import { motion, AnimatePresence } from "framer-motion";
 
 const badgeColors = {
   tan: '#A48D78',
@@ -33,6 +31,7 @@ export default function SiteHeader({
   const [isAtTop, setIsAtTop] = useState<boolean>(true);
   const [forceHighContrast, setForceHighContrast] = useState<boolean>(false);
   const pathname = usePathname();
+  const router = useRouter();
   const forceSolidRoutes = ["/terms", "/privacy", "/refunds"];
   const forceSolidBg = forceSolidRoutes.some((route) => pathname?.startsWith(route));
   const drawerWasOpen = useRef(false);
@@ -171,6 +170,44 @@ export default function SiteHeader({
     window.dispatchEvent(new CustomEvent("open-cart"));
   };
 
+  // Handle mobile drawer link clicks - close drawer and navigate
+  const handleMobileNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Prevent default navigation
+    e.preventDefault();
+
+    // Don't navigate if already on this page
+    if (pathname === href) {
+      setIsOpen(false);
+      return;
+    }
+
+    // Close the drawer and navigate with short delay
+    setIsOpen(false);
+
+    // Navigate quickly while drawer is closing
+    setTimeout(() => {
+      router.push(href);
+    }, 200); // Short delay to start close animation, then navigate
+  };
+
+  // Prefetch hero images on hover for instant page transitions
+  const prefetchPageImage = (route: string) => {
+    const heroImages: Record<string, string> = {
+      '/menu': '/menu/tnc-menu-hero-bg.png',
+      '/story': '/story/tnc-story-hero-bg.png',
+      '/contact': '/contact/tnc-contact-hero-bg.png',
+      '/careers': '/careers/tnc-career-hero-bg.png',
+    };
+
+    const imageSrc = heroImages[route];
+    if (imageSrc) {
+      // Create image object to trigger browser cache
+      // Use window.Image to avoid conflict with Next.js Image component
+      const img = new window.Image();
+      img.src = imageSrc;
+    }
+  };
+
   return (
     <>
       {/* <AnnouncementBanner text={announcementText} /> */}
@@ -238,6 +275,7 @@ export default function SiteHeader({
               </Link>
               <Link
                 href="/menu"
+                onMouseEnter={() => prefetchPageImage('/menu')}
                 className={`${navLinkBase} ${isActive("/menu") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Menu
@@ -250,6 +288,7 @@ export default function SiteHeader({
               </Link>
               <Link
                 href="/story"
+                onMouseEnter={() => prefetchPageImage('/story')}
                 className={`${navLinkBase} ${isActive("/story") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Story
@@ -262,6 +301,7 @@ export default function SiteHeader({
               </Link>
               <Link
                 href="/contact"
+                onMouseEnter={() => prefetchPageImage('/contact')}
                 className={`${navLinkBase} ${isActive("/contact") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Contact
@@ -274,6 +314,7 @@ export default function SiteHeader({
               </Link>
               <Link
                 href="/careers"
+                onMouseEnter={() => prefetchPageImage('/careers')}
                 className={`${navLinkBase} ${isActive("/careers") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Careers
@@ -342,112 +383,52 @@ export default function SiteHeader({
           </div>
         </div>
 
-        {/* Mobile Menu - Full Screen Overlay */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              className="fixed left-0 right-0 bottom-0 md:hidden bg-cafe-mist"
-              style={{
-                top: '80px',
-                zIndex: 120,
-                minHeight: 'calc(100vh - 80px)',
-                width: '100vw',
-                height: 'calc(100vh - 80px)'
-              }}
-            >
-              {/* Content */}
-              <div
-                className="relative w-full h-full flex flex-col items-center justify-center px-8 py-16 overflow-y-auto"
-                style={{ minHeight: 'calc(100vh - 80px)', transform: 'translateY(-40px)' }}
-              >
-                {/* Navigation Links */}
-                <nav className="flex flex-col items-center gap-6 mb-12">
-                  {[
-                    { href: '/', label: 'Home' },
-                    { href: '/menu', label: 'Menu' },
-                    { href: '/story', label: 'Story' },
-                    { href: '/contact', label: 'Contact' },
-                    { href: '/careers', label: 'Careers' }
-                  ].map((link, index) => (
-                    <motion.div
-                      key={link.href}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        delay: 0.06 + index * 0.04,
-                        duration: 0.35,
-                        ease: [0.4, 0, 0.2, 1]
-                      }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={() => setIsOpen(false)}
-                        className={`block font-medium uppercase tracking-[0.18em] text-lg sm:text-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive(link.href)
-                          ? 'text-cafe-tan'
-                          : 'text-cafe-black hover:text-cafe-tan hover:translate-x-1'
-                          }`}
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </nav>
+        {/* Cinematic Mobile Menu - Double Layer Right-to-Left */}
+        {/* Layer 1: Backdrop (Tan) */}
+        <div className={`menu-layer-backdrop md:hidden ${isOpen ? 'open' : ''}`} />
 
-                {/* Footer Info */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.5 }}
-                  className="text-center space-y-3"
-                >
-                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-cafe-tan to-transparent mx-auto mb-3" />
+        {/* Layer 2: Main Drawer (Charcoal) */}
+        <div className={`menu-drawer-cinematic md:hidden ${isOpen ? 'open' : ''}`}>
+          {/* Close Button */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="menu-drawer-close"
+            aria-label="Close menu"
+            type="button"
+          >
+            <div className="menu-drawer-close-x" />
+          </button>
 
-                  <p className="text-sm text-cafe-brown/80 font-medium leading-relaxed">
-                    Follow Us!
-                  </p>
-
-                  {/* Social Icons */}
-                  {(instagramUrl || spotifyUrl) && (
-                    <div className="flex items-center justify-center gap-4 pt-3">
-                      {instagramUrl && (
-                        <a
-                          href={instagramUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-10 h-10 rounded-full bg-cafe-tan/10 border border-cafe-tan/20 flex items-center justify-center text-cafe-tan hover:bg-cafe-tan hover:text-cafe-white transition-all duration-300 hover:scale-110"
-                          aria-label="Instagram"
-                        >
-                          <PiInstagramLogoFill
-                            size={20}
-                            className="translate-x-[10px] translate-y-[10px]"
-                          />
-                        </a>
-                      )}
-                      {spotifyUrl && (
-                        <a
-                          href={spotifyUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-10 h-10 rounded-full bg-cafe-tan/10 border border-cafe-tan/20 flex items-center justify-center text-cafe-tan hover:bg-cafe-tan hover:text-cafe-white transition-all duration-300 hover:scale-110"
-                          aria-label="Spotify"
-                        >
-                          <PiSpotifyLogoFill
-                            size={20}
-                            className="translate-x-[10px] translate-y-[10px]"
-                          />
-                        </a>
-                      )}
-                    </div>
-                  )}
-                </motion.div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4vh' }}>
+            {/* Navigation Links */}
+            {[
+              { href: '/', label: 'Home' },
+              { href: '/menu', label: 'Menu' },
+              { href: '/story', label: 'Story' },
+              { href: '/contact', label: 'Contact' },
+              { href: '/careers', label: 'Careers' }
+            ].map((link) => (
+              <div key={link.href} className="menu-link-wrapper">
+                <div className={`menu-link-text ${isActive(link.href) ? 'active' : ''}`}>
+                  <Link
+                    href={link.href}
+                    onClick={(e) => handleMobileNavClick(e, link.href)}
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    {link.label}
+                  </Link>
+                </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            ))}
+
+            {/* Footer / Copyright */}
+            <div className="menu-drawer-footer">
+              <div className="menu-drawer-footer-text">
+                Est. Riverside 2026
+              </div>
+            </div>
+          </div>
+        </div>
       </nav>
 
     </>

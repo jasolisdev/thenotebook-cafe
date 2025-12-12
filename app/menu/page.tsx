@@ -7,7 +7,8 @@ import { MenuItem as MenuItemType, SelectedModifier } from '@/app/types';
 import { MENU_ITEMS } from '@/app/constants';
 import { ProductModal } from '@/app/components/features/ProductModal';
 import { useCart } from '@/app/components/providers/CartProvider';
-import Reveal from '../components/ui/Reveal';
+import RevealText from '../components/ui/RevealText';
+import FadeInSection from '../components/ui/FadeInSection';
 import ParallaxHero from '../components/features/ParallaxHero';
 import '../styles/pages/menu.css';
 
@@ -101,27 +102,30 @@ export default function MenuPage() {
         {/* Menu Header */}
         <ParallaxHero backgroundImage="/menu/tnc-menu-hero-bg.png" overlayVariant="lighter">
           <div className="max-w-4xl mx-auto text-center relative z-10 px-6 space-y-6">
-            <Reveal>
+            {/* Eyebrow - Instant reveal */}
+            <RevealText delay="0ms">
               <span
                 className="font-bold tracking-[0.2em] uppercase text-sm block"
                 style={{ color: 'var(--cafe-tan)' }}
               >
                 The Menu
               </span>
-            </Reveal>
-            <Reveal delay={120}>
+            </RevealText>
+            {/* Main Headline - 200ms delay */}
+            <RevealText delay="200ms">
               <h1 className="font-serif text-[70px] md:text-[90px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
                 Curated Selection
               </h1>
-            </Reveal>
-            <Reveal delay={220}>
+            </RevealText>
+            {/* Body Content - 400ms delay */}
+            <FadeInSection delay="400ms">
               <p
                 className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed"
                 style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}
               >
                 Small-batch roasts, house-made syrups, and locally sourced ingredients.
               </p>
-            </Reveal>
+            </FadeInSection>
           </div>
         </ParallaxHero>
 

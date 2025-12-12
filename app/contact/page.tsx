@@ -5,6 +5,8 @@
  * Features business hours, location map, contact info, and social links.
  */
 import Reveal from "../components/ui/Reveal";
+import RevealText from "../components/ui/RevealText";
+import FadeInSection from "../components/ui/FadeInSection";
 import ParallaxHero from "../components/features/ParallaxHero";
 import { MapPin, Clock, Phone, Mail, Coffee } from "lucide-react";
 
@@ -14,24 +16,27 @@ export default function ContactPage() {
       {/* Hero Section */}
       <ParallaxHero backgroundImage="/contact/tnc-contact-hero-bg.png" focusPercent={150} overlayVariant="light" >
         <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
-          <Reveal>
+          {/* Eyebrow - Instant reveal */}
+          <RevealText delay="0ms">
             <span className="font-bold tracking-[0.2em] uppercase text-sm block" style={{ color: 'var(--cafe-tan)' }}>
               Get in Touch
             </span>
-          </Reveal>
+          </RevealText>
 
-          <Reveal delay={200}>
+          {/* Main Headline - 200ms delay */}
+          <RevealText delay="200ms">
             <h1 className="font-serif text-[64px] md:text-[86px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
               Visit Us<br />
               <span className="italic" style={{ color: 'var(--cafe-tan)' }}>In Riverside</span>
             </h1>
-          </Reveal>
+          </RevealText>
 
-          <Reveal delay={400}>
+          {/* Body Content - 400ms delay */}
+          <FadeInSection delay="400ms">
             <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}>
               Come write your next chapter with us. Walk in, call ahead, or plan your next creative session here.
             </p>
-          </Reveal>
+          </FadeInSection>
         </div>
       </ParallaxHero>
 

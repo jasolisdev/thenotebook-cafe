@@ -419,6 +419,49 @@ h3 {
 }
 
 /* ============================================================
+   MASKED EDITORIAL REVEAL SYSTEM
+   High-end magazine-style page load animations
+============================================================ */
+
+/* The Mask Container - Hides text before reveal */
+.reveal-mask {
+  overflow: hidden;
+  display: block; /* Ensures the mask captures the full height */
+}
+
+/* The Moving Text - Slides up from below */
+.reveal-text-anim {
+  display: block;
+  transform: translateY(110%); /* Start completely out of view below */
+  opacity: 0;
+  animation: slideUpReveal 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+@keyframes slideUpReveal {
+  0% {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* The Body Fade - Soft fade up for body content */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
+              transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
    ACCESSIBILITY
 ============================================================ */
 ::selection {

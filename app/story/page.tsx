@@ -5,6 +5,8 @@
  */
 import { client } from "@/sanity/lib/client";
 import Reveal from "../components/ui/Reveal";
+import RevealText from "../components/ui/RevealText";
+import FadeInSection from "../components/ui/FadeInSection";
 import Image from "next/image";
 import ParallaxHero from "../components/features/ParallaxHero";
 import { Coffee, Music, Heart, MapPin, Sparkles, BookOpen, Users, Home as HomeIcon, Award } from "lucide-react";
@@ -44,24 +46,27 @@ export default async function StoryPage() {
       {/* Hero Section (from prototype) */}
       <ParallaxHero backgroundImage="/story/tnc-story-hero-bg.png" overlayVariant="light">
         <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
-          <Reveal>
+          {/* Eyebrow - Instant reveal */}
+          <RevealText delay="0ms">
             <span className="font-bold tracking-[0.2em] uppercase text-sm block" style={{ color: 'var(--cafe-tan)' }}>
               Our Story
             </span>
-          </Reveal>
+          </RevealText>
 
-          <Reveal delay={200}>
+          {/* Main Headline - 200ms delay */}
+          <RevealText delay="200ms">
             <h1 className="font-serif text-[64px] md:text-[86px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
               Built by Locals,<br />
               <span className="italic" style={{ color: 'var(--cafe-tan)' }}>For Locals</span>
             </h1>
-          </Reveal>
+          </RevealText>
 
-          <Reveal delay={400}>
+          {/* Body Content - 400ms delay */}
+          <FadeInSection delay="400ms">
             <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}>
               The story of a husband-wife dream to create Riverside&apos;s first truly genuine coffee community hub.
             </p>
-          </Reveal>
+          </FadeInSection>
         </div>
       </ParallaxHero>
 
