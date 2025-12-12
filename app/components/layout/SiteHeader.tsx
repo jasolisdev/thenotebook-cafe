@@ -5,8 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { ShoppingBag } from "lucide-react";
-import { PiSpotifyLogoFill, PiInstagramLogoFill } from "react-icons/pi";
-import { motion, AnimatePresence } from "framer-motion";
 
 const badgeColors = {
   tan: '#A48D78',
@@ -342,112 +340,42 @@ export default function SiteHeader({
           </div>
         </div>
 
-        {/* Mobile Menu - Full Screen Overlay */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              className="fixed left-0 right-0 bottom-0 md:hidden bg-cafe-mist"
-              style={{
-                top: '80px',
-                zIndex: 120,
-                minHeight: 'calc(100vh - 80px)',
-                width: '100vw',
-                height: 'calc(100vh - 80px)'
-              }}
-            >
-              {/* Content */}
-              <div
-                className="relative w-full h-full flex flex-col items-center justify-center px-8 py-16 overflow-y-auto"
-                style={{ minHeight: 'calc(100vh - 80px)', transform: 'translateY(-40px)' }}
-              >
-                {/* Navigation Links */}
-                <nav className="flex flex-col items-center gap-6 mb-12">
-                  {[
-                    { href: '/', label: 'Home' },
-                    { href: '/menu', label: 'Menu' },
-                    { href: '/story', label: 'Story' },
-                    { href: '/contact', label: 'Contact' },
-                    { href: '/careers', label: 'Careers' }
-                  ].map((link, index) => (
-                    <motion.div
-                      key={link.href}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        delay: 0.06 + index * 0.04,
-                        duration: 0.35,
-                        ease: [0.4, 0, 0.2, 1]
-                      }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={() => setIsOpen(false)}
-                        className={`block font-medium uppercase tracking-[0.18em] text-lg sm:text-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive(link.href)
-                          ? 'text-cafe-tan'
-                          : 'text-cafe-black hover:text-cafe-tan hover:translate-x-1'
-                          }`}
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </nav>
+        {/* Cinematic Mobile Menu - Double Layer Right-to-Left */}
+        {/* Layer 1: Backdrop (Tan) */}
+        <div className={`menu-layer-backdrop md:hidden ${isOpen ? 'open' : ''}`} />
 
-                {/* Footer Info */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.5 }}
-                  className="text-center space-y-3"
-                >
-                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-cafe-tan to-transparent mx-auto mb-3" />
-
-                  <p className="text-sm text-cafe-brown/80 font-medium leading-relaxed">
-                    Follow Us!
-                  </p>
-
-                  {/* Social Icons */}
-                  {(instagramUrl || spotifyUrl) && (
-                    <div className="flex items-center justify-center gap-4 pt-3">
-                      {instagramUrl && (
-                        <a
-                          href={instagramUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-10 h-10 rounded-full bg-cafe-tan/10 border border-cafe-tan/20 flex items-center justify-center text-cafe-tan hover:bg-cafe-tan hover:text-cafe-white transition-all duration-300 hover:scale-110"
-                          aria-label="Instagram"
-                        >
-                          <PiInstagramLogoFill
-                            size={20}
-                            className="translate-x-[10px] translate-y-[10px]"
-                          />
-                        </a>
-                      )}
-                      {spotifyUrl && (
-                        <a
-                          href={spotifyUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-10 h-10 rounded-full bg-cafe-tan/10 border border-cafe-tan/20 flex items-center justify-center text-cafe-tan hover:bg-cafe-tan hover:text-cafe-white transition-all duration-300 hover:scale-110"
-                          aria-label="Spotify"
-                        >
-                          <PiSpotifyLogoFill
-                            size={20}
-                            className="translate-x-[10px] translate-y-[10px]"
-                          />
-                        </a>
-                      )}
-                    </div>
-                  )}
-                </motion.div>
+        {/* Layer 2: Main Drawer (Charcoal) */}
+        <div className={`menu-drawer-cinematic md:hidden ${isOpen ? 'open' : ''}`}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4vh' }}>
+            {/* Navigation Links */}
+            {[
+              { href: '/', label: 'Home' },
+              { href: '/menu', label: 'Menu' },
+              { href: '/story', label: 'Story' },
+              { href: '/contact', label: 'Contact' },
+              { href: '/careers', label: 'Careers' }
+            ].map((link) => (
+              <div key={link.href} className="menu-link-wrapper">
+                <div className={`menu-link-text ${isActive(link.href) ? 'active' : ''}`}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    {link.label}
+                  </Link>
+                </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            ))}
+
+            {/* Footer / Copyright */}
+            <div className="menu-drawer-footer">
+              <div className="menu-drawer-footer-text">
+                Est. Riverside 2026
+              </div>
+            </div>
+          </div>
+        </div>
       </nav>
 
     </>
