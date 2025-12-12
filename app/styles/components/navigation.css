@@ -777,56 +777,60 @@
 
 /* --- 3. Text Reveal Animations --- */
 .menu-link-wrapper {
-  overflow: hidden; /* Masks the text before it slides up */
+  overflow: visible; /* No masking - cleaner reveal */
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 16px 24px;
+  position: relative;
+}
+
+/* Subtle underline on hover */
+.menu-link-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60%;
+  height: 1px;
+  background: var(--cafe-tan);
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.menu-link-wrapper:hover::after {
+  transform: translateX(-50%) scaleX(1);
 }
 
 .menu-link-text {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-family: var(--font-sans); /* Outfit - cleaner, modern */
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem); /* Slightly smaller */
+  font-weight: 300; /* Light weight for elegance */
+  letter-spacing: 0.08em; /* Generous spacing */
   text-transform: uppercase;
-  line-height: 1.2;
+  line-height: 1.4; /* More breathing room */
   color: var(--cafe-cream);
-  transform: translateY(100%); /* Hidden down */
-  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1), color 0.3s ease;
-  will-change: transform;
+  opacity: 0;
+  transform: translateY(10px); /* Subtle slide */
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1), color 0.3s ease;
+  will-change: transform, opacity;
   display: block;
 }
 
-/* Text slides up when drawer opens */
+/* All text reveals at once - cleaner, faster */
 .menu-drawer-cinematic.open .menu-link-text {
+  opacity: 1;
   transform: translateY(0);
-}
-
-/* Staggered delays for each link */
-.menu-link-wrapper:nth-child(1) .menu-link-text {
-  transition-delay: 0.3s;
-}
-
-.menu-link-wrapper:nth-child(2) .menu-link-text {
-  transition-delay: 0.38s;
-}
-
-.menu-link-wrapper:nth-child(3) .menu-link-text {
-  transition-delay: 0.46s;
-}
-
-.menu-link-wrapper:nth-child(4) .menu-link-text {
-  transition-delay: 0.54s;
-}
-
-.menu-link-wrapper:nth-child(5) .menu-link-text {
-  transition-delay: 0.62s;
+  transition-delay: 0.4s; /* Single delay for all links */
 }
 
 .menu-link-wrapper:hover .menu-link-text {
-  color: var(--cafe-tan); /* Accent color on hover */
+  color: var(--cafe-tan);
+  transform: translateY(-2px); /* Subtle lift on hover */
 }
 
 /* Active link state */
 .menu-link-text.active {
   color: var(--cafe-tan);
+  font-weight: 400; /* Slightly heavier when active */
 }
 
 /* Close button in drawer */
