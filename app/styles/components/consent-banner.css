@@ -67,6 +67,18 @@
   opacity: 0.8;
 }
 
+.consent-banner__link {
+  color: var(--cafe-mist);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.consent-banner__link:hover {
+  color: var(--cafe-white);
+  text-decoration: underline;
+}
+
 /* Button Container */
 .consent-banner__actions {
   display: flex;

@@ -58,7 +58,10 @@ export default function ConsentBanner() {
       <div className="consent-banner__text">
         <h4 className="consent-banner__headline">We use cookies</h4>
         <p className="consent-banner__copy">
-          To improve your experience and keep the coffee flowing smoothly, we use cookies.
+          To improve your experience and keep the coffee flowing smoothly, we use cookies.{" "}
+          <a href="/privacy" className="consent-banner__link">
+            Learn more
+          </a>
         </p>
       </div>
       <div className="consent-banner__actions">
