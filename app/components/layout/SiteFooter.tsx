@@ -31,23 +31,7 @@ export default function SiteFooter(): React.JSX.Element {
 
   return (
     <footer className="relative overflow-hidden pt-20 pb-10" style={{ backgroundColor: 'var(--coffee-900)', borderTop: '1px solid var(--coffee-800)' }}>
-      {/* Watermark */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none"
-        style={{
-          fontSize: '20rem',
-          fontFamily: 'var(--font-display)',
-          color: 'var(--coffee-800)',
-          opacity: 0.1,
-          lineHeight: 1,
-          whiteSpace: 'nowrap',
-        }}
-        aria-hidden="true"
-      >
-        Notebook
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
 
           {/* Brand Column */}

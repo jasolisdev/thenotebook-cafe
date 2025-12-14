@@ -69,28 +69,32 @@ export default function SiteHeader({
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const currentScrollY = window.scrollY;
-          const atTop = currentScrollY < 10;
+          const atTop = currentScrollY < 20;
           const scrollingDown = currentScrollY > lastScrollY.current;
           const scrollingUp = currentScrollY < lastScrollY.current;
 
+          // Update state immediately
           setIsAtTop(atTop);
 
-          // Show/hide navbar based on scroll direction
-          if (scrollingDown) {
-            // Keep nav transparent while it is on its way out
-            setShowSolidBg(forceSolidRef.current);
-
-            if (currentScrollY > 100) {
-              setIsVisible(false);
-            }
-          } else if (scrollingUp) {
-            // Scrolling up - show navbar with solid background
-            setIsVisible(true);
-            setShowSolidBg(forceSolidRef.current || !atTop);
-          } else if (atTop) {
-            // At the very top - show transparent
+          // At the very top - show transparent navbar
+          if (atTop) {
             setIsVisible(true);
             setShowSolidBg(forceSolidRef.current ? true : false);
+          }
+          // Scrolling down - hide navbar
+          else if (scrollingDown && currentScrollY > 100) {
+            setIsVisible(false);
+            setShowSolidBg(true);
+          }
+          // Scrolling up - show navbar with glassmorphism
+          else if (scrollingUp) {
+            setIsVisible(true);
+            setShowSolidBg(true);
+          }
+          // Just scrolled from top - show glassmorphism immediately
+          else if (!atTop && currentScrollY > 20) {
+            setIsVisible(true);
+            setShowSolidBg(true);
           }
 
           lastScrollY.current = currentScrollY;
@@ -233,7 +237,7 @@ export default function SiteHeader({
             ? 'border-coffee-50/20'
             : isScrolled
             ? 'border-coffee-50/20'
-            : 'border-coffee-50 border-opacity-100'
+            : 'border-transparent'
         }`}
         data-at-top={isAtTop}
         style={{
