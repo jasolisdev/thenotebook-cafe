@@ -168,7 +168,7 @@ export default async function HomePage() {
       {/* Signature Pours */}
       <section
         data-section="Signature Pours"
-        className="signature-pours-section relative py-24 px-6 overflow-hidden"
+        className="relative py-24 px-6 overflow-hidden"
       >
         {/* Subtle Floating Decorations */}
         <div className="absolute top-20 right-10 md:right-20 opacity-[0.05] pointer-events-none signature-float" style={{ animation: 'floatGentle 10s ease-in-out infinite' }}>

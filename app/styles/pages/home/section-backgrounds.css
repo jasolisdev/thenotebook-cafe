@@ -7,13 +7,14 @@
    UNIFIED GRADIENT TREATMENT
    Signature Pours, Our Philosophy, Low Lights, Atmosphere
    Consistent layered radial gradients for cohesive flow
+   Matches "More Than Coffee" background with lighter text areas
 ============================================================ */
 [data-section="Signature Pours"],
 [data-section="Our Philosophy"],
 [data-section="Low Lights"],
 [data-section="Atmosphere"] {
   position: relative;
-  background-color: var(--cafe-mist);
+  background-color: var(--cafe-beige);
   background-image:
     radial-gradient(1100px circle at 32% 28%,
       rgba(var(--cafe-cream-rgb), 0.92) 0%,

@@ -5,37 +5,3 @@
 .signature-float {
   filter: drop-shadow(0 2px 8px rgba(164, 141, 120, 0.15));
 }
-
-.signature-pours-section {
-  --signature-fade-overlap: 96px;
-  margin-top: calc(var(--signature-fade-overlap) * -1);
-  padding-top: calc(6rem + var(--signature-fade-overlap));
-}
-
-.signature-pours-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--cafe-mist);
-  z-index: 0;
-  pointer-events: none;
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0,
-    #000 var(--signature-fade-overlap),
-    #000 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0,
-    #000 var(--signature-fade-overlap),
-    #000 100%
-  );
-}
-
-@media (max-width: 767px) {
-  .signature-pours-section {
-    --signature-fade-overlap: 72px;
-  }
-}
-
