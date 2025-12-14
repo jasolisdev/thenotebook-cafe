@@ -4,97 +4,40 @@
 ============================================================ */
 
 /* ============================================================
-   SIGNATURE POURS SECTION
-   Light cream base with subtle tan warmth
+   UNIFIED GRADIENT TREATMENT
+   Signature Pours, Our Philosophy, Low Lights, Atmosphere
+   Consistent layered radial gradients for cohesive flow
 ============================================================ */
-[data-section="Signature Pours"] {
-  position: relative;
-  background-color: var(--cafe-white);
-  background-image:
-    radial-gradient(1000px circle at 68% 25%,
-      rgba(var(--cafe-cream-rgb), 0.85) 0%,
-      rgba(var(--cafe-cream-rgb), 0.45) 42%,
-      rgba(var(--cafe-cream-rgb), 0) 75%),
-    radial-gradient(950px circle at 22% 65%,
-      rgba(var(--cafe-tan-rgb), 0.18) 0%,
-      rgba(var(--cafe-tan-rgb), 0) 58%),
-    radial-gradient(800px circle at 85% 70%,
-      rgba(var(--cafe-mist-rgb), 0.95) 0%,
-      rgba(var(--cafe-mist-rgb), 0) 62%);
-}
-
-[data-section="Signature Pours"]::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(1100px circle at 45% 40%,
-      rgba(var(--cafe-black-rgb), 0) 0%,
-      rgba(var(--cafe-black-rgb), 0.08) 100%);
-  opacity: 0.65;
-  mix-blend-mode: multiply;
-}
-
-/* ============================================================
-   OUR PHILOSOPHY SECTION
-   Warm mist base with layered cream and tan
-============================================================ */
-[data-section="Our Philosophy"] {
+[data-section="Signature Pours"],
+[data-section="Our Philosophy"],
+[data-section="Low Lights"],
+[data-section="Atmosphere"] {
   position: relative;
   background-color: var(--cafe-mist);
   background-image:
-    radial-gradient(1200px circle at 18% 35%,
-      rgba(var(--cafe-cream-rgb), 0.88) 0%,
-      rgba(var(--cafe-cream-rgb), 0.52) 40%,
-      rgba(var(--cafe-cream-rgb), 0) 72%),
-    radial-gradient(900px circle at 82% 42%,
-      rgba(var(--cafe-tan-rgb), 0.25) 0%,
-      rgba(var(--cafe-tan-rgb), 0) 65%),
-    radial-gradient(1100px circle at 50% 85%,
-      rgba(var(--cafe-beige-rgb), 0.12) 0%,
-      rgba(var(--cafe-beige-rgb), 0) 55%);
+    radial-gradient(1100px circle at 32% 28%,
+      rgba(var(--cafe-cream-rgb), 0.92) 0%,
+      rgba(var(--cafe-cream-rgb), 0.55) 38%,
+      rgba(var(--cafe-cream-rgb), 0) 70%),
+    radial-gradient(950px circle at 78% 30%,
+      rgba(var(--cafe-tan-rgb), 0.22) 0%,
+      rgba(var(--cafe-tan-rgb), 0) 62%),
+    radial-gradient(1000px circle at 78% 78%,
+      rgba(var(--cafe-brown-rgb), 0.10) 0%,
+      rgba(var(--cafe-brown-rgb), 0) 58%);
 }
 
-[data-section="Our Philosophy"]::after {
+[data-section="Signature Pours"]::after,
+[data-section="Our Philosophy"]::after,
+[data-section="Low Lights"]::after,
+[data-section="Atmosphere"]::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(1300px circle at 55% 30%,
+  background: radial-gradient(1200px circle at 50% 35%,
       rgba(var(--cafe-black-rgb), 0) 0%,
-      rgba(var(--cafe-black-rgb), 0.10) 100%);
-  opacity: 0.5;
-  mix-blend-mode: multiply;
-}
-
-/* ============================================================
-   LOW LIGHTS SECTION
-   Deep mist with centered cream glow
-============================================================ */
-[data-section="Low Lights"] {
-  position: relative;
-  background-color: var(--cafe-mist);
-  background-image:
-    radial-gradient(1150px circle at 42% 38%,
-      rgba(var(--cafe-cream-rgb), 0.90) 0%,
-      rgba(var(--cafe-cream-rgb), 0.48) 45%,
-      rgba(var(--cafe-cream-rgb), 0) 78%),
-    radial-gradient(1000px circle at 75% 28%,
-      rgba(var(--cafe-tan-rgb), 0.20) 0%,
-      rgba(var(--cafe-tan-rgb), 0) 60%),
-    radial-gradient(950px circle at 25% 75%,
-      rgba(var(--cafe-brown-rgb), 0.08) 0%,
-      rgba(var(--cafe-brown-rgb), 0) 52%);
-}
-
-[data-section="Low Lights"]::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(1250px circle at 50% 45%,
-      rgba(var(--cafe-black-rgb), 0) 0%,
-      rgba(var(--cafe-black-rgb), 0.11) 100%);
+      rgba(var(--cafe-black-rgb), 0.12) 100%);
   opacity: 0.55;
   mix-blend-mode: multiply;
 }
@@ -128,38 +71,6 @@
       rgba(var(--cafe-black-rgb), 0) 0%,
       rgba(var(--cafe-black-rgb), 0.06) 100%);
   opacity: 0.7;
-  mix-blend-mode: multiply;
-}
-
-/* ============================================================
-   ATMOSPHERE SECTION
-   Rich mist with dual tan warmth
-============================================================ */
-[data-section="Atmosphere"] {
-  position: relative;
-  background-color: var(--cafe-mist);
-  background-image:
-    radial-gradient(1250px circle at 28% 32%,
-      rgba(var(--cafe-cream-rgb), 0.92) 0%,
-      rgba(var(--cafe-cream-rgb), 0.55) 42%,
-      rgba(var(--cafe-cream-rgb), 0) 75%),
-    radial-gradient(1000px circle at 72% 38%,
-      rgba(var(--cafe-tan-rgb), 0.22) 0%,
-      rgba(var(--cafe-tan-rgb), 0) 62%),
-    radial-gradient(950px circle at 50% 80%,
-      rgba(var(--cafe-beige-rgb), 0.15) 0%,
-      rgba(var(--cafe-beige-rgb), 0) 58%);
-}
-
-[data-section="Atmosphere"]::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(1300px circle at 45% 35%,
-      rgba(var(--cafe-black-rgb), 0) 0%,
-      rgba(var(--cafe-black-rgb), 0.12) 100%);
-  opacity: 0.52;
   mix-blend-mode: multiply;
 }
 
