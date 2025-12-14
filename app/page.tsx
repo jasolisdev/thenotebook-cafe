@@ -165,17 +165,9 @@ export default async function HomePage() {
       {/* Signature Pours */}
       <section
         data-section="Signature Pours"
-        className="relative py-24 px-6 overflow-hidden"
+        className="relative py-24 overflow-hidden"
       >
-        {/* Subtle Floating Decorations */}
-        <div className="absolute top-20 right-10 md:right-20 opacity-[0.05] pointer-events-none signature-float" style={{ animation: 'floatGentle 10s ease-in-out infinite' }}>
-          <Coffee size={64} className="text-cafe-tan" strokeWidth={1.5} />
-        </div>
-        <div className="absolute bottom-32 left-10 md:left-24 opacity-[0.05] pointer-events-none signature-float" style={{ animation: 'floatGentle 12s ease-in-out infinite 2s' }}>
-          <Coffee size={52} className="text-cafe-tan" strokeWidth={1.5} />
-        </div>
-
-        <div className="max-w-6xl mx-auto relative z-10">
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <Reveal>
               <span className="text-xs uppercase tracking-[0.25em] font-semibold" style={{ color: 'var(--cafe-tan)' }}>
@@ -379,15 +371,6 @@ export default async function HomePage() {
         data-section="The Trinity"
         className="py-20 md:py-24 relative overflow-hidden trinity-slab"
       >
-        <div className="section-deco" style={{ top: '12%', right: '16%', animationDuration: '10s' }} aria-hidden="true">
-          <Sparkles strokeWidth={1.6} />
-        </div>
-        <div className="section-deco section-deco-dark" style={{ bottom: '6%', left: '10%', animationDuration: '12s', animationDelay: '0.6s' }} aria-hidden="true">
-          <Armchair strokeWidth={1.4} />
-        </div>
-        <div className="section-deco-mobile" style={{ top: '8%', right: '12%' }} aria-hidden="true">
-          <Sparkles strokeWidth={1.6} />
-        </div>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3">
             <Reveal>
