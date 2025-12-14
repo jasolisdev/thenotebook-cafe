@@ -10,6 +10,7 @@ import { useCart } from '@/app/components/providers/CartProvider';
 import RevealText from '../components/ui/RevealText';
 import FadeInSection from '../components/ui/FadeInSection';
 import ParallaxHero from '../components/features/ParallaxHero';
+import { TextWithSerifAmpersand, TextWithSansAmpersand } from '@/app/utils/ampersandUtils';
 import '../styles/pages/menu.css';
 
 const colors = {
@@ -237,15 +238,28 @@ export default function MenuPage() {
                 className="mb-16"
               >
                 {/* Category Header - Editorial Style */}
-                <h2
-                  className="font-serif text-3xl md:text-4xl mb-2 pb-3 border-b"
-                  style={{
-                    color: colors.black,
-                    borderColor: colors.tan
-                  }}
-                >
-                  {subcategory}
-                </h2>
+                <div className="flex items-baseline justify-between mb-2 pb-3 border-b" style={{ borderColor: colors.tan }}>
+                  <div className="flex items-baseline gap-3">
+                    <h2
+                      className="font-serif text-3xl md:text-4xl"
+                      style={{ color: colors.black }}
+                    >
+                      <TextWithSerifAmpersand>{subcategory}</TextWithSerifAmpersand>
+                    </h2>
+                    <span
+                      className="hidden md:inline text-base font-light"
+                      style={{ color: colors.beige }}
+                    >
+                      {items.length} {items.length === 1 ? 'item' : 'items'}
+                    </span>
+                  </div>
+                  <span
+                    className="md:hidden text-sm font-light"
+                    style={{ color: colors.beige }}
+                  >
+                    {items.length} {items.length === 1 ? 'item' : 'items'}
+                  </span>
+                </div>
 
                 {/* Menu Items - Clean List Layout */}
                 <div className="space-y-4 mt-8">
@@ -283,7 +297,7 @@ export default function MenuPage() {
                           )}
                         </h3>
                         <p style={{ color: colors.brown }}>
-                          {item.description}
+                          <TextWithSansAmpersand>{item.description}</TextWithSansAmpersand>
                         </p>
                       </div>
 

@@ -3,6 +3,7 @@
  *
  * Redesigned homepage featuring new hero, sanctuary section, vibe carousel, and newsletter.
  */
+import "./styles/pages/home.css";
 import Link from "next/link";
 import Image from "next/image";
 import Reveal from "./components/ui/Reveal";
@@ -15,9 +16,10 @@ import StoryLink from "./components/ui/StoryLink";
 import StoryBlobs from "./components/ui/StoryBlobs";
 import AtmosphereBlob from "./components/ui/AtmosphereBlob";
 import PhilosophyBlob from "./components/ui/PhilosophyBlob";
-import { Coffee, Music, Wifi, PlugZap, Armchair, Sparkles } from "lucide-react";
+import { Coffee, Music, Wifi, PlugZap, Armchair, Sparkles, BookOpen, Heart, Users } from "lucide-react";
 import AtmosphereStrip from "./components/AtmosphereStrip";
 import SignaturePoursGrid from "./components/SignaturePoursGrid";
+import NewsletterSubscribe from "./components/ui/NewsletterSubscribe";
 
 const vibeImages = [
   "/unsplash/tnc-placeholder-3.png",
@@ -84,49 +86,21 @@ export default async function HomePage() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#F4F1EA',
+          backgroundColor: 'var(--cafe-mist)',
           overflow: 'hidden'
         }}
       >
         {/* Subtle Coffee Texture Background */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=2000&q=80)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: 0.12,
-            filter: 'sepia(25%) saturate(70%) brightness(95%) hue-rotate(10deg)',
-            zIndex: 0
-          }}
-        />
+        <div className="editorial-hero-bg" aria-hidden="true" />
 
         {/* Content */}
         <div
-          style={{
-            position: 'relative',
-            zIndex: 1,
-            textAlign: 'center',
-            maxWidth: '1100px',
-            padding: '0 2rem'
-          }}
+          className="editorial-hero-content"
         >
           {/* Eyebrow - Instant reveal (0ms) */}
           <RevealText delay="0ms">
             <p
-              style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
-                letterSpacing: '0.3em',
-                textTransform: 'uppercase',
-                color: '#6B5A4D',
-                marginBottom: 'clamp(2.5rem, 5vw, 4rem)',
-                fontWeight: 500
-              }}
+              className="hero-eyebrow"
             >
               EST. RIVERSIDE 2026
             </p>
@@ -135,35 +109,59 @@ export default async function HomePage() {
           {/* Main Headline - 200ms delay */}
           <RevealText delay="200ms">
             <h1
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(3.5rem, 9vw, 8rem)',
-                lineHeight: 1.05,
-                color: 'var(--cafe-black)',
-                marginBottom: 'clamp(3rem, 6vw, 5rem)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em'
-              }}
+              className="hero-headline"
             >
-              Where Every Cup<br />Tells a Story
+              <span className="hero-headline-top">Where Every Cup</span>
+              <br />
+              <span className="hero-headline-bottom">Tells a Story</span>
             </h1>
           </RevealText>
 
           {/* Body Content - 400ms delay (waits for headline) */}
           <FadeInSection delay="400ms">
             <p
-              style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: 'clamp(0.875rem, 2vw, 1.125rem)',
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-                color: '#6B5A4D',
-                fontWeight: 400,
-                opacity: 0.9
-              }}
+              className="hero-tagline"
             >
               COME FOR THE COFFEE, STAY FOR THE VIBE.
             </p>
+          </FadeInSection>
+
+          {/* Brewing Soon + Social Proof */}
+          <FadeInSection delay="520ms">
+            <div className="hero-brewing-soon">
+              <div className="hero-brewing-pill" aria-label="Brewing Soon">
+                <span>Brewing Soon</span>
+                <span className="hero-brewing-cup" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
+                    <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
+                    <line x1="6" y1="1" x2="6" y2="4" className="hero-steam" style={{ animationDelay: '0s' }} />
+                    <line x1="10" y1="1" x2="10" y2="4" className="hero-steam" style={{ animationDelay: '0.5s' }} />
+                    <line x1="14" y1="1" x2="14" y2="4" className="hero-steam" style={{ animationDelay: '1s' }} />
+                  </svg>
+                </span>
+              </div>
+
+              <div className="hero-social-proof" aria-label="Future Local Favorite">
+                <div className="hero-avatar-row" aria-hidden="true">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="hero-avatar">
+                      <Image
+                        src={`https://i.pravatar.cc/100?img=${i + 20}`}
+                        alt=""
+                        fill
+                        className="object-cover opacity-90"
+                        sizes="32px"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="hero-social-copy">
+                  <span className="hero-social-title">Future Local Favorite</span>
+                  <span className="hero-social-subtitle">Coming to Riverside 2026</span>
+                </div>
+              </div>
+            </div>
           </FadeInSection>
         </div>
       </section>
@@ -171,8 +169,7 @@ export default async function HomePage() {
       {/* Signature Pours */}
       <section
         data-section="Signature Pours"
-        className="relative py-24 px-6 overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
+        className="signature-pours-section relative py-24 px-6 overflow-hidden"
       >
         {/* Subtle Floating Decorations */}
         <div className="absolute top-20 right-10 md:right-20 opacity-[0.05] pointer-events-none signature-float" style={{ animation: 'floatGentle 10s ease-in-out infinite' }}>
@@ -561,6 +558,108 @@ export default async function HomePage() {
         <AtmosphereStrip images={vibeImages} />
       </section>
 
+      {/* More Than Coffee - Two Column Layout */}
+      <section
+        data-section="More Than Coffee"
+        className="more-than-coffee-section py-32 px-6 relative overflow-hidden"
+      >
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-10">
+          {/* Left Column - Text Content */}
+          <div className="space-y-12">
+            <Reveal>
+              <div>
+                <h2 className="font-serif text-4xl md:text-6xl text-cafe-black mb-6">
+                  More than just coffee.{' '}
+                  <br />
+                  <span className="italic text-cafe-tan">It&apos;s a feeling.</span>
+                </h2>
+                <p className="text-cafe-brown/70 text-lg leading-relaxed">
+                  We designed The Notebook Café to be an extension of your living room. Whether you&apos;re catching up with friends, diving into deep work, or just soaking in the playlist.
+                </p>
+              </div>
+            </Reveal>
+
+            {/* Feature List */}
+            <div className="space-y-8">
+              <Reveal delay={150}>
+                <div className="flex gap-4 items-start">
+                  <div className="p-3 bg-cafe-tan/20 rounded-full text-cafe-tan">
+                    <Music size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-serif text-xl font-bold text-cafe-black">
+                      Curated Soundscapes
+                    </h4>
+                    <p className="text-cafe-brown/60 text-sm">
+                      Vinyl sessions every morning and lo-fi beats for your focus hours.
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={200}>
+                <div className="flex gap-4 items-start">
+                  <div className="p-3 bg-cafe-tan/20 rounded-full text-cafe-brown">
+                    <Users size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-serif text-xl font-bold text-cafe-black">
+                      Creative Community
+                    </h4>
+                    <p className="text-cafe-brown/60 text-sm">
+                      A space where artists, writers, and dreamers collide.
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={250}>
+                <div className="flex gap-4 items-start">
+                  <div className="p-3 bg-cafe-brown/10 rounded-full text-cafe-black">
+                    <Coffee size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-serif text-xl font-bold text-cafe-black">
+                      Direct Trade Beans
+                    </h4>
+                    <p className="text-cafe-brown/60 text-sm">
+                      Sourced ethically from small farms in Mexico and beyond.
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+
+          {/* Right Column - Overlapping Images */}
+          <div className="relative h-[600px] w-full">
+            <Reveal delay={100}>
+              <div className="absolute top-10 left-10 w-3/4 h-3/4 z-20 overflow-hidden rounded-2xl shadow-2xl">
+                <Image
+                  src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1400&q=80"
+                  alt="Cafe Interior"
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-700"
+                  sizes="(min-width: 768px) 50vw, 75vw"
+                />
+              </div>
+            </Reveal>
+
+            <Reveal delay={200}>
+              <div className="absolute bottom-0 right-0 w-2/3 h-2/3 z-10 overflow-hidden rounded-2xl shadow-xl">
+                <Image
+                  src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1200&q=80"
+                  alt="Coffee Details"
+                  fill
+                  className="object-cover grayscale hover:grayscale-0 hover:scale-105 transition-all duration-500"
+                  sizes="(min-width: 768px) 33vw, 67vw"
+                />
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
       {/* Stay in the Loop - Instagram CTA */}
       <section
         data-section="Stay in the Loop"
@@ -596,27 +695,39 @@ export default async function HomePage() {
               className="text-xl md:text-2xl font-light leading-relaxed mb-12 max-w-2xl mx-auto"
               style={{ color: 'rgba(237, 231, 216, 0.9)' }}
             >
-              New events announced weekly. Follow us for updates, behind-the-scenes moments, and spontaneous gatherings.
+              We open our doors in 2026. Be the first to know about our soft launch events and exclusive tastings.
             </p>
           </Reveal>
 
+          {/* Email Subscription Form */}
+          <Reveal delay={250}>
+            <div className="max-w-3xl mx-auto mb-16">
+              <NewsletterSubscribe />
+            </div>
+          </Reveal>
+
+          {/* Social & Location */}
           <Reveal delay={300}>
-            <a
-              href="https://instagram.com/thenotebookcafellc"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-8 md:px-12 py-4 md:py-5 text-xs md:text-sm uppercase tracking-[0.25em] font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-              style={{
-                backgroundColor: 'var(--cafe-black)',
-                color: 'var(--cafe-white)',
-                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
-                borderRadius: '4px'
-              }}
-            >
-              <Coffee size={20} strokeWidth={2} />
-              <span>@thenotebookcafellc</span>
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </a>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm md:text-base uppercase tracking-[0.2em]" style={{ color: 'var(--cafe-cream)' }}>
+              <a
+                href="https://instagram.com/thenotebookcafellc"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-cafe-tan transition-colors"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+                @thenotebookcafellc
+              </a>
+              <div className="flex items-center gap-2 opacity-60">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                Riverside, CA
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>

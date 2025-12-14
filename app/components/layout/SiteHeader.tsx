@@ -42,11 +42,21 @@ export default function SiteHeader({
   const navLinkBase =
     "nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist";
   const solidBg = showSolidBg || forceSolidBg || isOpen || forceHighContrast;
-  const activeLinkClass = solidBg ? "font-semibold text-cafe-black" : "font-semibold text-cafe-cream";
-  const inactiveLinkClass = solidBg
-    ? "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
-    : "text-cafe-cream/80 hover:text-cafe-cream hover:-translate-y-0.5";
-  const logoSrc = solidBg ? "/tnc-navbar-logo.png" : "/tnc-navbar-logo-light.png";
+  const isHeroTop = pathname === "/" && isAtTop && !isOpen && !forceHighContrast;
+
+  // Determine text color based on background
+  // At top (transparent over light hero) = dark text
+  // Mobile drawer (isOpen) uses cafe-mist background = dark text
+  // Olive background (scrolled) = light text
+  const useLightText = (solidBg && !isOpen && !isAtTop) || isHeroTop;
+
+  const activeLinkClass = useLightText ? "font-semibold text-cafe-cream" : "font-semibold text-cafe-black";
+  const inactiveLinkClass = useLightText
+    ? "text-cafe-cream/80 hover:text-cafe-cream hover:-translate-y-0.5"
+    : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5";
+
+  // Logo: light when using dark text, dark when using light text
+  const logoSrc = useLightText ? "/tnc-navbar-logo-dark-v1.png" : "/tnc-navbar-logo-light-v1.png";
 
   // Hide on scroll down, show on scroll up, transparent at top
   useEffect(() => {
@@ -213,20 +223,21 @@ export default function SiteHeader({
       {/* <AnnouncementBanner text={announcementText} /> */}
 
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 ${isOpen ? '' : (solidBg ? 'backdrop-blur-xl' : 'backdrop-blur-none')} border-b transition-all duration-300 ease-in-out ${
-          isOpen
-            ? 'bg-cafe-mist border-cafe-tan/10'
-            : solidBg
-            ? 'bg-cafe-mist/85 border-cafe-tan/10'
+        className={`fixed top-0 left-0 right-0 z-50 ${isOpen ? '' : (solidBg ? 'backdrop-blur-xl' : 'backdrop-blur-none')} border-b transition-all duration-300 ease-in-out ${isOpen
+          ? 'border-cafe-tan/10'
+          : solidBg
+            ? 'border-cafe-tan/10'
             : 'bg-transparent border-transparent'
-        }`}
+          }`}
         data-at-top={isAtTop}
         style={{
           transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
+          backgroundColor: isOpen ? 'var(--cafe-mist)' : (solidBg ? 'rgba(44, 36, 32, 0.8)' : 'transparent'),
         }}
       >
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
-          <div className="flex justify-between items-center h-20">
+          <div className="grid grid-cols-[auto_1fr_auto] items-center h-20">
+            {/* Logo - Left */}
             <Link
               href="/"
               className="flex items-center cursor-pointer group gap-2.5"
@@ -237,22 +248,22 @@ export default function SiteHeader({
                 alt="The Notebook Café Logo"
                 width={65}
                 height={65}
-                className="w-[56px] h-[56px] sm:w-[65px] sm:h-[65px]"
+                className="w-[50px] h-[50px] sm:w-[58px] sm:h-[58px]"
                 priority
               />
               <div className="flex flex-col">
                 <span
-                  className="font-serif text-2xl sm:text-3xl leading-none tracking-tight"
-                  style={{ color: solidBg ? 'var(--cafe-black)' : 'var(--cafe-cream)' }}
+                  className="font-serif whitespace-nowrap text-xl sm:text-2xl md:text-3xl leading-none tracking-tight"
+                  style={{ color: useLightText ? 'var(--cafe-cream)' : 'var(--cafe-black)' }}
                 >
                   The Notebook
                 </span>
                 <span
                   className="text-[12px] uppercase tracking-[0.22em] leading-none"
                   style={{
-                    color: solidBg
+                    color: useLightText
                       ? 'var(--cafe-tan)'
-                      : 'var(--cafe-terracotta)'
+                      : 'var(--cafe-tan)'
                   }}
                 >
                   Café
@@ -260,18 +271,13 @@ export default function SiteHeader({
               </div>
             </Link>
 
-            <div className="hidden md:flex items-center space-x-7">
+            {/* Navigation - Center */}
+            <div className="hidden md:flex items-center justify-center space-x-7">
               <Link
                 href="/"
                 className={`${navLinkBase} ${isActive("/") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Home
-                {isActive("/") && (
-                  <span
-                    className="nav-underline"
-                    style={!solidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
-                  />
-                )}
               </Link>
               <Link
                 href="/menu"
@@ -279,12 +285,6 @@ export default function SiteHeader({
                 className={`${navLinkBase} ${isActive("/menu") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Menu
-                {isActive("/menu") && (
-                  <span
-                    className="nav-underline"
-                    style={!solidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
-                  />
-                )}
               </Link>
               <Link
                 href="/story"
@@ -292,12 +292,6 @@ export default function SiteHeader({
                 className={`${navLinkBase} ${isActive("/story") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Story
-                {isActive("/story") && (
-                  <span
-                    className="nav-underline"
-                    style={!solidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
-                  />
-                )}
               </Link>
               <Link
                 href="/contact"
@@ -305,12 +299,6 @@ export default function SiteHeader({
                 className={`${navLinkBase} ${isActive("/contact") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Contact
-                {isActive("/contact") && (
-                  <span
-                    className="nav-underline"
-                    style={!solidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
-                  />
-                )}
               </Link>
               <Link
                 href="/careers"
@@ -318,16 +306,12 @@ export default function SiteHeader({
                 className={`${navLinkBase} ${isActive("/careers") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Careers
-                {isActive("/careers") && (
-                  <span
-                    className="nav-underline"
-                    style={!solidBg ? { background: 'linear-gradient(90deg, transparent, var(--cafe-cream), transparent)' } : undefined}
-                  />
-                )}
               </Link>
+            </div>
 
-              <div className="h-4 w-px bg-cafe-beige/50"></div>
-
+            {/* Cart & Social - Right */}
+            <div className="hidden md:flex items-center justify-end gap-4">
+              {/* Cart Icon */}
               <button
                 type="button"
                 className="relative cursor-pointer group"
@@ -335,7 +319,7 @@ export default function SiteHeader({
                 aria-label="Open cart"
               >
                 <ShoppingBag
-                  className={`transition-colors ${solidBg ? 'text-cafe-black group-hover:text-cafe-tan' : 'text-cafe-cream group-hover:text-cafe-cream'}`}
+                  className={`transition-colors ${useLightText ? 'text-cafe-cream group-hover:text-cafe-cream' : 'text-cafe-black group-hover:text-cafe-tan'}`}
                   strokeWidth={1.5}
                   size={22}
                 />
@@ -348,16 +332,42 @@ export default function SiteHeader({
                   </span>
                 )}
               </button>
+
+              {/* Divider */}
+              <div className="h-4 w-px bg-cafe-beige/50"></div>
+
+              {/* Instagram Icon + Follow Button */}
+              <a
+                href="https://instagram.com/thenotebookcafellc"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-5 group"
+              >
+                {/* Instagram Icon */}
+                <svg
+                  className={`w-5 h-5 transition-colors ${useLightText ? 'text-cafe-cream group-hover:text-cafe-tan' : 'text-cafe-black group-hover:text-cafe-tan'}`}
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+                {/* Follow Button */}
+                <span
+                  className={`${navLinkBase} !text-[10px] px-3 py-1.5 border rounded transition-all ${useLightText ? 'border-cafe-cream/40 text-cafe-cream hover:border-cafe-tan hover:text-cafe-tan' : 'border-cafe-black/40 text-cafe-black hover:border-cafe-tan hover:text-cafe-tan'}`}
+                >
+                  Follow
+                </span>
+              </a>
             </div>
 
-            <div className="md:hidden flex items-center gap-6">
+            <div className="md:hidden col-start-3 flex items-center justify-end gap-6">
               <button
                 type="button"
                 className="relative cursor-pointer"
                 onClick={handleCartClick}
                 aria-label="Open cart"
               >
-                <ShoppingBag className={solidBg ? "text-cafe-black" : "text-cafe-cream"} size={24} strokeWidth={1.5} />
+                <ShoppingBag className={useLightText ? "text-cafe-cream" : "text-cafe-black"} size={24} strokeWidth={1.5} />
                 {cartBadge > 0 && (
                   <span
                     className="absolute -bottom-2 -right-2 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full leading-none shadow-[0_2px_6px_rgba(0,0,0,0.25)] ring-1 ring-white/70"
@@ -373,7 +383,7 @@ export default function SiteHeader({
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 type="button"
               >
-                <span className={`hamburger-icon ${solidBg ? '' : 'hamburger-light'}`}>
+                <span className={`hamburger-icon ${useLightText ? 'hamburger-light' : ''}`}>
                   <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>
                   <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>
                   <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>

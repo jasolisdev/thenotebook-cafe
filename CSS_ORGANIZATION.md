@@ -24,7 +24,12 @@ app/
     │   └── sections.css
     └── pages/           # Page-specific styles
         ├── careers.css
-        └── home.css
+        ├── home.css
+        └── home/         # Home page split by section
+            ├── hero.css
+            ├── more-than-coffee.css
+            ├── signature-pours-section.css
+            └── trinity-slab.css
 ```
 
 > Note: `.backup` files in the style folders are snapshots of older layouts—keep them unchanged unless intentionally restoring previous styling.
@@ -55,7 +60,7 @@ app/
 
 ## Page Styles
 - **careers.css** — Careers hero wrapper and parallax hero overrides.
-- **home.css** — Welcome highlights, vibe quote, info cards, newsletter card, social icons, and carousel styling.
+- **home.css** — Home entrypoint; imports section styles from `styles/pages/home/`.
 
 ## Import Order
 
@@ -76,12 +81,9 @@ import "./styles/components/what-to-expect.css";
 // Layout styles
 import "./styles/layout/sections.css";
 import "./styles/layout/animations.css";
-
-// Page styles
-import "./styles/pages/home.css";
 ```
 
-Component-scoped CSS (e.g., `kenburns-hero.css`, `parallax-hero.css`) is imported within the React component that needs it. Additional page styles (`careers.css` and any future route-specific sheets) can be pulled in locally as those routes evolve.
+Page-specific CSS is imported by the route that needs it (e.g., `app/page.tsx` imports `./styles/pages/home.css`). Component-scoped CSS (e.g., `kenburns-hero.css`, `parallax-hero.css`) is imported within the React component that needs it.
 
 ## Why This Layout Works
 1. Styles are discoverable by concern: foundation → components → layout → pages.
@@ -98,7 +100,7 @@ Component-scoped CSS (e.g., `kenburns-hero.css`, `parallax-hero.css`) is importe
 - **New page?** → Create file in `styles/pages/`
 - **New animation/layout?** → Add to `styles/layout/`
 
-Don't forget to import the new CSS file in `app/layout.tsx`!
+Don't forget to import new layout/component CSS in the correct place (layout vs. route/component).
 
 ---
 

@@ -628,16 +628,25 @@ export default async function StoryPage() {
             </Reveal>
           </div>
 
-          {/* Together Section */}
+          {/* Together Section - Founders Quote */}
           <Reveal delay={400}>
-            <div className="mt-20 p-10 md:p-12 rounded-2xl text-center" style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.08)', border: '1px solid rgba(var(--cafe-tan-rgb), 0.2)' }}>
-              <Heart size={32} className="mx-auto mb-6" style={{ color: 'var(--cafe-tan)' }} />
-              <h3 className="font-serif text-3xl md:text-4xl mb-4" style={{ color: 'var(--cafe-black)' }}>
-                Building Together
-              </h3>
-              <p className="text-lg md:text-xl leading-relaxed font-light max-w-3xl mx-auto" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.82)' }}>
-                This is more than a business venture—it&apos;s our first shared creative project, a culmination of our individual passions converging into something we hope Riverside will love as much as we do.
-              </p>
+            <div className="mt-20 p-10 md:p-16 rounded-2xl relative" style={{ border: '2px solid rgba(var(--cafe-tan-rgb), 0.3)' }}>
+              {/* Icon with Lines */}
+              <div className="flex items-center justify-center gap-4 mb-10">
+                <div className="flex-1 h-[1px]" style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.3)' }}></div>
+                <Music size={32} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+                <div className="flex-1 h-[1px]" style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.3)' }}></div>
+              </div>
+
+              {/* Quote */}
+              <blockquote className="text-center">
+                <p className="font-serif text-2xl md:text-3xl lg:text-4xl italic leading-relaxed mb-6 max-w-4xl mx-auto" style={{ color: 'var(--cafe-black)' }}>
+                  &ldquo;This is more than a business venture—it&apos;s our first shared creative project, a culmination of our individual passions converging into something we hope Riverside will love as much as we do.&rdquo;
+                </p>
+                <footer className="text-sm uppercase tracking-[0.25em] font-semibold" style={{ color: 'var(--cafe-tan)' }}>
+                  — The Founders
+                </footer>
+              </blockquote>
             </div>
           </Reveal>
         </div>

@@ -15,11 +15,8 @@ import "./styles/components/what-to-expect.css";
 import "./styles/layout/sections.css";
 import "./styles/layout/animations.css";
 
-// Page styles
-import "./styles/pages/home.css";
-
 import { ThemeProvider } from "next-themes";
-import { DM_Serif_Display, Outfit, Caveat, Inter } from "next/font/google";
+import { DM_Serif_Display, Outfit, Caveat, Inter, Playfair_Display } from "next/font/google";
 import { cookies } from "next/headers";
 import PasswordGate from "./components/ui/PasswordGate";
 import SiteHeader from "./components/layout/SiteHeader";
@@ -59,9 +56,17 @@ const caveat = Caveat({
 });
 
 const inter = Inter({
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const playfairDisplay = Playfair_Display({
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-playfair",
   display: "swap",
 });
 
@@ -99,7 +104,7 @@ export default async function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${dmSerif.variable} ${outfit.variable} ${caveat.variable} ${inter.variable}`}
+      className={`${dmSerif.variable} ${outfit.variable} ${caveat.variable} ${inter.variable} ${playfairDisplay.variable}`}
     >
       <body className="antialiased font-sans">
         <ThemeProvider

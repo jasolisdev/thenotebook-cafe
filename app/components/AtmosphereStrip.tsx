@@ -1,5 +1,6 @@
 "use client";
 
+import "../styles/components/atmosphere-strip.css";
 import Image from "next/image";
 import { useRef } from "react";
 

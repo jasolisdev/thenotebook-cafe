@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { PiInstagramLogoFill } from "react-icons/pi";
+import { FaTiktok } from "react-icons/fa";
 import NewsletterForm from "../features/NewsLetterForm";
 import { useCallback } from "react";
 
@@ -83,11 +84,24 @@ export default function SiteFooter(): React.JSX.Element {
               >
                 <PiInstagramLogoFill className="w-5 h-5" />
               </a>
+              <a
+                href="https://www.tiktok.com/@thenotebookcafe"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+                className="hover:text-white cursor-pointer transition-colors"
+              >
+                <FaTiktok className="w-5 h-5" />
+              </a>
             </div>
           </div>
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs opacity-50 gap-3 md:gap-6">
+          <div className="text-center md:text-left">
+            <p>&copy; {year} The Notebook Café. All rights reserved.</p>
+            <p className="mt-1 md:mt-0">Made with ♥ in Riverside.</p>
+          </div>
           <div className="flex flex-wrap items-center gap-4 md:gap-6">
             <button
               type="button"
@@ -99,10 +113,6 @@ export default function SiteFooter(): React.JSX.Element {
             <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
             <Link href="/refunds" className="hover:text-white transition-colors">Refunds</Link>
-          </div>
-          <div className="text-center md:text-right">
-            <p>&copy; {year} The Notebook Café. All rights reserved.</p>
-            <p className="mt-1 md:mt-0">Made with ♥ in Riverside.</p>
           </div>
         </div>
       </div>

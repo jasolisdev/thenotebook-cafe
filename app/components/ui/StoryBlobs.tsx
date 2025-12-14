@@ -1,5 +1,6 @@
 "use client";
 
+import "../../styles/components/story-blobs.css";
 import { useEffect, useRef, useState } from "react";
 
 export default function StoryBlobs() {

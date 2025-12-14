@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import {
   AccessibilityHumanIcon, XMarkIcon, TypeIcon,
@@ -52,6 +52,12 @@ export const AccessibilityWidget: React.FC = () => {
       return defaultSettings;
     }
   });
+
+  const isDefaultSettings = useMemo(() => {
+    return (Object.keys(defaultSettings) as (keyof AccessibilitySettings)[]).every(
+      (key) => settings[key] === defaultSettings[key]
+    );
+  }, [settings]);
 
   // Save settings to localStorage whenever they change
   useEffect(() => {
@@ -200,7 +206,7 @@ export const AccessibilityWidget: React.FC = () => {
       {/* Floating Toggle Button */}
       <button
         onClick={toggleOpen}
-        className="fixed bottom-6 right-6 z-[110] w-14 h-14 bg-cafe-black text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-brown transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border border-cafe-tan/40"
+        className={`fixed bottom-6 left-6 z-[110] w-14 h-14 bg-cafe-black text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-brown transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border ${isDefaultSettings ? 'border-cafe-tan/40' : 'border-gold/90 shadow-[0_0_0_3px_rgba(196,164,132,0.18)]'}`}
         aria-label="Accessibility Options"
       >
         <AccessibilityHumanIcon className="w-8 h-8" />
@@ -215,10 +221,10 @@ export const AccessibilityWidget: React.FC = () => {
       )}
 
       {/* Drawer */}
-      <div className={`fixed inset-y-0 right-0 z-[110] w-full md:w-96 bg-cafe-white shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? 'translate-x-0' : 'translate-x-full'} flex flex-col border-l border-cafe-tan/20`}>
+      <div className={`fixed inset-y-0 right-0 z-[110] w-full md:w-96 bg-cafe-luxe-oat shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? 'translate-x-0' : 'translate-x-full'} flex flex-col border-l border-cafe-tan/20`}>
         
         {/* Header */}
-        <div className="p-6 border-b border-cafe-tan/20 bg-cafe-cream flex items-center justify-between shrink-0">
+        <div className="p-6 border-b border-cafe-tan/20 bg-cafe-luxe-oat flex items-center justify-between shrink-0">
           <h2 className="font-display font-bold text-xl text-cafe-black">
             {view === 'settings' ? 'Accessibility Tools' : 'Accessibility Statement'}
           </h2>
@@ -232,7 +238,7 @@ export const AccessibilityWidget: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6 bg-cafe-white">
+        <div className="flex-1 overflow-y-auto p-6 bg-cafe-luxe-oat">
           {view === 'settings' ? (
             <div className="space-y-4">
               <p className="text-sm text-cafe-brown font-sans mb-4">
@@ -374,7 +380,7 @@ export const AccessibilityWidget: React.FC = () => {
 
         {/* Footer */}
         {view === 'settings' && (
-          <div className="p-6 border-t border-cafe-tan/20 bg-cafe-cream shrink-0">
+          <div className="p-6 border-t border-cafe-tan/20 bg-cafe-luxe-oat shrink-0">
             <button 
               onClick={resetSettings}
               className="w-full flex items-center justify-center gap-2 py-3 px-4 border-2 border-cafe-black text-cafe-black hover:bg-cafe-black hover:text-cafe-cream rounded-xl font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"

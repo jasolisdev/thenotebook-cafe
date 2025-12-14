@@ -1,0 +1,32 @@
+/* ============================================================
+   HOME: More Than Coffee
+============================================================ */
+
+.more-than-coffee-section {
+  position: relative;
+  background-color: var(--cafe-beige);
+  background-image:
+    radial-gradient(1100px circle at 32% 28%,
+      rgba(var(--cafe-cream-rgb), 0.92) 0%,
+      rgba(var(--cafe-cream-rgb), 0.55) 38%,
+      rgba(var(--cafe-cream-rgb), 0) 70%),
+    radial-gradient(950px circle at 78% 30%,
+      rgba(var(--cafe-tan-rgb), 0.22) 0%,
+      rgba(var(--cafe-tan-rgb), 0) 62%),
+    radial-gradient(1000px circle at 78% 78%,
+      rgba(var(--cafe-brown-rgb), 0.10) 0%,
+      rgba(var(--cafe-brown-rgb), 0) 58%);
+}
+
+.more-than-coffee-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(1200px circle at 50% 35%,
+      rgba(var(--cafe-black-rgb), 0) 0%,
+      rgba(var(--cafe-black-rgb), 0.12) 100%);
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+}
+

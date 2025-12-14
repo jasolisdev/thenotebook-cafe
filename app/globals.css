@@ -8,11 +8,22 @@
   --color-cafe-tan: #A48D78;
   --color-cafe-terracotta: #9A4C32;
   --color-cafe-beige: #CBB9A4;
+  --color-cafe-luxe-oat: #CBBFAF;
   --color-cafe-cream: #EDE7D8;
   --color-cafe-mist: #F4F1EA;
   --color-cafe-white: #FAF9F6;
   --color-cafe-olive: #4A4F41;
   --color-cafe-red: #ef4444;
+
+  /* Test app palette (Aura & Bean) */
+  --color-cream: #F9F7F2;
+  --color-beige: #EBE5D9;
+  --color-latte: #D4C5B0;
+  --color-olive: #8C9A86;
+  --color-olive-dark: #5F6B5A;
+  --color-coffee: #4A3B32;
+  --color-coffee-dark: #2C221C;
+  --color-gold: #C4A484;
 }
 
 /* Component Styles */
@@ -48,6 +59,23 @@
   font-display: swap;
 }
 
+/* Playfair Display Font for Menu Ampersands */
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ============================================================
    DESIGN TOKENS
 =========================================================== */
@@ -55,7 +83,10 @@
   --font-sans: "Outfit", system-ui, sans-serif;
   --font-mono: "Outfit", monospace;
   --font-display: "DM Serif Display", serif;
-  --font-inter: "Inter", system-ui, sans-serif;
+
+  /* Menu Page Fonts */
+  --font-serif: var(--font-playfair), 'Playfair Display', serif; /* Used for Titles, Headers, Prices */
+  --font-sans-menu: var(--font-inter), 'Inter', sans-serif;       /* Used for Descriptions, UI, Buttons */
 
   /* ===============================
      UPDATED COLOR PALETTE
@@ -69,6 +100,7 @@
   --cafe-tan: #A48D78;
   --cafe-terracotta: #9A4C32;
   --cafe-beige: #CBB9A4;
+  --cafe-luxe-oat: #CBBFAF;
   --cafe-cream: #EDE7D8;
   --cafe-mist: #F4F1EA;
   --cafe-white: #FAF9F6;
@@ -94,7 +126,9 @@
   --cafe-brown-rgb: 74, 59, 50;
   --cafe-tan-rgb: 164, 141, 120;
   --cafe-beige-rgb: 203, 185, 164;
+  --cafe-luxe-oat-rgb: 203, 191, 175;
   --cafe-cream-rgb: 237, 231, 216;
+  --cafe-olive-rgb: 74, 79, 65;
   --cafe-mist-rgb: 244, 241, 234;
   --cafe-white-rgb: 250, 249, 246;
   --cafe-olive-rgb: 74, 79, 65;
@@ -292,6 +326,14 @@ body {
 ============================================================ */
 .font-display {
   font-family: var(--font-display);
+}
+
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
+.font-inter {
+  font-family: var(--font-inter);
 }
 
 h1,
