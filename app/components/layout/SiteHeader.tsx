@@ -417,13 +417,22 @@ export default function SiteHeader({
               { href: '/story', label: 'Story' },
               { href: '/contact', label: 'Contact' },
               { href: '/careers', label: 'Careers' }
-            ].map((link) => (
+            ].map((link, index) => (
               <div key={link.href} className="menu-link-wrapper">
-                <div className={`menu-link-text ${isActive(link.href) ? 'active' : ''}`}>
+                {/* The masked content container */}
+                <div
+                  className="menu-link-content"
+                  style={{ transitionDelay: isOpen ? `${0.4 + (index * 0.08)}s` : '0s' }}
+                >
+                  {/* Index Number */}
+                  <span className="menu-item-number">0{index + 1}</span>
+
+                  {/* Main Label */}
                   <Link
                     href={link.href}
                     onClick={(e) => handleMobileNavClick(e, link.href)}
-                    style={{ textDecoration: 'none', color: 'inherit' }}
+                    className={`menu-link-text ${isActive(link.href) ? 'active' : ''}`}
+                    style={{ textDecoration: 'none' }}
                   >
                     {link.label}
                   </Link>

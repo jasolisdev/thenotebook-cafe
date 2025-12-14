@@ -181,12 +181,18 @@
   z-index: 0;
   --hero-bg-image: url("https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=2000&q=80");
   background-image:
-    linear-gradient(rgba(var(--cafe-mist-rgb), 0.82), rgba(var(--cafe-mist-rgb), 0.82)),
+    linear-gradient(
+      135deg,
+      rgba(var(--cafe-mist-rgb), 0.92) 0%,
+      rgba(var(--cafe-mist-rgb), 0.75) 35%,
+      rgba(var(--cafe-cream-rgb), 0.68) 65%,
+      rgba(var(--cafe-mist-rgb), 0.85) 100%
+    ),
     var(--hero-bg-image);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: sepia(20%) saturate(80%);
+  filter: sepia(25%) saturate(85%) brightness(1.02);
 }
 
 @media (max-width: 767px) {

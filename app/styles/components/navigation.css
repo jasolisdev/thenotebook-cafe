@@ -775,62 +775,78 @@
   pointer-events: auto;
 }
 
-/* --- 3. Text Reveal Animations --- */
+/* --- 3. Masked Editorial Reveal Animations --- */
+
+/* The Mask (overflow hidden wrapper) */
 .menu-link-wrapper {
-  overflow: visible; /* No masking - cleaner reveal */
+  overflow: hidden; /* Critical for reveal effect */
   cursor: pointer;
-  padding: 16px 24px;
+  padding: 5px 20px;
   position: relative;
 }
 
-/* Subtle underline on hover */
-.menu-link-wrapper::after {
-  content: '';
-  position: absolute;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%) scaleX(0);
-  width: 60%;
-  height: 1px;
-  background: var(--cafe-tan);
-  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+/* The Moving Content (slides up from below) */
+.menu-link-content {
+  display: flex;
+  align-items: baseline; /* Aligns number with text baseline */
+  gap: 20px;
+
+  /* Initial State: Pushed down out of view */
+  transform: translateY(110%);
+
+  /* Smooth Custom Easing */
+  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform;
 }
 
-.menu-link-wrapper:hover::after {
-  transform: translateX(-50%) scaleX(1);
-}
-
-.menu-link-text {
-  font-family: var(--font-sans); /* Outfit - cleaner, modern */
-  font-size: clamp(1.75rem, 4.5vw, 2.5rem); /* Slightly smaller */
-  font-weight: 300; /* Light weight for elegance */
-  letter-spacing: 0.08em; /* Generous spacing */
-  text-transform: uppercase;
-  line-height: 1.4; /* More breathing room */
-  color: var(--cafe-cream);
-  opacity: 0;
-  transform: translateY(10px); /* Subtle slide */
-  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1), color 0.3s ease;
-  will-change: transform, opacity;
-  display: block;
-}
-
-/* All text reveals at once - cleaner, faster */
-.menu-drawer-cinematic.open .menu-link-text {
-  opacity: 1;
+/* Active State (reveals when drawer opens) */
+.menu-drawer-cinematic.open .menu-link-content {
   transform: translateY(0);
-  transition-delay: 0.4s; /* Single delay for all links */
 }
 
-.menu-link-wrapper:hover .menu-link-text {
-  color: var(--cafe-tan);
-  transform: translateY(-2px); /* Subtle lift on hover */
+/* The Index Number (01, 02, 03...) */
+.menu-item-number {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--cafe-luxe-oat); /* Tan/Oat color */
+  opacity: 0.6;
+  font-weight: 500;
+  transform: translateY(-5px); /* Optical alignment */
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+/* The Main Label */
+.menu-link-text {
+  font-family: var(--font-display); /* Playfair Display for editorial serif feel */
+  font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive sizing */
+  text-transform: uppercase;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+  color: var(--cafe-cream); /* Off-white */
+
+  /* Transitions for hover effects */
+  transition: color 0.4s ease, letter-spacing 0.4s ease, font-style 0.3s ease;
 }
 
 /* Active link state */
 .menu-link-text.active {
   color: var(--cafe-tan);
-  font-weight: 400; /* Slightly heavier when active */
+  font-weight: 500;
+}
+
+/* --- Hover Interaction --- */
+@media (hover: hover) {
+  .menu-link-wrapper:hover .menu-link-text {
+    color: var(--cafe-luxe-oat); /* Changes to Tan */
+    letter-spacing: 0.1em; /* Expands slightly */
+    font-style: italic; /* Editorial flair */
+  }
+
+  .menu-link-wrapper:hover .menu-item-number {
+    opacity: 1; /* Number becomes fully visible */
+    color: var(--cafe-cream); /* Number turns white */
+  }
 }
 
 /* Close button in drawer */
