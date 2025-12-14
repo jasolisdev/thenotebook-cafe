@@ -76,7 +76,7 @@ const atmosphereFeatures = [
 
 export default async function HomePage() {
   return (
-    <main className="overflow-hidden" style={{ backgroundColor: 'var(--cafe-mist)', color: 'var(--cafe-brown)' }}>
+    <main className="overflow-hidden" style={{ color: 'var(--cafe-brown)' }}>
       {/* Hero Section - Editorial Minimalist */}
       <section
         className="editorial-hero"
@@ -86,7 +86,6 @@ export default async function HomePage() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: 'var(--cafe-mist)',
           overflow: 'hidden'
         }}
       >
@@ -224,7 +223,6 @@ export default async function HomePage() {
       <section
         data-section="Our Philosophy"
         className="py-24 relative overflow-visible"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <PhilosophyBlob />
         <div className="section-deco" style={{ top: '6%', right: '12%', animationDuration: '13s' }} aria-hidden="true">
@@ -324,7 +322,6 @@ export default async function HomePage() {
       <section
         data-section="Low Lights"
         className="relative overflow-visible py-24 md:py-32 px-6"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <StoryBlobs />
         <div className="section-deco" style={{ top: '8%', left: '6%', animationDuration: '12s', animationDelay: '0.4s' }} aria-hidden="true">
@@ -477,7 +474,6 @@ export default async function HomePage() {
       <section
         data-section="Atmosphere"
         className="relative pt-24 md:pt-32 pb-[calc(6rem+20px)] md:pb-[calc(8rem+20px)] px-6 overflow-visible mb-16 md:mb-24"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <AtmosphereBlob />
         <div className="section-deco" style={{ top: '10%', left: '8%', animationDuration: '11s' }} aria-hidden="true">
@@ -544,7 +540,6 @@ export default async function HomePage() {
       <section
         data-section="Atmosphere Images"
         className="overflow-visible relative pb-24 md:pb-28"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <div className="section-deco" style={{ top: '6%', left: '10%', animationDuration: '13s' }} aria-hidden="true">
           <Sparkles strokeWidth={1.6} />
@@ -664,7 +659,6 @@ export default async function HomePage() {
       <section
         data-section="Stay in the Loop"
         className="relative py-24 md:py-32 overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-olive)' }}
       >
         <div className="section-deco" style={{ top: '12%', left: '10%', animationDuration: '11s' }} aria-hidden="true">
           <Coffee strokeWidth={1.4} />
