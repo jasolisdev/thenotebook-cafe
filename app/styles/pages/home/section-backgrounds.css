@@ -136,6 +136,48 @@
 }
 
 /* ============================================================
+   TEST SECTIONS
+   6 empty sections with More Than Coffee background treatment
+============================================================ */
+[data-section="test-section-1"],
+[data-section="test-section-2"],
+[data-section="test-section-3"],
+[data-section="test-section-4"],
+[data-section="test-section-5"],
+[data-section="test-section-6"] {
+  position: relative;
+  background-color: var(--cafe-beige);
+  background-image:
+    radial-gradient(1100px circle at 32% 28%,
+      rgba(var(--cafe-cream-rgb), 0.92) 0%,
+      rgba(var(--cafe-cream-rgb), 0.55) 38%,
+      rgba(var(--cafe-cream-rgb), 0) 70%),
+    radial-gradient(950px circle at 78% 30%,
+      rgba(var(--cafe-tan-rgb), 0.22) 0%,
+      rgba(var(--cafe-tan-rgb), 0) 62%),
+    radial-gradient(1000px circle at 78% 78%,
+      rgba(var(--cafe-brown-rgb), 0.10) 0%,
+      rgba(var(--cafe-brown-rgb), 0) 58%);
+}
+
+[data-section="test-section-1"]::after,
+[data-section="test-section-2"]::after,
+[data-section="test-section-3"]::after,
+[data-section="test-section-4"]::after,
+[data-section="test-section-5"]::after,
+[data-section="test-section-6"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(1200px circle at 50% 35%,
+      rgba(var(--cafe-black-rgb), 0) 0%,
+      rgba(var(--cafe-black-rgb), 0.12) 100%);
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+}
+
+/* ============================================================
    RESPONSIVE ADJUSTMENTS
    Scale gradients for mobile screens
 ============================================================ */
@@ -148,7 +190,13 @@
   [data-section="Atmosphere"],
   [data-section="Atmosphere Images"],
   [data-section="More Than Coffee"],
-  [data-section="Stay in the Loop"] {
+  [data-section="Stay in the Loop"],
+  [data-section="test-section-1"],
+  [data-section="test-section-2"],
+  [data-section="test-section-3"],
+  [data-section="test-section-4"],
+  [data-section="test-section-5"],
+  [data-section="test-section-6"] {
     background-size: 200% 200%;
     background-position: center center;
   }
@@ -161,7 +209,13 @@
   [data-section="Atmosphere"]::after,
   [data-section="Atmosphere Images"]::after,
   [data-section="More Than Coffee"]::after,
-  [data-section="Stay in the Loop"]::after {
+  [data-section="Stay in the Loop"]::after,
+  [data-section="test-section-1"]::after,
+  [data-section="test-section-2"]::after,
+  [data-section="test-section-3"]::after,
+  [data-section="test-section-4"]::after,
+  [data-section="test-section-5"]::after,
+  [data-section="test-section-6"]::after {
     opacity: 0.35;
   }
 }

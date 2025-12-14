@@ -655,6 +655,42 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Test Section 1 */}
+      <section
+        data-section="test-section-1"
+        className="relative py-32 overflow-hidden"
+      />
+
+      {/* Test Section 2 */}
+      <section
+        data-section="test-section-2"
+        className="relative py-32 overflow-hidden"
+      />
+
+      {/* Test Section 3 */}
+      <section
+        data-section="test-section-3"
+        className="relative py-32 overflow-hidden"
+      />
+
+      {/* Test Section 4 */}
+      <section
+        data-section="test-section-4"
+        className="relative py-32 overflow-hidden"
+      />
+
+      {/* Test Section 5 */}
+      <section
+        data-section="test-section-5"
+        className="relative py-32 overflow-hidden"
+      />
+
+      {/* Test Section 6 */}
+      <section
+        data-section="test-section-6"
+        className="relative py-32 overflow-hidden"
+      />
+
       {/* Stay in the Loop - Instagram CTA */}
       <section
         data-section="Stay in the Loop"
