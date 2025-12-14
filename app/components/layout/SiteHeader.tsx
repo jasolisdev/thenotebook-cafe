@@ -243,7 +243,9 @@ export default function SiteHeader({
         style={{
           transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
           transition: 'transform 500ms ease-in-out',
-          backgroundColor: isOpen
+          backgroundColor: isAtTop
+            ? 'transparent'
+            : isOpen
             ? 'var(--cafe-mist)'
             : isScrolled
             ? 'rgba(var(--coffee-50-rgb), 0.9)'
