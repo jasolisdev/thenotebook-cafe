@@ -4,18 +4,8 @@
 
 .trinity-slab {
   background: var(--cafe-olive);
-  border-radius: 24px;
-  margin: 48px 24px 24px;
-  padding: 62px 28px;
-  border: 1px solid rgba(var(--cafe-cream-rgb), 0.16);
 }
 
-@media (min-width: 1024px) {
-  .trinity-slab {
-    margin-left: 178px;
-    margin-right: 178px;
-  }
-}
 
 .trinity-slab .section-deco,
 .trinity-slab .section-deco-dark,
@@ -68,13 +58,6 @@
   align-items: start;
 }
 
-@media (max-width: 767px) {
-  .trinity-slab {
-    margin: 32px 16px 16px;
-    border-radius: 16px;
-    padding: 28px 20px;
-  }
-}
 
 .couch-bounce {
   animation: couchSway 2.4s ease-in-out infinite;
