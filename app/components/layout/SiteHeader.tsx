@@ -230,7 +230,7 @@ export default function SiteHeader({
       {/* <AnnouncementBanner text={announcementText} /> */}
 
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 border-b transition-all ease-in-out ${
+        className={`fixed top-0 left-0 right-0 z-50 border-b ease-in-out ${
           isScrolled ? 'backdrop-blur-md shadow-md' : ''
         } ${
           isOpen
@@ -242,12 +242,12 @@ export default function SiteHeader({
         data-at-top={isAtTop}
         style={{
           transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
+          transition: 'transform 500ms ease-in-out',
           backgroundColor: isOpen
             ? 'var(--cafe-mist)'
             : isScrolled
             ? 'rgba(var(--coffee-50-rgb), 0.9)'
             : 'transparent',
-          transitionDuration: '500ms',
         }}
       >
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
