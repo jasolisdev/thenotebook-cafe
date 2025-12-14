@@ -45,22 +45,22 @@
 
 /* ============================================================
    THE TRINITY SECTION
-   Clean white base with subtle cream warmth
+   Cafe-olive base with layered gradient (matches More Than Coffee)
 ============================================================ */
 [data-section="The Trinity"] {
   position: relative;
-  background-color: var(--cafe-white);
+  background-color: var(--cafe-olive);
   background-image:
-    radial-gradient(1100px circle at 50% 30%,
-      rgba(var(--cafe-cream-rgb), 0.75) 0%,
-      rgba(var(--cafe-cream-rgb), 0.40) 48%,
-      rgba(var(--cafe-cream-rgb), 0) 80%),
-    radial-gradient(900px circle at 85% 55%,
-      rgba(var(--cafe-tan-rgb), 0.15) 0%,
-      rgba(var(--cafe-tan-rgb), 0) 58%),
-    radial-gradient(850px circle at 15% 60%,
-      rgba(var(--cafe-mist-rgb), 0.88) 0%,
-      rgba(var(--cafe-mist-rgb), 0) 60%);
+    radial-gradient(1100px circle at 32% 28%,
+      rgba(var(--cafe-cream-rgb), 0.92) 0%,
+      rgba(var(--cafe-cream-rgb), 0.55) 38%,
+      rgba(var(--cafe-cream-rgb), 0) 70%),
+    radial-gradient(950px circle at 78% 30%,
+      rgba(var(--cafe-tan-rgb), 0.22) 0%,
+      rgba(var(--cafe-tan-rgb), 0) 62%),
+    radial-gradient(1000px circle at 78% 78%,
+      rgba(var(--cafe-brown-rgb), 0.10) 0%,
+      rgba(var(--cafe-brown-rgb), 0) 58%);
 }
 
 [data-section="The Trinity"]::after {
@@ -68,10 +68,10 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(1150px circle at 50% 50%,
+  background: radial-gradient(1200px circle at 50% 35%,
       rgba(var(--cafe-black-rgb), 0) 0%,
-      rgba(var(--cafe-black-rgb), 0.06) 100%);
-  opacity: 0.7;
+      rgba(var(--cafe-black-rgb), 0.12) 100%);
+  opacity: 0.55;
   mix-blend-mode: multiply;
 }
 

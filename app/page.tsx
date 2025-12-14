@@ -13,9 +13,6 @@ import HeroButtons from "./components/ui/HeroButtons";
 import KenBurnsHero from "./components/features/KenBurnsHero";
 import HeroHeart from "./components/ui/HeroHeart";
 import StoryLink from "./components/ui/StoryLink";
-import StoryBlobs from "./components/ui/StoryBlobs";
-import AtmosphereBlob from "./components/ui/AtmosphereBlob";
-import PhilosophyBlob from "./components/ui/PhilosophyBlob";
 import { Coffee, Music, Wifi, PlugZap, Armchair, Sparkles, BookOpen, Heart, Users } from "lucide-react";
 import AtmosphereStrip from "./components/AtmosphereStrip";
 import SignaturePoursGrid from "./components/SignaturePoursGrid";
@@ -224,7 +221,6 @@ export default async function HomePage() {
         data-section="Our Philosophy"
         className="py-24 relative overflow-visible"
       >
-        <PhilosophyBlob />
         <div className="section-deco" style={{ top: '6%', right: '12%', animationDuration: '13s' }} aria-hidden="true">
           <Coffee strokeWidth={1.4} />
         </div>
@@ -267,7 +263,6 @@ export default async function HomePage() {
             </div>
 
             <div className="order-1 lg:order-2 space-y-6 text-right items-end lg:pl-10 relative">
-              <div className="philosophy-blob hidden lg:block" aria-hidden="true"></div>
               <Reveal>
                 <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
                   Our Philosophy
@@ -323,7 +318,6 @@ export default async function HomePage() {
         data-section="Low Lights"
         className="relative overflow-visible py-24 md:py-32 px-6"
       >
-        <StoryBlobs />
         <div className="section-deco" style={{ top: '8%', left: '6%', animationDuration: '12s', animationDelay: '0.4s' }} aria-hidden="true">
           <Music strokeWidth={1.4} />
         </div>
@@ -475,7 +469,6 @@ export default async function HomePage() {
         data-section="Atmosphere"
         className="relative pt-24 md:pt-32 pb-[calc(6rem+20px)] md:pb-[calc(8rem+20px)] px-6 overflow-visible mb-16 md:mb-24"
       >
-        <AtmosphereBlob />
         <div className="section-deco" style={{ top: '10%', left: '8%', animationDuration: '11s' }} aria-hidden="true">
           <Wifi strokeWidth={1.4} />
         </div>
