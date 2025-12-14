@@ -26,22 +26,25 @@ export default function NewsletterSubscribe() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-        className="flex-1 px-6 py-4 text-base border-b-2 bg-transparent focus:outline-none transition-colors"
+        className="flex-1 px-6 py-4 text-base border-2 rounded-sm focus:outline-none transition-all duration-300"
         style={{
           borderColor: borderColor,
           color: 'var(--cafe-cream)',
+          backgroundColor: 'rgba(255, 255, 255, 0.04)',
+          boxShadow: borderColor === 'var(--cafe-tan)' ? '0 0 0 3px rgba(164, 141, 120, 0.15)' : 'none',
         }}
         onFocus={() => setBorderColor('var(--cafe-tan)')}
-        onBlur={() => setBorderColor('rgba(237, 231, 216, 0.3)')}
+        onBlur={() => setBorderColor('rgba(237, 231, 216, 0.25)')}
       />
       <button
         type="submit"
-        className="group inline-flex items-center justify-center gap-3 px-8 md:px-12 py-4 text-xs md:text-sm uppercase tracking-[0.25em] font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl whitespace-nowrap"
+        className="group inline-flex items-center justify-center gap-3 px-8 md:px-12 py-4 text-xs md:text-sm uppercase tracking-[0.25em] font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 active:shadow-lg whitespace-nowrap"
         style={{
           backgroundColor: 'var(--cafe-black)',
           color: 'var(--cafe-white)',
           boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
-          borderRadius: '4px'
+          borderRadius: '4px',
+          background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%), var(--cafe-black)',
         }}
       >
         <span>Subscribe</span>
