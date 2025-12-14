@@ -180,7 +180,7 @@ export default function SiteHeader({
     window.dispatchEvent(new CustomEvent("open-cart"));
   };
 
-  // Handle mobile drawer link clicks - close drawer and navigate
+  // Handle mobile drawer link clicks - navigate then close drawer
   const handleMobileNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     // Prevent default navigation
     e.preventDefault();
@@ -191,13 +191,13 @@ export default function SiteHeader({
       return;
     }
 
-    // Close the drawer and navigate with short delay
-    setIsOpen(false);
+    // Start navigation immediately to begin page load
+    router.push(href);
 
-    // Navigate quickly while drawer is closing
+    // Keep drawer open while page loads, then close with smooth transition
     setTimeout(() => {
-      router.push(href);
-    }, 200); // Short delay to start close animation, then navigate
+      setIsOpen(false);
+    }, 450); // Delay allows page content to load before drawer slides away
   };
 
   // Prefetch hero images on hover for instant page transitions
