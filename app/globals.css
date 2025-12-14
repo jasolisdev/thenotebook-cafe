@@ -15,6 +15,12 @@
   --color-cafe-olive: #4A4F41;
   --color-cafe-red: #ef4444;
 
+  /* Premium Navbar/Footer Palette */
+  --color-coffee-50: #F3EFE9;      /* Off-White - Top nav text */
+  --color-coffee-100: #E6DCCA;     /* Cream - Footer body text */
+  --color-coffee-800: #3A2D26;     /* Dark Brown - Footer borders */
+  --color-coffee-900: #2C241F;     /* Deep Espresso - Footer bg, scrolled nav text */
+
   /* Test app palette (Aura & Bean) */
   --color-cream: #F9F7F2;
   --color-beige: #EBE5D9;
@@ -106,6 +112,12 @@
   --cafe-white: #FAF9F6;
   --cafe-olive: #4A4F41;
 
+  /* Premium Navbar/Footer Palette */
+  --coffee-50: #F3EFE9;      /* Off-White - Top nav text */
+  --coffee-100: #E6DCCA;     /* Cream - Footer body text */
+  --coffee-800: #3A2D26;     /* Dark Brown - Footer borders */
+  --coffee-900: #2C241F;     /* Deep Espresso - Footer bg, scrolled nav text */
+
   /* Extended palette - frequently used colors */
   --espresso-brown: #2a1f16;     /* Dark brown text */
   --warm-brown: #5a4a38;         /* Warm brown text */
@@ -132,6 +144,12 @@
   --cafe-mist-rgb: 244, 241, 234;
   --cafe-white-rgb: 250, 249, 246;
   --cafe-olive-rgb: 74, 79, 65;
+
+  /* Premium Navbar/Footer RGB */
+  --coffee-50-rgb: 243, 239, 233;   /* Off-White */
+  --coffee-100-rgb: 230, 220, 202;  /* Cream */
+  --coffee-800-rgb: 58, 45, 38;     /* Dark Brown */
+  --coffee-900-rgb: 44, 36, 31;     /* Deep Espresso */
 
   /* Extended RGB helpers */
   --espresso-brown-rgb: 42, 31, 22;

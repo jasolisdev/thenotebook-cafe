@@ -40,27 +40,41 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
     }
   }
 
-  // Inline footer style (like test footer)
+  // Inline footer style - minimalist line design
   if (inline) {
     return (
       <div>
-        <form onSubmit={onSubmit} className="flex">
+        <form onSubmit={onSubmit} className="flex gap-3">
           <input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email address"
+            placeholder="Your email address"
             inputMode="email"
             autoComplete="email"
-            className="bg-white/10 border-none outline-none text-white px-4 py-2 text-sm w-full rounded-l-sm focus:bg-white/20 transition-colors placeholder-white/50"
+            className="flex-1 bg-transparent border-0 border-b outline-none px-0 py-2 text-sm transition-all"
+            style={{
+              borderColor: 'rgba(var(--coffee-100-rgb), 0.3)',
+              color: 'var(--coffee-50)',
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(var(--coffee-100-rgb), 0.6)';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(var(--coffee-100-rgb), 0.3)';
+            }}
           />
           <button
             type="submit"
             disabled={status === "loading"}
-            className="bg-cafe-tan text-white px-4 py-2 text-xs uppercase font-bold tracking-wider hover:bg-cafe-tan/80 transition-colors rounded-r-sm whitespace-nowrap"
+            className="px-6 py-2 text-xs uppercase font-bold tracking-wider transition-all hover:opacity-80"
+            style={{
+              backgroundColor: 'var(--coffee-50)',
+              color: 'var(--coffee-900)',
+            }}
           >
-            {status === "loading" ? "Joining..." : "Join"}
+            {status === "loading" ? "..." : "Join"}
           </button>
         </form>
 

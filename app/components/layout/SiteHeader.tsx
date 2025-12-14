@@ -44,18 +44,21 @@ export default function SiteHeader({
   const solidBg = showSolidBg || forceSolidBg || isOpen || forceHighContrast;
   const isHeroTop = pathname === "/" && isAtTop && !isOpen && !forceHighContrast;
 
-  // Determine text color based on background
-  // At top (transparent over light hero) = dark text
-  // Mobile drawer (isOpen) uses cafe-mist background = dark text
-  // Olive background (scrolled) = light text
-  const useLightText = (solidBg && !isOpen && !isAtTop) || isHeroTop;
+  // New scroll-based color system
+  // At top (transparent) = light text (off-white)
+  // Scrolled (glassmorphism) = dark text (deep espresso)
+  const isScrolled = !isAtTop;
+  const useLightText = isAtTop && !isOpen;
+  const useDarkText = isScrolled || isOpen;
 
-  const activeLinkClass = useLightText ? "font-semibold text-cafe-cream" : "font-semibold text-cafe-black";
+  const activeLinkClass = useLightText
+    ? "font-semibold text-coffee-50"
+    : "font-semibold text-coffee-900";
   const inactiveLinkClass = useLightText
-    ? "text-cafe-cream/80 hover:text-cafe-cream hover:-translate-y-0.5"
-    : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5";
+    ? "text-coffee-50 hover:text-coffee-50/80 hover:-translate-y-0.5"
+    : "text-coffee-900/80 hover:text-coffee-900 hover:-translate-y-0.5";
 
-  // Logo: light when using dark text, dark when using light text
+  // Logo: dark when light text (at top), light when dark text (scrolled)
   const logoSrc = useLightText ? "/tnc-navbar-logo-dark-v1.png" : "/tnc-navbar-logo-light-v1.png";
 
   // Hide on scroll down, show on scroll up, transparent at top
@@ -223,20 +226,30 @@ export default function SiteHeader({
       {/* <AnnouncementBanner text={announcementText} /> */}
 
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 ${isOpen ? '' : (solidBg ? 'backdrop-blur-xl' : 'backdrop-blur-none')} border-b transition-all duration-300 ease-in-out ${isOpen
-          ? 'border-cafe-tan/10'
-          : solidBg
-            ? 'border-cafe-tan/10'
-            : 'bg-transparent border-transparent'
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 border-b transition-all ease-in-out ${
+          isScrolled ? 'backdrop-blur-md shadow-md' : ''
+        } ${
+          isOpen
+            ? 'border-coffee-50/20'
+            : isScrolled
+            ? 'border-coffee-50/20'
+            : 'border-coffee-50 border-opacity-100'
+        }`}
         data-at-top={isAtTop}
         style={{
           transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
-          backgroundColor: isOpen ? 'var(--cafe-mist)' : (solidBg ? 'rgba(44, 36, 32, 0.8)' : 'transparent'),
+          backgroundColor: isOpen
+            ? 'var(--cafe-mist)'
+            : isScrolled
+            ? 'rgba(var(--coffee-50-rgb), 0.9)'
+            : 'transparent',
+          transitionDuration: '500ms',
         }}
       >
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-[auto_1fr_auto] items-center h-20">
+          <div className={`grid grid-cols-[auto_1fr_auto] items-center transition-all duration-500 ${
+            isAtTop ? 'py-8' : 'py-3'
+          }`}>
             {/* Logo - Left */}
             <Link
               href="/"
@@ -254,16 +267,15 @@ export default function SiteHeader({
               <div className="flex flex-col">
                 <span
                   className="font-serif whitespace-nowrap text-xl sm:text-2xl md:text-3xl leading-none tracking-tight"
-                  style={{ color: useLightText ? 'var(--cafe-cream)' : 'var(--cafe-black)' }}
+                  style={{ color: useLightText ? 'var(--coffee-50)' : 'var(--coffee-900)' }}
                 >
                   The Notebook
                 </span>
                 <span
                   className="text-[12px] uppercase tracking-[0.22em] leading-none"
                   style={{
-                    color: useLightText
-                      ? 'var(--cafe-tan)'
-                      : 'var(--cafe-tan)'
+                    color: useLightText ? 'var(--coffee-50)' : 'var(--coffee-900)',
+                    opacity: 0.8
                   }}
                 >
                   Café
@@ -319,7 +331,7 @@ export default function SiteHeader({
                 aria-label="Open cart"
               >
                 <ShoppingBag
-                  className={`transition-colors ${useLightText ? 'text-cafe-cream group-hover:text-cafe-cream' : 'text-cafe-black group-hover:text-cafe-tan'}`}
+                  className={`transition-colors ${useLightText ? 'text-coffee-50 group-hover:text-coffee-50/80' : 'text-coffee-900 group-hover:text-coffee-900/80'}`}
                   strokeWidth={1.5}
                   size={22}
                 />
@@ -345,7 +357,7 @@ export default function SiteHeader({
               >
                 {/* Instagram Icon */}
                 <svg
-                  className={`w-5 h-5 transition-colors ${useLightText ? 'text-cafe-cream group-hover:text-cafe-tan' : 'text-cafe-black group-hover:text-cafe-tan'}`}
+                  className={`w-5 h-5 transition-colors ${useLightText ? 'text-coffee-50 group-hover:text-coffee-50/80' : 'text-coffee-900 group-hover:text-coffee-900/80'}`}
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -353,7 +365,7 @@ export default function SiteHeader({
                 </svg>
                 {/* Follow Button */}
                 <span
-                  className={`${navLinkBase} !text-[10px] px-3 py-1.5 border rounded transition-all ${useLightText ? 'border-cafe-cream/40 text-cafe-cream hover:border-cafe-tan hover:text-cafe-tan' : 'border-cafe-black/40 text-cafe-black hover:border-cafe-tan hover:text-cafe-tan'}`}
+                  className={`${navLinkBase} !text-[10px] px-3 py-1.5 border rounded transition-all ${useLightText ? 'border-coffee-50/40 text-coffee-50 hover:border-coffee-50/80 hover:text-coffee-50/80' : 'border-coffee-900/40 text-coffee-900 hover:border-coffee-900/80 hover:text-coffee-900/80'}`}
                 >
                   Follow
                 </span>
@@ -367,7 +379,7 @@ export default function SiteHeader({
                 onClick={handleCartClick}
                 aria-label="Open cart"
               >
-                <ShoppingBag className={useLightText ? "text-cafe-cream" : "text-cafe-black"} size={24} strokeWidth={1.5} />
+                <ShoppingBag className={useLightText ? "text-coffee-50" : "text-coffee-900"} size={24} strokeWidth={1.5} />
                 {cartBadge > 0 && (
                   <span
                     className="absolute -bottom-2 -right-2 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full leading-none shadow-[0_2px_6px_rgba(0,0,0,0.25)] ring-1 ring-white/70"
