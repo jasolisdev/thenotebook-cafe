@@ -17,7 +17,7 @@
 }
 
 .story-hero-title {
-  color: var(--cafe-cream);
+  color: var(--cafe-black);
 }
 
 .story-hero-title-accent {
@@ -25,7 +25,7 @@
 }
 
 .story-hero-subtitle {
-  color: rgba(var(--cafe-cream-rgb), 0.82);
+  color: rgba(var(--cafe-brown-rgb), 0.78);
 }
 
 .story-section-title {

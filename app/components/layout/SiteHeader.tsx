@@ -21,7 +21,7 @@ type SiteHeaderProps = {
 export default function SiteHeader({
   instagramUrl,
   spotifyUrl,
-  cartCount = 0,
+  cartCount,
   onCartClick,
 }: SiteHeaderProps): React.JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -52,6 +52,7 @@ export default function SiteHeader({
   const atTopVisual = isAtTop && !forceSolid;
   const isScrolled = !atTopVisual;
   const useLightText = atTopVisual;
+  const effectiveCartBadge = cartCount ?? cartBadge;
 
   const activeLinkClass = useLightText
     ? "font-semibold text-coffee-50"
@@ -161,12 +162,12 @@ export default function SiteHeader({
 
   // Close drawer on route change and scroll to top if drawer was open
   useEffect(() => {
-    if (drawerWasOpen.current) {
-      requestAnimationFrame(() => {
-        window.scrollTo(0, 0);
-      });
-    }
-    setIsOpen(false);
+    const wasOpen = drawerWasOpen.current;
+    const rafId = requestAnimationFrame(() => {
+      if (wasOpen) window.scrollTo(0, 0);
+      setIsOpen(false);
+    });
+    return () => cancelAnimationFrame(rafId);
   }, [pathname]);
 
   // Lock body scroll when drawer is open
@@ -176,11 +177,6 @@ export default function SiteHeader({
       document.body.style.overflow = "";
     };
   }, [isOpen]);
-
-  // Sync cart count from global events when not passed explicitly
-  useEffect(() => {
-    setCartBadge(cartCount ?? 0);
-  }, [cartCount]);
 
   // Respect accessibility hide-images toggle for nav contrast/logo
   useEffect(() => {
@@ -242,10 +238,6 @@ export default function SiteHeader({
   // Prefetch hero images on hover for instant page transitions
   const prefetchPageImage = (route: string) => {
     const heroImages: Record<string, string> = {
-      '/menu': '/menu/tnc-menu-hero-bg.png',
-      '/story': '/story/tnc-story-hero-bg.png',
-      '/contact': '/contact/tnc-contact-hero-bg.png',
-      '/careers': '/careers/tnc-career-hero-bg.png',
     };
 
     const imageSrc = heroImages[route];
@@ -372,12 +364,12 @@ export default function SiteHeader({
                   strokeWidth={1.5}
                   size={22}
                 />
-	                {cartBadge > 0 && (
+	                {effectiveCartBadge > 0 && (
 	                  <span
 	                    className="absolute -bottom-2 -right-2 text-2xs font-bold w-4 h-4 flex items-center justify-center rounded-full leading-none shadow-[0_2px_6px_rgba(0,0,0,0.25)] ring-1 ring-white/70"
 	                    style={{ backgroundColor: badgeColors.tan, color: badgeColors.white }}
 	                  >
-	                    {cartBadge}
+	                    {effectiveCartBadge}
 	                  </span>
 	                )}
               </button>
@@ -436,12 +428,12 @@ export default function SiteHeader({
                 aria-label="Open cart"
               >
                 <ShoppingBag className={useLightText ? "text-coffee-50" : "text-coffee-900"} size={24} strokeWidth={1.5} />
-	                {cartBadge > 0 && (
+	                {effectiveCartBadge > 0 && (
 	                  <span
 	                    className="absolute -bottom-2 -right-2 text-2xs font-bold w-4 h-4 flex items-center justify-center rounded-full leading-none shadow-[0_2px_6px_rgba(0,0,0,0.25)] ring-1 ring-white/70"
 	                    style={{ backgroundColor: badgeColors.tan, color: badgeColors.white }}
 	                  >
-	                    {cartBadge}
+	                    {effectiveCartBadge}
 	                  </span>
 	                )}
               </button>

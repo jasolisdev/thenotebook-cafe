@@ -92,7 +92,7 @@ export default function MenuPage() {
         <div className="menu-fixed-background" aria-hidden="true" />
 
         {/* Menu Header */}
-        <ParallaxHero backgroundImage="/menu/tnc-menu-hero-bg.png" focusPercent={150} overlayVariant="light">
+        <ParallaxHero className="parallax-hero--cafe-gradient" backgroundColor="var(--cafe-beige)" overlayVariant="lighter">
           <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
             {/* Eyebrow - Instant reveal */}
             <RevealText delay="0ms">
@@ -105,7 +105,7 @@ export default function MenuPage() {
             </RevealText>
             {/* Main Headline - 200ms delay */}
             <RevealText delay="200ms">
-              <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl" style={{ color: 'var(--cafe-cream)' }}>
+              <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl" style={{ color: 'var(--cafe-black)' }}>
                 Curated Selection
               </h1>
             </RevealText>
@@ -113,7 +113,7 @@ export default function MenuPage() {
             <FadeInSection delay="400ms">
               <p
                 className="text-xl md:text-2xl max-w-2xl mx-auto font-normal leading-relaxed"
-                style={{ color: 'rgba(var(--cafe-cream-rgb), 0.9)' }}
+                style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}
               >
                 Small-batch roasts, house-made syrups, and locally sourced ingredients.
               </p>

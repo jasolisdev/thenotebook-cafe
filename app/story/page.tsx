@@ -16,7 +16,7 @@ export default function StoryPage() {
     <main className="story-page min-h-screen relative">
       <div className="story-fixed-background" aria-hidden="true" />
       {/* Hero Section (from prototype) */}
-      <ParallaxHero backgroundImage="/story/tnc-story-hero-bg.png" overlayVariant="light">
+      <ParallaxHero className="parallax-hero--cafe-gradient" backgroundColor="var(--cafe-beige)" overlayVariant="lighter">
         <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
           {/* Eyebrow - Instant reveal */}
           <RevealText delay="0ms">

@@ -4,6 +4,7 @@ import { CSSProperties, ReactNode } from "react";
 import "../../styles/components/parallax-hero.css";
 
 type ParallaxHeroProps = {
+  className?: string;
   backgroundImage?: string;
   backgroundColor?: string;
   headline?: string;
@@ -18,6 +19,7 @@ const cx = (...classes: (string | false | null | undefined)[]) =>
   classes.filter(Boolean).join(" ");
 
 export default function ParallaxHero({
+  className,
   backgroundImage,
   backgroundColor,
   headline,
@@ -39,7 +41,7 @@ export default function ParallaxHero({
   );
 
   return (
-    <section className="parallax-hero" style={style} data-section="Hero">
+    <section className={cx("parallax-hero", className)} style={style} data-section="Hero">
       <div className={overlayClass} aria-hidden />
 
       <div className={cx("parallax-hero__content", contentClassName)}>

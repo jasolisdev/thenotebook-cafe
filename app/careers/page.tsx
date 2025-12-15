@@ -18,7 +18,7 @@ export default function CareersPage() {
     <main className="careers-page min-h-screen relative">
       <div className="careers-fixed-background" aria-hidden="true" />
       {/* Hero Section */}
-      <ParallaxHero backgroundImage="/careers/tnc-career-hero-bg.png" focusPercent={150} overlayVariant="light">
+      <ParallaxHero className="parallax-hero--cafe-gradient" backgroundColor="var(--cafe-beige)" overlayVariant="lighter">
         <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
           {/* Eyebrow - Instant reveal */}
           <RevealText delay="0ms">
@@ -29,7 +29,7 @@ export default function CareersPage() {
 
           {/* Main Headline - Instant reveal */}
           <RevealText delay="200ms">
-            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl" style={{ color: 'var(--cafe-cream)' }}>
+            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl" style={{ color: 'var(--cafe-black)' }}>
               Join The Team<br />
               <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Build The Culture</span>
             </h1>
@@ -37,7 +37,7 @@ export default function CareersPage() {
 
           {/* Body Content - 400ms delay */}
           <FadeInSection delay="400ms">
-            <p className="text-xl md:text-2xl max-w-2xl mx-auto font-normal leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.9)' }}>
+            <p className="text-xl md:text-2xl max-w-2xl mx-auto font-normal leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
               We&apos;re looking for baristas, creatives, and morning people who want to shape Riverside&apos;s coffee scene.
             </p>
           </FadeInSection>

@@ -17,7 +17,7 @@ export default function ContactPage() {
     <main className="contact-page min-h-screen relative">
       <div className="contact-fixed-background" aria-hidden="true" />
       {/* Hero Section */}
-      <ParallaxHero backgroundImage="/contact/tnc-contact-hero-bg.png" focusPercent={150} overlayVariant="light">
+      <ParallaxHero className="parallax-hero--cafe-gradient" backgroundColor="var(--cafe-beige)" overlayVariant="lighter">
         <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
           {/* Eyebrow - Instant reveal */}
           <RevealText delay="0ms">
