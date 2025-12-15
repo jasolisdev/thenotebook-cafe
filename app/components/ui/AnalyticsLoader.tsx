@@ -27,6 +27,9 @@ export default function AnalyticsLoader() {
   const loadedRef = useRef(false);
 
   useEffect(() => {
+    // Avoid injecting Vercel analytics scripts during local dev profiling.
+    if (process.env.NODE_ENV !== "production") return;
+
     const loadAnalytics = () => {
       if (loadedRef.current || !shouldAllowAnalytics()) return;
 
@@ -52,11 +55,21 @@ export default function AnalyticsLoader() {
       loadedRef.current = true;
     };
 
-    loadAnalytics();
+    const scheduleLoad = () => {
+      if (loadedRef.current || !shouldAllowAnalytics()) return;
+      if ("requestIdleCallback" in window) {
+        (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout?: number }) => number })
+          .requestIdleCallback(loadAnalytics, { timeout: 3000 });
+      } else {
+        window.setTimeout(loadAnalytics, 1500);
+      }
+    };
 
-    const onConsentChange = () => loadAnalytics();
+    scheduleLoad();
+
+    const onConsentChange = () => scheduleLoad();
     const onStorage = (e: StorageEvent) => {
-      if (e.key === STORAGE_KEY) loadAnalytics();
+      if (e.key === STORAGE_KEY) scheduleLoad();
     };
 
     window.addEventListener("tnc-consent-change", onConsentChange as EventListener);

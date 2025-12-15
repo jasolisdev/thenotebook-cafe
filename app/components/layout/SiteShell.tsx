@@ -2,14 +2,25 @@
 
 import { useEffect, useMemo } from "react";
 import { usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
 import ImagePreloader from "./ImagePreloader";
 import AnnouncementBanner from "../ui/AnnouncementBanner";
-import ConsentBanner from "../ui/ConsentBanner";
-import AnalyticsLoader from "../ui/AnalyticsLoader";
-import { AccessibilityWidget } from "../features/Accessibility/AccessibilityWidget";
-import { CartDrawer } from "../features/CartDrawer";
+
+const ConsentBanner = dynamic(() => import("../ui/ConsentBanner"), { ssr: false });
+const AnalyticsLoader = dynamic(() => import("../ui/AnalyticsLoader"), { ssr: false });
+const AccessibilityWidget = dynamic(
+  () =>
+    import("../features/Accessibility/AccessibilityWidget").then(
+      (m) => m.AccessibilityWidget
+    ),
+  { ssr: false }
+);
+const CartDrawer = dynamic(
+  () => import("../features/CartDrawer").then((m) => m.CartDrawer),
+  { ssr: false }
+);
 
 type SiteShellProps = {
   children: React.ReactNode;
@@ -56,4 +67,3 @@ export default function SiteShell({
     </>
   );
 }
-

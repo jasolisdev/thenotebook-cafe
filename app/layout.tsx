@@ -32,7 +32,7 @@ const dmSerif = DM_Serif_Display({
 });
 
 const outfit = Outfit({
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
@@ -43,13 +43,15 @@ const caveat = Caveat({
   subsets: ["latin"],
   variable: "--font-handwritten",
   display: "swap",
+  preload: false,
 });
 
 const inter = Inter({
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  preload: false,
 });
 
 const playfairDisplay = Playfair_Display({
@@ -58,6 +60,7 @@ const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
