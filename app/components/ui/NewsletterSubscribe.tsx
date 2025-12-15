@@ -38,14 +38,7 @@ export default function NewsletterSubscribe() {
       />
       <button
         type="submit"
-        className="group inline-flex items-center justify-center gap-3 px-8 md:px-12 py-4 text-xs md:text-sm uppercase tracking-[0.25em] font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 active:shadow-lg whitespace-nowrap"
-        style={{
-          backgroundColor: 'var(--cafe-black)',
-          color: 'var(--cafe-white)',
-          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
-          borderRadius: '4px',
-          background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%), var(--cafe-black)',
-        }}
+        className="group inline-flex items-center justify-center gap-2 px-8 py-4 text-xs uppercase tracking-[0.25em] font-semibold border-2 border-cafe-cream rounded-sm text-cafe-cream transition-all duration-300 hover:bg-cafe-cream hover:text-cafe-olive hover:-translate-y-0.5 hover:shadow-lg whitespace-nowrap"
       >
         <span>Subscribe</span>
         <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

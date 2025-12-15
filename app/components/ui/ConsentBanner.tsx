@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "../../styles/components/consent-banner.css";
 
 const STORAGE_KEY = "tnc-consent";
@@ -12,22 +12,22 @@ export default function ConsentBanner() {
   const [visible, setVisible] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
 
+  const openBanner = useCallback(() => {
+    setShouldRender(true);
+    setTimeout(() => setVisible(true), 10);
+  }, []);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     const stored = localStorage.getItem(STORAGE_KEY);
     if (!stored) {
-      setShouldRender(true);
-      const timer = setTimeout(() => setVisible(true), 1500);
+      const timer = setTimeout(openBanner, 1500);
       return () => clearTimeout(timer);
     }
 
-    const handleOpen = () => {
-      setShouldRender(true);
-      setTimeout(() => setVisible(true), 10); // Small delay for animation
-    };
-    window.addEventListener("tnc-open-consent", handleOpen as EventListener);
-    return () => window.removeEventListener("tnc-open-consent", handleOpen as EventListener);
-  }, []);
+    window.addEventListener("tnc-open-consent", openBanner as EventListener);
+    return () => window.removeEventListener("tnc-open-consent", openBanner as EventListener);
+  }, [openBanner]);
 
   const persist = (value: ConsentValue, analytics: boolean) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ choice: value, analytics }));

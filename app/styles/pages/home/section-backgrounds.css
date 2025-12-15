@@ -1,221 +1,42 @@
 /* ============================================================
    HOME: Section Background Treatments
-   Layered radial gradients for premium depth and texture
+   Backgrounds are now provided by `.home-fixed-background`.
 ============================================================ */
 
-/* ============================================================
-   UNIFIED GRADIENT TREATMENT
-   Signature Pours, Our Philosophy, Low Lights, Atmosphere
-   Consistent layered radial gradients for cohesive flow
-   Matches "More Than Coffee" background with lighter text areas
-============================================================ */
-[data-section="Signature Pours"],
 [data-section="Our Philosophy"],
 [data-section="Low Lights"],
-[data-section="Atmosphere"] {
+[data-section="Atmosphere"],
+[data-section="Atmosphere Images"],
+[data-section="More Than Coffee"] {
   position: relative;
-  background-color: var(--cafe-beige);
-  background-image:
-    radial-gradient(1100px circle at 32% 28%,
-      rgba(var(--cafe-cream-rgb), 0.92) 0%,
-      rgba(var(--cafe-cream-rgb), 0.55) 38%,
-      rgba(var(--cafe-cream-rgb), 0) 70%),
-    radial-gradient(950px circle at 78% 30%,
-      rgba(var(--cafe-tan-rgb), 0.22) 0%,
-      rgba(var(--cafe-tan-rgb), 0) 62%),
-    radial-gradient(1000px circle at 78% 78%,
-      rgba(var(--cafe-brown-rgb), 0.10) 0%,
-      rgba(var(--cafe-brown-rgb), 0) 58%);
+  background: transparent;
+  background-image: none;
 }
 
-[data-section="Signature Pours"]::after,
 [data-section="Our Philosophy"]::after,
 [data-section="Low Lights"]::after,
-[data-section="Atmosphere"]::after {
+[data-section="Atmosphere"]::after,
+[data-section="Atmosphere Images"]::after,
+[data-section="More Than Coffee"]::after {
   content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(1200px circle at 50% 35%,
-      rgba(var(--cafe-black-rgb), 0) 0%,
-      rgba(var(--cafe-black-rgb), 0.12) 100%);
-  opacity: 0.55;
-  mix-blend-mode: multiply;
+  display: none;
 }
 
-/* ============================================================
-   THE TRINITY SECTION
-   Cafe-olive base with layered gradient (matches More Than Coffee)
-============================================================ */
-[data-section="The Trinity"] {
-  position: relative;
-  background-color: var(--cafe-olive);
-  background-image:
-    radial-gradient(1100px circle at 32% 28%,
-      rgba(var(--cafe-cream-rgb), 0.92) 0%,
-      rgba(var(--cafe-cream-rgb), 0.55) 38%,
-      rgba(var(--cafe-cream-rgb), 0) 70%),
-    radial-gradient(950px circle at 78% 30%,
-      rgba(var(--cafe-tan-rgb), 0.22) 0%,
-      rgba(var(--cafe-tan-rgb), 0) 62%),
-    radial-gradient(1000px circle at 78% 78%,
-      rgba(var(--cafe-brown-rgb), 0.10) 0%,
-      rgba(var(--cafe-brown-rgb), 0) 58%);
-}
-
-[data-section="The Trinity"]::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(1200px circle at 50% 35%,
-      rgba(var(--cafe-black-rgb), 0) 0%,
-      rgba(var(--cafe-black-rgb), 0.12) 100%);
-  opacity: 0.55;
-  mix-blend-mode: multiply;
-}
-
-/* ============================================================
-   ATMOSPHERE IMAGES SECTION
-   Light clean base with minimal gradient
-============================================================ */
-[data-section="Atmosphere Images"] {
-  position: relative;
-  background-color: var(--cafe-mist);
-  background-image:
-    radial-gradient(1100px circle at 50% 40%,
-      rgba(var(--cafe-cream-rgb), 0.80) 0%,
-      rgba(var(--cafe-cream-rgb), 0.42) 50%,
-      rgba(var(--cafe-cream-rgb), 0) 82%),
-    radial-gradient(900px circle at 20% 70%,
-      rgba(var(--cafe-tan-rgb), 0.12) 0%,
-      rgba(var(--cafe-tan-rgb), 0) 65%);
-}
-
-[data-section="Atmosphere Images"]::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(1200px circle at 50% 50%,
-      rgba(var(--cafe-black-rgb), 0) 0%,
-      rgba(var(--cafe-black-rgb), 0.07) 100%);
-  opacity: 0.6;
-  mix-blend-mode: multiply;
-}
-
-/* ============================================================
-   STAY IN THE LOOP SECTION (Newsletter)
-   Deep olive with warm cream highlights
-============================================================ */
+/* Keep Stay in the Loop readable (no gradient, solid only) */
 [data-section="Stay in the Loop"] {
   position: relative;
-  background-color: var(--cafe-olive);
-  background-image:
-    radial-gradient(1000px circle at 35% 30%,
-      rgba(var(--cafe-cream-rgb), 0.08) 0%,
-      rgba(var(--cafe-cream-rgb), 0) 60%),
-    radial-gradient(950px circle at 70% 45%,
-      rgba(var(--cafe-tan-rgb), 0.12) 0%,
-      rgba(var(--cafe-tan-rgb), 0) 58%),
-    radial-gradient(850px circle at 50% 75%,
-      rgba(var(--cafe-brown-rgb), 0.15) 0%,
-      rgba(var(--cafe-brown-rgb), 0) 52%);
+  background: var(--cafe-olive);
 }
 
 [data-section="Stay in the Loop"]::after {
   content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(1100px circle at 50% 40%,
-      rgba(var(--cafe-black-rgb), 0.15) 0%,
-      rgba(var(--cafe-black-rgb), 0.25) 100%);
-  opacity: 0.45;
-  mix-blend-mode: multiply;
+  display: none;
 }
 
-/* ============================================================
-   TEST SECTIONS
-   6 empty sections with More Than Coffee background treatment
-============================================================ */
-[data-section="test-section-1"],
-[data-section="test-section-2"],
-[data-section="test-section-3"],
-[data-section="test-section-4"],
-[data-section="test-section-5"],
-[data-section="test-section-6"] {
-  position: relative;
-  background-color: var(--cafe-beige);
-  background-image:
-    radial-gradient(1100px circle at 32% 28%,
-      rgba(var(--cafe-cream-rgb), 0.92) 0%,
-      rgba(var(--cafe-cream-rgb), 0.55) 38%,
-      rgba(var(--cafe-cream-rgb), 0) 70%),
-    radial-gradient(950px circle at 78% 30%,
-      rgba(var(--cafe-tan-rgb), 0.22) 0%,
-      rgba(var(--cafe-tan-rgb), 0) 62%),
-    radial-gradient(1000px circle at 78% 78%,
-      rgba(var(--cafe-brown-rgb), 0.10) 0%,
-      rgba(var(--cafe-brown-rgb), 0) 58%);
-}
-
-[data-section="test-section-1"]::after,
-[data-section="test-section-2"]::after,
-[data-section="test-section-3"]::after,
-[data-section="test-section-4"]::after,
-[data-section="test-section-5"]::after,
-[data-section="test-section-6"]::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(1200px circle at 50% 35%,
-      rgba(var(--cafe-black-rgb), 0) 0%,
-      rgba(var(--cafe-black-rgb), 0.12) 100%);
-  opacity: 0.55;
-  mix-blend-mode: multiply;
-}
-
-/* ============================================================
-   RESPONSIVE ADJUSTMENTS
-   Scale gradients for mobile screens
-============================================================ */
 @media (max-width: 767px) {
-  /* Scale down gradient sizes for mobile */
-  [data-section="Signature Pours"],
-  [data-section="Our Philosophy"],
   [data-section="Low Lights"],
-  [data-section="The Trinity"],
   [data-section="Atmosphere"],
-  [data-section="Atmosphere Images"],
-  [data-section="More Than Coffee"],
-  [data-section="Stay in the Loop"],
-  [data-section="test-section-1"],
-  [data-section="test-section-2"],
-  [data-section="test-section-3"],
-  [data-section="test-section-4"],
-  [data-section="test-section-5"],
-  [data-section="test-section-6"] {
-    background-size: 200% 200%;
-    background-position: center center;
-  }
-
-  /* Reduce pseudo-element opacity on mobile for better readability */
-  [data-section="Signature Pours"]::after,
-  [data-section="Our Philosophy"]::after,
-  [data-section="Low Lights"]::after,
-  [data-section="The Trinity"]::after,
-  [data-section="Atmosphere"]::after,
-  [data-section="Atmosphere Images"]::after,
-  [data-section="More Than Coffee"]::after,
-  [data-section="Stay in the Loop"]::after,
-  [data-section="test-section-1"]::after,
-  [data-section="test-section-2"]::after,
-  [data-section="test-section-3"]::after,
-  [data-section="test-section-4"]::after,
-  [data-section="test-section-5"]::after,
-  [data-section="test-section-6"]::after {
-    opacity: 0.35;
+  [data-section="Atmosphere Images"] {
+    background-color: var(--cafe-mist);
   }
 }

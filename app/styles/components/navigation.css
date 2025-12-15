@@ -88,6 +88,7 @@
     transform: scaleX(0);
     opacity: 0;
   }
+
   to {
     transform: scaleX(1);
     opacity: 1;
@@ -122,7 +123,8 @@
   /* Below announcement banner (z-index: 50), above page content */
   transition: transform 0.15s ease-out;
   /* Fast, smooth transition for live scroll tracking */
-  overflow: visible; /* Ensure drawer is not clipped */
+  overflow: visible;
+  /* Ensure drawer is not clipped */
   will-change: transform;
   background: transparent;
 }
@@ -739,15 +741,18 @@
   width: 100%;
   height: 100vh;
   background: var(--cafe-luxe-oat);
-  z-index: 998; /* Behind the drawer */
-  transform: translateX(100%); /* Hidden to the right */
+  z-index: 998;
+  /* Behind the drawer */
+  transform: translateX(100%);
+  /* Hidden to the right */
   transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
   pointer-events: none;
 }
 
 .menu-layer-backdrop.open {
   transform: translateX(0);
-  transition-duration: 0.6s; /* Faster entry */
+  transition-duration: 0.6s;
+  /* Faster entry */
 }
 
 /* --- 2. The Main Drawer (Slides second) --- */
@@ -763,7 +768,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateX(100%); /* Hidden to the right */
+  transform: translateX(100%);
+  /* Hidden to the right */
   transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
   will-change: transform;
   pointer-events: none;
@@ -771,15 +777,30 @@
 
 .menu-drawer-cinematic.open {
   transform: translateX(0);
-  transition-delay: 0.1s; /* Stagger effect: wait for backdrop */
+  transition-delay: 0.1s;
+  /* Stagger effect: wait for backdrop */
   pointer-events: auto;
 }
 
 /* --- 3. Masked Editorial Reveal Animations --- */
 
+/* The Container Group for Links (New) */
+.menu-links-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4vh;
+  align-items: flex-start;
+  /* Align children to the left */
+  width: fit-content;
+  /* Shrink to fit content */
+  margin: 0 auto;
+  /* Center the group horizontally */
+}
+
 /* The Mask (overflow hidden wrapper) */
 .menu-link-wrapper {
-  overflow: hidden; /* Critical for reveal effect */
+  overflow: hidden;
+  /* Critical for reveal effect */
   cursor: pointer;
   padding: 5px 20px;
   position: relative;
@@ -788,8 +809,9 @@
 /* The Moving Content (slides up from below) */
 .menu-link-content {
   display: flex;
-  align-items: center; /* Vertically center number with text */
-  gap: 20px;
+  align-items: baseline;
+  gap: 40px;
+  justify-content: flex-start;
 
   /* Initial State: Pushed down out of view */
   transform: translateY(110%);
@@ -808,21 +830,28 @@
 .menu-item-number {
   font-family: var(--font-sans);
   font-size: 1rem;
-  color: var(--cafe-luxe-oat); /* Tan/Oat color */
+  color: var(--cafe-luxe-oat);
+  /* Tan/Oat color */
   opacity: 0.6;
   font-weight: 500;
   transition: opacity 0.3s ease, color 0.3s ease;
+  min-width: 44px;
+  text-align: right;
+  letter-spacing: 0.08em;
 }
 
 /* The Main Label */
 .menu-link-text {
-  font-family: var(--font-display); /* Playfair Display for editorial serif feel */
-  font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive sizing */
+  font-family: var(--font-display);
+  /* Playfair Display for editorial serif feel */
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  /* Responsive sizing */
   text-transform: uppercase;
   line-height: 1.1;
   letter-spacing: 0.05em;
   font-weight: 400;
-  color: var(--cafe-cream); /* Off-white */
+  color: var(--cafe-cream);
+  /* Off-white */
 
   /* Transitions for hover effects */
   transition: color 0.4s ease, letter-spacing 0.4s ease, font-style 0.3s ease;
@@ -837,14 +866,19 @@
 /* --- Hover Interaction --- */
 @media (hover: hover) {
   .menu-link-wrapper:hover .menu-link-text {
-    color: var(--cafe-luxe-oat); /* Changes to Tan */
-    letter-spacing: 0.1em; /* Expands slightly */
-    font-style: italic; /* Editorial flair */
+    color: var(--cafe-luxe-oat);
+    /* Changes to Tan */
+    letter-spacing: 0.1em;
+    /* Expands slightly */
+    font-style: italic;
+    /* Editorial flair */
   }
 
   .menu-link-wrapper:hover .menu-item-number {
-    opacity: 1; /* Number becomes fully visible */
-    color: var(--cafe-cream); /* Number turns white */
+    opacity: 1;
+    /* Number becomes fully visible */
+    color: var(--cafe-cream);
+    /* Number turns white */
   }
 }
 
@@ -865,9 +899,9 @@
   opacity: 0;
   transform: scale(0.8) rotate(-90deg);
   transition: opacity 0.6s cubic-bezier(0.19, 1, 0.22, 1),
-              transform 0.6s cubic-bezier(0.19, 1, 0.22, 1),
-              border-color 0.3s ease,
-              background 0.3s ease;
+    transform 0.6s cubic-bezier(0.19, 1, 0.22, 1),
+    border-color 0.3s ease,
+    background 0.3s ease;
   transition-delay: 0.5s;
   z-index: 10;
 }

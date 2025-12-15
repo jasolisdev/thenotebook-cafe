@@ -1,4 +1,3 @@
-import React from 'react';
 import Reveal from '../components/ui/Reveal';
 import '../styles/pages/legal.css';
 
@@ -13,7 +12,7 @@ const PrivacyPage = () => (
       <div style={{ marginBottom: '60px' }}>
         <h2>Overview & Collection</h2>
         <p>
-          This Privacy Policy explains how The Notebook Café ("we," "us," "our") collects, uses, and shares information when you visit our website or interact with us online.
+          This Privacy Policy explains how The Notebook Café (&quot;we,&quot; &quot;us,&quot; &quot;our&quot;) collects, uses, and shares information when you visit our website or interact with us online.
         </p>
         <p>
           We collect information you provide directly (like job applications or contact forms) and automatic data (like IP addresses and essential cookies) to keep our site running smoothly.
@@ -40,7 +39,7 @@ const PrivacyPage = () => (
       <div style={{ marginBottom: '60px' }}>
         <h2>Your Rights & Choices</h2>
         <p>
-          You can manage your cookie preferences anytime via the "Cookie Preferences" link in the footer. We honor Global Privacy Control (GPC) signals from your browser.
+          You can manage your cookie preferences anytime via the &quot;Cookie Preferences&quot; link in the footer. We honor Global Privacy Control (GPC) signals from your browser.
         </p>
         <p>
           To request access, correction, or deletion of personal information you submitted, please contact us.

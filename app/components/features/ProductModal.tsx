@@ -259,7 +259,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
                           {group.required ? 'Required' : 'Optional'}
                         </span>
                         {group.maxSelections && (
-                          <span className="text-[10px]" style={{ color: `${colors.brown}99` }}>
+                          <span className="text-2xs" style={{ color: `${colors.brown}99` }}>
                             Max {group.maxSelections}
                           </span>
                         )}

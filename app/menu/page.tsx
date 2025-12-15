@@ -1,108 +1,99 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import Image from "next/image";
-import { Coffee, ArrowRight, Plus } from 'lucide-react';
-import { MenuItem as MenuItemType, SelectedModifier } from '@/app/types';
+import { useMemo, useState, useEffect, useRef, useCallback } from 'react';
+import type { MenuItem as MenuItemType, SelectedModifier } from '@/app/types';
 import { MENU_ITEMS } from '@/app/constants';
 import { ProductModal } from '@/app/components/features/ProductModal';
 import { useCart } from '@/app/components/providers/CartProvider';
-import RevealText from '../components/ui/RevealText';
-import FadeInSection from '../components/ui/FadeInSection';
-import ParallaxHero from '../components/features/ParallaxHero';
-import { TextWithSerifAmpersand, TextWithSansAmpersand } from '@/app/utils/ampersandUtils';
+import RevealText from '@/app/components/ui/RevealText';
+import FadeInSection from '@/app/components/ui/FadeInSection';
+import ParallaxHero from '@/app/components/features/ParallaxHero';
 import '../styles/pages/menu.css';
+import { MenuTabs } from './_components/MenuTabs';
+import { MenuSectionList } from './_components/MenuSectionList';
 
-const colors = {
-  black: '#2C2420',
-  brown: '#4A3B32',
-  tan: '#A48D78',
-  beige: '#CBB9A4',
-  cream: '#EDE7D8',
-  mist: '#F4F1EA',
-  white: '#FAF9F6',
-};
+const MENU_VIEWPORT_LOCK_Y = 250;
+
+function readCssPxVariable(name: string, fallback: number): number {
+  if (typeof window === "undefined") return fallback;
+  const raw = window.getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const num = Number.parseFloat(raw.replace("px", ""));
+  return Number.isFinite(num) ? num : fallback;
+}
 
 export default function MenuPage() {
   const [selectedItem, setSelectedItem] = useState<MenuItemType | null>(null);
   const { addItem } = useCart();
   const [activeSection, setActiveSection] = useState<'drinks' | 'meals' | 'desserts'>('drinks');
   const [searchQuery, setSearchQuery] = useState('');
-  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
-  const [isProgrammaticScroll, setIsProgrammaticScroll] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const menuContentRef = useRef<HTMLDivElement>(null);
+  const tabsRef = useRef<HTMLDivElement>(null);
 
-  const filteredItems = MENU_ITEMS.filter(item => {
-    const matchesSection = item.section === activeSection;
-    const matchesSearch =
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesSection && matchesSearch;
-  });
+  const groupedItems = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    const filteredItems = MENU_ITEMS.filter((item) => {
+      if (item.section !== activeSection) return false;
+      if (!q) return true;
+      return (
+        item.name.toLowerCase().includes(q) ||
+        item.description.toLowerCase().includes(q)
+      );
+    });
 
-  const groupedItems = filteredItems.reduce((acc, item) => {
-    const key = item.subcategory || 'General';
-    if (!acc[key]) acc[key] = [];
-    acc[key].push(item);
-    return acc;
-  }, {} as Record<string, MenuItemType[]>);
+    return filteredItems.reduce((acc, item) => {
+      const key = item.subcategory || 'General';
+      if (!acc[key]) acc[key] = [];
+      acc[key].push(item);
+      return acc;
+    }, {} as Record<string, MenuItemType[]>);
+  }, [activeSection, searchQuery]);
 
   const handleAddToCart = (item: MenuItemType, quantity: number, modifiers: SelectedModifier[], notes?: string, totalPrice?: number) => {
     addItem(item, quantity, modifiers, notes, totalPrice);
   };
 
-  // Detect navbar visibility for sticky tabs positioning
+  // Listen for SiteHeader visibility (single source of truth)
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          // Skip navbar logic during programmatic scroll
-          if (isProgrammaticScroll) {
-            ticking = false;
-            return;
-          }
-
-          const currentScrollY = window.scrollY;
-
-          // If at menu viewing position, lock navbar to visible and skip further checks
-          // This prevents flash when switching tabs while viewing menu
-          if (currentScrollY < 250) {
-            setIsNavbarVisible(true);
-            lastScrollY = currentScrollY;
-            ticking = false;
-            return;
-          }
-
-          // Normal show/hide logic for scrolled positions
-          if (currentScrollY < lastScrollY) {
-            setIsNavbarVisible(true);
-          } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-            setIsNavbarVisible(false);
-          }
-
-          lastScrollY = currentScrollY;
-          ticking = false;
-        });
-        ticking = true;
-      }
+    const onHeaderState = (e: Event) => {
+      const detail = (e as CustomEvent).detail as { visible?: boolean } | undefined;
+      if (typeof detail?.visible === "boolean") setIsHeaderVisible(detail.visible);
     };
+    window.addEventListener("tnc-header-state", onHeaderState as EventListener);
+    return () => window.removeEventListener("tnc-header-state", onHeaderState as EventListener);
+  }, []);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isProgrammaticScroll]);
+  const scrollToMenuContent = useCallback(() => {
+    if (!menuContentRef.current) return;
+
+    const headerHeight = readCssPxVariable("--site-header-height", 80);
+    const tabsHeight = tabsRef.current?.offsetHeight ?? 0;
+    const yOffset = -(headerHeight + tabsHeight - 5);
+
+    const element = menuContentRef.current;
+    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }, []);
+
+  const handleTabChange = useCallback((section: "drinks" | "meals" | "desserts") => {
+    setActiveSection(section);
+
+    const currentScrollY = window.scrollY;
+    if (currentScrollY < MENU_VIEWPORT_LOCK_Y) return;
+    scrollToMenuContent();
+  }, [scrollToMenuContent]);
 
   return (
     <>
       <main
-        className="min-h-screen pb-32"
-        style={{ backgroundColor: colors.mist, color: colors.brown }}
+        className="menu-page min-h-screen pb-32 relative" /* Added relative for z-index context */
       >
+        {/* Fixed background layer for mobile compatibility */}
+        <div className="menu-fixed-background" aria-hidden="true" />
+
         {/* Menu Header */}
-        <ParallaxHero backgroundImage="/menu/tnc-menu-hero-bg.png" overlayVariant="lighter">
-          <div className="max-w-4xl mx-auto text-center relative z-10 px-6 space-y-6">
+        <ParallaxHero backgroundImage="/menu/tnc-menu-hero-bg.png" focusPercent={150} overlayVariant="light">
+          <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
             {/* Eyebrow - Instant reveal */}
             <RevealText delay="0ms">
               <span
@@ -114,15 +105,15 @@ export default function MenuPage() {
             </RevealText>
             {/* Main Headline - 200ms delay */}
             <RevealText delay="200ms">
-              <h1 className="font-serif text-[70px] md:text-[90px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
+              <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl" style={{ color: 'var(--cafe-cream)' }}>
                 Curated Selection
               </h1>
             </RevealText>
             {/* Body Content - 400ms delay */}
             <FadeInSection delay="400ms">
               <p
-                className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed"
-                style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}
+                className="text-xl md:text-2xl max-w-2xl mx-auto font-normal leading-relaxed"
+                style={{ color: 'rgba(var(--cafe-cream-rgb), 0.9)' }}
               >
                 Small-batch roasts, house-made syrups, and locally sourced ingredients.
               </p>
@@ -132,74 +123,18 @@ export default function MenuPage() {
 
         {/* Sticky Tabs Container */}
         <div
-          className="px-4 md:relative md:static transition-all duration-300"
+          className="menu-sticky-tabs px-4 md:relative md:static transition-all duration-300"
+          ref={tabsRef}
           style={{
-            position: 'sticky',
-            top: isNavbarVisible ? '80px' : '0', // 80px = navbar height (h-20), 0 when navbar hidden
-            zIndex: 40,
-            backgroundColor: colors.mist,
-            paddingTop: '1rem',
-            paddingBottom: '1rem'
+            top: isHeaderVisible ? 'var(--site-header-height, 80px)' : '0px',
           }}
         >
           <div className="max-w-md mx-auto">
             <div
-              className="rounded-2xl shadow-xl p-2 flex flex-col sm:flex-row items-center gap-3 border"
-              style={{ backgroundColor: colors.white, borderColor: `${colors.beige}33`, justifyContent: 'center' }}
+              className="menu-tabs-wrapper rounded-2xl shadow-xl p-2 flex flex-col sm:flex-row items-center gap-3 border"
             >
               {/* Section Tabs */}
-              <div className="flex gap-2 sm:gap-4 w-full sm:w-auto justify-center sm:justify-center overflow-visible p-1">
-                {(['drinks', 'meals', 'desserts'] as const).map(section => {
-                  const isActive = activeSection === section;
-                  return (
-                    <button
-                      key={section}
-                      onClick={() => {
-                        setActiveSection(section);
-
-                        // If at menu viewing position, skip all scroll logic to prevent navbar flash
-                        const currentScrollY = window.scrollY;
-                        if (currentScrollY < 250) {
-                          // Just switch tabs, navbar stays as is
-                          return;
-                        }
-
-                        // Scroll to menu content (only when scrolled down)
-                        if (menuContentRef.current) {
-                          // Set flag to prevent navbar changes during scroll
-                          setIsProgrammaticScroll(true);
-
-                          // Always account for navbar (80px) since it will appear after scroll
-                          // This prevents content jump when navbar appears
-                          const yOffset = -171; // navbar (80px) + sticky tabs (90px) + 1px hero
-                          const element = menuContentRef.current;
-                          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                          window.scrollTo({ top: y, behavior: 'smooth' });
-
-                          // Clear flag after smooth scroll completes, then trigger tiny scroll
-                          setTimeout(() => {
-                            setIsProgrammaticScroll(false);
-                            // Trigger 1px scroll to activate navbar when scrolling from down
-                            setTimeout(() => {
-                              window.scrollBy({ top: -1, behavior: 'auto' });
-                            }, 50);
-                          }, 600);
-                        }
-                      }}
-                      aria-pressed={isActive}
-                      className="basis-1/3 sm:flex-none px-6 py-2 rounded-lg text-[11px] md:text-xs font-bold uppercase tracking-[0.22em] whitespace-nowrap transition-colors duration-150 ease-out border"
-                      style={{
-                        backgroundColor: isActive ? colors.black : `${colors.mist}CC`,
-                        color: isActive ? colors.white : colors.brown,
-                        borderColor: isActive ? colors.black : `${colors.beige}80`,
-                        boxShadow: isActive ? '0 8px 18px rgba(0,0,0,0.12)' : 'none',
-                      }}
-                    >
-                      {section}
-                    </button>
-                  );
-                })}
-              </div>
+              <MenuTabs activeSection={activeSection} onChange={handleTabChange} />
 
               {/* Search temporarily hidden per request; keeping structure for future use */}
               {/* <div className="relative w-full flex-1">
@@ -223,106 +158,12 @@ export default function MenuPage() {
           </div>
         </div>
 
-        <div ref={menuContentRef} className="mx-auto px-4 sm:px-6 py-12" style={{ maxWidth: '900px' }}>
-          {Object.entries(groupedItems).length === 0 ? (
-            <div className="text-center py-32 opacity-50">
-              <Coffee size={64} className="mx-auto mb-6" color={colors.tan} strokeWidth={1} />
-              <p className="font-serif text-3xl mb-2" style={{ color: colors.black }}>No items found.</p>
-              <p style={{ color: colors.brown }}>Try adjusting your search terms.</p>
-              <button onClick={() => { setSearchQuery(''); setActiveSection('drinks') }} className="font-bold uppercase tracking-widest text-xs mt-8 border-b pb-1" style={{ color: colors.black, borderColor: colors.black }}>Clear filters</button>
-            </div>
-          ) : (
-            Object.entries(groupedItems).map(([subcategory, items]) => (
-              <div
-                key={subcategory}
-                className="mb-16"
-              >
-                {/* Category Header - Editorial Style */}
-                <div className="flex items-baseline justify-between mb-2 pb-3 border-b" style={{ borderColor: colors.tan }}>
-                  <div className="flex items-baseline gap-3">
-                    <h2
-                      className="font-serif text-3xl md:text-4xl"
-                      style={{ color: colors.black }}
-                    >
-                      <TextWithSerifAmpersand>{subcategory}</TextWithSerifAmpersand>
-                    </h2>
-                    <span
-                      className="hidden md:inline text-base font-light"
-                      style={{ color: colors.beige }}
-                    >
-                      {items.length} {items.length === 1 ? 'item' : 'items'}
-                    </span>
-                  </div>
-                  <span
-                    className="md:hidden text-sm font-light"
-                    style={{ color: colors.beige }}
-                  >
-                    {items.length} {items.length === 1 ? 'item' : 'items'}
-                  </span>
-                </div>
-
-                {/* Menu Items - Clean List Layout */}
-                <div className="space-y-4 mt-8">
-                  {items.map((item) => (
-                    <div
-                      key={item.id}
-                      className={`menu-item-editorial menu-item-${item.section} cursor-pointer group`}
-                      onClick={() => setSelectedItem(item)}
-                    >
-                      {/* Left Side: Title & Description */}
-                      <div className="flex-1 pr-4">
-                        <h3 style={{ color: colors.black }}>
-                          {item.name}
-                          {item.tag && (
-                            <span
-                              className="ml-3 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full inline-block"
-                              style={
-                                item.tag === 'seasonal'
-                                  ? {
-                                      backgroundColor: 'transparent',
-                                      color: 'var(--cafe-olive)',
-                                      border: '1px solid var(--cafe-olive)'
-                                    }
-                                  : item.tag === 'popular'
-                                  ? {
-                                      backgroundColor: 'transparent',
-                                      color: 'var(--cafe-tan)',
-                                      border: '1px solid var(--cafe-tan)'
-                                    }
-                                  : { backgroundColor: colors.mist, color: colors.black }
-                              }
-                            >
-                              {item.tag}
-                            </span>
-                          )}
-                        </h3>
-                        <p style={{ color: colors.brown }}>
-                          <TextWithSansAmpersand>{item.description}</TextWithSansAmpersand>
-                        </p>
-                      </div>
-
-                      {/* Right Side: Price (top right) */}
-                      <span className="price" style={{ color: colors.black }}>
-                        {item.price}
-                      </span>
-
-                      {/* Plus Button (bottom right - absolutely positioned) */}
-                      <button
-                        className="add-button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedItem(item);
-                        }}
-                        aria-label={`Add ${item.name} to cart`}
-                      >
-                        <Plus size={20} strokeWidth={2.5} />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))
-          )}
+        <div ref={menuContentRef} className="menu-content mx-auto px-4 sm:px-6 py-12">
+          <MenuSectionList
+            groupedItems={groupedItems}
+            onSelectItem={setSelectedItem}
+            onClearFilters={() => { setSearchQuery(''); setActiveSection('drinks'); }}
+          />
         </div>
       </main>
 

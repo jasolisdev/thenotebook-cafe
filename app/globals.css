@@ -3,37 +3,22 @@
 /* Tailwind v4 Theme Configuration */
 @theme {
   --color-cafe-black: #2C2420;
-  --color-cafe-charcoal: #2A2622;
   --color-cafe-brown: #4A3B32;
   --color-cafe-tan: #A48D78;
-  --color-cafe-terracotta: #9A4C32;
+  --color-cafe-tan-dark: #8E7965;
   --color-cafe-beige: #CBB9A4;
   --color-cafe-luxe-oat: #CBBFAF;
   --color-cafe-cream: #EDE7D8;
   --color-cafe-mist: #F4F1EA;
   --color-cafe-white: #FAF9F6;
-  --color-cafe-olive: #4A4F41;
-  --color-cafe-red: #ef4444;
 
   /* Premium Navbar/Footer Palette */
   --color-coffee-50: #F3EFE9;      /* Off-White - Top nav text */
-  --color-coffee-100: #E6DCCA;     /* Cream - Footer body text */
-  --color-coffee-800: #3A2D26;     /* Dark Brown - Footer borders */
   --color-coffee-900: #2C241F;     /* Deep Espresso - Footer bg, scrolled nav text */
 
-  /* Test app palette (Aura & Bean) */
-  --color-cream: #F9F7F2;
-  --color-beige: #EBE5D9;
-  --color-latte: #D4C5B0;
-  --color-olive: #8C9A86;
-  --color-olive-dark: #5F6B5A;
-  --color-coffee: #4A3B32;
-  --color-coffee-dark: #2C221C;
+  /* Accent */
   --color-gold: #C4A484;
 }
-
-/* Component Styles */
-@import "./styles/components/SiteHeader.css";
 
 /* ============================================================
    CUSTOM FONTS
@@ -87,8 +72,8 @@
 =========================================================== */
 :root {
   --font-sans: "Outfit", system-ui, sans-serif;
-  --font-mono: "Outfit", monospace;
   --font-display: "DM Serif Display", serif;
+  --site-header-height: 80px;
 
   /* Menu Page Fonts */
   --font-serif: var(--font-playfair), 'Playfair Display', serif; /* Used for Titles, Headers, Prices */
@@ -104,7 +89,6 @@
   --cafe-charcoal: #2A2622;
   --cafe-brown: #4A3B32;
   --cafe-tan: #A48D78;
-  --cafe-terracotta: #9A4C32;
   --cafe-beige: #CBB9A4;
   --cafe-luxe-oat: #CBBFAF;
   --cafe-cream: #EDE7D8;
@@ -123,55 +107,33 @@
   --warm-brown: #5a4a38;         /* Warm brown text */
   --medium-brown: #6b5a48;       /* Medium brown buttons */
   --cream-light: #f4f0e9;        /* Light cream backgrounds */
-  --pearl-white: #fffcf9;        /* Off-white for modals */
-  --latte-cream: #f6ebdf;        /* Events page light cream */
 
   /* Gold accent family */
   --gold-primary: #c99a58;       /* RGB: 201, 154, 88 */
-  --gold-darker: #b48a4e;        /* Darker gold variant */
-
-  /* Debug color */
-  --debug-red: #ff0000;          /* Bright red for testing */
 
   /* RGB helpers for rgba() usage */
   --cafe-black-rgb: 44, 36, 32;
   --cafe-brown-rgb: 74, 59, 50;
   --cafe-tan-rgb: 164, 141, 120;
   --cafe-beige-rgb: 203, 185, 164;
-  --cafe-luxe-oat-rgb: 203, 191, 175;
   --cafe-cream-rgb: 237, 231, 216;
-  --cafe-olive-rgb: 74, 79, 65;
   --cafe-mist-rgb: 244, 241, 234;
-  --cafe-white-rgb: 250, 249, 246;
-  --cafe-olive-rgb: 74, 79, 65;
 
   /* Premium Navbar/Footer RGB */
   --coffee-50-rgb: 243, 239, 233;   /* Off-White */
   --coffee-100-rgb: 230, 220, 202;  /* Cream */
-  --coffee-800-rgb: 58, 45, 38;     /* Dark Brown */
-  --coffee-900-rgb: 44, 36, 31;     /* Deep Espresso */
 
   /* Extended RGB helpers */
   --espresso-brown-rgb: 42, 31, 22;
-  --warm-brown-rgb: 90, 74, 56;
-  --gold-primary-rgb: 201, 154, 88;
-  --cream-light-rgb: 244, 240, 233;
 
   /* Core semantic tokens */
   --bg-solid: var(--cafe-mist);
   --bg-dark: var(--cafe-black);
-  --bg-cream: var(--cafe-cream);
-  --bg-mist: var(--cafe-mist);
 
   /* Text colors */
   --text-dark: var(--cafe-brown);
-  --text-black: var(--cafe-black);
   --text-light: var(--cafe-mist);
   --text-light-muted: var(--cafe-beige);
-
-  /* Accent colors */
-  --accent-primary: var(--cafe-tan);
-  --accent-dark: var(--cafe-brown);
 
   /* Glass panel effect */
   --glass-bg: rgba(250, 249, 246, 0.85);
@@ -181,18 +143,12 @@
   --opacity-light: 0.12;
   --opacity-medium: 0.25;
   --opacity-strong: 0.5;
-  --opacity-heavy: 0.75;
 
   /* Common transparency combinations */
   --tan-subtle: rgba(var(--cafe-tan-rgb), var(--opacity-subtle));
   --tan-light: rgba(var(--cafe-tan-rgb), var(--opacity-light));
   --tan-medium: rgba(var(--cafe-tan-rgb), var(--opacity-medium));
   --tan-strong: rgba(var(--cafe-tan-rgb), var(--opacity-strong));
-
-  --gold-subtle: rgba(var(--gold-primary-rgb), var(--opacity-subtle));
-  --gold-light: rgba(var(--gold-primary-rgb), var(--opacity-light));
-  --gold-medium: rgba(var(--gold-primary-rgb), var(--opacity-medium));
-  --gold-strong: rgba(var(--gold-primary-rgb), var(--opacity-strong));
 
   /* Hero gradients */
   --hero-gradient-espresso:
@@ -526,7 +482,7 @@ h3 {
 ============================================================ */
 ::selection {
   background: rgba(164, 141, 120, 0.3);
-  color: var(--ink-cream);
+  color: var(--cafe-black);
 }
 
 *:focus-visible {

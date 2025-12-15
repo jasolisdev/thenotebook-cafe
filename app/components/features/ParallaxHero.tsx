@@ -4,7 +4,8 @@ import { CSSProperties, ReactNode } from "react";
 import "../../styles/components/parallax-hero.css";
 
 type ParallaxHeroProps = {
-  backgroundImage: string;
+  backgroundImage?: string;
+  backgroundColor?: string;
   headline?: string;
   subheadline?: string;
   children: ReactNode;
@@ -18,6 +19,7 @@ const cx = (...classes: (string | false | null | undefined)[]) =>
 
 export default function ParallaxHero({
   backgroundImage,
+  backgroundColor,
   headline,
   subheadline,
   contentClassName,
@@ -26,7 +28,8 @@ export default function ParallaxHero({
   overlayVariant = "default",
 }: ParallaxHeroProps) {
   const style = {
-    "--parallax-hero-image": `url(${backgroundImage})`,
+    "--parallax-hero-image": backgroundImage ? `url(${backgroundImage})` : "none",
+    ...(backgroundColor ? { "--parallax-hero-color": backgroundColor } : null),
     backgroundPosition: `center ${focusPercent}%`,
   } as CSSProperties;
 

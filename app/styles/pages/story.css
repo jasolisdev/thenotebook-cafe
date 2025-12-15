@@ -1,0 +1,127 @@
+/* Story Page */
+
+.story-page {
+  color: var(--cafe-brown);
+}
+
+.story-fixed-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--cafe-mist);
+  background-image: none;
+}
+
+.story-hero-kicker {
+  color: var(--cafe-tan);
+}
+
+.story-hero-title {
+  color: var(--cafe-cream);
+}
+
+.story-hero-title-accent {
+  color: var(--cafe-tan);
+}
+
+.story-hero-subtitle {
+  color: rgba(var(--cafe-cream-rgb), 0.82);
+}
+
+.story-section-title {
+  color: var(--cafe-black);
+}
+
+.story-section-title-accent {
+  color: var(--cafe-tan);
+}
+
+.story-divider--black {
+  background-color: var(--cafe-black);
+}
+
+.story-divider--tan {
+  background-color: var(--cafe-tan);
+}
+
+.story-body {
+  color: rgba(var(--cafe-brown-rgb), 0.82);
+}
+
+.story-strong {
+  color: var(--cafe-black);
+  font-weight: 600;
+}
+
+.story-em-accent {
+  color: var(--cafe-tan);
+}
+
+.story-icon-badge {
+  background-color: rgba(var(--cafe-tan-rgb), 0.12);
+}
+
+.story-icon {
+  color: var(--cafe-tan);
+}
+
+.story-eyebrow {
+  color: var(--cafe-tan);
+}
+
+.story-card-title {
+  color: var(--cafe-black);
+}
+
+.story-card-body {
+  color: rgba(var(--cafe-brown-rgb), 0.85);
+}
+
+.story-pill {
+  background-color: rgba(var(--cafe-tan-rgb), 0.2);
+  color: var(--cafe-brown);
+  border: 1px solid rgba(var(--cafe-tan-rgb), 0.3);
+}
+
+.story-founders-quote {
+  border: 2px solid rgba(var(--cafe-tan-rgb), 0.3);
+}
+
+.story-founders-quote-line {
+  background-color: rgba(var(--cafe-tan-rgb), 0.3);
+}
+
+.story-founders-quote-icon {
+  color: var(--cafe-tan);
+}
+
+.story-founders-quote-text {
+  color: var(--cafe-black);
+}
+
+.story-founders-quote-footer {
+  color: var(--cafe-tan);
+}
+
+.story-image-overlay {
+  background: linear-gradient(135deg, rgba(var(--cafe-black-rgb), 0.5) 0%, transparent 60%);
+}
+
+.story-established-badge {
+  background-color: var(--cafe-tan);
+  color: var(--cafe-white);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  font-family: var(--font-serif);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.12);
+  letter-spacing: 0.02em;
+}
+
+.story-stat-title {
+  color: var(--cafe-black);
+}
+
+.story-stat-label {
+  color: var(--cafe-brown);
+}

@@ -4,7 +4,7 @@
 
 /* Main Footer Container */
 .site-footer {
-  background-color: var(--bg-dark);
+  background-color: var(--cafe-charcoal);
   position: relative;
   width: 100%;
 }
@@ -75,7 +75,7 @@
 
 /* Main Footer Content */
 .footer-main {
-  background-color: var(--bg-dark);
+  background-color: var(--cafe-charcoal);
   padding: 60px 20px 40px;
 }
 

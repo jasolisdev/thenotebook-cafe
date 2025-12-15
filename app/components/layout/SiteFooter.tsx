@@ -30,7 +30,7 @@ export default function SiteFooter(): React.JSX.Element {
   }, []);
 
   return (
-    <footer className="relative overflow-hidden pt-20 pb-10" style={{ backgroundColor: 'var(--coffee-900)', borderTop: '1px solid var(--coffee-800)' }}>
+    <footer className="relative overflow-hidden pt-20 pb-10" style={{ backgroundColor: 'var(--cafe-charcoal)', borderTop: '1px solid var(--coffee-800)' }}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
 

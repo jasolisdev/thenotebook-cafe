@@ -4,7 +4,6 @@ import "./globals.css";
 
 // Component styles
 import "./styles/components/navigation.css";
-import "./styles/components/hero.css";
 import "./styles/components/buttons.css";
 import "./styles/components/footer.css";
 import "./styles/components/announcement.css";
@@ -29,8 +28,6 @@ import { CartDrawer } from "./components/features/CartDrawer";
 import { AccessibilityWidget } from "./components/features/Accessibility/AccessibilityWidget";
 import ConsentBanner from "./components/ui/ConsentBanner";
 import AnalyticsLoader from "./components/ui/AnalyticsLoader";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
 
 // Google Fonts
 const dmSerif = DM_Serif_Display({
@@ -134,8 +131,6 @@ export default async function RootLayout({
                 {/* <VirtualBarista /> */}
                 <AccessibilityWidget />
                 <CartDrawer />
-                <Analytics />
-                <SpeedInsights />
               </>
             )}
           </CartProvider>

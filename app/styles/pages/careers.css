@@ -3,38 +3,21 @@
  * Parallax hero scoped to the careers page only
  */
 
-.careers-hero-wrapper {
-  position: relative;
-  background: var(--cafe-mist);
+.careers-page {
+  color: var(--cafe-brown);
 }
 
-.careers-hero-wrapper .parallax-hero {
-  min-height: 70vh;
-}
-
-.careers-hero-wrapper .parallax-hero__content h1 {
-  color: #ffffff;
-  text-shadow: 0 6px 28px rgba(0, 0, 0, 0.65);
-}
-
-.careers-hero-wrapper .parallax-hero__content h1 span {
-  color: var(--cafe-tan);
-}
-
-.careers-hero-wrapper .parallax-hero__content p {
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 4px 22px rgba(0, 0, 0, 0.55);
-}
-
-@media (min-width: 768px) {
-  .careers-hero-wrapper .parallax-hero__content {
-    padding: 8rem 1.5rem;
-  }
+.careers-fixed-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--cafe-mist);
+  background-image: none;
 }
 
 /* Custom checkbox and radio button styling */
-input[type="checkbox"],
-input[type="radio"] {
+.careers-page input[type="checkbox"],
+.careers-page input[type="radio"] {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -48,17 +31,17 @@ input[type="radio"] {
   flex-shrink: 0;
 }
 
-input[type="radio"] {
+.careers-page input[type="radio"] {
   border-radius: 50%;
 }
 
-input[type="checkbox"]:checked,
-input[type="radio"]:checked {
+.careers-page input[type="checkbox"]:checked,
+.careers-page input[type="radio"]:checked {
   background-color: var(--cafe-tan);
   border-color: var(--cafe-tan);
 }
 
-input[type="checkbox"]:checked::before {
+.careers-page input[type="checkbox"]:checked::before {
   content: "✓";
   position: absolute;
   top: 50%;
@@ -69,7 +52,7 @@ input[type="checkbox"]:checked::before {
   font-weight: bold;
 }
 
-input[type="radio"]:checked::before {
+.careers-page input[type="radio"]:checked::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -81,20 +64,14 @@ input[type="radio"]:checked::before {
   background-color: white;
 }
 
-input[type="checkbox"]:focus,
-input[type="radio"]:focus {
+.careers-page input[type="checkbox"]:focus,
+.careers-page input[type="radio"]:focus {
   outline: 2px solid var(--cafe-tan);
   outline-offset: 2px;
 }
 
 /* Thank you page spacing */
 .careers-thank-you-page {
-  padding-top: calc(112px + 50px); /* 32px announcement + 80px header + 50px spacing */
+  padding-top: calc(var(--site-header-height, 80px) + 50px);
   padding-bottom: 50px;
-}
-
-@media (min-width: 768px) {
-  .careers-thank-you-page {
-    padding-top: calc(116px + 50px); /* 36px announcement + 80px header + 50px spacing */
-  }
 }

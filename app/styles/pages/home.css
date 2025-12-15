@@ -3,7 +3,9 @@
    - Keep this file small; split by concern under `styles/pages/home/`.
 ============================================================ */
 
+@import "./home/base.css";
 @import "./home/hero.css";
+@import "./home/home-fixed-background.css";
 @import "./home/signature-pours-section.css";
 @import "./home/trinity-slab.css";
 @import "./home/more-than-coffee.css";

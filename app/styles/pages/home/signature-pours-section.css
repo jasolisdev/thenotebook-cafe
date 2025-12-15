@@ -5,3 +5,7 @@
 .signature-float {
   filter: drop-shadow(0 2px 8px rgba(164, 141, 120, 0.15));
 }
+
+.signature-pours-section {
+  background-color: var(--cafe-mist);
+}
