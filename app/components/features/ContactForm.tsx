@@ -22,14 +22,24 @@ export default function ContactForm() {
     e.preventDefault();
     setStatus("loading");
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    // For now, just simulate success. 
-    // In a real app, you'd POST to /api/contact
-    console.log("Form submitted:", formData);
-    setStatus("success");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+      const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+      if (!res.ok || !data?.ok) {
+        setStatus("error");
+        return;
+      }
+
+      setStatus("success");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   };
 
   if (status === "success") {

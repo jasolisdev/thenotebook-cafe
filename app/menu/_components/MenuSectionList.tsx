@@ -67,7 +67,7 @@ export function MenuSectionList({ groupedItems, onSelectItem, onClearFilters }: 
                     {item.name}
                     {item.tag && (
                       <span
-                        className="menu-item-tag ml-3 text-2xs font-bold uppercase tracking-wider px-2 py-1 rounded-full inline-block"
+                        className="menu-item-tag ml-2 text-[10px] leading-none font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full inline-flex items-center"
                         data-tag={item.tag}
                       >
                         {item.tag}

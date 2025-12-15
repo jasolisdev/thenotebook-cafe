@@ -310,24 +310,19 @@ export default function HomePage() {
 
           {/* Right Column - Heading (order-1 on mobile) */}
           <div className="space-y-6 order-1 lg:order-2 text-right items-end lg:pl-10">
-            <Reveal>
-              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
-                The Atmosphere
-              </span>
-            </Reveal>
             <Reveal delay={120}>
-              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-cafe-black">
-                <span className="italic text-cafe-brown">Designed for</span><br />
-                <span className="italic text-cafe-tan">Focus</span>
-              </h2>
+	              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-cafe-black">
+	                <span className="italic text-cafe-brown">More than just coffee.</span><br />
+	                <span className="italic text-cafe-tan">It&apos;s a feeling</span>
+	              </h2>
             </Reveal>
             <Reveal delay={150}>
               <div className="w-24 h-[2px] ml-auto bg-cafe-black" />
             </Reveal>
             <Reveal delay={250}>
-              <p className="text-lg md:text-xl font-normal leading-relaxed max-w-xl text-cafe-brown">
-                A sanctuary with warm lighting, deep playlists, and Wi-Fi that never drops. Settle in for an hour or stay all day.
-              </p>
+	              <p className="text-lg md:text-xl font-normal leading-relaxed max-w-xl text-cafe-brown">
+	                We designed The Notebook Café to be an extension of your living room. Whether you&apos;re catching up with friends, diving into deep work, or just soaking in the playlist.
+	              </p>
             </Reveal>
           </div>
         </div>

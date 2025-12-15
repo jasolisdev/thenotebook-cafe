@@ -216,6 +216,21 @@ body {
   overflow-anchor: auto;
 }
 
+/* Sanity Studio should fully take over the viewport */
+body.studio-mode {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+.studio-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  height: 100dvh;
+  overflow: auto;
+  background: var(--bg-solid);
+}
+
 /* Hide horizontal scrollbar for hero gallery track */
 .scrollbar-none::-webkit-scrollbar {
   display: none;

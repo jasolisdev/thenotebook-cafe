@@ -81,10 +81,13 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
         {msg && (
           <div
             role="status"
-            className={`text-xs mt-2 ${status === "success" || status === "duplicate"
-                ? "text-green-400"
-                : "text-red-400"
-              }`}
+            className="text-xs mt-2"
+            style={{
+              color:
+                status === "success" || status === "duplicate"
+                  ? "var(--cafe-mist)"
+                  : "rgb(248 113 113)",
+            }}
           >
             {msg}
           </div>

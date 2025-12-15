@@ -18,16 +18,9 @@ import { ThemeProvider } from "next-themes";
 import { DM_Serif_Display, Outfit, Caveat, Inter, Playfair_Display } from "next/font/google";
 import { cookies } from "next/headers";
 import PasswordGate from "./components/ui/PasswordGate";
-import SiteHeader from "./components/layout/SiteHeader";
-import SiteFooter from "./components/layout/SiteFooter";
-import ImagePreloader from "./components/layout/ImagePreloader";
-import AnnouncementBanner from "./components/ui/AnnouncementBanner";
+import SiteShell from "./components/layout/SiteShell";
 import { client } from "@/sanity/lib/client";
 import { CartProvider } from "./components/providers/CartProvider";
-import { CartDrawer } from "./components/features/CartDrawer";
-import { AccessibilityWidget } from "./components/features/Accessibility/AccessibilityWidget";
-import ConsentBanner from "./components/ui/ConsentBanner";
-import AnalyticsLoader from "./components/ui/AnalyticsLoader";
 
 // Google Fonts
 const dmSerif = DM_Serif_Display({
@@ -113,25 +106,13 @@ export default async function RootLayout({
             {showPasswordGate ? (
               <PasswordGate />
             ) : (
-              <>
-                {/* Preload critical hero images for smooth page transitions */}
-                <ImagePreloader />
-                {showAnnouncement && <AnnouncementBanner />}
-                <SiteHeader
-                  instagramUrl={settings?.social?.instagram}
-                  spotifyUrl={settings?.social?.spotify}
-                />
-                <div className="page-content">
-                  {children}
-                </div>
-                <SiteFooter />
-                <ConsentBanner />
-                <AnalyticsLoader />
-                {/* VirtualBarista temporarily hidden for hero debugging */}
-                {/* <VirtualBarista /> */}
-                <AccessibilityWidget />
-                <CartDrawer />
-              </>
+              <SiteShell
+                instagramUrl={settings?.social?.instagram}
+                spotifyUrl={settings?.social?.spotify}
+                showAnnouncement={showAnnouncement}
+              >
+                {children}
+              </SiteShell>
             )}
           </CartProvider>
         </ThemeProvider>

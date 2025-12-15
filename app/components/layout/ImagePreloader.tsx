@@ -19,7 +19,7 @@ import { useEffect } from 'react';
 export default function ImagePreloader() {
   useEffect(() => {
     // List of all hero images across the site
-    const heroImages = [
+    const heroImages: string[] = [
       // Add any other critical images
     ];
 
