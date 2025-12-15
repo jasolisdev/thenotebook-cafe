@@ -58,10 +58,11 @@ export default function AnalyticsLoader() {
     const scheduleLoad = () => {
       if (loadedRef.current || !shouldAllowAnalytics()) return;
       if ("requestIdleCallback" in window) {
-        (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout?: number }) => number })
-          .requestIdleCallback(loadAnalytics, { timeout: 3000 });
+        (window as unknown as {
+          requestIdleCallback: (cb: () => void, opts?: { timeout?: number }) => number;
+        }).requestIdleCallback(loadAnalytics, { timeout: 3000 });
       } else {
-        window.setTimeout(loadAnalytics, 1500);
+        globalThis.setTimeout(loadAnalytics, 1500);
       }
     };
 
