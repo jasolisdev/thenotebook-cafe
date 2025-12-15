@@ -161,7 +161,7 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  --hero-bg-image: url("/home/hero-v2.jpg");
+  --hero-bg-image: url("/home/hero-v2.webp");
   background-image: var(--hero-bg-image);
   background-size: cover;
   background-position: center;
@@ -183,7 +183,7 @@
 @media (min-width: 1024px) {
   .editorial-hero-bg {
     background-size: cover;
-    --hero-bg-image: url("/home/hero-v3.jpg");
+    --hero-bg-image: url("/home/hero-v3.webp");
     filter: blur(1px);
     animation: kenBurns 20s ease-out infinite alternate;
   }
