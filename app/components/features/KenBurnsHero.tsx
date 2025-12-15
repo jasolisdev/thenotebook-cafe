@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
@@ -9,26 +8,29 @@ type KenBurnsHeroProps = {
   headline?: string;
   subheadline?: string;
   children: ReactNode;
+  contentClassName?: string;
 };
 
 export default function KenBurnsHero({
   backgroundImage,
   headline,
   subheadline,
+  contentClassName,
   children,
 }: KenBurnsHeroProps) {
   const hasImage = Boolean(backgroundImage);
   const [isHidden, setIsHidden] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const onChange = () => setPrefersReducedMotion(mediaQuery.matches);
-    setPrefersReducedMotion(mediaQuery.matches);
     mediaQuery.addEventListener("change", onChange);
 
     const onScroll = () => {
-      const threshold = window.innerWidth < 768 ? 360 : 500;
+      const threshold = window.innerWidth < 768 ? 520 : 500;
       const y = window.scrollY || window.pageYOffset;
       setIsHidden(y > threshold);
     };
@@ -60,9 +62,8 @@ export default function KenBurnsHero({
           aria-hidden
         />
       )}
-      <div className="kb-hero__overlay" aria-hidden data-variant={hasImage ? "image" : "gradient"} />
 
-      <div className="kb-hero__content">
+      <div className={cx("kb-hero__content", contentClassName)}>
         {headline && <p className="kb-hero__headline">{headline}</p>}
         {subheadline && <p className="kb-hero__subheadline">{subheadline}</p>}
         {children}

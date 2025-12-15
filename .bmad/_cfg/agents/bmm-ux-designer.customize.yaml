@@ -26,12 +26,10 @@ memories: []
 
 # Add custom menu items (appended to base menu)
 # Don't include * prefix or help/exit - auto-injected
-menu: []
-# Example:
-# menu:
-#   - trigger: my-workflow
-#     workflow: "{project-root}/custom/my.yaml"
-#     description: My custom workflow
+menu:
+  - trigger: frontend-design
+    skill: "frontend-design"
+    description: Create distinctive, production-grade frontend interfaces with high design quality
 
 # Add custom prompts (for action="#id" handlers)
 prompts: []

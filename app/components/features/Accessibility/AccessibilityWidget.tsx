@@ -1,0 +1,438 @@
+
+"use client";
+
+import React, { useMemo, useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import {
+  AccessibilityHumanIcon, XMarkIcon, TypeIcon,
+  ContrastIcon, EyeIcon, ResetIcon, ChevronLeftIcon,
+  MousePointerIcon, LinkIcon, RulerIcon, PauseIcon, BrainIcon
+} from '@/app/components/ui/AccessibilityIcons';
+
+interface AccessibilitySettings {
+  textSize: 'normal' | 'large' | 'xl';
+  grayscale: boolean;
+  highContrast: boolean;
+  readableFont: boolean;
+  hideImages: boolean;
+  cursorSize: boolean;
+  highlightLinks: boolean;
+  dyslexiaFont: boolean;
+  readingGuide: boolean;
+  stopAnimations: boolean;
+  bionicReading: boolean;
+}
+
+const defaultSettings: AccessibilitySettings = {
+  textSize: 'normal',
+  grayscale: false,
+  highContrast: false,
+  readableFont: false,
+  hideImages: false,
+  cursorSize: false,
+  highlightLinks: false,
+  dyslexiaFont: false,
+  readingGuide: false,
+  stopAnimations: false,
+  bionicReading: false,
+};
+
+function escapeHtml(input: string) {
+  return input
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+export const AccessibilityWidget: React.FC = () => {
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+  const [view, setView] = useState<'settings' | 'statement'>('settings');
+  const [settings, setSettings] = useState<AccessibilitySettings>(() => {
+    if (typeof window === 'undefined') return defaultSettings;
+    const saved = localStorage.getItem('accessibility-settings');
+    if (!saved) return defaultSettings;
+    try {
+      return JSON.parse(saved) as AccessibilitySettings;
+    } catch (e) {
+      console.error('Failed to load accessibility settings:', e);
+      return defaultSettings;
+    }
+  });
+
+  const isDefaultSettings = useMemo(() => {
+    return (Object.keys(defaultSettings) as (keyof AccessibilitySettings)[]).every(
+      (key) => settings[key] === defaultSettings[key]
+    );
+  }, [settings]);
+
+  // Save settings to localStorage whenever they change
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('accessibility-settings', JSON.stringify(settings));
+    }
+  }, [settings]);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  // Apply settings to document
+  useEffect(() => {
+    const html = document.documentElement;
+
+    // Text Size
+    html.classList.remove('acc-text-md', 'acc-text-lg', 'acc-text-xl');
+    if (settings.textSize === 'large') html.classList.add('acc-text-lg');
+    if (settings.textSize === 'xl') html.classList.add('acc-text-xl');
+
+    // Toggles
+    if (settings.grayscale) html.classList.add('acc-grayscale'); else html.classList.remove('acc-grayscale');
+    if (settings.highContrast) html.classList.add('acc-contrast'); else html.classList.remove('acc-contrast');
+    if (settings.readableFont) html.classList.add('acc-readable-font'); else html.classList.remove('acc-readable-font');
+    if (settings.hideImages) html.classList.add('acc-hide-images'); else html.classList.remove('acc-hide-images');
+    if (settings.cursorSize) html.classList.add('acc-cursor-lg'); else html.classList.remove('acc-cursor-lg');
+    if (settings.highlightLinks) html.classList.add('acc-highlight-links'); else html.classList.remove('acc-highlight-links');
+    if (settings.dyslexiaFont) html.classList.add('acc-dyslexia-font'); else html.classList.remove('acc-dyslexia-font');
+    if (settings.readingGuide) html.classList.add('acc-reading-guide'); else html.classList.remove('acc-reading-guide');
+    if (settings.stopAnimations) html.classList.add('acc-stop-animations'); else html.classList.remove('acc-stop-animations');
+
+  }, [settings]);
+
+  // Bionic Reading Logic
+  useEffect(() => {
+    const applyBionicReading = () => {
+      if (settings.bionicReading) {
+        const textElements = document.querySelectorAll('main p, main h1, main h2, main h3, main h4, main h5, main h6, main li, main a, main button, main span:not(.bionic-skip)');
+        textElements.forEach(el => {
+          const element = el as HTMLElement;
+          // Skip elements that are already processed or should be skipped
+          if (!element.getAttribute('data-bionic-original') && element.textContent && element.textContent.trim().length > 0) {
+            element.setAttribute('data-bionic-original', element.innerHTML);
+            const words = element.innerText.split(' ');
+            const newHtml = words.map(word => {
+              const mid = Math.ceil(word.length / 2);
+              const left = escapeHtml(word.slice(0, mid));
+              const right = escapeHtml(word.slice(mid));
+              return `<b class="bionic-bold">${left}</b>${right}`;
+            }).join(' ');
+            element.innerHTML = newHtml;
+          }
+        });
+      } else {
+        const textElements = document.querySelectorAll('main [data-bionic-original]');
+        textElements.forEach(element => {
+          const original = element.getAttribute('data-bionic-original');
+          if (original) {
+             element.innerHTML = original;
+             element.removeAttribute('data-bionic-original');
+          }
+        });
+      }
+    };
+
+    // Delay to ensure page content is fully rendered after navigation
+    const timeoutId = setTimeout(() => {
+      applyBionicReading();
+    }, 50);
+
+    // Watch for DOM changes (dynamic content)
+    let observer: MutationObserver | null = null;
+    if (settings.bionicReading) {
+      observer = new MutationObserver((mutations) => {
+        // Check if new content was added
+        const hasNewContent = mutations.some(mutation =>
+          mutation.type === 'childList' && mutation.addedNodes.length > 0
+        );
+        if (hasNewContent) {
+          // Delay to ensure content is fully rendered
+          setTimeout(applyBionicReading, 100);
+        }
+      });
+
+      const mainElement = document.querySelector('main');
+      if (mainElement) {
+        observer.observe(mainElement, {
+          childList: true,
+          subtree: true
+        });
+      }
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+      if (observer) observer.disconnect();
+    };
+  }, [settings.bionicReading, pathname]);
+
+  // Reading Guide Logic
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const guide = document.getElementById('reading-guide-line');
+      if (guide && settings.readingGuide) {
+        guide.style.top = `${e.clientY}px`;
+      }
+    };
+    
+    if (settings.readingGuide) {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [settings.readingGuide]);
+
+  const toggleSetting = (key: keyof AccessibilitySettings) => {
+    setSettings(prev => ({ ...prev, [key]: !prev[key] as boolean }));
+  };
+
+  const setTextSize = (size: 'normal' | 'large' | 'xl') => {
+    setSettings(prev => ({ ...prev, textSize: size }));
+  };
+
+  const resetSettings = () => {
+    setSettings(defaultSettings);
+  };
+
+  const toggleOpen = () => {
+    setIsOpen(!isOpen);
+    if (!isOpen) setView('settings');
+  };
+
+  return (
+    <>
+      {/* Floating Toggle Button */}
+      <button
+        onClick={toggleOpen}
+        className={`fixed bottom-6 left-6 z-[110] w-14 h-14 bg-cafe-black text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-brown transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border ${isDefaultSettings ? 'border-cafe-tan/40' : 'border-gold/90 shadow-[0_0_0_3px_rgba(196,164,132,0.18)]'}`}
+        aria-label="Accessibility Options"
+      >
+        <AccessibilityHumanIcon className="w-8 h-8" />
+      </button>
+
+      {/* Backdrop */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-cafe-black/40 z-[100]"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* Drawer */}
+      <div className={`fixed inset-y-0 left-0 z-[110] w-full md:w-96 bg-[#2A2622] shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? 'translate-x-0' : '-translate-x-full'} flex flex-col border-r border-cafe-cream/10`}>
+        
+        {/* Header */}
+        <div className="p-6 border-b border-cafe-cream/10 bg-[#2A2622] flex items-center justify-between shrink-0">
+          <h2 className="font-display font-bold text-xl text-cafe-cream">
+            {view === 'settings' ? 'Accessibility Tools' : 'Accessibility Statement'}
+          </h2>
+          <button 
+            onClick={() => setIsOpen(false)}
+            className="w-10 h-10 rounded-full hover:bg-cafe-black flex items-center justify-center text-cafe-mist transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
+            aria-label="Close accessibility panel"
+          >
+            <XMarkIcon className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto p-6 bg-[#2A2622]">
+          {view === 'settings' ? (
+            <div className="space-y-4">
+              <p className="text-sm text-cafe-mist/80 font-sans mb-4">
+                Customize your viewing experience with our accessibility tools.
+              </p>
+
+              {/* Text Size Control */}
+              <div className="bg-cafe-black/30 p-4 rounded-xl border border-cafe-cream/10">
+                 <div className="flex items-center gap-2 mb-3 text-cafe-cream font-bold">
+                    <TypeIcon className="w-5 h-5" />
+                    <span>Text Size</span>
+                 </div>
+                 <div className="flex gap-2">
+                    <button 
+                       onClick={() => setTextSize('normal')}
+                       className={`flex-1 py-2 rounded-lg text-sm font-bold border transition-colors ${settings.textSize === 'normal' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-transparent text-cafe-mist border-cafe-cream/20 hover:bg-cafe-cream/5 hover:border-cafe-cream/40'}`}
+                    >
+                      Aa
+                    </button>
+                    <button 
+                       onClick={() => setTextSize('large')}
+                       className={`flex-1 py-2 rounded-lg text-base font-bold border transition-colors ${settings.textSize === 'large' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-transparent text-cafe-mist border-cafe-cream/20 hover:bg-cafe-cream/5 hover:border-cafe-cream/40'}`}
+                    >
+                      Aa
+                    </button>
+                    <button 
+                       onClick={() => setTextSize('xl')}
+                       className={`flex-1 py-2 rounded-lg text-lg font-bold border transition-colors ${settings.textSize === 'xl' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-transparent text-cafe-mist border-cafe-cream/20 hover:bg-cafe-cream/5 hover:border-cafe-cream/40'}`}
+                    >
+                      Aa
+                    </button>
+                 </div>
+              </div>
+
+              {/* Toggles */}
+              <div className="space-y-3">
+                <ToggleButton 
+                  label="Bionic Reading" 
+                  icon={<BrainIcon className="w-6 h-6" />}
+                  active={settings.bionicReading} 
+                  onClick={() => toggleSetting('bionicReading')} 
+                />
+
+                <ToggleButton 
+                  label="Reading Guide" 
+                  icon={<RulerIcon className="w-6 h-6" />}
+                  active={settings.readingGuide} 
+                  onClick={() => toggleSetting('readingGuide')} 
+                />
+
+                <ToggleButton 
+                  label="High Contrast" 
+                  icon={<ContrastIcon className="w-6 h-6" />}
+                  active={settings.highContrast} 
+                  onClick={() => toggleSetting('highContrast')} 
+                />
+
+                <ToggleButton 
+                  label="Grayscale" 
+                  icon={<EyeIcon className="w-6 h-6" />}
+                  active={settings.grayscale} 
+                  onClick={() => toggleSetting('grayscale')} 
+                />
+
+                <ToggleButton 
+                  label="Dyslexia Font" 
+                  icon={<span className="font-serif font-bold text-xl px-1">D</span>}
+                  active={settings.dyslexiaFont} 
+                  onClick={() => toggleSetting('dyslexiaFont')} 
+                />
+                
+                <ToggleButton 
+                  label="Highlight Links" 
+                  icon={<LinkIcon className="w-6 h-6" />}
+                  active={settings.highlightLinks} 
+                  onClick={() => toggleSetting('highlightLinks')} 
+                />
+
+                <ToggleButton 
+                  label="Large Cursor" 
+                  icon={<MousePointerIcon className="w-6 h-6" />}
+                  active={settings.cursorSize} 
+                  onClick={() => toggleSetting('cursorSize')} 
+                />
+
+                 <ToggleButton 
+                  label="Hide Images" 
+                  icon={<EyeIcon className="w-6 h-6" />}
+                  active={settings.hideImages} 
+                  onClick={() => toggleSetting('hideImages')} 
+                />
+
+                <ToggleButton 
+                  label="Stop Animations" 
+                  icon={<PauseIcon className="w-6 h-6" />}
+                  active={settings.stopAnimations} 
+                  onClick={() => toggleSetting('stopAnimations')} 
+                />
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-cafe-cream/10">
+                <button 
+                  onClick={() => setView('statement')}
+                  className="w-full py-3 px-4 bg-cafe-black/40 hover:bg-cafe-black text-cafe-mist rounded-xl font-bold transition-colors text-sm border border-cafe-cream/20"
+                >
+                  Read Accessibility Statement
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="prose prose-sm max-w-none text-cafe-mist/90 animate-slide-in-left">
+              <button 
+                onClick={() => setView('settings')}
+                className="flex items-center gap-2 text-cafe-cream font-bold mb-6 hover:text-cafe-tan transition-colors"
+              >
+                <ChevronLeftIcon className="w-5 h-5" />
+                Back to Settings
+              </button>
+              
+              <h3 className="font-display font-bold text-lg text-cafe-cream mb-2">Our Commitment to Accessibility</h3>
+              <p className="mb-4 text-cafe-mist/80">We want everyone to enjoy The Notebook Café online. We aim for WCAG 2.1 AA alignment and keep iterating with feedback from our community.</p>
+
+              <h3 className="font-display font-bold text-lg text-cafe-cream mb-2">Features Available</h3>
+              <ul className="list-disc pl-5 mb-4 space-y-1 text-cafe-mist/80">
+                <li><strong>Text Options:</strong> Adjustable sizes and high-contrast mode.</li>
+                <li><strong>Reading Aids:</strong> Dyslexia-friendly font, bionic reading, and a reading guide line.</li>
+                <li><strong>Visual Controls:</strong> Grayscale, hide images, pause animations.</li>
+                <li><strong>Focus Helpers:</strong> Larger cursor, link highlights.</li>
+              </ul>
+
+              <h3 className="font-display font-bold text-lg text-cafe-cream mb-2">How We Test</h3>
+              <p className="mb-4 text-cafe-mist/80">We review pages with keyboard-only navigation, screen magnifiers, and automated checks, and we welcome your feedback to improve further.</p>
+
+              <h3 className="font-display font-bold text-lg text-cafe-cream mb-2">Need Assistance?</h3>
+              <p className="mb-8 text-cafe-mist/80">If any part of this site is hard to use, email us at <a href="mailto:thenotebookcafellc@gmail.com" className="font-semibold text-cafe-cream underline">thenotebookcafellc@gmail.com</a> and we’ll work with you directly.</p>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        {view === 'settings' && (
+          <div className="p-6 border-t border-cafe-cream/10 bg-[#2A2622] shrink-0">
+            <button 
+              onClick={resetSettings}
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 border-2 border-cafe-mist/20 text-cafe-mist hover:bg-cafe-mist hover:text-cafe-charcoal rounded-xl font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
+            >
+              <ResetIcon className="w-5 h-5" />
+              Reset Settings
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Reading Guide Line */}
+      {settings.readingGuide && (
+        <div
+          id="reading-guide-line"
+          style={{
+            position: 'fixed',
+            left: 0,
+            right: 0,
+            height: '3px',
+            backgroundColor: 'rgba(164, 141, 120, 0.7)',
+            pointerEvents: 'none',
+            zIndex: 9999,
+            boxShadow: '0 0 10px rgba(164, 141, 120, 0.5)',
+          }}
+        />
+      )}
+    </>
+  );
+};
+
+// Helper Component for consistency
+const ToggleButton = ({ label, icon, active, onClick }: { label: string, icon: React.ReactNode, active: boolean, onClick: () => void }) => (
+  <button 
+    onClick={onClick}
+    className={`w-full p-4 rounded-xl border flex items-center gap-4 transition-all ${active ? 'bg-cafe-tan text-cafe-white border-cafe-tan shadow-md' : 'bg-transparent text-cafe-mist border-cafe-cream/20 hover:border-cafe-cream/40 hover:bg-cafe-cream/5'}`}
+  >
+    {icon}
+    <span className="font-bold flex-1 text-left">{label}</span>
+    <div className={`w-10 h-6 rounded-full p-1 transition-colors ${active ? 'bg-cafe-black/20' : 'bg-cafe-black/40'}`}>
+      <div className={`w-4 h-4 rounded-full transition-transform ${active ? 'translate-x-4 bg-white' : 'translate-x-0 bg-cafe-mist/50'}`} />
+    </div>
+  </button>
+);

@@ -24,6 +24,12 @@ export default defineType({
       description: "Where the signup came from (homepage, footer, etc.)",
     }),
     defineField({
+      name: "unsubscribeToken",
+      title: "Unsubscribe Token",
+      type: "string",
+      description: "Unique token used to unsubscribe via email links.",
+    }),
+    defineField({
       name: "status",
       title: "Status",
       type: "string",
@@ -36,6 +42,11 @@ export default defineType({
         layout: "radio",
       },
       initialValue: "subscribed",
+    }),
+    defineField({
+      name: "unsubscribedAt",
+      title: "Unsubscribed At",
+      type: "datetime",
     }),
     defineField({
       name: "createdAt",

@@ -94,15 +94,13 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
               <button
                 key={cat}
                 onClick={() => setActiveTab(cat)}
-                className={`pb-3 px-2 sm:px-4 md:px-6 text-xs sm:text-sm font-bold tracking-[0.12em] sm:tracking-[0.18em] md:tracking-[0.22em] uppercase transition-all relative whitespace-nowrap ${
-                  activeTab === cat ? "text-cafe-black" : "text-cafe-brown/50 hover:text-cafe-brown"
-                }`}
+                className={`pb-3 px-2 sm:px-4 md:px-6 text-xs sm:text-sm font-bold tracking-[0.12em] sm:tracking-[0.18em] md:tracking-[0.22em] uppercase transition-all relative whitespace-nowrap ${activeTab === cat ? "text-cafe-black" : "text-cafe-brown/50 hover:text-cafe-brown"
+                  }`}
               >
                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
                 {activeTab === cat && (
                   <span
-                    className="absolute bottom-0 left-0 w-full h-0.5 animate-fade-in"
-                    style={{ backgroundColor: "#A48D78" }}
+                    className="absolute bottom-0 left-0 w-full h-0.5 animate-fade-in bg-cafe-tan"
                   ></span>
                 )}
               </button>
@@ -125,7 +123,7 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
                 fill
                 className="object-cover transition-transform duration-700 hover:scale-105"
               />
-              <div className="absolute top-3 right-3 bg-[#A48D78] text-white text-[11px] font-bold px-2.5 py-1 rounded-sm uppercase tracking-[0.18em] shadow-sm">
+              <div className="absolute top-3 right-3 bg-cafe-tan text-white text-[11px] font-bold px-2.5 py-1 rounded-sm uppercase tracking-[0.18em] shadow-sm">
                 Seasonal
               </div>
             </div>
@@ -151,7 +149,7 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
                     {subcategory}
                   </h2>
                   {/* Subcategory Items */}
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
                     {subcategoryItems.map((item, index) => (
                       <Reveal key={item.id} delay={index * 30} replay={false}>
                         <div
@@ -168,19 +166,14 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
                             <p className="text-cafe-brown/70 text-sm font-light leading-relaxed">{item.description}</p>
                             {item.tag && (
                               <span
-                                className="inline-block mt-2 text-[10px] uppercase tracking-wider font-bold text-cafe-tan px-2 py-1 bg-cafe-tan/10 rounded-sm"
-                                style={{
-                                  color: "#A48D78",
-                                  backgroundColor: "rgba(164, 141, 120, 0.1)",
-                                  fontSize: "10px",
-                                }}
+                                className="inline-block mt-2 text-2xs uppercase tracking-wider font-bold text-cafe-tan px-2 py-1 bg-cafe-tan/10 rounded-sm"
                               >
                                 {item.tag}
                               </span>
                             )}
                           </div>
                           {/* Click indicator */}
-                          <div className="flex-shrink-0 text-cafe-brown/30 group-hover:text-cafe-tan transition-colors self-center">
+                          <div className="flex-shrink-0 text-cafe-brown/30 group-hover:text-cafe-black transition-colors self-center">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                               <circle cx="12" cy="12" r="10" />
                               <line x1="12" y1="8" x2="12" y2="16" />
@@ -195,7 +188,7 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
               ))}
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10 mt-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12 mt-4">
               {filteredItems.map((item, index) => (
                 <Reveal key={item.id} delay={index * 30} replay={false}>
                   <div
@@ -212,12 +205,7 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
                       <p className="text-cafe-brown/70 text-sm font-light leading-relaxed">{item.description}</p>
                       {item.tag && (
                         <span
-                          className="inline-block mt-2 text-[10px] uppercase tracking-wider font-bold text-cafe-tan px-2 py-1 bg-cafe-tan/10 rounded-sm"
-                          style={{
-                            color: "#A48D78",
-                            backgroundColor: "rgba(164, 141, 120, 0.1)",
-                            fontSize: "10px",
-                          }}
+                          className="inline-block mt-2 text-2xs uppercase tracking-wider font-bold text-cafe-tan px-2 py-1 bg-cafe-tan/10 rounded-sm"
                         >
                           {item.tag}
                         </span>
@@ -271,7 +259,7 @@ export default function MenuNewContent({ items }: MenuNewContentProps) {
               <div className="flex items-center justify-between mt-auto pt-4 border-t border-cafe-beige/20 sm:border-0 sm:pt-0">
                 <span className="text-2xl font-serif text-cafe-black">{formatPrice(selectedItem.price)}</span>
                 <button className="bg-cafe-black text-white px-6 py-2 text-xs uppercase tracking-widest hover:bg-cafe-tan transition-colors">
-                  Add to Order
+                  Add to Order {formatPrice(selectedItem.price)}
                 </button>
               </div>
             </div>

@@ -1,203 +1,91 @@
 # CSS Organization
 
-This project's CSS has been refactored from a single large `globals.css` (2089 lines) into a clean, modular structure.
+A modular CSS layout that breaks the old monolithic `globals.css` into focused, documented layers. Styles live alongside the App Router and are imported in a predictable cascade.
 
 ## Folder Structure
 
 ```
 app/
-├── globals.css (foundational styles only)
+├── globals.css
 └── styles/
     ├── components/      # Reusable component styles
     │   ├── announcement.css
     │   ├── buttons.css
-    │   ├── card-gallery.css
+    │   ├── consent-banner.css
     │   ├── footer.css
-    │   ├── hero.css
-    │   ├── modal.css
+    │   ├── kenburns-hero.css
     │   ├── navigation.css
-    │   ├── page-transitions.css
+    │   ├── parallax-hero.css
     │   └── what-to-expect.css
     ├── layout/          # Layout primitives and animations
     │   ├── animations.css
     │   └── sections.css
     └── pages/           # Page-specific styles
-        ├── about.css
-        ├── contact.css
-        ├── events.css
+        ├── careers.css
         ├── home.css
-        └── menu.css
+        └── home/         # Home page split by section
+            ├── hero.css
+            ├── more-than-coffee.css
+            ├── signature-pours-section.css
+            └── trinity-slab.css
 ```
 
-## File Contents
+> Note: `.backup` files in the style folders are snapshots of older layouts—keep them unchanged unless intentionally restoring previous styling.
 
-### `globals.css` (Foundation)
-- Tailwind import
-- Custom font declarations (@font-face for Alpino, now using DM Serif Display + Outfit from Google Fonts)
-- Design tokens (CSS custom properties: colors, fonts, etc.)
-- Base HTML/body styles
-- Global utility classes (text-light, site-layout, section-cream, section-dark, etc.)
-- Typography base (h1-h3, font-display)
-- Core animations (fadeInUp, pulse, fadeIn, pulseGlow, scrollReveal)
-- Scroll reveal system
-- Accessibility styles (::selection, :focus-visible)
+## Foundations (`globals.css`)
+- Tailwind v4 import (`@import "tailwindcss";`) plus `@theme` tokens for the café palette.
+- Font variables provided by `next/font`: DM Serif Display (display), Outfit (body), Caveat (handwritten accents). `OpenDyslexic` is registered as an accessibility-friendly fallback.
+- Expanded design tokens: semantic café colors, hero gradients, overlay helpers, and opacity presets—mirrored in `app/lib/colors.ts` for JS/TS parity.
+- Base element resets and typography defaults, selection/focus treatments, scroll handling fixes, and global utility classes.
+- Animation library (fade, pulse, scroll reveal) and accessibility hooks (`acc-*` classes for contrast, cursor sizing, dyslexia font, animation kill switch, bionic reading support).
 
-### `styles/components/` (Reusable Components)
+## Component Styles
+- **announcement.css** — Fixed top banner, gradient background, animated icons, responsive spacing.
+- **buttons.css** — Pill buttons, gold badges, hover transitions, shared CTA styling.
+- **consent-banner.css** — Cookie/analytics consent banner with warm gradient, stacked actions, responsive layout.
+- **footer.css** — Footer grid, social/icon styling, muted text treatments.
+- **kenburns-hero.css** — Cinematic hero with Ken Burns pan/zoom, scroll-hide behavior, overlay variants (imported inside `KenBurnsHero.tsx`).
+- **navigation.css** — Glassmorphism header, nav links, drawer/drawer-footer, burger animations, active state styling.
+- **parallax-hero.css** — Parallax background hero with overlay variants and reduce-motion support (imported inside `ParallaxHero.tsx`).
+- **what-to-expect.css** — “What to Expect” section bullets, icon animations, and typography.
 
-**announcement.css**
-- Announcement banner at top of site
-- Fixed positioning and z-index management
-- Gold gradient background
-- Animated coffee cup icons with steam
-- Responsive spacing and typography
+## Layout Styles
+- **sections.css** — Shared section backgrounds (cream/dark), dividers, and global spacing helpers.
+- **animations.css** — Floating decorative items for hero/home/menu/footer, keyframes, and responsive sizing.
 
-**buttons.css**
-- btn-pill (global pill button)
-- badge-gold (gold badge styling)
-- Button hover effects and transitions
+## Page Styles
+- **careers.css** — Careers hero wrapper and parallax hero overrides.
+- **contact.css** — Contact page fixed background, info grid, and map section styling.
+- **home.css** — Home entrypoint; imports section styles from `styles/pages/home/`.
+- **menu.css** — Menu page fixed background, sticky tabs, and editorial list styling.
+- **story.css** — Story/about page background, typography, and section styling.
 
-**card-gallery.css**
-- Card gallery layout and grid
-- Individual card styles
-- Card image containers
-- Card content and typography
-- Hover effects and animations
+## Import Order
 
-**footer.css**
-- Footer layout and spacing
-- Footer text styles (footer-dim)
-- Social icon styling and hover effects
-- Footer navigation links
-
-**hero.css**
-- Hero section layout
-- Hero gradient background
-- Hero title, tagline, divider, description
-- Hero CTA button and badge
-- All hero-specific animations
-
-**modal.css**
-- Modal overlay and backdrop
-- Modal container and positioning
-- Modal header, body, footer
-- Close button styling
-- Open/close animations
-- Responsive modal sizing
-
-**navigation.css**
-- Nav bar (nav-glass-wrap, nav-glass, header-dark)
-- Brand and navigation links
-- Burger menu icon and animations
-- Mobile drawer (drawer, drawer-nav, drawer-footer)
-- All drawer transitions and effects
-- Active state styling
-
-**page-transitions.css**
-- Page transition animations
-- Route change effects
-- Fade in/out transitions
-
-**what-to-expect.css**
-- "What to Expect" section styling
-- Bullet point layouts
-- Icon animations
-- Section-specific typography
-
-### `styles/pages/` (Page-Specific)
-
-**about.css**
-- About/Story hero section (badge, title, subtitle)
-- About body card and content
-- Values grid and value cards
-- Mission card with glow animation
-- About divider styling
-- About footer
-
-**contact.css**
-- Contact page layout
-- Contact form styling
-- Form input fields and validation states
-- Submit button styles
-- Contact information display
-
-**events.css**
-- Events page layout
-- Event card styling
-- Event calendar integration
-- Event details and descriptions
-- RSVP/CTA buttons
-- Floating decorative items specific to events page
-
-**home.css**
-- Welcome section (section label, highlights grid)
-- Animated icons (coffee with steam, music notes, notebook with pen)
-- Welcome CTA button
-- Vibe quote section
-- Home info cards (home-info-card, home-card-icon)
-- Social icons (home-social-icon)
-- Newsletter card (home-newsletter-card)
-- Atmosphere carousel
-- Home footer styling
-
-**menu.css**
-- Menu tab navigation
-- Menu item cards and grid layout
-- Menu item animations (menuItemFadeIn)
-- Menu item icon hover effects
-- Menu item modal integration
-- Seasonal drinks section
-- Scroll-to-top button
-
-### `styles/layout/` (Layout Primitives)
-
-**sections.css**
-- Divider styling (divider-cream)
-- Section backgrounds (section-cream, section-dark)
-- Section-specific icon color adjustments
-
-**animations.css**
-- Floating items container
-- Menu page floating items (cup, beans)
-- Home page floating items:
-  - Hero section (hero-bean-left, hero-bean-right)
-  - Welcome section (home-bean-up-left, home-bean-bottom-right, home-coffee-plant)
-  - Cards section (4 beans at corners)
-  - Footer section (flower, beans)
-- All floating animation keyframes
-- Responsive sizing for mobile
-
-## Import Order in layout.tsx
+`app/layout.tsx` imports the global cascade in this order:
 
 ```tsx
 import "./globals.css";
 
 // Component styles
 import "./styles/components/navigation.css";
-import "./styles/components/hero.css";
 import "./styles/components/buttons.css";
 import "./styles/components/footer.css";
 import "./styles/components/announcement.css";
+import "./styles/components/consent-banner.css";
 import "./styles/components/what-to-expect.css";
 
 // Layout styles
 import "./styles/layout/sections.css";
 import "./styles/layout/animations.css";
-
-// Page styles
-import "./styles/pages/home.css";
-import "./styles/pages/about.css";
-import "./styles/pages/menu.css";
-import "./styles/pages/events.css";
-import "./styles/pages/contact.css";
 ```
 
-This order ensures proper CSS cascade: foundation → components → layout → pages.
+Page-specific CSS is imported by the route that needs it (e.g., `app/page.tsx` imports `./styles/pages/home.css`). Component-scoped CSS (e.g., `kenburns-hero.css`, `parallax-hero.css`) is imported within the React component that needs it.
 
-## Benefits of This Organization
-
-1. **Easy to find styles** - Component, page, or layout? Each has its own folder
-2. **Maintainable** - Small, focused files instead of one 2000+ line file
-3. **Modular** - Easy to add/remove page-specific styles
+## Why This Layout Works
+1. Styles are discoverable by concern: foundation → components → layout → pages.
+2. Tokens live in one place and stay in sync with TypeScript helpers.
+3. Component-level imports keep specialized effects (hero, parallax) isolated and opt-in.
 4. **Clear separation** - Globals contain only foundational styles
 5. **Better performance** - CSS can be cached more efficiently by file
 6. **Easier collaboration** - Team members can work on different files without conflicts
@@ -209,16 +97,10 @@ This order ensures proper CSS cascade: foundation → components → layout → 
 - **New page?** → Create file in `styles/pages/`
 - **New animation/layout?** → Add to `styles/layout/`
 
-Don't forget to import the new CSS file in `app/layout.tsx`!
+Don't forget to import new layout/component CSS in the correct place (layout vs. route/component).
 
 ---
 
 ## Additional Component Files
 
-The following CSS files exist in `styles/components/` but are not currently imported in `layout.tsx`. They are used by specific components that import them directly or are reserved for future features:
-
-- **card-gallery.css** - Card gallery component (imported in component file)
-- **modal.css** - Modal/dialog component (imported in component file)
-- **page-transitions.css** - Page transition effects (conditionally used)
-
-These files follow the same organizational principles but are included on-demand rather than globally.
+Legacy `.backup` files in `styles/components/` and `styles/pages/` preserve prior design experiments without shipping unused CSS to production. Keep them for reference or restoration, but avoid importing them unless intentionally reviving an old layout.

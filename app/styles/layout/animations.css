@@ -735,6 +735,90 @@
   }
 }
 
+/* ============================================================
+   SECTION DECORATIONS (shared)
+============================================================ */
+.section-deco {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(44px, 8vw, 72px);
+  height: clamp(44px, 8vw, 72px);
+  color: var(--cafe-tan);
+  opacity: 0.1;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 18px rgba(164, 141, 120, 0.18));
+  animation: floatGentle 11s ease-in-out infinite;
+  z-index: 1;
+}
+
+.section-deco svg {
+  width: 100%;
+  height: 100%;
+}
+
+.section-deco.section-deco-dark {
+  color: rgba(var(--cafe-brown-rgb), 0.5);
+  opacity: 0.12;
+}
+
+.section-deco-mobile {
+  position: absolute;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--cafe-tan);
+  opacity: 0.2;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 12px rgba(164, 141, 120, 0.22));
+  animation: floatGentle 10s ease-in-out infinite;
+  z-index: 1;
+}
+
+.section-deco-mobile svg {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .section-deco {
+    display: none;
+  }
+
+  .section-deco-mobile {
+    display: inline-flex;
+  }
+}
+
+.hero-float-icon {
+  filter: drop-shadow(0 2px 8px rgba(164, 141, 120, 0.2));
+}
+
+@keyframes floatGentle {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+}
+
+@keyframes floatHero {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
 /* Responsive sizing for events page items */
 @media (max-width: 768px) {
   .events-hero-bean-left {
@@ -756,4 +840,14 @@
     width: 58px;
     right: 5%;
   }
+}
+
+/* ============================================================
+   REMOVE ALL FLOATING DECORATIONS
+============================================================ */
+.section-deco,
+.section-deco-dark,
+.section-deco-mobile,
+.floating-item {
+  display: none !important;
 }

@@ -70,7 +70,7 @@ export const GENERAL_FAQ: FaqItem[] = [
   {
     id: "hours",
     question: "What are your hours?",
-    answer: "Hours: Mon-Thu 6:30am–4:00pm, Fri-Sat 6:30am–6:00pm, Sun closed.",
+    answer: "Hours: Mon-Sat 7:00am–6:00pm, Sun closed.",
     keywords: ["hours", "open", "close", "closing", "when", "time"],
   },
   {

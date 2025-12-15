@@ -1,0 +1,85 @@
+/* Simple parallax hero background scoped to the hero only */
+.parallax-hero {
+  position: relative;
+  min-height: 70vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background-image: var(--parallax-hero-image);
+  background-color: var(--parallax-hero-color, transparent);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  z-index: 0;
+  isolation: isolate;
+}
+
+.parallax-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.35) 50%,
+      rgba(0, 0, 0, 0.2) 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Lighter overlay variant */
+.parallax-hero__overlay--light {
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(0, 0, 0, 0.25) 50%,
+      rgba(0, 0, 0, 0.1) 100%);
+}
+
+/* Even lighter overlay variant */
+.parallax-hero__overlay--lighter {
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.05) 50%,
+      rgba(0, 0, 0, 0.03) 100%);
+}
+
+.parallax-hero__content {
+  position: relative;
+  z-index: 1;
+  width: min(980px, 100%);
+  text-align: center;
+  padding: 7rem 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+  color: #ffffff;
+}
+
+.parallax-hero__headline {
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  color: var(--cafe-tan);
+}
+
+.parallax-hero__subheadline {
+  color: rgba(var(--cafe-cream-rgb, 250, 249, 246), 0.9);
+}
+
+@media (max-width: 768px) {
+  .parallax-hero {
+    min-height: 70vh;
+    background-position: center 24%;
+    background-size: cover;
+    background-attachment: scroll;
+  }
+
+  .parallax-hero__content {
+    padding: 6rem 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-hero {
+    background-attachment: scroll;
+  }
+}

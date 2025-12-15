@@ -1,0 +1,132 @@
+/* Cookie Consent Banner - Dark Aesthetic Minimal Design */
+
+/* Container */
+.consent-banner {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  background: var(--cafe-charcoal);
+  color: var(--cafe-mist);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 2000;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(164, 141, 120, 0.15);
+  border-radius: 4px;
+  max-width: 400px;
+
+  /* Animation Setup - Hidden by default */
+  transform: translateY(150%);
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Animation Active State */
+.consent-banner.show {
+  transform: translateY(0);
+}
+
+/* Desktop Responsive - Bottom Right */
+@media (min-width: 768px) {
+  .consent-banner {
+    flex-direction: row;
+    align-items: center;
+    max-width: 540px;
+    left: auto;
+    right: 32px;
+    bottom: 32px;
+    gap: 32px;
+    /* Start position for desktop - off-screen */
+    transform: translateY(150%);
+  }
+
+  .consent-banner.show {
+    /* End position for desktop - visible */
+    transform: translateY(0);
+  }
+}
+
+/* Text Content */
+.consent-banner__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.consent-banner__headline {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--cafe-mist);
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+.consent-banner__copy {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(244, 241, 234, 0.75);
+  font-family: var(--font-sans);
+}
+
+/* Button Container */
+.consent-banner__actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Base Button Styles */
+.consent-banner__button {
+  padding: 10px 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+/* Accept Button - Filled */
+.consent-banner__button--solid {
+  background: var(--cafe-tan);
+  color: var(--cafe-white);
+  border: 1px solid var(--cafe-tan);
+}
+
+.consent-banner__button--solid:hover {
+  background: var(--cafe-mist);
+  border-color: var(--cafe-mist);
+  color: var(--cafe-charcoal);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Decline Button - Outline */
+.consent-banner__button--outline {
+  background: transparent;
+  color: var(--cafe-mist);
+  border: 1px solid rgba(244, 241, 234, 0.3);
+}
+
+.consent-banner__button--outline:hover {
+  border-color: var(--cafe-mist);
+  color: var(--cafe-white);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .consent-banner {
+    transition: none;
+  }
+
+  .consent-banner__button {
+    transition: none;
+  }
+}

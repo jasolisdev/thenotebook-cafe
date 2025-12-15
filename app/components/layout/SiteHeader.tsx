@@ -1,12 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState, useRef } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { BookOpen, ShoppingBag, Menu, Coffee, Music, Instagram as InstagramIcon } from "lucide-react";
-import { PiSpotifyLogoFill, PiInstagramLogoFill, PiTiktokLogoFill } from "react-icons/pi";
-import { motion, AnimatePresence } from "framer-motion";
+import { ShoppingBag } from "lucide-react";
 
 const badgeColors = {
   tan: '#A48D78',
@@ -16,7 +14,6 @@ const badgeColors = {
 type SiteHeaderProps = {
   instagramUrl?: string;
   spotifyUrl?: string;
-  announcementText?: string;
   cartCount?: number;
   onCartClick?: () => void;
 };
@@ -24,16 +21,138 @@ type SiteHeaderProps = {
 export default function SiteHeader({
   instagramUrl,
   spotifyUrl,
-  announcementText,
   cartCount = 0,
   onCartClick,
 }: SiteHeaderProps): React.JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [cartBadge, setCartBadge] = useState<number>(cartCount ?? 0);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [isAtTop, setIsAtTop] = useState<boolean>(true);
+  const [forceHighContrast, setForceHighContrast] = useState<boolean>(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const forceSolidRoutes = ["/terms", "/privacy", "/refunds"];
+  const forceSolidBg = forceSolidRoutes.some((route) => pathname?.startsWith(route));
   const drawerWasOpen = useRef(false);
+  const lastScrollY = useRef(0);
+  const scrollDeltaAcc = useRef(0);
+  const navRef = useRef<HTMLElement | null>(null);
+  const headerHeightRef = useRef<number>(80);
 
   const isActive = (path: string): boolean => pathname === path;
+  const navLinkBase =
+    "nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:text-cafe-tan";
+  const instagramHref = instagramUrl || "https://instagram.com/thenotebookcafellc";
+  const spotifyHref = spotifyUrl?.trim() || "";
+
+  // New scroll-based color system
+  // At top (transparent) = light text (off-white)
+  // Scrolled (glassmorphism) = dark text (deep espresso)
+  const forceSolid = forceSolidBg || forceHighContrast;
+  const atTopVisual = isAtTop && !forceSolid;
+  const isScrolled = !atTopVisual;
+  const useLightText = atTopVisual;
+
+  const activeLinkClass = useLightText
+    ? "font-semibold text-coffee-50"
+    : "font-semibold text-coffee-900";
+  const inactiveLinkClass = useLightText
+    ? "text-coffee-50 hover:text-coffee-50/80 hover:-translate-y-0.5"
+    : "text-coffee-900/80 hover:text-coffee-900 hover:-translate-y-0.5";
+
+  // Logo: dark when light text (at top), light when dark text (scrolled)
+  const logoSrc = useLightText ? "/tnc-navbar-logo-dark-v1.png" : "/tnc-navbar-logo-light-v1.png";
+
+  // Hide on scroll down, show on scroll up, transparent at top
+  useEffect(() => {
+    let ticking = false;
+    // Buffer before hiding to prevent jitter at the very top
+    const hideAfterPx = 60; 
+    const toggleThresholdPx = 10;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = Math.max(0, window.scrollY);
+          const atTop = currentScrollY < 20;
+          const delta = currentScrollY - lastScrollY.current;
+
+          setIsAtTop(atTop);
+
+          // Always show at the very top
+          if (atTop) {
+            setIsVisible(true);
+            scrollDeltaAcc.current = 0;
+          } else {
+            // Accumulate scroll delta to avoid trigger-happy toggling
+            const directionChanged =
+              (delta > 0 && scrollDeltaAcc.current < 0) || (delta < 0 && scrollDeltaAcc.current > 0);
+            
+            if (directionChanged) {
+              scrollDeltaAcc.current = 0;
+            }
+
+            scrollDeltaAcc.current += delta;
+
+            // Only hide if we've scrolled past the buffer and accumulated enough downward movement
+            if (scrollDeltaAcc.current > toggleThresholdPx && currentScrollY > hideAfterPx) {
+              setIsVisible(false);
+              scrollDeltaAcc.current = 0; // Reset to prevent repeated triggering
+            } else if (scrollDeltaAcc.current < -toggleThresholdPx) {
+              setIsVisible(true);
+              scrollDeltaAcc.current = 0;
+            }
+          }
+
+          lastScrollY.current = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    lastScrollY.current = window.scrollY;
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const syncHeaderHeight = useCallback(() => {
+    if (typeof window === "undefined") return;
+    const el = navRef.current;
+    if (!el) return;
+    const height = Math.max(0, Math.round(el.getBoundingClientRect().height));
+    headerHeightRef.current = height;
+    document.documentElement.style.setProperty("--site-header-height", `${height}px`);
+  }, []);
+
+  // Publish header height as a CSS variable for other UI (sticky offsets, etc.)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    syncHeaderHeight();
+    const el = navRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(() => syncHeaderHeight());
+    observer.observe(el);
+    window.addEventListener("resize", syncHeaderHeight);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", syncHeaderHeight);
+    };
+  }, [syncHeaderHeight]);
+
+  // Broadcast header visibility to pages that need sticky positioning.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.dispatchEvent(
+      new CustomEvent("tnc-header-state", {
+        detail: {
+          visible: isVisible,
+          atTop: atTopVisual,
+          height: headerHeightRef.current,
+        },
+      })
+    );
+  }, [isVisible, atTopVisual]);
 
   // Track drawer state
   useEffect(() => {
@@ -43,7 +162,6 @@ export default function SiteHeader({
   // Close drawer on route change and scroll to top if drawer was open
   useEffect(() => {
     if (drawerWasOpen.current) {
-      // Drawer was open during navigation, ensure proper scroll
       requestAnimationFrame(() => {
         window.scrollTo(0, 0);
       });
@@ -63,6 +181,20 @@ export default function SiteHeader({
   useEffect(() => {
     setCartBadge(cartCount ?? 0);
   }, [cartCount]);
+
+  // Respect accessibility hide-images toggle for nav contrast/logo
+  useEffect(() => {
+    const updateContrast = () => {
+      if (typeof document === "undefined") return;
+      const isHideImages = document.documentElement.classList.contains("acc-hide-images");
+      setForceHighContrast(isHideImages);
+    };
+
+    updateContrast();
+    const observer = new MutationObserver(updateContrast);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, [forceSolidBg]);
 
   useEffect(() => {
     const handleCartCount = (e: Event) => {
@@ -89,96 +221,146 @@ export default function SiteHeader({
     window.dispatchEvent(new CustomEvent("open-cart"));
   };
 
+  // Handle mobile drawer link clicks - navigate then close drawer
+  const handleMobileNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Prevent default navigation
+    e.preventDefault();
+
+    // Don't navigate if already on this page
+    if (pathname === href) {
+      setIsOpen(false);
+      return;
+    }
+
+    // Start navigation and delay closing to let the page begin loading
+    router.push(href);
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 450);
+  };
+
+  // Prefetch hero images on hover for instant page transitions
+  const prefetchPageImage = (route: string) => {
+    const heroImages: Record<string, string> = {
+      '/menu': '/menu/tnc-menu-hero-bg.png',
+      '/story': '/story/tnc-story-hero-bg.png',
+      '/contact': '/contact/tnc-contact-hero-bg.png',
+      '/careers': '/careers/tnc-career-hero-bg.png',
+    };
+
+    const imageSrc = heroImages[route];
+    if (imageSrc) {
+      const img = new window.Image();
+      img.src = imageSrc;
+    }
+  };
+
   return (
     <>
       {/* <AnnouncementBanner text={announcementText} /> */}
 
-      <nav className="sticky top-0 z-50 bg-cafe-mist/85 backdrop-blur-xl border-b border-cafe-tan/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+      <nav
+        ref={navRef}
+        className={`fixed top-0 left-0 right-0 z-50 border-b transform-gpu will-change-transform transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] ${
+          isScrolled ? 'backdrop-blur-md shadow-md' : ''
+        } ${
+          isOpen
+            ? 'border-transparent'
+            : isScrolled
+            ? 'border-coffee-50/20'
+            : 'border-transparent'
+        } ${
+          isVisible ? 'translate-y-0' : '-translate-y-full'
+        }`}
+        data-at-top={atTopVisual}
+        style={{
+          backgroundColor: atTopVisual
+            ? 'transparent'
+            : isOpen
+            ? 'var(--cafe-mist)'
+            : forceSolid
+            ? 'var(--cafe-mist)'
+            : isScrolled
+            ? 'rgba(var(--coffee-50-rgb), 0.9)'
+            : 'transparent',
+        }}
+      >
+        <div className="max-w-[1600px] mx-auto px-6 max-[390px]:px-4 lg:px-12">
+	          <div className="grid grid-cols-[auto_1fr_auto] items-center transition-all duration-500 py-4">
+            {/* Logo - Left */}
             <Link
               href="/"
               className="flex items-center cursor-pointer group gap-2.5"
               style={{ color: 'inherit', textDecoration: 'none' }}
             >
               <Image
-                src="/tnc-navbar-logo.png"
+                src={logoSrc}
                 alt="The Notebook Café Logo"
                 width={65}
                 height={65}
-                className="w-[56px] h-[56px] sm:w-[65px] sm:h-[65px]"
+                className="w-[50px] h-[50px] sm:w-[58px] sm:h-[58px]"
                 priority
               />
               <div className="flex flex-col">
                 <span
-                  className="font-serif text-2xl sm:text-3xl leading-none tracking-tight"
-                  style={{ color: 'var(--cafe-black)' }}
+                  className="font-serif whitespace-nowrap text-xl sm:text-2xl md:text-3xl leading-none tracking-tight"
+                  style={{ color: useLightText ? 'var(--coffee-50)' : 'var(--coffee-900)' }}
                 >
                   The Notebook
                 </span>
                 <span
                   className="text-[12px] uppercase tracking-[0.22em] leading-none"
-                  style={{ color: 'var(--cafe-tan)' }}
+                  style={{
+                    color: useLightText ? 'var(--coffee-50)' : 'var(--coffee-900)',
+                    opacity: 0.8
+                  }}
                 >
                   Café
                 </span>
               </div>
             </Link>
 
-            <div className="hidden md:flex items-center space-x-7">
+            {/* Navigation - Center */}
+            <div className="hidden md:flex items-center justify-center space-x-7">
               <Link
                 href="/"
-                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/")
-                  ? "font-semibold text-cafe-black"
-                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
-                  }`}
+                className={`${navLinkBase} ${isActive("/") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Home
-                {isActive("/") && <span className="nav-underline" />}
               </Link>
               <Link
                 href="/menu"
-                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/menu")
-                  ? "font-semibold text-cafe-black"
-                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
-                  }`}
+                onMouseEnter={() => prefetchPageImage('/menu')}
+                className={`${navLinkBase} ${isActive("/menu") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Menu
-                {isActive("/menu") && <span className="nav-underline" />}
               </Link>
               <Link
                 href="/story"
-                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/story")
-                  ? "font-semibold text-cafe-black"
-                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
-                  }`}
+                onMouseEnter={() => prefetchPageImage('/story')}
+                className={`${navLinkBase} ${isActive("/story") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Story
-                {isActive("/story") && <span className="nav-underline" />}
-              </Link>
-              <Link
-                href="/events"
-                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/events")
-                  ? "font-semibold text-cafe-black"
-                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
-                  }`}
-              >
-                Events
-                {isActive("/events") && <span className="nav-underline" />}
               </Link>
               <Link
                 href="/contact"
-                className={`nav-link text-xs sm:text-sm tracking-[0.18em] uppercase font-medium transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive("/contact")
-                  ? "font-semibold text-cafe-black"
-                  : "text-cafe-brown hover:text-cafe-black hover:-translate-y-0.5"
-                  }`}
+                onMouseEnter={() => prefetchPageImage('/contact')}
+                className={`${navLinkBase} ${isActive("/contact") ? activeLinkClass : inactiveLinkClass}`}
               >
                 Contact
-                {isActive("/contact") && <span className="nav-underline" />}
               </Link>
+              <Link
+                href="/careers"
+                onMouseEnter={() => prefetchPageImage('/careers')}
+                className={`${navLinkBase} ${isActive("/careers") ? activeLinkClass : inactiveLinkClass}`}
+              >
+                Careers
+              </Link>
+            </div>
 
-              <div className="h-4 w-px bg-cafe-beige/50"></div>
-
+            {/* Cart & Social - Right */}
+            <div className="hidden md:flex items-center justify-end gap-4">
+              {/* Cart Icon */}
               <button
                 type="button"
                 className="relative cursor-pointer group"
@@ -186,37 +368,82 @@ export default function SiteHeader({
                 aria-label="Open cart"
               >
                 <ShoppingBag
-                  className="text-cafe-black group-hover:text-cafe-tan transition-colors"
+                  className={`transition-colors ${useLightText ? 'text-coffee-50 group-hover:text-coffee-50/80' : 'text-coffee-900 group-hover:text-coffee-900/80'}`}
                   strokeWidth={1.5}
                   size={22}
                 />
-                {cartBadge > 0 && (
-                  <span
-                    className="absolute -bottom-2 -right-2 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full leading-none shadow-[0_2px_6px_rgba(0,0,0,0.25)] ring-1 ring-white/70"
-                    style={{ backgroundColor: badgeColors.tan, color: badgeColors.white }}
-                  >
-                    {cartBadge}
-                  </span>
-                )}
+	                {cartBadge > 0 && (
+	                  <span
+	                    className="absolute -bottom-2 -right-2 text-2xs font-bold w-4 h-4 flex items-center justify-center rounded-full leading-none shadow-[0_2px_6px_rgba(0,0,0,0.25)] ring-1 ring-white/70"
+	                    style={{ backgroundColor: badgeColors.tan, color: badgeColors.white }}
+	                  >
+	                    {cartBadge}
+	                  </span>
+	                )}
               </button>
-            </div>
 
-            <div className="md:hidden flex items-center gap-6">
+              {/* Divider */}
+              <div className="h-4 w-px bg-cafe-beige/50"></div>
+
+	              {/* Instagram Icon + Follow Button */}
+	              <a
+	                href={instagramHref}
+	                target="_blank"
+	                rel="noopener noreferrer"
+	                className="flex items-center gap-5 group"
+	              >
+                {/* Instagram Icon */}
+                <svg
+                  className={`w-5 h-5 transition-colors ${useLightText ? 'text-coffee-50 group-hover:text-coffee-50/80' : 'text-coffee-900 group-hover:text-coffee-900/80'}`}
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+	                {/* Follow Button */}
+	                <span
+	                  className={`${navLinkBase} !text-2xs px-3 py-1.5 border rounded transition-all ${useLightText ? 'border-coffee-50/40 text-coffee-50 hover:border-coffee-50/80 hover:text-coffee-50/80' : 'border-coffee-900/40 text-coffee-900 hover:border-coffee-900/80 hover:text-coffee-900/80'}`}
+	                >
+		                  Follow
+		                </span>
+		              </a>
+
+	              {spotifyHref && (
+	                <a
+	                  href={spotifyHref}
+	                  target="_blank"
+	                  rel="noopener noreferrer"
+	                  className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-black/5 transition-colors"
+	                  aria-label="Spotify"
+	                >
+	                  <svg
+	                    className={`w-5 h-5 transition-colors ${useLightText ? 'text-coffee-50' : 'text-coffee-900/80'}`}
+	                    viewBox="0 0 24 24"
+	                    fill="currentColor"
+	                    aria-hidden="true"
+	                  >
+	                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.494 17.318a.75.75 0 0 1-1.03.246c-2.824-1.725-6.381-2.115-10.575-1.158a.75.75 0 1 1-.334-1.463c4.583-1.045 8.513-.597 11.672 1.333a.75.75 0 0 1 .267 1.042zm1.474-3.28a.9.9 0 0 1-1.237.295c-3.233-1.988-8.163-2.564-11.99-1.402a.9.9 0 1 1-.525-1.722c4.369-1.329 9.783-.68 13.516 1.613a.9.9 0 0 1 .236 1.216zm.127-3.416c-3.875-2.301-10.269-2.512-13.969-1.389a1.05 1.05 0 1 1-.61-2.008c4.248-1.29 11.314-1.041 15.79 1.615a1.05 1.05 0 0 1-1.07 1.782z" />
+	                  </svg>
+	                </a>
+	              )}
+	            </div>
+
+            <div className="md:hidden col-start-3 flex items-center justify-end gap-6">
               <button
                 type="button"
                 className="relative cursor-pointer"
                 onClick={handleCartClick}
                 aria-label="Open cart"
               >
-                <ShoppingBag className="text-cafe-black" size={24} strokeWidth={1.5} />
-                {cartBadge > 0 && (
-                  <span
-                    className="absolute -bottom-2 -right-2 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full leading-none shadow-[0_2px_6px_rgba(0,0,0,0.25)] ring-1 ring-white/70"
-                    style={{ backgroundColor: badgeColors.tan, color: badgeColors.white }}
-                  >
-                    {cartBadge}
-                  </span>
-                )}
+                <ShoppingBag className={useLightText ? "text-coffee-50" : "text-coffee-900"} size={24} strokeWidth={1.5} />
+	                {cartBadge > 0 && (
+	                  <span
+	                    className="absolute -bottom-2 -right-2 text-2xs font-bold w-4 h-4 flex items-center justify-center rounded-full leading-none shadow-[0_2px_6px_rgba(0,0,0,0.25)] ring-1 ring-white/70"
+	                    style={{ backgroundColor: badgeColors.tan, color: badgeColors.white }}
+	                  >
+	                    {cartBadge}
+	                  </span>
+	                )}
               </button>
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -224,7 +451,7 @@ export default function SiteHeader({
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 type="button"
               >
-                <span className="hamburger-icon">
+                <span className={`hamburger-icon ${useLightText ? 'hamburger-light' : ''}`}>
                   <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>
                   <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>
                   <span className={`hamburger-line ${isOpen ? 'open' : ''}`}></span>
@@ -234,124 +461,61 @@ export default function SiteHeader({
           </div>
         </div>
 
-        {/* Mobile Menu - Full Screen Overlay */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              className="fixed left-0 right-0 bottom-0 md:hidden bg-cafe-mist"
-              style={{
-                top: '80px',
-                zIndex: 40,
-                minHeight: 'calc(100vh - 80px)',
-                width: '100vw',
-                height: 'calc(100vh - 80px)'
-              }}
-            >
-              {/* Content */}
-              <div
-                className="relative w-full h-full flex flex-col items-center justify-center px-8 py-16 overflow-y-auto"
-                style={{ minHeight: 'calc(100vh - 80px)', transform: 'translateY(-40px)' }}
-              >
-                {/* Navigation Links */}
-                <nav className="flex flex-col items-center gap-6 mb-12">
-                  {[
-                    { href: '/', label: 'Home' },
-                    { href: '/menu', label: 'Menu' },
-                    { href: '/story', label: 'Story' },
-                    { href: '/events', label: 'Events' },
-                    { href: '/contact', label: 'Contact' }
-                  ].map((link, index) => (
-                    <motion.div
-                      key={link.href}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        delay: 0.06 + index * 0.04,
-                        duration: 0.35,
-                        ease: [0.4, 0, 0.2, 1]
-                      }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={() => setIsOpen(false)}
-                        className={`block font-medium uppercase tracking-[0.18em] text-lg sm:text-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-tan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cafe-mist ${isActive(link.href)
-                          ? 'text-cafe-tan'
-                          : 'text-cafe-black hover:text-cafe-tan hover:translate-x-1'
-                          }`}
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </nav>
+        {/* Cinematic Mobile Menu - Double Layer Right-to-Left */}
+        {/* Layer 1: Backdrop (Tan) */}
+        <div className={`menu-layer-backdrop md:hidden ${isOpen ? 'open' : ''}`} />
 
-                {/* Footer Info */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.5 }}
-                  className="text-center space-y-3"
+        {/* Layer 2: Main Drawer (Charcoal) */}
+        <div className={`menu-drawer-cinematic md:hidden ${isOpen ? 'open' : ''}`}>
+          {/* Close Button */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="menu-drawer-close"
+            aria-label="Close menu"
+            type="button"
+          >
+            <div className="menu-drawer-close-x" />
+          </button>
+
+          <div className="menu-links-group">
+            {/* Navigation Links */}
+            {[
+              { href: '/', label: 'Home' },
+              { href: '/menu', label: 'Menu' },
+              { href: '/story', label: 'Story' },
+              { href: '/contact', label: 'Contact' },
+              { href: '/careers', label: 'Careers' }
+            ].map((link, index) => (
+              <div key={link.href} className="menu-link-wrapper">
+                {/* The masked content container */}
+                <div
+                  className="menu-link-content"
+                  style={{ transitionDelay: isOpen ? `${0.2 + (index * 0.08)}s` : '0s' }}
                 >
-                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-cafe-tan to-transparent mx-auto mb-3" />
+                  {/* Index Number */}
+                  <span className="menu-item-number">0{index + 1}</span>
 
-                  <p className="text-sm text-cafe-brown/80 font-medium leading-relaxed">
-                    Follow Us!
-                  </p>
-
-                  {/* Social Icons */}
-                  {(instagramUrl || spotifyUrl) && (
-                    <div className="flex items-center justify-center gap-4 pt-3">
-                      {instagramUrl && (
-                        <a
-                          href={instagramUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-10 h-10 rounded-full bg-cafe-tan/10 border border-cafe-tan/20 flex items-center justify-center text-cafe-tan hover:bg-cafe-tan hover:text-cafe-white transition-all duration-300 hover:scale-110"
-                          aria-label="Instagram"
-                        >
-                          <PiInstagramLogoFill
-                            size={20}
-                            className="translate-x-[10px] translate-y-[10px]"
-                          />
-                        </a>
-                      )}
-                      {spotifyUrl && (
-                        <a
-                          href={spotifyUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-10 h-10 rounded-full bg-cafe-tan/10 border border-cafe-tan/20 flex items-center justify-center text-cafe-tan hover:bg-cafe-tan hover:text-cafe-white transition-all duration-300 hover:scale-110"
-                          aria-label="Spotify"
-                        >
-                          <PiSpotifyLogoFill
-                            size={20}
-                            className="translate-x-[10px] translate-y-[10px]"
-                          />
-                        </a>
-                      )}
-                      <a
-                        href="https://www.tiktok.com/@thenotebookcafe"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-cafe-tan/10 border border-cafe-tan/20 flex items-center justify-center text-cafe-tan hover:bg-cafe-tan hover:text-cafe-white transition-all duration-300 hover:scale-110"
-                        aria-label="TikTok"
-                      >
-                        <PiTiktokLogoFill
-                          size={18}
-                          className="translate-x-[10px] translate-y-[10px]"
-                        />
-                      </a>
-                    </div>
-                  )}
-                </motion.div>
+                  {/* Main Label */}
+                  <Link
+                    href={link.href}
+                    onClick={(e) => handleMobileNavClick(e, link.href)}
+                    className={`menu-link-text ${isActive(link.href) ? 'active' : ''}`}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    {link.label}
+                  </Link>
+                </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            ))}
+
+            {/* Footer / Copyright */}
+            <div className="menu-drawer-footer">
+              <div className="menu-drawer-footer-text">
+                Est. Riverside 2026
+              </div>
+            </div>
+          </div>
+        </div>
       </nav>
 
     </>

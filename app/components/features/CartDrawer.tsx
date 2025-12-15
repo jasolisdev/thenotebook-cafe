@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from "next/image";
+import Link from "next/link";
 import { ShoppingBag, X, Trash2, Minus, Plus, Edit2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/Button';
@@ -18,23 +20,6 @@ export const CartDrawer: React.FC = () => {
   const subtotal = cart.reduce((acc, item) => acc + item.totalPrice, 0);
   const totalItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-  useEffect(() => {
-    if (typeof document === 'undefined') return;
-    const body = document.body;
-    body.dataset.cartOpen = isOpen ? 'true' : 'false';
-    if (isOpen) {
-      body.style.overflow = 'hidden';
-    } else if (body.dataset.modalOpen !== 'true' && body.dataset.navOpen !== 'true') {
-      body.style.overflow = '';
-    }
-    return () => {
-      body.dataset.cartOpen = 'false';
-      if (body.dataset.modalOpen !== 'true' && body.dataset.navOpen !== 'true') {
-        body.style.overflow = '';
-      }
-    };
-  }, [isOpen]);
-
   // Listen for global 'open-cart' events (triggered by cart icon in header)
   useEffect(() => {
     const handleOpenCart = () => open();
@@ -43,19 +28,21 @@ export const CartDrawer: React.FC = () => {
   }, [open]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {isOpen && (
-        <>
+        <React.Fragment key="cart-drawer">
           <motion.div
+            key="cart-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={close}
             className="fixed inset-0 z-50"
-            style={{ backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(6px)' }}
+            style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
           />
 
           <motion.div
+            key="cart-content"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
@@ -103,123 +90,145 @@ export const CartDrawer: React.FC = () => {
                   <p className="text-sm" style={{ color: colors.brown }}>
                     Looks like you haven&apos;t added any treats yet.
                   </p>
-                  <a href="/menu" className="mt-8 inline-block">
+                  <Link href="/menu" className="mt-8 inline-block" onClick={close}>
                     <Button variant="outline">
                       Browse Menu
                     </Button>
-                  </a>
+                  </Link>
                 </div>
               ) : (
-                cart.map((item, idx) => (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    key={`${item.cartId}-${idx}`}
-                    className="p-5 rounded-xl flex gap-4 group"
-                    style={{
-                      backgroundColor: colors.white,
-                      border: `1px solid ${colors.beige}4D`,
-                      boxShadow: '0 6px 18px rgba(0,0,0,0.06)',
-                    }}
-                  >
-                    <div
-                      className="w-16 h-16 rounded-lg shrink-0 overflow-hidden relative"
-                      style={{ backgroundColor: colors.mist }}
+                <>
+                  {cart.map((item, idx) => (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      key={`${item.cartId}-${idx}`}
+                      className="p-5 rounded-xl flex gap-4 group"
+                      style={{
+                        backgroundColor: colors.white,
+                        border: `1px solid ${colors.beige}4D`,
+                        boxShadow: '0 6px 18px rgba(0,0,0,0.06)',
+                      }}
                     >
-                      <img
-                        src="/unsplash/tnc-placeholder-menuitem.png"
-                        className="w-full h-full object-cover"
-                        alt={item.name}
-                      />
                       <div
-                        className="absolute bottom-0 right-0 text-[10px] font-bold px-1.5 py-0.5 rounded-tl-md"
-                        style={{ backgroundColor: colors.black, color: colors.white }}
+                        className="relative w-16 h-16 rounded-lg shrink-0 overflow-hidden"
+                        style={{ backgroundColor: colors.mist }}
                       >
-                        x{item.quantity}
-                      </div>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex justify-between items-start mb-1">
-                        <h3 className="font-serif text-lg leading-tight truncate" style={{ color: colors.black }}>
-                          {item.name}
-                        </h3>
-                        <p className="font-medium" style={{ color: colors.black }}>
-                          ${item.totalPrice.toFixed(2)}
-                        </p>
-                      </div>
-
-                      <div className="flex flex-wrap gap-1 mb-2">
-                        {item.modifiers.map((mod, i) => (
-                          <span
-                            key={i}
-                            className="text-[10px] px-1.5 py-0.5 rounded border"
-                            style={{ backgroundColor: colors.mist, color: colors.brown, borderColor: `${colors.beige}80` }}
-                          >
-                            {mod.optionLabel}
-                          </span>
-                        ))}
-                      </div>
-
-                      {item.notes && (
-                        <p
-                          className="text-xs italic truncate border-l-2 pl-2"
-                          style={{ color: '#6b7280', borderColor: colors.tan }}
+                        <Image
+                          src="/unsplash/tnc-placeholder-menuitem.png"
+                          alt={item.name}
+                          fill
+                          sizes="64px"
+                          className="object-cover"
+                        />
+                        <div
+                          className="absolute bottom-0 right-0 text-2xs font-bold px-1.5 py-0.5 rounded-tl-md"
+                          style={{ backgroundColor: colors.black, color: colors.white }}
                         >
-                          &ldquo;{item.notes}&rdquo;
-                        </p>
-                      )}
-
-                      <div className="mt-3 flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-2">
-                          <button
-                            className="w-8 h-8 rounded-full flex items-center justify-center border transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-                            style={{
-                              borderColor: `${colors.beige}80`,
-                              backgroundColor: colors.white,
-                              color: colors.black
-                            }}
-                            aria-label="Decrease quantity"
-                            disabled={item.quantity <= 1}
-                            onClick={() => updateQuantity(item.cartId, item.quantity - 1)}
-                          >
-                            <Minus size={14} />
-                          </button>
-                          <span className="text-sm font-semibold min-w-[24px] text-center" style={{ color: colors.black }}>
-                            {item.quantity}
-                          </span>
-                          <button
-                            className="w-8 h-8 rounded-full flex items-center justify-center border transition-colors"
-                            style={{
-                              borderColor: `${colors.beige}80`,
-                              backgroundColor: colors.white,
-                              color: colors.black
-                            }}
-                            aria-label="Increase quantity"
-                            onClick={() => updateQuantity(item.cartId, item.quantity + 1)}
-                          >
-                            <Plus size={14} />
-                          </button>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <button
-                            className="text-xs flex items-center gap-1 transition-colors hover:opacity-80"
-                            style={{ color: colors.tan }}
-                            onClick={() => setEditingItem(item)}
-                          >
-                            <Edit2 size={12} /> Edit
-                          </button>
-                          <button
-                            className="text-xs flex items-center gap-1 transition-colors hover:opacity-80"
-                            style={{ color: colors.red }}
-                            onClick={() => removeItem(item.cartId)}
-                          >
-                            <Trash2 size={12} /> Remove
-                          </button>
+                          x{item.quantity}
                         </div>
                       </div>
-                    </div>
-                  </motion.div>
-                ))
+                      <div className="flex-1 min-w-0">
+                        <div className="flex justify-between items-start mb-1">
+                          <h3 className="font-serif text-lg leading-tight truncate" style={{ color: colors.black }}>
+                            {item.name}
+                          </h3>
+                          <p className="font-medium" style={{ color: colors.black }}>
+                            ${item.totalPrice.toFixed(2)}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-wrap gap-1 mb-2">
+                          {item.modifiers.map((mod, i) => (
+                            <span
+                              key={i}
+                              className="text-2xs px-1.5 py-0.5 rounded border"
+                              style={{ backgroundColor: colors.mist, color: colors.brown, borderColor: `${colors.beige}80` }}
+                            >
+                              {mod.optionLabel}
+                            </span>
+                          ))}
+                        </div>
+
+                        {item.notes && (
+                          <p
+                            className="text-xs italic truncate border-l-2 pl-2"
+                            style={{ color: '#6b7280', borderColor: colors.tan }}
+                          >
+                            &ldquo;{item.notes}&rdquo;
+                          </p>
+                        )}
+
+                        <div className="mt-3 flex items-center justify-between gap-3">
+                          <div className="flex items-center gap-2">
+                            <button
+                              className="w-8 h-8 rounded-full flex items-center justify-center border transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                              style={{
+                                borderColor: `${colors.beige}80`,
+                                backgroundColor: colors.white,
+                                color: colors.black
+                              }}
+                              aria-label="Decrease quantity"
+                              disabled={item.quantity <= 1}
+                              onClick={() => updateQuantity(item.cartId, item.quantity - 1)}
+                            >
+                              <Minus size={14} />
+                            </button>
+                            <span className="text-sm font-semibold min-w-[24px] text-center" style={{ color: colors.black }}>
+                              {item.quantity}
+                            </span>
+                            <button
+                              className="w-8 h-8 rounded-full flex items-center justify-center border transition-colors"
+                              style={{
+                                borderColor: `${colors.beige}80`,
+                                backgroundColor: colors.white,
+                                color: colors.black
+                              }}
+                              aria-label="Increase quantity"
+                              onClick={() => updateQuantity(item.cartId, item.quantity + 1)}
+                            >
+                              <Plus size={14} />
+                            </button>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <button
+                              className="text-xs flex items-center gap-1 transition-colors hover:opacity-80"
+                              style={{ color: colors.tan }}
+                              onClick={() => {
+                                close(); // Close cart first
+                                setEditingItem(item);
+                              }}
+                            >
+                              <Edit2 size={12} /> Edit
+                            </button>
+                            <button
+                              className="text-xs flex items-center gap-1 transition-colors hover:opacity-80"
+                              style={{ color: colors.red }}
+                              onClick={() => removeItem(item.cartId)}
+                            >
+                              <Trash2 size={12} /> Remove
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+
+                  {/* Add More Items Link */}
+                  <Link
+                    href="/menu"
+                    className="flex items-center justify-center gap-2 p-4 rounded-xl border-2 border-dashed transition-all hover:border-solid"
+                    style={{
+                      borderColor: colors.tan,
+                      color: colors.tan,
+                      backgroundColor: `${colors.cream}40`
+                    }}
+                    onClick={close}
+                  >
+                    <Plus size={16} />
+                    <span className="font-medium">Add More Items</span>
+                  </Link>
+                </>
               )}
             </div>
 
@@ -268,15 +277,19 @@ export const CartDrawer: React.FC = () => {
               </Button>
             </div>
           </motion.div>
-        </>
+        </React.Fragment>
       )}
 
       {/* Edit Modal */}
       {editingItem && (
         <ProductModal
+          key="edit-modal"
           item={editingItem}
           editingItem={editingItem}
-          onClose={() => setEditingItem(null)}
+          onClose={() => {
+            setEditingItem(null);
+            open(); // Reopen cart after closing modal
+          }}
         />
       )}
     </AnimatePresence>

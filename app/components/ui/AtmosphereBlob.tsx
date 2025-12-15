@@ -1,5 +1,6 @@
 "use client";
 
+import "../../styles/components/atmosphere-blob.css";
 import { useEffect, useRef, useState } from "react";
 
 export default function AtmosphereBlob() {

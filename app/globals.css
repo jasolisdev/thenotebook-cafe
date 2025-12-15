@@ -5,30 +5,79 @@
   --color-cafe-black: #2C2420;
   --color-cafe-brown: #4A3B32;
   --color-cafe-tan: #A48D78;
+  --color-cafe-tan-dark: #8E7965;
   --color-cafe-beige: #CBB9A4;
+  --color-cafe-luxe-oat: #CBBFAF;
   --color-cafe-cream: #EDE7D8;
   --color-cafe-mist: #F4F1EA;
   --color-cafe-white: #FAF9F6;
-  --color-cafe-red: #ef4444;
-}
 
-/* Component Styles */
-@import "./styles/components/card-gallery.css";
-@import "./styles/components/modal.css";
-@import "./styles/components/SiteHeader.css";
+  /* Premium Navbar/Footer Palette */
+  --color-coffee-50: #F3EFE9;      /* Off-White - Top nav text */
+  --color-coffee-900: #2C241F;     /* Deep Espresso - Footer bg, scrolled nav text */
+
+  /* Accent */
+  --color-gold: #C4A484;
+}
 
 /* ============================================================
    CUSTOM FONTS
 ============================================================ */
 /* DM Serif Display and Outfit fonts loaded via Google Fonts in layout.tsx */
 
+/* OpenDyslexic Font for Accessibility */
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('/fonts/OpenDyslexic-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('/fonts/OpenDyslexic-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('/fonts/OpenDyslexic-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Playfair Display Font for Menu Ampersands */
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ============================================================
    DESIGN TOKENS
 =========================================================== */
 :root {
   --font-sans: "Outfit", system-ui, sans-serif;
-  --font-mono: "Outfit", monospace;
   --font-display: "DM Serif Display", serif;
+  --site-header-height: 80px;
+
+  /* Menu Page Fonts */
+  --font-serif: var(--font-playfair), 'Playfair Display', serif; /* Used for Titles, Headers, Prices */
+  --font-sans-menu: var(--font-inter), 'Inter', sans-serif;       /* Used for Descriptions, UI, Buttons */
 
   /* ===============================
      UPDATED COLOR PALETTE
@@ -37,27 +86,30 @@
 
   /* Core palette */
   --cafe-black: #2C2420;
+  --cafe-charcoal: #2A2622;
   --cafe-brown: #4A3B32;
   --cafe-tan: #A48D78;
   --cafe-beige: #CBB9A4;
+  --cafe-luxe-oat: #CBBFAF;
   --cafe-cream: #EDE7D8;
   --cafe-mist: #F4F1EA;
   --cafe-white: #FAF9F6;
+  --cafe-olive: #4A4F41;
+
+  /* Premium Navbar/Footer Palette */
+  --coffee-50: #F3EFE9;      /* Off-White - Top nav text */
+  --coffee-100: #E6DCCA;     /* Cream - Footer body text */
+  --coffee-800: #3A2D26;     /* Dark Brown - Footer borders */
+  --coffee-900: #2C241F;     /* Deep Espresso - Footer bg, scrolled nav text */
 
   /* Extended palette - frequently used colors */
   --espresso-brown: #2a1f16;     /* Dark brown text */
   --warm-brown: #5a4a38;         /* Warm brown text */
   --medium-brown: #6b5a48;       /* Medium brown buttons */
   --cream-light: #f4f0e9;        /* Light cream backgrounds */
-  --pearl-white: #fffcf9;        /* Off-white for modals */
-  --latte-cream: #f6ebdf;        /* Events page light cream */
 
   /* Gold accent family */
   --gold-primary: #c99a58;       /* RGB: 201, 154, 88 */
-  --gold-darker: #b48a4e;        /* Darker gold variant */
-
-  /* Debug color */
-  --debug-red: #ff0000;          /* Bright red for testing */
 
   /* RGB helpers for rgba() usage */
   --cafe-black-rgb: 44, 36, 32;
@@ -66,29 +118,22 @@
   --cafe-beige-rgb: 203, 185, 164;
   --cafe-cream-rgb: 237, 231, 216;
   --cafe-mist-rgb: 244, 241, 234;
-  --cafe-white-rgb: 250, 249, 246;
+
+  /* Premium Navbar/Footer RGB */
+  --coffee-50-rgb: 243, 239, 233;   /* Off-White */
+  --coffee-100-rgb: 230, 220, 202;  /* Cream */
 
   /* Extended RGB helpers */
   --espresso-brown-rgb: 42, 31, 22;
-  --warm-brown-rgb: 90, 74, 56;
-  --gold-primary-rgb: 201, 154, 88;
-  --cream-light-rgb: 244, 240, 233;
 
   /* Core semantic tokens */
-  --bg-solid: var(--cafe-white);
+  --bg-solid: var(--cafe-mist);
   --bg-dark: var(--cafe-black);
-  --bg-cream: var(--cafe-cream);
-  --bg-mist: var(--cafe-mist);
 
   /* Text colors */
   --text-dark: var(--cafe-brown);
-  --text-black: var(--cafe-black);
   --text-light: var(--cafe-mist);
   --text-light-muted: var(--cafe-beige);
-
-  /* Accent colors */
-  --accent-primary: var(--cafe-tan);
-  --accent-dark: var(--cafe-brown);
 
   /* Glass panel effect */
   --glass-bg: rgba(250, 249, 246, 0.85);
@@ -98,7 +143,6 @@
   --opacity-light: 0.12;
   --opacity-medium: 0.25;
   --opacity-strong: 0.5;
-  --opacity-heavy: 0.75;
 
   /* Common transparency combinations */
   --tan-subtle: rgba(var(--cafe-tan-rgb), var(--opacity-subtle));
@@ -106,10 +150,22 @@
   --tan-medium: rgba(var(--cafe-tan-rgb), var(--opacity-medium));
   --tan-strong: rgba(var(--cafe-tan-rgb), var(--opacity-strong));
 
-  --gold-subtle: rgba(var(--gold-primary-rgb), var(--opacity-subtle));
-  --gold-light: rgba(var(--gold-primary-rgb), var(--opacity-light));
-  --gold-medium: rgba(var(--gold-primary-rgb), var(--opacity-medium));
-  --gold-strong: rgba(var(--gold-primary-rgb), var(--opacity-strong));
+  /* Hero gradients */
+  --hero-gradient-espresso:
+    radial-gradient(ellipse at 78% 0%, rgba(var(--cafe-tan-rgb), 0.34), rgba(var(--cafe-tan-rgb), 0) 56%),
+    radial-gradient(ellipse at 18% 22%, rgba(var(--cafe-tan-rgb), 0.2), rgba(var(--cafe-tan-rgb), 0) 50%),
+    linear-gradient(145deg, #1a120e 0%, #2c2420 55%, #1a120e 100%);
+  --hero-espresso-overlay:
+    radial-gradient(ellipse at 82% 18%, rgba(var(--cafe-cream-rgb), 0.22), rgba(var(--cafe-cream-rgb), 0) 52%),
+    radial-gradient(ellipse at 18% 10%, rgba(var(--cafe-tan-rgb), 0.16), rgba(var(--cafe-tan-rgb), 0) 50%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55));
+  --hero-gradient-cream:
+    radial-gradient(ellipse at 22% 30%, rgba(var(--cafe-tan-rgb), 0.22), rgba(var(--cafe-tan-rgb), 0) 55%),
+    radial-gradient(ellipse at 68% 70%, rgba(var(--cafe-cream-rgb), 0.32), rgba(var(--cafe-cream-rgb), 0) 58%),
+    linear-gradient(145deg, #faf7f1 0%, #f5eee5 50%, #f9f5ee 100%);
+  --hero-cream-overlay:
+    radial-gradient(ellipse at 70% 40%, rgba(var(--cafe-tan-rgb), 0.12), rgba(var(--cafe-tan-rgb), 0) 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.8));
 
   --dark-overlay: rgba(0, 0, 0, var(--opacity-medium));
   --white-overlay: rgba(255, 255, 255, var(--opacity-light));
@@ -218,9 +274,7 @@ body {
   min-height: 100dvh;
   background: var(--bg-solid);
   color: var(--text-light);
-  padding-top: 80px;
-  transition: padding-top 0.3s ease;
-  /* Nav height only (banner hidden) */
+  /* No padding-top needed - navbar is fixed and doesn't take up space */
 }
 
 /* Text color utilities for dark backgrounds */
@@ -246,6 +300,14 @@ body {
 ============================================================ */
 .font-display {
   font-family: var(--font-display);
+}
+
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
+.font-inter {
+  font-family: var(--font-inter);
 }
 
 h1,
@@ -373,11 +435,54 @@ h3 {
 }
 
 /* ============================================================
+   MASKED EDITORIAL REVEAL SYSTEM
+   High-end magazine-style page load animations
+============================================================ */
+
+/* The Mask Container - Hides text before reveal */
+.reveal-mask {
+  overflow: hidden;
+  display: block; /* Ensures the mask captures the full height */
+}
+
+/* The Moving Text - Slides up from below */
+.reveal-text-anim {
+  display: block;
+  transform: translateY(110%); /* Start completely out of view below */
+  opacity: 0;
+  animation: slideUpReveal 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+@keyframes slideUpReveal {
+  0% {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* The Body Fade - Soft fade up for body content */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
+              transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
    ACCESSIBILITY
 ============================================================ */
 ::selection {
   background: rgba(164, 141, 120, 0.3);
-  color: var(--ink-cream);
+  color: var(--cafe-black);
 }
 
 *:focus-visible {
@@ -410,4 +515,123 @@ h3 {
   border-radius: 4px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
   pointer-events: none;
+}
+
+/* Accessibility Widget Styles */
+.acc-grayscale {
+  filter: grayscale(100%);
+}
+.acc-contrast {
+  filter: contrast(125%);
+}
+/* Hide images but keep UI icons visible */
+.acc-hide-images main img,
+.acc-hide-images main svg:not(.bionic-skip),
+.acc-hide-images main [style*="background-image"] {
+  visibility: hidden;
+}
+
+/* Hide decorative blobs/shapes for reduced visual noise */
+.acc-hide-images .signature-pour-blob,
+.acc-hide-images .philosophy-blob,
+.acc-hide-images .story-blob,
+.acc-hide-images .story-gallery-blob,
+.acc-hide-images .atmosphere-blob,
+.acc-hide-images .blob-marker,
+.acc-hide-images .menu-card-image {
+  display: none !important;
+}
+
+/* When images are hidden, force hero text to dark for readability */
+.acc-hide-images .home-hero-title,
+.acc-hide-images .home-hero-subtitle,
+.acc-hide-images .home-hero-pill,
+.acc-hide-images .home-hero-cta,
+.acc-hide-images .home-hero-copy,
+.acc-hide-images .home-hero-grid,
+.acc-hide-images .hero-latte-card,
+.acc-hide-images .hero-latte-pill {
+  color: var(--cafe-black) !important;
+  fill: var(--cafe-black) !important;
+}
+.acc-hide-images .home-hero-pill,
+.acc-hide-images .hero-latte-card {
+  background-color: rgba(var(--cafe-cream-rgb), 0.9) !important;
+  border-color: rgba(var(--cafe-brown-rgb), 0.2) !important;
+}
+
+/* Navigation readability when images are hidden */
+.acc-hide-images .site-header {
+  background: rgba(var(--cafe-cream-rgb), 0.92) !important;
+  border-bottom-color: rgba(var(--cafe-brown-rgb), 0.12) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.acc-hide-images .nav-link,
+.acc-hide-images .site-header a,
+.acc-hide-images .site-header span {
+  color: var(--cafe-black) !important;
+  fill: var(--cafe-black) !important;
+}
+.acc-hide-images .hamburger-line {
+  background-color: var(--cafe-black) !important;
+}
+
+/* Ensure navigation, accessibility widget, and UI icons remain visible */
+.acc-hide-images nav svg,
+.acc-hide-images nav img,
+.acc-hide-images [class*="accessibility"] svg,
+.acc-hide-images [id*="accessibility"] svg,
+.acc-hide-images button svg,
+.acc-hide-images [role="button"] svg,
+.acc-hide-images .acc-icon-only svg {
+  visibility: visible !important;
+}
+.acc-cursor-lg,
+.acc-cursor-lg * {
+  cursor: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5056 10.7754C21.1225 10.5355 21.431 10.4155 21.5176 10.2459C21.5926 10.099 21.5903 9.92446 21.5115 9.77954C21.4205 9.61226 21.109 9.50044 20.486 9.2768L4.59629 3.5728C4.0866 3.38983 3.83175 3.29835 3.66514 3.35605C3.52029 3.40621 3.40645 3.52004 3.35629 3.6649C3.29859 3.8315 3.39008 4.08635 3.57304 4.59605L9.277 20.4858C9.50064 21.1088 9.61246 21.4203 9.77973 21.5113C9.92465 21.5901 10.0991 21.5924 10.2461 21.5174C10.4157 21.4308 10.5356 21.1223 10.7756 20.5054L13.3724 13.8278C13.4194 13.707 13.4429 13.6466 13.4792 13.5957C13.5114 13.5506 13.5508 13.5112 13.5959 13.479C13.6468 13.4427 13.7072 13.4192 13.828 13.3722L20.5056 10.7754Z' fill='white' stroke='%232C2420' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 4 4, auto !important;
+}
+
+.acc-cursor-lg button,
+.acc-cursor-lg a,
+.acc-cursor-lg [role="button"] {
+  cursor: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5056 10.7754C21.1225 10.5355 21.431 10.4155 21.5176 10.2459C21.5926 10.099 21.5903 9.92446 21.5115 9.77954C21.4205 9.61226 21.109 9.50044 20.486 9.2768L4.59629 3.5728C4.0866 3.38983 3.83175 3.29835 3.66514 3.35605C3.52029 3.40621 3.40645 3.52004 3.35629 3.6649C3.29859 3.8315 3.39008 4.08635 3.57304 4.59605L9.277 20.4858C9.50064 21.1088 9.61246 21.4203 9.77973 21.5113C9.92465 21.5901 10.0991 21.5924 10.2461 21.5174C10.4157 21.4308 10.5356 21.1223 10.7756 20.5054L13.3724 13.8278C13.4194 13.707 13.4429 13.6466 13.4792 13.5957C13.5114 13.5506 13.5508 13.5112 13.5959 13.479C13.6468 13.4427 13.7072 13.4192 13.828 13.3722L20.5056 10.7754Z' fill='white' stroke='%232C2420' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 4 4, pointer !important;
+}
+.acc-highlight-links a {
+  background-color: var(--cafe-tan) !important;
+  color: var(--cafe-black) !important;
+  text-decoration: underline !important;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+.bionic-bold {
+  font-weight: 700;
+}
+#reading-guide-line {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background-color: rgba(var(--cafe-tan-rgb), 0.6);
+  pointer-events: none;
+  z-index: 9999;
+}
+.acc-text-lg {
+  font-size: 1.25rem;
+}
+.acc-text-xl {
+  font-size: 1.5rem;
+}
+.acc-readable-font {
+  font-family: 'Arial', sans-serif !important;
+}
+.acc-dyslexia-font {
+  font-family: 'OpenDyslexic', sans-serif !important;
+}
+.acc-dyslexia-font body,
+.acc-dyslexia-font body * {
+  font-family: 'OpenDyslexic', sans-serif !important;
+}
+.acc-stop-animations * {
+  animation: none !important;
+  transition: none !important;
 }
