@@ -35,7 +35,6 @@ export default function SignaturePoursGrid({ pours }: Props) {
 function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-  const [blobVisible, setBlobVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -64,19 +63,6 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
     };
   }, [isMobile]);
 
-  // Trigger blob animation while image is sliding in
-  useEffect(() => {
-    if (visible) {
-      const blobDelay = 800; // Blob zooms in 800ms after image starts sliding (overlapping effect)
-
-      const timer = setTimeout(() => {
-        setBlobVisible(true);
-      }, blobDelay);
-
-      return () => clearTimeout(timer);
-    }
-  }, [visible, index]);
-
   const mobileStart = index % 2 === 0 ? "translate-x-[130%]" : "-translate-x-[130%]";
   const desktopStart = "md:translate-y-[110%] md:translate-x-0";
   const baseHidden = `${mobileStart} ${desktopStart}`;
@@ -92,17 +78,6 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
   const transitionTiming = "cubic-bezier(0.16, 1, 0.3, 1)";
   const transitionDuration = "1400ms";
 
-  // Different blob SVG and rotation for each card
-  const blobSvgs = [
-    '/signature-pour-blob-1.svg',
-    '/signature-pour-blob-2.svg',
-    '/signature-pour-blob-3.svg',
-    '/signature-pour-blob-4.svg'
-  ];
-  const blobRotations = ['-12deg', '8deg', '-15deg', '10deg'];
-  const blobSvg = blobSvgs[index % 4];
-  const blobRotation = blobRotations[index % 4];
-
   return (
     <div ref={ref} className="h-full flex flex-col items-center gap-4 signature-pour-card">
       <div
@@ -115,15 +90,6 @@ function SignaturePourCard({ pour, index }: { pour: Pour; index: number }) {
           transitionDuration
         }}
       >
-        {/* Blob that appears after image slides in */}
-        <div
-          className={`signature-pour-blob ${blobVisible ? 'blob-visible' : ''}`}
-          style={{
-            backgroundImage: `url(${blobSvg})`,
-            transform: `rotate(${blobRotation})`
-          }}
-        />
-
         <Image
           src={pour.image}
           alt={pour.name}

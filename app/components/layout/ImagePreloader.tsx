@@ -19,11 +19,7 @@ import { useEffect } from 'react';
 export default function ImagePreloader() {
   useEffect(() => {
     // List of all hero images across the site
-    const heroImages = [
-      '/menu/tnc-menu-hero-bg.png',
-      '/story/tnc-story-hero-bg.png',
-      '/contact/tnc-contact-hero-bg.png',
-      '/careers/tnc-career-hero-bg.png',
+    const heroImages: string[] = [
       // Add any other critical images
     ];
 

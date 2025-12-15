@@ -20,46 +20,6 @@
   }
 }
 
-.signature-pour-blob {
-  position: absolute;
-  inset: -30%;
-  z-index: 0;
-  opacity: 0;
-  transform: scale(0.3);
-  pointer-events: none;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  mix-blend-mode: multiply;
-}
-
-@media (min-width: 768px) {
-  .signature-pour-blob {
-    display: none;
-  }
-}
-
-.signature-pour-card .signature-pour-blob.blob-visible {
-  opacity: 1;
-  animation: blobDramaticZoom 600ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes blobDramaticZoom {
-  0% {
-    opacity: 0;
-    transform: scale(0.3);
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 @media (hover: hover) {
   .signature-pour-card:hover .signature-pour-image-wrapper {
     transform: translateY(-6px) scale(1.02) !important;
@@ -80,3 +40,6 @@
   }
 }
 
+.signature-pour-image {
+  /* The filter property is removed from here */
+}

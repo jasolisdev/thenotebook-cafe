@@ -62,7 +62,10 @@ export default function ThankYouPage() {
             </Link>
 
             <p className="text-sm font-light" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>
-              Questions? Email us at <a href="mailto:hello@thenotebook.cafe" className="underline" style={{ color: 'var(--cafe-tan)' }}>hello@thenotebook.cafe</a>
+              Questions? Email us at{" "}
+              <a href="mailto:thenotebookcafellc@gmail.com" className="underline" style={{ color: 'var(--cafe-tan)' }}>
+                thenotebookcafellc@gmail.com
+              </a>
             </p>
           </div>
         </Reveal>

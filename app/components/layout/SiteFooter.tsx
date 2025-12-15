@@ -30,34 +30,34 @@ export default function SiteFooter(): React.JSX.Element {
   }, []);
 
   return (
-    <footer className="bg-cafe-charcoal text-cafe-mist pt-20 pb-10">
+    <footer className="relative overflow-hidden pt-20 pb-10" style={{ backgroundColor: 'var(--cafe-charcoal)', borderTop: '1px solid var(--coffee-800)' }}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
 
           {/* Brand Column */}
           <div className="col-span-1 md:col-span-1">
-            <h3 className="font-serif text-2xl font-bold text-white mb-6">The Notebook Café</h3>
-            <p className="text-sm leading-relaxed opacity-80">
+            <h3 className="font-serif text-2xl font-bold mb-6" style={{ color: 'var(--coffee-50)' }}>The Notebook Café</h3>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--coffee-100)', opacity: 0.7 }}>
               Crafting moments of clarity and connection through exceptional coffee.
             </p>
           </div>
 
           {/* Navigation Column */}
           <div>
-            <h4 className="text-cafe-terracotta font-serif text-lg mb-6">Explore</h4>
-            <ul className="space-y-3 text-sm">
-              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link href="/menu" className="hover:text-white transition-colors">Menu</Link></li>
-              <li><Link href="/story" className="hover:text-white transition-colors">Our Story</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-              <li><Link href="/careers" className="hover:text-white transition-colors">Careers</Link></li>
+            <h4 className="font-serif text-lg mb-6" style={{ color: 'var(--coffee-50)' }}>Explore</h4>
+            <ul className="space-y-3 text-sm" style={{ color: 'var(--coffee-100)', opacity: 0.7 }}>
+              <li><Link href="/" className="hover:opacity-100 transition-opacity">Home</Link></li>
+              <li><Link href="/menu" className="hover:opacity-100 transition-opacity">Menu</Link></li>
+              <li><Link href="/story" className="hover:opacity-100 transition-opacity">Our Story</Link></li>
+              <li><Link href="/contact" className="hover:opacity-100 transition-opacity">Contact</Link></li>
+              <li><Link href="/careers" className="hover:opacity-100 transition-opacity">Careers</Link></li>
             </ul>
           </div>
 
           {/* Visit Us Column */}
           <div>
-            <h4 className="text-cafe-terracotta font-serif text-lg mb-6">Visit Us</h4>
-            <ul className="space-y-3 text-sm opacity-80">
+            <h4 className="font-serif text-lg mb-6" style={{ color: 'var(--coffee-50)' }}>Visit Us</h4>
+            <ul className="space-y-3 text-sm" style={{ color: 'var(--coffee-100)', opacity: 0.7 }}>
               <li>3512 9th St</li>
               <li>Riverside, CA 92501</li>
               <li className="pt-2">Mon-Sat: 7am - 6pm</li>
@@ -67,8 +67,8 @@ export default function SiteFooter(): React.JSX.Element {
 
           {/* Newsletter Column */}
           <div>
-            <h4 className="text-cafe-terracotta font-serif text-lg mb-6">Stay Connected</h4>
-            <p className="text-xs mb-4 opacity-70">Join our newsletter for brewing tips and events.</p>
+            <h4 className="font-serif text-lg mb-6" style={{ color: 'var(--coffee-50)' }}>Stay Connected</h4>
+            <p className="text-xs mb-4" style={{ color: 'var(--coffee-100)', opacity: 0.7 }}>Join our newsletter for brewing tips and events.</p>
 
             {/* Newsletter Form - Inline */}
             <NewsletterForm source="footer" inline={true} />
@@ -80,7 +80,8 @@ export default function SiteFooter(): React.JSX.Element {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="hover:text-white cursor-pointer transition-colors"
+                className="hover:opacity-100 cursor-pointer transition-opacity"
+                style={{ color: 'var(--coffee-100)', opacity: 0.7 }}
               >
                 <PiInstagramLogoFill className="w-5 h-5" />
               </a>
@@ -89,7 +90,8 @@ export default function SiteFooter(): React.JSX.Element {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TikTok"
-                className="hover:text-white cursor-pointer transition-colors"
+                className="hover:opacity-100 cursor-pointer transition-opacity"
+                style={{ color: 'var(--coffee-100)', opacity: 0.7 }}
               >
                 <FaTiktok className="w-5 h-5" />
               </a>
@@ -97,7 +99,7 @@ export default function SiteFooter(): React.JSX.Element {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs opacity-50 gap-3 md:gap-6">
+        <div className="pt-8 flex flex-col md:flex-row justify-between items-center text-xs gap-3 md:gap-6" style={{ borderTop: '1px solid rgba(var(--coffee-100-rgb), 0.1)', color: 'var(--coffee-100)', opacity: 0.4 }}>
           <div className="text-center md:text-left">
             <p>&copy; {year} The Notebook Café. All rights reserved.</p>
             <p className="mt-1 md:mt-0">Made with ♥ in Riverside.</p>
@@ -106,13 +108,13 @@ export default function SiteFooter(): React.JSX.Element {
             <button
               type="button"
               onClick={openConsent}
-              className="hover:text-white transition-colors"
+              className="hover:opacity-100 transition-opacity"
             >
               Cookies
             </button>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-            <Link href="/refunds" className="hover:text-white transition-colors">Refunds</Link>
+            <Link href="/terms" className="hover:opacity-100 transition-opacity">Terms</Link>
+            <Link href="/privacy" className="hover:opacity-100 transition-opacity">Privacy</Link>
+            <Link href="/refunds" className="hover:opacity-100 transition-opacity">Refunds</Link>
           </div>
         </div>
       </div>

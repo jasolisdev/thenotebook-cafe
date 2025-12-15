@@ -1,0 +1,27 @@
+/* ============================================================
+   HOME: Fixed Washed Background (matches Careers)
+============================================================ */
+
+.home-fixed-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--cafe-mist);
+  /* background-image:
+    radial-gradient(1500px circle at 50% 45%,
+      rgba(var(--cafe-cream-rgb), 0.88) 0%,
+      rgba(var(--cafe-cream-rgb), 0.55) 34%,
+      rgba(var(--cafe-cream-rgb), 0) 82%),
+    radial-gradient(1050px circle at 0% 52%,
+      rgba(var(--cafe-cream-rgb), 0.55) 0%,
+      rgba(var(--cafe-cream-rgb), 0) 64%),
+    radial-gradient(1050px circle at 100% 52%,
+      rgba(var(--cafe-cream-rgb), 0.55) 0%,
+      rgba(var(--cafe-cream-rgb), 0) 64%),
+    radial-gradient(800px circle at 22% 18%,
+      rgba(var(--cafe-tan-rgb), 0.14) 0%,
+      rgba(var(--cafe-tan-rgb), 0) 62%),
+    radial-gradient(800px circle at 78% 18%,
+      rgba(var(--cafe-tan-rgb), 0.14) 0%,
+      rgba(var(--cafe-tan-rgb), 0) 62%); */
+}

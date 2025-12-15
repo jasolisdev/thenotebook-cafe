@@ -62,6 +62,8 @@ const settings = defineType({
           name: "tiktok",
           type: "url",
           title: "TikTok URL",
+          description: "https://www.tiktok.com/@thenotebookcafe",
+          initialValue: "https://www.tiktok.com/@thenotebookcafe",
         }),
         defineField({
           name: "spotify",

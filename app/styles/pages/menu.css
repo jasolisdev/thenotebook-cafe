@@ -1,5 +1,84 @@
 /* Menu Item Component - Minimal Aesthetic Design */
 
+.menu-page {
+  color: var(--cafe-brown);
+}
+
+.menu-fixed-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: var(--cafe-mist);
+  background-image: none;
+}
+
+@media (max-width: 767px) {
+  .menu-fixed-background {
+    background-image: none;
+  }
+}
+
+.menu-sticky-tabs {
+  position: sticky;
+  z-index: 40;
+  padding-bottom: 1rem;
+}
+
+.menu-content {
+  max-width: 900px;
+}
+
+.menu-tabs-wrapper {
+  justify-content: center;
+  background-color: var(--cafe-white);
+  border-color: rgba(var(--cafe-beige-rgb), 0.2);
+}
+
+.menu-tab-button {
+  background-color: rgba(var(--cafe-mist-rgb), 0.8);
+  color: var(--cafe-brown);
+  border-color: rgba(var(--cafe-beige-rgb), 0.5);
+}
+
+.menu-tab-button[data-active="true"] {
+  background-color: var(--cafe-black);
+  color: var(--cafe-white);
+  border-color: var(--cafe-black);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.menu-subcategory-header {
+  border-color: var(--cafe-tan);
+}
+
+.menu-subcategory-header h2 {
+  color: var(--cafe-black);
+}
+
+.menu-subcategory-header span {
+  color: var(--cafe-beige);
+}
+
+.menu-empty-state {
+  color: var(--cafe-tan);
+}
+
+.menu-empty-state__title {
+  color: var(--cafe-black);
+}
+
+.menu-empty-state__copy {
+  color: var(--cafe-brown);
+}
+
+.menu-empty-state__button {
+  color: var(--cafe-black);
+  border-color: var(--cafe-black);
+}
+
 /* Base menu item styling - matches reference design */
 .menu-item-editorial {
   position: relative; /* For absolute positioning of plus button */
@@ -9,7 +88,7 @@
   padding: 20px;
   padding-bottom: 24px; /* Extra padding for bottom-right plus button */
   border-radius: 12px;
-  border: 1px solid rgba(164, 141, 120, 0.2); /* Tan at 20% opacity */
+  border: 1px solid rgba(var(--cafe-tan-rgb), 0.2); /* Tan at 20% opacity */
   background-color: transparent;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin: 10px; /* 10px spacing outside the border */
@@ -17,13 +96,18 @@
 
 /* Hover State - Subtle and Elegant */
 .menu-item-editorial:hover {
-  background-color: rgba(164, 141, 120, 0.08); /* Subtle tan wash */
-  border-color: rgba(164, 141, 120, 0.4); /* Darken border to 40% */
+  background-color: rgba(var(--cafe-tan-rgb), 0.08); /* Subtle tan wash */
+  border-color: rgba(var(--cafe-tan-rgb), 0.4); /* Darken border to 40% */
 }
 
 /* Title color change on hover - Changes to Olive */
 .menu-item-editorial:hover h3 {
-  color: var(--cafe-olive) !important;
+  color: var(--cafe-olive);
+}
+
+.menu-item-editorial:focus-visible {
+  outline: 2px solid rgba(var(--cafe-tan-rgb), 0.8);
+  outline-offset: 3px;
 }
 
 /* Plus button - Always visible in bottom right */
@@ -34,29 +118,34 @@
   width: 43px; /* Reduced by 10% from 48px */
   height: 43px;
   border-radius: 6px 0 12px 0; /* Top-left corner rounded, bottom-right matches card */
-  border: 1px solid rgba(164, 141, 120, 0.2); /* Tan at 20% opacity */
-  background-color: rgba(164, 141, 120, 0.08); /* Subtle tan wash - matches menu item hover */
+  border: 1px solid rgba(var(--cafe-tan-rgb), 0.2); /* Tan at 20% opacity */
+  background-color: rgba(var(--cafe-tan-rgb), 0.08); /* Subtle tan wash - matches menu item hover */
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 1; /* Always visible */
   transform: scale(1); /* No initial scale */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  color: #2C2420; /* Soft black icon */
+  color: var(--cafe-black); /* Soft black icon */
   cursor: pointer;
 }
 
+.menu-item-editorial .add-button:focus-visible {
+  outline: 2px solid rgba(var(--cafe-tan-rgb), 0.8);
+  outline-offset: 3px;
+}
+
 .menu-item-editorial:hover .add-button {
-  background-color: #4A4F41; /* Olive on hover */
-  border-color: #4A4F41; /* Olive border on hover */
-  color: #F4F1EA; /* Mist/white icon on hover */
+  background-color: var(--cafe-olive); /* Olive on hover */
+  border-color: var(--cafe-olive); /* Olive border on hover */
+  color: var(--cafe-mist); /* Mist/white icon on hover */
   transform: scale(1.05); /* Slight scale on hover */
 }
 
 .menu-item-editorial .add-button:hover {
-  background-color: #4A4F41; /* Olive when button hovered */
-  border-color: #4A4F41; /* Olive border when hovered */
-  color: #F4F1EA; /* Mist/white icon */
+  background-color: var(--cafe-olive); /* Olive when button hovered */
+  border-color: var(--cafe-olive); /* Olive border when hovered */
+  color: var(--cafe-mist); /* Mist/white icon */
   transform: scale(1.08);
 }
 
@@ -69,6 +158,25 @@
   margin: 0 0 8px 0;
   line-height: 1.2;
   transition: color 0.3s ease;
+  color: var(--cafe-black);
+}
+
+.menu-item-tag {
+  background-color: rgba(var(--cafe-mist-rgb), 1);
+  border: 1px solid transparent;
+  color: var(--cafe-black);
+}
+
+.menu-item-tag[data-tag="seasonal"] {
+  background-color: transparent;
+  color: var(--cafe-olive);
+  border-color: var(--cafe-olive);
+}
+
+.menu-item-tag[data-tag="popular"] {
+  background-color: transparent;
+  color: var(--cafe-tan);
+  border-color: var(--cafe-tan);
 }
 
 /* Menu Item Description - Inter (Sans-Serif) */
@@ -78,6 +186,7 @@
   font-size: 0.95rem;
   font-family: var(--font-sans-menu); /* Inter */
   opacity: 0.7;
+  color: var(--cafe-brown);
 
   /* Limit to 2 lines with ellipsis */
   display: -webkit-box;
@@ -94,6 +203,7 @@
   font-size: 1.1rem;
   font-family: var(--font-serif); /* Playfair Display - Forces serif to match title */
   white-space: nowrap;
+  color: var(--cafe-black);
 }
 
 /* Responsive adjustments */
@@ -122,4 +232,8 @@
     width: 43px; /* Reduced by 10% */
     height: 43px;
   }
+}
+
+@media (min-width: 768px) {
+  /* No main background styles needed here as they are now global */
 }

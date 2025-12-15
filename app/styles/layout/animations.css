@@ -841,3 +841,13 @@
     right: 5%;
   }
 }
+
+/* ============================================================
+   REMOVE ALL FLOATING DECORATIONS
+============================================================ */
+.section-deco,
+.section-deco-dark,
+.section-deco-mobile,
+.floating-item {
+  display: none !important;
+}

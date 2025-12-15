@@ -3,22 +3,24 @@
 /* Container */
 .consent-banner {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
   background: var(--cafe-charcoal);
   color: var(--cafe-mist);
-  padding: 20px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
   z-index: 2000;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(164, 141, 120, 0.15);
+  border-radius: 4px;
   max-width: 400px;
 
   /* Animation Setup - Hidden by default */
   transform: translateY(150%);
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 /* Animation Active State */
@@ -26,20 +28,23 @@
   transform: translateY(0);
 }
 
-/* Desktop Responsive - Centered */
+/* Desktop Responsive - Bottom Right */
 @media (min-width: 768px) {
   .consent-banner {
     flex-direction: row;
     align-items: center;
-    max-width: 800px;
-    left: 50%;
+    max-width: 540px;
+    left: auto;
+    right: 32px;
+    bottom: 32px;
+    gap: 32px;
     /* Start position for desktop - off-screen */
-    transform: translate(-50%, 150%);
+    transform: translateY(150%);
   }
 
   .consent-banner.show {
-    /* End position for desktop - centered */
-    transform: translate(-50%, 0);
+    /* End position for desktop - visible */
+    transform: translateY(0);
   }
 }
 
@@ -48,64 +53,70 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
 }
 
 .consent-banner__headline {
   margin: 0;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 400;
   color: var(--cafe-mist);
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
 }
 
 .consent-banner__copy {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   line-height: 1.5;
-  color: var(--cafe-mist);
-  opacity: 0.8;
+  color: rgba(244, 241, 234, 0.75);
+  font-family: var(--font-sans);
 }
 
 /* Button Container */
 .consent-banner__actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 /* Base Button Styles */
 .consent-banner__button {
-  padding: 8px 16px;
-  font-size: 0.8rem;
+  padding: 10px 20px;
+  font-size: 0.75rem;
   font-weight: 600;
   font-family: var(--font-sans);
-  border-radius: 0;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 2px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 /* Accept Button - Filled */
 .consent-banner__button--solid {
-  background: var(--cafe-mist);
-  color: var(--cafe-charcoal);
-  border: none;
+  background: var(--cafe-tan);
+  color: var(--cafe-white);
+  border: 1px solid var(--cafe-tan);
 }
 
 .consent-banner__button--solid:hover {
-  background: var(--cafe-white);
+  background: var(--cafe-mist);
+  border-color: var(--cafe-mist);
+  color: var(--cafe-charcoal);
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* Decline Button - Outline */
 .consent-banner__button--outline {
   background: transparent;
   color: var(--cafe-mist);
-  border: 1px solid var(--cafe-mist);
+  border: 1px solid rgba(244, 241, 234, 0.3);
 }
 
 .consent-banner__button--outline:hover {
-  background: rgba(var(--cafe-mist-rgb), 0.1);
-  border-color: var(--cafe-white);
+  border-color: var(--cafe-mist);
   color: var(--cafe-white);
 }
 

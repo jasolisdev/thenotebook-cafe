@@ -64,7 +64,7 @@ export default function EventsPage() {
           </Reveal>
 
           <Reveal delay={200}>
-            <h1 className="font-serif text-[56px] md:text-[86px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
+            <h1 className="font-serif text-hero md:text-hero-lg" style={{ color: 'var(--cafe-cream)' }}>
               Cozy Holiday<br />
               <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Nights</span>
             </h1>

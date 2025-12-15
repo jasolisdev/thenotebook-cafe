@@ -7,6 +7,7 @@
   place-items: center;
   overflow: hidden;
   background-image: var(--parallax-hero-image);
+  background-color: var(--parallax-hero-color, transparent);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -62,6 +63,51 @@
 
 .parallax-hero__subheadline {
   color: rgba(var(--cafe-cream-rgb, 250, 249, 246), 0.9);
+}
+
+/* Cafe gradient variant (used on Menu/Story/Contact/Careers) */
+.parallax-hero--cafe-gradient {
+  --menu-hero-side-strong: 0.36;
+  --menu-hero-side-medium: 0.18;
+  --menu-hero-side-light: 0.06;
+
+  background-color: var(--cafe-beige);
+  background-image:
+    linear-gradient(180deg,
+      rgba(var(--cafe-black-rgb), 0.62) 0%,
+      rgba(var(--cafe-black-rgb), 0.32) 120px,
+      rgba(var(--cafe-black-rgb), 0.14) 240px,
+      rgba(var(--cafe-black-rgb), 0.06) 360px,
+      rgba(var(--cafe-black-rgb), 0) 520px),
+    linear-gradient(90deg,
+      rgba(var(--cafe-black-rgb), var(--menu-hero-side-strong)) 0%,
+      rgba(var(--cafe-black-rgb), var(--menu-hero-side-medium)) 18%,
+      rgba(var(--cafe-black-rgb), var(--menu-hero-side-light)) 34%,
+      rgba(var(--cafe-black-rgb), 0) 46%,
+      rgba(var(--cafe-black-rgb), 0) 54%,
+      rgba(var(--cafe-black-rgb), var(--menu-hero-side-light)) 66%,
+      rgba(var(--cafe-black-rgb), var(--menu-hero-side-medium)) 82%,
+      rgba(var(--cafe-black-rgb), var(--menu-hero-side-strong)) 100%),
+    radial-gradient(1120px circle at 50% 44%,
+      rgba(var(--cafe-cream-rgb), 0.86) 0%,
+      rgba(var(--cafe-cream-rgb), 0.44) 42%,
+      rgba(var(--cafe-cream-rgb), 0) 78%),
+    radial-gradient(900px circle at 50% 15%,
+      rgba(var(--cafe-tan-rgb), 0.14) 0%,
+      rgba(var(--cafe-tan-rgb), 0) 60%);
+  background-attachment: scroll;
+}
+
+.parallax-hero--cafe-gradient .parallax-hero__overlay {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .parallax-hero--cafe-gradient {
+    --menu-hero-side-strong: 0.28;
+    --menu-hero-side-medium: 0.14;
+    --menu-hero-side-light: 0.04;
+  }
 }
 
 @media (max-width: 768px) {

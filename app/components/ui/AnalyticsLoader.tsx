@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 type ConsentPayload = {
   choice: "accepted" | "declined" | "custom";
@@ -8,7 +8,8 @@ type ConsentPayload = {
 };
 
 const STORAGE_KEY = "tnc-consent";
-const VERCEL_ANALYTICS_ID = "__vercel";
+const VERCEL_INSIGHTS_ID = "__vercel_insights";
+const VERCEL_SPEED_INSIGHTS_ID = "__vercel_speed_insights";
 
 function shouldAllowAnalytics(): boolean {
   if (typeof window === "undefined") return false;
@@ -24,30 +25,52 @@ function shouldAllowAnalytics(): boolean {
 
 export default function AnalyticsLoader() {
   const loadedRef = useRef(false);
-  const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    // Avoid injecting Vercel analytics scripts during local dev profiling.
+    if (process.env.NODE_ENV !== "production") return;
+
     const loadAnalytics = () => {
       if (loadedRef.current || !shouldAllowAnalytics()) return;
-      if (document.getElementById(VERCEL_ANALYTICS_ID)) {
-        loadedRef.current = true;
-        setReady(true);
-        return;
+
+      const insightsAlreadyLoaded = Boolean(document.getElementById(VERCEL_INSIGHTS_ID));
+      const speedAlreadyLoaded = Boolean(document.getElementById(VERCEL_SPEED_INSIGHTS_ID));
+
+      if (!insightsAlreadyLoaded) {
+        const insights = document.createElement("script");
+        insights.id = VERCEL_INSIGHTS_ID;
+        insights.src = "/_vercel/insights/script.js";
+        insights.defer = true;
+        document.body.appendChild(insights);
       }
-      const script = document.createElement("script");
-      script.id = VERCEL_ANALYTICS_ID;
-      script.src = "/_vercel/insights/script.js";
-      script.defer = true;
-      document.body.appendChild(script);
+
+      if (!speedAlreadyLoaded) {
+        const speed = document.createElement("script");
+        speed.id = VERCEL_SPEED_INSIGHTS_ID;
+        speed.src = "/_vercel/speed-insights/script.js";
+        speed.defer = true;
+        document.body.appendChild(speed);
+      }
+
       loadedRef.current = true;
-      setReady(true);
     };
 
-    loadAnalytics();
+    const scheduleLoad = () => {
+      if (loadedRef.current || !shouldAllowAnalytics()) return;
+      if ("requestIdleCallback" in window) {
+        (window as unknown as {
+          requestIdleCallback: (cb: () => void, opts?: { timeout?: number }) => number;
+        }).requestIdleCallback(loadAnalytics, { timeout: 3000 });
+      } else {
+        globalThis.setTimeout(loadAnalytics, 1500);
+      }
+    };
 
-    const onConsentChange = () => loadAnalytics();
+    scheduleLoad();
+
+    const onConsentChange = () => scheduleLoad();
     const onStorage = (e: StorageEvent) => {
-      if (e.key === STORAGE_KEY) loadAnalytics();
+      if (e.key === STORAGE_KEY) scheduleLoad();
     };
 
     window.addEventListener("tnc-consent-change", onConsentChange as EventListener);
@@ -58,5 +81,5 @@ export default function AnalyticsLoader() {
     };
   }, []);
 
-  return ready ? null : null;
+  return null;
 }
