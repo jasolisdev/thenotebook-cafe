@@ -111,7 +111,7 @@ export function sanitizeObject<T extends Record<string, unknown>>(
     urlFields = ["url", "website"],
   } = options;
 
-  const sanitized = { ...obj };
+  const sanitized = { ...obj } as Record<string, unknown>;
 
   for (const [key, value] of Object.entries(sanitized)) {
     // Skip null/undefined
@@ -120,16 +120,13 @@ export function sanitizeObject<T extends Record<string, unknown>>(
     // Sanitize based on field type
     if (typeof value === "string") {
       if (emailFields.includes(key)) {
-        sanitized[key] = sanitizeEmail(value) as T[Extract<keyof T, string>];
+        sanitized[key] = sanitizeEmail(value);
       } else if (phoneFields.includes(key)) {
-        sanitized[key] = sanitizePhone(value) as T[Extract<keyof T, string>];
+        sanitized[key] = sanitizePhone(value);
       } else if (urlFields.includes(key)) {
-        sanitized[key] = (sanitizeUrl(value) || "") as T[Extract<
-          keyof T,
-          string
-        >];
+        sanitized[key] = sanitizeUrl(value) || "";
       } else {
-        sanitized[key] = sanitizeText(value) as T[Extract<keyof T, string>];
+        sanitized[key] = sanitizeText(value);
       }
     }
     // Recursively sanitize nested objects
@@ -137,15 +134,15 @@ export function sanitizeObject<T extends Record<string, unknown>>(
       sanitized[key] = sanitizeObject(
         value as Record<string, unknown>,
         options
-      ) as T[Extract<keyof T, string>];
+      );
     }
     // Sanitize arrays of strings
     else if (Array.isArray(value)) {
       sanitized[key] = value.map((item) =>
         typeof item === "string" ? sanitizeText(item) : item
-      ) as T[Extract<keyof T, string>];
+      );
     }
   }
 
-  return sanitized;
+  return sanitized as T;
 }
