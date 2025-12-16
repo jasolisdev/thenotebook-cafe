@@ -241,7 +241,7 @@ The Notebook Café uses Next.js 16 API Routes for server-side logic. All endpoin
 
 ## Global Security
 
-### Middleware (`middleware.ts`)
+### Proxy (`proxy.ts`)
 
 **Security Headers:**
 - `X-Frame-Options: DENY` - Prevents clickjacking

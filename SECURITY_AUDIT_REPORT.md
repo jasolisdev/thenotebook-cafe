@@ -23,14 +23,14 @@ This comprehensive security audit assessed The Notebook Café's production readi
 
 ## Critical Findings (MUST FIX BEFORE LAUNCH)
 
-### 1. ❌ **CRITICAL: Missing Security Headers Middleware**
+### 1. ❌ **CRITICAL: Missing Security Headers Proxy**
 
 **Severity:** CRITICAL
 **Risk:** XSS, Clickjacking, MIME sniffing attacks
 **Status:** NOT IMPLEMENTED
 
 **Issue:**
-The PRODUCTION_HARDENING.md document claims Phase 2 includes `middleware.ts` with comprehensive security headers, but **the file does not exist in the codebase**. This means the application is currently deployed without:
+The PRODUCTION_HARDENING.md document claims Phase 2 includes `proxy.ts` with comprehensive security headers, but **the file does not exist in the codebase**. This means the application is currently deployed without:
 - Content Security Policy (CSP)
 - X-Frame-Options
 - X-Content-Type-Options
@@ -44,7 +44,7 @@ The PRODUCTION_HARDENING.md document claims Phase 2 includes `middleware.ts` wit
 - No HTTPS enforcement
 - Browser security features disabled
 
-**Location:** `/middleware.ts` (missing)
+**Location:** `/proxy.ts` (missing)
 
 **Recommendation:** **IMMEDIATE** - Implement middleware with all security headers as documented in Phase 2 of PRODUCTION_HARDENING.md
 
@@ -354,7 +354,7 @@ png:  [0x89, 0x50, 0x4e, 0x47, ...]   // PNG
 
 ## Security Headers Status
 
-**Current Status:** ❌ **NONE IMPLEMENTED** (middleware.ts missing)
+**Current Status:** ❌ **NONE IMPLEMENTED** (proxy.ts missing)
 
 **Required Headers (from PRODUCTION_HARDENING.md Phase 2):**
 
@@ -369,7 +369,7 @@ png:  [0x89, 0x50, 0x4e, 0x47, ...]   // PNG
 
 **Impact:** Application is vulnerable to multiple attack vectors
 
-**Recommendation:** Create `middleware.ts` immediately (see Remediation Plan)
+**Recommendation:** Create `proxy.ts` immediately (see Remediation Plan)
 
 ---
 
@@ -377,7 +377,7 @@ png:  [0x89, 0x50, 0x4e, 0x47, ...]   // PNG
 
 ### Critical (MUST DO BEFORE LAUNCH)
 
-- [ ] **Create middleware.ts with all security headers**
+- [ ] **Create proxy.ts with all security headers**
 - [ ] **Add rate limiting to /api/unsubscribe (10/hour)**
 - [ ] **Add rate limiting to /api/auth/verify (3/15min)**
 - [ ] **Update password cookie maxAge to 7 days**
@@ -407,12 +407,12 @@ png:  [0x89, 0x50, 0x4e, 0x47, ...]   // PNG
 
 ## Remediation Plan
 
-### Step 1: Create Security Headers Middleware (1 hour)
+### Step 1: Create Security Headers Proxy (1 hour)
 
 **Priority:** CRITICAL
 **Effort:** 1 hour
 
-**Create `/middleware.ts`:**
+**Create `/proxy.ts`:**
 
 ```typescript
 import { NextResponse } from 'next/server';
@@ -713,7 +713,7 @@ describe('Security Tests', () => {
 **Estimated Time to Production Ready:** 3-4 hours
 
 **Priority Order:**
-1. **Create middleware.ts** (1 hour) - CRITICAL
+1. **Create proxy.ts** (1 hour) - CRITICAL
 2. **Add missing rate limits** (30 min) - CRITICAL
 3. **Fix password cookie expiry** (5 min) - CRITICAL
 4. **Implement token expiration** (1 hour) - HIGH

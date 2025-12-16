@@ -49,7 +49,7 @@ This document summarizes the comprehensive production hardening work completed o
 
 #### A. Created Middleware with Security Headers
 
-**File Created:** `middleware.ts` (135 lines)
+**File Created:** `proxy.ts` (135 lines)
 
 **Security Headers Implemented:**
 - ✅ `X-Frame-Options: DENY` - Clickjacking prevention
@@ -176,7 +176,7 @@ This document summarizes the comprehensive production hardening work completed o
 
 ### New Files (4)
 
-1. **`middleware.ts`** (135 lines)
+1. **`proxy.ts`** (135 lines)
    - Security headers
    - API request logging
    - Performance monitoring
@@ -275,7 +275,7 @@ frame-ancestors 'none';
 
 ### Pre-Launch (Ready Now) ✅
 
-- [x] **Security headers implemented** (middleware.ts)
+- [x] **Security headers implemented** (proxy.ts)
 - [x] **Rate limiting on all endpoints** (5/5)
 - [x] **CSRF protection on POST endpoints** (3/3)
 - [x] **Input sanitization on all user inputs**
