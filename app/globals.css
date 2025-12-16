@@ -157,64 +157,6 @@
 
 }
 
-/* ===============================
-   DARK MODE THEME
-   Deep espresso-inspired palette
-=============================== */
-.dark {
-  /* Core palette - inverted */
-  --cafe-black: #F4F1EA;        /* Light text */
-  --cafe-charcoal: #E6DCCA;     /* Lighter accent */
-  --cafe-brown: #E6DCCA;        /* Body text */
-  --cafe-tan: #C4A484;          /* Gold accent (brighter) */
-  --cafe-beige: #8E7965;        /* Muted elements */
-  --cafe-luxe-oat: #A48D78;     /* Navigation accents */
-  --cafe-cream: #2A2622;        /* Dark background */
-  --cafe-mist: #1a1410;         /* Darkest background */
-  --cafe-white: #0f0c09;        /* Main dark background */
-  --cafe-olive: #94997d;        /* Lighter olive */
-
-  /* Navbar/Footer - adjusted */
-  --coffee-50: #2C2420;         /* Dark nav text */
-  --coffee-100: #4A3B32;        /* Dark footer text */
-  --coffee-800: #A48D78;        /* Light borders */
-  --coffee-900: #F3EFE9;        /* Light nav text (scrolled) */
-
-  /* Extended palette */
-  --espresso-brown: #F3EFE9;    /* Light text */
-  --warm-brown: #CBB9A4;        /* Warm light text */
-
-  /* Gold accent */
-  --gold-primary: #d4a866;      /* Brighter gold */
-
-  /* RGB helpers - inverted */
-  --cafe-black-rgb: 244, 241, 234;
-  --cafe-brown-rgb: 230, 220, 202;
-  --cafe-tan-rgb: 196, 164, 132;
-  --cafe-beige-rgb: 142, 121, 101;
-  --cafe-cream-rgb: 42, 38, 34;
-  --cafe-mist-rgb: 26, 20, 16;
-  --coffee-50-rgb: 44, 36, 32;
-  --coffee-100-rgb: 74, 59, 50;
-  --espresso-brown-rgb: 243, 239, 233;
-
-  /* Semantic tokens */
-  --bg-solid: #1a1410;
-  --bg-dark: #0f0c09;
-  --text-dark: #E6DCCA;
-  --text-light: #2C2420;
-  --text-light-muted: #4A3B32;
-
-  /* Glass panel effect */
-  --glass-bg: rgba(26, 20, 16, 0.85);
-
-  /* Overlays - inverted */
-  --dark-overlay: rgba(255, 255, 255, 0.12);
-  --white-overlay: rgba(0, 0, 0, 0.25);
-  --black-overlay-subtle: rgba(255, 255, 255, 0.08);
-  --white-overlay-subtle: rgba(0, 0, 0, 0.08);
-}
-
 /* ============================================================
    BASE ELEMENTS
 ============================================================ */
