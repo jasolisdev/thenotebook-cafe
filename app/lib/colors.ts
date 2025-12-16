@@ -22,17 +22,11 @@ export const COLORS = {
   cream: '#EDE7D8',
   mist: '#F4F1EA',
   white: '#FAF9F6',
-  red: '#ef4444',
 
   // Extended palette
   espressoBrown: '#2a1f16',
   warmBrown: '#5a4a38',
-  mediumBrown: '#6b5a48',
-  creamLight: '#f4f0e9',
-  pearlWhite: '#fffcf9',
-  latteCream: '#f6ebdf',
   goldPrimary: '#c99a58',
-  goldDarker: '#b48a4e',
 } as const;
 
 export const RGBA_COLORS = {

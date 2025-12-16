@@ -359,40 +359,60 @@ The site uses Tailwind CSS v4 with colors registered via the `@theme` directive 
 ```css
 /* Tailwind v4 Theme - generates bg-cafe-*, text-cafe-* utilities */
 @theme {
-  --color-cafe-black: #2C2420;    /* Dark brown, primary text */
-  --color-cafe-brown: #4A3B32;    /* Medium brown, body text */
-  --color-cafe-tan: #A48D78;      /* Gold/tan accent color */
-  --color-cafe-beige: #CBB9A4;    /* Beige for borders/muted elements */
-  --color-cafe-cream: #EDE7D8;    /* Light cream backgrounds */
-  --color-cafe-mist: #F4F1EA;     /* Lightest warm background */
-  --color-cafe-white: #FAF9F6;    /* Off-white, main background */
-  --color-cafe-red: #ef4444;      /* Danger/delete actions */
+  /* Core Palette (8 colors) */
+  --color-cafe-black: #2C2420;      /* Dark brown - headings, primary text */
+  --color-cafe-brown: #4A3B32;      /* Medium brown - body text */
+  --color-cafe-tan: #A48D78;        /* Primary accent - CTAs, highlights */
+  --color-cafe-tan-dark: #8E7965;   /* Button hover states */
+  --color-cafe-beige: #CBB9A4;      /* Borders, muted elements */
+  --color-cafe-luxe-oat: #CBBFAF;   /* Navigation accents */
+  --color-cafe-cream: #EDE7D8;      /* Light backgrounds */
+  --color-cafe-mist: #F4F1EA;       /* Very light backgrounds */
+  --color-cafe-white: #FAF9F6;      /* Main background */
+
+  /* Premium Navbar/Footer (2 colors) */
+  --color-coffee-50: #F3EFE9;       /* Navbar text (light) */
+  --color-coffee-900: #2C241F;      /* Navbar text (scrolled) */
+
+  /* Accent (1 color) */
+  --color-gold: #C4A484;            /* Accessibility, password gate */
 }
 ```
 
 **CSS Variables** (for inline styles):
 ```css
-/* Core palette */
---cafe-black: #2C2420;
---cafe-brown: #4A3B32;
---cafe-tan: #A48D78;
---cafe-beige: #CBB9A4;
---cafe-cream: #EDE7D8;
---cafe-mist: #F4F1EA;
---cafe-white: #FAF9F6;
+/* Core Palette (9 colors) */
+--cafe-black: #2C2420;      /* Dark brown - headings, primary text */
+--cafe-brown: #4A3B32;      /* Medium brown - body text */
+--cafe-tan: #A48D78;        /* Primary accent - CTAs, highlights */
+--cafe-beige: #CBB9A4;      /* Borders, muted elements */
+--cafe-luxe-oat: #CBBFAF;   /* Navigation accents */
+--cafe-cream: #EDE7D8;      /* Light backgrounds */
+--cafe-mist: #F4F1EA;       /* Very light backgrounds */
+--cafe-white: #FAF9F6;      /* Main background */
+--cafe-olive: #4A4F41;      /* Menu hover, Trinity section */
 
-/* Extended palette */
---espresso-brown: #2a1f16;
---warm-brown: #5a4a38;
---gold-primary: #c99a58;
+/* Specialty Colors (7 colors) */
+--cafe-charcoal: #2A2622;   /* Footer background */
+--coffee-50: #F3EFE9;       /* Navbar text (light) */
+--coffee-100: #E6DCCA;      /* Footer text */
+--coffee-800: #3A2D26;      /* Footer borders */
+--coffee-900: #2C241F;      /* Navbar text (scrolled) */
+--espresso-brown: #2a1f16;  /* Navigation, announcement */
+--warm-brown: #5a4a38;      /* Navigation descriptive text */
 
-/* Semantic tokens */
---bg-solid: var(--cafe-white);
+/* Gold Accents (1 color) */
+--gold-primary: #c99a58;    /* Navigation accents */
+
+/* Semantic Tokens */
+--bg-solid: var(--cafe-mist);
 --bg-dark: var(--cafe-black);
---bg-cream: var(--cafe-cream);
 --text-dark: var(--cafe-brown);
 --text-light: var(--cafe-mist);
+--text-light-muted: var(--cafe-beige);
 ```
+
+**Total: 17 essential colors** (cleaned from 25+)
 
 #### Responsive Breakpoints
 ```css

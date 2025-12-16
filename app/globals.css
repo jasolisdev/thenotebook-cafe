@@ -90,11 +90,9 @@
   /* Extended palette - frequently used colors */
   --espresso-brown: #2a1f16;     /* Dark brown text */
   --warm-brown: #5a4a38;         /* Warm brown text */
-  --medium-brown: #6b5a48;       /* Medium brown buttons */
-  --cream-light: #f4f0e9;        /* Light cream backgrounds */
 
   /* Gold accent family */
-  --gold-primary: #c99a58;       /* RGB: 201, 154, 88 */
+  --gold-primary: #c99a58;       /* Navigation accents */
 
   /* RGB helpers for rgba() usage */
   --cafe-black-rgb: 44, 36, 32;
