@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PiInstagramLogoFill } from "react-icons/pi";
 import { FaTiktok } from "react-icons/fa";
 import NewsletterForm from "../features/NewsLetterForm";
+import DarkModeToggle from "../ui/DarkModeToggle";
 import { useCallback } from "react";
 
 /**
@@ -73,8 +74,8 @@ export default function SiteFooter(): React.JSX.Element {
             {/* Newsletter Form - Inline */}
             <NewsletterForm source="footer" inline={true} />
 
-            {/* Social Icons */}
-            <div className="flex gap-4 mt-6">
+            {/* Social Icons & Dark Mode Toggle */}
+            <div className="flex items-center gap-4 mt-6">
               <a
                 href="https://www.instagram.com/thenotebookcafellc/"
                 target="_blank"
@@ -95,6 +96,8 @@ export default function SiteFooter(): React.JSX.Element {
               >
                 <FaTiktok className="w-5 h-5" />
               </a>
+              <div className="w-px h-5 bg-cafe-tan/20 mx-1" />
+              <DarkModeToggle />
             </div>
           </div>
         </div>
