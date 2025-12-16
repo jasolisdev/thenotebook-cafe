@@ -59,8 +59,8 @@ const PrivacyPage = () => (
       <div style={{ marginTop: '40px', paddingTop: '20px', borderTop: '1px solid var(--cafe-tan)' }}>
         <p style={{ fontStyle: 'italic', fontSize: '0.9rem' }}>
           Questions about privacy? Email{' '}
-          <a href="mailto:hello@notebook.cafe" style={{ color: 'var(--cafe-black)', textDecoration: 'underline' }}>
-            hello@notebook.cafe
+          <a href="mailto:thenotebookcafellc@gmail.com" style={{ color: 'var(--cafe-black)', textDecoration: 'underline' }}>
+            thenotebookcafellc@gmail.com
           </a>.
         </p>
       </div>

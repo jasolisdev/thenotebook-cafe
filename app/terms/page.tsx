@@ -98,8 +98,8 @@ export default function TermsPage() {
         <h2 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>Contact</h2>
         <p className="text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
           Questions about these Terms of Service? Email{" "}
-          <a href="mailto:hello@notebook.cafe" className="underline" style={{ color: 'var(--cafe-tan)' }}>
-            hello@notebook.cafe
+          <a href="mailto:thenotebookcafellc@gmail.com" className="underline" style={{ color: 'var(--cafe-tan)' }}>
+            thenotebookcafellc@gmail.com
           </a>.
         </p>
       </section>
