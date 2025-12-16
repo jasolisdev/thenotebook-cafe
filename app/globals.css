@@ -533,11 +533,6 @@ h3 {
 
 /* Hide decorative blobs/shapes for reduced visual noise */
 .acc-hide-images .signature-pour-blob,
-.acc-hide-images .philosophy-blob,
-.acc-hide-images .story-blob,
-.acc-hide-images .story-gallery-blob,
-.acc-hide-images .atmosphere-blob,
-.acc-hide-images .blob-marker,
 .acc-hide-images .menu-card-image {
   display: none !important;
 }

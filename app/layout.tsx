@@ -8,7 +8,6 @@ import "./styles/components/buttons.css";
 import "./styles/components/footer.css";
 import "./styles/components/announcement.css";
 import "./styles/components/consent-banner.css";
-import "./styles/components/what-to-expect.css";
 
 // Layout styles
 import "./styles/layout/sections.css";

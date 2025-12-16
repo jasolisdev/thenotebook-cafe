@@ -11,6 +11,12 @@
   overflow: hidden;
 }
 
+@media (min-width: 1024px) {
+  .editorial-hero {
+    min-height: 70vh;
+  }
+}
+
 .hero-brewing-soon {
   margin-top: 48px;
   display: grid;
@@ -183,7 +189,7 @@
 @media (min-width: 1024px) {
   .editorial-hero-bg {
     background-size: cover;
-    --hero-bg-image: url("/home/hero-v3.webp");
+    --hero-bg-image: url("/menu/tnc-menu-banner.webp");
     filter: blur(1px);
     animation: kenBurns 20s ease-out infinite alternate;
   }

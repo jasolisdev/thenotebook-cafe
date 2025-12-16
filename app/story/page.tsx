@@ -398,13 +398,13 @@ export default function StoryPage() {
             </Reveal>
             <Reveal delay={120}>
               <h2 className="story-section-title font-serif text-4xl md:text-6xl mt-4">
-                Meet the <span className="story-section-title-accent italic">Founders</span>
+                Meet the <span className="story-section-title-accent italic">Founders & Owners</span>
               </h2>
             </Reveal>
           </div>
 
           <div className="grid gap-20 lg:gap-32">
-            {/* Founder 1 - Coffee Visionary */}
+            {/* Michael & Julia - Founders & Owners */}
             <Reveal delay={200}>
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 {/* Image */}
@@ -412,7 +412,7 @@ export default function StoryPage() {
                   <div className="relative aspect-[3/4] md:aspect-[4/5] rounded-xl overflow-hidden shadow-xl">
                     <Image
                       src="/story/tnc-founder-v1.webp"
-                      alt="Founder - Coffee Expert"
+                      alt="Michael & Julia - Founders & Owners"
                       fill
                       className="object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-700"
                       sizes="(min-width: 1024px) 50vw, 100vw"
@@ -424,17 +424,17 @@ export default function StoryPage() {
                 <div className="space-y-6 order-1 lg:order-2">
                   <div>
                     <h3 className="story-card-title font-serif text-3xl md:text-4xl mb-2">
-                      The Coffee Visionary
+                      Michael & Julia
                     </h3>
                     <p className="story-eyebrow text-xs uppercase tracking-[0.25em] font-semibold text-cafe-tan">
-                      Founder & Head of Coffee
+                      Founders & Owners
                     </p>
                   </div>
 
                   <div className="story-divider story-divider--tan w-16 h-[2px]" />
 
                   <p className="story-card-body text-lg font-normal leading-relaxed text-cafe-brown">
-                    With years of experience in specialty coffee and a deep connection to Mexican coffee culture, they bring expertise in sourcing, roasting, and extraction science. Every dial-in, every pour—it&apos;s personal.
+                    A husband-wife team with a shared vision: to create a coffee shop that Riverside deserves. Michael brings expertise in specialty coffee, sourcing, and extraction science, while Julia designs every intentional detail—from custom furniture to the lighting that sets the mood. Together, they&apos;re building more than a business; they&apos;re crafting a community sanctuary.
                   </p>
 
                   <div className="flex flex-wrap gap-3 pt-4">
@@ -444,51 +444,9 @@ export default function StoryPage() {
                     <span className="px-4 py-2 bg-cafe-tan/10 text-cafe-tan text-xs uppercase tracking-wider font-semibold rounded-sm">
                       Direct Trade Advocate
                     </span>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Founder 2 - Creative Architect */}
-            <Reveal delay={300}>
-              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                {/* Content */}
-                <div className="space-y-6 order-1 lg:order-1 lg:text-right flex flex-col lg:items-end">
-                  <div>
-                    <h3 className="story-card-title font-serif text-3xl md:text-4xl mb-2">
-                      The Creative Architect
-                    </h3>
-                    <p className="story-eyebrow text-xs uppercase tracking-[0.25em] font-semibold text-cafe-tan">
-                      Founder & Design Director
-                    </p>
-                  </div>
-
-                  <div className="story-divider story-divider--tan w-16 h-[2px]" />
-
-                  <p className="story-card-body text-lg font-normal leading-relaxed text-cafe-brown">
-                    A designer with an eye for detail and a passion for creating spaces that inspire. Every bench, table, and light fixture in The Notebook Café is custom-designed—no catalog orders, just intentional craft.
-                  </p>
-
-                  <div className="flex flex-wrap gap-3 pt-4 lg:justify-end">
                     <span className="px-4 py-2 bg-cafe-tan/10 text-cafe-tan text-xs uppercase tracking-wider font-semibold rounded-sm">
                       Interior Design
                     </span>
-                    <span className="px-4 py-2 bg-cafe-tan/10 text-cafe-tan text-xs uppercase tracking-wider font-semibold rounded-sm">
-                      Furniture Maker
-                    </span>
-                  </div>
-                </div>
-
-                {/* Image */}
-                <div className="relative order-2 lg:order-2">
-                  <div className="relative aspect-[3/4] md:aspect-[4/5] rounded-xl overflow-hidden shadow-xl">
-                    <Image
-                      src="/story/tnc-founder-v2.webp"
-                      alt="Founder - Designer"
-                      fill
-                      className="object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-700"
-                      sizes="(min-width: 1024px) 50vw, 100vw"
-                    />
                   </div>
                 </div>
               </div>
