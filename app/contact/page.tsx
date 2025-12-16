@@ -17,27 +17,26 @@ export default function ContactPage() {
     <main className="contact-page min-h-screen relative">
       <div className="contact-fixed-background" aria-hidden="true" />
       {/* Hero Section */}
-      <ParallaxHero className="parallax-hero--cafe-gradient" backgroundColor="var(--cafe-beige)" overlayVariant="lighter">
-        <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
-          {/* Eyebrow - Instant reveal */}
+      <ParallaxHero
+        className="parallax-hero--compact"
+        contentClassName="parallax-hero__content--compact tnc-hero__content"
+        parallax={false}
+        backgroundImage="/contact/tnc-contact-banner.webp"
+        backgroundFit="fitHeight"
+        backgroundFitDesktop="cover"
+        backgroundColor="var(--cafe-black)"
+        overlayVariant="solid"
+        focusPercent={32}
+      >
+        <div className="tnc-hero__inner">
           <RevealText delay="0ms">
-            <span className="contact-hero-kicker font-bold tracking-[0.2em] uppercase text-sm block">
+            <h1 className="tnc-hero__title font-serif">
               Get in Touch
-            </span>
-          </RevealText>
-
-          {/* Main Headline - 200ms delay */}
-          <RevealText delay="200ms">
-            <h1 className="contact-hero-title font-serif text-5xl md:text-7xl lg:text-8xl">
-              Visit Us<br />
-              <span className="contact-hero-title-accent italic">In Riverside</span>
             </h1>
           </RevealText>
-
-          {/* Body Content - 400ms delay */}
-          <FadeInSection delay="400ms">
-            <p className="contact-hero-subtitle text-xl md:text-2xl max-w-2xl mx-auto font-normal leading-relaxed">
-              Come write your next chapter with us. Walk in, call ahead, or plan your next creative session here.
+          <FadeInSection delay="200ms">
+            <p className="tnc-hero__subtitle">
+              We&apos;re Just Around the Corner.
             </p>
           </FadeInSection>
         </div>
@@ -87,7 +86,7 @@ export default function ContactPage() {
                       Location
                     </span>
                   </div>
-                  
+
                   <div>
                     <h3 className="font-serif text-3xl md:text-4xl mb-4 text-cafe-black">
                       Our Riverside Home
@@ -171,7 +170,7 @@ export default function ContactPage() {
                 <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
                   <Mail size={120} />
                 </div>
-                
+
                 <div className="relative z-10">
                   <h3 className="font-serif text-3xl md:text-4xl mb-2 text-cafe-black">
                     Send a Message
@@ -179,7 +178,7 @@ export default function ContactPage() {
                   <p className="text-cafe-brown/70 mb-8 font-light">
                     Have a question or just want to say hello? Drop us a note below.
                   </p>
-                  
+
                   <ContactForm />
                 </div>
               </div>

@@ -31,6 +31,12 @@
   max-width: 900px;
 }
 
+.menu-hero__content {
+  width: min(980px, 100%);
+  text-align: left;
+}
+
+
 .menu-tabs-wrapper {
   justify-content: center;
   background-color: var(--cafe-white);
@@ -110,8 +116,8 @@
   outline-offset: 3px;
 }
 
-/* Plus button - Always visible in bottom right */
-.menu-item-editorial .add-button {
+/* Details button - Always visible in bottom right */
+.menu-item-editorial .details-button {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -130,19 +136,19 @@
   cursor: pointer;
 }
 
-.menu-item-editorial .add-button:focus-visible {
+.menu-item-editorial .details-button:focus-visible {
   outline: 2px solid rgba(var(--cafe-tan-rgb), 0.8);
   outline-offset: 3px;
 }
 
-.menu-item-editorial:hover .add-button {
+.menu-item-editorial:hover .details-button {
   background-color: var(--cafe-olive); /* Olive on hover */
   border-color: var(--cafe-olive); /* Olive border on hover */
   color: var(--cafe-mist); /* Mist/white icon on hover */
   transform: scale(1.05); /* Slight scale on hover */
 }
 
-.menu-item-editorial .add-button:hover {
+.menu-item-editorial .details-button:hover {
   background-color: var(--cafe-olive); /* Olive when button hovered */
   border-color: var(--cafe-olive); /* Olive border when hovered */
   color: var(--cafe-mist); /* Mist/white icon */
@@ -226,7 +232,7 @@
     font-size: 1rem;
   }
 
-  .menu-item-editorial .add-button {
+  .menu-item-editorial .details-button {
     bottom: 0;
     right: 0;
     width: 43px; /* Reduced by 10% */

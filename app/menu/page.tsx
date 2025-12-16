@@ -1,10 +1,9 @@
 'use client';
 
 import { useMemo, useState, useEffect, useRef, useCallback } from 'react';
-import type { MenuItem as MenuItemType, SelectedModifier } from '@/app/types';
+import type { MenuItem as MenuItemType } from '@/app/types';
 import { MENU_ITEMS } from '@/app/constants';
 import { ProductModal } from '@/app/components/features/ProductModal';
-import { useCart } from '@/app/components/providers/CartProvider';
 import RevealText from '@/app/components/ui/RevealText';
 import FadeInSection from '@/app/components/ui/FadeInSection';
 import ParallaxHero from '@/app/components/features/ParallaxHero';
@@ -23,7 +22,6 @@ function readCssPxVariable(name: string, fallback: number): number {
 
 export default function MenuPage() {
   const [selectedItem, setSelectedItem] = useState<MenuItemType | null>(null);
-  const { addItem } = useCart();
   const [activeSection, setActiveSection] = useState<'drinks' | 'meals' | 'desserts'>('drinks');
   const [searchQuery, setSearchQuery] = useState('');
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
@@ -48,10 +46,6 @@ export default function MenuPage() {
       return acc;
     }, {} as Record<string, MenuItemType[]>);
   }, [activeSection, searchQuery]);
-
-  const handleAddToCart = (item: MenuItemType, quantity: number, modifiers: SelectedModifier[], notes?: string, totalPrice?: number) => {
-    addItem(item, quantity, modifiers, notes, totalPrice);
-  };
 
   // Listen for SiteHeader visibility (single source of truth)
   useEffect(() => {
@@ -92,30 +86,26 @@ export default function MenuPage() {
         <div className="menu-fixed-background" aria-hidden="true" />
 
         {/* Menu Header */}
-        <ParallaxHero className="parallax-hero--cafe-gradient" backgroundColor="var(--cafe-beige)" overlayVariant="lighter">
-          <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
-            {/* Eyebrow - Instant reveal */}
+        <ParallaxHero
+          className="parallax-hero--compact"
+          contentClassName="parallax-hero__content--compact tnc-hero__content"
+          backgroundImage="/menu/tnc-menu-banner.webp"
+          backgroundColor="var(--cafe-black)"
+          backgroundFit="fitHeight"
+          backgroundFitDesktop="cover"
+          parallax={false}
+          overlayVariant="solid"
+          focusPercent={30}
+        >
+          <div className="tnc-hero__inner">
             <RevealText delay="0ms">
-              <span
-                className="font-bold tracking-[0.2em] uppercase text-sm block"
-                style={{ color: 'var(--cafe-tan)' }}
-              >
+              <h1 className="tnc-hero__title font-serif">
                 The Menu
-              </span>
-            </RevealText>
-            {/* Main Headline - 200ms delay */}
-            <RevealText delay="200ms">
-              <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl" style={{ color: 'var(--cafe-black)' }}>
-                Curated Selection
               </h1>
             </RevealText>
-            {/* Body Content - 400ms delay */}
-            <FadeInSection delay="400ms">
-              <p
-                className="text-xl md:text-2xl max-w-2xl mx-auto font-normal leading-relaxed"
-                style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}
-              >
-                Small-batch roasts, house-made syrups, and locally sourced ingredients.
+            <FadeInSection delay="200ms">
+              <p className="tnc-hero__subtitle">
+                Handcrafted Daily.
               </p>
             </FadeInSection>
           </div>
@@ -159,19 +149,53 @@ export default function MenuPage() {
         </div>
 
         <div ref={menuContentRef} className="menu-content mx-auto px-4 sm:px-6 py-12">
-          <MenuSectionList
-            groupedItems={groupedItems}
-            onSelectItem={setSelectedItem}
-            onClearFilters={() => { setSearchQuery(''); setActiveSection('drinks'); }}
-          />
+          {activeSection === "drinks" ? (
+            <section
+              aria-label="Drinks coming soon"
+              className="mx-auto max-w-2xl text-center py-20 md:py-28 px-4"
+            >
+              <h2 className="font-serif font-bold text-4xl md:text-5xl text-cafe-black">
+                We&apos;re Busy Brewing!
+              </h2>
+              <p className="mt-5 text-base md:text-lg leading-relaxed text-cafe-brown/80">
+                Thank you for your patience! We&apos;re putting the finishing touches on our handcrafted drink menu.
+                Check back very soon to see what we&apos;ve been mixing up.
+              </p>
+              <p className="mt-6 text-sm md:text-base font-medium text-cafe-brown/80">
+                In the meantime, explore our comforting{" "}
+                <button
+                  type="button"
+                  onClick={() => setActiveSection("meals")}
+                  className="underline underline-offset-4 hover:text-cafe-black transition-colors"
+                >
+                  MEALS
+                </button>{" "}
+                and sweet{" "}
+                <button
+                  type="button"
+                  onClick={() => setActiveSection("desserts")}
+                  className="underline underline-offset-4 hover:text-cafe-black transition-colors"
+                >
+                  DESSERTS
+                </button>
+                !
+              </p>
+            </section>
+          ) : (
+            <MenuSectionList
+              groupedItems={groupedItems}
+              onSelectItem={setSelectedItem}
+              onClearFilters={() => { setSearchQuery(''); setActiveSection('drinks'); }}
+              showPrices={false}
+            />
+          )}
         </div>
       </main>
 
       <ProductModal
         item={selectedItem}
         onClose={() => setSelectedItem(null)}
-        onAddToOrder={(cartItem) =>
-          handleAddToCart(cartItem, cartItem.quantity || 1, cartItem.modifiers || [], cartItem.notes, cartItem.totalPrice)}
+        orderingEnabled={false}
       />
     </>
   );

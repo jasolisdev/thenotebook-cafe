@@ -12,12 +12,12 @@
   background-image: none;
 }
 
-.story-hero-kicker {
-  color: var(--cafe-tan);
+.story-hero__content {
+  text-align: left;
 }
 
-.story-hero-title {
-  color: var(--cafe-black);
+.story-hero-kicker {
+  color: var(--cafe-tan);
 }
 
 .story-hero-title-accent {

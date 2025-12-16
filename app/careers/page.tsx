@@ -18,28 +18,23 @@ export default function CareersPage() {
     <main className="careers-page min-h-screen relative">
       <div className="careers-fixed-background" aria-hidden="true" />
       {/* Hero Section */}
-      <ParallaxHero className="parallax-hero--cafe-gradient" backgroundColor="var(--cafe-beige)" overlayVariant="lighter">
-        <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
-          {/* Eyebrow - Instant reveal */}
+      <ParallaxHero
+        className="parallax-hero--compact"
+        contentClassName="parallax-hero__content--compact tnc-hero__content"
+        backgroundImage="/careers/tnc-careers-banner.webp"
+        backgroundFit="fitHeight"
+        backgroundFitDesktop="cover"
+        backgroundColor="var(--cafe-black)"
+        parallax={false}
+        overlayVariant="solid"
+        focusPercent={32}
+      >
+        <div className="tnc-hero__inner relative z-10">
           <RevealText delay="0ms">
-            <span className="font-bold tracking-[0.2em] uppercase text-sm block" style={{ color: 'var(--cafe-tan)' }}>
-              Careers
-            </span>
+            <h1 className="tnc-hero__title font-serif">Careers</h1>
           </RevealText>
-
-          {/* Main Headline - Instant reveal */}
-          <RevealText delay="200ms">
-            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl" style={{ color: 'var(--cafe-black)' }}>
-              Join The Team<br />
-              <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Build The Culture</span>
-            </h1>
-          </RevealText>
-
-          {/* Body Content - 400ms delay */}
-          <FadeInSection delay="400ms">
-            <p className="text-xl md:text-2xl max-w-2xl mx-auto font-normal leading-relaxed" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
-              We&apos;re looking for baristas, creatives, and morning people who want to shape Riverside&apos;s coffee scene.
-            </p>
+          <FadeInSection delay="200ms">
+            <p className="tnc-hero__subtitle">Join The Team, Build The Culture.</p>
           </FadeInSection>
         </div>
       </ParallaxHero>

@@ -12,25 +12,10 @@
   background-image: none;
 }
 
-.contact-hero-kicker {
-  color: var(--cafe-tan);
-}
-
-.contact-hero-title {
-  color: var(--cafe-black);
-}
-
-.contact-hero-title-accent {
-  color: var(--cafe-tan);
-}
-
-.contact-hero-subtitle {
-  color: rgba(var(--cafe-brown-rgb), 0.78);
-}
-
 .contact-section-title {
   color: var(--cafe-black);
 }
+
 
 .contact-section-title-accent {
   color: var(--cafe-tan);
