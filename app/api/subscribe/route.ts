@@ -2,6 +2,10 @@ import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 import { client } from "@/sanity/lib/client";
 import { writeClient } from "@/sanity/lib/writeClient";
+import { validateOrigin } from "@/app/lib/csrf";
+import { checkRateLimit } from "@/app/lib/rateLimit";
+import { logger } from "@/app/lib/logger";
+import { sanitizeEmail, sanitizeText } from "@/app/lib/sanitize";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -22,6 +26,14 @@ function normalizeSource(input: unknown): string {
 }
 
 export async function POST(req: Request) {
+  // CSRF protection
+  const originError = validateOrigin(req);
+  if (originError) return originError;
+
+  // Rate limiting: 5 requests per minute
+  const rateLimitError = checkRateLimit(req, "/api/subscribe", 5, 60000);
+  if (rateLimitError) return rateLimitError;
+
   try {
     const { email, source } = await req.json().catch(() => ({}));
 
@@ -54,11 +66,11 @@ export async function POST(req: Request) {
       );
     }
 
-    // Create
+    // Create (with sanitization)
     const doc = await writeClient.create({
       _type: "subscriber",
-      email: normalizedEmail,
-      source: normalizeSource(source),
+      email: sanitizeEmail(normalizedEmail),
+      source: sanitizeText(normalizeSource(source)),
       status: "subscribed",
       unsubscribeToken: token,
       createdAt: new Date().toISOString(),
@@ -69,7 +81,7 @@ export async function POST(req: Request) {
       { headers: { "Cache-Control": "no-store" } }
     );
   } catch (err) {
-    console.error("Subscribe error:", err);
+    logger.error("Subscribe error", err);
     return NextResponse.json(
       { ok: false, error: "Server error" },
       { status: 500, headers: { "Cache-Control": "no-store" } }

@@ -21,7 +21,7 @@ export default function ContactPage() {
         className="parallax-hero--compact"
         contentClassName="parallax-hero__content--compact tnc-hero__content"
         parallax={false}
-        backgroundImage="/contact/tnc-contact-banner.webp"
+        backgroundImage="/menu/tnc-menu-banner.webp"
         backgroundFit="fitHeight"
         backgroundFitDesktop="cover"
         backgroundColor="var(--cafe-black)"

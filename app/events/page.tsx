@@ -54,7 +54,7 @@ export default function EventsPage() {
       <ParallaxHero
         className="parallax-hero--compact"
         contentClassName="parallax-hero__content--compact"
-        backgroundImage="/unsplash/tnc-events-hero-bg.jpg"
+        backgroundImage="/menu/tnc-menu-banner.webp"
       >
         <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6">
           <Reveal>
