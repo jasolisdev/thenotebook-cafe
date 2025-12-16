@@ -27,6 +27,9 @@ export const COLORS = {
   espressoBrown: '#2a1f16',
   warmBrown: '#5a4a38',
   goldPrimary: '#c99a58',
+
+  // Semantic colors
+  red: '#ef4444',  // Danger/delete actions (CartDrawer)
 } as const;
 
 export const RGBA_COLORS = {

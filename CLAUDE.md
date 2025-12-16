@@ -412,7 +412,14 @@ The site uses Tailwind CSS v4 with colors registered via the `@theme` directive 
 --text-light-muted: var(--cafe-beige);
 ```
 
-**Total: 17 essential colors** (cleaned from 25+)
+**TypeScript/JSX Colors** (colors.ts only, not CSS variables):
+```typescript
+red: '#ef4444'  // Danger/delete actions (CartDrawer)
+```
+
+**Total: 18 colors** (cleaned from 25+)
+
+**Note:** The `red` color is only defined in `colors.ts` for React component usage and is not available as a CSS variable.
 
 #### Responsive Breakpoints
 ```css
