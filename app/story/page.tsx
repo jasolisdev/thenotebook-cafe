@@ -19,7 +19,7 @@ export default function StoryPage() {
       <ParallaxHero
         className="parallax-hero--compact"
         contentClassName="parallax-hero__content--compact tnc-hero__content story-hero__content"
-        backgroundImage="/story/tnc-story-banner.webp"
+        backgroundImage="/menu/tnc-menu-banner.webp"
         backgroundFit="fitHeight"
         backgroundFitDesktop="cover"
         backgroundColor="var(--cafe-black)"

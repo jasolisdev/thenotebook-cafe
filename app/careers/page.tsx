@@ -21,7 +21,7 @@ export default function CareersPage() {
       <ParallaxHero
         className="parallax-hero--compact"
         contentClassName="parallax-hero__content--compact tnc-hero__content"
-        backgroundImage="/careers/tnc-careers-banner.webp"
+        backgroundImage="/menu/tnc-menu-banner.webp"
         backgroundFit="fitHeight"
         backgroundFitDesktop="cover"
         backgroundColor="var(--cafe-black)"
