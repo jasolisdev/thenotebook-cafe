@@ -54,34 +54,39 @@ class Logger {
     if (this.isDev) {
       console.error(`[ERROR] ${message}`, error, context || '');
     } else {
-      // Production: Send to error tracking
-      // Example integrations:
-      // - Sentry.captureException(error, { tags: { message }, extra: context });
-      // - LogRocket.captureException(error);
-      // - Vercel Analytics (automatic)
-
-      // For now, just log the message (not the full error object)
+      // Production: Log message only (not full error object)
       console.error(`[ERROR] ${message}`);
+
+      // Send to monitoring service (Sentry/etc when configured)
+      this.sendToMonitoring('error', message, { error, ...context });
     }
   }
 
   /**
    * Send logs to external monitoring service
-   * Override this method to integrate with your monitoring provider
+   * Dynamically imports monitoring module to avoid circular dependencies
    */
   private sendToMonitoring(
     level: LogLevel,
     message: string,
     context?: LogContext
   ): void {
-    // TODO: Integrate with Sentry, LogRocket, or other service
-    // Example:
-    // if (typeof window !== 'undefined' && window.Sentry) {
-    //   window.Sentry.captureMessage(message, {
-    //     level,
-    //     extra: context,
-    //   });
-    // }
+    // Only send in production
+    if (process.env.NODE_ENV !== 'production') return;
+
+    // Dynamically import monitoring module
+    import('./monitoring')
+      .then((monitoring) => {
+        if (level === 'error' && context?.error instanceof Error) {
+          monitoring.captureError(context.error, context);
+        } else {
+          const sentryLevel = level === 'warn' ? 'warning' : level;
+          monitoring.captureMessage(message, sentryLevel, context);
+        }
+      })
+      .catch(() => {
+        // Silently fail if monitoring is not configured
+      });
   }
 }
 

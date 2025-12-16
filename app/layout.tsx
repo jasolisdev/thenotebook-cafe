@@ -20,6 +20,7 @@ import PasswordGate from "./components/ui/PasswordGate";
 import SiteShell from "./components/layout/SiteShell";
 import { client } from "@/sanity/lib/client";
 import { CartProvider } from "./components/providers/CartProvider";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 // Google Fonts
 const dmSerif = DM_Serif_Display({
@@ -104,19 +105,21 @@ export default async function RootLayout({
           defaultTheme="dark"
           enableSystem={false}
         >
-          <CartProvider>
-            {showPasswordGate ? (
-              <PasswordGate />
-            ) : (
-              <SiteShell
-                instagramUrl={settings?.social?.instagram}
-                spotifyUrl={settings?.social?.spotify}
-                showAnnouncement={showAnnouncement}
-              >
-                {children}
-              </SiteShell>
-            )}
-          </CartProvider>
+          <ErrorBoundary>
+            <CartProvider>
+              {showPasswordGate ? (
+                <PasswordGate />
+              ) : (
+                <SiteShell
+                  instagramUrl={settings?.social?.instagram}
+                  spotifyUrl={settings?.social?.spotify}
+                  showAnnouncement={showAnnouncement}
+                >
+                  {children}
+                </SiteShell>
+              )}
+            </CartProvider>
+          </ErrorBoundary>
         </ThemeProvider>
       </body>
     </html>

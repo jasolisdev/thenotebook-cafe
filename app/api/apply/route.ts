@@ -4,6 +4,7 @@ import { validateOrigin } from "@/app/lib/csrf";
 import { checkRateLimit } from "@/app/lib/rateLimit";
 import { validateUploadedFile } from "@/app/lib/fileValidation";
 import { logger } from "@/app/lib/logger";
+import { sanitizeEmail, sanitizeText, sanitizePhone } from "@/app/lib/sanitize";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -184,24 +185,24 @@ export async function POST(req: Request) {
       supplementalApplication?: FileReference;
     } = {
       _type: "jobApplication",
-      firstName,
-      lastName,
-      email,
-      phone,
-      birthdate,
-      positions,
-      employmentType,
-      daysAvailable,
-      startDate,
-      hoursPerWeek,
-      commitmentLength,
+      firstName: sanitizeText(firstName),
+      lastName: sanitizeText(lastName),
+      email: sanitizeEmail(email),
+      phone: sanitizePhone(phone),
+      birthdate: sanitizeText(birthdate),
+      positions: positions.map(p => sanitizeText(p)),
+      employmentType: sanitizeText(employmentType),
+      daysAvailable: daysAvailable.map(d => sanitizeText(d)),
+      startDate: sanitizeText(startDate),
+      hoursPerWeek: sanitizeText(hoursPerWeek),
+      commitmentLength: sanitizeText(commitmentLength),
       status: "new",
       appliedAt: new Date().toISOString(),
     };
 
-    // Add optional fields if provided
+    // Add optional fields if provided (with sanitization)
     if (message) {
-      applicationData.message = message;
+      applicationData.message = sanitizeText(message);
     }
     if (resumeAsset) {
       applicationData.resume = {

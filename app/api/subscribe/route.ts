@@ -5,6 +5,7 @@ import { writeClient } from "@/sanity/lib/writeClient";
 import { validateOrigin } from "@/app/lib/csrf";
 import { checkRateLimit } from "@/app/lib/rateLimit";
 import { logger } from "@/app/lib/logger";
+import { sanitizeEmail, sanitizeText } from "@/app/lib/sanitize";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -65,11 +66,11 @@ export async function POST(req: Request) {
       );
     }
 
-    // Create
+    // Create (with sanitization)
     const doc = await writeClient.create({
       _type: "subscriber",
-      email: normalizedEmail,
-      source: normalizeSource(source),
+      email: sanitizeEmail(normalizedEmail),
+      source: sanitizeText(normalizeSource(source)),
       status: "subscribed",
       unsubscribeToken: token,
       createdAt: new Date().toISOString(),
