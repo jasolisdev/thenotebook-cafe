@@ -37,7 +37,7 @@
   transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-:global(.dark) .dark-mode-toggle__track {
+.dark .dark-mode-toggle__track {
   background: #1a1410;
   box-shadow:
     inset 0 2px 4px rgba(0, 0, 0, 0.3),
@@ -61,7 +61,7 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-:global(.dark) .dark-mode-toggle__thumb {
+.dark .dark-mode-toggle__thumb {
   left: calc(100% - 25px);
   background: #2C2420;
   color: #F4F1EA;
@@ -79,7 +79,7 @@
   transform: rotate(15deg);
 }
 
-:global(.dark) .dark-mode-toggle:hover .dark-mode-toggle__thumb svg {
+.dark .dark-mode-toggle:hover .dark-mode-toggle__thumb svg {
   transform: rotate(-15deg);
 }
 
@@ -97,7 +97,7 @@
   border-radius: 100px;
 }
 
-:global(.dark) .dark-mode-toggle:focus-visible {
+.dark .dark-mode-toggle:focus-visible {
   outline-color: #F4F1EA;
 }
 
