@@ -8,6 +8,7 @@ import {
   ContrastIcon, EyeIcon, ResetIcon, ChevronLeftIcon,
   MousePointerIcon, LinkIcon, RulerIcon, PauseIcon, BrainIcon
 } from '@/app/components/ui/AccessibilityIcons';
+import { logger } from '@/app/lib/logger';
 
 interface AccessibilitySettings {
   textSize: 'normal' | 'large' | 'xl';
@@ -57,7 +58,7 @@ export const AccessibilityWidget: React.FC = () => {
     try {
       return JSON.parse(saved) as AccessibilitySettings;
     } catch (e) {
-      console.error('Failed to load accessibility settings:', e);
+      logger.error('Failed to load accessibility settings', e);
       return defaultSettings;
     }
   });
