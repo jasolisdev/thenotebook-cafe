@@ -1,40 +1,65 @@
 # API Contracts - The Notebook Café
 
-**Generated:** 2025-12-05 | **Scan Mode:** Exhaustive | **API Count:** 2
+**Generated:** 2025-12-16 | **Updated:** Security Audit | **API Count:** 5
 
 ---
 
 ## Overview
 
-The Notebook Café uses Next.js 16 API Routes for server-side logic. All endpoints are located in `app/api/` and handle newsletter subscriptions and password authentication.
+The Notebook Café uses Next.js 16 API Routes for server-side logic. All endpoints are located in `app/api/` and handle newsletter subscriptions, contact forms, job applications, password authentication, and unsubscribe requests.
+
+**Security Features (All Endpoints):**
+- ✅ Security headers via middleware
+- ✅ Rate limiting
+- ✅ Input sanitization
+- ✅ Production-safe logging
 
 ---
 
-## API Endpoints
+## API Endpoints Summary
+
+| Endpoint | Method | Purpose | CSRF | Rate Limit | Status |
+|----------|--------|---------|------|------------|--------|
+| `/api/subscribe` | POST | Newsletter signup | ✅ | 5/min | ✅ SECURE |
+| `/api/contact` | POST | Contact form | ✅ | 3/min | ✅ SECURE |
+| `/api/apply` | POST | Job applications | ✅ | 2/hr | ✅ SECURE |
+| `/api/auth/verify` | POST | Password auth | N/A | 3/15min | ✅ SECURE |
+| `/api/unsubscribe` | GET | Unsubscribe | N/A | 10/hr | ✅ SECURE |
+
+---
+
+## Detailed Endpoint Documentation
 
 ### 1. Newsletter Subscription
 
 **Endpoint:** `POST /api/subscribe`
+**File:** `app/api/subscribe/route.ts`
 
 **Purpose:** Subscribe users to the newsletter mailing list
 
-**Request Body:**
+**Security:**
+- CSRF protection (origin validation)
+- Rate limiting: 5 requests/minute per IP
+- Input sanitization
+- Duplicate detection
+
+**Request:**
 ```json
 {
   "email": "user@example.com",
-  "source": "homepage"  // optional: defaults to "homepage"
+  "source": "homepage"  // optional
 }
 ```
 
-**Response (Success):**
+**Success Response (200):**
 ```json
 {
   "ok": true,
-  "id": "draft-123abc"  // Sanity document ID
+  "id": "draft-123abc"
 }
 ```
 
-**Response (Duplicate):**
+**Duplicate Response (200):**
 ```json
 {
   "ok": true,
@@ -42,241 +67,295 @@ The Notebook Café uses Next.js 16 API Routes for server-side logic. All endpoin
 }
 ```
 
-**Response (Error):**
-```json
-{
-  "ok": false,
-  "error": "Invalid email"  // or "Server error"
-}
-```
-
-**Status Codes:**
-- `200` - Success (subscribed or duplicate)
+**Error Responses:**
 - `400` - Invalid email format
+- `403` - CSRF violation
+- `429` - Rate limit exceeded
 - `500` - Server error
-
-**Implementation Details:**
-- Email validation using regex: `/^[^\s@]+@[^\s@]+\.[^\s@]+$/`
-- Duplicate detection (case-insensitive GROQ query)
-- Creates `subscriber` document in Sanity CMS
-- Uses write client for mutations
-- Stores: email, source, status ("subscribed"), createdAt timestamp
-
-**Security:**
-- Email sanitization
-- Duplicate prevention
-- Error handling with generic messages
-
-**File:** `app/api/subscribe/route.ts`
 
 ---
 
-### 2. Password Authentication
+### 2. Contact Form
+
+**Endpoint:** `POST /api/contact`
+**File:** `app/api/contact/route.ts`
+
+**Purpose:** Submit contact form messages
+
+**Security:**
+- CSRF protection
+- Rate limiting: 3 requests/minute per IP
+- Input sanitization
+- Field length limits
+
+**Request:**
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "subject": "Question",
+  "message": "What are your hours?"
+}
+```
+
+**Field Limits:**
+- name: 120 chars
+- email: 254 chars
+- subject: 120 chars
+- message: 5000 chars
+
+**Success Response (200):**
+```json
+{
+  "ok": true,
+  "id": "contactMessage-123"
+}
+```
+
+---
+
+### 3. Job Applications
+
+**Endpoint:** `POST /api/apply`
+**File:** `app/api/apply/route.ts`
+
+**Purpose:** Submit job applications with resume uploads
+
+**Security:**
+- CSRF protection
+- Rate limiting: 2 requests/hour per IP
+- Input sanitization (all 13 fields)
+- File validation (magic number checks)
+- 5MB file size limit
+
+**Request:** `multipart/form-data`
+
+**Required Fields:**
+- firstName, lastName, email, phone, birthdate
+- positions (JSON array)
+- employmentType ("full-time" | "part-time")
+- daysAvailable (JSON array)
+- startDate, hoursPerWeek, commitmentLength
+
+**Optional Fields:**
+- message
+- resume (PDF, DOC, DOCX - max 5MB)
+- supplementalApplication (PDF - max 5MB)
+
+**File Validation:**
+- Magic number (file signature) validation
+- Prevents type spoofing (.txt renamed to .pdf)
+- Supported: PDF, DOC, DOCX
+
+**Success Response (200):**
+```json
+{
+  "ok": true,
+  "id": "jobApplication-123"
+}
+```
+
+---
+
+### 4. Password Authentication
 
 **Endpoint:** `POST /api/auth/verify`
+**File:** `app/api/auth/verify/route.ts`
 
-**Purpose:** Verify site password for dev/staging environment protection
+**Purpose:** Optional site-wide password protection
 
-**Request Body:**
+**Security:**
+- Rate limiting: 3 requests per 15 minutes (brute-force protection)
+- httpOnly cookie
+- Secure cookie (HTTPS in production)
+- sameSite: strict
+
+**Request:**
 ```json
 {
   "password": "your-password"
 }
 ```
 
-**Response (Success):**
+**Cookie (on success):**
+- Name: `site-auth`
+- Value: `authenticated`
+- Expires: 7 days
+- httpOnly, secure, sameSite strict
+
+**Success Response (200):**
 ```json
 {
   "success": true
 }
 ```
 
-**Response (Error):**
+**Error Response (401):**
 ```json
 {
   "success": false,
-  "message": "Incorrect password"  // or "Password not configured" or "Server error"
+  "message": "Incorrect password"
 }
 ```
 
-**Status Codes:**
-- `200` - Correct password (cookie set)
-- `401` - Incorrect password
-- `500` - Password not configured or server error
+---
 
-**Implementation Details:**
-- Compares against `SITE_PASSWORD` environment variable
-- Sets `site-auth` cookie on successful authentication
-- Cookie configuration:
-  - `httpOnly: true` - JavaScript cannot access
-  - `secure: true` - HTTPS only in production
-  - `sameSite: "strict"` - CSRF protection
-  - `maxAge: 60` - 1 minute (testing mode; production should be 7 days)
-  - `path: "/"` - Site-wide
+### 5. Newsletter Unsubscribe
+
+**Endpoint:** `GET /api/unsubscribe?token=xxx`
+**File:** `app/api/unsubscribe/route.ts`
+
+**Purpose:** Unsubscribe from newsletter via email link
 
 **Security:**
-- Environment variable for password (not hardcoded)
-- httpOnly cookie prevents XSS attacks
-- Secure cookie for HTTPS in production
-- sameSite strict prevents CSRF
-- Generic error messages (no password hints)
+- Rate limiting: 10 requests/hour per IP (prevents token enumeration)
+- HTML output sanitization
+- Token validation (UUID v4)
 
-**Notes:**
-⚠️ **Testing Mode Active:** Cookie expires in 1 minute. For production, change `maxAge` to `60 * 60 * 24 * 7` (7 days)
+**Query Parameter:**
+- `token` (required): Unsubscribe token
 
-**File:** `app/api/auth/verify/route.ts`
+**Response:** HTML page (not JSON)
 
----
+**Success (200):**
+- "You're unsubscribed. Thank you."
 
-## Authentication Flow
+**Already Unsubscribed (200):**
+- "You're already unsubscribed for [email]."
 
-### Password Protection (Optional)
-1. User visits site
-2. If `SITE_PASSWORD` env var is set, password prompt appears
-3. User submits password via `/api/auth/verify`
-4. On success, `site-auth` cookie is set
-5. Cookie expires after configured duration
-6. User can access site while cookie is valid
+**Not Found (404):**
+- "We couldn't find that subscription."
 
-### Newsletter Subscription
-1. User enters email in newsletter form
-2. Frontend validates email format
-3. POST request to `/api/subscribe`
-4. Server validates and checks for duplicates
-5. Creates subscriber document in Sanity
-6. Returns success/duplicate/error response
-7. Frontend displays appropriate message
+**Missing Token (400):**
+- "Unsubscribe token missing."
 
----
-
-## Data Integration
-
-### Sanity CMS
-
-**Read Operations** (via `client`):
-- Duplicate email check: `*[_type=="subscriber" && lower(email) == lower($email)][0]{_id}`
-
-**Write Operations** (via `writeClient`):
-- Create subscriber: Creates document with `_type: "subscriber"`
-
-**Environment Variables Required:**
-- `NEXT_PUBLIC_SANITY_PROJECT_ID` - Sanity project ID
-- `NEXT_PUBLIC_SANITY_DATASET` - Dataset name (production)
-- `SANITY_WRITE_TOKEN` - API token for mutations
-- `SITE_PASSWORD` - Optional password for dev/staging protection
-
----
-
-## Error Handling
-
-### Global Error Strategy
-- Try-catch blocks on all routes
-- Generic error messages to prevent information leakage
-- Console logging for server-side debugging
-- Appropriate HTTP status codes
-- JSON responses for all outcomes
-
-### Common Error Responses
-```typescript
-// 400 - Client Error
-{ ok: false, error: "Invalid email" }
-
-// 401 - Unauthorized
-{ success: false, message: "Incorrect password" }
-
-// 500 - Server Error
-{ ok: false, error: "Server error" }
-{ success: false, message: "Password not configured" }
+**Rate Limited (429):**
+```json
+{
+  "ok": false,
+  "error": "Too many requests. Please try again later."
+}
 ```
+
+---
+
+## Global Security
+
+### Proxy (`proxy.ts`)
+
+**Security Headers:**
+- `X-Frame-Options: DENY` - Prevents clickjacking
+- `X-Content-Type-Options: nosniff` - Prevents MIME sniffing
+- `Referrer-Policy: strict-origin-when-cross-origin`
+- `Permissions-Policy: camera=(), microphone=(), geolocation=()`
+- `Content-Security-Policy` - Comprehensive CSP
+- `Strict-Transport-Security` - HTTPS enforcement (production)
+
+**Logging:**
+- API request logging (IP + response time)
+- Performance monitoring (X-Response-Time header)
+
+### CSRF Protection
+
+**Allowed Origins:**
+- `http://localhost:3000` (development)
+- `https://thenotebookcafe.com` (production)
+- `https://www.thenotebookcafe.com` (production)
+
+**Protected Endpoints:**
+- POST /api/subscribe
+- POST /api/contact
+- POST /api/apply
+
+### Rate Limiting
+
+**Implementation:** In-memory (IP-based)
+
+| Endpoint | Limit | Window |
+|----------|-------|--------|
+| /api/subscribe | 5 | 1 minute |
+| /api/contact | 3 | 1 minute |
+| /api/apply | 2 | 1 hour |
+| /api/auth/verify | 3 | 15 minutes |
+| /api/unsubscribe | 10 | 1 hour |
+
+**Note:** For multi-server deployments, use Redis/Upstash (Phase 3)
+
+### Input Sanitization
+
+**Functions:**
+- `sanitizeText()` - Removes HTML, scripts, injection patterns
+- `sanitizeEmail()` - Strict email cleaning
+- `sanitizePhone()` - Phone number sanitization
+- `sanitizeUrl()` - URL validation (http/https only)
+
+**Applied to:**
+- All subscriber data
+- All contact form fields
+- All job application fields
 
 ---
 
 ## Testing
 
-### Manual Testing Checklist
+### Manual Testing Examples
 
-**POST /api/subscribe**
-- [ ] Valid email → Returns success with ID
-- [ ] Invalid email → Returns 400 error
-- [ ] Duplicate email → Returns success with duplicate flag
-- [ ] Missing email → Returns 400 error
-- [ ] Sanity write failure → Returns 500 error
+**CSRF Test:**
+```bash
+# Should fail (403)
+curl -X POST http://localhost:3000/api/subscribe \
+  -H "Content-Type: application/json" \
+  -H "Origin: https://evil.com" \
+  -d '{"email":"test@example.com"}'
+```
 
-**POST /api/auth/verify**
-- [ ] Correct password → Returns success, sets cookie
-- [ ] Incorrect password → Returns 401 error
-- [ ] No SITE_PASSWORD env var → Returns 500 error
-- [ ] Cookie expires correctly (check maxAge)
+**Rate Limit Test:**
+```bash
+# 6th request should fail (429)
+for i in {1..6}; do
+  curl -X POST http://localhost:3000/api/subscribe \
+    -H "Content-Type: application/json" \
+    -H "Origin: http://localhost:3000" \
+    -d '{"email":"test'$i'@example.com"}'
+done
+```
 
-### Example Requests
-
-**Subscribe to Newsletter:**
+**Subscribe:**
 ```bash
 curl -X POST http://localhost:3000/api/subscribe \
   -H "Content-Type: application/json" \
+  -H "Origin: http://localhost:3000" \
   -d '{"email":"test@example.com","source":"footer"}'
 ```
 
-**Verify Password:**
+---
+
+## Environment Variables
+
+**Required:**
 ```bash
-curl -X POST http://localhost:3000/api/auth/verify \
-  -H "Content-Type: application/json" \
-  -d '{"password":"your-password"}' \
-  -c cookies.txt  # Save cookies
+NEXT_PUBLIC_SANITY_PROJECT_ID=<project_id>
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_WRITE_TOKEN=<write_token>
+```
+
+**Optional:**
+```bash
+SITE_PASSWORD=<password>  # Leave empty to disable
+NEXT_PUBLIC_SENTRY_DSN=<sentry_dsn>  # Phase 3
 ```
 
 ---
 
-## Future Enhancements
+## References
 
-### Potential Additions
-- [ ] GET /api/health - Health check endpoint
-- [ ] POST /api/contact - Contact form submission
-- [ ] GET /api/menu - Menu items API (currently Sanity-only)
-- [ ] POST /api/events/rsvp - Event RSVP system
-- [ ] GET /api/hours - Business hours API
-- [ ] Rate limiting middleware
-- [ ] Request logging
-- [ ] API versioning (/api/v1/)
+- [SECURITY_AUDIT_REPORT.md](../SECURITY_AUDIT_REPORT.md) - Security assessment
+- [PRODUCTION_HARDENING.md](../PRODUCTION_HARDENING.md) - Hardening guide
+- [Next.js API Routes](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
 
 ---
 
-## Security Considerations
-
-### Current Measures
-✅ Environment variables for secrets
-✅ httpOnly cookies
-✅ HTTPS in production
-✅ CSRF protection (sameSite)
-✅ Email validation
-✅ Generic error messages
-✅ Server-side API token handling
-
-### Recommended Additions
-- [ ] Rate limiting (prevent abuse)
-- [ ] Request validation library (Zod/Yup)
-- [ ] CORS configuration
-- [ ] API authentication tokens (for future mobile app)
-- [ ] Request logging/monitoring
-- [ ] Extend cookie expiry for production auth
-
----
-
-## Dependencies
-
-### Used in API Routes
-- `next/server` - NextResponse, cookies
-- `@/sanity/lib/client` - Read-only Sanity client (CDN)
-- `@/sanity/lib/writeClient` - Write Sanity client (mutations)
-
-### Environment Access
-- `process.env.SITE_PASSWORD` - Optional site password
-- `process.env.NODE_ENV` - Environment detection
-
----
-
-**API Documentation Complete** ✓
-**Total Endpoints:** 2
-**Authentication:** Cookie-based (optional)
-**Data Layer:** Sanity CMS
-**Framework:** Next.js 16 API Routes
+**Last Updated:** December 16, 2025
+**Status:** ✅ Production-Ready
+**Total Endpoints:** 5
+**Framework:** Next.js 16
