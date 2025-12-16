@@ -42,7 +42,7 @@ type FileType = keyof typeof FILE_SIGNATURES;
 /**
  * Check if buffer starts with the given signature
  */
-function matchesSignature(buffer: Buffer, signature: number[]): boolean {
+function matchesSignature(buffer: Buffer, signature: readonly number[]): boolean {
   if (buffer.length < signature.length) return false;
 
   for (let i = 0; i < signature.length; i++) {
