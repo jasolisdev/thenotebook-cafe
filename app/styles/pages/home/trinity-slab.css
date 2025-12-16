@@ -1,0 +1,101 @@
+/* ============================================================
+   HOME: Trinity Slab + Icon Animations
+============================================================ */
+
+.trinity-slab {
+  background: var(--cafe-olive);
+}
+
+
+.trinity-slab .section-deco,
+.trinity-slab .section-deco-dark,
+.trinity-slab .section-deco-mobile {
+  opacity: 0.28;
+}
+
+.trinity-slab h2,
+.trinity-slab h3,
+.trinity-slab p,
+.trinity-slab span,
+.trinity-slab a {
+  color: var(--cafe-cream) !important;
+}
+
+.trinity-slab h3 {
+  color: var(--cafe-white) !important;
+}
+
+.trinity-slab p {
+  color: rgba(var(--cafe-cream-rgb), 0.9) !important;
+}
+
+.trinity-slab .text-cafe-tan {
+  color: rgba(var(--cafe-cream-rgb), 0.82) !important;
+}
+
+.trinity-slab .font-serif {
+  color: var(--cafe-cream) !important;
+}
+
+.trinity-slab .p-10 {
+  padding: 14px;
+}
+
+.trinity-slab .w-16.h-16 {
+  background: rgba(var(--cafe-cream-rgb), 0.95) !important;
+  color: rgba(var(--cafe-black-rgb), 0.82) !important;
+  border: 1px solid rgba(var(--cafe-cream-rgb), 0.32) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.trinity-slab .grid {
+  gap: 24px;
+  row-gap: 28px;
+  align-items: start;
+}
+
+.trinity-divider-v {
+  background: linear-gradient(
+    180deg,
+    rgba(var(--cafe-brown-rgb), 0) 0%,
+    rgba(var(--cafe-brown-rgb), 0.35) 50%,
+    rgba(var(--cafe-brown-rgb), 0) 100%
+  );
+}
+
+.trinity-divider-h {
+  background: linear-gradient(
+    90deg,
+    rgba(var(--cafe-brown-rgb), 0) 0%,
+    rgba(var(--cafe-brown-rgb), 0.35) 50%,
+    rgba(var(--cafe-brown-rgb), 0) 100%
+  );
+}
+
+
+.couch-bounce {
+  animation: couchSway 2.4s ease-in-out infinite;
+  transform-origin: 50% 80%;
+}
+
+@keyframes couchSway {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-2px) rotate(-1.5deg);
+  }
+
+  50% {
+    transform: translateY(0) rotate(0.5deg);
+  }
+
+  75% {
+    transform: translateY(-3px) rotate(1.25deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}

@@ -6,6 +6,7 @@ export default {
     "./app/**/*.{ts,tsx,js,jsx}",
     "./components/**/*.{ts,tsx,js,jsx}",
     "./pages/**/*.{ts,tsx,js,jsx}",
+    "./test/**/*.{ts,tsx,js,jsx}",
   ],
   theme: {
     extend: {
@@ -13,6 +14,11 @@ export default {
         sans: ["var(--font-sans)", "Outfit", "system-ui", "sans-serif"],
         serif: ["var(--font-display)", "DM Serif Display", "serif"],
         mono: ["var(--font-sans)", "Outfit", "monospace"],
+      },
+      fontSize: {
+        "2xs": ["0.625rem", { lineHeight: "0.875rem" }], // 10px
+        hero: ["3.5rem", { lineHeight: "0.9" }], // 56px
+        "hero-lg": ["5.375rem", { lineHeight: "0.9" }], // 86px
       },
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out forwards',

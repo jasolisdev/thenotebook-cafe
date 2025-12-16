@@ -3,19 +3,15 @@
  *
  * Redesigned homepage featuring new hero, sanctuary section, vibe carousel, and newsletter.
  */
+import "@/app/styles/pages/home.css";
 import Link from "next/link";
 import Image from "next/image";
-import Reveal from "./components/ui/Reveal";
-import HeroButtons from "./components/ui/HeroButtons";
-import KenBurnsHero from "./components/features/KenBurnsHero";
-import HeroHeart from "./components/ui/HeroHeart";
-import StoryLink from "./components/ui/StoryLink";
-import StoryBlobs from "./components/ui/StoryBlobs";
-import AtmosphereBlob from "./components/ui/AtmosphereBlob";
-import PhilosophyBlob from "./components/ui/PhilosophyBlob";
+import Reveal from "@/app/components/ui/Reveal";
+import StoryLink from "@/app/components/ui/StoryLink";
 import { Coffee, Music, Wifi, PlugZap, Armchair, Sparkles } from "lucide-react";
-import AtmosphereStrip from "./components/AtmosphereStrip";
-import SignaturePoursGrid from "./components/SignaturePoursGrid";
+import AtmosphereStrip from "@/app/components/AtmosphereStrip";
+import SignaturePoursGrid from "@/app/components/SignaturePoursGrid";
+import NewsletterSubscribe from "@/app/components/ui/NewsletterSubscribe";
 
 const vibeImages = [
   "/unsplash/tnc-placeholder-3.png",
@@ -49,8 +45,8 @@ const signaturePours = [
 
 const atmosphereFeatures = [
   {
-    title: "Fiber Optic Wi-Fi",
-    description: "Gigabit speeds for heavy workflows.",
+    title: "Fast Reliable Wi-Fi",
+    description: "Great speeds for heavy workflows.",
     icon: Wifi
   },
   {
@@ -70,105 +66,63 @@ const atmosphereFeatures = [
   }
 ];
 
-export default async function HomePage() {
+export default function HomePage() {
   return (
-    <main className="overflow-hidden" style={{ backgroundColor: 'var(--cafe-mist)', color: 'var(--cafe-brown)' }}>
-      {/* Hero Section */}
-      <KenBurnsHero
-        backgroundImage="/home/hero-bg-2.png"
-        contentClassName="home-hero-shell"
+    <main className="home-page overflow-hidden relative">
+      <div className="home-fixed-background" aria-hidden="true" />
+      {/* Hero Section - Editorial Minimalist */}
+      <section
+        className="editorial-hero"
       >
-        <div className="home-hero-grid">
-          <div className="home-hero-copy">
-            <Reveal>
-              <div className="home-hero-pill">
-                Est. Riverside 2026
-              </div>
-            </Reveal>
+        {/* Subtle Coffee Texture Background */}
+        <div className="editorial-hero-bg" aria-hidden="true" />
 
-            <Reveal delay={120}>
-              <h1 className="home-hero-title">
-                Where Every Cup <span className="home-hero-title-accent">Tells a Story</span>
-              </h1>
-            </Reveal>
+        {/* Content */}
+        <div
+          className="editorial-hero-content"
+        >
+          <p className="hero-eyebrow">EST. RIVERSIDE 2026</p>
 
-            <Reveal delay={240}>
-              <p className="home-hero-subtitle">
-                Come For The Coffee, <br className="hero-subtitle-break" />
-                Stay For The Vibe.
-              </p>
-            </Reveal>
-
-            <Reveal delay={360}>
-              <div className="home-hero-cta">
-                <HeroButtons />
-              </div>
-            </Reveal>
+          <div className="flex justify-center mb-6">
+            <Image
+              src="/tnc-navbar-logo-v2.png"
+              alt="The Notebook Café Logo"
+              width={350}
+              height={350}
+              className="w-48 h-auto md:w-72 md:h-auto opacity-90 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
+            />
           </div>
 
-          <Reveal delay={120} className="home-hero-visual-wrap">
-            <div className="home-hero-visual">
-              <div className="hero-latte-wrapper">
-                <div className="relative animate-float">
-                  <div className="hero-latte-image">
-                    <Image
-                      src="/unsplash/tnc-hero-cup-v2.png"
-                      alt="Signature latte art"
-                      width={460}
-                      height={460}
-                      className="w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] md:w-[400px] md:h-[400px] object-cover rounded-full border-[12px] relative z-10"
-                      style={{ borderColor: "rgba(var(--cafe-cream-rgb), 0.96)" }}
-                      priority
-                    />
-                  </div>
+          <h1 className="hero-headline">
+            <span className="hero-headline-top">Where Every Cup</span>
+            <br />
+            <span className="hero-headline-bottom">Tells a Story</span>
+          </h1>
 
-                  <div className="hero-latte-card">
-                    <span className="hero-latte-pill">Signature</span>
-                    <span className="font-display font-bold text-sm text-cafe-brown">Latte</span>
-                    <div className="flex gap-[4px] mt-1 text-cafe-tan text-[12px]">
-                      <span aria-hidden>★</span>
-                      <span aria-hidden>★</span>
-                      <span aria-hidden>★</span>
-                      <span aria-hidden>★</span>
-                    </div>
-                  </div>
+          <p className="hero-tagline">COME FOR THE COFFEE, STAY FOR THE VIBE.</p>
 
-                  <HeroHeart />
-                </div>
-              </div>
-            </div>
-          </Reveal>
         </div>
-      </KenBurnsHero>
+      </section>
 
       {/* Signature Pours */}
       <section
         data-section="Signature Pours"
-        className="relative py-24 px-6 overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
+        className="relative py-24 overflow-hidden signature-pours-section"
       >
-        {/* Subtle Floating Decorations */}
-        <div className="absolute top-20 right-10 md:right-20 opacity-[0.05] pointer-events-none signature-float" style={{ animation: 'floatGentle 10s ease-in-out infinite' }}>
-          <Coffee size={64} className="text-cafe-tan" strokeWidth={1.5} />
-        </div>
-        <div className="absolute bottom-32 left-10 md:left-24 opacity-[0.05] pointer-events-none signature-float" style={{ animation: 'floatGentle 12s ease-in-out infinite 2s' }}>
-          <Coffee size={52} className="text-cafe-tan" strokeWidth={1.5} />
-        </div>
-
-        <div className="max-w-6xl mx-auto relative z-10">
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <Reveal>
-              <span className="text-xs uppercase tracking-[0.25em] font-semibold" style={{ color: 'var(--cafe-tan)' }}>
+              <span className="text-cafe-tan text-xs uppercase tracking-[0.25em] font-semibold">
                 Signature Pours
               </span>
             </Reveal>
             <Reveal delay={150}>
-              <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl mt-4" style={{ color: 'var(--cafe-black)' }}>
+              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mt-4 text-cafe-black">
                 Crafted With Care
               </h2>
             </Reveal>
             <Reveal delay={250}>
-              <p className="mt-4 text-xl md:text-2xl font-light" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.75)' }}>
+              <p className="mt-4 text-lg md:text-xl font-normal text-cafe-brown">
                 Small-batch recipes we obsess over—balanced, nuanced, and poured with a steady hand.
               </p>
             </Reveal>
@@ -178,14 +132,11 @@ export default async function HomePage() {
             <SignaturePoursGrid pours={signaturePours} />
           </div>
 
-          <div className="text-center mt-16">
+          <div className="text-center mt-16 pb-16">
             <Reveal delay={200}>
               <Link
                 href="/menu"
-                className="group inline-flex items-center gap-2 px-8 py-3 text-xs uppercase tracking-[0.25em] font-semibold border-2 border-cafe-black rounded-sm transition-all duration-300 hover:bg-cafe-black hover:text-cafe-white hover:-translate-y-0.5 hover:shadow-lg"
-                style={{
-                  boxShadow: '0 4px 12px rgba(44, 36, 32, 0.08)',
-                }}
+                className="group inline-flex items-center gap-2 px-8 py-3 text-xs uppercase tracking-[0.25em] font-semibold border-2 border-cafe-black rounded-sm transition-all duration-300 hover:bg-cafe-black hover:text-cafe-white hover:-translate-y-0.5 hover:shadow-lg shadow-[0_4px_12px_rgba(44,36,32,0.08)]"
               >
                 View Our Menu
                 <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -196,113 +147,12 @@ export default async function HomePage() {
         <div />
       </section>
 
-      {/* Our Philosophy */}
-      <section
-        data-section="Our Philosophy"
-        className="py-24 relative overflow-visible"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
-      >
-        <PhilosophyBlob />
-        <div className="section-deco" style={{ top: '6%', right: '12%', animationDuration: '13s' }} aria-hidden="true">
-          <Coffee strokeWidth={1.4} />
-        </div>
-        <div className="section-deco section-deco-dark" style={{ bottom: '10%', left: '6%', animationDuration: '10s', transform: 'rotate(-10deg)' }} aria-hidden="true">
-          <Sparkles strokeWidth={1.6} />
-        </div>
-        <div className="section-deco-mobile" style={{ top: '6%', right: '10%' }} aria-hidden="true">
-          <Coffee strokeWidth={1.4} />
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="order-2 lg:order-1 relative">
-              <Reveal>
-                <div className="grid grid-cols-2 gap-4">
-                  <Image
-                    src="/unsplash/tnc-placeholder-philosophy-1.png"
-                    alt="Cafe bar espresso"
-                    width={900}
-                    height={900}
-                    className="w-full aspect-[3/4] object-cover rounded-2xl shadow-xl -mt-6 md:mt-12"
-                  />
-                  <Image
-                    src="/unsplash/tnc-placeholder-philosophy-2.png"
-                    alt="Cafe pastry display"
-                    width={900}
-                    height={900}
-                    className="w-full aspect-[3/4] object-cover rounded-2xl shadow-xl mt-10 md:mt-0"
-                  />
-                </div>
-              </Reveal>
-              <Reveal delay={150} replay={false}>
-                <div className="absolute -bottom-6 -left-6 bg-cafe-black text-cafe-cream p-5 md:p-6 rounded-tr-3xl shadow-2xl max-w-[180px] md:max-w-[220px]">
-                  <p className="font-serif text-2xl md:text-2xl mb-1">Grand Opening</p>
-                  <div className="text-xs md:text-xs text-cafe-tan mb-2">Coming Soon 2025</div>
-                  <p className="text-[10px] md:text-[11px] uppercase tracking-widest opacity-60">
-                    Save the date
-                  </p>
-                </div>
-              </Reveal>
-            </div>
-
-            <div className="order-1 lg:order-2 space-y-6 text-right items-end lg:pl-10 relative">
-              <div className="philosophy-blob hidden lg:block" aria-hidden="true"></div>
-              <Reveal>
-                <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
-                  Our Philosophy
-                </span>
-              </Reveal>
-              <Reveal delay={120}>
-                <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl text-cafe-black mb-8 leading-none">
-                  Crafted for <br />
-                  <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Creatives</span>
-                </h2>
-              </Reveal>
-              <Reveal delay={180}>
-                <div className="w-24 h-[2px] ml-auto" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
-              </Reveal>
-              <Reveal delay={200}>
-                <p className="text-xl md:text-2xl text-cafe-brown/80 mb-6 font-light leading-relaxed">
-                  We believe that great ideas start with great coffee. Whether you&apos;re sketching your next masterpiece, writing the next great novel, or just enjoying a moment of silence.
-                </p>
-              </Reveal>
-              <Reveal delay={260}>
-                <p className="text-xl md:text-2xl text-cafe-brown/80 mb-10 font-light leading-relaxed">
-                  Our beans are ethically sourced, roasted in small batches, and brewed with precision to fuel your inspiration.
-                </p>
-              </Reveal>
-
-              <Reveal delay={320}>
-                <div className="flex gap-10 justify-end border-t border-cafe-beige pt-8">
-                  <div>
-                    <h4 className="font-serif text-2xl text-cafe-black mb-1">
-                      100%
-                    </h4>
-                    <p className="text-xs text-cafe-brown uppercase tracking-wider">
-                      Organic Beans
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-serif text-2xl text-cafe-black mb-1">
-                      Daily
-                    </h4>
-                    <p className="text-xs text-cafe-brown uppercase tracking-wider">
-                      Fresh Pastries
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Low Lights Section */}
       <section
         data-section="Low Lights"
         className="relative overflow-visible py-24 md:py-32 px-6"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
-        <StoryBlobs />
         <div className="section-deco" style={{ top: '8%', left: '6%', animationDuration: '12s', animationDelay: '0.4s' }} aria-hidden="true">
           <Music strokeWidth={1.4} />
         </div>
@@ -316,17 +166,17 @@ export default async function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <Reveal>
-              <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
+              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-cafe-black">
                 Low lights,<br />
                 good sound,<br />
-                <span className="italic" style={{ color: 'var(--cafe-tan)' }}>better coffee.</span>
+                <span className="italic text-cafe-tan">better coffee.</span>
               </h2>
             </Reveal>
             <Reveal delay={150}>
-              <div className="w-24 h-[2px]" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
+              <div className="w-24 h-[2px] bg-cafe-black" />
             </Reveal>
             <Reveal delay={250}>
-              <p className="text-xl md:text-2xl font-light leading-relaxed max-w-xl" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
+              <p className="text-lg md:text-xl font-normal leading-relaxed max-w-xl text-cafe-brown">
                 We designed The Notebook Café as a sanctuary for the creatives, the writers, and the dreamers of Riverside. It is not just about the caffeine—it is about the headspace.
               </p>
             </Reveal>
@@ -364,35 +214,15 @@ export default async function HomePage() {
         data-section="The Trinity"
         className="py-20 md:py-24 relative overflow-hidden trinity-slab"
       >
-        <div className="section-deco" style={{ top: '12%', right: '16%', animationDuration: '10s' }} aria-hidden="true">
-          <Sparkles strokeWidth={1.6} />
-        </div>
-        <div className="section-deco section-deco-dark" style={{ bottom: '6%', left: '10%', animationDuration: '12s', animationDelay: '0.6s' }} aria-hidden="true">
-          <Armchair strokeWidth={1.4} />
-        </div>
-        <div className="section-deco-mobile" style={{ top: '8%', right: '12%' }} aria-hidden="true">
-          <Sparkles strokeWidth={1.6} />
-        </div>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3">
             <Reveal>
               <div className="p-10 text-center">
-                <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full trinity-icon" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-tan)', border: '1px solid rgba(var(--cafe-tan-rgb), 0.35)' }}>
-                  <svg viewBox="0 0 24 24" className="trinity-cup" aria-hidden="true" focusable="false">
-                    <path
-                      d="M17 10V8C17 6.89543 16.1046 6 15 6H5C3.89543 6 3 6.89543 3 8V10M17 10V16C17 17.1046 16.1046 18 15 18H5C3.89543 18 3 17.1046 3 16V10M17 10H18C19.1046 10 20 10.8954 20 12C20 13.1046 19.1046 14 18 14H17M3 18H17"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      fill="none"
-                    />
-                  </svg>
-                  <div className="trinity-steam-line trinity-steam-line-1" aria-hidden="true"></div>
-                  <div className="trinity-steam-line trinity-steam-line-2" aria-hidden="true"></div>
-                  <div className="trinity-steam-line trinity-steam-line-3" aria-hidden="true"></div>
+                <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full">
+                  <Coffee size={26} className="couch-bounce" />
                 </div>
-                <h3 className="font-serif text-2xl mb-3" style={{ color: 'var(--cafe-black)' }}>Craft Espresso</h3>
-                <p className="text-base md:text-lg font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
+                <h3 className="font-serif text-xl md:text-2xl mb-3">Craft Espresso</h3>
+                <p className="text-base md:text-lg font-light leading-relaxed">
                   Roasted locally, extracted with precision. We respect the bean and the process.
                 </p>
               </div>
@@ -402,33 +232,23 @@ export default async function HomePage() {
               <div className="relative p-10 text-center">
                 {/* Desktop: Vertical gradient dividers */}
                 <span
-                  className="hidden md:block absolute inset-y-6 left-0 w-px"
-                  style={{ background: 'linear-gradient(180deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
-                ></span>
+                  className="trinity-divider-v hidden md:block absolute inset-y-6 left-0 w-px"
+                />
                 <span
-                  className="hidden md:block absolute inset-y-6 right-0 w-px"
-                  style={{ background: 'linear-gradient(180deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
-                ></span>
+                  className="trinity-divider-v hidden md:block absolute inset-y-6 right-0 w-px"
+                />
                 {/* Mobile: Horizontal gradient dividers */}
                 <span
-                  className="md:hidden block absolute top-0 inset-x-10 h-px"
-                  style={{ background: 'linear-gradient(90deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
-                ></span>
+                  className="trinity-divider-h md:hidden block absolute top-0 inset-x-10 h-px"
+                />
                 <span
-                  className="md:hidden block absolute bottom-0 inset-x-10 h-px"
-                  style={{ background: 'linear-gradient(90deg, rgba(var(--cafe-brown-rgb),0) 0%, rgba(var(--cafe-brown-rgb),0.35) 50%, rgba(var(--cafe-brown-rgb),0) 100%)' }}
-                ></span>
-                <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-tan)', border: '1px solid rgba(var(--cafe-tan-rgb), 0.35)' }}>
-                  <div className="music-visualizer" aria-hidden="true">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
+                  className="trinity-divider-h md:hidden block absolute bottom-0 inset-x-10 h-px"
+                />
+                <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full">
+                  <Music size={26} className="couch-bounce" />
                 </div>
-                <h3 className="font-serif text-2xl mb-3" style={{ color: 'var(--cafe-black)' }}>Curated Sound</h3>
-                <p className="text-base md:text-lg font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
+                <h3 className="font-serif text-xl md:text-2xl mb-3">Curated Sound</h3>
+                <p className="text-base md:text-lg font-light leading-relaxed">
                   Deep house, soul, and lo-fi grooves tuned to keep you in flow.
                 </p>
               </div>
@@ -436,11 +256,11 @@ export default async function HomePage() {
 
             <Reveal delay={250}>
               <div className="p-10 text-center">
-                <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: 'var(--cafe-white)', color: 'var(--cafe-tan)', border: '1px solid rgba(var(--cafe-tan-rgb), 0.35)' }}>
+                <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full">
                   <Armchair size={26} className="couch-bounce" />
                 </div>
-                <h3 className="font-serif text-2xl mb-3" style={{ color: 'var(--cafe-black)' }}>Creative Comfort</h3>
-                <p className="text-base md:text-lg font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-black-rgb), 0.7)' }}>
+                <h3 className="font-serif text-xl md:text-2xl mb-3">Creative Comfort</h3>
+                <p className="text-base md:text-lg font-light leading-relaxed">
                   Cozy seating, warm light, plenty of outlets—stay as long as you need.
                 </p>
               </div>
@@ -452,10 +272,8 @@ export default async function HomePage() {
       {/* Atmosphere */}
       <section
         data-section="Atmosphere"
-        className="relative pt-24 md:pt-32 pb-[calc(6rem+20px)] md:pb-[calc(8rem+20px)] px-6 overflow-visible mb-16 md:mb-24"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
+        className="relative pt-24 md:pt-32 pb-[calc(6rem+20px)] md:pb-[calc(8rem+20px)] px-6 overflow-visible"
       >
-        <AtmosphereBlob />
         <div className="section-deco" style={{ top: '10%', left: '8%', animationDuration: '11s' }} aria-hidden="true">
           <Wifi strokeWidth={1.4} />
         </div>
@@ -475,14 +293,13 @@ export default async function HomePage() {
                   return (
                     <div key={item.title} className="flex items-start gap-4">
                       <div
-                        className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
-                        style={{ backgroundColor: 'rgba(var(--cafe-tan-rgb), 0.1)', color: 'var(--cafe-tan)' }}
+                        className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 bg-cafe-tan/10 text-cafe-tan"
                       >
                         <Icon size={22} />
                       </div>
                       <div>
-                        <div className="font-serif text-xl mb-1" style={{ color: 'var(--cafe-black)' }}>{item.title}</div>
-                        <p className="text-base md:text-lg" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.7)' }}>{item.description}</p>
+                        <div className="font-serif text-xl md:text-2xl mb-1 text-cafe-black">{item.title}</div>
+                        <p className="text-base md:text-lg text-cafe-brown/70">{item.description}</p>
                       </div>
                     </div>
                   );
@@ -493,24 +310,19 @@ export default async function HomePage() {
 
           {/* Right Column - Heading (order-1 on mobile) */}
           <div className="space-y-6 order-1 lg:order-2 text-right items-end lg:pl-10">
-            <Reveal>
-              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
-                The Atmosphere
-              </span>
-            </Reveal>
             <Reveal delay={120}>
-              <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05]" style={{ color: 'var(--cafe-black)' }}>
-                <span className="italic" style={{ color: 'var(--cafe-brown)' }}>Designed for</span><br />
-                <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Focus</span>
-              </h2>
+	              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-cafe-black">
+	                <span className="italic text-cafe-brown">More than just coffee.</span><br />
+	                <span className="italic text-cafe-tan">It&apos;s a feeling</span>
+	              </h2>
             </Reveal>
             <Reveal delay={150}>
-              <div className="w-24 h-[2px] ml-auto" style={{ backgroundColor: 'var(--cafe-black)' }}></div>
+              <div className="w-24 h-[2px] ml-auto bg-cafe-black" />
             </Reveal>
             <Reveal delay={250}>
-              <p className="text-xl md:text-2xl font-light leading-relaxed max-w-xl" style={{ color: 'rgba(var(--cafe-brown-rgb), 0.78)' }}>
-                A sanctuary with warm lighting, deep playlists, and Wi-Fi that never drops. Settle in for an hour or stay all day.
-              </p>
+	              <p className="text-lg md:text-xl font-normal leading-relaxed max-w-xl text-cafe-brown">
+	                We designed The Notebook Café to be an extension of your living room. Whether you&apos;re catching up with friends, diving into deep work, or just soaking in the playlist.
+	              </p>
             </Reveal>
           </div>
         </div>
@@ -520,7 +332,6 @@ export default async function HomePage() {
       <section
         data-section="Atmosphere Images"
         className="overflow-visible relative pb-24 md:pb-28"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <div className="section-deco" style={{ top: '6%', left: '10%', animationDuration: '13s' }} aria-hidden="true">
           <Sparkles strokeWidth={1.6} />
@@ -534,11 +345,11 @@ export default async function HomePage() {
         <AtmosphereStrip images={vibeImages} />
       </section>
 
+
       {/* Stay in the Loop - Instagram CTA */}
       <section
         data-section="Stay in the Loop"
-        className="relative py-24 md:py-32 overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
+        className="relative py-20 md:py-24 overflow-hidden"
       >
         <div className="section-deco" style={{ top: '12%', left: '10%', animationDuration: '11s' }} aria-hidden="true">
           <Coffee strokeWidth={1.4} />
@@ -549,16 +360,15 @@ export default async function HomePage() {
 
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <Reveal>
-            <div className="w-16 h-[2px] mx-auto mb-8" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
+            <div className="w-16 h-[2px] mx-auto mb-6 bg-cafe-tan" />
           </Reveal>
 
           <Reveal delay={100}>
             <h2
-              className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] mb-8"
-              style={{ color: 'var(--cafe-black)' }}
+              className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[0.95] mb-6 text-cafe-cream"
             >
-              Stay in the{" "}
-              <span className="italic" style={{ color: 'var(--cafe-tan)' }}>
+              <span className="font-normal">Stay in the</span>{" "}
+              <span className="italic text-cafe-white font-semibold">
                 Loop
               </span>
             </h2>
@@ -566,30 +376,41 @@ export default async function HomePage() {
 
           <Reveal delay={200}>
             <p
-              className="text-xl md:text-2xl font-light leading-relaxed mb-12 max-w-2xl mx-auto"
-              style={{ color: 'rgba(var(--cafe-brown-rgb), 0.8)' }}
+              className="text-lg md:text-xl font-normal leading-relaxed mb-8 max-w-2xl mx-auto text-cafe-cream/95"
             >
-              New events announced weekly. Follow us for updates, behind-the-scenes moments, and spontaneous gatherings.
+              We open our doors in 2026. Be the first to know about our soft launch events and exclusive tastings.
             </p>
           </Reveal>
 
+          {/* Email Subscription Form */}
+          <Reveal delay={250}>
+            <div className="max-w-2xl mx-auto mb-8">
+              <NewsletterSubscribe />
+            </div>
+          </Reveal>
+
+          {/* Social & Location */}
           <Reveal delay={300}>
-            <a
-              href="https://instagram.com/thenotebookcafellc"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-8 md:px-12 py-4 md:py-5 text-xs md:text-sm uppercase tracking-[0.25em] font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-              style={{
-                backgroundColor: 'var(--cafe-black)',
-                color: 'var(--cafe-white)',
-                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
-                borderRadius: '4px'
-              }}
-            >
-              <Coffee size={20} strokeWidth={2} />
-              <span>@thenotebookcafellc</span>
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </a>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 text-xs md:text-sm uppercase tracking-[0.2em] opacity-70 text-cafe-cream">
+              <a
+                href="https://instagram.com/thenotebookcafellc"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:opacity-100 hover:text-cafe-tan transition-all"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+                thenotebookcafellc
+              </a>
+              <div className="flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                Riverside, CA
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>

@@ -1,13 +1,14 @@
 
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import {
   AccessibilityHumanIcon, XMarkIcon, TypeIcon,
   ContrastIcon, EyeIcon, ResetIcon, ChevronLeftIcon,
   MousePointerIcon, LinkIcon, RulerIcon, PauseIcon, BrainIcon
 } from '@/app/components/ui/AccessibilityIcons';
+import { logger } from '@/app/lib/logger';
 
 interface AccessibilitySettings {
   textSize: 'normal' | 'large' | 'xl';
@@ -37,6 +38,15 @@ const defaultSettings: AccessibilitySettings = {
   bionicReading: false,
 };
 
+function escapeHtml(input: string) {
+  return input
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export const AccessibilityWidget: React.FC = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -48,10 +58,16 @@ export const AccessibilityWidget: React.FC = () => {
     try {
       return JSON.parse(saved) as AccessibilitySettings;
     } catch (e) {
-      console.error('Failed to load accessibility settings:', e);
+      logger.error('Failed to load accessibility settings', e);
       return defaultSettings;
     }
   });
+
+  const isDefaultSettings = useMemo(() => {
+    return (Object.keys(defaultSettings) as (keyof AccessibilitySettings)[]).every(
+      (key) => settings[key] === defaultSettings[key]
+    );
+  }, [settings]);
 
   // Save settings to localStorage whenever they change
   useEffect(() => {
@@ -109,7 +125,9 @@ export const AccessibilityWidget: React.FC = () => {
             const words = element.innerText.split(' ');
             const newHtml = words.map(word => {
               const mid = Math.ceil(word.length / 2);
-              return `<b class="bionic-bold">${word.slice(0, mid)}</b>${word.slice(mid)}`;
+              const left = escapeHtml(word.slice(0, mid));
+              const right = escapeHtml(word.slice(mid));
+              return `<b class="bionic-bold">${left}</b>${right}`;
             }).join(' ');
             element.innerHTML = newHtml;
           }
@@ -200,7 +218,7 @@ export const AccessibilityWidget: React.FC = () => {
       {/* Floating Toggle Button */}
       <button
         onClick={toggleOpen}
-        className="fixed bottom-6 right-6 z-[110] w-14 h-14 bg-cafe-black text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-brown transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border border-cafe-tan/40"
+        className={`fixed bottom-6 left-6 z-[110] w-14 h-14 bg-cafe-black text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-brown transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border ${isDefaultSettings ? 'border-cafe-tan/40' : 'border-gold/90 shadow-[0_0_0_3px_rgba(196,164,132,0.18)]'}`}
         aria-label="Accessibility Options"
       >
         <AccessibilityHumanIcon className="w-8 h-8" />
@@ -215,7 +233,7 @@ export const AccessibilityWidget: React.FC = () => {
       )}
 
       {/* Drawer */}
-      <div className={`fixed inset-y-0 right-0 z-[110] w-full md:w-96 bg-cafe-white shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? 'translate-x-0' : 'translate-x-full'} flex flex-col border-l border-cafe-tan/20`}>
+      <div className={`fixed inset-y-0 left-0 z-[110] w-full md:w-96 bg-cafe-cream shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? 'translate-x-0' : '-translate-x-full'} flex flex-col border-r border-cafe-tan/20`}>
         
         {/* Header */}
         <div className="p-6 border-b border-cafe-tan/20 bg-cafe-cream flex items-center justify-between shrink-0">
@@ -224,7 +242,7 @@ export const AccessibilityWidget: React.FC = () => {
           </h2>
           <button 
             onClick={() => setIsOpen(false)}
-            className="w-10 h-10 rounded-full hover:bg-cafe-mist flex items-center justify-center text-cafe-brown transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
+            className="w-10 h-10 rounded-full hover:bg-cafe-tan/15 flex items-center justify-center text-cafe-brown transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
             aria-label="Close accessibility panel"
           >
             <XMarkIcon className="w-6 h-6" />
@@ -232,15 +250,15 @@ export const AccessibilityWidget: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6 bg-cafe-white">
+        <div className="flex-1 overflow-y-auto p-6 bg-cafe-cream">
           {view === 'settings' ? (
             <div className="space-y-4">
-              <p className="text-sm text-cafe-brown font-sans mb-4">
+              <p className="text-sm text-cafe-brown/70 font-sans mb-4">
                 Customize your viewing experience with our accessibility tools.
               </p>
 
               {/* Text Size Control */}
-              <div className="bg-cafe-cream p-4 rounded-xl border border-cafe-tan/20">
+              <div className="bg-white p-4 rounded-xl border border-cafe-tan/20 shadow-sm">
                  <div className="flex items-center gap-2 mb-3 text-cafe-black font-bold">
                     <TypeIcon className="w-5 h-5" />
                     <span>Text Size</span>
@@ -248,19 +266,19 @@ export const AccessibilityWidget: React.FC = () => {
                  <div className="flex gap-2">
                     <button 
                        onClick={() => setTextSize('normal')}
-                       className={`flex-1 py-2 rounded-lg text-sm font-bold border transition-colors ${settings.textSize === 'normal' ? 'bg-cafe-black text-cafe-cream border-cafe-black' : 'bg-cafe-mist text-cafe-black border-cafe-tan/25 hover:bg-cafe-cream hover:border-cafe-tan/40'}`}
+                       className={`flex-1 py-2 rounded-lg text-sm font-bold border transition-colors ${settings.textSize === 'normal' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50'}`}
                     >
                       Aa
                     </button>
                     <button 
                        onClick={() => setTextSize('large')}
-                       className={`flex-1 py-2 rounded-lg text-base font-bold border transition-colors ${settings.textSize === 'large' ? 'bg-cafe-black text-cafe-cream border-cafe-black' : 'bg-cafe-mist text-cafe-black border-cafe-tan/25 hover:bg-cafe-cream hover:border-cafe-tan/40'}`}
+                       className={`flex-1 py-2 rounded-lg text-base font-bold border transition-colors ${settings.textSize === 'large' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50'}`}
                     >
                       Aa
                     </button>
                     <button 
                        onClick={() => setTextSize('xl')}
-                       className={`flex-1 py-2 rounded-lg text-lg font-bold border transition-colors ${settings.textSize === 'xl' ? 'bg-cafe-black text-cafe-cream border-cafe-black' : 'bg-cafe-mist text-cafe-black border-cafe-tan/25 hover:bg-cafe-cream hover:border-cafe-tan/40'}`}
+                       className={`flex-1 py-2 rounded-lg text-lg font-bold border transition-colors ${settings.textSize === 'xl' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50'}`}
                     >
                       Aa
                     </button>
@@ -333,17 +351,17 @@ export const AccessibilityWidget: React.FC = () => {
                 />
               </div>
 
-              <div className="mt-8 pt-6 border-t border-cafe-tan/20">
+              <div className="mt-8 pt-6 border-t border-cafe-cream/10">
                 <button 
                   onClick={() => setView('statement')}
-                  className="w-full py-3 px-4 bg-cafe-mist hover:bg-cafe-cream text-cafe-black rounded-xl font-bold transition-colors text-sm border border-cafe-tan/30"
+                  className="w-full py-3 px-4 bg-white hover:bg-cafe-tan/10 text-cafe-brown rounded-xl font-bold transition-colors text-sm border border-cafe-tan/20"
                 >
                   Read Accessibility Statement
                 </button>
               </div>
             </div>
           ) : (
-            <div className="prose prose-sm max-w-none text-cafe-brown animate-slide-in-left">
+            <div className="prose prose-sm max-w-none text-cafe-brown/90 animate-slide-in-left">
               <button 
                 onClick={() => setView('settings')}
                 className="flex items-center gap-2 text-cafe-black font-bold mb-6 hover:text-cafe-tan transition-colors"
@@ -353,10 +371,10 @@ export const AccessibilityWidget: React.FC = () => {
               </button>
               
               <h3 className="font-display font-bold text-lg text-cafe-black mb-2">Our Commitment to Accessibility</h3>
-              <p className="mb-4">We want everyone to enjoy The Notebook Café online. We aim for WCAG 2.1 AA alignment and keep iterating with feedback from our community.</p>
+              <p className="mb-4 text-cafe-brown/80">We want everyone to enjoy The Notebook Café online. We aim for WCAG 2.1 AA alignment and keep iterating with feedback from our community.</p>
 
               <h3 className="font-display font-bold text-lg text-cafe-black mb-2">Features Available</h3>
-              <ul className="list-disc pl-5 mb-4 space-y-1">
+              <ul className="list-disc pl-5 mb-4 space-y-1 text-cafe-brown/80">
                 <li><strong>Text Options:</strong> Adjustable sizes and high-contrast mode.</li>
                 <li><strong>Reading Aids:</strong> Dyslexia-friendly font, bionic reading, and a reading guide line.</li>
                 <li><strong>Visual Controls:</strong> Grayscale, hide images, pause animations.</li>
@@ -364,10 +382,10 @@ export const AccessibilityWidget: React.FC = () => {
               </ul>
 
               <h3 className="font-display font-bold text-lg text-cafe-black mb-2">How We Test</h3>
-              <p className="mb-4">We review pages with keyboard-only navigation, screen magnifiers, and automated checks, and we welcome your feedback to improve further.</p>
+              <p className="mb-4 text-cafe-brown/80">We review pages with keyboard-only navigation, screen magnifiers, and automated checks, and we welcome your feedback to improve further.</p>
 
               <h3 className="font-display font-bold text-lg text-cafe-black mb-2">Need Assistance?</h3>
-              <p className="mb-8">If any part of this site is hard to use, email us at <a href="mailto:hello@thenotebook.cafe" className="font-semibold text-cafe-black underline">hello@thenotebook.cafe</a> and we’ll work with you directly.</p>
+              <p className="mb-8 text-cafe-brown/80">If any part of this site is hard to use, email us at <a href="mailto:thenotebookcafellc@gmail.com" className="font-semibold text-cafe-black underline">thenotebookcafellc@gmail.com</a> and we’ll work with you directly.</p>
             </div>
           )}
         </div>
@@ -377,7 +395,7 @@ export const AccessibilityWidget: React.FC = () => {
           <div className="p-6 border-t border-cafe-tan/20 bg-cafe-cream shrink-0">
             <button 
               onClick={resetSettings}
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 border-2 border-cafe-black text-cafe-black hover:bg-cafe-black hover:text-cafe-cream rounded-xl font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 border-2 border-cafe-tan/25 text-cafe-brown hover:bg-cafe-tan/10 rounded-xl font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40 bg-white"
             >
               <ResetIcon className="w-5 h-5" />
               Reset Settings
@@ -410,12 +428,13 @@ export const AccessibilityWidget: React.FC = () => {
 const ToggleButton = ({ label, icon, active, onClick }: { label: string, icon: React.ReactNode, active: boolean, onClick: () => void }) => (
   <button 
     onClick={onClick}
-    className={`w-full p-4 rounded-xl border flex items-center gap-4 transition-all ${active ? 'bg-cafe-black text-cafe-cream border-cafe-black shadow-md' : 'bg-cafe-white text-cafe-black border-cafe-tan/25 hover:border-cafe-tan/50 hover:bg-cafe-mist'}`}
+    aria-pressed={active}
+    className={`w-full p-4 rounded-xl border flex items-center gap-4 transition-all ${active ? 'bg-cafe-tan/15 text-cafe-black border-cafe-tan/50 shadow-sm' : 'bg-white text-cafe-brown border-cafe-tan/20 hover:border-cafe-tan/40 hover:bg-cafe-tan/5'}`}
   >
     {icon}
     <span className="font-bold flex-1 text-left">{label}</span>
-    <div className={`w-10 h-6 rounded-full p-1 transition-colors ${active ? 'bg-cafe-tan/90' : 'bg-cafe-tan/25'}`}>
-      <div className={`w-4 h-4 bg-cafe-cream rounded-full transition-transform ${active ? 'translate-x-4' : 'translate-x-0'}`} />
+    <div className={`w-10 h-6 rounded-full p-1 transition-colors ${active ? 'bg-cafe-tan' : 'bg-cafe-beige'}`}>
+      <div className={`w-4 h-4 rounded-full transition-transform ${active ? 'translate-x-4 bg-cafe-white' : 'translate-x-0 bg-cafe-brown/30'}`} />
     </div>
   </button>
 );

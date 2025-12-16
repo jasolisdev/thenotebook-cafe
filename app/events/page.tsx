@@ -51,7 +51,11 @@ export default function EventsPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--cafe-mist)' }}>
       {/* Hero Section */}
-      <ParallaxHero backgroundImage="/unsplash/tnc-events-hero-bg.jpg">
+      <ParallaxHero
+        className="parallax-hero--compact"
+        contentClassName="parallax-hero__content--compact"
+        backgroundImage="/menu/tnc-menu-banner.webp"
+      >
         <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6">
           <Reveal>
             <div className="flex items-center justify-center gap-3 mb-4">
@@ -64,7 +68,7 @@ export default function EventsPage() {
           </Reveal>
 
           <Reveal delay={200}>
-            <h1 className="font-serif text-[56px] md:text-[86px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
+            <h1 className="font-serif text-hero md:text-hero-lg" style={{ color: 'var(--cafe-cream)' }}>
               Cozy Holiday<br />
               <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Nights</span>
             </h1>

@@ -18,9 +18,16 @@ interface ProductModalProps {
   onClose: () => void;
   onAddToOrder?: (item: CartItem) => void;
   editingItem?: CartItem | null;
+  orderingEnabled?: boolean;
 }
 
-export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAddToOrder, editingItem }) => {
+export const ProductModal: React.FC<ProductModalProps> = ({
+  item,
+  onClose,
+  onAddToOrder,
+  editingItem,
+  orderingEnabled,
+}) => {
   if (!item) return null;
 
   const modalKey = `${item.id}-${editingItem ? 'edit' : 'new'}`;
@@ -31,6 +38,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ item, onClose, onAdd
       onClose={onClose}
       onAddToOrder={onAddToOrder}
       editingItem={editingItem}
+      orderingEnabled={orderingEnabled}
     />
   );
 };
@@ -77,6 +85,7 @@ type ProductModalContentProps = {
   onClose: () => void;
   onAddToOrder?: (item: CartItem) => void;
   editingItem?: CartItem | null;
+  orderingEnabled?: boolean;
 };
 
 const ProductModalContent: React.FC<ProductModalContentProps> = ({
@@ -84,6 +93,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
   onClose,
   onAddToOrder,
   editingItem,
+  orderingEnabled,
 }) => {
   const { addItem, updateItem } = useCart();
   const modifierGroups = useMemo(() => deriveModifierGroups(item), [item]);
@@ -93,6 +103,8 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
     buildInitialSelections(modifierGroups, editingItem)
   );
   const [hideImages, setHideImages] = useState(false);
+  const isOrderingEnabled = orderingEnabled !== false;
+  const heroImageHeightClass = isOrderingEnabled ? "h-64 sm:h-56" : "h-56 sm:h-44";
 
   // Track accessibility "hide images" toggle by watching the root class list.
   useEffect(() => {
@@ -187,7 +199,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: '100%', opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="pointer-events-auto w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-xl sm:rounded-2xl shadow-2xl flex flex-col relative z-10 overflow-hidden"
+          className="pointer-events-auto w-full h-[100dvh] sm:h-auto sm:max-h-[95vh] sm:max-w-xl sm:rounded-2xl shadow-2xl flex flex-col relative z-10 overflow-hidden"
           style={{ backgroundColor: colors.cream }}
         >
           {hideImages ? (
@@ -201,7 +213,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
               </button>
             </div>
           ) : (
-            <div className="relative h-64 sm:h-56 overflow-hidden shrink-0 group" style={{ backgroundColor: colors.brown }}>
+            <div className={`relative ${heroImageHeightClass} overflow-hidden shrink-0 group`} style={{ backgroundColor: colors.brown }}>
               <Image
                 src="/unsplash/tnc-placeholder-menuitem.png"
                 alt={item.name}
@@ -221,203 +233,229 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
             </div>
           )}
 
-          <div className="flex-1 overflow-y-auto scroll-smooth pb-32" style={{ backgroundColor: colors.white }}>
+          <div className="flex-1 overflow-y-auto scroll-smooth" style={{ backgroundColor: colors.white }}>
             <div className="p-6 space-y-6">
               <div>
                 <div className="mb-4">
                   <h2 className="font-serif text-xl sm:text-2xl leading-tight mb-2" style={{ color: colors.black }}>
                     {item.name}
                   </h2>
-                  <span className="font-serif text-2xl" style={{ color: colors.tan }}>
-                    {item.price}
-                  </span>
+                  {isOrderingEnabled && (
+                    <span className="font-serif text-2xl" style={{ color: colors.tan }}>
+                      {item.price}
+                    </span>
+                  )}
                 </div>
                 <p className="text-lg font-light leading-relaxed" style={{ color: `${colors.brown}CC` }}>
                   {item.description}
                 </p>
               </div>
 
-              <div className="space-y-8">
-                {modifierGroups.map(group => (
-                  <div key={group.id} className="space-y-4">
-                    <div
-                      className="flex justify-between items-baseline pb-2"
-                      style={{ borderBottom: `1px solid ${colors.beige}4D` }}
-                    >
-                      <div>
-                        <h3 className="font-serif text-xl" style={{ color: colors.black }}>
-                          {group.name}
-                        </h3>
-                        {group.description && (
-                          <p className="text-xs" style={{ color: `${colors.brown}99` }}>
-                            {group.description}
-                          </p>
-                        )}
-                      </div>
-                      <div className="flex flex-col items-end">
-                        <span className="text-xs font-bold uppercase tracking-wider" style={{ color: colors.tan }}>
-                          {group.required ? 'Required' : 'Optional'}
-                        </span>
-                        {group.maxSelections && (
-                          <span className="text-[10px]" style={{ color: `${colors.brown}99` }}>
-                            Max {group.maxSelections}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 gap-2">
-                      {group.options.map(option => {
-                        const isSelected = selections[group.id]?.has(option.label);
-                        return (
-                          <label
-                            key={option.label}
-                            className="relative flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all duration-200"
-                            style={{
-                              borderColor: isSelected ? colors.black : `${colors.beige}80`,
-                              backgroundColor: isSelected ? colors.mist : colors.white,
-                              boxShadow: isSelected ? `0 0 0 1px ${colors.black}` : 'none',
-                            }}
-                            onClick={e => {
-                              e.preventDefault();
-                              toggleSelection(group.id, option.label, group.type, group.maxSelections);
-                            }}
-                          >
-                            <div className="flex items-center gap-3">
-                              {group.type === 'radio' ? (
-                                <div
-                                  className="w-5 h-5 rounded-full border flex items-center justify-center transition-colors"
-                                  style={{ borderColor: isSelected ? colors.black : colors.beige }}
-                                >
-                                  {isSelected && (
-                                    <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: colors.black }} />
-                                  )}
-                                </div>
-                              ) : (
-                                <div
-                                  className="w-5 h-5 rounded border flex items-center justify-center transition-colors"
-                                  style={{
-                                    borderColor: isSelected ? colors.black : colors.beige,
-                                    backgroundColor: isSelected ? colors.black : 'transparent',
-                                  }}
-                                >
-                                  {isSelected && <Check size={12} className="text-white" />}
-                                </div>
-                              )}
-                              <span
-                                className="text-base"
-                                style={{ color: isSelected ? colors.black : colors.brown, fontWeight: isSelected ? 600 : 400 }}
-                              >
-                                {option.label}
-                              </span>
-                            </div>
-                            {option.priceDelta > 0 && (
-                              <span className="text-sm font-bold" style={{ color: colors.tan }}>
-                                +${option.priceDelta.toFixed(2)}
+              {isOrderingEnabled && (
+                <>
+                  <div className="space-y-8">
+                    {modifierGroups.map(group => (
+                      <div key={group.id} className="space-y-4">
+                        <div
+                          className="flex justify-between items-baseline pb-2"
+                          style={{ borderBottom: `1px solid ${colors.beige}4D` }}
+                        >
+                          <div>
+                            <h3 className="font-serif text-xl" style={{ color: colors.black }}>
+                              {group.name}
+                            </h3>
+                            {group.description && (
+                              <p className="text-xs" style={{ color: `${colors.brown}99` }}>
+                                {group.description}
+                              </p>
+                            )}
+                          </div>
+                          <div className="flex flex-col items-end">
+                            <span className="text-xs font-bold uppercase tracking-wider" style={{ color: colors.tan }}>
+                              {group.required ? 'Required' : 'Optional'}
+                            </span>
+                            {group.maxSelections && (
+                              <span className="text-2xs" style={{ color: `${colors.brown}99` }}>
+                                Max {group.maxSelections}
                               </span>
                             )}
-                          </label>
-                        );
-                      })}
-                    </div>
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-1 gap-2">
+                          {group.options.map(option => {
+                            const isSelected = selections[group.id]?.has(option.label);
+                            return (
+                              <label
+                                key={option.label}
+                                className="relative flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all duration-200"
+                                style={{
+                                  borderColor: isSelected ? colors.black : `${colors.beige}80`,
+                                  backgroundColor: isSelected ? colors.mist : colors.white,
+                                  boxShadow: isSelected ? `0 0 0 1px ${colors.black}` : 'none',
+                                }}
+                                onClick={e => {
+                                  e.preventDefault();
+                                  toggleSelection(group.id, option.label, group.type, group.maxSelections);
+                                }}
+                              >
+                                <div className="flex items-center gap-3">
+                                  {group.type === 'radio' ? (
+                                    <div
+                                      className="w-5 h-5 rounded-full border flex items-center justify-center transition-colors"
+                                      style={{ borderColor: isSelected ? colors.black : colors.beige }}
+                                    >
+                                      {isSelected && (
+                                        <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: colors.black }} />
+                                      )}
+                                    </div>
+                                  ) : (
+                                    <div
+                                      className="w-5 h-5 rounded border flex items-center justify-center transition-colors"
+                                      style={{
+                                        borderColor: isSelected ? colors.black : colors.beige,
+                                        backgroundColor: isSelected ? colors.black : 'transparent',
+                                      }}
+                                    >
+                                      {isSelected && <Check size={12} className="text-white" />}
+                                    </div>
+                                  )}
+                                  <span
+                                    className="text-base"
+                                    style={{ color: isSelected ? colors.black : colors.brown, fontWeight: isSelected ? 600 : 400 }}
+                                  >
+                                    {option.label}
+                                  </span>
+                                </div>
+                                {option.priceDelta > 0 && (
+                                  <span className="text-sm font-bold" style={{ color: colors.tan }}>
+                                    +${option.priceDelta.toFixed(2)}
+                                  </span>
+                                )}
+                              </label>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
 
-              <div className="space-y-3">
-                <label className="font-serif text-lg flex items-center gap-2" style={{ color: colors.black }}>
-                  Special Requests
-                </label>
-                <textarea
-                  value={notes}
-                  onChange={e => setNotes(e.target.value)}
-                  placeholder={item.section === 'desserts' ? "Warmed, allergy info, etc..." : "Extra hot, allergy info, etc..."}
-                  className="w-full p-4 rounded-xl border outline-none resize-none h-24 text-base"
-                  style={{
-                    borderColor: `${colors.beige}80`,
-                    backgroundColor: colors.white,
-                    color: colors.black,
-                  }}
-                />
-              </div>
+                  <div className="space-y-3">
+                    <label className="font-serif text-lg flex items-center gap-2" style={{ color: colors.black }}>
+                      Special Requests
+                    </label>
+                    <textarea
+                      value={notes}
+                      onChange={e => setNotes(e.target.value)}
+                      placeholder={item.section === 'desserts' ? "Warmed, allergy info, etc..." : "Extra hot, allergy info, etc..."}
+                      className="w-full p-4 rounded-xl border outline-none resize-none h-24 text-base"
+                      style={{
+                        borderColor: `${colors.beige}80`,
+                        backgroundColor: colors.white,
+                        color: colors.black,
+                      }}
+                    />
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
-          <div
-            className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 shadow-[0_-5px_30px_rgba(0,0,0,0.08)] z-20"
-            style={{ backgroundColor: colors.white, borderTop: `1px solid ${colors.beige}` }}
-          >
-            <div className="flex items-center gap-4 max-w-xl mx-auto">
-              <div
-                className="flex items-center rounded-lg overflow-hidden shrink-0 border"
-                style={{ backgroundColor: colors.mist, borderColor: `${colors.beige}80` }}
-              >
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="p-3 sm:p-3.5 transition-colors"
-                  style={{ color: colors.black }}
+          {isOrderingEnabled ? (
+            <div
+              className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 shadow-[0_-5px_30px_rgba(0,0,0,0.08)] z-20"
+              style={{ backgroundColor: colors.white, borderTop: `1px solid ${colors.beige}` }}
+            >
+              <div className="flex items-center gap-4 max-w-xl mx-auto">
+                <div
+                  className="flex items-center rounded-lg overflow-hidden shrink-0 border"
+                  style={{ backgroundColor: colors.mist, borderColor: `${colors.beige}80` }}
                 >
-                  <Minus size={18} />
-                </button>
-                <span className="w-8 sm:w-10 text-center font-bold text-lg" style={{ color: colors.black }}>
-                  {quantity}
-                </span>
-                <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="p-3 sm:p-3.5 transition-colors"
-                  style={{ color: colors.black }}
-                >
-                  <Plus size={18} />
-                </button>
-              </div>
-              <Button
-                fullWidth
-                onClick={() => {
-                  const modifiers: SelectedModifier[] = [];
-                  modifierGroups.forEach(group => {
-                    const groupSet = selections[group.id];
-                    if (groupSet) {
-                      groupSet.forEach(label => {
-                        const option = group.options.find(o => o.label === label);
-                        if (option) {
-                          modifiers.push({
-                            groupId: group.id,
-                            groupName: group.name,
-                            optionLabel: option.label,
-                            priceDelta: option.priceDelta,
-                          });
-                        }
-                      });
-                    }
-                  });
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="p-3 sm:p-3.5 transition-colors"
+                    style={{ color: colors.black }}
+                  >
+                    <Minus size={18} />
+                  </button>
+                  <span className="w-8 sm:w-10 text-center font-bold text-lg" style={{ color: colors.black }}>
+                    {quantity}
+                  </span>
+                  <button
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="p-3 sm:p-3.5 transition-colors"
+                    style={{ color: colors.black }}
+                  >
+                    <Plus size={18} />
+                  </button>
+                </div>
+                <Button
+                  fullWidth
+                  onClick={() => {
+                    const modifiers: SelectedModifier[] = [];
+                    modifierGroups.forEach(group => {
+                      const groupSet = selections[group.id];
+                      if (groupSet) {
+                        groupSet.forEach(label => {
+                          const option = group.options.find(o => o.label === label);
+                          if (option) {
+                            modifiers.push({
+                              groupId: group.id,
+                              groupName: group.name,
+                              optionLabel: option.label,
+                              priceDelta: option.priceDelta,
+                            });
+                          }
+                        });
+                      }
+                    });
 
-                  if (editingItem) {
-                    // Update existing cart item
-                    updateItem(editingItem.cartId, quantity, modifiers, notes);
-                  } else {
-                    // Add new item
-                    const cartItem: CartItem = {
-                      ...item,
-                      cartId: Math.random().toString(36).substr(2, 9),
-                      modifiers,
-                      notes,
-                      totalPrice: finalPrice,
-                      quantity,
-                    };
-                    if (onAddToOrder) {
-                      onAddToOrder(cartItem);
+                    if (editingItem) {
+                      // Update existing cart item
+                      updateItem(editingItem.cartId, quantity, modifiers, notes);
                     } else {
-                      addItem(item, quantity, modifiers, notes, finalPrice);
+                      // Add new item
+                      const cartItem: CartItem = {
+                        ...item,
+                        cartId: Math.random().toString(36).substr(2, 9),
+                        modifiers,
+                        notes,
+                        totalPrice: finalPrice,
+                        quantity,
+                      };
+                      if (onAddToOrder) {
+                        onAddToOrder(cartItem);
+                      } else {
+                        addItem(item, quantity, modifiers, notes, finalPrice);
+                      }
                     }
-                  }
-                  close();
-                }}
-                className="h-12 sm:h-14 flex justify-center items-center gap-2 px-6 text-sm sm:text-base"
-              >
-                <span>{editingItem ? 'Update Order' : 'Add to Order'}</span>
-                <span>${finalPrice.toFixed(2)}</span>
-              </Button>
+                    close();
+                  }}
+                  className="h-12 sm:h-14 flex justify-center items-center gap-2 px-6 text-sm sm:text-base"
+                >
+                  <span>{editingItem ? 'Update Order' : 'Add to Order'}</span>
+                  <span>${finalPrice.toFixed(2)}</span>
+                </Button>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div
+              className="p-4 sm:p-6 shadow-[0_-5px_30px_rgba(0,0,0,0.08)]"
+              style={{ backgroundColor: colors.white, borderTop: `1px solid ${colors.beige}` }}
+            >
+              <div className="max-w-xl mx-auto space-y-3">
+                <p className="text-sm font-medium text-center" style={{ color: colors.brown }}>
+                  Online ordering is coming soon. Ask our baristas in-store to place an order.
+                </p>
+                <Button
+                  fullWidth
+                  onClick={close}
+                  className="h-12 sm:h-14 flex justify-center items-center px-6 text-sm sm:text-base"
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
+          )}
         </motion.div>
       </motion.div>
     </AnimatePresence>

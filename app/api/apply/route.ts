@@ -1,15 +1,40 @@
 import { NextResponse } from "next/server";
 import { writeClient } from "@/sanity/lib/writeClient";
+import { validateOrigin } from "@/app/lib/csrf";
+import { checkRateLimit } from "@/app/lib/rateLimit";
+import { validateUploadedFile } from "@/app/lib/fileValidation";
+import { logger } from "@/app/lib/logger";
+import { sanitizeEmail, sanitizeText, sanitizePhone } from "@/app/lib/sanitize";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function normalizeEmail(input: unknown): string | null {
+  if (typeof input !== "string") return null;
+  const email = input.trim();
+  if (email.length > 254) return null;
+  if (/[<>"'`\s]/.test(email)) return null;
+  if (!EMAIL_RE.test(email)) return null;
+  return email;
+}
+
 export async function POST(req: Request) {
+  // CSRF protection
+  const originError = validateOrigin(req);
+  if (originError) return originError;
+
+  // Rate limiting: 2 requests per hour (applications are infrequent)
+  const rateLimitError = checkRateLimit(req, "/api/apply", 2, 3600000);
+  if (rateLimitError) return rateLimitError;
+
   try {
     const formData = await req.formData();
 
-    const fullName = formData.get("fullName") as string;
-    const email = formData.get("email") as string;
+    const firstName = formData.get("firstName") as string;
+    const lastName = formData.get("lastName") as string;
+    const emailRaw = formData.get("email");
+    const emailString = typeof emailRaw === "string" ? emailRaw : "";
     const phone = formData.get("phone") as string;
+    const birthdate = formData.get("birthdate") as string;
     const positionsRaw = formData.get("positions") as string;
     const employmentType = formData.get("employmentType") as string;
     const daysAvailableRaw = formData.get("daysAvailable") as string;
@@ -17,22 +42,26 @@ export async function POST(req: Request) {
     const hoursPerWeek = formData.get("hoursPerWeek") as string;
     const commitmentLength = formData.get("commitmentLength") as string;
     const message = formData.get("message") as string;
-    const resumeFile = formData.get("resume") as File | null;
-    const supplementalFile = formData.get("supplementalApplication") as File | null;
+    const resumeValue = formData.get("resume");
+    const supplementalValue = formData.get("supplementalApplication");
+    const resumeFile = resumeValue instanceof File ? resumeValue : null;
+    const supplementalFile = supplementalValue instanceof File ? supplementalValue : null;
+
+    const email = normalizeEmail(emailString);
 
     // Validate required fields
-    if (!fullName || !email || !phone || !positionsRaw || !employmentType || !daysAvailableRaw || !startDate || !hoursPerWeek || !commitmentLength || !message || !resumeFile) {
+    if (!firstName || !lastName || !emailString || !phone || !birthdate || !positionsRaw || !employmentType || !daysAvailableRaw || !startDate || !hoursPerWeek || !commitmentLength) {
       return NextResponse.json(
         { ok: false, error: "Missing required fields" },
-        { status: 400 }
+        { status: 400, headers: { "Cache-Control": "no-store" } }
       );
     }
 
     // Validate email
-    if (!EMAIL_RE.test(email)) {
+    if (!email) {
       return NextResponse.json(
         { ok: false, error: "Invalid email address" },
-        { status: 400 }
+        { status: 400, headers: { "Cache-Control": "no-store" } }
       );
     }
 
@@ -46,7 +75,7 @@ export async function POST(req: Request) {
     } catch {
       return NextResponse.json(
         { ok: false, error: "Invalid positions data" },
-        { status: 400 }
+        { status: 400, headers: { "Cache-Control": "no-store" } }
       );
     }
 
@@ -57,68 +86,64 @@ export async function POST(req: Request) {
       if (!Array.isArray(daysAvailable) || daysAvailable.length === 0) {
         throw new Error("Invalid days available");
       }
-      // Validate Saturday requirement (café is closed Sunday)
-      const hasSaturday = daysAvailable.includes("saturday");
-      if (!hasSaturday) {
-        return NextResponse.json(
-          { ok: false, error: "Saturday availability is required" },
-          { status: 400 }
-        );
-      }
-    } catch (e) {
-      if (e instanceof Error && e.message.includes("weekend")) {
-        return NextResponse.json(
-          { ok: false, error: e.message },
-          { status: 400 }
-        );
-      }
+    } catch {
       return NextResponse.json(
         { ok: false, error: "Invalid days available data" },
-        { status: 400 }
+        { status: 400, headers: { "Cache-Control": "no-store" } }
       );
     }
 
-    // Validate resume file
-    const allowedTypes = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
-    if (!allowedTypes.includes(resumeFile.type)) {
-      return NextResponse.json(
-        { ok: false, error: "Resume must be PDF, DOC, or DOCX" },
-        { status: 400 }
+    // Upload resume to Sanity (if provided)
+    let resumeAsset = null;
+    if (resumeFile) {
+      // Validate file with magic number checks
+      const allowedTypes = [
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      ];
+      const maxSize = 5 * 1024 * 1024; // 5MB
+
+      const validation = await validateUploadedFile(
+        resumeFile,
+        allowedTypes,
+        maxSize
       );
+
+      if (!validation.valid) {
+        return NextResponse.json(
+          { ok: false, error: validation.error || "Invalid resume file" },
+          { status: 400, headers: { "Cache-Control": "no-store" } }
+        );
+      }
+
+      const arrayBuffer = await resumeFile.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+
+      resumeAsset = await writeClient.assets.upload("file", buffer, {
+        filename: resumeFile.name,
+        contentType: resumeFile.type,
+      });
     }
-
-    // Check file size (5MB limit)
-    const maxSize = 5 * 1024 * 1024; // 5MB
-    if (resumeFile.size > maxSize) {
-      return NextResponse.json(
-        { ok: false, error: "Resume file size must be under 5MB" },
-        { status: 400 }
-      );
-    }
-
-    // Upload resume to Sanity
-    const arrayBuffer = await resumeFile.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-
-    const resumeAsset = await writeClient.assets.upload("file", buffer, {
-      filename: resumeFile.name,
-      contentType: resumeFile.type,
-    });
 
     // Upload supplemental application if provided
     let supplementalAsset = null;
     if (supplementalFile) {
-      // Validate supplemental file
-      if (supplementalFile.type !== "application/pdf") {
+      // Validate supplemental file with magic number checks
+      const suppValidation = await validateUploadedFile(
+        supplementalFile,
+        ["application/pdf"],
+        5 * 1024 * 1024
+      );
+
+      if (!suppValidation.valid) {
         return NextResponse.json(
-          { ok: false, error: "Supplemental application must be a PDF" },
-          { status: 400 }
-        );
-      }
-      if (supplementalFile.size > 5 * 1024 * 1024) {
-        return NextResponse.json(
-          { ok: false, error: "Supplemental application file size must be under 5MB" },
-          { status: 400 }
+          {
+            ok: false,
+            error:
+              suppValidation.error || "Invalid supplemental application file",
+          },
+          { status: 400, headers: { "Cache-Control": "no-store" } }
         );
       }
 
@@ -142,42 +167,52 @@ export async function POST(req: Request) {
 
     const applicationData: {
       _type: "jobApplication";
-      fullName: string;
+      firstName: string;
+      lastName: string;
       email: string;
       phone: string;
+      birthdate: string;
       positions: string[];
-      resume: FileReference;
       employmentType: string;
       daysAvailable: string[];
       startDate: string;
       hoursPerWeek: string;
       commitmentLength: string;
-      message: string;
+      message?: string;
       status: "new";
       appliedAt: string;
+      resume?: FileReference;
       supplementalApplication?: FileReference;
     } = {
       _type: "jobApplication",
-      fullName,
-      email,
-      phone,
-      positions,
-      resume: {
+      firstName: sanitizeText(firstName),
+      lastName: sanitizeText(lastName),
+      email: sanitizeEmail(email),
+      phone: sanitizePhone(phone),
+      birthdate: sanitizeText(birthdate),
+      positions: positions.map(p => sanitizeText(p)),
+      employmentType: sanitizeText(employmentType),
+      daysAvailable: daysAvailable.map(d => sanitizeText(d)),
+      startDate: sanitizeText(startDate),
+      hoursPerWeek: sanitizeText(hoursPerWeek),
+      commitmentLength: sanitizeText(commitmentLength),
+      status: "new",
+      appliedAt: new Date().toISOString(),
+    };
+
+    // Add optional fields if provided (with sanitization)
+    if (message) {
+      applicationData.message = sanitizeText(message);
+    }
+    if (resumeAsset) {
+      applicationData.resume = {
         _type: "file",
         asset: {
           _type: "reference",
           _ref: resumeAsset._id,
         },
-      },
-      employmentType,
-      daysAvailable,
-      startDate,
-      hoursPerWeek,
-      commitmentLength,
-      message,
-      status: "new",
-      appliedAt: new Date().toISOString(),
-    };
+      };
+    }
 
     // Add supplemental application if uploaded
     if (supplementalAsset) {
@@ -192,12 +227,15 @@ export async function POST(req: Request) {
 
     const doc = await writeClient.create(applicationData);
 
-    return NextResponse.json({ ok: true, id: doc._id });
+    return NextResponse.json(
+      { ok: true, id: doc._id },
+      { headers: { "Cache-Control": "no-store" } }
+    );
   } catch (err) {
-    console.error("Application submission error:", err);
+    logger.error("Application submission error", err);
     return NextResponse.json(
       { ok: false, error: "Server error. Please try again." },
-      { status: 500 }
+      { status: 500, headers: { "Cache-Control": "no-store" } }
     );
   }
 }

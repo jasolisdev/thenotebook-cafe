@@ -1,0 +1,42 @@
+/* ============================================================
+   HOME: Section Background Treatments
+   Backgrounds are now provided by `.home-fixed-background`.
+============================================================ */
+
+[data-section="Our Philosophy"],
+[data-section="Low Lights"],
+[data-section="Atmosphere"],
+[data-section="Atmosphere Images"],
+[data-section="More Than Coffee"] {
+  position: relative;
+  background: transparent;
+  background-image: none;
+}
+
+[data-section="Our Philosophy"]::after,
+[data-section="Low Lights"]::after,
+[data-section="Atmosphere"]::after,
+[data-section="Atmosphere Images"]::after,
+[data-section="More Than Coffee"]::after {
+  content: "";
+  display: none;
+}
+
+/* Keep Stay in the Loop readable (no gradient, solid only) */
+[data-section="Stay in the Loop"] {
+  position: relative;
+  background: var(--cafe-olive);
+}
+
+[data-section="Stay in the Loop"]::after {
+  content: "";
+  display: none;
+}
+
+@media (max-width: 767px) {
+  [data-section="Low Lights"],
+  [data-section="Atmosphere"],
+  [data-section="Atmosphere Images"] {
+    background-color: var(--cafe-mist);
+  }
+}

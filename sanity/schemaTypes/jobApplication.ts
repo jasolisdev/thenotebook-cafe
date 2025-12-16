@@ -6,10 +6,16 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
-      name: "fullName",
-      title: "Full Name",
+      name: "firstName",
+      title: "First Name",
       type: "string",
-      validation: (Rule) => Rule.required().error("Full name is required"),
+      validation: (Rule) => Rule.required().error("First name is required"),
+    }),
+    defineField({
+      name: "lastName",
+      title: "Last Name",
+      type: "string",
+      validation: (Rule) => Rule.required().error("Last name is required"),
     }),
     defineField({
       name: "email",
@@ -30,6 +36,12 @@ export default defineType({
       validation: (Rule) => Rule.required().error("Phone number is required"),
     }),
     defineField({
+      name: "birthdate",
+      title: "Date of Birth",
+      type: "date",
+      validation: (Rule) => Rule.required().error("Date of birth is required"),
+    }),
+    defineField({
       name: "positions",
       title: "Position(s) Interested In",
       type: "array",
@@ -47,12 +59,12 @@ export default defineType({
     }),
     defineField({
       name: "resume",
-      title: "Resume",
+      title: "Resume (Optional)",
       type: "file",
       options: {
         accept: ".pdf,.doc,.docx",
       },
-      validation: (Rule) => Rule.required().error("Resume is required"),
+      description: "Upload your resume (PDF, DOC, or DOCX)",
     }),
     defineField({
       name: "employmentType",
@@ -88,12 +100,7 @@ export default defineType({
       validation: (Rule) =>
         Rule.required()
           .min(1)
-          .error("Select at least one day")
-          .custom((days) => {
-            if (!days || !Array.isArray(days)) return true;
-            const hasSaturday = days.includes("saturday");
-            return hasSaturday || "Saturday availability is required";
-          }),
+          .error("Select at least one day"),
     }),
     defineField({
       name: "startDate",
@@ -142,14 +149,10 @@ export default defineType({
     }),
     defineField({
       name: "message",
-      title: "Why The Notebook Café?",
+      title: "Why The Notebook Café? (Optional)",
       type: "text",
       rows: 4,
-      description: "Tell us why you want to work here",
-      validation: (Rule) =>
-        Rule.required()
-          .min(20)
-          .error("Please write at least a few sentences about yourself"),
+      description: "Tell us why you want to work here (optional)",
     }),
     defineField({
       name: "status",
@@ -182,14 +185,16 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: "fullName",
+      firstName: "firstName",
+      lastName: "lastName",
       subtitle: "email",
       positions: "positions",
       status: "status",
     },
-    prepare({ title, subtitle, positions, status }) {
+    prepare({ firstName, lastName, subtitle, positions, status }) {
+      const fullName = [firstName, lastName].filter(Boolean).join(" ");
       return {
-        title: title || "No name",
+        title: fullName || "No name",
         subtitle: `${subtitle} • ${positions?.join(", ") || "No position"} • ${status}`,
       };
     },

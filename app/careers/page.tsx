@@ -1,144 +1,48 @@
 /**
  * Careers Page - The Notebook Café
  *
- * Join our team page featuring culture, open positions, hiring process, and application form.
+ * Join our team page featuring culture, open positions, and hiring process.
  */
-"use client";
-
-import { useState, FormEvent } from "react";
 import Reveal from "../components/ui/Reveal";
+import RevealText from "../components/ui/RevealText";
+import FadeInSection from "../components/ui/FadeInSection";
 import ParallaxHero from "../components/features/ParallaxHero";
-import { Coffee, Heart, TrendingUp, CheckCircle, Upload, Briefcase, Clock, ChefHat } from "lucide-react";
+import { Coffee, Heart, TrendingUp, CheckCircle, Mail, ExternalLink, MapPin, DollarSign, Briefcase, Gift } from "lucide-react";
 import "../styles/pages/careers.css";
 
+const INDEED_JOB_URL =
+  "https://www.indeed.com/viewjob?cmp=The-Notebook-Cafe&t=Barista&jk=b440eb90eb5586f1&q=The+Notebook+Cafe&xpse=SoAZ67I3pQVIuMSJ1p0LbzkdCdPP&xfps=bc612584-8ce8-4f71-b66d-2e539b85c724&xkcb=SoDf67M3pQVJD4gNUz0KbzkdCdPP&vjs=3";
+
 export default function CareersPage() {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    birthdate: "",
-    positions: [] as string[],
-    employmentType: "",
-    daysAvailable: [] as string[],
-    startDate: "",
-    hoursPerWeek: "",
-    commitmentLength: "",
-    message: "",
-  });
-  const [resumeFile, setResumeFile] = useState<File | null>(null);
-  const [supplementalFile, setSupplementalFile] = useState<File | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
-  const [availabilityError] = useState("");
-
-  const handlePositionToggle = (position: string) => {
-    setFormData(prev => ({
-      ...prev,
-      positions: prev.positions.includes(position)
-        ? prev.positions.filter(p => p !== position)
-        : [...prev.positions, position]
-    }));
-  };
-
-  const handleDayToggle = (day: string) => {
-    setFormData(prev => {
-      const newDays = prev.daysAvailable.includes(day)
-        ? prev.daysAvailable.filter(d => d !== day)
-        : [...prev.daysAvailable, day];
-
-      return {
-        ...prev,
-        daysAvailable: newDays
-      };
-    });
-  };
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    setIsSubmitting(true);
-    setSubmitStatus("idle");
-
-    try {
-      // Create FormData for file upload
-      const data = new FormData();
-      data.append("fullName", formData.fullName);
-      data.append("email", formData.email);
-      data.append("phone", formData.phone);
-      data.append("birthdate", formData.birthdate);
-      data.append("positions", JSON.stringify(formData.positions));
-      data.append("employmentType", formData.employmentType);
-      data.append("daysAvailable", JSON.stringify(formData.daysAvailable));
-      data.append("startDate", formData.startDate);
-      data.append("hoursPerWeek", formData.hoursPerWeek);
-      data.append("commitmentLength", formData.commitmentLength);
-      data.append("message", formData.message);
-      if (resumeFile) {
-        data.append("resume", resumeFile);
-      }
-      if (supplementalFile) {
-        data.append("supplementalApplication", supplementalFile);
-      }
-
-      const response = await fetch("/api/apply", {
-        method: "POST",
-        body: data,
-      });
-
-      if (response.ok) {
-        setSubmitStatus("success");
-        // Redirect to thank you page after 1.5 seconds
-        setTimeout(() => {
-          window.location.href = "/careers/thank-you";
-        }, 1500);
-      } else {
-        setSubmitStatus("error");
-      }
-    } catch (error) {
-      console.error("Application error:", error);
-      setSubmitStatus("error");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
-    <main className="min-h-screen" style={{ backgroundColor: 'var(--cafe-mist)' }}>
+    <main className="careers-page min-h-screen relative">
+      <div className="careers-fixed-background" aria-hidden="true" />
       {/* Hero Section */}
-      <div className="careers-hero-wrapper">
-        <ParallaxHero
-          backgroundImage="/careers/tnc-career-hero-bg.png"
-          focusPercent={150}
-          overlayVariant="light"
-        >
-          <div className="max-w-4xl mx-auto space-y-6">
-            <Reveal>
-              <span className="font-bold tracking-[0.2em] uppercase text-sm block" style={{ color: 'var(--cafe-tan)' }}>
-                Join Our Team
-              </span>
-            </Reveal>
-
-            <Reveal delay={200}>
-              <h1 className="font-serif text-[56px] md:text-[86px] leading-[0.9]" style={{ color: 'var(--cafe-cream)' }}>
-                Be Part of<br />
-                <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Something Special</span>
-              </h1>
-            </Reveal>
-
-            <Reveal delay={400}>
-              <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed" style={{ color: 'rgba(var(--cafe-cream-rgb), 0.82)' }}>
-                Help us build Riverside&apos;s first truly genuine coffee community hub. We&apos;re looking for passionate, driven people who love great coffee and warm vibes.
-              </p>
-            </Reveal>
-          </div>
-        </ParallaxHero>
-      </div>
+      <ParallaxHero
+        className="parallax-hero--compact"
+        contentClassName="parallax-hero__content--compact tnc-hero__content"
+        backgroundImage="/menu/tnc-menu-banner.webp"
+        backgroundFit="fitHeight"
+        backgroundFitDesktop="cover"
+        backgroundColor="var(--cafe-black)"
+        parallax={false}
+        overlayVariant="solid"
+        focusPercent={32}
+      >
+        <div className="tnc-hero__inner relative z-10">
+          <RevealText delay="0ms">
+            <h1 className="tnc-hero__title font-serif">Careers</h1>
+          </RevealText>
+          <FadeInSection delay="200ms">
+            <p className="tnc-hero__subtitle">Join The Team, Build The Culture.</p>
+          </FadeInSection>
+        </div>
+      </ParallaxHero>
 
       {/* Culture Section */}
       <section
         data-section="Our Culture"
         className="py-24 md:py-32 relative overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -153,21 +57,182 @@ export default function CareersPage() {
               </h2>
             </Reveal>
             <Reveal delay={180}>
-              <p className="text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto" style={{ color: 'rgba(74, 59, 50, 0.82)' }}>
+              <p className="text-lg md:text-xl font-normal leading-relaxed max-w-3xl mx-auto" style={{ color: 'rgba(74, 59, 50, 0.82)' }}>
                 We&apos;re locally-owned, family-oriented, and all about creating a space where people actually want to spend time. Think lofi house music, specialty coffee, fresh acai bowls, and a team that genuinely cares about the craft.
-              </p>            </Reveal>
+              </p>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Open Positions */}
+      <section data-section="Join Our Team" className="py-24 md:py-32 relative">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <Reveal>
+              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+                We&apos;re Hiring
+              </span>
+            </Reveal>
+            <Reveal delay={100}>
+              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none" style={{ color: 'var(--cafe-black)' }}>
+                Join Our <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Team</span>
+              </h2>
+            </Reveal>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-10 mt-16">
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-10">
+              <Reveal delay={200}>
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between gap-4">
+                    <h4 className="font-serif text-2xl md:text-3xl leading-tight" style={{ color: 'var(--cafe-black)' }}>
+                      Barista Cashier
+                    </h4>
+                    <span
+                      className="px-4 py-2 rounded-full text-xs tracking-[0.18em] uppercase font-semibold whitespace-nowrap"
+                      style={{
+                        border: '1.5px solid rgba(44, 36, 32, 0.55)',
+                        color: 'rgba(44, 36, 32, 0.85)',
+                        backgroundColor: 'rgba(250, 249, 246, 0.45)',
+                      }}
+                    >
+                      Now Hiring
+                    </span>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4 pt-2">
+                    <div
+                      className="p-5 rounded-2xl"
+                      style={{ backgroundColor: 'rgba(250, 249, 246, 0.6)', border: '1px solid rgba(164, 141, 120, 0.18)' }}
+                    >
+                      <p className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'rgba(74, 59, 50, 0.65)' }}>
+                        Quick Facts
+                      </p>
+                      <ul className="mt-4 space-y-2">
+                        <li className="flex items-center gap-2">
+                          <DollarSign size={16} strokeWidth={1.6} aria-hidden="true" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                          <span className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Pay: $17–$22/hr</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <Briefcase size={16} strokeWidth={1.6} aria-hidden="true" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                          <span className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Type: Full-time / Part-time</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <MapPin size={16} strokeWidth={1.6} aria-hidden="true" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                          <span className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Location: In person</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div
+                      className="p-5 rounded-2xl"
+                      style={{ backgroundColor: 'rgba(250, 249, 246, 0.6)', border: '1px solid rgba(164, 141, 120, 0.18)' }}
+                    >
+                      <p className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'rgba(74, 59, 50, 0.65)' }}>
+                        Benefits
+                      </p>
+                      <ul className="mt-4 space-y-2">
+                        <li className="flex items-center gap-2">
+                          <Gift size={16} strokeWidth={1.6} aria-hidden="true" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                          <span className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Employee discount</span>
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle size={16} strokeWidth={1.6} aria-hidden="true" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                          <span className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Paid sick time</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="space-y-7 pt-2">
+                    <div className="space-y-3">
+                      <h5 className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>Overview</h5>
+                      <p className="font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                        Join our vibrant café team as a Barista Cashier. You’ll greet guests, prepare drinks and café items, handle transactions, and help keep the space welcoming, clean, and running smoothly.
+                      </p>
+                    </div>
+
+                    <div className="space-y-3">
+                      <h5 className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>Responsibilities</h5>
+                      <ul className="space-y-2">
+                        {[
+                          "Greet customers warmly and take orders with professionalism",
+                          "Prepare coffee beverages and food items to recipe and quality standards",
+                          "Operate Clover POS and process sales accurately",
+                          "Handle cash and card transactions with strong retail math",
+                          "Maintain cleanliness and food safety in prep and guest areas",
+                          "Move efficiently during rushes while maintaining hospitality",
+                          "Restock supplies and support basic food prep as needed",
+                        ].map((item) => (
+                          <li key={item} className="flex gap-3 items-start">
+                            <CheckCircle size={16} strokeWidth={1.6} aria-hidden="true" className="mt-[2px] flex-shrink-0" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                            <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="space-y-3">
+                      <h5 className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>Qualifications</h5>
+                      <ul className="space-y-2">
+                        {[
+                          "Prior barista experience or coffee knowledge preferred",
+                          "POS experience (Clover, Aloha, Micros, etc.) is a plus",
+                          "Strong customer service and communication skills",
+                          "Comfortable multitasking in a fast-paced environment",
+                          "Knowledge of food safety and food handling practices",
+                          "Reliable work ethic and solid time management",
+                          "Must have a California food handler card",
+                        ].map((item) => (
+                          <li key={item} className="flex gap-3 items-start">
+                            <CheckCircle size={16} strokeWidth={1.6} aria-hidden="true" className="mt-[2px] flex-shrink-0" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                            <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {["Customer Service", "Clover POS", "Cash Handling", "Food Safety"].map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-2 rounded-lg text-xs"
+                        style={{
+                          backgroundColor: 'rgba(164, 141, 120, 0.12)',
+                          color: 'rgba(44, 36, 32, 0.78)',
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Culture Values Section */}
+      <section
+        data-section="Culture Values"
+        className="py-24 md:py-32 relative overflow-hidden"
+        style={{ backgroundColor: 'var(--cafe-olive)' }}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-3 gap-10">
             <Reveal delay={200}>
               <div className="text-center space-y-4">
-                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}>
-                  <Heart size={28} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(237, 231, 216, 0.2)' }}>
+                  <Heart size={28} style={{ color: 'var(--cafe-cream)' }} strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>
+                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-cream)' }}>
                   Family Vibes
                 </h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                <p className="font-normal leading-relaxed" style={{ color: 'rgba(237, 231, 216, 0.9)' }}>
                   Locally-owned by a husband-wife team. This is our dream, and we want to grow it with people who&apos;re passionate about what we do.
                 </p>
               </div>
@@ -175,13 +240,13 @@ export default function CareersPage() {
 
             <Reveal delay={280}>
               <div className="text-center space-y-4">
-                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}>
-                  <Coffee size={28} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(237, 231, 216, 0.2)' }}>
+                  <Coffee size={28} style={{ color: 'var(--cafe-cream)' }} strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>
+                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-cream)' }}>
                   Craft-Focused
                 </h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                <p className="font-normal leading-relaxed" style={{ color: 'rgba(237, 231, 216, 0.9)' }}>
                   From espresso to acai bowls, we take pride in every detail. Learn barista skills, food prep, and the art of hospitality.
                 </p>
               </div>
@@ -189,13 +254,13 @@ export default function CareersPage() {
 
             <Reveal delay={360}>
               <div className="text-center space-y-4">
-                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}>
-                  <TrendingUp size={28} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+                <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(237, 231, 216, 0.2)' }}>
+                  <TrendingUp size={28} style={{ color: 'var(--cafe-cream)' }} strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>
+                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-cream)' }}>
                   Room to Grow
                 </h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                <p className="font-normal leading-relaxed" style={{ color: 'rgba(237, 231, 216, 0.9)' }}>
                   This is a new café with big ambitions. Grow with us—leadership opportunities, skill development, and career advancement.
                 </p>
               </div>
@@ -208,7 +273,6 @@ export default function CareersPage() {
       <section
         data-section="Perks & Benefits"
         className="py-24 md:py-32 relative"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <div className="max-w-5xl mx-auto px-6">
           <Reveal>
@@ -219,11 +283,11 @@ export default function CareersPage() {
 
           <div className="grid md:grid-cols-2 gap-8">
             <Reveal delay={100}>
-              <div className="flex gap-4 p-6 rounded-2xl" style={{ backgroundColor: 'rgba(244, 241, 234, 0.5)' }}>
+              <div className="flex gap-4 p-6 rounded-2xl">
                 <CheckCircle size={24} style={{ color: 'var(--cafe-tan)', flexShrink: 0 }} strokeWidth={1.5} />
                 <div>
                   <h3 className="font-serif text-xl mb-2" style={{ color: 'var(--cafe-black)' }}>Employee Training</h3>
-                  <p className="font-light" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                  <p className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
                     Comprehensive training in barista skills, food prep, customer service, and café operations.
                   </p>
                 </div>
@@ -231,11 +295,11 @@ export default function CareersPage() {
             </Reveal>
 
             <Reveal delay={180}>
-              <div className="flex gap-4 p-6 rounded-2xl" style={{ backgroundColor: 'rgba(244, 241, 234, 0.5)' }}>
+              <div className="flex gap-4 p-6 rounded-2xl">
                 <CheckCircle size={24} style={{ color: 'var(--cafe-tan)', flexShrink: 0 }} strokeWidth={1.5} />
                 <div>
                   <h3 className="font-serif text-xl mb-2" style={{ color: 'var(--cafe-black)' }}>Flexible Scheduling</h3>
-                  <p className="font-light" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                  <p className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
                     We work with your schedule. Students, parents, side hustlers—we get it.
                   </p>
                 </div>
@@ -243,11 +307,11 @@ export default function CareersPage() {
             </Reveal>
 
             <Reveal delay={260}>
-              <div className="flex gap-4 p-6 rounded-2xl" style={{ backgroundColor: 'rgba(244, 241, 234, 0.5)' }}>
+              <div className="flex gap-4 p-6 rounded-2xl">
                 <CheckCircle size={24} style={{ color: 'var(--cafe-tan)', flexShrink: 0 }} strokeWidth={1.5} />
                 <div>
                   <h3 className="font-serif text-xl mb-2" style={{ color: 'var(--cafe-black)' }}>Career Development</h3>
-                  <p className="font-light" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                  <p className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
                     Start as a barista, grow into a shift lead or manager. We promote from within.
                   </p>
                 </div>
@@ -255,141 +319,13 @@ export default function CareersPage() {
             </Reveal>
 
             <Reveal delay={340}>
-              <div className="flex gap-4 p-6 rounded-2xl" style={{ backgroundColor: 'rgba(244, 241, 234, 0.5)' }}>
+              <div className="flex gap-4 p-6 rounded-2xl">
                 <CheckCircle size={24} style={{ color: 'var(--cafe-tan)', flexShrink: 0 }} strokeWidth={1.5} />
                 <div>
                   <h3 className="font-serif text-xl mb-2" style={{ color: 'var(--cafe-black)' }}>Great Vibes Daily</h3>
-                  <p className="font-light" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                  <p className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
                     Work to a curated lofi house soundtrack in a beautiful space with a supportive team.
                   </p>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Open Positions */}
-      <section
-        data-section="Open Positions"
-        className="py-24 md:py-32 relative"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
-      >
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <Reveal>
-              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
-                We&apos;re Hiring
-              </span>
-            </Reveal>
-            <Reveal delay={100}>
-              <h2 className="font-serif text-5xl sm:text-6xl mb-6 leading-none" style={{ color: 'var(--cafe-black)' }}>
-                Open <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Positions</span>
-              </h2>
-            </Reveal>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Barista */}
-            <Reveal delay={150}>
-              <div className="p-8 rounded-2xl" style={{ backgroundColor: 'var(--cafe-white)', border: '2px solid rgba(164, 141, 120, 0.15)' }}>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}>
-                    <Coffee size={22} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
-                  </div>
-                  <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>Barista</h3>
-                </div>
-                <p className="font-light leading-relaxed mb-4" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  Craft exceptional espresso drinks, serve customers with warmth and care, and maintain our high quality standards. Learn latte art, dialing in espresso, and the science behind great coffee.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(164, 141, 120, 0.1)', color: 'var(--cafe-brown)' }}>
-                    Espresso Skills
-                  </span>
-                  <span className="px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(164, 141, 120, 0.1)', color: 'var(--cafe-brown)' }}>
-                    Customer Service
-                  </span>
-                  <span className="px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(164, 141, 120, 0.1)', color: 'var(--cafe-brown)' }}>
-                    Latte Art
-                  </span>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Opening Shift Lead */}
-            <Reveal delay={230}>
-              <div className="p-8 rounded-2xl" style={{ backgroundColor: 'var(--cafe-white)', border: '2px solid rgba(164, 141, 120, 0.15)' }}>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}>
-                    <Clock size={22} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
-                  </div>
-                  <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>Opening Shift Lead</h3>
-                </div>
-                <p className="font-light leading-relaxed mb-4" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  Open the café, prep for service, and lead the morning team. Responsible for setting up equipment, managing opening duties, and ensuring everything runs smoothly during morning rush.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(164, 141, 120, 0.1)', color: 'var(--cafe-brown)' }}>
-                    Leadership
-                  </span>
-                  <span className="px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(164, 141, 120, 0.1)', color: 'var(--cafe-brown)' }}>
-                    Opening Procedures
-                  </span>
-                  <span className="px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(164, 141, 120, 0.1)', color: 'var(--cafe-brown)' }}>
-                    Team Management
-                  </span>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Closing Shift Lead */}
-            <Reveal delay={310}>
-              <div className="p-8 rounded-2xl" style={{ backgroundColor: 'var(--cafe-white)', border: '2px solid rgba(164, 141, 120, 0.15)' }}>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}>
-                    <Briefcase size={22} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
-                  </div>
-                  <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>Closing Shift Lead</h3>
-                </div>
-                <p className="font-light leading-relaxed mb-4" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  Close the café, clean and reset for the next day, and lead the evening team. Ensure all closing checklists are completed and the space is ready for tomorrow&apos;s service.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(164, 141, 120, 0.1)', color: 'var(--cafe-brown)' }}>
-                    Leadership
-                  </span>
-                  <span className="px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(164, 141, 120, 0.1)', color: 'var(--cafe-brown)' }}>
-                    Closing Procedures
-                  </span>
-                  <span className="px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(164, 141, 120, 0.1)', color: 'var(--cafe-brown)' }}>
-                    Quality Control
-                  </span>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Kitchen Prep/Barista */}
-            <Reveal delay={390}>
-              <div className="p-8 rounded-2xl" style={{ backgroundColor: 'var(--cafe-white)', border: '2px solid rgba(164, 141, 120, 0.15)' }}>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}>
-                    <ChefHat size={22} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
-                  </div>
-                  <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>Kitchen Prep / Barista</h3>
-                </div>
-                <p className="font-light leading-relaxed mb-4" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  Prepare fresh acai bowls, sandwiches, and pastries while cross-training on the coffee bar. Perfect for someone who loves both food and coffee, and wants to learn multiple skills.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(164, 141, 120, 0.1)', color: 'var(--cafe-brown)' }}>
-                    Food Prep
-                  </span>
-                  <span className="px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(164, 141, 120, 0.1)', color: 'var(--cafe-brown)' }}>
-                    Barista Training
-                  </span>
-                  <span className="px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(164, 141, 120, 0.1)', color: 'var(--cafe-brown)' }}>
-                    Multi-Tasking
-                  </span>
                 </div>
               </div>
             </Reveal>
@@ -401,7 +337,6 @@ export default function CareersPage() {
       <section
         data-section="Hiring Process"
         className="py-24 md:py-32 relative"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
       >
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-20">
@@ -411,7 +346,7 @@ export default function CareersPage() {
               </span>
             </Reveal>
             <Reveal delay={100}>
-              <h2 className="font-serif text-5xl sm:text-6xl mb-6 leading-none" style={{ color: 'var(--cafe-black)' }}>
+              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none" style={{ color: 'var(--cafe-black)' }}>
                 How We <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Hire</span>
               </h2>
             </Reveal>
@@ -427,8 +362,8 @@ export default function CareersPage() {
                 <h3 className="font-serif text-2xl md:text-3xl" style={{ color: 'var(--cafe-black)' }}>
                   Apply
                 </h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  If you vibe with our mission and love great coffee, we want to hear from you. Fill out the form below and show us who you are.
+                <p className="font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                  If you vibe with our mission and love great coffee, we want to hear from you. Email your resume (or apply on Indeed) and the role you&apos;re applying for.
                 </p>
               </div>
             </Reveal>
@@ -442,8 +377,8 @@ export default function CareersPage() {
                 <h3 className="font-serif text-2xl md:text-3xl" style={{ color: 'var(--cafe-black)' }}>
                   Connect
                 </h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  We&apos;ll set up a casual conversation—think of it as getting to know each other over coffee. You&apos;ll learn about our café, our culture, and the role. We&apos;ll learn about you, your goals, and what you bring to the table.
+                <p className="font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                  We&apos;ll set up a casual conversation—think of it as getting to know each other over coffee.
                 </p>
               </div>
             </Reveal>
@@ -457,8 +392,8 @@ export default function CareersPage() {
                 <h3 className="font-serif text-2xl md:text-3xl" style={{ color: 'var(--cafe-black)' }}>
                   Decision
                 </h3>
-                <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                  We know waiting is tough, so we move fast. Whether it&apos;s a yes or not quite right now, we&apos;ll keep you in the loop every step of the way.
+                <p className="font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                  We know waiting is tough, so we move fast. We&apos;ll keep you in the loop every step of the way.
                 </p>
               </div>
             </Reveal>
@@ -466,459 +401,116 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Application Form */}
-      <section
-        data-section="Application Form"
-        className="py-24 md:py-32 relative"
-        style={{ backgroundColor: 'var(--cafe-mist)' }}
-      >
-        <div className="max-w-3xl mx-auto px-6">
+      {/* Email Application (form hidden for now) */}
+      <section id="apply" data-section="Apply" className="py-24 md:py-32 relative">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <Reveal>
-              <h2 className="font-serif text-4xl md:text-5xl mb-6" style={{ color: 'var(--cafe-black)' }}>
-                Ready to <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Apply?</span>
-              </h2>
+              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+                Get Started
+              </span>
             </Reveal>
             <Reveal delay={100}>
-              <p className="text-lg font-light" style={{ color: 'rgba(74, 59, 50, 0.82)' }}>
-                We&apos;re excited to meet you! Fill out the form below and we&apos;ll be in touch soon.
-              </p>
+              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none" style={{ color: 'var(--cafe-black)' }}>
+                Send Your <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Resume</span>
+              </h2>
             </Reveal>
           </div>
 
-          <form
-            onSubmit={handleSubmit}
-            className="p-8 md:p-10 rounded-3xl space-y-6"
-            style={{ backgroundColor: 'var(--cafe-white)', border: '2px solid rgba(164, 141, 120, 0.2)' }}
-          >
-            {/* Full Name */}
-            <div>
-              <label htmlFor="fullName" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Full Name <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <input
-                type="text"
-                id="fullName"
-                required
-                value={formData.fullName}
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                style={{
-                  backgroundColor: 'var(--cafe-mist)',
-                  border: '1px solid rgba(164, 141, 120, 0.2)',
-                  color: 'var(--cafe-black)'
-                }}
-                placeholder="Your full name"
-              />
-            </div>
-
-            {/* Email */}
-            <div>
-              <label htmlFor="email" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Email <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <input
-                type="email"
-                id="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                style={{
-                  backgroundColor: 'var(--cafe-mist)',
-                  border: '1px solid rgba(164, 141, 120, 0.2)',
-                  color: 'var(--cafe-black)'
-                }}
-                placeholder="your@email.com"
-              />
-            </div>
-
-            {/* Phone */}
-            <div>
-              <label htmlFor="phone" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Phone Number <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                required
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                style={{
-                  backgroundColor: 'var(--cafe-mist)',
-                  border: '1px solid rgba(164, 141, 120, 0.2)',
-                  color: 'var(--cafe-black)'
-                }}
-                placeholder="(555) 123-4567"
-              />
-            </div>
-
-            {/* Birthdate */}
-            <div>
-              <label htmlFor="birthdate" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Date of Birth <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <input
-                type="date"
-                id="birthdate"
-                required
-                value={formData.birthdate}
-                onChange={(e) => setFormData({ ...formData, birthdate: e.target.value })}
-                max={new Date().toISOString().split('T')[0]}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                style={{
-                  backgroundColor: 'var(--cafe-mist)',
-                  border: '1px solid rgba(164, 141, 120, 0.2)',
-                  color: 'var(--cafe-black)'
-                }}
-              />
-            </div>
-
-            {/* Position(s) Interested In */}
-            <div>
-              <label className="block mb-3 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Position(s) Interested In <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <div className="space-y-3">
-                {[
-                  { value: "barista", label: "Barista" },
-                  { value: "opening-lead", label: "Opening Shift Lead" },
-                  { value: "closing-lead", label: "Closing Shift Lead" },
-                  { value: "kitchen-prep", label: "Kitchen Prep / Barista" },
-                ].map((position) => (
-                  <label
-                    key={position.value}
-                    className="flex items-center gap-3 p-4 rounded-lg cursor-pointer transition-all"
-                    style={{
-                      backgroundColor: formData.positions.includes(position.value)
-                        ? 'rgba(164, 141, 120, 0.15)'
-                        : 'rgba(244, 241, 234, 0.5)',
-                      border: `2px solid ${formData.positions.includes(position.value) ? 'var(--cafe-tan)' : 'transparent'}`
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={formData.positions.includes(position.value)}
-                      onChange={() => handlePositionToggle(position.value)}
-                      className="w-5 h-5"
-                      style={{ accentColor: 'var(--cafe-tan)' }}
-                    />
-                    <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
-                      {position.label}
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Employment Type */}
-            <div>
-              <label className="block mb-3 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Employment Type <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { value: "full-time", label: "Full-time" },
-                  { value: "part-time", label: "Part-time" },
-                  { value: "weekends", label: "Weekends Only" },
-                  { value: "flexible", label: "Flexible" },
-                ].map((option) => (
-                  <label
-                    key={option.value}
-                    className="flex items-center gap-3 p-4 rounded-lg cursor-pointer transition-all"
-                    style={{
-                      backgroundColor: formData.employmentType === option.value
-                        ? 'rgba(164, 141, 120, 0.15)'
-                        : 'rgba(244, 241, 234, 0.5)',
-                      border: `2px solid ${formData.employmentType === option.value ? 'var(--cafe-tan)' : 'transparent'}`
-                    }}
-                  >
-                    <input
-                      type="radio"
-                      name="employmentType"
-                      value={option.value}
-                      checked={formData.employmentType === option.value}
-                      onChange={(e) => setFormData({ ...formData, employmentType: e.target.value })}
-                      className="w-5 h-5"
-                      style={{ accentColor: 'var(--cafe-tan)' }}
-                      required
-                    />
-                    <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
-                      {option.label}
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Work Availability - Days */}
-            <div>
-              <label className="block mb-3 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Work Availability <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <p className="text-sm mb-3" style={{ color: 'rgba(74, 59, 50, 0.7)' }}>
-                Select all days you&apos;re available. Saturday availability may be required (we&apos;re closed Sundays).
-              </p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {[
-                  { value: "monday", label: "Monday" },
-                  { value: "tuesday", label: "Tuesday" },
-                  { value: "wednesday", label: "Wednesday" },
-                  { value: "thursday", label: "Thursday" },
-                  { value: "friday", label: "Friday" },
-                  { value: "saturday", label: "Saturday" },
-                ].map((day) => (
-                  <label
-                    key={day.value}
-                    className="flex items-center gap-3 p-4 rounded-lg cursor-pointer transition-all"
-                    style={{
-                      backgroundColor: formData.daysAvailable.includes(day.value)
-                        ? 'rgba(164, 141, 120, 0.15)'
-                        : 'rgba(244, 241, 234, 0.5)',
-                      border: `2px solid ${formData.daysAvailable.includes(day.value) ? 'var(--cafe-tan)' : 'transparent'}`
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={formData.daysAvailable.includes(day.value)}
-                      onChange={() => handleDayToggle(day.value)}
-                      className="w-5 h-5"
-                      style={{ accentColor: 'var(--cafe-tan)' }}
-                    />
-                    <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
-                      {day.label}
-                    </span>
-                  </label>
-                ))}
-              </div>
-              {availabilityError && (
-                <p className="text-sm mt-2" style={{ color: '#ef4444' }}>
-                  {availabilityError}
-                </p>
-              )}
-            </div>
-
-            {/* When Can You Start */}
-            <div>
-              <label htmlFor="startDate" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                When Can You Start? <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <input
-                type="date"
-                id="startDate"
-                required
-                value={formData.startDate}
-                onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-                min={new Date().toISOString().split('T')[0]}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                style={{
-                  backgroundColor: 'var(--cafe-mist)',
-                  border: '1px solid rgba(164, 141, 120, 0.2)',
-                  color: 'var(--cafe-black)'
-                }}
-              />
-            </div>
-
-            {/* Hours Per Week */}
-            <div>
-              <label className="block mb-3 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Hours Per Week Desired <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { value: "0-16", label: "0-16 Hours" },
-                  { value: "16-20", label: "16-20 Hours" },
-                  { value: "20-35", label: "20-35 Hours" },
-                  { value: "35-40", label: "35-40 Hours" },
-                ].map((option) => (
-                  <label
-                    key={option.value}
-                    className="flex items-center gap-3 p-4 rounded-lg cursor-pointer transition-all"
-                    style={{
-                      backgroundColor: formData.hoursPerWeek === option.value
-                        ? 'rgba(164, 141, 120, 0.15)'
-                        : 'rgba(244, 241, 234, 0.5)',
-                      border: `2px solid ${formData.hoursPerWeek === option.value ? 'var(--cafe-tan)' : 'transparent'}`
-                    }}
-                  >
-                    <input
-                      type="radio"
-                      name="hoursPerWeek"
-                      value={option.value}
-                      checked={formData.hoursPerWeek === option.value}
-                      onChange={(e) => setFormData({ ...formData, hoursPerWeek: e.target.value })}
-                      className="w-5 h-5"
-                      style={{ accentColor: 'var(--cafe-tan)' }}
-                      required
-                    />
-                    <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
-                      {option.label}
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Commitment Length */}
-            <div>
-              <label className="block mb-3 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                How Long Do You Plan to Work Here? <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {[
-                  { value: "3-6-months", label: "3-6 months", sublabel: "Seasonal/Short-term" },
-                  { value: "6-12-months", label: "6-12 months", sublabel: "" },
-                  { value: "1-2-years", label: "1-2 years", sublabel: "" },
-                  { value: "2plus-years", label: "2+ years", sublabel: "Long-term/Career" },
-                ].map((option) => (
-                  <label
-                    key={option.value}
-                    className="flex items-center gap-3 p-4 rounded-lg cursor-pointer transition-all"
-                    style={{
-                      backgroundColor: formData.commitmentLength === option.value
-                        ? 'rgba(164, 141, 120, 0.15)'
-                        : 'rgba(244, 241, 234, 0.5)',
-                      border: `2px solid ${formData.commitmentLength === option.value ? 'var(--cafe-tan)' : 'transparent'}`
-                    }}
-                  >
-                    <input
-                      type="radio"
-                      name="commitmentLength"
-                      value={option.value}
-                      checked={formData.commitmentLength === option.value}
-                      onChange={(e) => setFormData({ ...formData, commitmentLength: e.target.value })}
-                      className="w-5 h-5"
-                      style={{ accentColor: 'var(--cafe-tan)' }}
-                      required
-                    />
-                    <div className="flex flex-col">
-                      <span className="font-medium" style={{ color: 'var(--cafe-black)' }}>
-                        {option.label}
-                      </span>
-                      {option.sublabel && (
-                        <span className="text-xs" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>
-                          {option.sublabel}
-                        </span>
-                      )}
-                    </div>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Message */}
-            <div>
-              <label htmlFor="message" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Why The Notebook Café? <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <textarea
-                id="message"
-                required
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                rows={5}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 resize-none"
-                style={{
-                  backgroundColor: 'var(--cafe-mist)',
-                  border: '1px solid rgba(164, 141, 120, 0.2)',
-                  color: 'var(--cafe-black)'
-                }}
-                placeholder="Tell us about yourself and why you want to work here..."
-              />
-            </div>
-
-            {/* Resume Upload */}
-            <div>
-              <label htmlFor="resume" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Resume <span style={{ color: 'var(--cafe-tan)' }}>*</span>
-              </label>
-              <div
-                className="relative p-8 rounded-lg border-2 border-dashed text-center cursor-pointer transition-all hover:border-cafe-tan"
-                style={{
-                  borderColor: resumeFile ? 'var(--cafe-tan)' : 'rgba(164, 141, 120, 0.3)',
-                  backgroundColor: resumeFile ? 'rgba(164, 141, 120, 0.05)' : 'var(--cafe-mist)'
-                }}
-              >
-                <input
-                  type="file"
-                  id="resume"
-                  required
-                  accept=".pdf,.doc,.docx"
-                  onChange={(e) => setResumeFile(e.target.files?.[0] || null)}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                />
-                <Upload size={32} className="mx-auto mb-3" style={{ color: 'var(--cafe-tan)' }} />
-                <p className="font-medium mb-1" style={{ color: 'var(--cafe-black)' }}>
-                  {resumeFile ? resumeFile.name : "Click to upload resume"}
-                </p>
-                <p className="text-sm" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>
-                  PDF, DOC, or DOCX (Max 5MB)
-                </p>
-              </div>
-            </div>
-
-            {/* Optional Supplemental Application PDF */}
-            <div>
-              <label htmlFor="supplemental" className="block mb-2 font-medium" style={{ color: 'var(--cafe-black)' }}>
-                Supplemental Application <span className="text-sm font-normal" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>(Optional)</span>
-              </label>
-              <p className="text-sm mb-3" style={{ color: 'rgba(74, 59, 50, 0.7)' }}>
-                If you have additional information to provide, you may upload a completed application form (PDF only).{' '}
-                <a
-                  href="/application-template.html"
-                  target="_blank"
-                  className="font-medium underline"
-                  style={{ color: 'var(--cafe-tan)' }}
-                >
-                  Download our application template here
-                </a>
-                {' '}(open in browser, fill out, and print to PDF).
-              </p>
-              <div
-                className="relative p-8 rounded-lg border-2 border-dashed text-center cursor-pointer transition-all hover:border-cafe-tan"
-                style={{
-                  borderColor: supplementalFile ? 'var(--cafe-tan)' : 'rgba(164, 141, 120, 0.3)',
-                  backgroundColor: supplementalFile ? 'rgba(164, 141, 120, 0.05)' : 'var(--cafe-mist)'
-                }}
-              >
-                <input
-                  type="file"
-                  id="supplemental"
-                  accept=".pdf"
-                  onChange={(e) => setSupplementalFile(e.target.files?.[0] || null)}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                />
-                <Upload size={28} className="mx-auto mb-3" style={{ color: 'var(--cafe-tan)' }} />
-                <p className="font-medium mb-1" style={{ color: 'var(--cafe-black)' }}>
-                  {supplementalFile ? supplementalFile.name : "Click to upload supplemental application"}
-                </p>
-                <p className="text-sm" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>
-                  PDF only (Max 5MB)
-                </p>
-              </div>
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isSubmitting || submitStatus === "success"}
-              className="w-full py-4 rounded-lg font-serif text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02]"
+          <Reveal delay={200}>
+            <div
+              className="p-8 sm:p-10 md:p-12 rounded-3xl shadow-[0_14px_40px_rgba(44,36,32,0.08)]"
               style={{
-                backgroundColor: 'var(--cafe-tan)',
-                color: 'white',
-                border: 'none'
+                backgroundColor: 'rgba(250, 249, 246, 0.85)',
+                border: '2px solid rgba(164, 141, 120, 0.14)',
               }}
             >
-              {isSubmitting ? "Submitting..." : submitStatus === "success" ? "Application Sent! Redirecting..." : "Submit Application"}
-            </button>
+              <div className="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-16 items-start">
+                <div className="space-y-6">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="w-12 h-12 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}
+                    >
+                      <Mail size={20} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+                    </div>
+                    <span className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'var(--cafe-tan)' }}>
+                      Careers
+                    </span>
+                  </div>
 
-            {submitStatus === "error" && (
-              <p className="text-center font-medium" style={{ color: '#ef4444' }}>
-                Something went wrong. Please try again or email us directly.
-              </p>
-            )}
-          </form>
+                  <p className="text-base md:text-lg font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+                    Send your resume and a quick note. We&apos;ll reply to qualified candidates within 3–5 business days.
+                  </p>
+
+                  <ul className="space-y-4">
+                    {[
+                      "Role you’re applying for",
+                      "Your availability",
+                      "Resume (PDF preferred)",
+                    ].map((item) => (
+                      <li key={item} className="flex gap-3 items-start">
+                        <CheckCircle
+                          size={18}
+                          strokeWidth={1.6}
+                          aria-hidden="true"
+                          className="mt-[2px] flex-shrink-0"
+                          style={{ color: 'rgba(74, 59, 50, 0.55)' }}
+                        />
+                        <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.82)' }}>
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                </div>
+
+                <div className="flex flex-col gap-4">
+                  <div
+                    className="p-6 md:p-7 rounded-2xl"
+                    style={{
+                      backgroundColor: 'rgba(164, 141, 120, 0.10)',
+                      border: '1.5px solid rgba(164, 141, 120, 0.22)',
+                    }}
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <Mail size={18} strokeWidth={1.8} style={{ color: 'var(--cafe-tan)' }} />
+                      <span className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'rgba(74, 59, 50, 0.7)' }}>
+                        Email Your Resume
+                      </span>
+                    </div>
+                    <a
+                      href="mailto:thenotebookcafellc@gmail.com"
+                      className="block font-serif text-base sm:text-lg md:text-xl leading-tight break-words md:break-normal"
+                      style={{ color: 'var(--cafe-black)', textDecoration: 'none' }}
+                    >
+                      thenotebookcafellc@gmail.com
+                    </a>
+                    <p className="mt-3 text-sm font-normal" style={{ color: 'rgba(74, 59, 50, 0.75)' }}>
+                      Include the role you’re applying for and your availability.
+                    </p>
+                  </div>
+
+                  <a
+                    href={INDEED_JOB_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex w-full items-center justify-center gap-3 px-6 sm:px-10 py-4 rounded-full font-semibold tracking-[0.14em] sm:tracking-[0.16em] uppercase text-xs sm:text-sm transition-transform hover:scale-[1.02]"
+                    style={{
+                      backgroundColor: 'rgba(250, 249, 246, 0.55)',
+                      color: 'rgba(44, 36, 32, 0.9)',
+                      textDecoration: 'none',
+                      border: '1.5px solid rgba(44, 36, 32, 0.35)',
+                    }}
+                  >
+                    <ExternalLink size={18} strokeWidth={1.8} />
+                    Apply on Indeed
+                  </a>
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
     </main>

@@ -1,0 +1,45 @@
+/* ============================================================
+   SIGNATURE POURS GRID (component)
+============================================================ */
+
+.signature-pour-card {
+  cursor: pointer;
+  position: relative;
+}
+
+.signature-pour-image-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .signature-pour-image-wrapper {
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+}
+
+@media (hover: hover) {
+  .signature-pour-card:hover .signature-pour-image-wrapper {
+    transform: translateY(-6px) scale(1.02) !important;
+  }
+
+  .signature-pour-card:hover .signature-pour-image {
+    transform: scale(1.05) !important;
+  }
+}
+
+.signature-pour-image {
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (hover: none) {
+  .signature-pour-card:active .signature-pour-image-wrapper {
+    transform: scale(0.98);
+  }
+}
+
+.signature-pour-image {
+  /* The filter property is removed from here */
+}

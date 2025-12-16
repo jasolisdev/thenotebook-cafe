@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { checkRateLimit } from "@/app/lib/rateLimit";
 
 export async function POST(request: Request) {
+  // Rate limiting: 3 requests per 15 minutes (prevent brute force)
+  const rateLimitError = checkRateLimit(request, "/api/auth/verify", 3, 900000);
+  if (rateLimitError) return rateLimitError;
+
   try {
     const { password } = await request.json();
     const correctPassword = process.env.SITE_PASSWORD;
@@ -20,7 +25,7 @@ export async function POST(request: Request) {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
-        maxAge: 60, // 1 minute (for testing - change back to 60 * 60 * 24 * 7 for production)
+        maxAge: 60 * 60 * 24 * 7, // 7 days
         path: "/",
       });
 

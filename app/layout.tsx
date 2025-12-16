@@ -4,35 +4,23 @@ import "./globals.css";
 
 // Component styles
 import "./styles/components/navigation.css";
-import "./styles/components/hero.css";
 import "./styles/components/buttons.css";
 import "./styles/components/footer.css";
 import "./styles/components/announcement.css";
 import "./styles/components/consent-banner.css";
-import "./styles/components/what-to-expect.css";
 
 // Layout styles
 import "./styles/layout/sections.css";
 import "./styles/layout/animations.css";
 
-// Page styles
-import "./styles/pages/home.css";
-
 import { ThemeProvider } from "next-themes";
-import { DM_Serif_Display, Outfit, Caveat } from "next/font/google";
+import { DM_Serif_Display, Outfit, Caveat, Inter, Playfair_Display } from "next/font/google";
 import { cookies } from "next/headers";
 import PasswordGate from "./components/ui/PasswordGate";
-import SiteHeader from "./components/layout/SiteHeader";
-import SiteFooter from "./components/layout/SiteFooter";
-import AnnouncementBanner from "./components/ui/AnnouncementBanner";
+import SiteShell from "./components/layout/SiteShell";
 import { client } from "@/sanity/lib/client";
 import { CartProvider } from "./components/providers/CartProvider";
-import { CartDrawer } from "./components/features/CartDrawer";
-import { AccessibilityWidget } from "./components/features/Accessibility/AccessibilityWidget";
-import ConsentBanner from "./components/ui/ConsentBanner";
-import AnalyticsLoader from "./components/ui/AnalyticsLoader";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 // Google Fonts
 const dmSerif = DM_Serif_Display({
@@ -44,7 +32,7 @@ const dmSerif = DM_Serif_Display({
 });
 
 const outfit = Outfit({
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
@@ -55,6 +43,24 @@ const caveat = Caveat({
   subsets: ["latin"],
   variable: "--font-handwritten",
   display: "swap",
+  preload: false,
+});
+
+const inter = Inter({
+  weight: ["400", "500", "600"],
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+  preload: false,
+});
+
+const playfairDisplay = Playfair_Display({
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -91,7 +97,7 @@ export default async function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${dmSerif.variable} ${outfit.variable} ${caveat.variable}`}
+      className={`${dmSerif.variable} ${outfit.variable} ${caveat.variable} ${inter.variable} ${playfairDisplay.variable}`}
     >
       <body className="antialiased font-sans">
         <ThemeProvider
@@ -99,31 +105,21 @@ export default async function RootLayout({
           defaultTheme="dark"
           enableSystem={false}
         >
-          <CartProvider>
-            {showPasswordGate ? (
-              <PasswordGate />
-            ) : (
-              <>
-                {showAnnouncement && <AnnouncementBanner />}
-                <SiteHeader
+          <ErrorBoundary>
+            <CartProvider>
+              {showPasswordGate ? (
+                <PasswordGate />
+              ) : (
+                <SiteShell
                   instagramUrl={settings?.social?.instagram}
                   spotifyUrl={settings?.social?.spotify}
-                />
-                <div className="page-content">
+                  showAnnouncement={showAnnouncement}
+                >
                   {children}
-                </div>
-                <SiteFooter />
-                <ConsentBanner />
-                <AnalyticsLoader />
-                {/* VirtualBarista temporarily hidden for hero debugging */}
-                {/* <VirtualBarista /> */}
-                <AccessibilityWidget />
-                <CartDrawer />
-                <Analytics />
-                <SpeedInsights />
-              </>
-            )}
-          </CartProvider>
+                </SiteShell>
+              )}
+            </CartProvider>
+          </ErrorBoundary>
         </ThemeProvider>
       </body>
     </html>

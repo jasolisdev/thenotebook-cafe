@@ -23,7 +23,7 @@ export default function RefundsPage() {
       <section className="space-y-4">
         <h2 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>How to request a refund</h2>
         <ul className="list-disc pl-5 space-y-2 text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
-          <li>Visit us in person or email <a href="mailto:hello@notebook.cafe" className="underline" style={{ color: 'var(--cafe-tan)' }}>hello@notebook.cafe</a>.</li>
+          <li>Visit us in person or email <a href="mailto:thenotebookcafellc@gmail.com" className="underline" style={{ color: 'var(--cafe-tan)' }}>thenotebookcafellc@gmail.com</a>.</li>
           <li>Include order details (date, time, items) and what went wrong.</li>
           <li>For online orders, include your order number and platform.</li>
         </ul>
@@ -40,8 +40,8 @@ export default function RefundsPage() {
         <h2 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>Questions</h2>
         <p className="text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
           We want every experience to be great. If something’s off, let us know and we’ll make it right:{" "}
-          <a href="mailto:hello@notebook.cafe" className="underline" style={{ color: 'var(--cafe-tan)' }}>
-            hello@notebook.cafe
+          <a href="mailto:thenotebookcafellc@gmail.com" className="underline" style={{ color: 'var(--cafe-tan)' }}>
+            thenotebookcafellc@gmail.com
           </a>.
         </p>
       </section>

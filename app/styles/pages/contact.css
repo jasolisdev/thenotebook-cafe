@@ -1,0 +1,115 @@
+/* Contact Page */
+
+.contact-page {
+  color: var(--cafe-brown);
+}
+
+.contact-fixed-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--cafe-mist);
+  background-image: none;
+}
+
+.contact-section-title {
+  color: var(--cafe-black);
+}
+
+
+.contact-section-title-accent {
+  color: var(--cafe-tan);
+}
+
+.contact-divider--black {
+  background-color: var(--cafe-black);
+}
+
+.contact-divider--tan {
+  background-color: var(--cafe-tan);
+}
+
+/* Icons & Badges */
+.contact-icon-badge {
+  background-color: rgba(var(--cafe-tan-rgb), 0.12);
+}
+
+.contact-icon {
+  color: var(--cafe-tan);
+}
+
+.contact-eyebrow {
+  color: var(--cafe-tan);
+}
+
+/* Links */
+.contact-directions-link {
+  color: var(--cafe-tan);
+}
+
+.contact-directions-link:focus-visible {
+  outline: 2px solid rgba(var(--cafe-tan-rgb), 0.8);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Map Section */
+.contact-map-frame {
+  border: 2px solid rgba(var(--cafe-tan-rgb), 0.2);
+  box-shadow: 0 8px 30px rgba(var(--cafe-black-rgb), 0.15);
+}
+
+.contact-map-badge {
+  background-color: var(--cafe-tan);
+  color: var(--cafe-white);
+  border-radius: 0.75rem;
+  padding: 1rem 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  font-family: var(--font-display);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
+}
+
+/* Quote Section */
+.contact-quote {
+  background-color: rgba(var(--cafe-tan-rgb), 0.08);
+  border: 1px solid rgba(var(--cafe-tan-rgb), 0.2);
+}
+
+.contact-quote__icon {
+  color: var(--cafe-tan);
+}
+
+.contact-quote__text {
+  color: rgba(var(--cafe-brown-rgb), 0.8);
+}
+
+.contact-quote__footer {
+  color: var(--cafe-tan);
+}
+
+/* Decorative Elements */
+.contact-info-deco--phone {
+  top: 10%;
+  right: 12%;
+  animation-duration: 11s;
+}
+
+.contact-info-deco--clock {
+  bottom: 10%;
+  left: 8%;
+  animation-duration: 12s;
+  animation-delay: 0.5s;
+}
+
+.contact-map-deco--pin {
+  top: 8%;
+  left: 10%;
+  animation-duration: 12s;
+}
+
+.contact-map-deco--coffee {
+  bottom: 8%;
+  right: 10%;
+  animation-duration: 11s;
+  animation-delay: 0.6s;
+}

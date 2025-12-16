@@ -122,7 +122,7 @@ export const CartDrawer: React.FC = () => {
                           className="object-cover"
                         />
                         <div
-                          className="absolute bottom-0 right-0 text-[10px] font-bold px-1.5 py-0.5 rounded-tl-md"
+                          className="absolute bottom-0 right-0 text-2xs font-bold px-1.5 py-0.5 rounded-tl-md"
                           style={{ backgroundColor: colors.black, color: colors.white }}
                         >
                           x{item.quantity}
@@ -142,7 +142,7 @@ export const CartDrawer: React.FC = () => {
                           {item.modifiers.map((mod, i) => (
                             <span
                               key={i}
-                              className="text-[10px] px-1.5 py-0.5 rounded border"
+                              className="text-2xs px-1.5 py-0.5 rounded border"
                               style={{ backgroundColor: colors.mist, color: colors.brown, borderColor: `${colors.beige}80` }}
                             >
                               {mod.optionLabel}

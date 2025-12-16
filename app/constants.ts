@@ -2,8 +2,8 @@ import { MenuItem, ModifierGroup } from './types';
 
 export const MENU_ITEMS: MenuItem[] = [
   // Drinks - Featured
-  { id: "1", name: "Honey Lavender Latte", description: "Floral lavender and local honey with espresso and steamed milk. Light and aromatic.", price: "$5.75", section: "drinks", subcategory: "Featured Drinks", tag: "popular" },
-  { id: "2", name: "Iced Brown Sugar Shaken Espresso", description: "Shaken espresso with brown sugar and oat milk over ice. Smooth and lightly sweet.", price: "$5.50", section: "drinks", subcategory: "Featured Drinks", tag: "popular" },
+  { id: "1", name: "Pumpkin Spice Latte", description: "Fall classic with pumpkin, cinnamon, and nutmeg. Topped with whipped cream.", price: "$6.00", section: "drinks", subcategory: "Featured Drinks", tag: "seasonal" },
+  { id: "2", name: "Peppermint Mocha", description: "Rich chocolate, espresso, and cool peppermint. Holiday favorite, hot or iced.", price: "$6.00", section: "drinks", subcategory: "Featured Drinks", tag: "seasonal" },
 
   // Drinks - Espresso
   { id: "3", name: "Espresso", description: "Rich, concentrated shot of pure coffee excellence. Bold flavor with a smooth crema finish.", price: "$3.50", section: "drinks", subcategory: "Espresso Drinks" },
@@ -37,10 +37,6 @@ export const MENU_ITEMS: MenuItem[] = [
   { id: "23", name: "Kids Hot Chocolate", description: "Smaller portion of our rich hot chocolate. Topped with whipped cream and sprinkles.", price: "$3.50", section: "drinks", subcategory: "Kids Drinks" },
   { id: "24", name: "Apple Juice", description: "Fresh pressed apple juice. No added sugar.", price: "$2.50", section: "drinks", subcategory: "Kids Drinks" },
   { id: "25", name: "Chocolate Milk", description: "Cold whole milk with premium chocolate syrup. Classic favorite.", price: "$3.00", section: "drinks", subcategory: "Kids Drinks" },
-
-  // Drinks - Seasonal
-  { id: "26", name: "Pumpkin Spice Latte", description: "Fall classic with pumpkin, cinnamon, and nutmeg. Topped with whipped cream.", price: "$6.00", section: "drinks", subcategory: "Seasonal Drinks", tag: "seasonal" },
-  { id: "27", name: "Peppermint Mocha", description: "Rich chocolate, espresso, and cool peppermint. Holiday favorite, hot or iced.", price: "$6.00", section: "drinks", subcategory: "Seasonal Drinks", tag: "seasonal" },
 
   // Meals - Açaí Bowls
   { id: "28", name: "Build Your Own Bowl", description: "Create your perfect bowl with fresh fruits, toppings, and drizzles.", price: "$12.00", section: "meals", subcategory: "Açaí Bowls", tag: "popular" },
