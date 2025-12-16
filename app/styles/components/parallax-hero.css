@@ -8,9 +8,9 @@
   overflow: hidden;
   background-image: var(--parallax-hero-image);
   background-color: var(--parallax-hero-color, transparent);
-  background-size: cover;
+  background-size: var(--parallax-hero-size-mobile, var(--parallax-hero-size, cover));
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: var(--parallax-hero-attachment, fixed);
   background-repeat: no-repeat;
   z-index: 0;
   isolation: isolate;
@@ -43,6 +43,11 @@
       rgba(0, 0, 0, 0.03) 100%);
 }
 
+/* Solid dark overlay variant */
+.parallax-hero__overlay--solid {
+  background: rgba(0, 0, 0, 0.42);
+}
+
 .parallax-hero__content {
   position: relative;
   z-index: 1;
@@ -63,6 +68,53 @@
 
 .parallax-hero__subheadline {
   color: rgba(var(--cafe-cream-rgb, 250, 249, 246), 0.9);
+}
+
+/* Shared hero typography (Menu/Story/Contact/etc.) */
+.tnc-hero__content {
+  width: min(980px, 100%);
+  text-align: left;
+}
+
+.tnc-hero__inner {
+  padding: 0 1.25rem;
+  max-width: 36rem;
+}
+
+.tnc-hero__title {
+  font-size: clamp(2.25rem, 4.6vw, 4rem);
+  line-height: 1.05;
+  color: rgba(255, 255, 255, 0.96);
+  letter-spacing: -0.02em;
+}
+
+.tnc-hero__subtitle {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.tnc-hero__lede {
+  margin-top: 0.9rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.5;
+  text-transform: none;
+  letter-spacing: normal;
+  color: rgba(255, 255, 255, 0.84);
+}
+
+/* Compact hero variant (used on most interior pages) */
+.parallax-hero--compact {
+  min-height: 28vh;
+}
+
+.parallax-hero__content--compact {
+  padding-top: calc(var(--site-header-height, 80px) + 1.25rem);
+  padding-bottom: 1.5rem;
 }
 
 /* Cafe gradient variant (used on Menu/Story/Contact/Careers) */
@@ -108,18 +160,31 @@
     --menu-hero-side-medium: 0.14;
     --menu-hero-side-light: 0.04;
   }
+
+  .parallax-hero {
+    background-size: var(--parallax-hero-size-desktop,
+        var(--parallax-hero-size-mobile, var(--parallax-hero-size, cover)));
+  }
 }
 
 @media (max-width: 768px) {
   .parallax-hero {
     min-height: 70vh;
     background-position: center 24%;
-    background-size: cover;
     background-attachment: scroll;
   }
 
   .parallax-hero__content {
     padding: 6rem 1.25rem;
+  }
+
+  .parallax-hero--compact {
+    min-height: 22vh;
+  }
+
+  .parallax-hero__content--compact {
+    padding-top: calc(var(--site-header-height, 80px) + 1rem);
+    padding-bottom: 1.25rem;
   }
 }
 

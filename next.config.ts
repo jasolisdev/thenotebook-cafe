@@ -8,6 +8,9 @@ const securityHeaders = [
 ] as const;
 
 const nextConfig: NextConfig = {
+  experimental: {
+    inlineCss: true,
+  },
   poweredByHeader: false,
   images: {
     remotePatterns: [

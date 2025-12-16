@@ -16,33 +16,31 @@ export default function StoryPage() {
     <main className="story-page min-h-screen relative">
       <div className="story-fixed-background" aria-hidden="true" />
       {/* Hero Section (from prototype) */}
-      <ParallaxHero className="parallax-hero--cafe-gradient" backgroundColor="var(--cafe-beige)" overlayVariant="lighter">
-        <div className="max-w-4xl mx-auto relative z-10 space-y-6 px-6 text-center">
-          {/* Eyebrow - Instant reveal */}
+      <ParallaxHero
+        className="parallax-hero--compact"
+        contentClassName="parallax-hero__content--compact tnc-hero__content story-hero__content"
+        backgroundImage="/story/tnc-story-banner.webp"
+        backgroundFit="fitHeight"
+        backgroundFitDesktop="cover"
+        backgroundColor="var(--cafe-black)"
+        parallax={false}
+        overlayVariant="solid"
+        focusPercent={32}
+      >
+        <div className="tnc-hero__inner relative z-10">
           <RevealText delay="0ms">
-            <span className="story-hero-kicker font-bold tracking-[0.2em] uppercase text-sm block">
+            <h1 className="tnc-hero__title font-serif">
               Our Story
-            </span>
-          </RevealText>
-
-          {/* Main Headline - 200ms delay */}
-          <RevealText delay="200ms">
-            <h1 className="story-hero-title font-serif text-5xl md:text-7xl lg:text-8xl">
-              Built by Locals,<br />
-              <span className="story-hero-title-accent italic">For Locals</span>
             </h1>
           </RevealText>
 
-          {/* Body Content - 400ms delay */}
-          <FadeInSection delay="400ms">
-            <p className="story-hero-subtitle text-xl md:text-2xl max-w-2xl mx-auto font-normal leading-relaxed">
-              The story of a husband-wife dream to create Riverside&apos;s first truly genuine coffee community hub.
+          <FadeInSection delay="200ms">
+            <p className="tnc-hero__subtitle">
+              Built by Locals, For Locals.
             </p>
           </FadeInSection>
         </div>
       </ParallaxHero>
-
-
 
       {/* The Origin Story - Two Column Layout */}
       <section
@@ -413,7 +411,7 @@ export default function StoryPage() {
                 <div className="relative order-2 lg:order-1">
                   <div className="relative aspect-[3/4] md:aspect-[4/5] rounded-xl overflow-hidden shadow-xl">
                     <Image
-                      src="/story/tnc-founder-1.webp"
+                      src="/story/tnc-founder-v1.webp"
                       alt="Founder - Coffee Expert"
                       fill
                       className="object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-700"
@@ -485,7 +483,7 @@ export default function StoryPage() {
                 <div className="relative order-2 lg:order-2">
                   <div className="relative aspect-[3/4] md:aspect-[4/5] rounded-xl overflow-hidden shadow-xl">
                     <Image
-                      src="/story/tnc-founder-2.webp"
+                      src="/story/tnc-founder-v2.webp"
                       alt="Founder - Designer"
                       fill
                       className="object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-700"

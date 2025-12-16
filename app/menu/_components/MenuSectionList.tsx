@@ -1,6 +1,6 @@
 "use client";
 
-import { Coffee, Plus } from "lucide-react";
+import { Coffee, ChevronRight } from "lucide-react";
 import { TextWithSerifAmpersand, TextWithSansAmpersand } from "@/app/utils/ampersandUtils";
 import type { MenuItem as MenuItemType } from "@/app/types";
 
@@ -8,9 +8,15 @@ type MenuSectionListProps = {
   groupedItems: Record<string, MenuItemType[]>;
   onSelectItem: (item: MenuItemType) => void;
   onClearFilters: () => void;
+  showPrices?: boolean;
 };
 
-export function MenuSectionList({ groupedItems, onSelectItem, onClearFilters }: MenuSectionListProps) {
+export function MenuSectionList({
+  groupedItems,
+  onSelectItem,
+  onClearFilters,
+  showPrices = true,
+}: MenuSectionListProps) {
   if (Object.entries(groupedItems).length === 0) {
     return (
       <div className="menu-empty-state text-center py-32 opacity-50">
@@ -79,10 +85,10 @@ export function MenuSectionList({ groupedItems, onSelectItem, onClearFilters }: 
                   </p>
                 </div>
 
-                <span className="price menu-item-price">{item.price}</span>
+                {showPrices && <span className="price menu-item-price">{item.price}</span>}
 
                 <button
-                  className="add-button"
+                  className="details-button"
                   onClick={(e) => {
                     e.stopPropagation();
                     onSelectItem(item);
@@ -90,7 +96,7 @@ export function MenuSectionList({ groupedItems, onSelectItem, onClearFilters }: 
                   aria-label={`View ${item.name} details`}
                   type="button"
                 >
-                  <Plus size={20} strokeWidth={2.5} />
+                  <ChevronRight size={20} strokeWidth={2.5} />
                 </button>
               </div>
             ))}

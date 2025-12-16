@@ -4,12 +4,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { ShoppingBag } from "lucide-react";
-
-const badgeColors = {
-  tan: '#A48D78',
-  white: '#FAF9F6',
-};
 
 type SiteHeaderProps = {
   instagramUrl?: string;
@@ -21,11 +15,8 @@ type SiteHeaderProps = {
 export default function SiteHeader({
   instagramUrl,
   spotifyUrl,
-  cartCount,
-  onCartClick,
 }: SiteHeaderProps): React.JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [cartBadge, setCartBadge] = useState<number>(cartCount ?? 0);
   const [isVisible, setIsVisible] = useState<boolean>(true);
   const [isAtTop, setIsAtTop] = useState<boolean>(true);
   const [forceHighContrast, setForceHighContrast] = useState<boolean>(false);
@@ -52,7 +43,6 @@ export default function SiteHeader({
   const atTopVisual = isAtTop && !forceSolid;
   const isScrolled = !atTopVisual;
   const useLightText = atTopVisual;
-  const effectiveCartBadge = cartCount ?? cartBadge;
 
   const activeLinkClass = useLightText
     ? "font-semibold text-coffee-50"
@@ -192,31 +182,6 @@ export default function SiteHeader({
     return () => observer.disconnect();
   }, [forceSolidBg]);
 
-  useEffect(() => {
-    const handleCartCount = (e: Event) => {
-      const detail = (e as CustomEvent).detail;
-      if (typeof detail === "number") {
-        setCartBadge(detail);
-      } else {
-        const bodyCount = Number(document.body.dataset.cartCount || 0);
-        setCartBadge(bodyCount);
-      }
-    };
-    window.addEventListener("cart-count-change", handleCartCount as EventListener);
-    return () => window.removeEventListener("cart-count-change", handleCartCount as EventListener);
-  }, []);
-
-  const handleCartClick = () => {
-    // Close mobile nav if open before toggling cart
-    if (isOpen) setIsOpen(false);
-    if (onCartClick) {
-      onCartClick();
-      return;
-    }
-    // Dispatch event to open cart drawer (now available on all pages)
-    window.dispatchEvent(new CustomEvent("open-cart"));
-  };
-
   // Handle mobile drawer link clicks - navigate then close drawer
   const handleMobileNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     // Prevent default navigation
@@ -350,33 +315,8 @@ export default function SiteHeader({
               </Link>
             </div>
 
-            {/* Cart & Social - Right */}
+            {/* Social - Right */}
             <div className="hidden md:flex items-center justify-end gap-4">
-              {/* Cart Icon */}
-              <button
-                type="button"
-                className="relative cursor-pointer group"
-                onClick={handleCartClick}
-                aria-label="Open cart"
-              >
-                <ShoppingBag
-                  className={`transition-colors ${useLightText ? 'text-coffee-50 group-hover:text-coffee-50/80' : 'text-coffee-900 group-hover:text-coffee-900/80'}`}
-                  strokeWidth={1.5}
-                  size={22}
-                />
-	                {effectiveCartBadge > 0 && (
-	                  <span
-	                    className="absolute -bottom-2 -right-2 text-2xs font-bold w-4 h-4 flex items-center justify-center rounded-full leading-none shadow-[0_2px_6px_rgba(0,0,0,0.25)] ring-1 ring-white/70"
-	                    style={{ backgroundColor: badgeColors.tan, color: badgeColors.white }}
-	                  >
-	                    {effectiveCartBadge}
-	                  </span>
-	                )}
-              </button>
-
-              {/* Divider */}
-              <div className="h-4 w-px bg-cafe-beige/50"></div>
-
 	              {/* Instagram Icon + Follow Button */}
 	              <a
 	                href={instagramHref}
@@ -418,25 +358,9 @@ export default function SiteHeader({
 	                  </svg>
 	                </a>
 	              )}
-	            </div>
+            </div>
 
             <div className="md:hidden col-start-3 flex items-center justify-end gap-6">
-              <button
-                type="button"
-                className="relative cursor-pointer"
-                onClick={handleCartClick}
-                aria-label="Open cart"
-              >
-                <ShoppingBag className={useLightText ? "text-coffee-50" : "text-coffee-900"} size={24} strokeWidth={1.5} />
-	                {effectiveCartBadge > 0 && (
-	                  <span
-	                    className="absolute -bottom-2 -right-2 text-2xs font-bold w-4 h-4 flex items-center justify-center rounded-full leading-none shadow-[0_2px_6px_rgba(0,0,0,0.25)] ring-1 ring-white/70"
-	                    style={{ backgroundColor: badgeColors.tan, color: badgeColors.white }}
-	                  >
-	                    {effectiveCartBadge}
-	                  </span>
-	                )}
-              </button>
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="relative w-12 h-12 flex items-center justify-center"
