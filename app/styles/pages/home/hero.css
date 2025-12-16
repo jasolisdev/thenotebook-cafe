@@ -11,12 +11,6 @@
   overflow: hidden;
 }
 
-@media (min-width: 1024px) {
-  .editorial-hero {
-    min-height: 70vh;
-  }
-}
-
 .hero-brewing-soon {
   margin-top: 48px;
   display: grid;
