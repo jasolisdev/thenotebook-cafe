@@ -37,7 +37,7 @@ const contactFAQs = [
   },
   {
     question: 'Where is The Notebook Café located?',
-    answer: `We're located at ${BUSINESS_INFO.address.full}, near the art district and University Drive nightlife area in Riverside, California.`,
+    answer: `We're located at ${BUSINESS_INFO.address.street}, ${BUSINESS_INFO.address.city}, ${BUSINESS_INFO.address.state} ${BUSINESS_INFO.address.zip}, near the art district and University Drive nightlife area in Riverside, California.`,
   },
   {
     question: 'Do you have Wi-Fi for remote work?',
@@ -45,7 +45,7 @@ const contactFAQs = [
   },
   {
     question: 'Can I host an event at The Notebook Café?',
-    answer: 'We love hosting community events, live music, and open mics. Contact us at thenotebookcafellc@gmail.com or call (951) 823-0004 to discuss your event ideas.',
+    answer: `We love hosting community events, live music, and open mics. Contact us at ${BUSINESS_INFO.email} or call ${BUSINESS_INFO.phoneDisplay} to discuss your event ideas.`,
   },
   {
     question: 'What makes The Notebook Café different from other coffee shops in Riverside?',

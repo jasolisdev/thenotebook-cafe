@@ -10,38 +10,49 @@ import { SEO } from '@/lib/seo';
 import { BUSINESS_INFO } from '@/lib/business';
 
 export default function LocalBusinessJsonLd() {
-  const jsonLd = {
+  const b = BUSINESS_INFO;
+
+  const jsonLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'CafeOrCoffeeShop',
-    name: BUSINESS_INFO.name,
-    legalName: BUSINESS_INFO.legalName,
-    description: SEO.defaultDescription,
-    url: SEO.siteUrl,
-    logo: `${SEO.siteUrl}/logo.png`,
-    image: `${SEO.siteUrl}/logo.png`,
-    telephone: BUSINESS_INFO.phoneRaw,
-    email: BUSINESS_INFO.email,
+    '@id': `${b.url}/#business`,
+    name: b.name,
+    legalName: b.legalName,
+    url: b.url,
+    telephone: b.phoneE164,
+    email: b.email,
+    logo: `${b.url}/logo.png`,
+    image: `${b.url}${SEO.ogImage}`,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: BUSINESS_INFO.address.street,
-      addressLocality: BUSINESS_INFO.address.city,
-      addressRegion: BUSINESS_INFO.address.state,
-      postalCode: BUSINESS_INFO.address.zip,
-      addressCountry: BUSINESS_INFO.address.country,
+      streetAddress: b.address.street,
+      addressLocality: b.address.city,
+      addressRegion: b.address.state,
+      postalCode: b.address.zip,
+      addressCountry: b.address.country,
     },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: BUSINESS_INFO.geo.latitude,
-      longitude: BUSINESS_INFO.geo.longitude,
-    },
-    openingHoursSpecification: BUSINESS_INFO.hours.schema,
-    servesCuisine: BUSINESS_INFO.servesCuisine,
-    priceRange: BUSINESS_INFO.priceRange,
-    hasMap: BUSINESS_INFO.maps.directionsUrl,
-    sameAs: [
-      BUSINESS_INFO.social.instagram,
-    ].filter(Boolean),
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        opens: b.hours.monSat.opens,
+        closes: b.hours.monSat.closes,
+      },
+    ],
+    hasMap: b.maps.directionsUrl,
+    servesCuisine: b.servesCuisine,
+    priceRange: b.priceRange,
+    sameAs: [b.social.instagram],
   };
+
+  // Only include geo if verified coordinates exist
+  if (b.geo) {
+    jsonLd.geo = {
+      '@type': 'GeoCoordinates',
+      latitude: b.geo.latitude,
+      longitude: b.geo.longitude,
+    };
+  }
 
   return (
     <script

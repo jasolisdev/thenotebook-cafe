@@ -9,44 +9,26 @@ export const BUSINESS_INFO = {
   // Core Identity
   name: 'The Notebook Café',
   legalName: 'The Notebook Café LLC',
-  
-  // Location
+  url: 'https://www.thenotebookcafellc.com',
+
+  // Address (NAP - Name, Address, Phone)
   address: {
     street: '3512 9th St',
     city: 'Riverside',
     state: 'CA',
     zip: '92501',
     country: 'US',
-    full: '3512 9th St, Riverside, CA 92501',
   },
-  
+
   // Contact
-  phone: '(951) 823-0004',
-  phoneRaw: '+19518230004', // For tel: links and schema
+  phoneDisplay: '(951) 823-0004',
+  phoneE164: '+19518230004',
   email: 'thenotebookcafellc@gmail.com',
-  
-  // Hours (OpeningHoursSpecification format)
+
+  // Business Hours
   hours: {
-    // Human-readable
-    display: {
-      weekday: 'Monday – Saturday: 7am — 6pm',
-      weekend: 'Sunday: Closed',
-    },
-    // Schema.org format
-    schema: [
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        opens: '07:00',
-        closes: '18:00',
-      },
-    ],
-  },
-  
-  // Geo Coordinates (for future use - get from Google Maps)
-  geo: {
-    latitude: 33.9806,  // Approximate - should verify
-    longitude: -117.3755,
+    monSat: { opens: '07:00', closes: '18:00' },
+    closedDays: ['Sunday'] as const,
   },
 
   // Google Maps
@@ -60,8 +42,12 @@ export const BUSINESS_INFO = {
     instagram: 'https://www.instagram.com/thenotebookcafellc/',
   },
 
-  // Business Details
-  priceRange: '$$',
-  servesCuisine: 'Coffee',
+  // Geo Coordinates - ONLY include when verified
+  // To verify: Google Maps → right-click location → "What's here?"
+  // Wrong coordinates hurt SEO more than missing coordinates
+  geo: null as null | { latitude: number; longitude: number },
 
+  // Business Details
+  priceRange: '$$' as const,
+  servesCuisine: 'Coffee' as const,
 } as const;
