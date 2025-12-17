@@ -52,7 +52,7 @@ export const SEO = {
     },
     careers: {
       title: 'Careers',
-      description: 'Join The Notebook Café team in Riverside, CA. We're looking for passionate people who love coffee and community.',
+      description: 'Join The Notebook Café team in Riverside, CA. We\'re looking for passionate people who love coffee and community.',
     },
     contact: {
       title: 'Contact',
