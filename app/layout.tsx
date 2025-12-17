@@ -21,6 +21,7 @@ import SiteShell from "./components/layout/SiteShell";
 import { client } from "@/sanity/lib/client";
 import { CartProvider } from "./components/providers/CartProvider";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { SEO } from "@/lib/seo";
 
 // Google Fonts
 const dmSerif = DM_Serif_Display({
@@ -64,11 +65,65 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "The Notebook Café",
-  description: "Coffee. Culture. House Music.",
+  metadataBase: new URL(SEO.siteUrl),
+  title: {
+    default: SEO.defaultTitle,
+    template: `%s | ${SEO.siteName}`,
+  },
+  description: SEO.defaultDescription,
+  keywords: [
+    'coffee shop',
+    'Riverside CA',
+    'specialty coffee',
+    'house music',
+    'coffee culture',
+    'local cafe',
+    'espresso',
+    'pour over',
+    'community hub',
+  ],
+  authors: [{ name: SEO.siteName }],
+  creator: SEO.siteName,
+  publisher: SEO.siteName,
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: SEO.siteUrl,
+    siteName: SEO.siteName,
+    title: SEO.defaultTitle,
+    description: SEO.defaultDescription,
+    images: [
+      {
+        url: SEO.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${SEO.siteName} - Coffee culture meets community in Riverside, CA`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SEO.defaultTitle,
+    description: SEO.defaultDescription,
+    images: [SEO.twitterImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
-    icon: '/logo.png',
-    apple: '/logo.png',
+    icon: '/icon.png',
+    apple: '/apple-touch-icon.png',
+  },
+  alternates: {
+    canonical: SEO.siteUrl,
   },
 };
 
