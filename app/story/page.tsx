@@ -23,6 +23,20 @@ export const metadata: Metadata = {
     title: SEO.pages.story.title,
     description: SEO.pages.story.description,
     url: `${SEO.siteUrl}/story`,
+    images: [
+      {
+        url: SEO.pages.story.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${SEO.siteName} — Our Story in Riverside, CA`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SEO.pages.story.title,
+    description: SEO.pages.story.description,
+    images: [SEO.pages.story.ogImage],
   },
 };
 
@@ -33,7 +47,7 @@ export default function StoryPage() {
       {/* Hero Section (from prototype) */}
       <ParallaxHero
         className="parallax-hero--compact"
-        contentClassName="parallax-hero__content--compact tnc-hero__content story-hero__content"
+        contentClassName="parallax-hero__content--compact tnc-hero__content"
         backgroundImage="/menu/tnc-menu-banner.webp"
         backgroundFit="fitHeight"
         backgroundFitDesktop="cover"
@@ -51,7 +65,7 @@ export default function StoryPage() {
 
           <FadeInSection delay="200ms">
             <p className="tnc-hero__subtitle">
-              Built by Locals, For Locals.
+              Built by Riverside Locals, For Riverside.
             </p>
           </FadeInSection>
         </div>
@@ -77,7 +91,7 @@ export default function StoryPage() {
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                   <Image
                     src="/unsplash/tnc-placeholder-philosophy-1.png"
-                    alt="Our origin story"
+                    alt="The Notebook Café founders preparing specialty coffee in their Riverside, CA coffee shop"
                     fill
                     className="object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
                     sizes="(min-width: 1024px) 50vw, 100vw"
@@ -143,7 +157,7 @@ export default function StoryPage() {
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                   <Image
                     src="/unsplash/placeholder-interior-shop.png"
-                    alt="Riverside location"
+                    alt="The Notebook Café storefront in Riverside art district with warm lighting and modern design"
                     fill
                     className="object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
                     sizes="(min-width: 1024px) 50vw, 100vw"
@@ -237,14 +251,14 @@ export default function StoryPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <Image
                     src="/unsplash/tnc-placeholder-philosophy-1.png"
-                    alt="Cafe bar espresso"
+                    alt="Professional espresso machine and coffee bar at specialty coffee shop in Riverside, CA"
                     width={900}
                     height={900}
                     className="w-full aspect-[3/4] object-cover rounded-2xl shadow-xl -mt-6 md:mt-12"
                   />
                   <Image
                     src="/unsplash/tnc-placeholder-philosophy-2.png"
-                    alt="Cafe pastry display"
+                    alt="Fresh pastries and acai bowls at The Notebook Café in Riverside, California"
                     width={900}
                     height={900}
                     className="w-full aspect-[3/4] object-cover rounded-2xl shadow-xl mt-10 md:mt-0"

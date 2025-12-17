@@ -23,7 +23,7 @@ export const SEO = {
   },
 
   // Social/OG Images
-  ogImage: '/og.png', // 1200x630 recommended, using logo for now
+  ogImage: '/og.png', // 1200x630 recommended
   twitterImage: '/og.png',
 
   // Social Handles
@@ -37,26 +37,27 @@ export const SEO = {
     home: {
       title: 'The Notebook Café | Riverside, CA',
       description: 'A genuine coffee community hub in Riverside, California. Come for the coffee, stay for the vibe.',
+      ogImage: '/og.png',
     },
     menu: {
       title: 'Menu',
       description: 'Explore espresso, pour-overs, and seasonal specials at The Notebook Café in Riverside, CA.',
+      ogImage: '/og-menu.png',
     },
     story: {
       title: 'Our Story',
       description: 'Built by locals, for locals—learn how The Notebook Café is creating a genuine Riverside coffee community hub.',
-    },
-    events: {
-      title: 'Events',
-      description: 'Join us for live music, open mics, and community gatherings at The Notebook Café in Riverside, CA.',
+      ogImage: '/og-story.png',
     },
     careers: {
       title: 'Careers',
       description: 'Join The Notebook Café team in Riverside, CA. We\'re looking for passionate people who love coffee and community.',
+      ogImage: '/og.png',
     },
     contact: {
       title: 'Contact',
       description: 'Get in touch with The Notebook Café in Riverside, CA. Hours, location info, and how to reach us.',
+      ogImage: '/og.png',
     },
   },
 } as const;

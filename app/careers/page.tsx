@@ -22,6 +22,20 @@ export const metadata: Metadata = {
     title: SEO.pages.careers.title,
     description: SEO.pages.careers.description,
     url: `${SEO.siteUrl}/careers`,
+    images: [
+      {
+        url: SEO.pages.careers.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${SEO.siteName} Careers — Riverside, CA`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SEO.pages.careers.title,
+    description: SEO.pages.careers.description,
+    images: [SEO.pages.careers.ogImage],
   },
 };
 
@@ -37,9 +51,9 @@ export default function CareersPage() {
         className="parallax-hero--compact"
         contentClassName="parallax-hero__content--compact tnc-hero__content"
         backgroundImage="/menu/tnc-menu-banner.webp"
+        backgroundColor="var(--cafe-black)"
         backgroundFit="fitHeight"
         backgroundFitDesktop="cover"
-        backgroundColor="var(--cafe-black)"
         parallax={false}
         overlayVariant="solid"
         focusPercent={32}
@@ -162,66 +176,53 @@ export default function CareersPage() {
 
                   <div className="space-y-7 pt-2">
                     <div className="space-y-3">
-                      <h5 className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>Overview</h5>
-                      <p className="font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                        Join our vibrant café team as a Barista Cashier. You’ll greet guests, prepare drinks and café items, handle transactions, and help keep the space welcoming, clean, and running smoothly.
-                      </p>
-                    </div>
+	                      <h5 className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>Overview</h5>
+	                      <p className="font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+	                        Join our vibrant café team as a Barista Cashier. You&apos;ll greet guests, prepare drinks and café items, handle transactions, and help keep the space welcoming, clean, and running smoothly.
+	                      </p>
+	                    </div>
 
-                    <div className="space-y-3">
-                      <h5 className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>Responsibilities</h5>
-                      <ul className="space-y-2">
-                        {[
-                          "Greet customers warmly and take orders with professionalism",
-                          "Prepare coffee beverages and food items to recipe and quality standards",
-                          "Operate Clover POS and process sales accurately",
-                          "Handle cash and card transactions with strong retail math",
-                          "Maintain cleanliness and food safety in prep and guest areas",
-                          "Move efficiently during rushes while maintaining hospitality",
-                          "Restock supplies and support basic food prep as needed",
-                        ].map((item) => (
-                          <li key={item} className="flex gap-3 items-start">
-                            <CheckCircle size={16} strokeWidth={1.6} aria-hidden="true" className="mt-[2px] flex-shrink-0" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                            <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+                      <div className="space-y-3">
+                        <h5 className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>Responsibilities</h5>
+                        <ul className="space-y-2">
+                          {[
+                            "Greet customers warmly and take orders with professionalism",
+                            "Prepare coffee beverages and food items to recipe and quality standards",
+                            "Operate Clover POS and process sales accurately",
+                            "Handle cash and card transactions with strong retail math",
+                            "Maintain cleanliness and food safety in prep and guest areas",
+                            "Move efficiently during rushes while maintaining hospitality",
+                            "Restock supplies and support basic food prep as needed",
+                          ].map((item) => (
+                            <li key={item} className="flex gap-3 items-start">
+                              <CheckCircle size={16} strokeWidth={1.6} aria-hidden="true" className="mt-[2px] flex-shrink-0" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                              <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
 
-                    <div className="space-y-3">
-                      <h5 className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>Qualifications</h5>
-                      <ul className="space-y-2">
-                        {[
-                          "Prior barista experience or coffee knowledge preferred",
-                          "POS experience (Clover, Aloha, Micros, etc.) is a plus",
-                          "Strong customer service and communication skills",
-                          "Comfortable multitasking in a fast-paced environment",
-                          "Knowledge of food safety and food handling practices",
-                          "Reliable work ethic and solid time management",
-                          "Must have a California food handler card",
-                        ].map((item) => (
-                          <li key={item} className="flex gap-3 items-start">
-                            <CheckCircle size={16} strokeWidth={1.6} aria-hidden="true" className="mt-[2px] flex-shrink-0" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                            <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      <div className="space-y-3">
+                        <h5 className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>Qualifications</h5>
+                        <ul className="space-y-2">
+                          {[
+                            "Prior barista experience or coffee knowledge preferred",
+                            "POS experience (Clover, Aloha, Micros, etc.) is a plus",
+                            "Strong customer service and communication skills",
+                            "Comfortable multitasking in a fast-paced environment",
+                            "Knowledge of food safety and food handling practices",
+                            "Reliable work ethic and solid time management",
+                            "Must have a California food handler card",
+                          ].map((item) => (
+                            <li key={item} className="flex gap-3 items-start">
+                              <CheckCircle size={16} strokeWidth={1.6} aria-hidden="true" className="mt-[2px] flex-shrink-0" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                              <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {["Customer Service", "Clover POS", "Cash Handling", "Food Safety"].map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-2 rounded-lg text-xs"
-                        style={{
-                          backgroundColor: 'rgba(164, 141, 120, 0.12)',
-                          color: 'rgba(44, 36, 32, 0.78)',
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
                   </div>
 
                 </div>

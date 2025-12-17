@@ -4,13 +4,29 @@
 ============================================================ */
 
 [data-section="Our Philosophy"],
-[data-section="Low Lights"],
 [data-section="Atmosphere"],
 [data-section="Atmosphere Images"],
 [data-section="More Than Coffee"] {
   position: relative;
   background: transparent;
   background-image: none;
+}
+
+[data-section="Low Lights"] {
+  position: relative;
+  background: var(--color-cafe-baige-light);
+  background-image: none;
+}
+
+/* Ensure no transparency in Low Lights section */
+[data-section="Low Lights"] * {
+  opacity: 1 !important;
+}
+
+[data-section="Low Lights"] .section-deco,
+[data-section="Low Lights"] .section-deco-dark,
+[data-section="Low Lights"] .section-deco-mobile {
+  display: none !important;
 }
 
 [data-section="Our Philosophy"]::after,
@@ -34,7 +50,10 @@
 }
 
 @media (max-width: 767px) {
-  [data-section="Low Lights"],
+  [data-section="Low Lights"] {
+    background-color: var(--color-cafe-baige-light);
+  }
+
   [data-section="Atmosphere"],
   [data-section="Atmosphere Images"] {
     background-color: var(--cafe-mist);

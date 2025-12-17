@@ -1,5 +1,5 @@
 // app/layout.tsx
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 // Component styles
@@ -118,13 +118,28 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    google:
+      process.env.GOOGLE_SITE_VERIFICATION ??
+      process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
   icons: {
-    icon: '/icon.png',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   alternates: {
     canonical: SEO.siteUrl,
   },
+  manifest: '/manifest.json',
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default async function RootLayout({

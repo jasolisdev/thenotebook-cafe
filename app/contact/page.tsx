@@ -26,6 +26,20 @@ export const metadata: Metadata = {
     title: SEO.pages.contact.title,
     description: SEO.pages.contact.description,
     url: `${SEO.siteUrl}/contact`,
+    images: [
+      {
+        url: SEO.pages.contact.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${SEO.siteName} Contact — Riverside, CA`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SEO.pages.contact.title,
+    description: SEO.pages.contact.description,
+    images: [SEO.pages.contact.ogImage],
   },
 };
 
@@ -62,11 +76,11 @@ export default function ContactPage() {
       <ParallaxHero
         className="parallax-hero--compact"
         contentClassName="parallax-hero__content--compact tnc-hero__content"
-        parallax={false}
         backgroundImage="/menu/tnc-menu-banner.webp"
+        backgroundColor="var(--cafe-black)"
         backgroundFit="fitHeight"
         backgroundFitDesktop="cover"
-        backgroundColor="var(--cafe-black)"
+        parallax={false}
         overlayVariant="solid"
         focusPercent={32}
       >

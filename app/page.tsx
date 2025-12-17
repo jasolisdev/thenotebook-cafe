@@ -26,6 +26,20 @@ export const metadata: Metadata = {
     title: SEO.pages.home.title,
     description: SEO.pages.home.description,
     url: SEO.siteUrl,
+    images: [
+      {
+        url: SEO.pages.home.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${SEO.siteName} — Riverside, CA`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SEO.pages.home.title,
+    description: SEO.pages.home.description,
+    images: [SEO.pages.home.ogImage],
   },
 };
 
@@ -94,30 +108,29 @@ export default function HomePage() {
         {/* Subtle Coffee Texture Background */}
         <div className="editorial-hero-bg" aria-hidden="true" />
 
-        {/* Content */}
-        <div
-          className="editorial-hero-content"
-        >
-          <p className="hero-eyebrow">EST. RIVERSIDE 2026</p>
-
-          <div className="flex justify-center mb-6">
-            <Image
-              src="/tnc-navbar-logo-v2.png"
-              alt="The Notebook Café Logo"
-              width={350}
-              height={350}
-              className="w-48 h-auto md:w-72 md:h-auto opacity-90 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
-            />
+        {/* Content - 2 Column Layout on Desktop */}
+        <div className="editorial-hero-content">
+          {/* Left Column - Text Content */}
+          <div className="hero-text-column">
+            <p className="hero-eyebrow">EST. RIVERSIDE 2026</p>
+            <h1 className="hero-headline">
+              <span className="hero-headline-top">Riverside&apos;s Premier</span>
+              <br />
+              <span className="hero-headline-bottom">Coffee &amp; Creative Hub</span>
+            </h1>
+            <p className="hero-tagline">SPECIALTY COFFEE IN RIVERSIDE, CA. COME FOR THE COFFEE, STAY FOR THE VIBE.</p>
           </div>
 
-          <h1 className="hero-headline">
-            <span className="hero-headline-top">Where Every Cup</span>
-            <br />
-            <span className="hero-headline-bottom">Tells a Story</span>
-          </h1>
-
-          <p className="hero-tagline">COME FOR THE COFFEE, STAY FOR THE VIBE.</p>
-
+          {/* Right Column - Logo over Coffee Cup */}
+          <div className="hero-logo-column">
+            <Image
+              src="/tnc-navbar-logo-v2.png"
+              alt="The Notebook Café logo — Riverside, CA"
+              width={350}
+              height={350}
+              className="hero-logo-image"
+            />
+          </div>
         </div>
       </section>
 
@@ -207,7 +220,7 @@ export default function HomePage() {
               <div className="grid grid-cols-2 gap-4 relative">
                 <Image
                   src="/unsplash/tnc-placeholder-1.png"
-                  alt="Barista Pouring"
+                  alt="Barista pouring coffee at The Notebook Café in Riverside, CA"
                   width={900}
                   height={1200}
                   className="w-full h-full object-cover rounded-sm translate-y-12 shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
@@ -215,7 +228,7 @@ export default function HomePage() {
                 />
                 <Image
                   src="/unsplash/tnc-placeholder-2.png"
-                  alt="Cafe Corner"
+                  alt="Cozy corner seating at The Notebook Café in Riverside, CA"
                   width={900}
                   height={1200}
                   className="w-full h-full object-cover rounded-sm shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"

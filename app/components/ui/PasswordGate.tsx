@@ -42,9 +42,9 @@ export default function PasswordGate() {
       <div className="max-w-[500px] w-full mx-auto">
         {/* Lock Icon */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gold/15 border-2 border-gold/30 mb-6">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-cafe-tan/15 border-2 border-cafe-tan/30 mb-6">
             <svg
-              className="w-10 h-10 text-gold/80"
+              className="w-10 h-10 text-cafe-tan/80"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -76,7 +76,7 @@ export default function PasswordGate() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter password"
-              className="w-full px-6 py-4 bg-white border-2 border-gold/30 text-cafe-black placeholder:text-cafe-beige/80 focus:outline-none focus:border-gold/60 transition-all text-base"
+              className="w-full px-6 py-4 bg-white border-2 border-cafe-tan/30 text-cafe-black placeholder:text-cafe-beige/80 focus:outline-none focus:border-cafe-tan/60 transition-all text-base"
               disabled={isLoading}
               autoFocus
             />

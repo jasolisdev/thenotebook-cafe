@@ -252,7 +252,7 @@ export default function SiteHeader({
             >
               <Image
                 src={logoSrc}
-                alt="The Notebook Café Logo"
+                alt="The Notebook Café logo — Riverside, CA"
                 width={65}
                 height={65}
                 className="w-[50px] h-[50px] sm:w-[58px] sm:h-[58px]"

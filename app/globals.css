@@ -7,17 +7,17 @@
   --color-cafe-tan: #A48D78;
   --color-cafe-tan-dark: #8E7965;
   --color-cafe-beige: #CBB9A4;
+  --color-cafe-baige-light: #EBE5DE;
   --color-cafe-luxe-oat: #CBBFAF;
   --color-cafe-cream: #EDE7D8;
-  --color-cafe-mist: #F4F1EA;
+  --color-cafe-mist: #FfFfEA;
   --color-cafe-white: #FAF9F6;
 
   /* Premium Navbar/Footer Palette */
-  --color-coffee-50: #F3EFE9;      /* Off-White - Top nav text */
-  --color-coffee-900: #2C241F;     /* Deep Espresso - Footer bg, scrolled nav text */
-
-  /* Accent */
-  --color-gold: #C4A484;
+  --color-coffee-50: #F3EFE9;
+  /* Off-White - Top nav text */
+  --color-coffee-900: #2C241F;
+  /* Deep Espresso - Footer bg, scrolled nav text */
 }
 
 /* ============================================================
@@ -61,8 +61,10 @@
   --site-header-height: 80px;
 
   /* Menu Page Fonts */
-  --font-serif: var(--font-playfair), 'Playfair Display', serif; /* Used for Titles, Headers, Prices */
-  --font-sans-menu: var(--font-inter), 'Inter', sans-serif;       /* Used for Descriptions, UI, Buttons */
+  --font-serif: var(--font-playfair), 'Playfair Display', serif;
+  /* Used for Titles, Headers, Prices */
+  --font-sans-menu: var(--font-inter), 'Inter', sans-serif;
+  /* Used for Descriptions, UI, Buttons */
 
   /* ===============================
      UPDATED COLOR PALETTE
@@ -77,22 +79,25 @@
   --cafe-beige: #CBB9A4;
   --cafe-luxe-oat: #CBBFAF;
   --cafe-cream: #EDE7D8;
-  --cafe-mist: #F4F1EA;
+  --cafe-mist: #FDFBF7;
   --cafe-white: #FAF9F6;
   --cafe-olive: #4A4F41;
 
   /* Premium Navbar/Footer Palette */
-  --coffee-50: #F3EFE9;      /* Off-White - Top nav text */
-  --coffee-100: #E6DCCA;     /* Cream - Footer body text */
-  --coffee-800: #3A2D26;     /* Dark Brown - Footer borders */
-  --coffee-900: #2C241F;     /* Deep Espresso - Footer bg, scrolled nav text */
+  --coffee-50: #F3EFE9;
+  /* Off-White - Top nav text */
+  --coffee-100: #E6DCCA;
+  /* Cream - Footer body text */
+  --coffee-800: #3A2D26;
+  /* Dark Brown - Footer borders */
+  --coffee-900: #2C241F;
+  /* Deep Espresso - Footer bg, scrolled nav text */
 
   /* Extended palette - frequently used colors */
-  --espresso-brown: #2a1f16;     /* Dark brown text */
-  --warm-brown: #5a4a38;         /* Warm brown text */
-
-  /* Gold accent family */
-  --gold-primary: #c99a58;       /* Navigation accents */
+  --espresso-brown: #2a1f16;
+  /* Dark brown text */
+  --warm-brown: #5a4a38;
+  /* Warm brown text */
 
   /* RGB helpers for rgba() usage */
   --cafe-black-rgb: 44, 36, 32;
@@ -103,8 +108,10 @@
   --cafe-mist-rgb: 244, 241, 234;
 
   /* Premium Navbar/Footer RGB */
-  --coffee-50-rgb: 243, 239, 233;   /* Off-White */
-  --coffee-100-rgb: 230, 220, 202;  /* Cream */
+  --coffee-50-rgb: 243, 239, 233;
+  /* Off-White */
+  --coffee-100-rgb: 230, 220, 202;
+  /* Cream */
 
   /* Extended RGB helpers */
   --espresso-brown-rgb: 42, 31, 22;
@@ -190,9 +197,11 @@ body {
   letter-spacing: 0;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;  /* Only hide horizontal overflow */
+  overflow-x: hidden;
+  /* Only hide horizontal overflow */
   width: 100%;
-  min-height: 100vh; /* Allow body to grow beyond viewport */
+  min-height: 100vh;
+  /* Allow body to grow beyond viewport */
   background-color: var(--bg-solid);
   color: var(--text-dark);
   /* Re-enabled scroll anchoring for proper scroll restoration */
@@ -370,6 +379,7 @@ h3 {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -377,9 +387,12 @@ h3 {
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-15px);
   }
@@ -440,13 +453,15 @@ h3 {
 /* The Mask Container - Hides text before reveal */
 .reveal-mask {
   overflow: hidden;
-  display: block; /* Ensures the mask captures the full height */
+  display: block;
+  /* Ensures the mask captures the full height */
 }
 
 /* The Moving Text - Slides up from below */
 .reveal-text-anim {
   display: block;
-  transform: translateY(110%); /* Start completely out of view below */
+  transform: translateY(110%);
+  /* Start completely out of view below */
   opacity: 0;
   animation: slideUpReveal 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
@@ -456,6 +471,7 @@ h3 {
     transform: translateY(110%);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -467,7 +483,7 @@ h3 {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
-              transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+    transform 1s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .fade-up.visible {
@@ -492,9 +508,11 @@ h3 {
 .acc-grayscale {
   filter: grayscale(100%);
 }
+
 .acc-contrast {
   filter: contrast(125%);
 }
+
 /* Hide images but keep UI icons visible */
 .acc-hide-images main img,
 .acc-hide-images main svg:not(.bionic-skip),
@@ -520,6 +538,7 @@ h3 {
   color: var(--cafe-black) !important;
   fill: var(--cafe-black) !important;
 }
+
 .acc-hide-images .home-hero-pill,
 .acc-hide-images .hero-latte-card {
   background-color: rgba(var(--cafe-cream-rgb), 0.9) !important;
@@ -530,14 +549,16 @@ h3 {
 .acc-hide-images .site-header {
   background: rgba(var(--cafe-cream-rgb), 0.92) !important;
   border-bottom-color: rgba(var(--cafe-brown-rgb), 0.12) !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
+
 .acc-hide-images .nav-link,
 .acc-hide-images .site-header a,
 .acc-hide-images .site-header span {
   color: var(--cafe-black) !important;
   fill: var(--cafe-black) !important;
 }
+
 .acc-hide-images .hamburger-line {
   background-color: var(--cafe-black) !important;
 }
@@ -552,6 +573,7 @@ h3 {
 .acc-hide-images .acc-icon-only svg {
   visibility: visible !important;
 }
+
 .acc-cursor-lg,
 .acc-cursor-lg * {
   cursor: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5056 10.7754C21.1225 10.5355 21.431 10.4155 21.5176 10.2459C21.5926 10.099 21.5903 9.92446 21.5115 9.77954C21.4205 9.61226 21.109 9.50044 20.486 9.2768L4.59629 3.5728C4.0866 3.38983 3.83175 3.29835 3.66514 3.35605C3.52029 3.40621 3.40645 3.52004 3.35629 3.6649C3.29859 3.8315 3.39008 4.08635 3.57304 4.59605L9.277 20.4858C9.50064 21.1088 9.61246 21.4203 9.77973 21.5113C9.92465 21.5901 10.0991 21.5924 10.2461 21.5174C10.4157 21.4308 10.5356 21.1223 10.7756 20.5054L13.3724 13.8278C13.4194 13.707 13.4429 13.6466 13.4792 13.5957C13.5114 13.5506 13.5508 13.5112 13.5959 13.479C13.6468 13.4427 13.7072 13.4192 13.828 13.3722L20.5056 10.7754Z' fill='white' stroke='%232C2420' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 4 4, auto !important;
@@ -562,6 +584,7 @@ h3 {
 .acc-cursor-lg [role="button"] {
   cursor: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5056 10.7754C21.1225 10.5355 21.431 10.4155 21.5176 10.2459C21.5926 10.099 21.5903 9.92446 21.5115 9.77954C21.4205 9.61226 21.109 9.50044 20.486 9.2768L4.59629 3.5728C4.0866 3.38983 3.83175 3.29835 3.66514 3.35605C3.52029 3.40621 3.40645 3.52004 3.35629 3.6649C3.29859 3.8315 3.39008 4.08635 3.57304 4.59605L9.277 20.4858C9.50064 21.1088 9.61246 21.4203 9.77973 21.5113C9.92465 21.5901 10.0991 21.5924 10.2461 21.5174C10.4157 21.4308 10.5356 21.1223 10.7756 20.5054L13.3724 13.8278C13.4194 13.707 13.4429 13.6466 13.4792 13.5957C13.5114 13.5506 13.5508 13.5112 13.5959 13.479C13.6468 13.4427 13.7072 13.4192 13.828 13.3722L20.5056 10.7754Z' fill='white' stroke='%232C2420' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 4 4, pointer !important;
 }
+
 .acc-highlight-links a {
   background-color: var(--cafe-tan) !important;
   color: var(--cafe-black) !important;
@@ -569,9 +592,11 @@ h3 {
   border-radius: 2px;
   padding: 0 2px;
 }
+
 .bionic-bold {
   font-weight: 700;
 }
+
 #reading-guide-line {
   position: fixed;
   left: 0;
@@ -581,22 +606,28 @@ h3 {
   pointer-events: none;
   z-index: 9999;
 }
+
 .acc-text-lg {
   font-size: 1.25rem;
 }
+
 .acc-text-xl {
   font-size: 1.5rem;
 }
+
 .acc-readable-font {
   font-family: 'Arial', sans-serif !important;
 }
+
 .acc-dyslexia-font {
   font-family: 'OpenDyslexic', sans-serif !important;
 }
+
 .acc-dyslexia-font body,
 .acc-dyslexia-font body * {
   font-family: 'OpenDyslexic', sans-serif !important;
 }
+
 .acc-stop-animations * {
   animation: none !important;
   transition: none !important;
