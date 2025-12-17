@@ -64,7 +64,7 @@ export async function POST(req: Request) {
     const resend = getResendClient();
     if (resend) {
       try {
-        await resend.emails.send({
+        const emailResult = await resend.emails.send({
           from: 'The Notebook Café <onboarding@resend.dev>',
           to: CONTACT_EMAIL_RECIPIENT,
           subject: `Contact Form: ${sanitizeText(normalizedSubject)}`,
@@ -92,10 +92,16 @@ export async function POST(req: Request) {
             </div>
           `,
         });
+        logger.info("Contact email sent successfully", {
+          emailId: emailResult.data?.id,
+          recipient: CONTACT_EMAIL_RECIPIENT
+        });
       } catch (emailError) {
         // Log email error but don't fail the request
         logger.error("Failed to send contact email", emailError);
       }
+    } else {
+      logger.warn("Resend client not initialized - email not sent");
     }
 
     // Create with sanitization
