@@ -65,7 +65,7 @@ export async function POST(req: Request) {
     if (resend) {
       try {
         await resend.emails.send({
-          from: 'The Notebook Café <noreply@thenotebookcafe.com>',
+          from: 'The Notebook Café <onboarding@resend.dev>',
           to: CONTACT_EMAIL_RECIPIENT,
           subject: `Contact Form: ${sanitizeText(normalizedSubject)}`,
           html: `
