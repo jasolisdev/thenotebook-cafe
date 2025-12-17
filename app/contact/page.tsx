@@ -11,6 +11,21 @@ import ParallaxHero from "@/app/components/features/ParallaxHero";
 import ContactForm from "@/app/components/features/ContactForm";
 import { MapPin, Clock, Phone, Mail, Coffee } from "lucide-react";
 import "../styles/pages/contact.css";
+import type { Metadata } from "next";
+import { SEO } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: SEO.pages.contact.title,
+  description: SEO.pages.contact.description,
+  alternates: {
+    canonical: '/contact',
+  },
+  openGraph: {
+    title: SEO.pages.contact.title,
+    description: SEO.pages.contact.description,
+    url: '/contact',
+  },
+};
 
 export default function ContactPage() {
   return (

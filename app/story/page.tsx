@@ -10,6 +10,21 @@ import Image from "next/image";
 import ParallaxHero from "@/app/components/features/ParallaxHero";
 import { Coffee, Music, Heart, MapPin, Sparkles, BookOpen, Users, Home as HomeIcon, Award } from "lucide-react";
 import "../styles/pages/story.css";
+import type { Metadata } from "next";
+import { SEO } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: SEO.pages.story.title,
+  description: SEO.pages.story.description,
+  alternates: {
+    canonical: '/story',
+  },
+  openGraph: {
+    title: SEO.pages.story.title,
+    description: SEO.pages.story.description,
+    url: '/story',
+  },
+};
 
 export default function StoryPage() {
   return (

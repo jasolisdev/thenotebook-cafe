@@ -8,6 +8,21 @@ import Reveal from "../components/ui/Reveal";
 import ParallaxHero from "../components/features/ParallaxHero";
 import { Clock, Users, Instagram, Calendar, Heart } from "lucide-react";
 import Image from "next/image";
+import type { Metadata } from "next";
+import { SEO } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: SEO.pages.events.title,
+  description: SEO.pages.events.description,
+  alternates: {
+    canonical: '/events',
+  },
+  openGraph: {
+    title: SEO.pages.events.title,
+    description: SEO.pages.events.description,
+    url: '/events',
+  },
+};
 
 const EVENTS = [
   {

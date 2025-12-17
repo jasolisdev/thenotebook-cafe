@@ -9,6 +9,21 @@ import FadeInSection from "../components/ui/FadeInSection";
 import ParallaxHero from "../components/features/ParallaxHero";
 import { Coffee, Heart, TrendingUp, CheckCircle, Mail, ExternalLink, MapPin, DollarSign, Briefcase, Gift } from "lucide-react";
 import "../styles/pages/careers.css";
+import type { Metadata } from "next";
+import { SEO } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: SEO.pages.careers.title,
+  description: SEO.pages.careers.description,
+  alternates: {
+    canonical: '/careers',
+  },
+  openGraph: {
+    title: SEO.pages.careers.title,
+    description: SEO.pages.careers.description,
+    url: '/careers',
+  },
+};
 
 const INDEED_JOB_URL =
   "https://www.indeed.com/viewjob?cmp=The-Notebook-Cafe&t=Barista&jk=b440eb90eb5586f1&q=The+Notebook+Cafe&xpse=SoAZ67I3pQVIuMSJ1p0LbzkdCdPP&xfps=bc612584-8ce8-4f71-b66d-2e539b85c724&xkcb=SoDf67M3pQVJD4gNUz0KbzkdCdPP&vjs=3";

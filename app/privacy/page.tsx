@@ -1,5 +1,14 @@
 import Reveal from '../components/ui/Reveal';
 import '../styles/pages/legal.css';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 const PrivacyPage = () => (
   <div style={{ padding: '120px 20px 60px', maxWidth: '800px', margin: '0 auto' }} className="legal-content">
