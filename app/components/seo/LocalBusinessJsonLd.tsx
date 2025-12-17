@@ -37,6 +37,7 @@ export default function LocalBusinessJsonLd() {
     openingHoursSpecification: BUSINESS_INFO.hours.schema,
     servesCuisine: BUSINESS_INFO.servesCuisine,
     priceRange: BUSINESS_INFO.priceRange,
+    hasMap: BUSINESS_INFO.maps.directionsUrl,
     sameAs: [
       BUSINESS_INFO.social.instagram,
     ].filter(Boolean),

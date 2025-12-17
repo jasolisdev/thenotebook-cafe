@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: SEO.pages.menu.title,
     description: SEO.pages.menu.description,
-    url: '/menu',
+    url: `${SEO.siteUrl}/menu`,
   },
 };
 

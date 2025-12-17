@@ -48,14 +48,20 @@ export const BUSINESS_INFO = {
     latitude: 33.9806,  // Approximate - should verify
     longitude: -117.3755,
   },
-  
+
+  // Google Maps
+  maps: {
+    directionsUrl: 'https://www.google.com/maps/search/?api=1&query=The+Notebook+Cafe%2C+3512+9th+St%2C+Riverside%2C+CA+92501',
+    embedUrl: 'https://www.google.com/maps?q=The+Notebook+Cafe%2C+3512+9th+St%2C+Riverside%2C+CA+92501&output=embed',
+  },
+
   // Social Media
   social: {
     instagram: 'https://www.instagram.com/thenotebookcafellc/',
   },
-  
+
   // Business Details
   priceRange: '$$',
   servesCuisine: 'Coffee',
-  
+
 } as const;

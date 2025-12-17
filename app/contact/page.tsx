@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: SEO.pages.contact.title,
     description: SEO.pages.contact.description,
-    url: '/contact',
+    url: `${SEO.siteUrl}/contact`,
   },
 };
 

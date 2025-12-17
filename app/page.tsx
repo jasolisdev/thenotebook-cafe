@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: SEO.pages.home.title,
     description: SEO.pages.home.description,
-    url: '/',
+    url: SEO.siteUrl,
   },
 };
 
