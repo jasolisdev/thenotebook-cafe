@@ -109,7 +109,7 @@
 
 /* Compact hero variant (used on most interior pages) */
 .parallax-hero--compact {
-  min-height: 28vh;
+  min-height: 34vh; /* Increased by 20% from 28vh for desktop */
 }
 
 .parallax-hero__content--compact {

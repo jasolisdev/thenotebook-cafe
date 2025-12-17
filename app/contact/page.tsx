@@ -20,11 +20,11 @@ export default function ContactPage() {
       <ParallaxHero
         className="parallax-hero--compact"
         contentClassName="parallax-hero__content--compact tnc-hero__content"
-        parallax={false}
         backgroundImage="/menu/tnc-menu-banner.webp"
+        backgroundColor="var(--cafe-black)"
         backgroundFit="fitHeight"
         backgroundFitDesktop="cover"
-        backgroundColor="var(--cafe-black)"
+        parallax={false}
         overlayVariant="solid"
         focusPercent={32}
       >

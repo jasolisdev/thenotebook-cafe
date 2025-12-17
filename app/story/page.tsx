@@ -18,7 +18,7 @@ export default function StoryPage() {
       {/* Hero Section (from prototype) */}
       <ParallaxHero
         className="parallax-hero--compact"
-        contentClassName="parallax-hero__content--compact tnc-hero__content story-hero__content"
+        contentClassName="parallax-hero__content--compact tnc-hero__content"
         backgroundImage="/menu/tnc-menu-banner.webp"
         backgroundFit="fitHeight"
         backgroundFitDesktop="cover"

@@ -77,30 +77,29 @@ export default function HomePage() {
         {/* Subtle Coffee Texture Background */}
         <div className="editorial-hero-bg" aria-hidden="true" />
 
-        {/* Content */}
-        <div
-          className="editorial-hero-content"
-        >
-          <p className="hero-eyebrow">EST. RIVERSIDE 2026</p>
+        {/* Content - 2 Column Layout on Desktop */}
+        <div className="editorial-hero-content">
+          {/* Left Column - Text Content */}
+          <div className="hero-text-column">
+            <p className="hero-eyebrow">EST. RIVERSIDE 2026</p>
+            <h1 className="hero-headline">
+              <span className="hero-headline-top">Where Every Cup</span>
+              <br />
+              <span className="hero-headline-bottom">Tells a Story</span>
+            </h1>
+            <p className="hero-tagline">COME FOR THE COFFEE, STAY FOR THE VIBE.</p>
+          </div>
 
-          <div className="flex justify-center mb-6">
+          {/* Right Column - Logo over Coffee Cup */}
+          <div className="hero-logo-column">
             <Image
               src="/tnc-navbar-logo-v2.png"
               alt="The Notebook Café Logo"
               width={350}
               height={350}
-              className="w-48 h-auto md:w-72 md:h-auto opacity-90 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
+              className="hero-logo-image"
             />
           </div>
-
-          <h1 className="hero-headline">
-            <span className="hero-headline-top">Where Every Cup</span>
-            <br />
-            <span className="hero-headline-bottom">Tells a Story</span>
-          </h1>
-
-          <p className="hero-tagline">COME FOR THE COFFEE, STAY FOR THE VIBE.</p>
-
         </div>
       </section>
 

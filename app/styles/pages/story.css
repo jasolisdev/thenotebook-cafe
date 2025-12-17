@@ -12,10 +12,6 @@
   background-image: none;
 }
 
-.story-hero__content {
-  text-align: left;
-}
-
 .story-hero-kicker {
   color: var(--cafe-tan);
 }

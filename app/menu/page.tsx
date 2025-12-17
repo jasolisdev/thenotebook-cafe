@@ -95,7 +95,7 @@ export default function MenuPage() {
           backgroundFitDesktop="cover"
           parallax={false}
           overlayVariant="solid"
-          focusPercent={30}
+          focusPercent={32}
         >
           <div className="tnc-hero__inner">
             <RevealText delay="0ms">

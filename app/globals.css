@@ -15,9 +15,6 @@
   /* Premium Navbar/Footer Palette */
   --color-coffee-50: #F3EFE9;      /* Off-White - Top nav text */
   --color-coffee-900: #2C241F;     /* Deep Espresso - Footer bg, scrolled nav text */
-
-  /* Accent */
-  --color-gold: #C4A484;
 }
 
 /* ============================================================
@@ -90,9 +87,6 @@
   /* Extended palette - frequently used colors */
   --espresso-brown: #2a1f16;     /* Dark brown text */
   --warm-brown: #5a4a38;         /* Warm brown text */
-
-  /* Gold accent family */
-  --gold-primary: #c99a58;       /* Navigation accents */
 
   /* RGB helpers for rgba() usage */
   --cafe-black-rgb: 44, 36, 32;
