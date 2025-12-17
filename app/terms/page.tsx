@@ -1,3 +1,13 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Terms of Service',
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
+
 export default function TermsPage() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-24 space-y-8 md:pt-40" style={{ color: 'var(--cafe-brown)' }}>
