@@ -27,6 +27,24 @@ const ALLOWED_ORIGINS = [
 ];
 
 /**
+ * Check if an origin is allowed
+ * Supports exact matches and Vercel preview deployments
+ */
+function isOriginAllowed(origin: string): boolean {
+  // Check exact matches
+  if (ALLOWED_ORIGINS.includes(origin)) {
+    return true;
+  }
+
+  // Allow Vercel preview deployments (*.vercel.app)
+  if (origin.endsWith('.vercel.app') && origin.startsWith('https://')) {
+    return true;
+  }
+
+  return false;
+}
+
+/**
  * Validates the request origin header
  *
  * @param req - The incoming request
@@ -38,8 +56,7 @@ export function validateOrigin(req: Request): NextResponse | null {
 
   // Check origin header first (most reliable)
   if (origin) {
-    const isAllowed = ALLOWED_ORIGINS.some((allowed) => origin === allowed);
-    if (!isAllowed) {
+    if (!isOriginAllowed(origin)) {
       return NextResponse.json(
         { ok: false, error: "Invalid origin" },
         { status: 403, headers: { "Cache-Control": "no-store" } }
@@ -50,16 +67,23 @@ export function validateOrigin(req: Request): NextResponse | null {
 
   // Fallback to referer (less reliable but better than nothing)
   if (referer) {
-    const isAllowed = ALLOWED_ORIGINS.some((allowed) =>
-      referer.startsWith(allowed)
-    );
-    if (!isAllowed) {
+    try {
+      const refererUrl = new URL(referer);
+      const refererOrigin = refererUrl.origin;
+      if (!isOriginAllowed(refererOrigin)) {
+        return NextResponse.json(
+          { ok: false, error: "Invalid referer" },
+          { status: 403, headers: { "Cache-Control": "no-store" } }
+        );
+      }
+      return null;
+    } catch {
+      // Invalid URL in referer
       return NextResponse.json(
         { ok: false, error: "Invalid referer" },
         { status: 403, headers: { "Cache-Control": "no-store" } }
       );
     }
-    return null;
   }
 
   // No origin or referer - likely not a browser request
