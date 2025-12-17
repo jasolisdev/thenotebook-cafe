@@ -17,10 +17,10 @@ export default function PrivacyPage() {
       </p>
 
       <section className="space-y-4">
-        <h2 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>Overview & collection</h2>
-        <p className="text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
-          This Privacy Policy explains how The Notebook Café ("we," "us," "our") collects, uses, and shares information when you visit our website or interact with us online.
-        </p>
+	        <h2 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>Overview & collection</h2>
+	        <p className="text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
+	          This Privacy Policy explains how The Notebook Café (&quot;we,&quot; &quot;us,&quot; &quot;our&quot;) collects, uses, and shares information when you visit our website or interact with us online.
+	        </p>
         <p className="text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
           We collect information you provide directly (like job applications or contact forms) and automatic data (like IP addresses and essential cookies) to keep our site running smoothly.
         </p>
@@ -44,10 +44,10 @@ export default function PrivacyPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>Your rights & choices</h2>
-        <p className="text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
-          You can manage your cookie preferences anytime via the "Cookie Preferences" link in the footer. We honor Global Privacy Control (GPC) signals from your browser.
-        </p>
+	        <h2 className="font-serif text-2xl" style={{ color: 'var(--cafe-black)' }}>Your rights & choices</h2>
+	        <p className="text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
+	          You can manage your cookie preferences anytime via the &quot;Cookie Preferences&quot; link in the footer. We honor Global Privacy Control (GPC) signals from your browser.
+	        </p>
         <p className="text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
           To request access, correction, or deletion of personal information you submitted, please contact us.
         </p>

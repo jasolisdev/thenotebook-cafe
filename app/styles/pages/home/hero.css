@@ -216,6 +216,9 @@
     height: 100vh;
     z-index: -1;
     background-attachment: scroll;
+    /* Use mobile-specific hero image */
+    --hero-bg-image: url("/home/hero-v2.webp");
+    background-image: var(--hero-bg-image);
     /* Reset */
     filter: sepia(18%) saturate(92%) contrast(1.02) brightness(1.02) blur(3px);
     transform: scale(1.05);
@@ -237,6 +240,7 @@
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+  margin-top: calc(-14vh - 50px); /* Move content higher on mobile */
 }
 
 /* Desktop 2-column layout */
@@ -246,6 +250,7 @@
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 4rem;
+    margin-top: 0; /* Reset for desktop */
   }
 }
 
@@ -255,12 +260,14 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  order: 2; /* Text appears second on mobile */
 }
 
 @media (min-width: 1024px) {
   .hero-text-column {
     text-align: left;
     align-items: flex-start;
+    order: unset; /* Reset order for desktop grid */
   }
 }
 
@@ -270,17 +277,19 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  order: 1; /* Logo appears first on mobile */
 }
 
 @media (min-width: 1024px) {
   .hero-logo-column {
     /* Position logo centered in coffee cup */
     transform: translateX(calc(-15% + 18px)) translateY(calc(-5% + 31px));
+    order: unset; /* Reset order for desktop grid */
   }
 }
 
 .hero-logo-image {
-  width: 12rem;
+  width: 15.84rem; /* 13.2rem + 20% */
   height: auto;
   opacity: 0.9;
   filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));

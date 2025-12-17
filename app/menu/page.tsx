@@ -98,14 +98,12 @@ export default function MenuPage() {
           focusPercent={32}
         >
           <div className="tnc-hero__inner">
-            <RevealText delay="0ms">
-              <h1 className="tnc-hero__title font-serif">
-                The Menu
-              </h1>
-            </RevealText>
+            <h1 className="tnc-hero__title font-serif">
+              <RevealText delay="0ms">Specialty Coffee Menu</RevealText>
+            </h1>
             <FadeInSection delay="200ms">
               <p className="tnc-hero__subtitle">
-                Handcrafted Daily.
+                Handcrafted Daily in Riverside, CA.
               </p>
             </FadeInSection>
           </div>

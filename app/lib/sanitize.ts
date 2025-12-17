@@ -33,6 +33,31 @@ export function sanitizeText(input: string): string {
 }
 
 /**
+ * Sanitize text while preserving newlines for multiline content (e.g. messages).
+ * Removes HTML/script patterns but keeps line breaks for readability.
+ */
+export function sanitizeMultilineText(input: string): string {
+  if (!input) return "";
+
+  return (
+    input
+      // Normalize line endings
+      .replace(/\r\n/g, "\n")
+      .replace(/\r/g, "\n")
+      // Remove HTML tags
+      .replace(/<[^>]*>/g, "")
+      // Remove script injection patterns
+      .replace(/javascript:/gi, "")
+      .replace(/on\w+\s*=/gi, "")
+      // Remove null bytes
+      .replace(/\0/g, "")
+      // Normalize horizontal whitespace (but keep newlines)
+      .replace(/[ \t]+/g, " ")
+      .trim()
+  );
+}
+
+/**
  * Sanitize email addresses
  * More strict than sanitizeText - only allows valid email characters
  */

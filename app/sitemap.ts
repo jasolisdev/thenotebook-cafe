@@ -24,12 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${SEO.siteUrl}/events`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
       url: `${SEO.siteUrl}/careers`,
       lastModified: currentDate,
       changeFrequency: 'weekly',

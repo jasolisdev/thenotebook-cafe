@@ -22,6 +22,20 @@ export const metadata: Metadata = {
     title: SEO.pages.careers.title,
     description: SEO.pages.careers.description,
     url: `${SEO.siteUrl}/careers`,
+    images: [
+      {
+        url: SEO.pages.careers.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${SEO.siteName} Careers — Riverside, CA`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SEO.pages.careers.title,
+    description: SEO.pages.careers.description,
+    images: [SEO.pages.careers.ogImage],
   },
 };
 
@@ -162,11 +176,11 @@ export default function CareersPage() {
 
                   <div className="space-y-7 pt-2">
                     <div className="space-y-3">
-                      <h5 className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>Overview</h5>
-                      <p className="font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                        Join our vibrant café team as a Barista Cashier. You'll greet guests, prepare drinks and café items, handle transactions, and help keep the space welcoming, clean, and running smoothly.
-                      </p>
-                    </div>
+	                      <h5 className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>Overview</h5>
+	                      <p className="font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+	                        Join our vibrant café team as a Barista Cashier. You&apos;ll greet guests, prepare drinks and café items, handle transactions, and help keep the space welcoming, clean, and running smoothly.
+	                      </p>
+	                    </div>
 
                     <div className="grid md:grid-cols-2 gap-6 md:gap-8">
                       <div className="space-y-3">

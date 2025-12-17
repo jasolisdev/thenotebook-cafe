@@ -24,7 +24,7 @@ export default function AtmosphereStrip({ images }: AtmosphereStripProps) {
             >
               <Image
                 src={src}
-                alt={`The Notebook No. ${i + 1}`}
+                alt={`The Notebook Café atmosphere in Riverside, CA — photo ${i + 1}`}
                 width={320}
                 height={400}
                 className="w-full h-full object-cover"
@@ -49,7 +49,7 @@ export default function AtmosphereStrip({ images }: AtmosphereStripProps) {
             >
               <Image
                 src={src}
-                alt={`The Notebook No. ${i + 1}`}
+                alt={`The Notebook Café atmosphere in Riverside, CA — photo ${i + 1}`}
                 width={320}
                 height={400}
                 className="w-full h-full object-cover"
