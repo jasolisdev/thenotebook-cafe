@@ -11,10 +11,52 @@ import ParallaxHero from "@/app/components/features/ParallaxHero";
 import ContactForm from "@/app/components/features/ContactForm";
 import { MapPin, Clock, Phone, Mail, Coffee } from "lucide-react";
 import "../styles/pages/contact.css";
+import type { Metadata } from "next";
+import { SEO } from "@/lib/seo";
+import FAQJsonLd from "@/app/components/seo/FAQJsonLd";
+import { BUSINESS_INFO } from "@/lib/business";
+
+export const metadata: Metadata = {
+  title: SEO.pages.contact.title,
+  description: SEO.pages.contact.description,
+  alternates: {
+    canonical: '/contact',
+  },
+  openGraph: {
+    title: SEO.pages.contact.title,
+    description: SEO.pages.contact.description,
+    url: `${SEO.siteUrl}/contact`,
+  },
+};
+
+// FAQ data for local SEO
+const contactFAQs = [
+  {
+    question: 'What are The Notebook Café hours?',
+    answer: `We're open Monday through Saturday from 7am to 6pm. We're closed on Sundays to give our team time to rest and recharge.`,
+  },
+  {
+    question: 'Where is The Notebook Café located?',
+    answer: `We're located at ${BUSINESS_INFO.address.street}, ${BUSINESS_INFO.address.city}, ${BUSINESS_INFO.address.state} ${BUSINESS_INFO.address.zip}, near the art district and University Drive nightlife area in Riverside, California.`,
+  },
+  {
+    question: 'Do you have Wi-Fi for remote work?',
+    answer: 'Yes! We offer fast, reliable Wi-Fi perfect for remote work and studying. Every seat has a power outlet, and we have warm 2700K lighting for eye comfort during extended sessions.',
+  },
+  {
+    question: 'Can I host an event at The Notebook Café?',
+    answer: `We love hosting community events, live music, and open mics. Contact us at ${BUSINESS_INFO.email} or call ${BUSINESS_INFO.phoneDisplay} to discuss your event ideas.`,
+  },
+  {
+    question: 'What makes The Notebook Café different from other coffee shops in Riverside?',
+    answer: 'We focus on three pillars: exceptional specialty coffee, curated house music, and a sanctuary-like atmosphere designed for deep work and creativity. Plus, we treat our community like family—this is Riverside\'s living room.',
+  },
+];
 
 export default function ContactPage() {
   return (
     <main className="contact-page min-h-screen relative">
+      <FAQJsonLd items={contactFAQs} />
       <div className="contact-fixed-background" aria-hidden="true" />
       {/* Hero Section */}
       <ParallaxHero

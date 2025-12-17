@@ -12,6 +12,22 @@ import { Coffee, Music, Wifi, PlugZap, Armchair, Sparkles } from "lucide-react";
 import AtmosphereStrip from "@/app/components/AtmosphereStrip";
 import SignaturePoursGrid from "@/app/components/SignaturePoursGrid";
 import NewsletterSubscribe from "@/app/components/ui/NewsletterSubscribe";
+import LocalBusinessJsonLd from "@/app/components/seo/LocalBusinessJsonLd";
+import type { Metadata } from "next";
+import { SEO } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: SEO.pages.home.title,
+  description: SEO.pages.home.description,
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: SEO.pages.home.title,
+    description: SEO.pages.home.description,
+    url: SEO.siteUrl,
+  },
+};
 
 const vibeImages = [
   "/unsplash/tnc-placeholder-3.png",
@@ -69,6 +85,7 @@ const atmosphereFeatures = [
 export default function HomePage() {
   return (
     <main className="home-page overflow-hidden relative">
+      <LocalBusinessJsonLd />
       <div className="home-fixed-background" aria-hidden="true" />
       {/* Hero Section - Editorial Minimalist */}
       <section
