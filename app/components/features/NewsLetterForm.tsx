@@ -56,7 +56,7 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
             className="flex-1 bg-transparent border-0 border-b outline-none px-0 py-2 text-sm transition-all"
             style={{
               borderColor: 'rgba(var(--coffee-100-rgb), 0.3)',
-              color: 'var(--coffee-50)',
+              color: 'var(--color-coffee-50)',
             }}
             onFocus={(e) => {
               e.currentTarget.style.borderColor = 'rgba(var(--coffee-100-rgb), 0.6)';
@@ -70,8 +70,8 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
             disabled={status === "loading"}
             className="px-6 py-2 text-xs uppercase font-bold tracking-wider transition-all hover:opacity-80"
             style={{
-              backgroundColor: 'var(--coffee-50)',
-              color: 'var(--coffee-900)',
+              backgroundColor: 'var(--color-coffee-50)',
+              color: 'var(--color-coffee-900)',
             }}
           >
             {status === "loading" ? "..." : "Join"}
@@ -85,7 +85,7 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
             style={{
               color:
                 status === "success" || status === "duplicate"
-                  ? "var(--cafe-mist)"
+                  ? "var(--color-cafe-mist)"
                   : "rgb(248 113 113)",
             }}
           >
@@ -101,7 +101,7 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
     <div>
       <style jsx>{`
         input::placeholder {
-          color: #CBB9A4;
+          color: var(--color-cafe-beige);
         }
       `}</style>
       <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch">
@@ -115,17 +115,17 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
           autoComplete="email"
           className="flex-1 px-6 py-4 rounded-full border outline-none transition-all duration-200 placeholder-cafe-beige bg-white"
           style={{
-            borderColor: '#CBB9A4',
-            color: '#2C2420',
-            boxShadow: '0 8px 28px rgba(44, 36, 32, 0.06)'
+            borderColor: "var(--color-cafe-beige)",
+            color: "var(--color-cafe-black)",
+            boxShadow: "0 8px 28px rgba(var(--cafe-black-rgb), 0.06)",
           }}
           onFocus={(e) => {
-            e.currentTarget.style.borderColor = '#A48D78';
-            e.currentTarget.style.boxShadow = '0 10px 32px rgba(164, 141, 120, 0.22)';
+            e.currentTarget.style.borderColor = "var(--color-cafe-tan)";
+            e.currentTarget.style.boxShadow = "0 10px 32px rgba(var(--cafe-tan-rgb), 0.22)";
           }}
           onBlur={(e) => {
-            e.currentTarget.style.borderColor = '#CBB9A4';
-            e.currentTarget.style.boxShadow = '0 8px 28px rgba(44, 36, 32, 0.06)';
+            e.currentTarget.style.borderColor = "var(--color-cafe-beige)";
+            e.currentTarget.style.boxShadow = "0 8px 28px rgba(var(--cafe-black-rgb), 0.06)";
           }}
         />
 	        <button

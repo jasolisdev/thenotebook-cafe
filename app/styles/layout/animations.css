@@ -745,7 +745,7 @@
   justify-content: center;
   width: clamp(44px, 8vw, 72px);
   height: clamp(44px, 8vw, 72px);
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
   opacity: 0.1;
   pointer-events: none;
   filter: drop-shadow(0 6px 18px rgba(164, 141, 120, 0.18));
@@ -770,7 +770,7 @@
   justify-content: center;
   width: 44px;
   height: 44px;
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
   opacity: 0.2;
   pointer-events: none;
   filter: drop-shadow(0 4px 12px rgba(164, 141, 120, 0.22));

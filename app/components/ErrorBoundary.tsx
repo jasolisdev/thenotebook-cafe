@@ -63,14 +63,14 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       return (
         <div
           className="min-h-screen flex items-center justify-center px-6"
-          style={{ backgroundColor: 'var(--cafe-mist)' }}
+          style={{ backgroundColor: 'var(--color-cafe-mist)' }}
         >
           <div className="max-w-md w-full text-center">
             {/* Error Icon */}
             <div className="mb-6">
               <svg
                 className="w-20 h-20 mx-auto"
-                style={{ color: 'var(--cafe-tan)' }}
+                style={{ color: 'var(--color-cafe-tan)' }}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -87,14 +87,14 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             {/* Error Message */}
             <h1
               className="font-serif text-3xl md:text-4xl mb-4"
-              style={{ color: 'var(--cafe-black)' }}
+              style={{ color: 'var(--color-cafe-black)' }}
             >
               Oops! Something Went Wrong
             </h1>
 
             <p
               className="text-lg mb-8"
-              style={{ color: 'var(--cafe-brown)' }}
+              style={{ color: 'var(--color-cafe-brown)' }}
             >
               We encountered an unexpected error. Don&apos;t worry—your coffee is safe. Try refreshing the page.
             </p>
@@ -105,8 +105,8 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
                 onClick={this.handleReload}
                 className="px-6 py-3 rounded-sm font-semibold text-sm uppercase tracking-wider transition-all duration-300 hover:shadow-lg"
                 style={{
-                  backgroundColor: 'var(--cafe-tan)',
-                  color: 'var(--cafe-white)',
+                  backgroundColor: 'var(--color-cafe-tan)',
+                  color: 'var(--color-cafe-white)',
                 }}
               >
                 Reload Page
@@ -116,8 +116,8 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
                 onClick={this.handleReset}
                 className="px-6 py-3 rounded-sm font-semibold text-sm uppercase tracking-wider border-2 transition-all duration-300 hover:shadow-lg"
                 style={{
-                  borderColor: 'var(--cafe-tan)',
-                  color: 'var(--cafe-tan)',
+                  borderColor: 'var(--color-cafe-tan)',
+                  color: 'var(--color-cafe-tan)',
                   backgroundColor: 'transparent',
                 }}
               >
@@ -130,15 +130,15 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
               <details className="mt-8 text-left">
                 <summary
                   className="cursor-pointer text-sm font-semibold mb-2"
-                  style={{ color: 'var(--cafe-brown)' }}
+                  style={{ color: 'var(--color-cafe-brown)' }}
                 >
                   Error Details (Development Only)
                 </summary>
                 <pre
                   className="text-xs p-4 rounded overflow-auto"
                   style={{
-                    backgroundColor: 'var(--cafe-cream)',
-                    color: 'var(--cafe-black)',
+                    backgroundColor: 'var(--color-cafe-cream)',
+                    color: 'var(--color-cafe-black)',
                   }}
                 >
                   {this.state.error.message}

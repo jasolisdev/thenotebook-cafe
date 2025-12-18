@@ -142,7 +142,7 @@
 
 .hero-headline-bottom {
   font-style: italic;
-  color: var(--cafe-cream); /* Soft, elegant contrast */
+  color: var(--color-cafe-cream); /* Soft, elegant contrast */
   text-shadow:
     0 12px 32px rgba(var(--cafe-black-rgb), 0.58),
     0 2px 8px rgba(var(--cafe-black-rgb), 0.7);
@@ -170,40 +170,16 @@
   background-position: center;
   background-repeat: no-repeat;
   filter: blur(8px) sepia(18%) saturate(92%) contrast(1.02) brightness(0.75);
-  background-color: var(--cafe-charcoal);
-}
-
-/* Vignette overlay for better text separation */
-.editorial-hero-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 30%,
-    rgba(44, 36, 32, 0.4) 100%
-  );
-  pointer-events: none;
+  background-color: var(--color-cafe-charcoal);
 }
 
 /* Dark overlay - REMOVED */
-
-@keyframes kenBurns {
-  0% {
-    transform: scale(1);
-  }
-
-  100% {
-    transform: scale(1.1);
-  }
-}
 
 @media (min-width: 1024px) {
   .editorial-hero-bg {
     background-size: cover;
     --hero-bg-image: url("/home/tnc-home-hero-desktop.png");
     filter: blur(6px) sepia(18%) saturate(92%) contrast(1.02) brightness(0.85);
-    /* Ken Burns animation removed - static background */
   }
 }
 

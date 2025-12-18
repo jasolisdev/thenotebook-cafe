@@ -2,22 +2,27 @@
 
 /* Tailwind v4 Theme Configuration */
 @theme {
+  /* Core Palette */
   --color-cafe-black: #2C2420;
+  --color-cafe-charcoal: #2A2622;
   --color-cafe-brown: #4A3B32;
   --color-cafe-tan: #A48D78;
   --color-cafe-tan-dark: #8E7965;
   --color-cafe-beige: #CBB9A4;
-  --color-cafe-baige-light: #EBE5DE;
   --color-cafe-luxe-oat: #CBBFAF;
   --color-cafe-cream: #EDE7D8;
-  --color-cafe-mist: #FfFfEA;
-  --color-cafe-white: #FAF9F6;
+  --color-cafe-mist: #F4F1EA;
+  --color-cafe-white: #FDFBF7;
+  --color-cafe-olive: #4A4F41;
 
   /* Premium Navbar/Footer Palette */
   --color-coffee-50: #F3EFE9;
-  /* Off-White - Top nav text */
+  --color-coffee-100: #E6DCCA;
   --color-coffee-900: #2C241F;
-  /* Deep Espresso - Footer bg, scrolled nav text */
+
+  /* Extended Palette */
+  --color-espresso-brown: #2a1f16;
+  --color-warm-brown: #5a4a38;
 }
 
 /* ============================================================
@@ -67,37 +72,10 @@
   /* Used for Descriptions, UI, Buttons */
 
   /* ===============================
-     UPDATED COLOR PALETTE
-     (Premium Café Design System)
+     COLOR SYSTEM
+     All colors now defined in @theme above
+     RGB helpers & semantic tokens below
   =============================== */
-
-  /* Core palette */
-  --cafe-black: #2C2420;
-  --cafe-charcoal: #2A2622;
-  --cafe-brown: #4A3B32;
-  --cafe-tan: #A48D78;
-  --cafe-beige: #CBB9A4;
-  --cafe-luxe-oat: #CBBFAF;
-  --cafe-cream: #EDE7D8;
-  --cafe-mist: #FDFBF7;
-  --cafe-white: #FAF9F6;
-  --cafe-olive: #4A4F41;
-
-  /* Premium Navbar/Footer Palette */
-  --coffee-50: #F3EFE9;
-  /* Off-White - Top nav text */
-  --coffee-100: #E6DCCA;
-  /* Cream - Footer body text */
-  --coffee-800: #3A2D26;
-  /* Dark Brown - Footer borders */
-  --coffee-900: #2C241F;
-  /* Deep Espresso - Footer bg, scrolled nav text */
-
-  /* Extended palette - frequently used colors */
-  --espresso-brown: #2a1f16;
-  /* Dark brown text */
-  --warm-brown: #5a4a38;
-  /* Warm brown text */
 
   /* RGB helpers for rgba() usage */
   --cafe-black-rgb: 44, 36, 32;
@@ -117,13 +95,13 @@
   --espresso-brown-rgb: 42, 31, 22;
 
   /* Core semantic tokens */
-  --bg-solid: var(--cafe-mist);
-  --bg-dark: var(--cafe-black);
+  --bg-solid: var(--color-cafe-mist);
+  --bg-dark: var(--color-cafe-black);
 
   /* Text colors */
-  --text-dark: var(--cafe-brown);
-  --text-light: var(--cafe-mist);
-  --text-light-muted: var(--cafe-beige);
+  --text-dark: var(--color-cafe-brown);
+  --text-light: var(--color-cafe-mist);
+  --text-light-muted: var(--color-cafe-beige);
 
   /* Glass panel effect */
   --glass-bg: rgba(250, 249, 246, 0.85);
@@ -139,23 +117,6 @@
   --tan-light: rgba(var(--cafe-tan-rgb), var(--opacity-light));
   --tan-medium: rgba(var(--cafe-tan-rgb), var(--opacity-medium));
   --tan-strong: rgba(var(--cafe-tan-rgb), var(--opacity-strong));
-
-  /* Hero gradients */
-  --hero-gradient-espresso:
-    radial-gradient(ellipse at 78% 0%, rgba(var(--cafe-tan-rgb), 0.34), rgba(var(--cafe-tan-rgb), 0) 56%),
-    radial-gradient(ellipse at 18% 22%, rgba(var(--cafe-tan-rgb), 0.2), rgba(var(--cafe-tan-rgb), 0) 50%),
-    linear-gradient(145deg, #1a120e 0%, #2c2420 55%, #1a120e 100%);
-  --hero-espresso-overlay:
-    radial-gradient(ellipse at 82% 18%, rgba(var(--cafe-cream-rgb), 0.22), rgba(var(--cafe-cream-rgb), 0) 52%),
-    radial-gradient(ellipse at 18% 10%, rgba(var(--cafe-tan-rgb), 0.16), rgba(var(--cafe-tan-rgb), 0) 50%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55));
-  --hero-gradient-cream:
-    radial-gradient(ellipse at 22% 30%, rgba(var(--cafe-tan-rgb), 0.22), rgba(var(--cafe-tan-rgb), 0) 55%),
-    radial-gradient(ellipse at 68% 70%, rgba(var(--cafe-cream-rgb), 0.32), rgba(var(--cafe-cream-rgb), 0) 58%),
-    linear-gradient(145deg, #faf7f1 0%, #f5eee5 50%, #f9f5ee 100%);
-  --hero-cream-overlay:
-    radial-gradient(ellipse at 70% 40%, rgba(var(--cafe-tan-rgb), 0.12), rgba(var(--cafe-tan-rgb), 0) 62%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.8));
 
   --dark-overlay: rgba(0, 0, 0, var(--opacity-medium));
   --white-overlay: rgba(255, 255, 255, var(--opacity-light));
@@ -250,19 +211,6 @@ body.studio-mode {
   scrollbar-width: none;
 }
 
-/* REMOVED: Hero transform shifts
-
-   BEFORE:
-   .hero-content { transform: translateY(-16px); }
-   @media (max-width: 400px) { transform: translateY(34px); }
-
-   PROBLEM: Transforms shift content VISUALLY but don't affect document flow
-   SYMPTOM: scrollY=0 but content appears 34px lower on mobile
-
-   SOLUTION: Use margin-top/padding-top in hero sections directly instead
-   This ensures layout flow matches visual positioning
-*/
-
 .notched-mobile {
   overflow: visible;
 }
@@ -326,6 +274,23 @@ h3 {
 /* ============================================================
    CORE ANIMATIONS
 ============================================================ */
+@keyframes mask-up {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-mask-up {
+  animation: mask-up 1.4s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+.animate-fade-up {
+  animation: fadeInUp 1s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -496,7 +461,7 @@ h3 {
 ============================================================ */
 ::selection {
   background: rgba(164, 141, 120, 0.3);
-  color: var(--cafe-black);
+  color: var(--color-cafe-black);
 }
 
 *:focus-visible {
@@ -535,8 +500,8 @@ h3 {
 .acc-hide-images .home-hero-grid,
 .acc-hide-images .hero-latte-card,
 .acc-hide-images .hero-latte-pill {
-  color: var(--cafe-black) !important;
-  fill: var(--cafe-black) !important;
+  color: var(--color-cafe-black) !important;
+  fill: var(--color-cafe-black) !important;
 }
 
 .acc-hide-images .home-hero-pill,
@@ -555,12 +520,12 @@ h3 {
 .acc-hide-images .nav-link,
 .acc-hide-images .site-header a,
 .acc-hide-images .site-header span {
-  color: var(--cafe-black) !important;
-  fill: var(--cafe-black) !important;
+  color: var(--color-cafe-black) !important;
+  fill: var(--color-cafe-black) !important;
 }
 
 .acc-hide-images .hamburger-line {
-  background-color: var(--cafe-black) !important;
+  background-color: var(--color-cafe-black) !important;
 }
 
 /* Ensure navigation, accessibility widget, and UI icons remain visible */
@@ -586,8 +551,8 @@ h3 {
 }
 
 .acc-highlight-links a {
-  background-color: var(--cafe-tan) !important;
-  color: var(--cafe-black) !important;
+  background-color: var(--color-cafe-tan) !important;
+  color: var(--color-cafe-black) !important;
   text-decoration: underline !important;
   border-radius: 2px;
   padding: 0 2px;

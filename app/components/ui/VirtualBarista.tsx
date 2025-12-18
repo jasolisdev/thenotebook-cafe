@@ -62,7 +62,6 @@ export default function VirtualBarista() {
       {isOpen && (
         <div
           className="mb-4 w-80 sm:w-96 h-96 bg-cafe-white rounded-lg shadow-xl border border-cafe-tan/30 flex flex-col overflow-hidden animate-fade-in"
-          style={{ backgroundColor: "var(--cafe-white, #FAF9F6)" }}
         >
           {/* Header */}
           <div className="bg-cafe-black text-cafe-mist p-4 flex justify-between items-center">
@@ -88,7 +87,6 @@ export default function VirtualBarista() {
           <div
             ref={scrollRef}
             className="flex-1 overflow-y-auto p-4 space-y-4 bg-cafe-mist/30"
-            style={{ backgroundColor: "rgba(244, 241, 234, 0.3)" }}
           >
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
@@ -117,7 +115,6 @@ export default function VirtualBarista() {
           {/* Input */}
           <div
             className="p-3 bg-white border-t border-cafe-tan/20 flex gap-2"
-            style={{ backgroundColor: "#FFFFFF" }}
           >
             <input
               type="text"
@@ -143,11 +140,6 @@ export default function VirtualBarista() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="group flex items-center gap-2 bg-cafe-black hover:bg-cafe-brown text-cafe-tan px-4 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105 border border-cafe-tan/20"
-        style={{
-          backgroundColor: "var(--cafe-black, #2C2420)",
-          color: "var(--cafe-tan, #A48D78)",
-          borderColor: "rgba(164, 141, 120, 0.2)",
-        }}
         aria-label="Toggle virtual barista chat"
       >
         <span className="font-medium hidden sm:block overflow-hidden max-w-0 group-hover:max-w-xs transition-all duration-500 ease-in-out whitespace-nowrap">

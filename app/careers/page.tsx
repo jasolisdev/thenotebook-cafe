@@ -6,7 +6,6 @@
 import Reveal from "../components/ui/Reveal";
 import RevealText from "../components/ui/RevealText";
 import FadeInSection from "../components/ui/FadeInSection";
-import ParallaxHero from "../components/features/ParallaxHero";
 import { Coffee, Heart, TrendingUp, CheckCircle, Mail, ExternalLink, MapPin, DollarSign, Briefcase, Gift } from "lucide-react";
 import "../styles/pages/careers.css";
 import type { Metadata } from "next";
@@ -47,26 +46,33 @@ export default function CareersPage() {
     <main className="careers-page min-h-screen relative">
       <div className="careers-fixed-background" aria-hidden="true" />
       {/* Hero Section */}
-      <ParallaxHero
-        className="parallax-hero--compact"
-        contentClassName="parallax-hero__content--compact tnc-hero__content"
-        backgroundImage="/menu/tnc-menu-banner.webp"
-        backgroundColor="var(--cafe-black)"
-        backgroundFit="fitHeight"
-        backgroundFitDesktop="cover"
-        parallax={false}
-        overlayVariant="solid"
-        focusPercent={32}
+      <section
+        className="relative min-h-[50vh] flex items-center justify-center overflow-hidden"
+        data-section="Hero"
+        style={{
+          backgroundImage: 'url(/menu/tnc-menu-banner.webp)',
+          backgroundColor: 'var(--color-cafe-black)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 32%',
+        }}
       >
-        <div className="tnc-hero__inner relative z-10">
+        <div
+          className="absolute inset-0 bg-cafe-black/70"
+          aria-hidden="true"
+        />
+        <div className="relative z-10 text-center px-6 py-[100px]">
           <RevealText delay="0ms">
-            <h1 className="tnc-hero__title font-serif">Careers</h1>
+            <h1 className="font-serif text-4xl md:text-6xl text-cafe-cream mb-4">
+              Careers
+            </h1>
           </RevealText>
           <FadeInSection delay="200ms">
-            <p className="tnc-hero__subtitle">Join The Team, Build The Culture.</p>
+            <p className="text-lg md:text-xl text-cafe-cream/90">
+              Join The Team, Build The Culture.
+            </p>
           </FadeInSection>
         </div>
-      </ParallaxHero>
+      </section>
 
       {/* Culture Section */}
       <section
@@ -81,8 +87,8 @@ export default function CareersPage() {
               </span>
             </Reveal>
             <Reveal delay={120}>
-              <h2 className="font-serif text-5xl sm:text-6xl mb-8 leading-none" style={{ color: 'var(--cafe-black)' }}>
-                A <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Different</span> Kind of Café
+              <h2 className="font-serif text-5xl sm:text-6xl mb-8 leading-none" style={{ color: 'var(--color-cafe-black)' }}>
+                A <span className="italic" style={{ color: 'var(--color-cafe-tan)' }}>Different</span> Kind of Café
               </h2>
             </Reveal>
             <Reveal delay={180}>
@@ -104,8 +110,8 @@ export default function CareersPage() {
               </span>
             </Reveal>
             <Reveal delay={100}>
-              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none" style={{ color: 'var(--cafe-black)' }}>
-                Join Our <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Team</span>
+              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none" style={{ color: 'var(--color-cafe-black)' }}>
+                Join Our <span className="italic" style={{ color: 'var(--color-cafe-tan)' }}>Team</span>
               </h2>
             </Reveal>
           </div>
@@ -115,7 +121,7 @@ export default function CareersPage() {
               <Reveal delay={200}>
                 <div className="space-y-6">
                   <div className="flex items-center justify-between gap-4">
-                    <h4 className="font-serif text-2xl md:text-3xl leading-tight" style={{ color: 'var(--cafe-black)' }}>
+                    <h4 className="font-serif text-2xl md:text-3xl leading-tight" style={{ color: 'var(--color-cafe-black)' }}>
                       Barista Cashier
                     </h4>
                     <span
@@ -176,7 +182,7 @@ export default function CareersPage() {
 
                   <div className="space-y-7 pt-2">
                     <div className="space-y-3">
-	                      <h5 className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>Overview</h5>
+	                      <h5 className="font-serif text-xl" style={{ color: 'var(--color-cafe-black)' }}>Overview</h5>
 	                      <p className="font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
 	                        Join our vibrant café team as a Barista Cashier. You&apos;ll greet guests, prepare drinks and café items, handle transactions, and help keep the space welcoming, clean, and running smoothly.
 	                      </p>
@@ -184,7 +190,7 @@ export default function CareersPage() {
 
                     <div className="grid md:grid-cols-2 gap-6 md:gap-8">
                       <div className="space-y-3">
-                        <h5 className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>Responsibilities</h5>
+                        <h5 className="font-serif text-xl" style={{ color: 'var(--color-cafe-black)' }}>Responsibilities</h5>
                         <ul className="space-y-2">
                           {[
                             "Greet customers warmly and take orders with professionalism",
@@ -204,7 +210,7 @@ export default function CareersPage() {
                       </div>
 
                       <div className="space-y-3">
-                        <h5 className="font-serif text-xl" style={{ color: 'var(--cafe-black)' }}>Qualifications</h5>
+                        <h5 className="font-serif text-xl" style={{ color: 'var(--color-cafe-black)' }}>Qualifications</h5>
                         <ul className="space-y-2">
                           {[
                             "Prior barista experience or coffee knowledge preferred",
@@ -236,16 +242,16 @@ export default function CareersPage() {
       <section
         data-section="Culture Values"
         className="py-24 md:py-32 relative overflow-hidden"
-        style={{ backgroundColor: 'var(--cafe-olive)' }}
+        style={{ backgroundColor: 'var(--color-cafe-olive)' }}
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-10">
             <Reveal delay={200}>
               <div className="text-center space-y-4">
                 <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(237, 231, 216, 0.2)' }}>
-                  <Heart size={28} style={{ color: 'var(--cafe-cream)' }} strokeWidth={1.5} />
+                  <Heart size={28} style={{ color: 'var(--color-cafe-cream)' }} strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-cream)' }}>
+                <h3 className="font-serif text-2xl" style={{ color: 'var(--color-cafe-cream)' }}>
                   Family Vibes
                 </h3>
                 <p className="font-normal leading-relaxed" style={{ color: 'rgba(237, 231, 216, 0.9)' }}>
@@ -257,9 +263,9 @@ export default function CareersPage() {
             <Reveal delay={280}>
               <div className="text-center space-y-4">
                 <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(237, 231, 216, 0.2)' }}>
-                  <Coffee size={28} style={{ color: 'var(--cafe-cream)' }} strokeWidth={1.5} />
+                  <Coffee size={28} style={{ color: 'var(--color-cafe-cream)' }} strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-cream)' }}>
+                <h3 className="font-serif text-2xl" style={{ color: 'var(--color-cafe-cream)' }}>
                   Craft-Focused
                 </h3>
                 <p className="font-normal leading-relaxed" style={{ color: 'rgba(237, 231, 216, 0.9)' }}>
@@ -271,9 +277,9 @@ export default function CareersPage() {
             <Reveal delay={360}>
               <div className="text-center space-y-4">
                 <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: 'rgba(237, 231, 216, 0.2)' }}>
-                  <TrendingUp size={28} style={{ color: 'var(--cafe-cream)' }} strokeWidth={1.5} />
+                  <TrendingUp size={28} style={{ color: 'var(--color-cafe-cream)' }} strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-2xl" style={{ color: 'var(--cafe-cream)' }}>
+                <h3 className="font-serif text-2xl" style={{ color: 'var(--color-cafe-cream)' }}>
                   Room to Grow
                 </h3>
                 <p className="font-normal leading-relaxed" style={{ color: 'rgba(237, 231, 216, 0.9)' }}>
@@ -292,17 +298,17 @@ export default function CareersPage() {
       >
         <div className="max-w-5xl mx-auto px-6">
           <Reveal>
-            <h2 className="font-serif text-4xl md:text-5xl text-center mb-16" style={{ color: 'var(--cafe-black)' }}>
-              What We <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Offer</span>
+            <h2 className="font-serif text-4xl md:text-5xl text-center mb-16" style={{ color: 'var(--color-cafe-black)' }}>
+              What We <span className="italic" style={{ color: 'var(--color-cafe-tan)' }}>Offer</span>
             </h2>
           </Reveal>
 
           <div className="grid md:grid-cols-2 gap-8">
             <Reveal delay={100}>
               <div className="flex gap-4 p-6 rounded-2xl">
-                <CheckCircle size={24} style={{ color: 'var(--cafe-tan)', flexShrink: 0 }} strokeWidth={1.5} />
+                <CheckCircle size={24} style={{ color: 'var(--color-cafe-tan)', flexShrink: 0 }} strokeWidth={1.5} />
                 <div>
-                  <h3 className="font-serif text-xl mb-2" style={{ color: 'var(--cafe-black)' }}>Employee Training</h3>
+                  <h3 className="font-serif text-xl mb-2" style={{ color: 'var(--color-cafe-black)' }}>Employee Training</h3>
                   <p className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
                     Comprehensive training in barista skills, food prep, customer service, and café operations.
                   </p>
@@ -312,9 +318,9 @@ export default function CareersPage() {
 
             <Reveal delay={180}>
               <div className="flex gap-4 p-6 rounded-2xl">
-                <CheckCircle size={24} style={{ color: 'var(--cafe-tan)', flexShrink: 0 }} strokeWidth={1.5} />
+                <CheckCircle size={24} style={{ color: 'var(--color-cafe-tan)', flexShrink: 0 }} strokeWidth={1.5} />
                 <div>
-                  <h3 className="font-serif text-xl mb-2" style={{ color: 'var(--cafe-black)' }}>Flexible Scheduling</h3>
+                  <h3 className="font-serif text-xl mb-2" style={{ color: 'var(--color-cafe-black)' }}>Flexible Scheduling</h3>
                   <p className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
                     We work with your schedule. Students, parents, side hustlers—we get it.
                   </p>
@@ -324,9 +330,9 @@ export default function CareersPage() {
 
             <Reveal delay={260}>
               <div className="flex gap-4 p-6 rounded-2xl">
-                <CheckCircle size={24} style={{ color: 'var(--cafe-tan)', flexShrink: 0 }} strokeWidth={1.5} />
+                <CheckCircle size={24} style={{ color: 'var(--color-cafe-tan)', flexShrink: 0 }} strokeWidth={1.5} />
                 <div>
-                  <h3 className="font-serif text-xl mb-2" style={{ color: 'var(--cafe-black)' }}>Career Development</h3>
+                  <h3 className="font-serif text-xl mb-2" style={{ color: 'var(--color-cafe-black)' }}>Career Development</h3>
                   <p className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
                     Start as a barista, grow into a shift lead or manager. We promote from within.
                   </p>
@@ -336,9 +342,9 @@ export default function CareersPage() {
 
             <Reveal delay={340}>
               <div className="flex gap-4 p-6 rounded-2xl">
-                <CheckCircle size={24} style={{ color: 'var(--cafe-tan)', flexShrink: 0 }} strokeWidth={1.5} />
+                <CheckCircle size={24} style={{ color: 'var(--color-cafe-tan)', flexShrink: 0 }} strokeWidth={1.5} />
                 <div>
-                  <h3 className="font-serif text-xl mb-2" style={{ color: 'var(--cafe-black)' }}>Great Vibes Daily</h3>
+                  <h3 className="font-serif text-xl mb-2" style={{ color: 'var(--color-cafe-black)' }}>Great Vibes Daily</h3>
                   <p className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
                     Work to a curated lofi house soundtrack in a beautiful space with a supportive team.
                   </p>
@@ -362,8 +368,8 @@ export default function CareersPage() {
               </span>
             </Reveal>
             <Reveal delay={100}>
-              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none" style={{ color: 'var(--cafe-black)' }}>
-                How We <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Hire</span>
+              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none" style={{ color: 'var(--color-cafe-black)' }}>
+                How We <span className="italic" style={{ color: 'var(--color-cafe-tan)' }}>Hire</span>
               </h2>
             </Reveal>
           </div>
@@ -372,10 +378,10 @@ export default function CareersPage() {
             {/* Step 1: Apply */}
             <Reveal delay={150}>
               <div className="text-center space-y-4">
-                <div className="w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-4" style={{ backgroundColor: 'var(--cafe-tan)', color: 'white' }}>
+                <div className="w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-4" style={{ backgroundColor: 'var(--color-cafe-tan)', color: 'white' }}>
                   <span className="font-serif text-3xl">1</span>
                 </div>
-                <h3 className="font-serif text-2xl md:text-3xl" style={{ color: 'var(--cafe-black)' }}>
+                <h3 className="font-serif text-2xl md:text-3xl" style={{ color: 'var(--color-cafe-black)' }}>
                   Apply
                 </h3>
                 <p className="font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
@@ -387,10 +393,10 @@ export default function CareersPage() {
             {/* Step 2: Connect */}
             <Reveal delay={250}>
               <div className="text-center space-y-4">
-                <div className="w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-4" style={{ backgroundColor: 'var(--cafe-tan)', color: 'white' }}>
+                <div className="w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-4" style={{ backgroundColor: 'var(--color-cafe-tan)', color: 'white' }}>
                   <span className="font-serif text-3xl">2</span>
                 </div>
-                <h3 className="font-serif text-2xl md:text-3xl" style={{ color: 'var(--cafe-black)' }}>
+                <h3 className="font-serif text-2xl md:text-3xl" style={{ color: 'var(--color-cafe-black)' }}>
                   Connect
                 </h3>
                 <p className="font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
@@ -402,10 +408,10 @@ export default function CareersPage() {
             {/* Step 3: Decision */}
             <Reveal delay={350}>
               <div className="text-center space-y-4">
-                <div className="w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-4" style={{ backgroundColor: 'var(--cafe-tan)', color: 'white' }}>
+                <div className="w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-4" style={{ backgroundColor: 'var(--color-cafe-tan)', color: 'white' }}>
                   <span className="font-serif text-3xl">3</span>
                 </div>
-                <h3 className="font-serif text-2xl md:text-3xl" style={{ color: 'var(--cafe-black)' }}>
+                <h3 className="font-serif text-2xl md:text-3xl" style={{ color: 'var(--color-cafe-black)' }}>
                   Decision
                 </h3>
                 <p className="font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
@@ -427,8 +433,8 @@ export default function CareersPage() {
               </span>
             </Reveal>
             <Reveal delay={100}>
-              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none" style={{ color: 'var(--cafe-black)' }}>
-                Send Your <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Resume</span>
+              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none" style={{ color: 'var(--color-cafe-black)' }}>
+                Send Your <span className="italic" style={{ color: 'var(--color-cafe-tan)' }}>Resume</span>
               </h2>
             </Reveal>
           </div>
@@ -448,9 +454,9 @@ export default function CareersPage() {
                       className="w-12 h-12 rounded-full flex items-center justify-center"
                       style={{ backgroundColor: 'rgba(164, 141, 120, 0.12)' }}
                     >
-                      <Mail size={20} style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.5} />
+                      <Mail size={20} style={{ color: 'var(--color-cafe-tan)' }} strokeWidth={1.5} />
                     </div>
-                    <span className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'var(--cafe-tan)' }}>
+                    <span className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'var(--color-cafe-tan)' }}>
                       Careers
                     </span>
                   </div>
@@ -491,7 +497,7 @@ export default function CareersPage() {
                     }}
                   >
                     <div className="flex items-center gap-3 mb-3">
-                      <Mail size={18} strokeWidth={1.8} style={{ color: 'var(--cafe-tan)' }} />
+                      <Mail size={18} strokeWidth={1.8} style={{ color: 'var(--color-cafe-tan)' }} />
                       <span className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'rgba(74, 59, 50, 0.7)' }}>
                         Email Your Resume
                       </span>
@@ -499,7 +505,7 @@ export default function CareersPage() {
                     <a
                       href="mailto:thenotebookcafellc@gmail.com"
                       className="block font-serif text-base sm:text-lg md:text-xl leading-tight break-words md:break-normal"
-                      style={{ color: 'var(--cafe-black)', textDecoration: 'none' }}
+                      style={{ color: 'var(--color-cafe-black)', textDecoration: 'none' }}
                     >
                       thenotebookcafellc@gmail.com
                     </a>

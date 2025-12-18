@@ -1,16 +1,20 @@
 /**
  * Shared color constants for React components
- * These mirror the CSS variables from globals.css
+ * These mirror the Tailwind @theme colors from globals.css
  *
  * Usage: import { COLORS, RGBA_COLORS } from '@/app/lib/colors';
  *
  * @example
- * // In TypeScript/JSX:
+ * // In TypeScript/JSX (static values):
  * const buttonColor = COLORS.black;
  * style={{ backgroundColor: COLORS.tan }}
  *
- * // Prefer CSS variables in inline styles for theme support:
- * style={{ backgroundColor: 'var(--cafe-black)' }}
+ * // PREFERRED: Use Tailwind CSS variables in inline styles for theme support:
+ * style={{ backgroundColor: 'var(--color-cafe-black)' }}
+ * style={{ color: 'var(--color-cafe-tan)' }}
+ *
+ * Note: All colors are defined in @theme in globals.css
+ * Tailwind generates both utility classes (bg-cafe-white) and CSS variables (--color-cafe-white)
  */
 
 export const COLORS = {
@@ -21,7 +25,7 @@ export const COLORS = {
   beige: '#CBB9A4',
   cream: '#EDE7D8',
   mist: '#F4F1EA',
-  white: '#FAF9F6',
+  white: '#FDFBF7',
 
   // Extended palette
   espressoBrown: '#2a1f16',

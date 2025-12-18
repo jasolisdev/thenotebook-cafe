@@ -193,11 +193,14 @@ export default function SiteHeader({
       return;
     }
 
-    // Start navigation and delay closing to let the page begin loading
-    router.push(href);
+    // Close the drawer immediately
+    setIsOpen(false);
+
+    // Wait for the drawer to close (0.5s transition), then navigate
+    // This ensures the next page's hero animation starts AFTER the drawer is gone.
     setTimeout(() => {
-      setIsOpen(false);
-    }, 450);
+      router.push(href);
+    }, 500);
   };
 
   // Prefetch hero images on hover for instant page transitions
@@ -234,9 +237,9 @@ export default function SiteHeader({
           backgroundColor: atTopVisual
             ? 'transparent'
             : isOpen
-            ? 'var(--cafe-mist)'
+            ? 'var(--color-cafe-mist)'
             : forceSolid
-            ? 'var(--cafe-mist)'
+            ? 'var(--color-cafe-mist)'
             : isScrolled
             ? 'rgba(var(--coffee-50-rgb), 0.9)'
             : 'transparent',
@@ -261,14 +264,14 @@ export default function SiteHeader({
               <div className="flex flex-col">
                 <span
                   className="font-serif whitespace-nowrap text-xl sm:text-2xl md:text-3xl leading-none tracking-tight"
-                  style={{ color: useLightText ? 'var(--coffee-50)' : 'var(--coffee-900)' }}
+                  style={{ color: useLightText ? 'var(--color-coffee-50)' : 'var(--color-coffee-900)' }}
                 >
                   The Notebook
                 </span>
                 <span
                   className="text-[12px] uppercase tracking-[0.22em] leading-none"
                   style={{
-                    color: useLightText ? 'var(--coffee-50)' : 'var(--coffee-900)',
+                    color: useLightText ? 'var(--color-coffee-50)' : 'var(--color-coffee-900)',
                     opacity: 0.8
                   }}
                 >

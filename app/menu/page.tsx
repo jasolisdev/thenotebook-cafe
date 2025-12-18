@@ -6,7 +6,6 @@ import { MENU_ITEMS } from '@/app/constants';
 import { ProductModal } from '@/app/components/features/ProductModal';
 import RevealText from '@/app/components/ui/RevealText';
 import FadeInSection from '@/app/components/ui/FadeInSection';
-import ParallaxHero from '@/app/components/features/ParallaxHero';
 import '../styles/pages/menu.css';
 import { MenuTabs } from './_components/MenuTabs';
 import { MenuSectionList } from './_components/MenuSectionList';
@@ -86,28 +85,31 @@ export default function MenuPage() {
         <div className="menu-fixed-background" aria-hidden="true" />
 
         {/* Menu Header */}
-        <ParallaxHero
-          className="parallax-hero--compact"
-          contentClassName="parallax-hero__content--compact tnc-hero__content"
-          backgroundImage="/menu/tnc-menu-banner.webp"
-          backgroundColor="var(--cafe-black)"
-          backgroundFit="fitHeight"
-          backgroundFitDesktop="cover"
-          parallax={false}
-          overlayVariant="solid"
-          focusPercent={32}
+        <section
+          className="relative min-h-[50vh] flex items-center justify-center overflow-hidden"
+          data-section="Hero"
+          style={{
+            backgroundImage: 'url(/menu/tnc-menu-banner.webp)',
+            backgroundColor: 'var(--color-cafe-black)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 32%',
+          }}
         >
-          <div className="tnc-hero__inner">
-            <h1 className="tnc-hero__title font-serif">
+          <div
+            className="absolute inset-0 bg-cafe-black/70"
+            aria-hidden="true"
+          />
+          <div className="relative z-10 text-center px-6 py-[100px]">
+            <h1 className="font-serif text-4xl md:text-6xl text-cafe-cream mb-4">
               <RevealText delay="0ms">Specialty Coffee Menu</RevealText>
             </h1>
             <FadeInSection delay="200ms">
-              <p className="tnc-hero__subtitle">
+              <p className="text-lg md:text-xl text-cafe-cream/90">
                 Handcrafted Daily in Riverside, CA.
               </p>
             </FadeInSection>
           </div>
-        </ParallaxHero>
+        </section>
 
         {/* Sticky Tabs Container */}
         <div
