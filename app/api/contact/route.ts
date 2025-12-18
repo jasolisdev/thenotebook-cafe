@@ -89,76 +89,153 @@ function buildContactEmailHtml(params: {
   const safeReplyHref = escapeHtml(replyHref);
 
   return `<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
   <title>A Note Regarding ${safeSubject}</title>
+  <style>
+    /* Base Reset */
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+
+    /* Light Mode (Default) */
+    .email-wrapper { background-color: #FDFBF7; }
+    .email-card { background-color: #FAF9F6; }
+    .email-header-border { border-bottom: 1px solid #EDE7D8; }
+    .email-title { color: #2C2420; }
+    .email-greeting { color: #A48D78; }
+    .email-text { color: #2A2622; }
+    .email-subject { color: #4A4F41; }
+    .email-divider { background-color: #A48D78; }
+    .email-sender-border { border-left: 2px solid #EDE7D8; }
+    .email-sender-name { color: #4A3B32; }
+    .email-sender-email { color: #A48D78; }
+    .email-button { background-color: #A48D78; color: #FAF9F6; }
+    .email-footer-bg { background-color: #FDFBF7; }
+    .email-footer-text { color: #A48D78; }
+    .email-footer-divider { border-top: 1px solid #EDE7D8; }
+    .email-pillars { color: #999999; }
+
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+      .email-wrapper { background-color: #1a1410 !important; }
+      .email-card { background-color: #2a2420 !important; }
+      .email-header-border { border-bottom: 1px solid #4a4240 !important; }
+      .email-title { color: #f0e8d8 !important; }
+      .email-greeting { color: #c9a876 !important; }
+      .email-text { color: #e8dfd0 !important; }
+      .email-subject { color: #b8c098 !important; }
+      .email-divider { background-color: #c9a876 !important; }
+      .email-sender-border { border-left: 2px solid #4a4240 !important; }
+      .email-sender-name { color: #e8dfd0 !important; }
+      .email-sender-email { color: #c9a876 !important; }
+      .email-button { background-color: #c9a876 !important; color: #2a2420 !important; }
+      .email-footer-bg { background-color: #1a1410 !important; }
+      .email-footer-text { color: #c9a876 !important; }
+      .email-footer-divider { border-top: 1px solid #4a4240 !important; }
+      .email-pillars { color: #6a6260 !important; }
+    }
+
+    /* Mobile Responsive */
+    @media only screen and (max-width: 600px) {
+      .email-outer-padding { padding: 20px 10px !important; }
+      .email-header-padding { padding: 40px 20px 30px 20px !important; }
+      .email-content-padding { padding: 0 20px 30px 20px !important; }
+      .email-footer-padding { padding: 0 20px 40px 20px !important; }
+      .email-legal-padding { padding: 20px !important; }
+      .email-title { font-size: 22px !important; letter-spacing: 0.08em !important; }
+      .email-greeting { font-size: 12px !important; }
+      .email-text { font-size: 14px !important; }
+      .email-subject { font-size: 16px !important; }
+      .email-sender-wrapper { display: block !important; }
+      .email-sender-info { margin-bottom: 15px !important; padding-left: 15px !important; }
+      .email-button-wrapper { text-align: left !important; }
+      .email-button { display: block !important; width: 100% !important; text-align: center !important; padding: 14px 20px !important; }
+      .email-footer-text { font-size: 11px !important; }
+      .email-pillars { font-size: 9px !important; }
+    }
+  </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: #FDFBF7; font-family: 'Georgia', serif;">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #FDFBF7; padding: 60px 20px;">
+<body style="margin: 0; padding: 0; font-family: 'Georgia', serif;">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="email-wrapper" style="background-color: #FDFBF7;">
     <tr>
-      <td align="center">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; background-color: #FAF9F6; border-radius: 4px; overflow: hidden; box-shadow: 0 10px 30px rgba(44,36,32,0.1);">
+      <td align="center" class="email-outer-padding" style="padding: 60px 20px;">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="email-card" style="max-width: 600px; background-color: #FAF9F6; border-radius: 4px; overflow: hidden; box-shadow: 0 10px 30px rgba(44,36,32,0.1);">
+
           <!-- Editorial Header -->
           <tr>
-            <td align="center" style="padding: 60px 40px 40px 40px;">
-              <div style="border-bottom: 1px solid #EDE7D8; padding-bottom: 20px;">
-                <h1 style="margin: 0; color: #2C2420; font-size: 28px; letter-spacing: 0.1em; font-weight: 300; text-transform: uppercase;">The Notebook Café</h1>
+            <td align="center" class="email-header-padding" style="padding: 60px 40px 40px 40px;">
+              <div class="email-header-border" style="border-bottom: 1px solid #EDE7D8; padding-bottom: 20px;">
+                <h1 class="email-title" style="margin: 0; color: #2C2420; font-size: 28px; letter-spacing: 0.1em; font-weight: 300; text-transform: uppercase; line-height: 1.2;">The Notebook Café</h1>
               </div>
             </td>
           </tr>
+
           <!-- Main Content -->
           <tr>
-            <td style="padding: 0 50px 40px 50px;">
+            <td class="email-content-padding" style="padding: 0 50px 40px 50px;">
+
               <!-- Notification Header -->
               <div style="margin-bottom: 30px;">
-                <p style="margin: 0; color: #A48D78; font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: bold;">Hello Team,</p>
-                <p style="margin: 5px 0 0 0; color: #2A2622; font-size: 15px; line-height: 1.5;">You have received a new message via the <strong>Contact Page</strong> form.</p>
+                <p class="email-greeting" style="margin: 0; color: #A48D78; font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: bold;">Hello Team,</p>
+                <p class="email-text" style="margin: 5px 0 0 0; color: #2A2622; font-size: 15px; line-height: 1.5;">You have received a new message via the <strong>Contact Page</strong> form.</p>
               </div>
 
-              <h2 style="margin: 0 0 25px 0; color: #4A4F41; font-size: 18px; font-style: italic; font-weight: 400;">Re: ${safeSubject}</h2>
+              <h2 class="email-subject" style="margin: 0 0 25px 0; color: #4A4F41; font-size: 18px; font-style: italic; font-weight: 400; line-height: 1.4;">Re: ${safeSubject}</h2>
 
-              <div style="color: #2A2622; font-size: 16px; line-height: 1.8;">
+              <div class="email-text" style="color: #2A2622; font-size: 16px; line-height: 1.8;">
                 ${formattedMessage}
               </div>
 
-              <div style="margin: 40px auto; width: 40px; height: 1px; background-color: #A48D78;"></div>
+              <div class="email-divider" style="margin: 40px auto; width: 40px; height: 1px; background-color: #A48D78;"></div>
 
-              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <!-- Sender Info & Reply Button -->
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="email-sender-wrapper">
                 <tr>
-                  <td style="border-left: 2px solid #EDE7D8; padding-left: 20px;">
-                    <p style="margin: 0; font-size: 14px; color: #4A3B32; font-weight: bold;">${safeName}</p>
-                    <p style="margin: 4px 0 0 0; font-size: 13px; color: #A48D78;">${safeEmail}</p>
+                  <td class="email-sender-info email-sender-border" style="border-left: 2px solid #EDE7D8; padding-left: 20px;">
+                    <p class="email-sender-name" style="margin: 0; font-size: 14px; color: #4A3B32; font-weight: bold;">${safeName}</p>
+                    <p class="email-sender-email" style="margin: 4px 0 0 0; font-size: 13px; color: #A48D78; word-break: break-all;">${safeEmail}</p>
                   </td>
-                  <td align="right">
-                    <a href="${safeReplyHref}" style="display: inline-block; background-color: #A48D78; color: #FAF9F6; padding: 12px 24px; border-radius: 2px; text-decoration: none; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">REPLY</a>
+                  <td align="right" class="email-button-wrapper">
+                    <a href="${safeReplyHref}" class="email-button" style="display: inline-block; background-color: #A48D78; color: #FAF9F6; padding: 12px 24px; border-radius: 2px; text-decoration: none; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; min-width: 80px;">REPLY</a>
                   </td>
                 </tr>
               </table>
+
             </td>
           </tr>
+
           <!-- Footer Branding -->
           <tr>
-            <td align="center" style="padding: 0 50px 60px 50px;">
-               <div style="padding: 25px; background-color: #FDFBF7; border-radius: 4px;">
-                  <p style="margin: 0; color: #A48D78; font-size: 12px; font-style: italic;">"Where every Cup Tells a Story"</p>
-                  <div style="margin-top: 15px;">
-                     <span style="font-size: 10px; color: #cccccc; text-transform: uppercase; letter-spacing: 2px; margin: 0 10px;">Ink</span>
-                     <span style="font-size: 10px; color: #cccccc; text-transform: uppercase; letter-spacing: 2px; margin: 0 10px;">Roast</span>
-                     <span style="font-size: 10px; color: #cccccc; text-transform: uppercase; letter-spacing: 2px; margin: 0 10px;">Story</span>
-                  </div>
-               </div>
+            <td align="center" class="email-footer-padding" style="padding: 0 50px 60px 50px;">
+              <div class="email-footer-bg" style="padding: 25px; background-color: #FDFBF7; border-radius: 4px;">
+                <p class="email-footer-text" style="margin: 0; color: #A48D78; font-size: 12px; font-style: italic; line-height: 1.5;">&ldquo;Where every Cup Tells a Story&rdquo;</p>
+                <div style="margin-top: 15px;">
+                  <span class="email-pillars" style="font-size: 10px; color: #999999; text-transform: uppercase; letter-spacing: 2px; margin: 0 10px;">Ink</span>
+                  <span class="email-pillars" style="font-size: 10px; color: #999999; text-transform: uppercase; letter-spacing: 2px; margin: 0 10px;">Roast</span>
+                  <span class="email-pillars" style="font-size: 10px; color: #999999; text-transform: uppercase; letter-spacing: 2px; margin: 0 10px;">Story</span>
+                </div>
+              </div>
             </td>
           </tr>
+
           <!-- Legal Footer -->
           <tr>
-            <td align="center" style="background-color: #FAF9F6; padding: 30px; border-top: 1px solid #EDE7D8;">
-              <p style="margin: 0; color: #A48D78; font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em;">
+            <td align="center" class="email-legal-padding email-footer-divider" style="background-color: #FAF9F6; padding: 30px; border-top: 1px solid #EDE7D8;">
+              <p class="email-footer-text" style="margin: 0; color: #A48D78; font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; line-height: 1.6;">
                 &copy; 2025 The Notebook Café &bull; 3512 9th St, Riverside, CA 92501
               </p>
             </td>
           </tr>
+
         </table>
       </td>
     </tr>
