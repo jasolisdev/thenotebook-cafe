@@ -99,7 +99,7 @@ function buildContactEmailHtml(params: {
 
   // Build mailto link with subject and signature
   const replySubject = encodeURIComponent(`Re: ${sanitizeText(params.subject)}`);
-  const signature = `\n\n\n- The Notebook Café\n3512 9th St, Riverside, CA 92501\n(951) 823-0004`;
+  const signature = `\n\n- The Notebook Café\n3512 9th St, Riverside, CA 92501\n(951) 823-0004`;
   const replyBody = encodeURIComponent(signature);
   const replyHref = `mailto:${sanitizeEmail(params.email)}?subject=${replySubject}&body=${replyBody}`;
   const safeReplyHref = escapeHtml(replyHref);
