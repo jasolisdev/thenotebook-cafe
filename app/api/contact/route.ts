@@ -97,7 +97,11 @@ function buildContactEmailHtml(params: {
     .map(line => `<p style="margin: 0 0 25px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.8; color: #333333; font-weight: 300;">${line}</p>`)
     .join('');
 
-  const replyHref = `mailto:${sanitizeEmail(params.email)}`;
+  // Build mailto link with subject and signature
+  const replySubject = encodeURIComponent(`Re: ${sanitizeText(params.subject)}`);
+  const signature = `\n\n\n- The Notebook Café\n3512 9th St, Riverside, CA 92501\n(951) 823-0004`;
+  const replyBody = encodeURIComponent(signature);
+  const replyHref = `mailto:${sanitizeEmail(params.email)}?subject=${replySubject}&body=${replyBody}`;
   const safeReplyHref = escapeHtml(replyHref);
 
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
