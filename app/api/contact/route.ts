@@ -80,7 +80,7 @@ function buildContactEmailHtml(params: {
 
   // Format date and time
   const formattedDate = params.receivedAt.toLocaleDateString('en-US', {
-    month: 'long',
+    month: 'short',
     day: 'numeric',
     year: 'numeric'
   });
@@ -94,146 +94,121 @@ function buildContactEmailHtml(params: {
   const formattedMessage = safeMessage
     .split('\n')
     .filter(line => line.trim())
-    .map(line => `<p style="margin:0 0 1.5em 0; color:#2A2622; font-size:16px; line-height:1.8;">${line}</p>`)
+    .map(line => `<p style="margin: 0 0 25px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.8; color: #333333; font-weight: 300;">${line}</p>`)
     .join('');
 
   const replyHref = `mailto:${sanitizeEmail(params.email)}`;
   const safeReplyHref = escapeHtml(replyHref);
 
-  return `<!DOCTYPE html>
-<html lang="en">
+  return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="color-scheme" content="light dark">
   <meta name="supported-color-schemes" content="light dark">
   <title>A Note Regarding ${safeSubject}</title>
-  <style>
-    /* Base Reset */
-    body {
-      margin: 0 !important;
-      padding: 0 !important;
-      width: 100% !important;
-      -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-    }
+  <style type="text/css">
+    body { margin: 0; padding: 0; min-width: 100%; background-color: #F8F7F5; }
+    .email-container { width: 100%; max-width: 600px; margin: 0 auto; background-color: #FFFFFF; }
 
-    /* Prevent iOS Auto-Darkening */
-    .email-wrapper { background-color: #FDFBF7 !important; }
-    .email-card { background-color: #FAF9F6 !important; }
-    .email-header-border { border-bottom: 1px solid #EDE7D8 !important; }
-    .email-title { color: #2C2420 !important; }
-    .email-meta { color: #8E7965 !important; }
-    .email-greeting { color: #A48D78 !important; }
-    .email-text { color: #2A2622 !important; }
-    .email-subject { color: #4A4F41 !important; }
-    .email-message-box { background-color: #FFFFFF !important; border: 1px solid #EDE7D8 !important; }
-    .email-sender-border { border-left: 2px solid #EDE7D8 !important; }
-    .email-sender-name { color: #4A3B32 !important; }
-    .email-sender-email { color: #A48D78 !important; }
-    .email-button { background-color: #A48D78 !important; color: #FAF9F6 !important; }
-    .email-footer-bg { background-color: #FDFBF7 !important; }
-    .email-footer-text { color: #A48D78 !important; }
-    .email-footer-divider { border-top: 1px solid #EDE7D8 !important; }
-
-    /* Dark Mode Support - Custom Colors */
+    /* Dark Mode Support */
     @media (prefers-color-scheme: dark) {
-      .email-wrapper { background-color: #1a1410 !important; }
-      .email-card { background-color: #2a2420 !important; }
-      .email-header-border { border-bottom-color: #4a4240 !important; }
-      .email-title { color: #f0e8d8 !important; }
-      .email-meta { color: #a89580 !important; }
-      .email-greeting { color: #c9a876 !important; }
-      .email-text { color: #e8dfd0 !important; }
-      .email-subject { color: #b8c098 !important; }
-      .email-message-box { background-color: #1f1a16 !important; border-color: #4a4240 !important; }
-      .email-sender-border { border-left-color: #4a4240 !important; }
-      .email-sender-name { color: #e8dfd0 !important; }
-      .email-sender-email { color: #c9a876 !important; }
-      .email-button { background-color: #c9a876 !important; color: #2a2420 !important; }
-      .email-footer-bg { background-color: #1a1410 !important; }
-      .email-footer-text { color: #c9a876 !important; }
-      .email-footer-divider { border-top-color: #4a4240 !important; }
+      body { background-color: #1a1410 !important; }
+      .email-container { background-color: #2a2420 !important; border-color: #4a4240 !important; }
+      .meta-border { border-bottom-color: #4a4240 !important; }
+      .brand-title { color: #f0e8d8 !important; }
+      .brand-label { color: #a89580 !important; }
+      .label-text { color: #a89580 !important; }
+      .heading-text { color: #f0e8d8 !important; }
+      .body-text { color: #e8dfd0 !important; }
+      .button-border { border-color: #c9a876 !important; color: #c9a876 !important; }
+      .footer-bg { background-color: #1a1410 !important; border-top-color: #4a4240 !important; }
+      .footer-text { color: #c9a876 !important; }
+      .divider-line { background-color: #4a4240 !important; }
     }
 
-    /* Mobile Responsive */
     @media only screen and (max-width: 600px) {
-      .email-outer-padding { padding: 20px 10px !important; }
-      .email-header-padding { padding: 40px 20px 30px 20px !important; }
-      .email-content-padding { padding: 0 20px 30px 20px !important; }
-      .email-footer-padding { padding: 0 20px 40px 20px !important; }
-      .email-legal-padding { padding: 20px !important; }
-      .email-title { font-size: 22px !important; letter-spacing: 0.08em !important; }
-      .email-meta { font-size: 11px !important; }
-      .email-meta-wrapper { display: block !important; }
-      .email-meta-left { margin-bottom: 8px !important; }
-      .email-meta-right { text-align: left !important; }
-      .email-greeting { font-size: 12px !important; }
-      .email-text { font-size: 14px !important; }
-      .email-subject { font-size: 16px !important; }
-      .email-message-box { padding: 20px !important; }
-      .email-sender-wrapper { display: block !important; }
-      .email-sender-info { margin-bottom: 15px !important; padding-left: 15px !important; }
-      .email-footer-text { font-size: 11px !important; }
+      .main-padding { padding: 40px 25px !important; }
+      .meta-padding { padding: 20px 25px !important; }
+      .brand-spacing { margin-bottom: 40px !important; }
+      .brand-title { font-size: 26px !important; }
+      .subject-title { font-size: 22px !important; }
+      .body-text { font-size: 16px !important; }
+      .meta-stack td { display: block !important; width: 100% !important; text-align: left !important; }
+      .meta-stack td:first-child { margin-bottom: 20px !important; }
     }
   </style>
 </head>
-<body style="margin: 0 !important; padding: 0 !important; font-family: 'Georgia', serif !important;">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="email-wrapper" style="background-color: #FDFBF7 !important;">
+<body style="margin: 0; padding: 60px 0; background-color: #F8F7F5;">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
-      <td align="center" class="email-outer-padding" style="padding: 60px 20px;">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="email-card" style="max-width: 600px; background-color: #FAF9F6 !important; border-radius: 4px; overflow: hidden; box-shadow: 0 10px 30px rgba(44,36,32,0.1);">
+      <td align="center">
+        <!-- Main Card -->
+        <table class="email-container" border="0" cellspacing="0" cellpadding="0" style="background-color: #FFFFFF; border: 1px solid #E9E3D6; box-shadow: 0 20px 40px rgba(0,0,0,0.05);">
 
-          <!-- Editorial Header -->
+          <!-- Top Meta Row -->
           <tr>
-            <td align="center" class="email-header-padding" style="padding: 60px 40px 40px 40px; background-color: #FAF9F6 !important;">
-              <div class="email-header-border" style="border-bottom: 1px solid #EDE7D8 !important; padding-bottom: 20px;">
-                <h1 class="email-title" style="margin: 0 !important; color: #2C2420 !important; font-size: 28px; letter-spacing: 0.1em; font-weight: 300; text-transform: uppercase; line-height: 1.2; font-family: 'Georgia', serif;">The Notebook Café</h1>
-              </div>
-            </td>
-          </tr>
-
-          <!-- Meta Info: Name & Date -->
-          <tr>
-            <td class="email-content-padding" style="padding: 0 50px 20px 50px; background-color: #FAF9F6 !important;">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="email-meta-wrapper">
+            <td class="meta-padding meta-border" style="padding: 25px 40px; border-bottom: 1px solid #F8F7F5;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="meta-stack">
                 <tr>
-                  <td class="email-meta email-meta-left" style="color: #8E7965 !important; font-size: 12px; font-weight: 500; font-family: 'Georgia', serif;">
-                    From: ${safeName}
+                  <td align="left">
+                    <p class="label-text" style="margin: 0; font-family: Arial, sans-serif; font-size: 9px; color: #8B735B; text-transform: uppercase; letter-spacing: 2px; font-weight: bold;">From</p>
+                    <p class="heading-text" style="margin: 4px 0 0 0; font-family: Arial, sans-serif; font-size: 13px; color: #1A1A1A; font-weight: bold;">${safeName}</p>
+                    <p class="label-text" style="margin: 2px 0 0 0; font-family: Arial, sans-serif; font-size: 11px; color: #8B735B;">${safeEmail}</p>
                   </td>
-                  <td align="right" class="email-meta email-meta-right" style="color: #8E7965 !important; font-size: 12px; font-weight: 500; font-family: 'Georgia', serif;">
-                    ${formattedDate} at ${formattedTime}
+                  <td align="right" valign="top">
+                    <p class="label-text" style="margin: 0; font-family: Arial, sans-serif; font-size: 9px; color: #8B735B; text-transform: uppercase; letter-spacing: 2px; font-weight: bold;">Sent At</p>
+                    <p class="heading-text" style="margin: 4px 0 0 0; font-family: Arial, sans-serif; font-size: 11px; color: #1A1A1A; font-weight: bold;">${formattedDate}, ${formattedTime}</p>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- Main Content -->
+          <!-- Primary Content -->
           <tr>
-            <td class="email-content-padding" style="padding: 0 50px 40px 50px; background-color: #FAF9F6 !important;">
+            <td class="main-padding" style="padding: 70px 60px;">
 
-              <!-- Notification Header -->
-              <div style="margin-bottom: 30px;">
-                <p class="email-greeting" style="margin: 0 !important; color: #A48D78 !important; font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: bold; font-family: 'Georgia', serif;">Hello Team,</p>
-                <p class="email-text" style="margin: 5px 0 0 0 !important; color: #2A2622 !important; font-size: 15px; line-height: 1.5; font-family: 'Georgia', serif;">You have received a new message via the <strong>Contact Page</strong> form.</p>
-              </div>
-
-              <h2 class="email-subject" style="margin: 0 0 25px 0 !important; color: #4A4F41 !important; font-size: 18px; font-style: italic; font-weight: 400; line-height: 1.4; font-family: 'Georgia', serif;">Re: ${safeSubject}</h2>
-
-              <!-- Message Box with Background -->
-              <div class="email-message-box" style="background-color: #FFFFFF !important; border: 1px solid #EDE7D8 !important; border-radius: 4px; padding: 30px; margin-bottom: 30px;">
-                <div class="email-text" style="color: #2A2622 !important; font-size: 16px; line-height: 1.8; font-family: 'Georgia', serif;">
-                  ${formattedMessage}
-                </div>
-              </div>
-
-              <!-- Sender Contact Info -->
-              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="email-sender-wrapper">
+              <!-- Brand Identity -->
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="brand-spacing" style="margin-bottom: 60px;">
                 <tr>
-                  <td class="email-sender-info email-sender-border" style="border-left: 2px solid #EDE7D8 !important; padding-left: 20px;">
-                    <p class="email-sender-name" style="margin: 0 !important; font-size: 14px; color: #4A3B32 !important; font-weight: bold; font-family: 'Georgia', serif;">${safeName}</p>
-                    <p class="email-sender-email" style="margin: 4px 0 0 0 !important; font-size: 13px; color: #A48D78 !important; word-break: break-all; font-family: 'Georgia', serif;">${safeEmail}</p>
+                  <td align="center">
+                    <h1 class="brand-title" style="margin: 0; font-family: 'Georgia', serif; font-size: 32px; color: #1A1A1A; font-style: italic; font-weight: 100; letter-spacing: -0.5px;">The Notebook Café</h1>
+                    <table border="0" cellspacing="0" cellpadding="0" style="margin-top: 15px;">
+                      <tr>
+                        <td height="1" width="30" class="divider-line" bgcolor="#E9E3D6"></td>
+                        <td class="brand-label" style="padding: 0 15px; font-family: Arial, sans-serif; font-size: 9px; color: #8B735B; text-transform: uppercase; letter-spacing: 3px; font-weight: bold;">Editorial Studio</td>
+                        <td height="1" width="30" class="divider-line" bgcolor="#E9E3D6"></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Subject Section -->
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 40px;">
+                <tr>
+                  <td height="1" class="divider-line" bgcolor="#F8F7F5" style="line-height: 1px; font-size: 1px;">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td style="padding: 30px 0;">
+                    <p class="label-text" style="margin: 0 0 10px 0; font-family: Arial, sans-serif; font-size: 10px; color: #8B735B; text-transform: uppercase; letter-spacing: 2.5px; font-weight: bold;">Subject</p>
+                    <h2 class="subject-title" style="margin: 0; font-family: 'Georgia', serif; font-size: 26px; font-style: italic; color: #1A1A1A; font-weight: normal; line-height: 1.3;">${safeSubject}</h2>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Message Body -->
+              <div style="margin-bottom: 60px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                ${formattedMessage}
+              </div>
+
+              <!-- Button -->
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td align="center">
+                    <a href="${safeReplyHref}" class="button-border" style="display: inline-block; border: 1px solid #1A1A1A; color: #1A1A1A; padding: 18px 40px; text-decoration: none; font-family: Arial, sans-serif; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 4px;">Reply Direct</a>
                   </td>
                 </tr>
               </table>
@@ -241,31 +216,21 @@ function buildContactEmailHtml(params: {
             </td>
           </tr>
 
-          <!-- Reply Button (Centered) -->
+          <!-- Brand Statement Footer -->
           <tr>
-            <td align="center" style="padding: 0 50px 40px 50px; background-color: #FAF9F6 !important;">
-              <a href="${safeReplyHref}" class="email-button" style="display: inline-block; background-color: #A48D78 !important; color: #FAF9F6 !important; padding: 14px 32px; border-radius: 2px; text-decoration: none; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Georgia', serif;">REPLY</a>
+            <td class="footer-bg" style="padding: 40px 30px; background-color: #FAF9F6; border-top: 1px solid #E9E3D6; text-align: center;">
+              <p class="footer-text" style="margin: 0; font-family: Arial, sans-serif; font-size: 10px; color: #8B735B; text-transform: uppercase; letter-spacing: 5px; font-weight: bold;">WHERE EVERY CUP TELLS A STORY</p>
             </td>
           </tr>
+        </table>
 
-          <!-- Footer Branding -->
+        <!-- Meta Footer -->
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; margin-top: 30px;">
           <tr>
-            <td align="center" class="email-footer-padding" style="padding: 0 50px 40px 50px; background-color: #FAF9F6 !important;">
-              <div class="email-footer-bg" style="padding: 25px; background-color: #FDFBF7 !important; border-radius: 4px;">
-                <p class="email-footer-text" style="margin: 0 !important; color: #A48D78 !important; font-size: 12px; font-style: italic; line-height: 1.5; font-family: 'Georgia', serif;">&ldquo;Where every Cup Tells a Story&rdquo;</p>
-              </div>
+            <td align="center" class="footer-text" style="font-family: Arial, sans-serif; font-size: 9px; color: #8B735B; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8;">
+              The Notebook Café &bull; 3512 9th St, Riverside, CA 92501
             </td>
           </tr>
-
-          <!-- Legal Footer -->
-          <tr>
-            <td align="center" class="email-legal-padding email-footer-divider" style="background-color: #FAF9F6 !important; padding: 30px; border-top: 1px solid #EDE7D8 !important;">
-              <p class="email-footer-text" style="margin: 0 !important; color: #A48D78 !important; font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; line-height: 1.6; font-family: 'Georgia', serif;">
-                &copy; 2025 The Notebook Café &bull; 3512 9th St, Riverside, CA 92501
-              </p>
-            </td>
-          </tr>
-
         </table>
       </td>
     </tr>
