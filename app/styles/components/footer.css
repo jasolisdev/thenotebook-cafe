@@ -2,6 +2,159 @@
    FOOTER
 ============================================================ */
 
+/* ============================================================
+   SIMPLE FOOTER (Mobile-First Redesign)
+============================================================ */
+
+.simple-footer {
+  background-color: var(--cafe-cream);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.simple-footer__container {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.simple-footer__title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--cafe-brown);
+  margin: 0;
+}
+
+@media (min-width: 375px) {
+  .simple-footer__title {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 640px) {
+  .simple-footer__title {
+    font-size: 32px;
+  }
+}
+
+/* Icon Buttons */
+.simple-footer__icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .simple-footer__icons {
+    gap: 32px;
+  }
+}
+
+.simple-footer__icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--cafe-white);
+  color: var(--cafe-brown);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(44, 36, 32, 0.1);
+}
+
+@media (min-width: 640px) {
+  .simple-footer__icon-button {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+.simple-footer__icon-button:hover {
+  background-color: var(--cafe-tan);
+  color: var(--cafe-white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(44, 36, 32, 0.15);
+}
+
+/* Footer Navigation */
+.simple-footer__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 640px) {
+  .simple-footer__nav {
+    gap: 16px;
+  }
+}
+
+.simple-footer__link {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--cafe-brown);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  opacity: 0.8;
+}
+
+@media (min-width: 640px) {
+  .simple-footer__link {
+    font-size: 13px;
+  }
+}
+
+.simple-footer__link:hover {
+  color: var(--cafe-tan);
+  opacity: 1;
+}
+
+.simple-footer__separator {
+  font-size: 12px;
+  color: var(--cafe-brown);
+  opacity: 0.4;
+  user-select: none;
+}
+
+@media (min-width: 640px) {
+  .simple-footer__separator {
+    font-size: 13px;
+  }
+}
+
+/* Copyright */
+.simple-footer__copyright {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--cafe-brown);
+  margin: 0;
+  opacity: 0.7;
+}
+
+@media (min-width: 640px) {
+  .simple-footer__copyright {
+    font-size: 12px;
+  }
+}
+
+/* ============================================================
+   LEGACY FOOTER STYLES (Kept for backward compatibility)
+============================================================ */
+
 /* Main Footer Container */
 .site-footer {
   background-color: var(--cafe-charcoal);
