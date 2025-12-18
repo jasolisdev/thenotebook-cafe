@@ -78,16 +78,16 @@ function buildContactEmailHtml(params: {
   const safeSubject = escapeHtml(sanitizeText(params.subject));
   const safeMessage = escapeHtml(sanitizeMultilineText(params.message));
 
-  // Format date and time
-  const formattedDate = params.receivedAt.toLocaleDateString('en-US', {
+  // Format date and time with timezone
+  const formattedDateTime = params.receivedAt.toLocaleString('en-US', {
     month: 'short',
     day: 'numeric',
-    year: 'numeric'
-  });
-  const formattedTime = params.receivedAt.toLocaleTimeString('en-US', {
+    year: 'numeric',
     hour: 'numeric',
     minute: '2-digit',
-    hour12: true
+    hour12: true,
+    timeZone: 'America/Los_Angeles',
+    timeZoneName: 'short'
   });
 
   // Convert message line breaks to proper paragraph tags
@@ -137,6 +137,7 @@ function buildContactEmailHtml(params: {
       .body-text { font-size: 16px !important; }
       .meta-stack td { display: block !important; width: 100% !important; text-align: left !important; }
       .meta-stack td:first-child { margin-bottom: 20px !important; }
+      .footer-address { display: block !important; margin-top: 5px !important; }
     }
   </style>
 </head>
@@ -159,7 +160,7 @@ function buildContactEmailHtml(params: {
                   </td>
                   <td align="right" valign="top">
                     <p class="label-text" style="margin: 0; font-family: Arial, sans-serif; font-size: 9px; color: #8B735B; text-transform: uppercase; letter-spacing: 2px; font-weight: bold;">Sent At</p>
-                    <p class="heading-text" style="margin: 4px 0 0 0; font-family: Arial, sans-serif; font-size: 11px; color: #1A1A1A; font-weight: bold;">${formattedDate}, ${formattedTime}</p>
+                    <p class="heading-text" style="margin: 4px 0 0 0; font-family: Arial, sans-serif; font-size: 11px; color: #1A1A1A; font-weight: bold;">${formattedDateTime}</p>
                   </td>
                 </tr>
               </table>
@@ -175,13 +176,6 @@ function buildContactEmailHtml(params: {
                 <tr>
                   <td align="center">
                     <h1 class="brand-title" style="margin: 0; font-family: 'Georgia', serif; font-size: 32px; color: #1A1A1A; font-style: italic; font-weight: 100; letter-spacing: -0.5px;">The Notebook Café</h1>
-                    <table border="0" cellspacing="0" cellpadding="0" style="margin-top: 15px;">
-                      <tr>
-                        <td height="1" width="30" class="divider-line" bgcolor="#E9E3D6"></td>
-                        <td class="brand-label" style="padding: 0 15px; font-family: Arial, sans-serif; font-size: 9px; color: #8B735B; text-transform: uppercase; letter-spacing: 3px; font-weight: bold;">Editorial Studio</td>
-                        <td height="1" width="30" class="divider-line" bgcolor="#E9E3D6"></td>
-                      </tr>
-                    </table>
                   </td>
                 </tr>
               </table>
@@ -228,7 +222,7 @@ function buildContactEmailHtml(params: {
         <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; margin-top: 30px;">
           <tr>
             <td align="center" class="footer-text" style="font-family: Arial, sans-serif; font-size: 9px; color: #8B735B; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8;">
-              The Notebook Café &bull; 3512 9th St, Riverside, CA 92501
+              The Notebook Café<span class="footer-address"> &bull; 3512 9th St, Riverside, CA 92501</span>
             </td>
           </tr>
         </table>
