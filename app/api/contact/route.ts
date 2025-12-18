@@ -138,6 +138,7 @@ function buildContactEmailHtml(params: {
       .meta-stack td { display: block !important; width: 100% !important; text-align: left !important; }
       .meta-stack td:first-child { margin-bottom: 20px !important; }
       .footer-address { display: block !important; margin-top: 5px !important; }
+      .footer-break { display: block !important; }
     }
   </style>
 </head>
@@ -155,12 +156,12 @@ function buildContactEmailHtml(params: {
                 <tr>
                   <td align="left">
                     <p class="label-text" style="margin: 0; font-family: Arial, sans-serif; font-size: 9px; color: #8B735B; text-transform: uppercase; letter-spacing: 2px; font-weight: bold;">From</p>
-                    <p class="heading-text" style="margin: 4px 0 0 0; font-family: Arial, sans-serif; font-size: 13px; color: #1A1A1A; font-weight: bold;">${safeName}</p>
+                    <p class="heading-text" style="margin: 4px 0 0 0; font-family: 'Georgia', serif; font-size: 15px; color: #1A1A1A; font-weight: normal;">${safeName}</p>
                     <p class="label-text" style="margin: 2px 0 0 0; font-family: Arial, sans-serif; font-size: 11px; color: #8B735B;">${safeEmail}</p>
                   </td>
                   <td align="right" valign="top">
                     <p class="label-text" style="margin: 0; font-family: Arial, sans-serif; font-size: 9px; color: #8B735B; text-transform: uppercase; letter-spacing: 2px; font-weight: bold;">Sent At</p>
-                    <p class="heading-text" style="margin: 4px 0 0 0; font-family: Arial, sans-serif; font-size: 11px; color: #1A1A1A; font-weight: bold;">${formattedDateTime}</p>
+                    <p class="heading-text" style="margin: 4px 0 0 0; font-family: 'Georgia', serif; font-size: 12px; color: #1A1A1A; font-weight: normal;">${formattedDateTime}</p>
                   </td>
                 </tr>
               </table>
@@ -213,7 +214,7 @@ function buildContactEmailHtml(params: {
           <!-- Brand Statement Footer -->
           <tr>
             <td class="footer-bg" style="padding: 40px 30px; background-color: #FAF9F6; border-top: 1px solid #E9E3D6; text-align: center;">
-              <p class="footer-text" style="margin: 0; font-family: Arial, sans-serif; font-size: 10px; color: #8B735B; text-transform: uppercase; letter-spacing: 5px; font-weight: bold;">WHERE EVERY CUP TELLS A STORY</p>
+              <p class="footer-text" style="margin: 0; font-family: Arial, sans-serif; font-size: 10px; color: #8B735B; text-transform: uppercase; letter-spacing: 5px; font-weight: bold;">WHERE EVERY CUP<span class="footer-break" style="display: none;"><br /></span> TELLS A STORY</p>
             </td>
           </tr>
         </table>
