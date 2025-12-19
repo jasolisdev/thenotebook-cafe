@@ -14,7 +14,7 @@
 
 [data-section="Low Lights"] {
   position: relative;
-  background: var(--color-cafe-cream);
+  background: var(--color-cafe-mist);
   background-image: none;
 }
 
@@ -51,7 +51,7 @@
 
 @media (max-width: 767px) {
   [data-section="Low Lights"] {
-    background-color: var(--color-cafe-cream);
+    background-color: var(--color-cafe-mist);
   }
 
   [data-section="Atmosphere"],

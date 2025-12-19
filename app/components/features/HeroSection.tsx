@@ -29,21 +29,21 @@ const HeroSection: React.FC = () => {
           {/* Deep overlay for high contrast with text */}
           <div className="absolute inset-0 bg-black/40 z-[1]"></div>
         </div>
-        
+
         {/* Main Content Area */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center justify-center h-full">
           <div className="max-w-5xl w-full text-center flex flex-col items-center mt-8 md:mt-0">
-            
+
             <div className="mb-8 md:mb-10">
               <h1 className="leading-[1.1] md:leading-[0.9] tracking-tight font-serif text-white text-[38px] md:text-[84px] lg:text-[111px] drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                 <RevealText>
                   <span className="block font-bold whitespace-nowrap">
-                    Riverside's Premier
+                    Where Every Cup
                   </span>
                 </RevealText>
                 <RevealText delay="100ms">
                   <span className="block italic mt-2 md:mt-4 opacity-95 whitespace-nowrap text-cafe-luxe-oat">
-                    Coffee & Creative Hub
+                    Tells A Story
                   </span>
                 </RevealText>
               </h1>
@@ -64,7 +64,7 @@ const HeroSection: React.FC = () => {
       {/* Integrated Location & Hours Bar - Updated to Mist */}
       <div className="relative w-full bg-cafe-mist border-t border-cafe-brown/10 z-20 flex items-center py-6 md:py-12 lg:py-16 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full flex flex-col md:flex-row items-center justify-center md:justify-between space-y-10 md:space-y-0">
-          
+
           {/* Location Segment */}
           <div className="flex flex-col items-center text-center max-w-xs">
             <div className="flex items-center space-x-2 mb-3 text-cafe-brown/60">
@@ -74,7 +74,7 @@ const HeroSection: React.FC = () => {
             <p className="font-serif text-xl md:text-2xl text-cafe-brown tracking-tight leading-snug">
               {CAFE_INFO.address},<br className="md:hidden" /> {CAFE_INFO.location}
             </p>
-            <a 
+            <a
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CAFE_INFO.name)}`}
               target="_blank"
               rel="noopener noreferrer"

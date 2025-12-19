@@ -47,7 +47,7 @@ export default function CareersPage() {
       <div className="careers-fixed-background" aria-hidden="true" />
       {/* Hero Section */}
       <section
-        className="relative min-h-[50vh] flex items-center justify-center overflow-hidden"
+        className="relative min-h-[32vh] md:min-h-[40vh] flex items-center justify-center overflow-hidden pt-[var(--site-header-height,80px)]"
         data-section="Hero"
         style={{
           backgroundImage: 'url(/menu/tnc-menu-banner.webp)',
@@ -56,11 +56,8 @@ export default function CareersPage() {
           backgroundPosition: 'center 32%',
         }}
       >
-        <div
-          className="absolute inset-0 bg-cafe-black/70"
-          aria-hidden="true"
-        />
-        <div className="relative z-10 text-center px-6 py-[100px]">
+        <div className="absolute inset-0 bg-black/40 z-[1]" aria-hidden="true" />
+        <div className="relative z-10 text-left md:text-center px-6 w-full max-w-7xl mx-auto">
           <RevealText delay="0ms">
             <h1 className="font-serif text-4xl md:text-6xl text-cafe-cream mb-4">
               Careers

@@ -106,26 +106,6 @@ export default function HomePage() {
 
       <HeroSection />
 
-      {/* Menu Section */}
-      <MenuSection />
-
-      {/* Atmosphere Images */}
-      <section
-        data-section="Atmosphere Images"
-        className="overflow-visible relative pb-24 md:pb-28"
-      >
-        <div className="section-deco" style={{ top: '6%', left: '10%', animationDuration: '13s' }} aria-hidden="true">
-          <Sparkles strokeWidth={1.6} />
-        </div>
-        <div className="section-deco section-deco-dark" style={{ bottom: '6%', right: '10%', animationDuration: '10s', animationDelay: '0.5s' }} aria-hidden="true">
-          <Coffee strokeWidth={1.4} />
-        </div>
-        <div className="section-deco-mobile" style={{ top: '8%', right: '12%' }} aria-hidden="true">
-          <Coffee strokeWidth={1.4} />
-        </div>
-        <AtmosphereStrip images={vibeImages} />
-      </section>
-
       {/* Signature Pours */}
       <section
         data-section="Signature Pours"
@@ -142,11 +122,6 @@ export default function HomePage() {
               <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mt-4 text-cafe-black">
                 Crafted With Care
               </h2>
-            </Reveal>
-            <Reveal delay={250}>
-              <p className="mt-4 text-lg md:text-xl font-normal text-cafe-brown">
-                Small-batch recipes we obsess over—balanced, nuanced, and poured with a steady hand.
-              </p>
             </Reveal>
           </div>
 
@@ -169,21 +144,33 @@ export default function HomePage() {
         <div />
       </section>
 
+      {/* Menu Section */}
+      <MenuSection />
+
+      {/* Atmosphere Images */}
+      <section
+        data-section="Atmosphere Images"
+        className="overflow-visible relative pb-24 md:pb-28"
+      >
+        <div className="section-deco" style={{ top: '6%', left: '10%', animationDuration: '13s' }} aria-hidden="true">
+          <Sparkles strokeWidth={1.6} />
+        </div>
+        <div className="section-deco section-deco-dark" style={{ bottom: '6%', right: '10%', animationDuration: '10s', animationDelay: '0.5s' }} aria-hidden="true">
+          <Coffee strokeWidth={1.4} />
+        </div>
+        <div className="section-deco-mobile" style={{ top: '8%', right: '12%' }} aria-hidden="true">
+          <Coffee strokeWidth={1.4} />
+        </div>
+        <AtmosphereStrip images={vibeImages} />
+      </section>
+
+
 
       {/* Low Lights Section */}
       <section
         data-section="Low Lights"
         className="relative overflow-visible py-24 md:py-32 px-6"
       >
-        <div className="section-deco" style={{ top: '8%', left: '6%', animationDuration: '12s', animationDelay: '0.4s' }} aria-hidden="true">
-          <Music strokeWidth={1.4} />
-        </div>
-        <div className="section-deco section-deco-dark" style={{ bottom: '12%', right: '8%', animationDuration: '11s' }} aria-hidden="true">
-          <Coffee strokeWidth={1.4} />
-        </div>
-        <div className="section-deco-mobile" style={{ top: '10%', left: '10%' }} aria-hidden="true">
-          <Music strokeWidth={1.4} />
-        </div>
 
         <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
@@ -292,6 +279,7 @@ export default function HomePage() {
       </section>
 
       {/* Atmosphere */}
+      {/* 
       <section
         data-section="Atmosphere"
         className="relative pt-24 md:pt-32 pb-[calc(6rem+20px)] md:pb-[calc(8rem+20px)] px-6 overflow-visible"
@@ -306,7 +294,6 @@ export default function HomePage() {
           <Wifi strokeWidth={1.4} />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Column - Features (order-2 on mobile) */}
           <div className="order-2 lg:order-1">
             <Reveal delay={200}>
               <div className="grid gap-5 md:grid-cols-2 md:gap-6">
@@ -330,7 +317,6 @@ export default function HomePage() {
             </Reveal>
           </div>
 
-          {/* Right Column - Heading (order-1 on mobile) */}
           <div className="space-y-6 order-1 lg:order-2 text-right items-end lg:pl-10">
             <Reveal delay={120}>
               <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-cafe-black">
@@ -344,6 +330,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      */}
 
       {/* Newsletter Section */}
       <NewsletterSection />

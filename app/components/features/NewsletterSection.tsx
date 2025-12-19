@@ -5,7 +5,7 @@ import { MapPin } from 'lucide-react';
 
 const NewsletterSection: React.FC = () => {
   return (
-    <section className="py-24 bg-cafe-white border-t border-cafe-luxe-oat/20">
+    <section className="py-24 bg-cafe-mist border-t border-cafe-luxe-oat/20">
       <div className="max-w-4xl mx-auto px-6 text-center">
          <span className="text-[10px] uppercase tracking-[0.4em] text-cafe-tan-dark font-bold block mb-8 italic">Stay Connected</span>
          <h2 className="text-4xl md:text-6xl font-serif mb-8 italic tracking-tight text-cafe-black">The Story Continues.</h2>
