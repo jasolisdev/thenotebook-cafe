@@ -87,6 +87,33 @@ describe('CartDrawer', () => {
     expect(screen.getByRole('button', { name: /checkout/i })).toBeDisabled();
   });
 
+  test('closes when Browse Menu is clicked (empty state)', () => {
+    vi.mocked(useCart).mockReturnValue(makeCartState({ items: [] }));
+
+    render(<CartDrawer />);
+
+    fireEvent.click(screen.getByRole('button', { name: /browse menu/i }));
+    expect(close).toHaveBeenCalled();
+  });
+
+  test('closes when overlay is clicked', () => {
+    vi.mocked(useCart).mockReturnValue(makeCartState({ items: [baseItem] }));
+
+    render(<CartDrawer />);
+
+    fireEvent.click(screen.getByTestId('cart-overlay'));
+    expect(close).toHaveBeenCalled();
+  });
+
+  test('closes when close button is clicked', () => {
+    vi.mocked(useCart).mockReturnValue(makeCartState({ items: [baseItem] }));
+
+    render(<CartDrawer />);
+
+    fireEvent.click(screen.getByLabelText('Close cart'));
+    expect(close).toHaveBeenCalled();
+  });
+
   test('renders items and totals when cart has entries', () => {
     vi.mocked(useCart).mockReturnValue(makeCartState({ items: [baseItem] }));
 
@@ -97,6 +124,15 @@ describe('CartDrawer', () => {
     expect(screen.getAllByText('$12.00')).toHaveLength(2);
     expect(screen.getByText('$0.96')).toBeInTheDocument();
     expect(screen.getByText('$12.96')).toBeInTheDocument();
+  });
+
+  test('closes when Add More Items link is clicked', () => {
+    vi.mocked(useCart).mockReturnValue(makeCartState({ items: [baseItem] }));
+
+    render(<CartDrawer />);
+
+    fireEvent.click(screen.getByText('Add More Items'));
+    expect(close).toHaveBeenCalled();
   });
 
   test('updates quantity and removes items', () => {
@@ -112,6 +148,22 @@ describe('CartDrawer', () => {
 
     fireEvent.click(screen.getByText('Remove'));
     expect(removeItem).toHaveBeenCalledWith('cart-1');
+  });
+
+  test('fires alert when checkout is clicked', () => {
+    const alertMock = vi.fn();
+    vi.stubGlobal('alert', alertMock);
+
+    try {
+      vi.mocked(useCart).mockReturnValue(makeCartState({ items: [baseItem] }));
+
+      render(<CartDrawer />);
+
+      fireEvent.click(screen.getByRole('button', { name: /checkout/i }));
+      expect(alertMock).toHaveBeenCalled();
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 
   test('disables decrement when quantity is one', () => {

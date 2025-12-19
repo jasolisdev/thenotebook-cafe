@@ -8,6 +8,7 @@
 import '@testing-library/jest-dom';
 import { cleanup } from '@testing-library/react';
 import { afterEach, vi } from 'vitest';
+import React from 'react';
 
 // Cleanup after each test automatically
 afterEach(() => {
@@ -37,16 +38,22 @@ vi.mock('next/image', () => ({
 
 // Mock Next.js Link component
 vi.mock('next/link', () => ({
-  default: vi.fn(({ children }) => children),
+  default: vi.fn(({ href, onClick, children, ...rest }) =>
+    React.createElement(
+      'a',
+      { href: typeof href === 'string' ? href : '#', onClick, ...rest },
+      children
+    )
+  ),
 }));
 
 // Mock Framer Motion to avoid animation issues in tests
 vi.mock('framer-motion', () => ({
   motion: {
-    div: vi.fn(({ children }) => children),
-    button: vi.fn(({ children }) => children),
-    span: vi.fn(({ children }) => children),
-    section: vi.fn(({ children }) => children),
+    div: vi.fn(({ children, ...props }) => React.createElement('div', props, children)),
+    button: vi.fn(({ children, ...props }) => React.createElement('button', props, children)),
+    span: vi.fn(({ children, ...props }) => React.createElement('span', props, children)),
+    section: vi.fn(({ children, ...props }) => React.createElement('section', props, children)),
   },
   AnimatePresence: vi.fn(({ children }) => children),
 }));

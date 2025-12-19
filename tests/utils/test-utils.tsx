@@ -7,6 +7,7 @@
 
 import { render, RenderOptions } from '@testing-library/react';
 import { ReactElement, ReactNode } from 'react';
+import userEvent from '@testing-library/user-event';
 import { CartProvider } from '@/app/components/providers/CartProvider';
 
 /**
@@ -37,7 +38,7 @@ const customRender = (
 
 // Re-export everything from Testing Library
 export * from '@testing-library/react';
-export { userEvent } from '@testing-library/user-event';
+export { userEvent };
 
 // Override render with custom version
 export { customRender as render };

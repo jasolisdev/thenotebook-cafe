@@ -99,11 +99,6 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
   // Default homepage style
   return (
     <div>
-      <style jsx>{`
-        input::placeholder {
-          color: var(--color-cafe-beige);
-        }
-      `}</style>
       <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch">
         <input
           type="email"
@@ -113,7 +108,7 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
           placeholder="your@email.com"
           inputMode="email"
           autoComplete="email"
-          className="flex-1 px-6 py-4 rounded-full border outline-none transition-all duration-200 placeholder-cafe-beige bg-white"
+          className="flex-1 px-6 py-4 rounded-full border outline-none transition-all duration-200 placeholder:text-cafe-beige bg-white"
           style={{
             borderColor: "var(--color-cafe-beige)",
             color: "var(--color-cafe-black)",

@@ -61,6 +61,7 @@ export default function NewsletterModal({ isOpen, onClose, source = "modal" }: N
       className="fixed inset-0 z-50 md:flex md:items-center md:justify-center md:p-6"
       style={{ backgroundColor: 'rgba(44, 36, 32, 0.75)', top: 'var(--header-height, 0px)' }}
       onClick={onClose}
+      data-testid="newsletter-modal-overlay"
     >
       {/* Modal Container */}
       <div

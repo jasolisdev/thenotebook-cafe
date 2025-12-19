@@ -192,6 +192,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
           className="absolute inset-0 pointer-events-auto"
           onClick={close}
           style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
+          data-testid="product-modal-overlay"
         />
 
         <motion.div
@@ -206,6 +207,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
             <div className="flex justify-end p-4 sm:p-5" style={{ backgroundColor: colors.white }}>
               <button
                 onClick={close}
+                aria-label="Close modal"
                 className="p-2 rounded-full transition-colors"
                 style={{ backgroundColor: `${colors.mist}CC`, color: colors.black }}
               >
@@ -225,6 +227,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent sm:from-black/40" />
               <button
                 onClick={close}
+                aria-label="Close modal"
                 className="absolute top-4 right-4 p-2 rounded-full text-white transition-colors z-20"
                 style={{ backgroundColor: 'rgba(0,0,0,0.35)' }}
               >
@@ -372,6 +375,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
                 >
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    aria-label="Decrease quantity"
                     className="p-3 sm:p-3.5 transition-colors"
                     style={{ color: colors.black }}
                   >
@@ -382,6 +386,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
                   </span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
+                    aria-label="Increase quantity"
                     className="p-3 sm:p-3.5 transition-colors"
                     style={{ color: colors.black }}
                   >
