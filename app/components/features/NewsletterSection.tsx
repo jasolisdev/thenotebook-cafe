@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { MapPin } from 'lucide-react';
+import NewsletterForm from '@/app/components/features/NewsLetterForm';
 
 const NewsletterSection: React.FC = () => {
   return (
@@ -13,26 +14,9 @@ const NewsletterSection: React.FC = () => {
            Sign up to receive notes from the shop, seasonal menu previews, and invitations to our local Riverside gatherings. No clutter, just craft.
          </p>
          
-         <form 
-           className="max-w-xl mx-auto flex flex-col sm:flex-row items-center gap-6" 
-           onSubmit={(e) => e.preventDefault()}
-         >
-            <div className="relative w-full group">
-              <input 
-                type="email" 
-                placeholder="your@email.com" 
-                className="w-full bg-transparent border-b border-cafe-black/20 py-4 focus:border-cafe-black focus:outline-none transition-colors text-lg font-light text-center sm:text-left text-cafe-black"
-                required
-              />
-              <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-cafe-black transition-all duration-500 group-focus-within:w-full" />
-            </div>
-            <button 
-              type="submit"
-              className="w-full sm:w-auto px-12 py-5 bg-cafe-black text-white text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-cafe-brown transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95 whitespace-nowrap"
-            >
-              Subscribe
-            </button>
-         </form>
+         <div className="max-w-xl mx-auto">
+            <NewsletterForm source="homepage" />
+         </div>
          
          <p className="mt-8 text-[9px] text-cafe-black/30 uppercase tracking-widest">
            No spam. Only hand-crafted updates.

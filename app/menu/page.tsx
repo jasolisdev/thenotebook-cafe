@@ -192,7 +192,7 @@ export default function MenuPage() {
       <ProductModal
         item={selectedItem}
         onClose={() => setSelectedItem(null)}
-        orderingEnabled={false}
+        orderingEnabled={activeSection !== "drinks"}
       />
     </>
   );

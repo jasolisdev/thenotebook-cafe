@@ -266,18 +266,21 @@ export const AccessibilityWidget: React.FC = () => {
                  <div className="flex gap-2">
                     <button 
                        onClick={() => setTextSize('normal')}
+                       aria-label="Text size normal"
                        className={`flex-1 py-2 rounded-lg text-sm font-bold border transition-colors ${settings.textSize === 'normal' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50'}`}
                     >
                       Aa
                     </button>
                     <button 
                        onClick={() => setTextSize('large')}
+                       aria-label="Text size large"
                        className={`flex-1 py-2 rounded-lg text-base font-bold border transition-colors ${settings.textSize === 'large' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50'}`}
                     >
                       Aa
                     </button>
                     <button 
                        onClick={() => setTextSize('xl')}
+                       aria-label="Text size extra large"
                        className={`flex-1 py-2 rounded-lg text-lg font-bold border transition-colors ${settings.textSize === 'xl' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50'}`}
                     >
                       Aa

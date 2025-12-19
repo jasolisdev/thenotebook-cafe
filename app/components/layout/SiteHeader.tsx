@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import { ShoppingBag } from "lucide-react";
+import { useCart } from "@/app/components/providers/CartProvider";
 
 type SiteHeaderProps = {
   instagramUrl?: string;
@@ -16,6 +18,7 @@ export default function SiteHeader({
   instagramUrl,
   spotifyUrl,
 }: SiteHeaderProps): React.JSX.Element {
+  const { items, open: openCart } = useCart();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(true);
   const [isAtTop, setIsAtTop] = useState<boolean>(true);
@@ -53,6 +56,7 @@ export default function SiteHeader({
 
   // Logo: dark when light text (at top), light when dark text (scrolled)
   const logoSrc = useLightText ? "/tnc-navbar-logo-dark-v1.png" : "/tnc-navbar-logo-light-v1.png";
+  const cartCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   // Hide on scroll down, show on scroll up, transparent at top
   useEffect(() => {
@@ -162,10 +166,22 @@ export default function SiteHeader({
 
   // Lock body scroll when drawer is open
   useEffect(() => {
+    document.body.dataset.navOpen = isOpen ? "true" : "false";
     document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
+      document.body.dataset.navOpen = "false";
       document.body.style.overflow = "";
     };
+  }, [isOpen]);
+
+  // Close drawer on ESC key
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
   }, [isOpen]);
 
   // Respect accessibility hide-images toggle for nav contrast/logo
@@ -320,6 +336,33 @@ export default function SiteHeader({
 
             {/* Social - Right */}
             <div className="hidden md:flex items-center justify-end gap-4">
+              <button
+                type="button"
+                onClick={() => {
+                  openCart();
+                  window.dispatchEvent(new Event("open-cart"));
+                }}
+                aria-label="Shopping cart"
+                className={`relative flex items-center justify-center w-10 h-10 rounded-full transition-colors ${
+                  useLightText ? "hover:bg-white/10" : "hover:bg-black/5"
+                }`}
+              >
+                <ShoppingBag
+                  size={18}
+                  className={useLightText ? "text-coffee-50" : "text-coffee-900/80"}
+                />
+                {cartCount > 0 && (
+                  <span
+                    className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full text-[10px] leading-[18px] font-bold text-center"
+                    style={{
+                      backgroundColor: "var(--color-cafe-tan)",
+                      color: "var(--color-cafe-white)",
+                    }}
+                  >
+                    {cartCount}
+                  </span>
+                )}
+              </button>
 	              {/* Instagram Icon + Follow Button */}
 	              <a
 	                href={instagramHref}
@@ -365,6 +408,31 @@ export default function SiteHeader({
 
             <div className="md:hidden col-start-3 flex items-center justify-end gap-6">
               <button
+                type="button"
+                onClick={() => {
+                  openCart();
+                  window.dispatchEvent(new Event("open-cart"));
+                }}
+                aria-label="Shopping cart"
+                className="relative w-12 h-12 flex items-center justify-center"
+              >
+                <ShoppingBag
+                  size={20}
+                  className={useLightText ? "text-coffee-50" : "text-coffee-900/80"}
+                />
+                {cartCount > 0 && (
+                  <span
+                    className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full text-[10px] leading-[18px] font-bold text-center"
+                    style={{
+                      backgroundColor: "var(--color-cafe-tan)",
+                      color: "var(--color-cafe-white)",
+                    }}
+                  >
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+              <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="relative w-12 h-12 flex items-center justify-center"
                 aria-label={isOpen ? "Close menu" : "Open menu"}
@@ -382,7 +450,10 @@ export default function SiteHeader({
 
         {/* Cinematic Mobile Menu - Double Layer Right-to-Left */}
         {/* Layer 1: Backdrop (Tan) */}
-        <div className={`menu-layer-backdrop md:hidden ${isOpen ? 'open' : ''}`} />
+        <div
+          className={`menu-layer-backdrop md:hidden ${isOpen ? 'open' : ''}`}
+          onClick={() => setIsOpen(false)}
+        />
 
         {/* Layer 2: Main Drawer (Charcoal) */}
         <div className={`menu-drawer-cinematic md:hidden ${isOpen ? 'open' : ''}`}>
