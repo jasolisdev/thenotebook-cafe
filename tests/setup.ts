@@ -32,28 +32,23 @@ vi.mock('next/navigation', () => ({
 
 // Mock Next.js Image component
 vi.mock('next/image', () => ({
-  default: (props: any) => {
-    // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img {...props} />;
-  },
+  default: vi.fn((props) => props),
 }));
 
 // Mock Next.js Link component
 vi.mock('next/link', () => ({
-  default: ({ children, href, ...props }: any) => {
-    return <a href={href} {...props}>{children}</a>;
-  },
+  default: vi.fn(({ children }) => children),
 }));
 
 // Mock Framer Motion to avoid animation issues in tests
 vi.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    button: ({ children, ...props }: any) => <button {...props}>{children}</button>,
-    span: ({ children, ...props }: any) => <span {...props}>{children}</span>,
-    section: ({ children, ...props }: any) => <section {...props}>{children}</section>,
+    div: vi.fn(({ children }) => children),
+    button: vi.fn(({ children }) => children),
+    span: vi.fn(({ children }) => children),
+    section: vi.fn(({ children }) => children),
   },
-  AnimatePresence: ({ children }: any) => <>{children}</>,
+  AnimatePresence: vi.fn(({ children }) => children),
 }));
 
 // Mock environment variables
