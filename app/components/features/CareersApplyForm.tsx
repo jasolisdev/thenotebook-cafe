@@ -193,6 +193,7 @@ export default function CareersApplyForm() {
           <input
             type="date"
             className="input-field input-date"
+            aria-label="Birthday *"
             value={formData.birthdate}
             onChange={(e) => setFormData({ ...formData, birthdate: e.target.value })}
           />
@@ -239,7 +240,9 @@ export default function CareersApplyForm() {
         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
       />
 
-      <label className="form-group-label">Resume *</label>
+      <label className="form-group-label" htmlFor="resume-upload">
+        Resume *
+      </label>
       <div className="file-upload-zone" onClick={() => resumeInputRef.current?.click()}>
         <p style={{ margin: "0 0 8px", fontSize: "0.9rem" }}>
           {resumeFile ? resumeFile.name : "Click to upload resume"}
@@ -248,6 +251,7 @@ export default function CareersApplyForm() {
         <input
           ref={resumeInputRef}
           type="file"
+          id="resume-upload"
           style={{ display: "none" }}
           accept=".pdf,.doc,.docx"
           onChange={(e) => {
@@ -276,7 +280,9 @@ export default function CareersApplyForm() {
         and upload it below.
       </p>
 
-      <label className="form-group-label">Completed Application (optional)</label>
+      <label className="form-group-label" htmlFor="application-upload">
+        Completed Application (optional)
+      </label>
       <div className="file-upload-zone" onClick={() => applicationInputRef.current?.click()}>
         <p style={{ margin: "0 0 8px", fontSize: "0.9rem" }}>
           {applicationFile ? applicationFile.name : "Click to upload application"}
@@ -285,6 +291,7 @@ export default function CareersApplyForm() {
         <input
           ref={applicationInputRef}
           type="file"
+          id="application-upload"
           style={{ display: "none" }}
           accept=".pdf,.doc,.docx"
           onChange={(e) => {
@@ -301,7 +308,7 @@ export default function CareersApplyForm() {
         />
       </div>
 
-      <button type="submit" disabled={isSubmitting || submitStatus === "success"} className="btn-primary">
+      <button type="submit" disabled={isSubmitting} className="btn-primary">
         {isSubmitting ? "Submitting..." : "Submit Application"}
       </button>
 
