@@ -419,7 +419,9 @@ h3 {
 .reveal-mask {
   overflow: hidden;
   display: block;
-  /* Ensures the mask captures the full height */
+  padding-bottom: 0.22em;
+  margin-bottom: -0.22em;
+  /* Extra room for descenders while keeping layout height stable */
 }
 
 /* The Moving Text - Slides up from below */

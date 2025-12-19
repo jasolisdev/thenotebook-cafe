@@ -108,7 +108,7 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
           placeholder="your@email.com"
           inputMode="email"
           autoComplete="email"
-          className="flex-1 px-6 py-4 rounded-full border outline-none transition-all duration-200 placeholder:text-cafe-beige bg-white"
+          className="flex-1 px-6 py-4 rounded-md border outline-none transition-all duration-200 placeholder:text-cafe-beige bg-white"
           style={{
             borderColor: "var(--color-cafe-beige)",
             color: "var(--color-cafe-black)",

@@ -31,9 +31,10 @@ vi.mock('next/navigation', () => ({
   redirect: vi.fn(),
 }));
 
-// Mock Next.js Image component
+// Mock Next.js Image
 vi.mock('next/image', () => ({
-  default: vi.fn((props) => props),
+  default: ({ priority, fill, ...props }: any) =>
+    React.createElement('img', props),
 }));
 
 // Mock Next.js Link component
@@ -117,6 +118,14 @@ global.IntersectionObserver = class IntersectionObserver {
   takeRecords() {
     return [];
   }
+  unobserve() {}
+} as any;
+
+// Mock ResizeObserver (used by SiteHeader)
+global.ResizeObserver = class ResizeObserver {
+  constructor() {}
+  disconnect() {}
+  observe() {}
   unobserve() {}
 } as any;
 

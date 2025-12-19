@@ -8,7 +8,7 @@ const NewsletterSection: React.FC = () => {
   return (
     <section className="py-24 bg-cafe-mist border-t border-cafe-luxe-oat/20">
       <div className="max-w-4xl mx-auto px-6 text-center">
-         <span className="text-[10px] uppercase tracking-[0.4em] text-cafe-tan-dark font-bold block mb-8 italic">Stay Connected</span>
+         <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">Stay Connected</span>
          <h2 className="text-4xl md:text-6xl font-serif mb-8 italic tracking-tight text-cafe-black">The Story Continues.</h2>
          <p className="text-xl font-light text-cafe-black/60 max-w-2xl mx-auto mb-16 leading-relaxed">
            Sign up to receive notes from the shop, seasonal menu previews, and invitations to our local Riverside gatherings. No clutter, just craft.
@@ -18,7 +18,7 @@ const NewsletterSection: React.FC = () => {
             <NewsletterForm source="homepage" />
          </div>
          
-         <p className="mt-8 text-[9px] text-cafe-black/30 uppercase tracking-widest">
+         <p className="mt-8 text-[10.89px] text-cafe-black/30 uppercase tracking-widest">
            No spam. Only hand-crafted updates.
          </p>
 

@@ -21,13 +21,18 @@ import { FaYelp } from "react-icons/fa";
  */
 export default function SiteFooter(): React.JSX.Element {
   const year = new Date().getFullYear();
+  const openConsentBanner = () => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("tnc-open-consent"));
+    }
+  };
 
   return (
     <footer className="pb-12 pt-12 border-t border-white/10 bg-cafe-charcoal text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
         {/* Brand signature */}
         <div className="flex flex-col items-center md:items-start">
-          <span className="text-sm font-semibold tracking-tight font-display uppercase text-white/90">
+          <span className="text-sm font-medium uppercase text-white/90" style={{ fontFamily: "var(--font-sans)", letterSpacing: "1.5px" }}>
             THE NOTEBOOK CAFÉ
           </span>
         </div>
@@ -94,6 +99,13 @@ export default function SiteFooter(): React.JSX.Element {
           >
             REFUNDS
           </Link>
+          <button
+            type="button"
+            onClick={openConsentBanner}
+            className="text-[9px] text-white/60 uppercase tracking-[0.3em] hover:text-white transition-colors"
+          >
+            COOKIES
+          </button>
         </div>
         <div className="text-[9px] text-white/40 uppercase tracking-[0.3em]">
           &copy; {year} Handcrafted with care

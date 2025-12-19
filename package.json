@@ -7,12 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest",
+    "test": "vitest run",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage",
+    "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:all": "vitest --coverage && playwright test"
+    "test:all": "vitest run --coverage && playwright test"
   },
   "dependencies": {
     "@sanity/client": "^7.12.0",
