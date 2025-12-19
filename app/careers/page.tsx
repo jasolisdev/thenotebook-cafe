@@ -8,8 +8,10 @@ import RevealText from "../components/ui/RevealText";
 import FadeInSection from "../components/ui/FadeInSection";
 import { Coffee, Heart, TrendingUp, CheckCircle, Mail, ExternalLink, MapPin, DollarSign, Briefcase, Gift } from "lucide-react";
 import "../styles/pages/careers.css";
+import "../styles/components/application-form.css";
 import type { Metadata } from "next";
 import { SEO } from "@/lib/seo";
+import CareersApplyForm from "@/app/components/features/CareersApplyForm";
 
 export const metadata: Metadata = {
   title: SEO.pages.careers.title,
@@ -438,7 +440,7 @@ export default function CareersPage() {
 
           <Reveal delay={200}>
             <div
-              className="p-8 sm:p-10 md:p-12 rounded-3xl shadow-[0_14px_40px_rgba(44,36,32,0.08)]"
+              className="p-6 sm:p-8 md:p-12 rounded-3xl shadow-[0_14px_40px_rgba(44,36,32,0.08)]"
               style={{
                 backgroundColor: 'rgba(250, 249, 246, 0.85)',
                 border: '2px solid rgba(164, 141, 120, 0.14)',
@@ -464,9 +466,9 @@ export default function CareersPage() {
 
                   <ul className="space-y-4">
                     {[
-                      "Role you’re applying for",
-                      "Your availability",
-                      "Resume (PDF preferred)",
+                      "Contact details + role interest",
+                      "Availability",
+                      "Resume + optional application",
                     ].map((item) => (
                       <li key={item} className="flex gap-3 items-start">
                         <CheckCircle
@@ -486,29 +488,14 @@ export default function CareersPage() {
                 </div>
 
                 <div className="flex flex-col gap-4">
-                  <div
-                    className="p-6 md:p-7 rounded-2xl"
-                    style={{
-                      backgroundColor: 'rgba(164, 141, 120, 0.10)',
-                      border: '1.5px solid rgba(164, 141, 120, 0.22)',
-                    }}
-                  >
+                  <div>
                     <div className="flex items-center gap-3 mb-3">
                       <Mail size={18} strokeWidth={1.8} style={{ color: 'var(--color-cafe-tan)' }} />
                       <span className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'rgba(74, 59, 50, 0.7)' }}>
-                        Email Your Resume
+                        Quick Apply
                       </span>
                     </div>
-                    <a
-                      href="mailto:thenotebookcafellc@gmail.com"
-                      className="block font-serif text-base sm:text-lg md:text-xl leading-tight break-words md:break-normal"
-                      style={{ color: 'var(--color-cafe-black)', textDecoration: 'none' }}
-                    >
-                      thenotebookcafellc@gmail.com
-                    </a>
-                    <p className="mt-3 text-sm font-normal" style={{ color: 'rgba(74, 59, 50, 0.75)' }}>
-                      Include the role you’re applying for and your availability.
-                    </p>
+                    <CareersApplyForm />
                   </div>
 
                   <a

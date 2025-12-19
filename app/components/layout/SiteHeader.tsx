@@ -212,11 +212,7 @@ export default function SiteHeader({
     // Close the drawer immediately
     setIsOpen(false);
 
-    // Wait for the drawer to close (0.5s transition), then navigate
-    // This ensures the next page's hero animation starts AFTER the drawer is gone.
-    setTimeout(() => {
-      router.push(href);
-    }, 500);
+    router.push(href);
   };
 
   // Prefetch hero images on hover for instant page transitions

@@ -73,6 +73,30 @@
   font-family: var(--font-sans);
 }
 
+.consent-banner__details {
+  margin: 8px 0 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: rgba(244, 241, 234, 0.7);
+  font-family: var(--font-sans);
+}
+
+.consent-banner__link {
+  margin-left: 8px;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--color-cafe-tan);
+  font-size: 0.8rem;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.consent-banner__link:hover {
+  color: var(--color-cafe-mist);
+}
+
 /* Button Container */
 .consent-banner__actions {
   display: flex;

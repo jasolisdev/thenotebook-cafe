@@ -11,6 +11,7 @@ type ConsentValue = "accepted" | "declined";
 export default function ConsentBanner() {
   const [visible, setVisible] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const openBanner = useCallback(() => {
     setShouldRender(true);
@@ -51,7 +52,7 @@ export default function ConsentBanner() {
 
   return (
     <div
-      className={`consent-banner ${visible ? 'show' : ''}`}
+      className={`consent-banner ${visible ? 'show' : ''} ${expanded ? 'expanded' : ''}`}
       role="region"
       aria-label="Cookie consent"
     >
@@ -59,7 +60,22 @@ export default function ConsentBanner() {
         <h4 className="consent-banner__headline">We use cookies</h4>
         <p className="consent-banner__copy">
           To improve your experience and keep the coffee flowing smoothly, we use cookies.
+          <button
+            type="button"
+            className="consent-banner__link"
+            onClick={() => setExpanded((prev) => !prev)}
+          >
+            {expanded ? "Hide details" : "Read more..."}
+          </button>
         </p>
+        {expanded && (
+          <p className="consent-banner__details">
+            You can change your preferences anytime by clicking Cookies in the footer.
+            <a className="consent-banner__link" href="/privacy">
+              Learn more →
+            </a>
+          </p>
+        )}
       </div>
       <div className="consent-banner__actions">
         <button

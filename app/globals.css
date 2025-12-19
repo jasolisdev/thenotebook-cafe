@@ -430,7 +430,7 @@ h3 {
   transform: translateY(110%);
   /* Start completely out of view below */
   opacity: 0;
-  animation: slideUpReveal 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation: slideUpReveal 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
 @keyframes slideUpReveal {
