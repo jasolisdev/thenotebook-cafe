@@ -1,6 +1,6 @@
 import React from 'react';
 import { describe, expect, test } from 'vitest';
-import { render, screen, within } from '@/tests/utils/test-utils';
+import { render, within } from '@/tests/utils/test-utils';
 import HomePage from '@/app/page';
 
 describe('HomePage', () => {

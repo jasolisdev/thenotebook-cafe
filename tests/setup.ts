@@ -40,8 +40,11 @@ vi.mock('next/navigation', () => ({
 
 // Mock Next.js Image
 vi.mock('next/image', () => ({
-  default: ({ priority, fill, ...props }: NextImageProps) =>
-    React.createElement('img', props),
+  default: ({ priority, fill, ...props }: NextImageProps) => {
+    void priority;
+    void fill;
+    return React.createElement('img', props);
+  },
 }));
 
 // Mock Next.js Link component
