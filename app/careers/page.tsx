@@ -7,9 +7,6 @@ import Reveal from "../components/ui/Reveal";
 import RevealText from "../components/ui/RevealText";
 import FadeInSection from "../components/ui/FadeInSection";
 import {
-  Coffee,
-  Heart,
-  TrendingUp,
   CheckCircle,
   Mail,
   ExternalLink,

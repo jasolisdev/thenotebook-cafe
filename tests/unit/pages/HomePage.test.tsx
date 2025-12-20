@@ -15,11 +15,11 @@ describe('HomePage', () => {
 
     const section = within(atmosphereSection as HTMLElement);
 
-    const ritualLabel = section.getByText('The Ritual');
+    const ritualLabel = section.getByText('The Atmosphere');
     expect(ritualLabel).toBeInTheDocument();
-    expect(section.getByText(/Brewed for/i)).toBeInTheDocument();
-    expect(section.getByText(/Connection/i)).toBeInTheDocument();
-    expect(section.getByText(/Read Our Story/i)).toBeInTheDocument();
+    expect(section.getByText(/It's not just Coffee/i)).toBeInTheDocument();
+    expect(section.getByText(/It's a feeling/i)).toBeInTheDocument();
+    expect(section.getByText(/We believe in the power of a quiet moment/i)).toBeInTheDocument();
 
     const stickyColumn = ritualLabel.closest('div')?.parentElement;
     expect(stickyColumn).toBeTruthy();

@@ -7,7 +7,7 @@ import "@/app/styles/pages/home.css";
 import Image from "next/image";
 import Reveal from "@/app/components/ui/Reveal";
 import StoryLink from "@/app/components/ui/StoryLink";
-import { Coffee, Music, Wifi, PlugZap, Armchair, Sparkles } from "lucide-react";
+import { Coffee, Music, Armchair, Sparkles } from "lucide-react";
 import SignaturePoursGrid from "@/app/components/SignaturePoursGrid";
 import MenuSection from "@/app/components/features/MenuSection";
 import HeroSection from "@/app/components/features/HeroSection";
@@ -159,9 +159,9 @@ export default function HomePage() {
               </Reveal>
               <Reveal delay={100}>
                 <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-cafe-black">
-                  It's not just Coffee <br />
+                  It&apos;s not just Coffee <br />
                   <span className="italic text-cafe-tan block mt-2">
-                    It's a feeling
+                    It&apos;s a feeling
                   </span>
                 </h2>
               </Reveal>
