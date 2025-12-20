@@ -33,7 +33,7 @@ export function useOnScreen(options?: IntersectionObserverInit): [React.RefObjec
         }
       },
       {
-        threshold: 0.1, // Trigger when 10% visible
+        threshold: 0.2, // Trigger when 20% visible
         rootMargin: '0px 0px -50px 0px', // Trigger 50px before entering viewport
         ...options,
       }

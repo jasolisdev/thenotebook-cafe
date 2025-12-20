@@ -4,8 +4,6 @@ import { FormEvent, useRef, useState } from "react";
 
 type Status = "idle" | "loading" | "success" | "error";
 
-const MAX_RESUME_MB = 5;
-
 const formatPhoneInput = (value: string) => {
   const digits = value.replace(/\D/g, "").slice(0, 10);
   const parts = [];
@@ -26,7 +24,6 @@ export default function CareersApplyForm() {
   });
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [applicationFile, setApplicationFile] = useState<File | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<Status>("idle");
   const [submitError, setSubmitError] = useState("");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
@@ -64,7 +61,6 @@ export default function CareersApplyForm() {
 
     setValidationErrors([]);
     setSubmitError("");
-    setIsSubmitting(true);
     setSubmitStatus("idle");
 
     try {
@@ -111,8 +107,6 @@ export default function CareersApplyForm() {
     } catch {
       setSubmitStatus("error");
       setSubmitError("Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
     }
   };
 

@@ -69,24 +69,6 @@
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
 }
 
-/* Quote Section */
-.contact-quote {
-  background-color: rgba(var(--cafe-tan-rgb), 0.08);
-  border: 1px solid rgba(var(--cafe-tan-rgb), 0.2);
-}
-
-.contact-quote__icon {
-  color: var(--color-cafe-tan);
-}
-
-.contact-quote__text {
-  color: rgba(var(--cafe-brown-rgb), 0.8);
-}
-
-.contact-quote__footer {
-  color: var(--color-cafe-tan);
-}
-
 /* Decorative Elements */
 .contact-info-deco--phone {
   top: 10%;

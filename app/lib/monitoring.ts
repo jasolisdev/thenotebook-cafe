@@ -87,6 +87,8 @@ export function captureError(
   error: Error | unknown,
   context?: ErrorContext
 ): void {
+  void error;
+  void context;
   if (process.env.NODE_ENV !== "production") {
     return; // Logger handles dev errors
   }
@@ -114,6 +116,9 @@ export function captureMessage(
   level: "info" | "warning" | "error" = "info",
   context?: ErrorContext
 ): void {
+  void message;
+  void level;
+  void context;
   if (process.env.NODE_ENV !== "production") {
     return;
   }
@@ -135,6 +140,7 @@ export function setUserContext(user: {
   email?: string;
   username?: string;
 }): void {
+  void user;
   if (process.env.NODE_ENV !== "production") {
     return;
   }
@@ -167,6 +173,9 @@ export function addBreadcrumb(
   category: string,
   data?: ErrorContext
 ): void {
+  void message;
+  void category;
+  void data;
   if (process.env.NODE_ENV !== "production") {
     return;
   }

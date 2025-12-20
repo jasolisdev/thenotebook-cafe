@@ -23,6 +23,7 @@ vi.mock('@/app/components/providers/CartProvider', async (importOriginal) => {
 
 vi.mock('next/image', () => ({
   default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    /* eslint-disable-next-line @next/next/no-img-element */
     <img alt={props.alt} {...Object.fromEntries(Object.entries(props).filter(([key]) => key !== 'fill'))} />
   ),
 }));
