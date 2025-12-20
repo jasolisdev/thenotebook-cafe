@@ -282,12 +282,12 @@ export default function StoryPage() {
                 <div className="story-divider story-divider--black w-24 h-[2px] ml-auto" />
               </Reveal>
               <Reveal delay={200}>
-                <p className="text-xl md:text-2xl text-cafe-brown mb-6 font-normal leading-relaxed">
+                <p className="story-body text-lg md:text-xl font-normal leading-relaxed mb-6">
                   We believe that great ideas start with great coffee. Whether you&apos;re sketching your next masterpiece, writing the next great novel, or just enjoying a moment of silence.
                 </p>
               </Reveal>
               <Reveal delay={260}>
-                <p className="text-xl md:text-2xl text-cafe-brown mb-10 font-normal leading-relaxed">
+                <p className="story-body text-lg md:text-xl font-normal leading-relaxed mb-10">
                   Our beans are ethically sourced, roasted in small batches, and brewed with precision to fuel your inspiration.
                 </p>
               </Reveal>
@@ -341,7 +341,7 @@ export default function StoryPage() {
                 <h3 className="font-serif text-3xl md:text-4xl leading-tight text-cafe-black">
                   Single-Origin Mexican Coffee
                 </h3>
-                <p className="text-lg font-normal leading-relaxed text-cafe-brown">
+                <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
                   Direct-trade Chiapas and Oaxaca lots, roasted to honor sweetness and terroir. Every cup carries a cultural story and a transparent supply chain.
                 </p>
               </div>
@@ -359,7 +359,7 @@ export default function StoryPage() {
                 <h3 className="font-serif text-3xl md:text-4xl leading-tight text-cafe-black">
                   100% Custom-Designed Space
                 </h3>
-                <p className="text-lg font-normal leading-relaxed text-cafe-brown">
+                <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
                   Built-by-hand furniture, lighting, and layout designed by our founder. Nothing off-the-shelf—only intentional pieces that invite you to linger.
                 </p>
               </div>
@@ -377,7 +377,7 @@ export default function StoryPage() {
                 <h3 className="font-serif text-3xl md:text-4xl leading-tight text-cafe-black">
                   Curated Soundscapes
                 </h3>
-                <p className="text-lg font-normal leading-relaxed text-cafe-brown">
+                <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
                   Deep house, neo-soul, and lo-fi playlists scored for focus and calm. No generic radio, just sound that matches the craft in your cup.
                 </p>
               </div>
@@ -395,7 +395,7 @@ export default function StoryPage() {
                 <h3 className="font-serif text-3xl md:text-4xl leading-tight text-cafe-black">
                   Community First
                 </h3>
-                <p className="text-lg font-normal leading-relaxed text-cafe-brown">
+                <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
                   Riverside&apos;s living room—stay as long as you like. Students, creatives, neighbors: everyone is welcome, always.
                 </p>
               </div>
@@ -435,8 +435,8 @@ export default function StoryPage() {
             <Reveal delay={200}>
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 {/* Image */}
-                <div className="relative order-2 lg:order-1">
-                  <div className="relative aspect-[3/4] md:aspect-[4/5] rounded-xl overflow-hidden shadow-xl">
+                <div className="relative order-1 lg:order-1">
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                     <Image
                       src="/story/tnc-founder-v1.webp"
                       alt="Michael & Julia - Founders & Owners"
@@ -448,7 +448,7 @@ export default function StoryPage() {
                 </div>
 
                 {/* Content */}
-                <div className="space-y-6 order-1 lg:order-2">
+                <div className="space-y-6 order-2 lg:order-2">
                   <div>
                     <h3 className="story-card-title font-serif text-3xl md:text-4xl mb-2">
                       Michael & Julia
@@ -460,7 +460,7 @@ export default function StoryPage() {
 
                   <div className="story-divider story-divider--tan w-16 h-[2px]" />
 
-                  <p className="story-card-body text-lg font-normal leading-relaxed text-cafe-brown">
+                  <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
                     A husband-wife team with a shared vision: to create a coffee shop that Riverside deserves. Michael brings expertise in specialty coffee, sourcing, and extraction science, while Julia designs every intentional detail—from custom furniture to the lighting that sets the mood. Together, they&apos;re building more than a business; they&apos;re crafting a community sanctuary.
                   </p>
 
