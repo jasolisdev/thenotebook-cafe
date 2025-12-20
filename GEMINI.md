@@ -185,3 +185,8 @@ As a large language model from Google, I can assist with a variety of tasks in t
 - **Brainstorming**: Assist in brainstorming ideas for new features or solutions to problems.
 
 By leveraging the information in this file and the rest of the project documentation, I can provide assistance that is consistent with the project's standards and goals.
+
+no need to run npm run build after making changes.
+update this file if there are any changes to the project structure, tech stack, or development guidelines.
+
+

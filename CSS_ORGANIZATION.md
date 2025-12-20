@@ -13,9 +13,7 @@ app/
     │   ├── buttons.css
     │   ├── consent-banner.css
     │   ├── footer.css
-    │   ├── kenburns-hero.css
     │   ├── navigation.css
-    │   ├── parallax-hero.css
     │   └── what-to-expect.css
     ├── layout/          # Layout primitives and animations
     │   ├── animations.css
@@ -44,10 +42,8 @@ app/
 - **buttons.css** — Pill buttons, gold badges, hover transitions, shared CTA styling.
 - **consent-banner.css** — Cookie/analytics consent banner with warm gradient, stacked actions, responsive layout.
 - **footer.css** — Footer grid, social/icon styling, muted text treatments.
-- **kenburns-hero.css** — Cinematic hero with Ken Burns pan/zoom, scroll-hide behavior, overlay variants (imported inside `KenBurnsHero.tsx`).
 - **navigation.css** — Glassmorphism header, nav links, drawer/drawer-footer, burger animations, active state styling.
-- **parallax-hero.css** — Parallax background hero with overlay variants and reduce-motion support (imported inside `ParallaxHero.tsx`).
-- **what-to-expect.css** — “What to Expect” section bullets, icon animations, and typography.
+- **what-to-expect.css** — "What to Expect" section bullets, icon animations, and typography.
 
 ## Layout Styles
 - **sections.css** — Shared section backgrounds (cream/dark), dividers, and global spacing helpers.
@@ -80,7 +76,7 @@ import "./styles/layout/sections.css";
 import "./styles/layout/animations.css";
 ```
 
-Page-specific CSS is imported by the route that needs it (e.g., `app/page.tsx` imports `./styles/pages/home.css`). Component-scoped CSS (e.g., `kenburns-hero.css`, `parallax-hero.css`) is imported within the React component that needs it.
+Page-specific CSS is imported by the route that needs it (e.g., `app/page.tsx` imports `./styles/pages/home.css`).
 
 ## Why This Layout Works
 1. Styles are discoverable by concern: foundation → components → layout → pages.

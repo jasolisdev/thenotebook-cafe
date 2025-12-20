@@ -1,27 +1,23 @@
 /* Story Page */
 
 .story-page {
-  color: var(--cafe-brown);
+  color: var(--color-cafe-brown);
 }
 
 .story-fixed-background {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-color: var(--cafe-mist);
+  background-color: var(--color-cafe-mist);
   background-image: none;
 }
 
-.story-hero__content {
-  text-align: left;
-}
-
 .story-hero-kicker {
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
 }
 
 .story-hero-title-accent {
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
 }
 
 .story-hero-subtitle {
@@ -29,19 +25,19 @@
 }
 
 .story-section-title {
-  color: var(--cafe-black);
+  color: var(--color-cafe-black);
 }
 
 .story-section-title-accent {
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
 }
 
 .story-divider--black {
-  background-color: var(--cafe-black);
+  background-color: var(--color-cafe-black);
 }
 
 .story-divider--tan {
-  background-color: var(--cafe-tan);
+  background-color: var(--color-cafe-tan);
 }
 
 .story-body {
@@ -49,12 +45,12 @@
 }
 
 .story-strong {
-  color: var(--cafe-black);
+  color: var(--color-cafe-black);
   font-weight: 600;
 }
 
 .story-em-accent {
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
 }
 
 .story-icon-badge {
@@ -62,15 +58,15 @@
 }
 
 .story-icon {
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
 }
 
 .story-eyebrow {
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
 }
 
 .story-card-title {
-  color: var(--cafe-black);
+  color: var(--color-cafe-black);
 }
 
 .story-card-body {
@@ -79,7 +75,7 @@
 
 .story-pill {
   background-color: rgba(var(--cafe-tan-rgb), 0.2);
-  color: var(--cafe-brown);
+  color: var(--color-cafe-brown);
   border: 1px solid rgba(var(--cafe-tan-rgb), 0.3);
 }
 
@@ -92,15 +88,15 @@
 }
 
 .story-founders-quote-icon {
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
 }
 
 .story-founders-quote-text {
-  color: var(--cafe-black);
+  color: var(--color-cafe-black);
 }
 
 .story-founders-quote-footer {
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
 }
 
 .story-image-overlay {
@@ -108,8 +104,8 @@
 }
 
 .story-established-badge {
-  background-color: var(--cafe-tan);
-  color: var(--cafe-white);
+  background-color: var(--color-cafe-tan);
+  color: var(--color-cafe-white);
   border-radius: 0.5rem;
   padding: 0.75rem 1.25rem;
   border: 1px solid rgba(255, 255, 255, 0.32);
@@ -119,9 +115,9 @@
 }
 
 .story-stat-title {
-  color: var(--cafe-black);
+  color: var(--color-cafe-black);
 }
 
 .story-stat-label {
-  color: var(--cafe-brown);
+  color: var(--color-cafe-brown);
 }

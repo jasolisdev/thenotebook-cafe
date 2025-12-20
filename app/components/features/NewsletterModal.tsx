@@ -61,6 +61,7 @@ export default function NewsletterModal({ isOpen, onClose, source = "modal" }: N
       className="fixed inset-0 z-50 md:flex md:items-center md:justify-center md:p-6"
       style={{ backgroundColor: 'rgba(44, 36, 32, 0.75)', top: 'var(--header-height, 0px)' }}
       onClick={onClose}
+      data-testid="newsletter-modal-overlay"
     >
       {/* Modal Container */}
       <div
@@ -75,11 +76,11 @@ export default function NewsletterModal({ isOpen, onClose, source = "modal" }: N
         {/* Ornate corner decorations - hidden on mobile */}
         <div
           className="hidden md:block absolute top-0 left-0 w-24 h-24 border-t-2 border-l-2 rounded-tl-3xl pointer-events-none"
-          style={{ borderColor: 'var(--cafe-tan)' }}
+          style={{ borderColor: 'var(--color-cafe-tan)' }}
         ></div>
         <div
           className="hidden md:block absolute bottom-0 right-0 w-24 h-24 border-b-2 border-r-2 rounded-br-3xl pointer-events-none"
-          style={{ borderColor: 'var(--cafe-tan)' }}
+          style={{ borderColor: 'var(--color-cafe-tan)' }}
         ></div>
 
         {/* Industrial grid background accent */}
@@ -104,7 +105,7 @@ export default function NewsletterModal({ isOpen, onClose, source = "modal" }: N
           <X
             size={24}
             className="transition-transform duration-300 group-hover:rotate-90"
-            style={{ color: 'var(--cafe-tan)', strokeWidth: 2.5 }}
+            style={{ color: 'var(--color-cafe-tan)', strokeWidth: 2.5 }}
           />
         </button>
 
@@ -119,8 +120,8 @@ export default function NewsletterModal({ isOpen, onClose, source = "modal" }: N
                 border: '3px solid rgba(var(--cafe-tan-rgb), 0.4)'
               }}
             >
-              <Mail size={32} className="md:hidden" style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.8} />
-              <Mail size={40} className="hidden md:block" style={{ color: 'var(--cafe-tan)' }} strokeWidth={1.8} />
+              <Mail size={32} className="md:hidden" style={{ color: 'var(--color-cafe-tan)' }} strokeWidth={1.8} />
+              <Mail size={40} className="hidden md:block" style={{ color: 'var(--color-cafe-tan)' }} strokeWidth={1.8} />
             </div>
           </div>
 
@@ -128,12 +129,12 @@ export default function NewsletterModal({ isOpen, onClose, source = "modal" }: N
           <div className="text-center mb-8 md:mb-10">
             <h2
               className="font-serif text-3xl md:text-5xl mb-3 md:mb-4"
-              style={{ color: 'var(--cafe-black)' }}
+              style={{ color: 'var(--color-cafe-black)' }}
             >
-              Join Our <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Community</span>
+              Join Our <span className="italic" style={{ color: 'var(--color-cafe-tan)' }}>Community</span>
             </h2>
 
-            <div className="w-16 md:w-20 h-[2px] mx-auto mb-4 md:mb-6" style={{ backgroundColor: 'var(--cafe-tan)' }}></div>
+            <div className="w-16 md:w-20 h-[2px] mx-auto mb-4 md:mb-6" style={{ backgroundColor: 'var(--color-cafe-tan)' }}></div>
 
             <p
               className="text-sm md:text-lg font-light leading-relaxed max-w-xl mx-auto px-2"
@@ -152,20 +153,20 @@ export default function NewsletterModal({ isOpen, onClose, source = "modal" }: N
           <div className="mt-8 md:mt-12 pt-8 md:pt-10 border-t" style={{ borderColor: 'rgba(var(--cafe-tan-rgb), 0.2)' }}>
             <div className="grid grid-cols-3 gap-4 md:gap-6 text-center">
               <div>
-                <Sparkles className="mx-auto mb-2 md:mb-3" size={20} style={{ color: 'var(--cafe-tan)' }} />
-                <p className="text-xs md:text-sm font-medium" style={{ color: 'var(--cafe-brown)' }}>
+                <Sparkles className="mx-auto mb-2 md:mb-3" size={20} style={{ color: 'var(--color-cafe-tan)' }} />
+                <p className="text-xs md:text-sm font-medium" style={{ color: 'var(--color-cafe-brown)' }}>
                   Exclusive Updates
                 </p>
               </div>
               <div>
-                <Mail className="mx-auto mb-2 md:mb-3" size={20} style={{ color: 'var(--cafe-tan)' }} />
-                <p className="text-xs md:text-sm font-medium" style={{ color: 'var(--cafe-brown)' }}>
+                <Mail className="mx-auto mb-2 md:mb-3" size={20} style={{ color: 'var(--color-cafe-tan)' }} />
+                <p className="text-xs md:text-sm font-medium" style={{ color: 'var(--color-cafe-brown)' }}>
                   Opening News
                 </p>
               </div>
               <div>
-                <Sparkles className="mx-auto mb-2 md:mb-3" size={20} style={{ color: 'var(--cafe-tan)' }} />
-                <p className="text-xs md:text-sm font-medium" style={{ color: 'var(--cafe-brown)' }}>
+                <Sparkles className="mx-auto mb-2 md:mb-3" size={20} style={{ color: 'var(--color-cafe-tan)' }} />
+                <p className="text-xs md:text-sm font-medium" style={{ color: 'var(--color-cafe-brown)' }}>
                   Special Events
                 </p>
               </div>
@@ -173,7 +174,7 @@ export default function NewsletterModal({ isOpen, onClose, source = "modal" }: N
           </div>
 
           {/* Privacy Note */}
-          <p className="text-xs text-center mt-6 md:mt-8 opacity-60" style={{ color: 'var(--cafe-brown)' }}>
+          <p className="text-xs text-center mt-6 md:mt-8 opacity-60" style={{ color: 'var(--color-cafe-brown)' }}>
             We respect your privacy. Unsubscribe anytime.
           </p>
         </div>

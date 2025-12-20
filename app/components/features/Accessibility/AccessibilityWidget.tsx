@@ -8,6 +8,7 @@ import {
   ContrastIcon, EyeIcon, ResetIcon, ChevronLeftIcon,
   MousePointerIcon, LinkIcon, RulerIcon, PauseIcon, BrainIcon
 } from '@/app/components/ui/AccessibilityIcons';
+import { logger } from '@/app/lib/logger';
 
 interface AccessibilitySettings {
   textSize: 'normal' | 'large' | 'xl';
@@ -57,7 +58,7 @@ export const AccessibilityWidget: React.FC = () => {
     try {
       return JSON.parse(saved) as AccessibilitySettings;
     } catch (e) {
-      console.error('Failed to load accessibility settings:', e);
+      logger.error('Failed to load accessibility settings', e);
       return defaultSettings;
     }
   });
@@ -232,16 +233,16 @@ export const AccessibilityWidget: React.FC = () => {
       )}
 
       {/* Drawer */}
-      <div className={`fixed inset-y-0 left-0 z-[110] w-full md:w-96 bg-[#2A2622] shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? 'translate-x-0' : '-translate-x-full'} flex flex-col border-r border-cafe-cream/10`}>
+      <div className={`fixed inset-y-0 left-0 z-[110] w-full md:w-96 bg-cafe-cream shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? 'translate-x-0' : '-translate-x-full'} flex flex-col border-r border-cafe-tan/20`}>
         
         {/* Header */}
-        <div className="p-6 border-b border-cafe-cream/10 bg-[#2A2622] flex items-center justify-between shrink-0">
-          <h2 className="font-display font-bold text-xl text-cafe-cream">
+        <div className="p-6 border-b border-cafe-tan/20 bg-cafe-cream flex items-center justify-between shrink-0">
+          <h2 className="font-display font-bold text-xl text-cafe-black">
             {view === 'settings' ? 'Accessibility Tools' : 'Accessibility Statement'}
           </h2>
           <button 
             onClick={() => setIsOpen(false)}
-            className="w-10 h-10 rounded-full hover:bg-cafe-black flex items-center justify-center text-cafe-mist transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
+            className="w-10 h-10 rounded-full hover:bg-cafe-tan/15 flex items-center justify-center text-cafe-brown transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
             aria-label="Close accessibility panel"
           >
             <XMarkIcon className="w-6 h-6" />
@@ -249,35 +250,38 @@ export const AccessibilityWidget: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6 bg-[#2A2622]">
+        <div className="flex-1 overflow-y-auto p-6 bg-cafe-cream">
           {view === 'settings' ? (
             <div className="space-y-4">
-              <p className="text-sm text-cafe-mist/80 font-sans mb-4">
+              <p className="text-sm text-cafe-brown/70 font-sans mb-4">
                 Customize your viewing experience with our accessibility tools.
               </p>
 
               {/* Text Size Control */}
-              <div className="bg-cafe-black/30 p-4 rounded-xl border border-cafe-cream/10">
-                 <div className="flex items-center gap-2 mb-3 text-cafe-cream font-bold">
+              <div className="bg-white p-4 rounded-xl border border-cafe-tan/20 shadow-sm">
+                 <div className="flex items-center gap-2 mb-3 text-cafe-black font-bold">
                     <TypeIcon className="w-5 h-5" />
                     <span>Text Size</span>
                  </div>
                  <div className="flex gap-2">
                     <button 
                        onClick={() => setTextSize('normal')}
-                       className={`flex-1 py-2 rounded-lg text-sm font-bold border transition-colors ${settings.textSize === 'normal' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-transparent text-cafe-mist border-cafe-cream/20 hover:bg-cafe-cream/5 hover:border-cafe-cream/40'}`}
+                       aria-label="Text size normal"
+                       className={`flex-1 py-2 rounded-lg text-sm font-bold border transition-colors ${settings.textSize === 'normal' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50'}`}
                     >
                       Aa
                     </button>
                     <button 
                        onClick={() => setTextSize('large')}
-                       className={`flex-1 py-2 rounded-lg text-base font-bold border transition-colors ${settings.textSize === 'large' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-transparent text-cafe-mist border-cafe-cream/20 hover:bg-cafe-cream/5 hover:border-cafe-cream/40'}`}
+                       aria-label="Text size large"
+                       className={`flex-1 py-2 rounded-lg text-base font-bold border transition-colors ${settings.textSize === 'large' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50'}`}
                     >
                       Aa
                     </button>
                     <button 
                        onClick={() => setTextSize('xl')}
-                       className={`flex-1 py-2 rounded-lg text-lg font-bold border transition-colors ${settings.textSize === 'xl' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-transparent text-cafe-mist border-cafe-cream/20 hover:bg-cafe-cream/5 hover:border-cafe-cream/40'}`}
+                       aria-label="Text size extra large"
+                       className={`flex-1 py-2 rounded-lg text-lg font-bold border transition-colors ${settings.textSize === 'xl' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50'}`}
                     >
                       Aa
                     </button>
@@ -353,48 +357,48 @@ export const AccessibilityWidget: React.FC = () => {
               <div className="mt-8 pt-6 border-t border-cafe-cream/10">
                 <button 
                   onClick={() => setView('statement')}
-                  className="w-full py-3 px-4 bg-cafe-black/40 hover:bg-cafe-black text-cafe-mist rounded-xl font-bold transition-colors text-sm border border-cafe-cream/20"
+                  className="w-full py-3 px-4 bg-white hover:bg-cafe-tan/10 text-cafe-brown rounded-xl font-bold transition-colors text-sm border border-cafe-tan/20"
                 >
                   Read Accessibility Statement
                 </button>
               </div>
             </div>
           ) : (
-            <div className="prose prose-sm max-w-none text-cafe-mist/90 animate-slide-in-left">
+            <div className="prose prose-sm max-w-none text-cafe-brown/90 animate-slide-in-left">
               <button 
                 onClick={() => setView('settings')}
-                className="flex items-center gap-2 text-cafe-cream font-bold mb-6 hover:text-cafe-tan transition-colors"
+                className="flex items-center gap-2 text-cafe-black font-bold mb-6 hover:text-cafe-tan transition-colors"
               >
                 <ChevronLeftIcon className="w-5 h-5" />
                 Back to Settings
               </button>
               
-              <h3 className="font-display font-bold text-lg text-cafe-cream mb-2">Our Commitment to Accessibility</h3>
-              <p className="mb-4 text-cafe-mist/80">We want everyone to enjoy The Notebook Café online. We aim for WCAG 2.1 AA alignment and keep iterating with feedback from our community.</p>
+              <h3 className="font-display font-bold text-lg text-cafe-black mb-2">Our Commitment to Accessibility</h3>
+              <p className="mb-4 text-cafe-brown/80">We want everyone to enjoy The Notebook Café online. We aim for WCAG 2.1 AA alignment and keep iterating with feedback from our community.</p>
 
-              <h3 className="font-display font-bold text-lg text-cafe-cream mb-2">Features Available</h3>
-              <ul className="list-disc pl-5 mb-4 space-y-1 text-cafe-mist/80">
+              <h3 className="font-display font-bold text-lg text-cafe-black mb-2">Features Available</h3>
+              <ul className="list-disc pl-5 mb-4 space-y-1 text-cafe-brown/80">
                 <li><strong>Text Options:</strong> Adjustable sizes and high-contrast mode.</li>
                 <li><strong>Reading Aids:</strong> Dyslexia-friendly font, bionic reading, and a reading guide line.</li>
                 <li><strong>Visual Controls:</strong> Grayscale, hide images, pause animations.</li>
                 <li><strong>Focus Helpers:</strong> Larger cursor, link highlights.</li>
               </ul>
 
-              <h3 className="font-display font-bold text-lg text-cafe-cream mb-2">How We Test</h3>
-              <p className="mb-4 text-cafe-mist/80">We review pages with keyboard-only navigation, screen magnifiers, and automated checks, and we welcome your feedback to improve further.</p>
+              <h3 className="font-display font-bold text-lg text-cafe-black mb-2">How We Test</h3>
+              <p className="mb-4 text-cafe-brown/80">We review pages with keyboard-only navigation, screen magnifiers, and automated checks, and we welcome your feedback to improve further.</p>
 
-              <h3 className="font-display font-bold text-lg text-cafe-cream mb-2">Need Assistance?</h3>
-              <p className="mb-8 text-cafe-mist/80">If any part of this site is hard to use, email us at <a href="mailto:thenotebookcafellc@gmail.com" className="font-semibold text-cafe-cream underline">thenotebookcafellc@gmail.com</a> and we’ll work with you directly.</p>
+              <h3 className="font-display font-bold text-lg text-cafe-black mb-2">Need Assistance?</h3>
+              <p className="mb-8 text-cafe-brown/80">If any part of this site is hard to use, email us at <a href="mailto:thenotebookcafellc@gmail.com" className="font-semibold text-cafe-black underline">thenotebookcafellc@gmail.com</a> and we’ll work with you directly.</p>
             </div>
           )}
         </div>
 
         {/* Footer */}
         {view === 'settings' && (
-          <div className="p-6 border-t border-cafe-cream/10 bg-[#2A2622] shrink-0">
+          <div className="p-6 border-t border-cafe-tan/20 bg-cafe-cream shrink-0">
             <button 
               onClick={resetSettings}
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 border-2 border-cafe-mist/20 text-cafe-mist hover:bg-cafe-mist hover:text-cafe-charcoal rounded-xl font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 border-2 border-cafe-tan/25 text-cafe-brown hover:bg-cafe-tan/10 rounded-xl font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40 bg-white"
             >
               <ResetIcon className="w-5 h-5" />
               Reset Settings
@@ -427,12 +431,13 @@ export const AccessibilityWidget: React.FC = () => {
 const ToggleButton = ({ label, icon, active, onClick }: { label: string, icon: React.ReactNode, active: boolean, onClick: () => void }) => (
   <button 
     onClick={onClick}
-    className={`w-full p-4 rounded-xl border flex items-center gap-4 transition-all ${active ? 'bg-cafe-tan text-cafe-white border-cafe-tan shadow-md' : 'bg-transparent text-cafe-mist border-cafe-cream/20 hover:border-cafe-cream/40 hover:bg-cafe-cream/5'}`}
+    aria-pressed={active}
+    className={`w-full p-4 rounded-xl border flex items-center gap-4 transition-all ${active ? 'bg-cafe-tan/15 text-cafe-black border-cafe-tan/50 shadow-sm' : 'bg-white text-cafe-brown border-cafe-tan/20 hover:border-cafe-tan/40 hover:bg-cafe-tan/5'}`}
   >
     {icon}
     <span className="font-bold flex-1 text-left">{label}</span>
-    <div className={`w-10 h-6 rounded-full p-1 transition-colors ${active ? 'bg-cafe-black/20' : 'bg-cafe-black/40'}`}>
-      <div className={`w-4 h-4 rounded-full transition-transform ${active ? 'translate-x-4 bg-white' : 'translate-x-0 bg-cafe-mist/50'}`} />
+    <div className={`w-10 h-6 rounded-full p-1 transition-colors ${active ? 'bg-cafe-tan' : 'bg-cafe-beige'}`}>
+      <div className={`w-4 h-4 rounded-full transition-transform ${active ? 'translate-x-4 bg-cafe-white' : 'translate-x-0 bg-cafe-brown/30'}`} />
     </div>
   </button>
 );

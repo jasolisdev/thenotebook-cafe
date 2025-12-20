@@ -4,37 +4,81 @@
 .input-field {
   width: 100%;
   border: none;
-  border-bottom: 1px solid var(--cafe-tan);
+  border-bottom: 1px solid var(--color-cafe-tan);
   background: transparent;
   padding: 12px 0;
   margin-bottom: 15px;
-  font-family: var(--font-inter);
+  font-family: var(--font-sans);
   font-size: 1rem;
-  color: var(--cafe-black);
+  color: var(--color-cafe-black);
   outline: none;
   border-radius: 0;
 }
 
 .input-field:focus {
-  border-bottom-color: var(--cafe-olive);
+  border-bottom-color: var(--color-cafe-olive);
 }
 
 .input-field::placeholder {
-  color: var(--cafe-black);
+  color: var(--color-cafe-black);
   opacity: 0.4;
+}
+
+.input-placeholder-wrap {
+  position: relative;
+}
+
+.input-placeholder {
+  position: absolute;
+  left: 0;
+  top: 12px;
+  color: var(--color-cafe-black);
+  opacity: 0.4;
+  font-size: 0.95rem;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  font-family: var(--font-sans);
+}
+
+.input-placeholder-wrap:not(.has-value) .input-date {
+  color: transparent;
+  caret-color: var(--color-cafe-black);
+}
+
+.input-placeholder-wrap:not(.has-value) .input-date::-webkit-datetime-edit,
+.input-placeholder-wrap:not(.has-value) .input-date::-webkit-datetime-edit-fields-wrapper,
+.input-placeholder-wrap:not(.has-value) .input-date::-webkit-datetime-edit-text,
+.input-placeholder-wrap:not(.has-value) .input-date::-webkit-datetime-edit-month-field,
+.input-placeholder-wrap:not(.has-value) .input-date::-webkit-datetime-edit-day-field,
+.input-placeholder-wrap:not(.has-value) .input-date::-webkit-datetime-edit-year-field {
+  color: transparent;
+}
+
+.input-placeholder-wrap.has-value .input-date,
+.input-placeholder-wrap:focus-within .input-date {
+  color: var(--color-cafe-black);
+}
+
+.input-placeholder-wrap.has-value .input-placeholder,
+.input-placeholder-wrap:focus-within .input-placeholder {
+  opacity: 0;
+}
+
+.input-date {
+  padding-right: 12px;
 }
 
 /* 2. Labels - Uppercase & Spaced */
 .form-group-label {
   font-size: 0.8rem;
-  color: var(--cafe-olive);
+  color: var(--color-cafe-olive);
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin-bottom: 15px;
   margin-top: 30px;
   display: block;
   font-weight: 600;
-  font-family: var(--font-inter);
+  font-family: var(--font-sans);
 }
 
 /* 3. Custom Checkboxes - Animated Box */
@@ -50,7 +94,7 @@
   gap: 12px;
   cursor: pointer;
   font-size: 0.95rem;
-  font-family: var(--font-inter);
+  font-family: var(--font-sans);
 }
 
 .checkbox-input {
@@ -59,7 +103,7 @@
   -moz-appearance: none;
   width: 18px;
   height: 18px;
-  border: 1px solid var(--cafe-black);
+  border: 1px solid var(--color-cafe-black);
   display: grid;
   place-content: center;
   margin: 0;
@@ -75,7 +119,7 @@
   height: 10px;
   transform: scale(0);
   transition: 120ms transform ease-in-out;
-  box-shadow: inset 1em 1em var(--cafe-olive);
+  box-shadow: inset 1em 1em var(--color-cafe-olive);
 }
 
 .checkbox-input:checked::before {
@@ -84,7 +128,7 @@
 
 /* 4. File Upload Zone */
 .file-upload-zone {
-  border: 1px dashed var(--cafe-tan);
+  border: 1px dashed var(--color-cafe-tan);
   padding: 30px;
   text-align: center;
   background: rgba(164, 141, 120, 0.05);
@@ -98,14 +142,54 @@
 }
 
 .file-upload-zone:hover {
-  border-color: var(--cafe-olive);
+  border-color: var(--color-cafe-olive);
   background: rgba(74, 79, 65, 0.05);
+}
+
+/* 4b. Compact File Upload */
+.file-upload-compact {
+  border: 1px solid rgba(164, 141, 120, 0.2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.file-upload-compact:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: var(--color-cafe-tan);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(44, 36, 32, 0.05);
+}
+
+.file-upload-compact.has-file {
+  background: rgba(237, 231, 216, 0.3); /* cafe-cream light */
+  border-color: rgba(164, 141, 120, 0.4);
+}
+
+.upload-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(164, 141, 120, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.file-upload-compact.has-file .upload-icon-box {
+  background: rgba(34, 197, 94, 0.1); /* green-100 */
 }
 
 /* 5. Submit Button */
 .btn-primary {
-  background: var(--cafe-charcoal);
-  color: #FFF;
+  background: var(--color-cafe-charcoal);
+  color: #fff;
   padding: 16px 36px;
   border: none;
   font-size: 0.8rem;
@@ -114,12 +198,12 @@
   cursor: pointer;
   transition: all 0.3s ease;
   width: 100%;
-  font-family: var(--font-inter);
+  font-family: var(--font-sans);
   font-weight: 600;
 }
 
 .btn-primary:hover {
-  background: var(--cafe-olive);
+  background: var(--color-cafe-olive);
 }
 
 .btn-primary:disabled {
@@ -131,29 +215,45 @@
 textarea.input-field {
   min-height: 80px;
   resize: vertical;
-  border: 1px solid var(--cafe-tan);
+  border: 1px solid var(--color-cafe-tan);
   padding: 12px;
 }
 
 textarea.input-field:focus {
-  border-color: var(--cafe-olive);
+  border-color: var(--color-cafe-olive);
 }
 
 /* Form container */
 .editorial-form-container {
-  background: var(--cafe-mist);
+  background: var(--color-cafe-mist);
   border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
   padding: 40px;
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
+}
+
+.quick-apply-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.quick-apply-grid--spaced {
+  margin-top: 10px;
 }
 
 @media (max-width: 640px) {
   .editorial-form-container {
-    padding: 24px;
+    padding: 16px;
   }
 
   .checkbox-grid {
     grid-template-columns: 1fr;
+  }
+
+  .quick-apply-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }

@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
 import { writeClient } from "@/sanity/lib/writeClient";
+import { validateOrigin } from "@/app/lib/csrf";
+import { checkRateLimit } from "@/app/lib/rateLimit";
+import { validateUploadedFile } from "@/app/lib/fileValidation";
+import { logger } from "@/app/lib/logger";
+import { sanitizeEmail, sanitizeText, sanitizePhone } from "@/app/lib/sanitize";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -13,6 +18,14 @@ function normalizeEmail(input: unknown): string | null {
 }
 
 export async function POST(req: Request) {
+  // CSRF protection
+  const originError = validateOrigin(req);
+  if (originError) return originError;
+
+  // Rate limiting: 2 requests per hour (applications are infrequent)
+  const rateLimitError = checkRateLimit(req, "/api/apply", 2, 3600000);
+  if (rateLimitError) return rateLimitError;
+
   try {
     const formData = await req.formData();
 
@@ -83,19 +96,23 @@ export async function POST(req: Request) {
     // Upload resume to Sanity (if provided)
     let resumeAsset = null;
     if (resumeFile) {
-      const allowedTypes = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
-      if (!allowedTypes.includes(resumeFile.type)) {
-        return NextResponse.json(
-          { ok: false, error: "Resume must be PDF, DOC, or DOCX" },
-          { status: 400, headers: { "Cache-Control": "no-store" } }
-        );
-      }
-
-      // Check file size (5MB limit)
+      // Validate file with magic number checks
+      const allowedTypes = [
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      ];
       const maxSize = 5 * 1024 * 1024; // 5MB
-      if (resumeFile.size > maxSize) {
+
+      const validation = await validateUploadedFile(
+        resumeFile,
+        allowedTypes,
+        maxSize
+      );
+
+      if (!validation.valid) {
         return NextResponse.json(
-          { ok: false, error: "Resume file size must be under 5MB" },
+          { ok: false, error: validation.error || "Invalid resume file" },
           { status: 400, headers: { "Cache-Control": "no-store" } }
         );
       }
@@ -112,16 +129,20 @@ export async function POST(req: Request) {
     // Upload supplemental application if provided
     let supplementalAsset = null;
     if (supplementalFile) {
-      // Validate supplemental file
-      if (supplementalFile.type !== "application/pdf") {
+      // Validate supplemental file with magic number checks
+      const suppValidation = await validateUploadedFile(
+        supplementalFile,
+        ["application/pdf"],
+        5 * 1024 * 1024
+      );
+
+      if (!suppValidation.valid) {
         return NextResponse.json(
-          { ok: false, error: "Supplemental application must be a PDF" },
-          { status: 400, headers: { "Cache-Control": "no-store" } }
-        );
-      }
-      if (supplementalFile.size > 5 * 1024 * 1024) {
-        return NextResponse.json(
-          { ok: false, error: "Supplemental application file size must be under 5MB" },
+          {
+            ok: false,
+            error:
+              suppValidation.error || "Invalid supplemental application file",
+          },
           { status: 400, headers: { "Cache-Control": "no-store" } }
         );
       }
@@ -164,24 +185,24 @@ export async function POST(req: Request) {
       supplementalApplication?: FileReference;
     } = {
       _type: "jobApplication",
-      firstName,
-      lastName,
-      email,
-      phone,
-      birthdate,
-      positions,
-      employmentType,
-      daysAvailable,
-      startDate,
-      hoursPerWeek,
-      commitmentLength,
+      firstName: sanitizeText(firstName),
+      lastName: sanitizeText(lastName),
+      email: sanitizeEmail(email),
+      phone: sanitizePhone(phone),
+      birthdate: sanitizeText(birthdate),
+      positions: positions.map(p => sanitizeText(p)),
+      employmentType: sanitizeText(employmentType),
+      daysAvailable: daysAvailable.map(d => sanitizeText(d)),
+      startDate: sanitizeText(startDate),
+      hoursPerWeek: sanitizeText(hoursPerWeek),
+      commitmentLength: sanitizeText(commitmentLength),
       status: "new",
       appliedAt: new Date().toISOString(),
     };
 
-    // Add optional fields if provided
+    // Add optional fields if provided (with sanitization)
     if (message) {
-      applicationData.message = message;
+      applicationData.message = sanitizeText(message);
     }
     if (resumeAsset) {
       applicationData.resume = {
@@ -211,7 +232,7 @@ export async function POST(req: Request) {
       { headers: { "Cache-Control": "no-store" } }
     );
   } catch (err) {
-    console.error("Application submission error:", err);
+    logger.error("Application submission error", err);
     return NextResponse.json(
       { ok: false, error: "Server error. Please try again." },
       { status: 500, headers: { "Cache-Control": "no-store" } }

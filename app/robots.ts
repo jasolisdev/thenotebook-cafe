@@ -1,20 +1,15 @@
-import type { MetadataRoute } from "next";
+import { MetadataRoute } from 'next';
+import { SEO } from '@/lib/seo';
 
 export default function robots(): MetadataRoute.Robots {
-  const site =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000");
-
   return {
     rules: [
       {
-        userAgent: "*",
-        allow: "/",
-        disallow: ["/studio"], // block Sanity Studio
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/studio/', '/api/'],
       },
     ],
-    sitemap: `${site}/sitemap.xml`,
+    sitemap: `${SEO.siteUrl}/sitemap.xml`,
   };
 }

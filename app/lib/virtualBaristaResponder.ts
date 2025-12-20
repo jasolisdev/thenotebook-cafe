@@ -152,7 +152,7 @@ function tokenize(text: string): Set<string> {
   );
 }
 
-function similarityScore(queryTokens: Set<string>, entry: KnowledgeEntry): number {
+function similarityScore(query: string, queryTokens: Set<string>, entry: KnowledgeEntry): number {
   const combined = `${entry.title} ${entry.keywords.join(" ")}`.toLowerCase();
   const entryTokens = tokenize(combined);
   let overlap = 0;
@@ -161,7 +161,7 @@ function similarityScore(queryTokens: Set<string>, entry: KnowledgeEntry): numbe
     if (queryTokens.has(token)) overlap += 1;
   }
 
-  const keywordBonus = entry.keywords.filter((kw) => queryTokens.has(kw.toLowerCase()) || kw.includes(" ")).length;
+  const keywordBonus = entry.keywords.filter((kw) => queryTokens.has(kw.toLowerCase()) || (kw.includes(" ") && query.includes(kw.toLowerCase()))).length;
   const keywordIncludeBonus = entry.keywords.some((kw) => combined.includes(kw.toLowerCase())) ? 1 : 0;
 
   return overlap + keywordBonus * 1.5 + keywordIncludeBonus;
@@ -170,7 +170,7 @@ function similarityScore(queryTokens: Set<string>, entry: KnowledgeEntry): numbe
 function bestMatch(query: string, queryTokens: Set<string>, entries: KnowledgeEntry[]) {
   return entries.reduce(
     (best, entry) => {
-      const score = similarityScore(queryTokens, entry) + keywordPhraseBonus(query, entry.keywords);
+      const score = similarityScore(query, queryTokens, entry) + keywordPhraseBonus(query, entry.keywords);
       return score > best.score ? { entry, score } : best;
     },
     { entry: entries[0], score: 0 },

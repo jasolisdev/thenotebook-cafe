@@ -37,6 +37,7 @@ export const CartDrawer: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={close}
+            data-testid="cart-overlay"
             className="fixed inset-0 z-50"
             style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
           />
@@ -48,6 +49,7 @@ export const CartDrawer: React.FC = () => {
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             className="fixed right-0 top-0 h-full w-full max-w-md z-50 shadow-2xl flex flex-col"
+            data-testid="cart-drawer"
             style={{ backgroundColor: colors.mist, borderLeft: `1px solid ${colors.beige}80` }}
           >
             <div
@@ -68,6 +70,7 @@ export const CartDrawer: React.FC = () => {
               </div>
               <button
                 onClick={close}
+                aria-label="Close cart"
                 className="p-2 rounded-full transition-colors"
                 style={{ color: colors.brown }}
               >

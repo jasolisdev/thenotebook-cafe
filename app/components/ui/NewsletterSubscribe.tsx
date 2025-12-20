@@ -64,14 +64,14 @@ export default function NewsletterSubscribe() {
           className="flex-1 px-6 py-4 text-base border-2 rounded-sm focus:outline-none transition-all duration-300"
           style={{
             borderColor: borderColor,
-            color: "var(--cafe-cream)",
+            color: "var(--color-cafe-cream)",
             backgroundColor: "rgba(255, 255, 255, 0.04)",
             boxShadow:
-              borderColor === "var(--cafe-tan)"
+              borderColor === "var(--color-cafe-tan)"
                 ? "0 0 0 3px rgba(164, 141, 120, 0.15)"
                 : "none",
           }}
-          onFocus={() => setBorderColor("var(--cafe-tan)")}
+          onFocus={() => setBorderColor("var(--color-cafe-tan)")}
           onBlur={() => setBorderColor("rgba(237, 231, 216, 0.25)")}
         />
         <button
@@ -91,7 +91,7 @@ export default function NewsletterSubscribe() {
           style={{
             color:
               status === "success" || status === "duplicate"
-                ? "var(--cafe-mist)"
+                ? "var(--color-cafe-mist)"
                 : "rgb(254 202 202)",
           }}
         >

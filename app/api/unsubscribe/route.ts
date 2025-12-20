@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { client } from "@/sanity/lib/client";
 import { writeClient } from "@/sanity/lib/writeClient";
+import { checkRateLimit } from "@/app/lib/rateLimit";
 
 function escapeHtml(input: string) {
   return input
@@ -26,6 +27,10 @@ function htmlResponse(message: string, status = 200) {
 }
 
 export async function GET(req: Request) {
+  // Rate limiting: 10 requests per hour (prevent abuse/token enumeration)
+  const rateLimitError = checkRateLimit(req, "/api/unsubscribe", 10, 3600000);
+  if (rateLimitError) return rateLimitError;
+
   const url = new URL(req.url);
   const token = url.searchParams.get("token");
 

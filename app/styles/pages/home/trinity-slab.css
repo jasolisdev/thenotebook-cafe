@@ -3,7 +3,7 @@
 ============================================================ */
 
 .trinity-slab {
-  background: var(--cafe-olive);
+  background: var(--color-cafe-olive);
 }
 
 
@@ -18,11 +18,11 @@
 .trinity-slab p,
 .trinity-slab span,
 .trinity-slab a {
-  color: var(--cafe-cream) !important;
+  color: var(--color-cafe-cream) !important;
 }
 
 .trinity-slab h3 {
-  color: var(--cafe-white) !important;
+  color: var(--color-cafe-white) !important;
 }
 
 .trinity-slab p {
@@ -34,7 +34,7 @@
 }
 
 .trinity-slab .font-serif {
-  color: var(--cafe-cream) !important;
+  color: var(--color-cafe-cream) !important;
 }
 
 .trinity-slab .p-10 {

@@ -6,7 +6,7 @@
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-color: var(--cafe-mist);
+  background-color: var(--color-cafe-mist);
   /* background-image:
     radial-gradient(1500px circle at 50% 45%,
       rgba(var(--cafe-cream-rgb), 0.88) 0%,

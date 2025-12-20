@@ -7,40 +7,67 @@ import Reveal from "@/app/components/ui/Reveal";
 import RevealText from "@/app/components/ui/RevealText";
 import FadeInSection from "@/app/components/ui/FadeInSection";
 import Image from "next/image";
-import ParallaxHero from "@/app/components/features/ParallaxHero";
 import { Coffee, Music, Heart, MapPin, Sparkles, BookOpen, Users, Home as HomeIcon, Award } from "lucide-react";
 import "../styles/pages/story.css";
+import type { Metadata } from "next";
+import { SEO } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: SEO.pages.story.title,
+  description: SEO.pages.story.description,
+  alternates: {
+    canonical: '/story',
+  },
+  openGraph: {
+    title: SEO.pages.story.title,
+    description: SEO.pages.story.description,
+    url: `${SEO.siteUrl}/story`,
+    images: [
+      {
+        url: SEO.pages.story.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${SEO.siteName} — Our Story in Riverside, CA`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SEO.pages.story.title,
+    description: SEO.pages.story.description,
+    images: [SEO.pages.story.ogImage],
+  },
+};
 
 export default function StoryPage() {
   return (
     <main className="story-page min-h-screen relative">
       <div className="story-fixed-background" aria-hidden="true" />
-      {/* Hero Section (from prototype) */}
-      <ParallaxHero
-        className="parallax-hero--compact"
-        contentClassName="parallax-hero__content--compact tnc-hero__content story-hero__content"
-        backgroundImage="/story/tnc-story-banner.webp"
-        backgroundFit="fitHeight"
-        backgroundFitDesktop="cover"
-        backgroundColor="var(--cafe-black)"
-        parallax={false}
-        overlayVariant="solid"
-        focusPercent={32}
+      {/* Hero Section */}
+      <section
+        className="relative min-h-[32vh] md:min-h-[40vh] flex items-center justify-center overflow-hidden pt-[var(--site-header-height,80px)]"
+        data-section="Hero"
+        style={{
+          backgroundImage: 'url(/menu/tnc-menu-banner.webp)',
+          backgroundColor: 'var(--color-cafe-black)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 32%',
+        }}
       >
-        <div className="tnc-hero__inner relative z-10">
+        <div className="absolute inset-0 bg-black/40 z-[1]" aria-hidden="true" />
+        <div className="relative z-10 text-left md:text-center px-6 w-full max-w-7xl mx-auto">
           <RevealText delay="0ms">
-            <h1 className="tnc-hero__title font-serif">
+            <h1 className="font-serif text-4xl md:text-6xl text-cafe-cream mb-4">
               Our Story
             </h1>
           </RevealText>
-
           <FadeInSection delay="200ms">
-            <p className="tnc-hero__subtitle">
-              Built by Locals, For Locals.
+            <p className="text-lg md:text-xl text-cafe-cream/90">
+              Built by Riverside Locals, For Riverside.
             </p>
           </FadeInSection>
         </div>
-      </ParallaxHero>
+      </section>
 
       {/* The Origin Story - Two Column Layout */}
       <section
@@ -62,7 +89,7 @@ export default function StoryPage() {
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                   <Image
                     src="/unsplash/tnc-placeholder-philosophy-1.png"
-                    alt="Our origin story"
+                    alt="The Notebook Café founders preparing specialty coffee in their Riverside, CA coffee shop"
                     fill
                     className="object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
                     sizes="(min-width: 1024px) 50vw, 100vw"
@@ -128,7 +155,7 @@ export default function StoryPage() {
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                   <Image
                     src="/unsplash/placeholder-interior-shop.png"
-                    alt="Riverside location"
+                    alt="The Notebook Café storefront in Riverside art district with warm lighting and modern design"
                     fill
                     className="object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
                     sizes="(min-width: 1024px) 50vw, 100vw"
@@ -222,14 +249,14 @@ export default function StoryPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <Image
                     src="/unsplash/tnc-placeholder-philosophy-1.png"
-                    alt="Cafe bar espresso"
+                    alt="Professional espresso machine and coffee bar at specialty coffee shop in Riverside, CA"
                     width={900}
                     height={900}
                     className="w-full aspect-[3/4] object-cover rounded-2xl shadow-xl -mt-6 md:mt-12"
                   />
                   <Image
                     src="/unsplash/tnc-placeholder-philosophy-2.png"
-                    alt="Cafe pastry display"
+                    alt="Fresh pastries and acai bowls at The Notebook Café in Riverside, California"
                     width={900}
                     height={900}
                     className="w-full aspect-[3/4] object-cover rounded-2xl shadow-xl mt-10 md:mt-0"
@@ -398,13 +425,13 @@ export default function StoryPage() {
             </Reveal>
             <Reveal delay={120}>
               <h2 className="story-section-title font-serif text-4xl md:text-6xl mt-4">
-                Meet the <span className="story-section-title-accent italic">Founders</span>
+                Meet the <span className="story-section-title-accent italic">Founders & Owners</span>
               </h2>
             </Reveal>
           </div>
 
           <div className="grid gap-20 lg:gap-32">
-            {/* Founder 1 - Coffee Visionary */}
+            {/* Michael & Julia - Founders & Owners */}
             <Reveal delay={200}>
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 {/* Image */}
@@ -412,7 +439,7 @@ export default function StoryPage() {
                   <div className="relative aspect-[3/4] md:aspect-[4/5] rounded-xl overflow-hidden shadow-xl">
                     <Image
                       src="/story/tnc-founder-v1.webp"
-                      alt="Founder - Coffee Expert"
+                      alt="Michael & Julia - Founders & Owners"
                       fill
                       className="object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-700"
                       sizes="(min-width: 1024px) 50vw, 100vw"
@@ -424,17 +451,17 @@ export default function StoryPage() {
                 <div className="space-y-6 order-1 lg:order-2">
                   <div>
                     <h3 className="story-card-title font-serif text-3xl md:text-4xl mb-2">
-                      The Coffee Visionary
+                      Michael & Julia
                     </h3>
                     <p className="story-eyebrow text-xs uppercase tracking-[0.25em] font-semibold text-cafe-tan">
-                      Founder & Head of Coffee
+                      Founders & Owners
                     </p>
                   </div>
 
                   <div className="story-divider story-divider--tan w-16 h-[2px]" />
 
                   <p className="story-card-body text-lg font-normal leading-relaxed text-cafe-brown">
-                    With years of experience in specialty coffee and a deep connection to Mexican coffee culture, they bring expertise in sourcing, roasting, and extraction science. Every dial-in, every pour—it&apos;s personal.
+                    A husband-wife team with a shared vision: to create a coffee shop that Riverside deserves. Michael brings expertise in specialty coffee, sourcing, and extraction science, while Julia designs every intentional detail—from custom furniture to the lighting that sets the mood. Together, they&apos;re building more than a business; they&apos;re crafting a community sanctuary.
                   </p>
 
                   <div className="flex flex-wrap gap-3 pt-4">
@@ -444,51 +471,9 @@ export default function StoryPage() {
                     <span className="px-4 py-2 bg-cafe-tan/10 text-cafe-tan text-xs uppercase tracking-wider font-semibold rounded-sm">
                       Direct Trade Advocate
                     </span>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Founder 2 - Creative Architect */}
-            <Reveal delay={300}>
-              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                {/* Content */}
-                <div className="space-y-6 order-1 lg:order-1 lg:text-right flex flex-col lg:items-end">
-                  <div>
-                    <h3 className="story-card-title font-serif text-3xl md:text-4xl mb-2">
-                      The Creative Architect
-                    </h3>
-                    <p className="story-eyebrow text-xs uppercase tracking-[0.25em] font-semibold text-cafe-tan">
-                      Founder & Design Director
-                    </p>
-                  </div>
-
-                  <div className="story-divider story-divider--tan w-16 h-[2px]" />
-
-                  <p className="story-card-body text-lg font-normal leading-relaxed text-cafe-brown">
-                    A designer with an eye for detail and a passion for creating spaces that inspire. Every bench, table, and light fixture in The Notebook Café is custom-designed—no catalog orders, just intentional craft.
-                  </p>
-
-                  <div className="flex flex-wrap gap-3 pt-4 lg:justify-end">
                     <span className="px-4 py-2 bg-cafe-tan/10 text-cafe-tan text-xs uppercase tracking-wider font-semibold rounded-sm">
                       Interior Design
                     </span>
-                    <span className="px-4 py-2 bg-cafe-tan/10 text-cafe-tan text-xs uppercase tracking-wider font-semibold rounded-sm">
-                      Furniture Maker
-                    </span>
-                  </div>
-                </div>
-
-                {/* Image */}
-                <div className="relative order-2 lg:order-2">
-                  <div className="relative aspect-[3/4] md:aspect-[4/5] rounded-xl overflow-hidden shadow-xl">
-                    <Image
-                      src="/story/tnc-founder-v2.webp"
-                      alt="Founder - Designer"
-                      fill
-                      className="object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-700"
-                      sizes="(min-width: 1024px) 50vw, 100vw"
-                    />
                   </div>
                 </div>
               </div>

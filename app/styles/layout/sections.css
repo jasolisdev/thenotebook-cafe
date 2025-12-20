@@ -38,7 +38,7 @@
 
 /* Cream section background */
 .section-cream {
-  background-color: var(--cream);
+  background-color: var(--color-cafe-cream);
   position: relative;
   margin: 0;
   padding-top: 40px;
@@ -48,16 +48,16 @@
 
 /* Adjust icon colors in cream section */
 .section-cream .home-highlight-icon {
-  color: rgba(164, 141, 120, 0.8);
+  color: rgba(var(--cafe-tan-rgb), 0.8);
 }
 
 .section-cream .home-highlight-item:hover .home-highlight-icon {
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
 }
 
 /* Dark section background */
 .section-dark {
-  background-color: var(--bg-solid);
+  background-color: var(--bg-dark);
   position: relative;
   margin: 0;
 }
@@ -73,7 +73,7 @@
 
 /* Featured drinks section */
 .section-featured {
-  background-color: var(--cream);
+  background-color: var(--color-cafe-cream);
   padding: 60px 20px;
   position: relative;
 }
