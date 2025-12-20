@@ -24,13 +24,13 @@ describe('validateOrigin', () => {
     });
 
     test('allows production domain', () => {
-      const req = createMockRequest({ origin: 'https://thenotebookcafe.com' });
+      const req = createMockRequest({ origin: 'https://thenotebookcafellc.com' });
       const result = validateOrigin(req);
       expect(result).toBeNull();
     });
 
     test('allows www production domain', () => {
-      const req = createMockRequest({ origin: 'https://www.thenotebookcafe.com' });
+      const req = createMockRequest({ origin: 'https://www.thenotebookcafellc.com' });
       const result = validateOrigin(req);
       expect(result).toBeNull();
     });
@@ -95,7 +95,7 @@ describe('validateOrigin', () => {
 
   describe('Referer Fallback', () => {
     test('uses referer when origin not present and referer is valid', () => {
-      const req = createMockRequest({ referer: 'https://thenotebookcafe.com/page' });
+      const req = createMockRequest({ referer: 'https://thenotebookcafellc.com/page' });
       const result = validateOrigin(req);
       expect(result).toBeNull();
     });
@@ -169,7 +169,7 @@ describe('validateOrigin', () => {
   describe('Edge Cases', () => {
     test('prefers origin over referer when both present', () => {
       const req = createMockRequest({
-        origin: 'https://thenotebookcafe.com',
+        origin: 'https://thenotebookcafellc.com',
         referer: 'https://evil.com/page',
       });
       const result = validateOrigin(req);
@@ -179,7 +179,7 @@ describe('validateOrigin', () => {
     test('rejects when origin is invalid even if referer is valid', () => {
       const req = createMockRequest({
         origin: 'https://evil.com',
-        referer: 'https://thenotebookcafe.com/page',
+        referer: 'https://thenotebookcafellc.com/page',
       });
       const result = validateOrigin(req);
       expect(result).not.toBeNull(); // Should reject based on invalid origin

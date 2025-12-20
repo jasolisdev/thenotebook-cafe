@@ -123,7 +123,7 @@ describe('POST /api/subscribe', () => {
       status: 'subscribed',
       unsubscribeToken: null,
     });
-    mockedWritePatch.mockReturnValue({ set, commit } as any);
+    mockedWritePatch.mockReturnValue({ set, commit } as ReturnType<typeof mockedWritePatch>);
 
     const response = await POST(makeRequest({ email: 'test@example.com' }));
     const payload = await response.json();

@@ -85,8 +85,8 @@ beforeEach(() => {
   vi.clearAllMocks();
   mockedValidateOrigin.mockReturnValue(null);
   mockedCheckRateLimit.mockReturnValue(null);
-  mockedWriteCreate.mockResolvedValue({ _id: 'application-1' } as any);
-  mockedUpload.mockResolvedValue({ _id: 'file-1' } as any);
+  mockedWriteCreate.mockResolvedValue({ _id: 'application-1' } as { _id: string });
+  mockedUpload.mockResolvedValue({ _id: 'file-1' } as { _id: string });
   mockedValidateFile.mockResolvedValue({ valid: true });
 });
 

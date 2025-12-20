@@ -471,7 +471,7 @@ export default function CareersPage() {
                   </div>
 
                   <p className="text-base md:text-lg font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                    Send your resume and a quick note. We'll reply to qualified candidates within 3–5 business days. We're always looking for friendly souls to join our morning rituals.
+                    Send your resume and a quick note. We&rsquo;ll reply to qualified candidates within 3–5 business days. We&rsquo;re always looking for friendly souls to join our morning rituals.
                   </p>
 
                   <ul className="space-y-4">

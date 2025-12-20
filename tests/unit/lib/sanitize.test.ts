@@ -341,8 +341,9 @@ describe('sanitizeObject', () => {
       },
     };
     const result = sanitizeObject(input);
-    expect((result.user as any).name).toBe('John');
-    expect((result.user as any).profile.bio).toBe('xssBio');
+    const user = result.user as { name: string; profile: { bio: string } };
+    expect(user.name).toBe('John');
+    expect(user.profile.bio).toBe('xssBio');
   });
 
   test('sanitizes arrays of strings', () => {
@@ -400,6 +401,7 @@ describe('sanitizeObject', () => {
     expect(result.website).toBe('https://example.com/');
     expect(result.bio).toBe('Developer alert(1) Passionate coder'); // sanitizeText removes tags but keeps contents, converts newlines to spaces
     expect(result.tags).toEqual(['javascript', 'react', 'typescript']);
-    expect((result.metadata as any).author).toBe('hackerAdmin');
+    const metadata = result.metadata as { author: string };
+    expect(metadata.author).toBe('hackerAdmin');
   });
 });

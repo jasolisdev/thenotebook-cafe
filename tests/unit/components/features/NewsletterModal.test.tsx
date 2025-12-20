@@ -58,7 +58,7 @@ describe('NewsletterModal', () => {
   });
 
   test('passes source through to NewsletterForm submission', async () => {
-    let captured: any = null;
+    let captured: Record<string, unknown> | null = null;
     server.use(
       http.post('/api/subscribe', async ({ request }) => {
         captured = await request.json();

@@ -9,6 +9,8 @@ const mockRouter = {
   refresh: vi.fn(),
 };
 
+let fetchMock: ReturnType<typeof vi.fn>;
+
 vi.mock('next/navigation', () => ({
   useRouter: () => mockRouter,
 }));
@@ -16,7 +18,8 @@ vi.mock('next/navigation', () => ({
 describe('PasswordGate Component', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    global.fetch = vi.fn();
+    fetchMock = vi.fn();
+    global.fetch = fetchMock as unknown as typeof fetch;
   });
 
   it('renders correctly', () => {
@@ -42,7 +45,7 @@ describe('PasswordGate Component', () => {
   });
 
   it('handles successful verification', async () => {
-    (global.fetch as any).mockResolvedValueOnce({
+    fetchMock.mockResolvedValueOnce({
       json: async () => ({ success: true }),
     });
 
@@ -64,7 +67,7 @@ describe('PasswordGate Component', () => {
   });
 
   it('handles incorrect password', async () => {
-    (global.fetch as any).mockResolvedValueOnce({
+    fetchMock.mockResolvedValueOnce({
       json: async () => ({ success: false }),
     });
 
@@ -84,7 +87,7 @@ describe('PasswordGate Component', () => {
   });
 
   it('handles API errors', async () => {
-    (global.fetch as any).mockRejectedValueOnce(new Error('Network error'));
+    fetchMock.mockRejectedValueOnce(new Error('Network error'));
 
     render(<PasswordGate />);
     const input = screen.getByPlaceholderText(/enter password/i);
@@ -100,7 +103,7 @@ describe('PasswordGate Component', () => {
 
   it('shows loading state during submission', async () => {
     // Delay resolution
-    (global.fetch as any).mockImplementationOnce(() => new Promise(resolve => setTimeout(() => resolve({
+    fetchMock.mockImplementationOnce(() => new Promise(resolve => setTimeout(() => resolve({
       json: async () => ({ success: true })
     }), 100)));
 

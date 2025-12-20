@@ -2,9 +2,9 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { logger } from '@/app/lib/logger';
 
 describe('Logger Utility', () => {
-  let consoleLogSpy: any;
-  let consoleWarnSpy: any;
-  let consoleErrorSpy: any;
+  let consoleLogSpy: ReturnType<typeof vi.spyOn>;
+  let consoleWarnSpy: ReturnType<typeof vi.spyOn>;
+  let consoleErrorSpy: ReturnType<typeof vi.spyOn>;
   let originalEnv: string;
 
   beforeEach(() => {
@@ -31,7 +31,7 @@ describe('Logger Utility', () => {
       // This means changing process.env.NODE_ENV *after* import won't change `isDev`.
       // We need to mock the logger instance or bypass the singleton for testing.
       // Or, since we can't re-import easily in CJS/ESM mixed, we can try to cast it.
-      (logger as any).isDev = true; 
+      (logger as unknown as { isDev: boolean }).isDev = true; 
     });
 
     it('logs info messages', () => {
@@ -54,7 +54,7 @@ describe('Logger Utility', () => {
   describe('Production Environment', () => {
     beforeEach(() => {
       process.env.NODE_ENV = 'production';
-      (logger as any).isDev = false;
+      (logger as unknown as { isDev: boolean }).isDev = false;
     });
 
     it('does not log info messages', () => {

@@ -11,7 +11,7 @@ class MockIntersectionObserver {
     this.callback = callback;
   }
   observe(target: Element) {
-    this.callback([{ isIntersecting: true, target } as IntersectionObserverEntry], this as any);
+    this.callback([{ isIntersecting: true, target } as IntersectionObserverEntry], this as unknown as IntersectionObserver);
   }
   disconnect() {}
   unobserve() {}
@@ -26,7 +26,7 @@ describe('Reveal', () => {
   });
 
   test('applies visible class and delay when intersecting', async () => {
-    global.IntersectionObserver = MockIntersectionObserver as any;
+    global.IntersectionObserver = MockIntersectionObserver as unknown as typeof IntersectionObserver;
 
     render(
       <Reveal delay={150} className="custom-reveal">

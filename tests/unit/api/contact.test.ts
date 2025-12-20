@@ -59,7 +59,7 @@ beforeEach(() => {
   vi.clearAllMocks();
   mockedValidateOrigin.mockReturnValue(null);
   mockedCheckRateLimit.mockReturnValue(null);
-  mockedWriteCreate.mockResolvedValue({ _id: 'contact-1' } as any);
+  mockedWriteCreate.mockResolvedValue({ _id: 'contact-1' } as { _id: string });
   process.env.RESEND_API_KEY = 'test-resend-key';
   mockSend.mockResolvedValue({ data: { id: 'email-1' } });
 });

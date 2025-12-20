@@ -22,7 +22,7 @@ describe('ContactForm', () => {
   });
 
   test('submits form and shows success state', async () => {
-    let captured: any = null;
+    let captured: Record<string, unknown> | null = null;
     server.use(
       http.post('/api/contact', async ({ request }) => {
         captured = await request.json();

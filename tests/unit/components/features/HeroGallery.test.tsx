@@ -11,7 +11,7 @@ class MockIntersectionObserver {
     this.callback = callback;
   }
   observe(target: Element) {
-    this.callback([{ isIntersecting: true, target } as IntersectionObserverEntry], this as any);
+    this.callback([{ isIntersecting: true, target } as IntersectionObserverEntry], this as unknown as IntersectionObserver);
   }
   disconnect() {}
   unobserve() {}
@@ -26,7 +26,7 @@ describe('HeroGallery', () => {
   });
 
   test('renders images and applies animation class', async () => {
-    global.IntersectionObserver = MockIntersectionObserver as any;
+    global.IntersectionObserver = MockIntersectionObserver as unknown as typeof IntersectionObserver;
 
     render(
       <HeroGallery

@@ -22,8 +22,10 @@ import { NextResponse } from "next/server";
  */
 const ALLOWED_ORIGINS = [
   "http://localhost:3000",
-  "https://thenotebookcafe.com",
-  "https://www.thenotebookcafe.com",
+  "https://thenotebookcafellc.com",
+  "https://www.thenotebookcafellc.com",
+  "https://thenotebook.cafe",
+  "https://notebook.cafe",
 ];
 
 /**

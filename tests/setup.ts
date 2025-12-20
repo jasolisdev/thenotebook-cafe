@@ -10,6 +10,13 @@ import { cleanup } from '@testing-library/react';
 import { afterEach, vi } from 'vitest';
 import React from 'react';
 
+type NextImageProps = React.ComponentPropsWithoutRef<'img'> & {
+  src?: string | { src: string };
+  alt?: string;
+  fill?: boolean;
+  priority?: boolean;
+};
+
 // Cleanup after each test automatically
 afterEach(() => {
   cleanup();
@@ -33,7 +40,7 @@ vi.mock('next/navigation', () => ({
 
 // Mock Next.js Image
 vi.mock('next/image', () => ({
-  default: ({ priority, fill, ...props }: any) =>
+  default: ({ priority, fill, ...props }: NextImageProps) =>
     React.createElement('img', props),
 }));
 
@@ -119,7 +126,7 @@ global.IntersectionObserver = class IntersectionObserver {
     return [];
   }
   unobserve() {}
-} as any;
+} as unknown as typeof IntersectionObserver;
 
 // Mock ResizeObserver (used by SiteHeader)
 global.ResizeObserver = class ResizeObserver {
@@ -127,7 +134,7 @@ global.ResizeObserver = class ResizeObserver {
   disconnect() {}
   observe() {}
   unobserve() {}
-} as any;
+} as unknown as typeof ResizeObserver;
 
 // Mock matchMedia
 Object.defineProperty(window, 'matchMedia', {

@@ -93,7 +93,7 @@ describe('GET /api/unsubscribe', () => {
       email: 'test@example.com',
       status: 'subscribed',
     });
-    mockedWritePatch.mockReturnValue({ set, commit } as any);
+    mockedWritePatch.mockReturnValue({ set, commit } as ReturnType<typeof mockedWritePatch>);
 
     const response = await GET(
       new Request('http://localhost/api/unsubscribe?token=token')
