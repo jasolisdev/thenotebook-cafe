@@ -49,7 +49,7 @@ const HeroSection: React.FC = () => {
               </h1>
             </div>
 
-            <FadeInSection delay="600ms" className="flex flex-col items-center space-y-4 text-white">
+            <FadeInSection delay="300ms" className="flex flex-col items-center space-y-4 text-white">
               <p className="font-bold tracking-[0.4em] md:tracking-[0.6em] uppercase text-[10px] md:text-[13px] opacity-90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
                 SPECIALTY COFFEE IN RIVERSIDE, CA.
               </p>
@@ -63,7 +63,7 @@ const HeroSection: React.FC = () => {
 
       {/* Integrated Location & Hours Bar - Updated to Mist */}
       <div className="relative w-full bg-cafe-mist border-t border-cafe-brown/10 z-20 flex items-center py-6 md:py-12 lg:py-16 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full flex flex-col md:flex-row items-center justify-center md:justify-between space-y-10 md:space-y-0">
+        <FadeInSection delay="700ms" className="max-w-7xl mx-auto px-6 lg:px-12 w-full flex flex-col md:flex-row items-center justify-center md:justify-between space-y-10 md:space-y-0">
 
           {/* Location Segment */}
           <div className="flex flex-col items-center text-center max-w-xs">
@@ -98,7 +98,7 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
 
-        </div>
+        </FadeInSection>
       </div>
     </div>
   );

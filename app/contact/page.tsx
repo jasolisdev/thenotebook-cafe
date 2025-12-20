@@ -132,8 +132,8 @@ export default function ContactPage() {
             <div className="space-y-16">
               {/* Location */}
               <Reveal delay={200}>
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3">
+                <div className="space-y-6 flex flex-col items-center text-center md:items-start md:text-left">
+                  <div className="flex items-center justify-center md:justify-start gap-3">
                     <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
                       <MapPin size={22} className="contact-icon" strokeWidth={1.5} />
                     </div>
@@ -143,9 +143,6 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <h3 className="font-serif text-3xl md:text-4xl mb-4 text-cafe-black">
-                      Our Riverside Home
-                    </h3>
                     <address className="not-italic font-serif text-xl md:text-2xl leading-relaxed text-cafe-black/80">
                       3512 9th St,<br />
                       Riverside, CA 92501
@@ -166,8 +163,8 @@ export default function ContactPage() {
 
               {/* Hours */}
               <Reveal delay={300}>
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3">
+                <div className="space-y-6 flex flex-col items-center text-center md:items-start md:text-left">
+                  <div className="flex items-center justify-center md:justify-start gap-3">
                     <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
                       <Clock size={22} className="contact-icon" strokeWidth={1.5} />
                     </div>
@@ -176,7 +173,7 @@ export default function ContactPage() {
                     </span>
                   </div>
 
-                  <div className="space-y-4 max-w-md">
+                  <div className="space-y-4 w-full max-w-md">
                     <div className="flex justify-between items-baseline border-b border-cafe-tan/20 pb-2">
                       <span className="text-cafe-brown/70 font-medium">Monday – Saturday</span>
                       <span className="font-serif text-xl text-cafe-black">7am — 6pm</span>
@@ -191,8 +188,8 @@ export default function ContactPage() {
 
               {/* Contact Methods */}
               <Reveal delay={400}>
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3">
+                <div className="space-y-6 flex flex-col items-center text-center md:items-start md:text-left">
+                  <div className="flex items-center justify-center md:justify-start gap-3">
                     <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
                       <Phone size={22} className="contact-icon" strokeWidth={1.5} />
                     </div>
@@ -273,7 +270,7 @@ export default function ContactPage() {
               </div>
 
               {/* Decorative Badge */}
-              <div className="contact-map-badge absolute bottom-4 right-4 sm:-bottom-6 sm:-right-6 shadow-2xl">
+              <div className="contact-map-badge absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 shadow-2xl">
                 <p className="text-2xl md:text-3xl leading-tight font-normal">Come</p>
                 <p className="text-2xl md:text-3xl leading-tight font-normal">Visit Us</p>
                 <p className="text-[0.65rem] uppercase tracking-[0.2em] mt-2 opacity-90 font-bold">

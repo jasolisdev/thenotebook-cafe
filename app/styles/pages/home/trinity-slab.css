@@ -3,7 +3,6 @@
 ============================================================ */
 
 .trinity-slab {
-  background: var(--color-cafe-olive);
 }
 
 
@@ -35,6 +34,34 @@
 
 .trinity-slab .font-serif {
   color: var(--color-cafe-cream) !important;
+}
+
+.trinity-slab.trinity-slab-light h2,
+.trinity-slab.trinity-slab-light h3,
+.trinity-slab.trinity-slab-light p,
+.trinity-slab.trinity-slab-light span,
+.trinity-slab.trinity-slab-light a {
+  color: var(--color-cafe-black) !important;
+}
+
+.trinity-slab.trinity-slab-light p {
+  color: rgba(var(--cafe-brown-rgb), 0.85) !important;
+}
+
+.trinity-slab.trinity-slab-light .text-cafe-tan {
+  color: rgba(var(--cafe-brown-rgb), 0.72) !important;
+}
+
+.trinity-slab.trinity-slab-light .w-16.h-16 {
+  background: rgba(var(--cafe-white-rgb), 0.92) !important;
+  color: rgba(var(--cafe-brown-rgb), 0.82) !important;
+  border: 1px solid rgba(var(--cafe-brown-rgb), 0.2) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.trinity-slab.trinity-slab-light .music-visualizer span {
+  background: rgba(var(--cafe-brown-rgb), 0.65);
+  box-shadow: 0 4px 12px rgba(var(--cafe-brown-rgb), 0.2);
 }
 
 .trinity-slab .p-10 {

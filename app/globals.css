@@ -311,6 +311,7 @@ h3 {
   from {
     transform: translateY(110%);
   }
+
   to {
     transform: translateY(0);
   }
@@ -631,4 +632,26 @@ h3 {
 .acc-stop-animations * {
   animation: none !important;
   transition: none !important;
+}
+
+/* ============================================================
+   SHARED COMPONENTS (Global)
+============================================================ */
+
+/* Shared Quote Section (Originally from Contact Page) */
+.contact-quote {
+  background-color: rgba(var(--cafe-tan-rgb), 0.08);
+  border: 1px solid rgba(var(--cafe-tan-rgb), 0.2);
+}
+
+.contact-quote__icon {
+  color: var(--color-cafe-tan);
+}
+
+.contact-quote__text {
+  color: rgba(var(--cafe-brown-rgb), 0.8);
+}
+
+.contact-quote__footer {
+  color: var(--color-cafe-tan);
 }
