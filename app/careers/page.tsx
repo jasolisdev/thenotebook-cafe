@@ -6,12 +6,13 @@
 import Reveal from "../components/ui/Reveal";
 import RevealText from "../components/ui/RevealText";
 import FadeInSection from "../components/ui/FadeInSection";
-import { Coffee, Heart, TrendingUp, CheckCircle, Mail, ExternalLink, MapPin, DollarSign, Briefcase, Gift } from "lucide-react";
+import { Coffee, Heart, TrendingUp, CheckCircle, Mail, ExternalLink } from "lucide-react";
 import "../styles/pages/careers.css";
 import "../styles/components/application-form.css";
 import type { Metadata } from "next";
 import { SEO } from "@/lib/seo";
 import CareersApplyForm from "@/app/components/features/CareersApplyForm";
+import JobPosition from "@/app/components/features/JobPosition";
 
 export const metadata: Metadata = {
   title: SEO.pages.careers.title,
@@ -118,119 +119,36 @@ export default function CareersPage() {
           <div className="max-w-4xl mx-auto">
             <div className="space-y-10">
               <Reveal delay={200}>
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between gap-4">
-                    <h4 className="font-serif text-2xl md:text-3xl leading-tight" style={{ color: 'var(--color-cafe-black)' }}>
-                      Barista Cashier
-                    </h4>
-                    <span
-                      className="px-4 py-2 rounded-full text-xs tracking-[0.18em] uppercase font-semibold whitespace-nowrap"
-                      style={{
-                        border: '1.5px solid rgba(74, 59, 50, 0.35)',
-                        color: 'rgba(74, 59, 50, 0.65)',
-                        backgroundColor: 'rgba(250, 249, 246, 0.45)',
-                      }}
-                    >
-                      Reviewing Applications
-                    </span>
-                  </div>
-
-                  <div className="grid sm:grid-cols-2 gap-4 pt-2">
-                    <div
-                      className="p-5 rounded-2xl"
-                      style={{ backgroundColor: 'rgba(250, 249, 246, 0.6)', border: '1px solid rgba(164, 141, 120, 0.18)' }}
-                    >
-                      <p className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'rgba(74, 59, 50, 0.65)' }}>
-                        Quick Facts
-                      </p>
-                      <ul className="mt-4 space-y-2">
-                        <li className="flex items-center gap-2">
-                          <DollarSign size={16} strokeWidth={1.6} aria-hidden="true" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                          <span className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Pay: $17–$22/hr</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <Briefcase size={16} strokeWidth={1.6} aria-hidden="true" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                          <span className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Type: Full-time / Part-time</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <MapPin size={16} strokeWidth={1.6} aria-hidden="true" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                          <span className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Location: In person</span>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div
-                      className="p-5 rounded-2xl"
-                      style={{ backgroundColor: 'rgba(250, 249, 246, 0.6)', border: '1px solid rgba(164, 141, 120, 0.18)' }}
-                    >
-                      <p className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'rgba(74, 59, 50, 0.65)' }}>
-                        Benefits
-                      </p>
-                      <ul className="mt-4 space-y-2">
-                        <li className="flex items-center gap-2">
-                          <Gift size={16} strokeWidth={1.6} aria-hidden="true" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                          <span className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Employee discount</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle size={16} strokeWidth={1.6} aria-hidden="true" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                          <span className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Paid sick time</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="space-y-7 pt-2">
-                    <div className="space-y-3">
-                      <h5 className="font-serif text-xl" style={{ color: 'var(--color-cafe-black)' }}>Overview</h5>
-                      <p className="font-normal leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
-                        Join our vibrant café team as a Barista Cashier. You&apos;ll greet guests, prepare drinks and café items, handle transactions, and help keep the space welcoming, clean, and running smoothly.
-                      </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-                      <div className="space-y-3">
-                        <h5 className="font-serif text-xl" style={{ color: 'var(--color-cafe-black)' }}>Responsibilities</h5>
-                        <ul className="space-y-2">
-                          {[
-                            "Greet customers warmly and take orders with professionalism",
-                            "Prepare coffee beverages and food items to recipe and quality standards",
-                            "Operate Clover POS and process sales accurately",
-                            "Handle cash and card transactions with strong retail math",
-                            "Maintain cleanliness and food safety in prep and guest areas",
-                            "Move efficiently during rushes while maintaining hospitality",
-                            "Restock supplies and support basic food prep as needed",
-                          ].map((item) => (
-                            <li key={item} className="flex gap-3 items-start">
-                              <CheckCircle size={16} strokeWidth={1.6} aria-hidden="true" className="mt-[2px] flex-shrink-0" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                              <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div className="space-y-3">
-                        <h5 className="font-serif text-xl" style={{ color: 'var(--color-cafe-black)' }}>Qualifications</h5>
-                        <ul className="space-y-2">
-                          {[
-                            "Prior barista experience or coffee knowledge preferred",
-                            "POS experience (Clover, Aloha, Micros, etc.) is a plus",
-                            "Strong customer service and communication skills",
-                            "Comfortable multitasking in a fast-paced environment",
-                            "Knowledge of food safety and food handling practices",
-                            "Reliable work ethic and solid time management",
-                            "Must have a California food handler card",
-                          ].map((item) => (
-                            <li key={item} className="flex gap-3 items-start">
-                              <CheckCircle size={16} strokeWidth={1.6} aria-hidden="true" className="mt-[2px] flex-shrink-0" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                              <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
+                <JobPosition
+                  title="Barista Cashier"
+                  status="Hiring Paused"
+                  payRange="$17–$22/hr"
+                  type="Full-time / Part-time"
+                  location="In person"
+                  overview="Join our vibrant café team as a Barista Cashier. You'll greet guests, prepare drinks and café items, handle transactions, and help keep the space welcoming, clean, and running smoothly."
+                  responsibilities={[
+                    "Greet customers warmly and take orders with professionalism",
+                    "Prepare coffee beverages and food items to recipe and quality standards",
+                    "Operate Clover POS and process sales accurately",
+                    "Handle cash and card transactions with strong retail math",
+                    "Maintain cleanliness and food safety in prep and guest areas",
+                    "Move efficiently during rushes while maintaining hospitality",
+                    "Restock supplies and support basic food prep as needed",
+                  ]}
+                  qualifications={[
+                    "Prior barista experience or coffee knowledge preferred",
+                    "POS experience (Clover, Aloha, Micros, etc.) is a plus",
+                    "Strong customer service and communication skills",
+                    "Comfortable multitasking in a fast-paced environment",
+                    "Knowledge of food safety and food handling practices",
+                    "Reliable work ethic and solid time management",
+                    "Must have a California food handler card",
+                  ]}
+                  benefits={[
+                    "Employee discount",
+                    "Paid sick time",
+                  ]}
+                />
               </Reveal>
             </div>
           </div>
