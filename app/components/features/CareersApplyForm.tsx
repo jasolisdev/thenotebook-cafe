@@ -22,8 +22,6 @@ export default function CareersApplyForm() {
     lastName: "",
     email: "",
     phone: "",
-    birthdate: "",
-    availability: "",
     message: "",
   });
   const [resumeFile, setResumeFile] = useState<File | null>(null);
@@ -47,10 +45,9 @@ export default function CareersApplyForm() {
     if (!formData.lastName.trim()) errors.push("Last Name is required");
     if (!formData.email.trim()) errors.push("Email is required");
     if (!formData.phone.trim()) errors.push("Phone Number is required");
-    if (!formData.birthdate) errors.push("Date of Birth is required");
-    if (!formData.availability) errors.push("Availability is required");
     if (!formData.message.trim()) errors.push("Why Us? is required");
     if (!resumeFile) errors.push("Resume is required");
+    if (!applicationFile) errors.push("Completed application is required");
 
     if (errors.length > 0) {
       setValidationErrors(errors);
@@ -75,10 +72,8 @@ export default function CareersApplyForm() {
       payload.append("firstName", formData.firstName);
       payload.append("lastName", formData.lastName);
       payload.append("email", formData.email);
-      payload.append("availability", formData.availability);
       payload.append("message", formData.message);
       payload.append("phone", formData.phone);
-      payload.append("birthdate", formData.birthdate);
       payload.append("role", "Barista Cashier");
       if (resumeFile) payload.append("resume", resumeFile);
       if (applicationFile) payload.append("application", applicationFile);
@@ -97,8 +92,6 @@ export default function CareersApplyForm() {
           lastName: "",
           email: "",
           phone: "",
-          birthdate: "",
-          availability: "",
           message: "",
         });
         setResumeFile(null);
@@ -189,16 +182,6 @@ export default function CareersApplyForm() {
       </div>
 
       <div className="quick-apply-grid quick-apply-grid--spaced">
-        <div className={`input-placeholder-wrap ${formData.birthdate ? "has-value" : ""}`}>
-          <input
-            type="date"
-            className="input-field input-date"
-            aria-label="Birthday *"
-            value={formData.birthdate}
-            onChange={(e) => setFormData({ ...formData, birthdate: e.target.value })}
-          />
-          <span className="input-placeholder">Birthday *</span>
-        </div>
         <input
           type="text"
           placeholder="Phone Number *"
@@ -207,29 +190,14 @@ export default function CareersApplyForm() {
           inputMode="tel"
           onChange={(e) => setFormData({ ...formData, phone: formatPhoneInput(e.target.value) })}
         />
+        <input
+          type="email"
+          placeholder="Email *"
+          className="input-field"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        />
       </div>
-
-      <input
-        type="email"
-        placeholder="Email *"
-        className="input-field"
-        value={formData.email}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-      />
-
-      <label className="form-group-label">Availability *</label>
-      <select
-        className="input-field"
-        value={formData.availability}
-        onChange={(e) => setFormData({ ...formData, availability: e.target.value })}
-      >
-        <option value="" disabled>
-          Select availability
-        </option>
-        <option value="Weekdays">Weekdays</option>
-        <option value="Weekends">Weekends</option>
-        <option value="Flexible">Flexible</option>
-      </select>
 
       <label className="form-group-label">Why Us? *</label>
       <textarea
@@ -267,21 +235,22 @@ export default function CareersApplyForm() {
           }}
         />
       </div>
-      <p className="text-xs text-cafe-brown/70">
-        Prefer our application?{" "}
+
+      <p className="text-xs text-cafe-brown/70 mb-6">
+        <strong>Required:</strong> Please{" "}
         <a
-          href="/application-template.html"
+          href="/tnc-application-template.html"
           target="_blank"
           rel="noopener noreferrer"
-          className="underline decoration-cafe-brown/40 underline-offset-4 hover:text-cafe-brown"
+          className="underline decoration-cafe-brown/40 underline-offset-4 hover:text-cafe-brown font-bold"
         >
-          Download the application template
-        </a>{" "}
-        and upload it below.
+          download our application template
+        </a>
+        , complete it, and upload the finished file below. This is now mandatory for all applicants.
       </p>
 
       <label className="form-group-label" htmlFor="application-upload">
-        Completed Application (optional)
+        Completed Application *
       </label>
       <div className="file-upload-zone" onClick={() => applicationInputRef.current?.click()}>
         <p style={{ margin: "0 0 8px", fontSize: "0.9rem" }}>

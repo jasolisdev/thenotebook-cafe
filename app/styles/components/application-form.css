@@ -146,6 +146,46 @@
   background: rgba(74, 79, 65, 0.05);
 }
 
+/* 4b. Compact File Upload */
+.file-upload-compact {
+  border: 1px solid rgba(164, 141, 120, 0.2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.file-upload-compact:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: var(--color-cafe-tan);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(44, 36, 32, 0.05);
+}
+
+.file-upload-compact.has-file {
+  background: rgba(237, 231, 216, 0.3); /* cafe-cream light */
+  border-color: rgba(164, 141, 120, 0.4);
+}
+
+.upload-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(164, 141, 120, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.file-upload-compact.has-file .upload-icon-box {
+  background: rgba(34, 197, 94, 0.1); /* green-100 */
+}
+
 /* 5. Submit Button */
 .btn-primary {
   background: var(--color-cafe-charcoal);
