@@ -105,7 +105,7 @@ export default function CareersPage() {
           <div className="text-center mb-16">
             <Reveal>
               <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
-                We&apos;re Hiring
+                Position Status
               </span>
             </Reveal>
             <Reveal delay={100}>
@@ -126,12 +126,12 @@ export default function CareersPage() {
                     <span
                       className="px-4 py-2 rounded-full text-xs tracking-[0.18em] uppercase font-semibold whitespace-nowrap"
                       style={{
-                        border: '1.5px solid rgba(44, 36, 32, 0.55)',
-                        color: 'rgba(44, 36, 32, 0.85)',
+                        border: '1.5px solid rgba(74, 59, 50, 0.35)',
+                        color: 'rgba(74, 59, 50, 0.65)',
                         backgroundColor: 'rgba(250, 249, 246, 0.45)',
                       }}
                     >
-                      Now Hiring
+                      Reviewing Applications
                     </span>
                   </div>
 
@@ -428,19 +428,29 @@ export default function CareersPage() {
           <div className="text-center mb-12">
             <Reveal>
               <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
-                Get Started
+                Status Update
               </span>
             </Reveal>
             <Reveal delay={100}>
               <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none" style={{ color: 'var(--color-cafe-black)' }}>
-                Send Your <span className="italic" style={{ color: 'var(--color-cafe-tan)' }}>Resume</span>
+                Application <span className="italic" style={{ color: 'var(--color-cafe-tan)' }}>Update</span>
               </h2>
+            </Reveal>
+            <Reveal delay={150}>
+              <div className="max-w-2xl mx-auto bg-amber-50/50 border border-amber-100 rounded-2xl p-6 md:p-8">
+                <p className="text-lg text-cafe-brown font-medium">
+                  We are currently reviewing applications and are not accepting new submissions at this time.
+                </p>
+                <p className="text-cafe-brown/70 mt-2">
+                  Please check back later for future opportunities!
+                </p>
+              </div>
             </Reveal>
           </div>
 
           <Reveal delay={200}>
             <div
-              className="p-6 sm:p-8 md:p-12 rounded-3xl shadow-[0_14px_40px_rgba(44,36,32,0.08)]"
+              className="p-6 sm:p-8 md:p-12 rounded-3xl shadow-[0_14px_40px_rgba(44,36,32,0.08)] opacity-60 pointer-events-none select-none grayscale-[0.5]"
               style={{
                 backgroundColor: 'rgba(250, 249, 246, 0.85)',
                 border: '2px solid rgba(164, 141, 120, 0.14)',
@@ -468,7 +478,7 @@ export default function CareersPage() {
                     {[
                       "Contact details + role interest",
                       "Availability",
-                      "Resume + optional application",
+                      "Resume + Job Application",
                     ].map((item) => (
                       <li key={item} className="flex gap-3 items-start">
                         <CheckCircle

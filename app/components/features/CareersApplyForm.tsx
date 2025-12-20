@@ -170,6 +170,7 @@ export default function CareersApplyForm() {
           placeholder="First Name *"
           className="input-field"
           value={formData.firstName}
+          disabled
           onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
         />
         <input
@@ -177,6 +178,7 @@ export default function CareersApplyForm() {
           placeholder="Last Name *"
           className="input-field"
           value={formData.lastName}
+          disabled
           onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
         />
       </div>
@@ -188,6 +190,7 @@ export default function CareersApplyForm() {
           className="input-field"
           value={formData.phone}
           inputMode="tel"
+          disabled
           onChange={(e) => setFormData({ ...formData, phone: formatPhoneInput(e.target.value) })}
         />
         <input
@@ -195,6 +198,7 @@ export default function CareersApplyForm() {
           placeholder="Email *"
           className="input-field"
           value={formData.email}
+          disabled
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
       </div>
@@ -205,35 +209,18 @@ export default function CareersApplyForm() {
         placeholder="Tell us why you're a good fit..."
         style={{ minHeight: "80px", resize: "vertical" }}
         value={formData.message}
+        disabled
         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
       />
 
       <label className="form-group-label" htmlFor="resume-upload">
         Resume *
       </label>
-      <div className="file-upload-zone" onClick={() => resumeInputRef.current?.click()}>
+      <div className="file-upload-zone opacity-50 cursor-not-allowed">
         <p style={{ margin: "0 0 8px", fontSize: "0.9rem" }}>
-          {resumeFile ? resumeFile.name : "Click to upload resume"}
+          {resumeFile ? resumeFile.name : "Uploads Paused"}
         </p>
         <span style={{ fontSize: "0.75rem", opacity: 0.6 }}>PDF, DOC, or DOCX (Max 5MB)</span>
-        <input
-          ref={resumeInputRef}
-          type="file"
-          id="resume-upload"
-          style={{ display: "none" }}
-          accept=".pdf,.doc,.docx"
-          onChange={(e) => {
-            const file = e.target.files?.[0] || null;
-            if (file && file.size > MAX_RESUME_MB * 1024 * 1024) {
-              setResumeError(`Resume must be under ${MAX_RESUME_MB}MB.`);
-              setResumeFile(null);
-              e.target.value = "";
-              return;
-            }
-            setResumeError("");
-            setResumeFile(file);
-          }}
-        />
       </div>
 
       <p className="text-xs text-cafe-brown/70 mb-6">
@@ -252,33 +239,15 @@ export default function CareersApplyForm() {
       <label className="form-group-label" htmlFor="application-upload">
         Completed Application *
       </label>
-      <div className="file-upload-zone" onClick={() => applicationInputRef.current?.click()}>
+      <div className="file-upload-zone opacity-50 cursor-not-allowed">
         <p style={{ margin: "0 0 8px", fontSize: "0.9rem" }}>
-          {applicationFile ? applicationFile.name : "Click to upload application"}
+          {applicationFile ? applicationFile.name : "Uploads Paused"}
         </p>
         <span style={{ fontSize: "0.75rem", opacity: 0.6 }}>PDF, DOC, or DOCX (Max 5MB)</span>
-        <input
-          ref={applicationInputRef}
-          type="file"
-          id="application-upload"
-          style={{ display: "none" }}
-          accept=".pdf,.doc,.docx"
-          onChange={(e) => {
-            const file = e.target.files?.[0] || null;
-            if (file && file.size > MAX_RESUME_MB * 1024 * 1024) {
-              setApplicationError(`Application must be under ${MAX_RESUME_MB}MB.`);
-              setApplicationFile(null);
-              e.target.value = "";
-              return;
-            }
-            setApplicationError("");
-            setApplicationFile(file);
-          }}
-        />
       </div>
 
-      <button type="submit" disabled={isSubmitting} className="btn-primary">
-        {isSubmitting ? "Submitting..." : "Submit Application"}
+      <button type="button" disabled className="btn-primary opacity-50 cursor-not-allowed">
+        Applications Closed
       </button>
 
       {submitStatus === "error" && (
