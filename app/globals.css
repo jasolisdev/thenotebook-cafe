@@ -28,7 +28,38 @@
 /* ============================================================
    CUSTOM FONTS
 ============================================================ */
-/* DM Serif Display and Outfit fonts loaded via Google Fonts in layout.tsx */
+/* Local fonts (avoid network fetches during builds/tests) */
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* OpenDyslexic Font for Accessibility */
 @font-face {
@@ -55,14 +86,16 @@
   font-display: swap;
 }
 
-/* Playfair Display loaded via `next/font` (see `app/layout.tsx`). */
+/* Playfair Display and Inter loaded from local font files. */
 
 /* ============================================================
    DESIGN TOKENS
 =========================================================== */
 :root {
-  --font-sans: "Outfit", system-ui, sans-serif;
-  --font-display: "DM Serif Display", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Playfair Display", serif;
+  --font-playfair: "Playfair Display";
+  --font-inter: "Inter";
   --site-header-height: 80px;
 
   /* Menu Page Fonts */
