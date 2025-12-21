@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: SEO.pages.menu.title,
   description: SEO.pages.menu.description,
   alternates: {
-    canonical: '/menu',
+    canonical: `${SEO.siteUrl}/menu`,
   },
   openGraph: {
     title: SEO.pages.menu.title,

@@ -13,13 +13,14 @@ import "../styles/pages/contact.css";
 import type { Metadata } from "next";
 import { SEO } from "@/lib/seo";
 import FAQJsonLd from "@/app/components/seo/FAQJsonLd";
+import LocalBusinessJsonLd from "@/app/components/seo/LocalBusinessJsonLd";
 import { BUSINESS_INFO } from "@/lib/business";
 
 export const metadata: Metadata = {
   title: SEO.pages.contact.title,
   description: SEO.pages.contact.description,
   alternates: {
-    canonical: '/contact',
+    canonical: `${SEO.siteUrl}/contact`,
   },
   openGraph: {
     title: SEO.pages.contact.title,
@@ -70,6 +71,7 @@ export default function ContactPage() {
   return (
     <main className="contact-page min-h-screen relative">
       <FAQJsonLd items={contactFAQs} />
+      <LocalBusinessJsonLd />
       <div className="contact-fixed-background" aria-hidden="true" />
       {/* Hero Section */}
       <section
@@ -143,6 +145,9 @@ export default function ContactPage() {
                   </div>
 
                   <div>
+                    <p className="text-sm md:text-base text-cafe-brown/70 mb-3">
+                      Visit our Riverside cafe for specialty coffee and a welcoming space to work or relax.
+                    </p>
                     <address className="not-italic font-serif text-xl md:text-2xl leading-relaxed text-cafe-black/80">
                       3512 9th St,<br />
                       Riverside, CA 92501
@@ -209,6 +214,12 @@ export default function ContactPage() {
                       <p className="text-xs uppercase tracking-wider text-cafe-brown/60 mb-1">Email</p>
                       <a href="mailto:thenotebookcafellc@gmail.com" className="font-serif text-xl text-cafe-black hover:text-cafe-tan transition-colors">
                         thenotebookcafellc@gmail.com
+                      </a>
+                    </div>
+                    <div>
+                      <p className="text-xs uppercase tracking-wider text-cafe-brown/60 mb-1">Explore</p>
+                      <a href="/menu" className="font-serif text-xl text-cafe-black hover:text-cafe-tan transition-colors">
+                        View our Riverside menu
                       </a>
                     </div>
                   </div>

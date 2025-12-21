@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
 import { MapPin } from 'lucide-react';
 import NewsletterForm from '@/app/components/features/NewsLetterForm';
 import Reveal from '@/app/components/ui/Reveal';
@@ -43,6 +44,12 @@ const NewsletterSection: React.FC = () => {
                 </svg>
                 thenotebookcafellc
               </a>
+              <Link
+                href="/contact"
+                className="flex items-center gap-2 hover:opacity-100 hover:text-cafe-brown transition-all"
+              >
+                Visit our Riverside cafe
+              </Link>
               <div className="flex items-center gap-2">
                 <MapPin size={16} />
                 Riverside, CA

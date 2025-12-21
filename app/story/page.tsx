@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   title: SEO.pages.story.title,
   description: SEO.pages.story.description,
   alternates: {
-    canonical: "/story",
+    canonical: `${SEO.siteUrl}/story`,
   },
   openGraph: {
     title: SEO.pages.story.title,

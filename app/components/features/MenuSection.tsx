@@ -43,7 +43,7 @@ const MenuSection: React.FC = () => {
         <div className="mt-16 flex justify-center">
           <Reveal>
             <Button href="/menu" variant="cta" withArrow>
-              View Our Full Menu
+              View Our Riverside Menu
             </Button>
           </Reveal>
         </div>

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   title: SEO.pages.home.title,
   description: SEO.pages.home.description,
   alternates: {
-    canonical: "/",
+    canonical: SEO.siteUrl,
   },
   openGraph: {
     title: SEO.pages.home.title,
@@ -104,6 +104,13 @@ export default function HomePage() {
               <span className="text-cafe-tan text-md uppercase tracking-[0.25em] font-semibold">
                 Our Signature Pours
               </span>
+            </Reveal>
+            <Reveal delay={120}>
+              <p className="mt-4 text-sm md:text-base text-cafe-brown/80 leading-relaxed">
+                Discover our signature pours in Riverside, CA: the Iced Brown Sugar Oat,
+                Matcha Cloud, Classic Cold Brew, and Espresso Tonic. Crafted daily for a
+                smooth, memorable cup.
+              </p>
             </Reveal>
           </div>
 

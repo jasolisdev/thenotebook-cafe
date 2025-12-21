@@ -47,6 +47,9 @@ const HeroSection: React.FC = () => {
                   </span>
                 </RevealText>
               </h1>
+              <p className="mt-4 text-xs md:text-sm uppercase tracking-[0.35em] text-white/80 font-semibold">
+                The Notebook Caf&eacute; &mdash; Riverside, CA
+              </p>
             </div>
 
             <FadeInSection delay="300ms" className="flex flex-col items-center space-y-4 text-white">
