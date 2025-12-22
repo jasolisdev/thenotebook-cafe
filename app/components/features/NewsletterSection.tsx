@@ -1,7 +1,6 @@
 "use client";
 
 import React from 'react';
-import Link from 'next/link';
 import { MapPin } from 'lucide-react';
 import NewsletterForm from '@/app/components/features/NewsLetterForm';
 import Reveal from '@/app/components/ui/Reveal';

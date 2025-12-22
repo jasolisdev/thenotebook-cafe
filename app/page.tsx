@@ -8,7 +8,6 @@ import Image from "next/image";
 import Reveal from "@/app/components/ui/Reveal";
 import StoryLink from "@/app/components/ui/StoryLink";
 import { Coffee, Music, Armchair, Sparkles } from "lucide-react";
-import SignaturePoursGrid from "@/app/components/SignaturePoursGrid";
 import MenuSection from "@/app/components/features/MenuSection";
 import HeroSection from "@/app/components/features/HeroSection";
 import NewsletterSection from "@/app/components/features/NewsletterSection";
@@ -55,33 +54,6 @@ const imageCaptions = [
   { title: "The Craft", subtitle: "Small batch, always fresh." },
   { title: "The Vibe", subtitle: "Curated soundscapes." },
   { title: "The Community", subtitle: "Riverside's living room." },
-];
-
-const signaturePours = [
-  {
-    name: "Iced Brown Sugar Oat",
-    description:
-      "Caramelized brown sugar layered with velvety oat milk and slow-steeped espresso.",
-    image: "/unsplash/tnc-placeholder-featured-1.png",
-  },
-  {
-    name: "Matcha Cloud",
-    description:
-      "Ceremonial grade matcha poured over cold foam for a soft, cloudlike finish.",
-    image: "/unsplash/tnc-placeholder-featured-2.png",
-  },
-  {
-    name: "Classic Cold Brew",
-    description:
-      "18-hour brew for a chocolatey, low-acid sip served over crystal-clear ice.",
-    image: "/unsplash/tnc-placeholder-featured-3.png",
-  },
-  {
-    name: "Espresso Tonic",
-    description:
-      "Bright espresso lifted by artisanal tonic, citrus oils, and a crack of ice.",
-    image: "/unsplash/tnc-placeholder-featured-4.png",
-  },
 ];
 
 export default function HomePage() {

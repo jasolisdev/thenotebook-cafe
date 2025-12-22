@@ -6,7 +6,7 @@ export const metadata = {
 };
 
 // Helper to copy text to clipboard (simplified for this view)
-const ColorSwatch = ({ name, variable, bgClass, textClass = "text-cafe-black" }: { name: string, variable: string, bgClass: string, textClass?: string }) => (
+const ColorSwatch = ({ name, variable, bgClass }: { name: string, variable: string, bgClass: string }) => (
   <div className="flex flex-col gap-2">
     <div className={`h-24 w-full rounded-lg shadow-sm flex items-center justify-center ${bgClass} border border-cafe-tan/20`}>
        {/* Optional: Add hex code display logic here if needed, but for now visual is key */}
@@ -45,7 +45,7 @@ export default function StyleGuidePage() {
         <div className="space-y-4">
           <h1 className="text-5xl md:text-7xl font-display text-cafe-black">Style Guide</h1>
           <p className="text-xl font-sans text-cafe-brown max-w-2xl">
-            A reference for The Notebook Café's design system, including color palettes, typography, and core UI elements.
+            A reference for The Notebook Café&apos;s design system, including color palettes, typography, and core UI elements.
           </p>
         </div>
 
@@ -57,16 +57,16 @@ export default function StyleGuidePage() {
             <div>
               <h3 className="text-lg font-sans font-bold text-cafe-tan-dark mb-4">Core Café Palette</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                <ColorSwatch name="Café Black" variable="--color-cafe-black" bgClass="bg-cafe-black" textClass="text-cafe-white" />
-                <ColorSwatch name="Café Brown" variable="--color-cafe-brown" bgClass="bg-cafe-brown" textClass="text-cafe-white" />
+                <ColorSwatch name="Café Black" variable="--color-cafe-black" bgClass="bg-cafe-black" />
+                <ColorSwatch name="Café Brown" variable="--color-cafe-brown" bgClass="bg-cafe-brown" />
                 <ColorSwatch name="Café Tan" variable="--color-cafe-tan" bgClass="bg-cafe-tan" />
-                <ColorSwatch name="Café Tan Dark" variable="--color-cafe-tan-dark" bgClass="bg-cafe-tan-dark" textClass="text-cafe-white" />
+                <ColorSwatch name="Café Tan Dark" variable="--color-cafe-tan-dark" bgClass="bg-cafe-tan-dark" />
                 <ColorSwatch name="Café Beige" variable="--color-cafe-beige" bgClass="bg-cafe-beige" />
                 <ColorSwatch name="Café Luxe Oat" variable="--color-cafe-luxe-oat" bgClass="bg-cafe-luxe-oat" />
                 <ColorSwatch name="Café Cream" variable="--color-cafe-cream" bgClass="bg-cafe-cream" />
                 <ColorSwatch name="Café Mist" variable="--color-cafe-mist" bgClass="bg-cafe-mist" />
                 <ColorSwatch name="Café White" variable="--color-cafe-white" bgClass="bg-cafe-white" />
-                <ColorSwatch name="Café Olive" variable="--color-cafe-olive" bgClass="bg-cafe-olive" textClass="text-cafe-white" />
+                <ColorSwatch name="Café Olive" variable="--color-cafe-olive" bgClass="bg-cafe-olive" />
               </div>
             </div>
 
@@ -75,15 +75,15 @@ export default function StyleGuidePage() {
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 <ColorSwatch name="Coffee 50" variable="--color-coffee-50" bgClass="bg-coffee-50" />
                 <ColorSwatch name="Coffee 100" variable="--color-coffee-100" bgClass="bg-coffee-100" />
-                <ColorSwatch name="Coffee 900" variable="--color-coffee-900" bgClass="bg-coffee-900" textClass="text-white" />
+                <ColorSwatch name="Coffee 900" variable="--color-coffee-900" bgClass="bg-coffee-900" />
               </div>
             </div>
 
             <div>
               <h3 className="text-lg font-sans font-bold text-cafe-tan-dark mb-4">Extended Palette</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                <ColorSwatch name="Espresso Brown" variable="--color-espresso-brown" bgClass="bg-espresso-brown" textClass="text-white" />
-                <ColorSwatch name="Warm Brown" variable="--color-warm-brown" bgClass="bg-warm-brown" textClass="text-white" />
+                <ColorSwatch name="Espresso Brown" variable="--color-espresso-brown" bgClass="bg-espresso-brown" />
+                <ColorSwatch name="Warm Brown" variable="--color-warm-brown" bgClass="bg-warm-brown" />
               </div>
             </div>
           </div>
@@ -172,7 +172,7 @@ export default function StyleGuidePage() {
 
           {/* Font Comparisons for "How It Began" */}
           <div className="bg-cafe-mist p-8 rounded-xl shadow-sm border border-cafe-tan/10">
-            <h3 className="text-lg font-sans font-bold text-cafe-tan-dark mb-6">Font Comparisons for "How It Began"</h3>
+            <h3 className="text-lg font-sans font-bold text-cafe-tan-dark mb-6">Font Comparisons for &quot;How It Began&quot;</h3>
             <div className="space-y-8">
               
               <div className="p-4 bg-white/50 rounded-lg">
