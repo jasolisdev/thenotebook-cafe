@@ -46,24 +46,27 @@ export const metadata: Metadata = {
 // FAQ data for local SEO
 const contactFAQs = [
   {
-    question: 'What are The Notebook Café hours?',
+    question: "What are The Notebook Café hours?",
     answer: `We're open Monday through Saturday from 7am to 6pm. We're closed on Sundays to give our team time to rest and recharge.`,
   },
   {
-    question: 'Where is The Notebook Café located?',
+    question: "Where is The Notebook Café located?",
     answer: `We're located at ${BUSINESS_INFO.address.street}, ${BUSINESS_INFO.address.city}, ${BUSINESS_INFO.address.state} ${BUSINESS_INFO.address.zip}, near the art district and University Drive nightlife area in Riverside, California.`,
   },
   {
-    question: 'Do you have Wi-Fi for remote work?',
-    answer: 'Yes! We offer fast, reliable Wi-Fi perfect for remote work and studying. Every seat has a power outlet, and we have warm 2700K lighting for eye comfort during extended sessions.',
+    question: "Do you have Wi-Fi for remote work?",
+    answer:
+      "Yes! We offer fast, reliable Wi-Fi perfect for remote work and studying. Every seat has a power outlet, and we have warm 2700K lighting for eye comfort during extended sessions.",
   },
   {
-    question: 'Can I host an event at The Notebook Café?',
+    question: "Can I host an event at The Notebook Café?",
     answer: `We love hosting community events, live music, and open mics. Contact us at ${BUSINESS_INFO.email} or call ${BUSINESS_INFO.phoneDisplay} to discuss your event ideas.`,
   },
   {
-    question: 'What makes The Notebook Café different from other coffee shops in Riverside?',
-    answer: 'We focus on three pillars: exceptional specialty coffee, curated house music, and a sanctuary-like atmosphere designed for deep work and creativity. Plus, we treat our community like family—this is Riverside\'s living room.',
+    question:
+      "What makes The Notebook Café different from other coffee shops in Riverside?",
+    answer:
+      "We focus on three pillars: exceptional specialty coffee, curated house music, and a sanctuary-like atmosphere designed for deep work and creativity. Plus, we treat our community like family—this is Riverside's living room.",
   },
 ];
 
@@ -78,21 +81,24 @@ export default function ContactPage() {
         className="relative min-h-[32vh] md:min-h-[40vh] flex items-center justify-center overflow-hidden pt-[var(--site-header-height,80px)]"
         data-section="Hero"
         style={{
-          backgroundImage: 'url(/menu/tnc-menu-banner.webp)',
-          backgroundColor: 'var(--color-cafe-black)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 32%',
+          backgroundImage: "url(/menu/tnc-menu-banner.webp)",
+          backgroundColor: "var(--color-cafe-black)",
+          backgroundSize: "cover",
+          backgroundPosition: "center 32%",
         }}
       >
-        <div className="absolute inset-0 bg-black/40 z-[1]" aria-hidden="true" />
+        <div
+          className="absolute inset-0 bg-black/40 z-[1]"
+          aria-hidden="true"
+        />
         <div className="relative z-10 text-left md:text-center px-6 w-full max-w-7xl mx-auto">
           <RevealText delay="0ms">
-            <h1 className="font-serif text-4xl md:text-6xl text-cafe-cream mb-4">
+            <h1 className="font-dm-serif font-bold text-4xl md:text-6xl text-cafe-cream mb-4">
               Get in Touch
             </h1>
           </RevealText>
           <FadeInSection delay="200ms">
-            <p className="text-lg md:text-xl text-cafe-cream/90">
+            <p className="font-serif italic text-lg md:text-2xl text-cafe-cream/90 drop-shadow-sm">
               We&apos;re Just Around the Corner.
             </p>
           </FadeInSection>
@@ -104,10 +110,16 @@ export default function ContactPage() {
         data-section="Contact Info"
         className="py-24 md:py-32 relative overflow-hidden"
       >
-        <div className="section-deco contact-info-deco contact-info-deco--phone" aria-hidden="true">
+        <div
+          className="section-deco contact-info-deco contact-info-deco--phone"
+          aria-hidden="true"
+        >
           <Phone strokeWidth={1.4} />
         </div>
-        <div className="section-deco section-deco-dark contact-info-deco contact-info-deco--clock" aria-hidden="true">
+        <div
+          className="section-deco section-deco-dark contact-info-deco contact-info-deco--clock"
+          aria-hidden="true"
+        >
           <Clock strokeWidth={1.4} />
         </div>
 
@@ -120,8 +132,11 @@ export default function ContactPage() {
               </span>
             </Reveal>
             <Reveal delay={100}>
-              <h2 className="contact-section-title font-serif text-4xl md:text-6xl lg:text-7xl mb-6 leading-none">
-                How to <span className="contact-section-title-accent italic">Reach Us</span>
+              <h2 className="contact-section-title font-dm-serif font-bold text-4xl md:text-6xl lg:text-7xl mb-6 leading-none">
+                How to{" "}
+                <span className="contact-section-title-accent italic">
+                  Reach Us
+                </span>
               </h2>
             </Reveal>
             <Reveal delay={150}>
@@ -137,7 +152,11 @@ export default function ContactPage() {
                 <div className="space-y-6 flex flex-col items-center text-center md:items-start md:text-left">
                   <div className="flex items-center justify-center md:justify-start gap-3">
                     <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
-                      <MapPin size={22} className="contact-icon" strokeWidth={1.5} />
+                      <MapPin
+                        size={22}
+                        className="contact-icon"
+                        strokeWidth={1.5}
+                      />
                     </div>
                     <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold">
                       Location
@@ -146,10 +165,12 @@ export default function ContactPage() {
 
                   <div>
                     <p className="text-sm md:text-base text-cafe-brown/70 mb-3">
-                      Visit our Riverside cafe for specialty coffee and a welcoming space to work or relax.
+                      Visit our Riverside cafe for specialty coffee and a
+                      welcoming space to work or relax.
                     </p>
                     <address className="not-italic font-serif text-xl md:text-2xl leading-relaxed text-cafe-black/80">
-                      3512 9th St,<br />
+                      3512 9th St,
+                      <br />
                       Riverside, CA 92501
                     </address>
                   </div>
@@ -161,7 +182,9 @@ export default function ContactPage() {
                     className="contact-directions-link inline-flex items-center gap-2 text-sm uppercase tracking-wider font-semibold transition-all duration-400 group pt-2"
                   >
                     <span>Get Directions</span>
-                    <span className="transition-transform duration-400 group-hover:translate-x-2">→</span>
+                    <span className="transition-transform duration-400 group-hover:translate-x-2">
+                      →
+                    </span>
                   </a>
                 </div>
               </Reveal>
@@ -171,7 +194,11 @@ export default function ContactPage() {
                 <div className="space-y-6 flex flex-col items-center text-center md:items-start md:text-left">
                   <div className="flex items-center justify-center md:justify-start gap-3">
                     <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
-                      <Clock size={22} className="contact-icon" strokeWidth={1.5} />
+                      <Clock
+                        size={22}
+                        className="contact-icon"
+                        strokeWidth={1.5}
+                      />
                     </div>
                     <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold">
                       Hours
@@ -180,12 +207,20 @@ export default function ContactPage() {
 
                   <div className="space-y-4 w-full max-w-md">
                     <div className="flex justify-between items-baseline border-b border-cafe-tan/20 pb-2">
-                      <span className="text-cafe-brown/70 font-medium">Monday – Saturday</span>
-                      <span className="font-serif text-xl text-cafe-black">7am — 6pm</span>
+                      <span className="text-cafe-brown/70 font-medium">
+                        Monday – Saturday
+                      </span>
+                      <span className="font-serif text-xl text-cafe-black">
+                        7am — 6pm
+                      </span>
                     </div>
                     <div className="flex justify-between items-baseline border-b border-cafe-tan/20 pb-2">
-                      <span className="text-cafe-brown/70 font-medium">Sunday</span>
-                      <span className="font-serif text-xl text-cafe-black italic">Closed</span>
+                      <span className="text-cafe-brown/70 font-medium">
+                        Sunday
+                      </span>
+                      <span className="font-serif text-xl text-cafe-black italic">
+                        Closed
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -196,7 +231,11 @@ export default function ContactPage() {
                 <div className="space-y-6 flex flex-col items-center text-center md:items-start md:text-left">
                   <div className="flex items-center justify-center md:justify-start gap-3">
                     <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
-                      <Phone size={22} className="contact-icon" strokeWidth={1.5} />
+                      <Phone
+                        size={22}
+                        className="contact-icon"
+                        strokeWidth={1.5}
+                      />
                     </div>
                     <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold">
                       Contact
@@ -205,21 +244,25 @@ export default function ContactPage() {
 
                   <div className="space-y-4">
                     <div>
-                      <p className="text-xs uppercase tracking-wider text-cafe-brown/60 mb-1">Phone</p>
-                      <a href="tel:+19518230004" className="font-serif text-2xl text-cafe-black hover:text-cafe-tan transition-colors">
+                      <p className="text-xs uppercase tracking-wider text-cafe-brown/60 mb-1">
+                        Phone
+                      </p>
+                      <a
+                        href="tel:+19518230004"
+                        className="font-serif text-2xl text-cafe-black hover:text-cafe-tan transition-colors"
+                      >
                         (951) 823-0004
                       </a>
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-wider text-cafe-brown/60 mb-1">Email</p>
-                      <a href="mailto:thenotebookcafellc@gmail.com" className="font-serif text-xl text-cafe-black hover:text-cafe-tan transition-colors">
+                      <p className="text-xs uppercase tracking-wider text-cafe-brown/60 mb-1">
+                        Email
+                      </p>
+                      <a
+                        href="mailto:thenotebookcafellc@gmail.com"
+                        className="font-serif text-xl text-cafe-black hover:text-cafe-tan transition-colors"
+                      >
                         thenotebookcafellc@gmail.com
-                      </a>
-                    </div>
-                    <div>
-                      <p className="text-xs uppercase tracking-wider text-cafe-brown/60 mb-1">Explore</p>
-                      <a href="/menu" className="font-serif text-xl text-cafe-black hover:text-cafe-tan transition-colors">
-                        View our Riverside menu
                       </a>
                     </div>
                   </div>
@@ -239,7 +282,8 @@ export default function ContactPage() {
                     Send a Message
                   </h3>
                   <p className="text-cafe-brown/70 mb-8 font-light">
-                    Have a question or just want to say hello? Drop us a note below.
+                    Have a question or just want to say hello? Drop us a note
+                    below.
                   </p>
 
                   <ContactForm />
@@ -255,19 +299,23 @@ export default function ContactPage() {
         data-section="Map"
         className="py-24 md:py-32 relative overflow-hidden bg-cafe-tan/5"
       >
-        <div className="section-deco contact-map-deco contact-map-deco--pin" aria-hidden="true">
+        <div
+          className="section-deco contact-map-deco contact-map-deco--pin"
+          aria-hidden="true"
+        >
           <MapPin strokeWidth={1.4} />
         </div>
-        <div className="section-deco section-deco-dark contact-map-deco contact-map-deco--coffee" aria-hidden="true">
+        <div
+          className="section-deco section-deco-dark contact-map-deco contact-map-deco--coffee"
+          aria-hidden="true"
+        >
           <Coffee strokeWidth={1.4} />
         </div>
 
         <div className="max-w-6xl mx-auto px-6">
           <Reveal>
             <div className="relative">
-              <div
-                className="contact-map-frame relative w-full h-[420px] sm:h-[500px] md:h-[600px] rounded-2xl overflow-hidden shadow-2xl"
-              >
+              <div className="contact-map-frame relative w-full h-[420px] sm:h-[500px] md:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
                 <iframe
                   src="https://www.google.com/maps?q=The+Notebook+Cafe%2C+3512+9th+St%2C+Riverside%2C+CA+92501&output=embed"
                   width="100%"
@@ -282,8 +330,12 @@ export default function ContactPage() {
 
               {/* Decorative Badge */}
               <div className="contact-map-badge absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 shadow-2xl">
-                <p className="text-2xl md:text-3xl leading-tight font-normal">Come</p>
-                <p className="text-2xl md:text-3xl leading-tight font-normal">Visit Us</p>
+                <p className="text-2xl md:text-3xl leading-tight font-normal">
+                  Come
+                </p>
+                <p className="text-2xl md:text-3xl leading-tight font-normal">
+                  Visit Us
+                </p>
                 <p className="text-[0.65rem] uppercase tracking-[0.2em] mt-2 opacity-90 font-bold">
                   Open Mon–Sat
                 </p>
@@ -293,10 +345,11 @@ export default function ContactPage() {
             {/* Closing Quote */}
             <Reveal delay={410}>
               <div className="contact-quote mt-24 p-8 sm:p-10 md:p-12 rounded-2xl text-center">
-                <Coffee size={32} className="mx-auto mb-6 contact-quote__icon" />
-                <blockquote
-                  className="contact-quote__text font-serif text-2xl md:text-3xl italic max-w-2xl mx-auto leading-relaxed mb-4"
-                >
+                <Coffee
+                  size={32}
+                  className="mx-auto mb-6 contact-quote__icon"
+                />
+                <blockquote className="contact-quote__text font-serif text-2xl md:text-3xl italic max-w-2xl mx-auto leading-relaxed mb-4">
                   &ldquo;We can&apos;t wait to meet you. Come as you are.&rdquo;
                 </blockquote>
                 <footer className="contact-quote__footer text-xs uppercase tracking-[0.2em] font-bold">
@@ -304,7 +357,6 @@ export default function ContactPage() {
                 </footer>
               </div>
             </Reveal>
-
           </Reveal>
         </div>
       </section>

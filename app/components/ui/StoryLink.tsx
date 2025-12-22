@@ -8,7 +8,7 @@ export default function StoryLink() {
       href="/story"
       className="uppercase text-xs tracking-widest font-semibold pb-1 transition-colors inline-block text-cafe-tan border-b border-cafe-tan hover:text-cafe-black hover:border-cafe-black"
     >
-      Read Our Riverside Story
+      Read Our Story
     </Link>
   );
 }

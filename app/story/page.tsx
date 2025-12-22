@@ -70,12 +70,12 @@ export default function StoryPage() {
         />
         <div className="relative z-10 text-left md:text-center px-6 w-full max-w-7xl mx-auto">
           <RevealText delay="0ms">
-            <h1 className="font-serif text-4xl md:text-6xl text-cafe-cream mb-4">
+            <h1 className="font-dm-serif font-bold text-4xl md:text-6xl text-cafe-cream mb-4">
               Our Story
             </h1>
           </RevealText>
           <FadeInSection delay="200ms">
-            <p className="text-lg md:text-xl text-cafe-cream/90">
+            <p className="font-serif italic text-lg md:text-2xl text-cafe-cream/90 drop-shadow-sm">
               Built by Riverside Locals, For Riverside.
             </p>
           </FadeInSection>
@@ -133,7 +133,7 @@ export default function StoryPage() {
                 </span>
               </Reveal>
               <Reveal delay={120}>
-                <h2 className="story-section-title font-serif text-5xl sm:text-6xl mb-8 leading-none">
+                <h2 className="story-section-title font-dm-serif font-bold text-5xl sm:text-6xl mb-8 leading-none">
                   How It{" "}
                   <span className="story-section-title-accent italic">
                     Began
@@ -242,7 +242,7 @@ export default function StoryPage() {
                 </span>
               </Reveal>
               <Reveal delay={120}>
-                <h2 className="story-section-title font-serif text-5xl sm:text-6xl mb-8 leading-none">
+                <h2 className="story-section-title font-dm-serif font-bold text-5xl sm:text-6xl mb-8 leading-none">
                   Why{" "}
                   <span className="story-section-title-accent italic">
                     Here?
@@ -355,7 +355,7 @@ export default function StoryPage() {
                 </span>
               </Reveal>
               <Reveal delay={120}>
-                <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl text-cafe-black mb-8 leading-none">
+                <h2 className="font-dm-serif font-bold text-5xl md:text-6xl lg:text-7xl text-cafe-black mb-8 leading-none">
                   Crafted for <br />
                   <span className="story-section-title-accent italic">
                     Creatives
@@ -417,7 +417,7 @@ export default function StoryPage() {
               </span>
             </Reveal>
             <Reveal delay={100}>
-              <h2 className="story-section-title font-serif text-5xl sm:text-6xl mb-6 leading-none">
+              <h2 className="story-section-title font-dm-serif font-bold text-5xl sm:text-6xl mb-6 leading-none">
                 What Makes Us{" "}
                 <span className="story-section-title-accent italic">
                   Unique
@@ -562,7 +562,7 @@ export default function StoryPage() {
               </span>
             </Reveal>
             <Reveal delay={120}>
-              <h2 className="story-section-title font-serif text-4xl md:text-6xl mt-4">
+              <h2 className="story-section-title font-dm-serif font-bold text-4xl md:text-6xl mt-4">
                 Meet the{" "}
                 <span className="story-section-title-accent italic">
                   Founders & Owners

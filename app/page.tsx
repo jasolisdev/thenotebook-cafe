@@ -94,6 +94,7 @@ export default function HomePage() {
       <HeroSection />
 
       {/* Signature Pours */}
+      {/* 
       <section
         data-section="Signature Pours"
         className="relative pt-24 pb-12 overflow-hidden signature-pours-section"
@@ -105,13 +106,6 @@ export default function HomePage() {
                 Our Signature Pours
               </span>
             </Reveal>
-            <Reveal delay={120}>
-              <p className="mt-4 text-sm md:text-base text-cafe-brown/80 leading-relaxed">
-                Discover our signature pours in Riverside, CA: the Iced Brown Sugar Oat,
-                Matcha Cloud, Classic Cold Brew, and Espresso Tonic. Crafted daily for a
-                smooth, memorable cup.
-              </p>
-            </Reveal>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
@@ -120,6 +114,7 @@ export default function HomePage() {
         </div>
         <div />
       </section>
+      */}
 
       {/* Menu Section */}
       <MenuSection />
@@ -165,7 +160,7 @@ export default function HomePage() {
                 </span>
               </Reveal>
               <Reveal delay={100}>
-                <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-cafe-black">
+                <h2 className="font-dm-serif font-bold text-[2.43rem] md:text-[3.375rem] lg:text-[4.05rem] leading-[1.05] text-cafe-black">
                   It&apos;s not just Coffee <br />
                   <span className="italic text-cafe-tan block mt-2">
                     It&apos;s a feeling
@@ -217,10 +212,6 @@ export default function HomePage() {
       <section
         data-section="The Trinity"
         className="py-24 md:py-28 relative overflow-hidden trinity-slab trinity-slab-light"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(var(--cafe-tan-rgb), 0) 0%, rgba(var(--cafe-tan-rgb), 0.12) 50%, rgba(var(--cafe-tan-rgb), 0) 100%)",
-        }}
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3">
@@ -301,7 +292,7 @@ export default function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <Reveal>
-              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-cafe-black">
+              <h2 className="font-dm-serif font-bold text-[2.43rem] md:text-[3.375rem] lg:text-[4.05rem] leading-[1.05] text-cafe-black">
                 Low lights,
                 <br />
                 good sound,

@@ -13,6 +13,7 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)", "Outfit", "system-ui", "sans-serif"],
         serif: ["var(--font-display)", "DM Serif Display", "serif"],
+        "dm-serif": ["var(--font-dm-serif)", "DM Serif Display", "serif"],
         mono: ["var(--font-sans)", "Outfit", "monospace"],
       },
       fontSize: {

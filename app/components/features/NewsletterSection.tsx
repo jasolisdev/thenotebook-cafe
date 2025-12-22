@@ -15,11 +15,10 @@ const NewsletterSection: React.FC = () => {
            <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">Stay Connected</span>
          </Reveal>
          <Reveal delay={100}>
-           <h2 className="text-4xl md:text-6xl font-serif mb-8 italic tracking-tight text-cafe-black">The Story Continues.</h2>
-         </Reveal>
+                       <h2 className="text-[2.025rem] md:text-[3.375rem] font-dm-serif font-bold mb-8 italic tracking-tight text-cafe-black">The Story <span className="text-cafe-tan">Continues.</span></h2>         </Reveal>
          <Reveal delay={200}>
-           <p className="text-xl font-light text-cafe-black/60 max-w-2xl mx-auto mb-16 leading-relaxed">
-             Sign up to receive notes from the shop, seasonal menu previews, and invitations to our local Riverside gatherings. No clutter, just craft.
+           <p className="text-base md:text-xl font-light text-cafe-black/60 max-w-2xl mx-auto mb-16 leading-relaxed">
+             Sign up to receive notes from the shop, seasonal menu previews, and invitations to our local Riverside gatherings.<br/> No clutter, just craft.
            </p>
          </Reveal>
          
@@ -44,12 +43,6 @@ const NewsletterSection: React.FC = () => {
                 </svg>
                 thenotebookcafellc
               </a>
-              <Link
-                href="/contact"
-                className="flex items-center gap-2 hover:opacity-100 hover:text-cafe-brown transition-all"
-              >
-                Visit our Riverside cafe
-              </Link>
               <div className="flex items-center gap-2">
                 <MapPin size={16} />
                 Riverside, CA

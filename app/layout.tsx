@@ -15,6 +15,7 @@ import "./styles/layout/animations.css";
 
 import { ThemeProvider } from "next-themes";
 import { cookies } from "next/headers";
+import { DM_Serif_Display } from "next/font/google";
 import PasswordGate from "./components/ui/PasswordGate";
 import SiteShell from "./components/layout/SiteShell";
 import { client, hasSanityConfig } from "@/sanity/lib/client";
@@ -96,6 +97,14 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 };
 
+const dmSerif = DM_Serif_Display({
+  weight: ["400"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-dm-serif",
+  display: "swap",
+});
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -130,7 +139,7 @@ export default async function RootLayout({
       : null;
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${dmSerif.variable}`}>
       <body className="antialiased font-sans">
         <ThemeProvider
           attribute="class"

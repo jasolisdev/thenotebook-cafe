@@ -629,7 +629,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background: var(--color-cafe-charcoal);
+  background: var(--color-cafe-black);
   color: var(--color-cafe-cream);
   z-index: 999;
   display: flex;
@@ -784,7 +784,7 @@
 }
 
 .menu-drawer-close:hover .menu-drawer-close-icon {
-  color: var(--color-cafe-charcoal);
+  color: var(--color-cafe-black);
 }
 
 .menu-drawer-close-icon {
@@ -823,7 +823,7 @@
 
 .menu-drawer-close:hover .menu-drawer-close-x::before,
 .menu-drawer-close:hover .menu-drawer-close-x::after {
-  background: var(--color-cafe-charcoal);
+  background: var(--color-cafe-black);
 }
 
 /* Footer / Copyright in drawer */

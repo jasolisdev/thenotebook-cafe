@@ -97,11 +97,11 @@ export default function MenuPage() {
         >
           <div className="absolute inset-0 bg-black/40 z-[1]" aria-hidden="true" />
           <div className="relative z-10 text-left md:text-center px-6 w-full max-w-7xl mx-auto">
-            <h1 className="font-serif text-4xl md:text-6xl text-cafe-cream mb-4">
+            <h1 className="font-dm-serif font-bold text-4xl md:text-6xl text-cafe-cream mb-4">
               <RevealText delay="0ms">The Menu</RevealText>
             </h1>
             <FadeInSection delay="200ms">
-              <p className="text-lg md:text-xl text-cafe-cream/90">
+              <p className="font-serif italic text-lg md:text-2xl text-cafe-cream/90 drop-shadow-sm">
                 Handcrafted Daily in Riverside, CA.
               </p>
             </FadeInSection>

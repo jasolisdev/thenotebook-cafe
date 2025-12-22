@@ -74,7 +74,7 @@ export default function CareersPage() {
             </h1>
           </RevealText>
           <FadeInSection delay="200ms">
-            <p className="text-lg md:text-xl text-cafe-cream/90">
+            <p className="font-serif italic text-lg md:text-2xl text-cafe-cream/90 drop-shadow-sm">
               Join The Team, Build The Culture.
             </p>
           </FadeInSection>
@@ -95,7 +95,7 @@ export default function CareersPage() {
             </Reveal>
             <Reveal delay={120}>
               <h2
-                className="font-serif text-5xl sm:text-6xl mb-8 leading-none"
+                className="font-dm-serif font-bold text-5xl sm:text-6xl mb-8 leading-none"
                 style={{ color: "var(--color-cafe-black)" }}
               >
                 A{" "}
@@ -137,7 +137,7 @@ export default function CareersPage() {
             </Reveal>
             <Reveal delay={100}>
               <h2
-                className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none"
+                className="font-dm-serif font-bold text-4xl md:text-6xl lg:text-7xl mb-8 leading-none"
                 style={{ color: "var(--color-cafe-black)" }}
               >
                 Join Our{" "}
@@ -195,7 +195,7 @@ export default function CareersPage() {
         <div className="max-w-5xl mx-auto px-6">
           <Reveal>
             <h2
-              className="font-serif text-4xl md:text-5xl text-center mb-16"
+              className="font-dm-serif font-bold text-4xl md:text-5xl text-center mb-16"
               style={{ color: "var(--color-cafe-black)" }}
             >
               What We{" "}
@@ -326,7 +326,7 @@ export default function CareersPage() {
             </Reveal>
             <Reveal delay={100}>
               <h2
-                className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none"
+                className="font-dm-serif font-bold text-4xl md:text-6xl lg:text-7xl mb-8 leading-none"
                 style={{ color: "var(--color-cafe-black)" }}
               >
                 How We{" "}
@@ -443,7 +443,7 @@ export default function CareersPage() {
             </Reveal>
             <Reveal delay={100}>
               <h2
-                className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none"
+                className="font-dm-serif font-bold text-4xl md:text-6xl lg:text-7xl mb-8 leading-none"
                 style={{ color: "var(--color-cafe-black)" }}
               >
                 Application{" "}

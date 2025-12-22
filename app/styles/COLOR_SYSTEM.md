@@ -14,7 +14,6 @@ These are the canonical, named colors. Tailwind utilities like `bg-cafe-black` a
 | Token | Hex |
 |------|-----|
 | `--color-cafe-black` | `#2C2420` |
-| `--color-cafe-charcoal` | `#2A2622` |
 | `--color-cafe-brown` | `#4A3B32` |
 | `--color-cafe-tan` | `#A48D78` |
 | `--color-cafe-tan-dark` | `#8E7965` |
