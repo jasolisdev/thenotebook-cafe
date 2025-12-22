@@ -8,7 +8,7 @@ import FadeInSection from '@/app/components/ui/FadeInSection';
 
 const NewsletterSection: React.FC = () => {
   return (
-    <section className="pt-24 pb-24 bg-gradient-to-b from-cafe-tan/0 via-cafe-tan/12 to-cafe-tan/24">
+    <section className="pt-16 pb-24 bg-gradient-to-b from-cafe-tan/0 via-cafe-tan/12 to-cafe-tan/24">
       <div className="max-w-4xl mx-auto px-6 text-center">
          <Reveal>
            <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">Stay Connected</span>

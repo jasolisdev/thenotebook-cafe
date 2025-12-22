@@ -125,14 +125,14 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:items-start">
             {/* Left Column: Sticky Text */}
-            <div className="lg:sticky lg:top-32 h-fit lg:self-start">
+            <div className="lg:sticky lg:top-32 h-fit lg:self-start relative pl-4 before:absolute before:left-0 before:top-2 before:h-24 before:w-px before:bg-cafe-tan/40">
               <Reveal>
                 <span className="text-cafe-tan uppercase tracking-[0.25em] text-xs font-semibold block mb-4">
                   The Atmosphere
                 </span>
               </Reveal>
               <Reveal delay={100}>
-                <h2 className="font-dm-serif font-bold text-[2.43rem] md:text-[3.375rem] lg:text-[4.05rem] leading-[1.05] text-cafe-black">
+                <h2 className="font-dm-serif font-bold text-4xl md:text-5xl leading-[1.05] text-cafe-black">
                   It&apos;s not just Coffee <br />
                   <span className="italic text-cafe-tan block mt-2">
                     It&apos;s a feeling
@@ -262,9 +262,9 @@ export default function HomePage() {
         className="relative overflow-visible pt-12 pb-24 px-6"
       >
         <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
+          <div className="space-y-8 relative pl-4 before:absolute before:left-0 before:top-2 before:h-24 before:w-px before:bg-cafe-tan/40">
             <Reveal>
-              <h2 className="font-dm-serif font-bold text-[2.43rem] md:text-[3.375rem] lg:text-[4.05rem] leading-[1.05] text-cafe-black">
+              <h2 className="font-dm-serif font-bold text-4xl md:text-5xl leading-[1.05] text-cafe-black">
                 Low lights,
                 <br />
                 good sound,
@@ -287,7 +287,7 @@ export default function HomePage() {
             </Reveal>
           </div>
 
-          <div className="relative">
+          <div className="relative pb-6 md:pb-10">
             <div className="grid grid-cols-2 gap-4 relative">
               <Reveal delay={120} threshold={0.3} className="h-full">
                 <Image

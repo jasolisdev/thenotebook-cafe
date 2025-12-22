@@ -77,13 +77,79 @@
   font-display: swap;
 }
 
+/* Alpino Font Family */
+@font-face {
+  font-family: 'Alpino';
+  src: url('/fonts/Alpino-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alpino';
+  src: url('/fonts/Alpino-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alpino';
+  src: url('/fonts/Alpino-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alpino';
+  src: url('/fonts/Alpino-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alpino';
+  src: url('/fonts/Alpino-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alpino';
+  src: url('/fonts/Alpino-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Torus Font Family */
+@font-face {
+  font-family: 'Torus';
+  src: url('/fonts/Torus-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Torus';
+  src: url('/fonts/Torus-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Playfair Display and Inter loaded from local font files. */
 
 /* ============================================================
    DESIGN TOKENS
 =========================================================== */
 :root {
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: "Torus", "Inter", system-ui, sans-serif;
   --font-display: "Playfair Display", serif;
   --font-playfair: "Playfair Display";
   --font-inter: "Inter";

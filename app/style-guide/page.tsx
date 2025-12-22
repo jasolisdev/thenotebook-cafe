@@ -36,6 +36,31 @@ const FontSample = ({ name, fontClass, usage }: { name: string, fontClass: strin
   </div>
 );
 
+const FontFileSample = ({
+  name,
+  fontFamily,
+  fontWeight = 400,
+  fontStyle = "normal",
+  file,
+}: {
+  name: string;
+  fontFamily: string;
+  fontWeight?: number;
+  fontStyle?: "normal" | "italic";
+  file: string;
+}) => (
+  <div className="p-5 border border-cafe-tan/20 rounded-lg bg-cafe-white/50">
+    <div className="flex justify-between items-baseline mb-3 border-b border-cafe-tan/10 pb-2">
+      <h3 className="text-xs font-bold text-cafe-tan-dark uppercase tracking-wider">{name}</h3>
+      <span className="text-[10px] text-cafe-tan font-mono">{file}</span>
+    </div>
+    <div style={{ fontFamily, fontWeight, fontStyle }} className="text-cafe-black space-y-2">
+      <p className="text-2xl">The quick brown fox jumps over the lazy dog.</p>
+      <p className="text-sm opacity-80">Riverside, CA — 0123456789</p>
+    </div>
+  </div>
+);
+
 export default function StyleGuidePage() {
   return (
     <div className="min-h-screen bg-cafe-mist py-24 px-4 sm:px-8 lg:px-16">
@@ -136,6 +161,31 @@ export default function StyleGuidePage() {
                    Used when accessibility settings are toggled.
                  </p>
               </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-lg font-sans font-bold text-cafe-tan-dark">Local Font Files</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <FontFileSample name="Alpino Thin" fontFamily="Alpino" fontWeight={100} file="Alpino-Thin.otf" />
+              <FontFileSample name="Alpino Light" fontFamily="Alpino" fontWeight={300} file="Alpino-Light.otf" />
+              <FontFileSample name="Alpino Regular" fontFamily="Alpino" fontWeight={400} file="Alpino-Regular.otf" />
+              <FontFileSample name="Alpino Medium" fontFamily="Alpino" fontWeight={500} file="Alpino-Medium.otf" />
+              <FontFileSample name="Alpino Bold" fontFamily="Alpino" fontWeight={700} file="Alpino-Bold.otf" />
+              <FontFileSample name="Alpino Black" fontFamily="Alpino" fontWeight={900} file="Alpino-Black.otf" />
+
+              <FontFileSample name="Torus Regular" fontFamily="Torus" fontWeight={400} file="Torus-Regular.otf" />
+              <FontFileSample name="Torus Bold" fontFamily="Torus" fontWeight={700} file="Torus-Bold.otf" />
+
+              <FontFileSample name="Inter Regular" fontFamily="Inter" fontWeight={400} file="Inter-Regular.woff2" />
+              <FontFileSample name="Inter Medium" fontFamily="Inter" fontWeight={500} file="Inter-Medium.woff2" />
+
+              <FontFileSample name="Playfair Display" fontFamily="Playfair Display" fontWeight={400} file="PlayfairDisplay-Variable.ttf" />
+              <FontFileSample name="Playfair Display Bold" fontFamily="Playfair Display" fontWeight={700} file="PlayfairDisplay-Variable.ttf" />
+
+              <FontFileSample name="OpenDyslexic Regular" fontFamily="OpenDyslexic" fontWeight={400} file="OpenDyslexic-Regular.woff" />
+              <FontFileSample name="OpenDyslexic Bold" fontFamily="OpenDyslexic" fontWeight={700} file="OpenDyslexic-Bold.woff" />
+              <FontFileSample name="OpenDyslexic Italic" fontFamily="OpenDyslexic" fontWeight={400} fontStyle="italic" file="OpenDyslexic-Italic.woff" />
             </div>
           </div>
 

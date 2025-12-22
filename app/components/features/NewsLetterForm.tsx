@@ -126,7 +126,7 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
 	        <button
 	          type="submit"
 	          disabled={status === "loading"}
-	          className="group relative inline-flex items-center justify-center px-8 py-4 sm:px-12 sm:py-4 rounded-sm uppercase tracking-[0.2em] text-2xs sm:text-xs font-semibold bg-cafe-black text-cafe-white transition-all duration-300 disabled:opacity-50 hover:bg-cafe-brown hover:shadow-lg hover:-translate-y-0.5 overflow-hidden whitespace-nowrap shrink-0"
+            className="group relative inline-flex items-center justify-center px-8 py-4 sm:px-12 sm:py-4 rounded-sm uppercase tracking-[0.2em] text-2xs sm:text-xs font-semibold bg-cafe-brown text-cafe-white transition-all duration-300 disabled:opacity-50 hover:bg-cafe-tan hover:shadow-lg hover:-translate-y-0.5 overflow-hidden whitespace-nowrap shrink-0"
 	        >
           <span className="relative z-10">
             {status === "loading" ? "Subscribing…" : "Subscribe"}

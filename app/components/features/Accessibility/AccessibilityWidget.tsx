@@ -218,7 +218,7 @@ export const AccessibilityWidget: React.FC = () => {
       {/* Floating Toggle Button */}
       <button
         onClick={toggleOpen}
-        className={`fixed bottom-6 left-6 z-[110] w-14 h-14 bg-cafe-black text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-brown transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border ${isDefaultSettings ? 'border-cafe-tan/40' : 'border-gold/90 shadow-[0_0_0_3px_rgba(196,164,132,0.18)]'}`}
+        className={`fixed bottom-6 left-6 z-[110] w-14 h-14 bg-cafe-brown text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-black transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border ${isDefaultSettings ? 'border-cafe-tan/40' : 'border-gold/90 shadow-[0_0_0_3px_rgba(196,164,132,0.18)]'}`}
         aria-label="Accessibility Options"
       >
         <AccessibilityHumanIcon className="w-8 h-8" />
