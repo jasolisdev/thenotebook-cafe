@@ -14,9 +14,9 @@ const CAFE_INFO = {
 
 const HeroSection: React.FC = () => {
   return (
-    <div className="relative w-full min-h-[100svh] overflow-hidden bg-cafe-mist flex flex-col items-center">
+    <div className="relative w-full min-h-[90svh] md:min-h-[100svh] overflow-hidden bg-cafe-mist flex flex-col items-center">
       {/* Hero Content Section - Now flex-grow to push bar down */}
-      <div className="relative w-full flex-grow flex flex-col items-center justify-center pt-16 pb-0 md:pb-0">
+      <div className="relative w-full flex-grow flex flex-col items-center justify-center pt-12 md:pt-16 pb-0 md:pb-0">
         {/* Hero Background Image */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div
@@ -42,7 +42,7 @@ const HeroSection: React.FC = () => {
 
         {/* Main Content Area */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center justify-center h-full">
-          <div className="max-w-5xl w-full text-center flex flex-col items-center mt-8 md:mt-0">
+          <div className="max-w-5xl w-full text-center flex flex-col items-center mt-6 md:mt-0">
             <div className="mb-8 md:mb-10">
               <h1 className="leading-[1.1] md:leading-[0.9] tracking-tight font-dm-serif text-white text-[38px] md:text-[84px] lg:text-[111px] drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                 <RevealText>
@@ -74,7 +74,7 @@ const HeroSection: React.FC = () => {
       </div>
 
       {/* Integrated Location & Hours Bar - Updated to Mist */}
-      <div className="relative w-full bg-cafe-mist border-t border-cafe-brown/10 z-20 flex items-center py-6 md:py-12 lg:py-16 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+      <div className="relative w-full bg-cafe-mist border-t border-cafe-brown/10 z-20 flex items-center py-4 md:py-10 lg:py-12 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
         <FadeInSection
           delay="700ms"
           className="max-w-7xl mx-auto px-6 lg:px-12 w-full flex flex-col md:flex-row items-center justify-center md:justify-between space-y-10 md:space-y-0"
