@@ -18,14 +18,24 @@ const HeroSection: React.FC = () => {
       {/* Hero Content Section - Now flex-grow to push bar down */}
       <div className="relative w-full flex-grow flex flex-col items-center justify-center pt-16 pb-0 md:pb-0">
         {/* Hero Background Image */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          <Image
-            src="/menu/tnc-menu-banner.webp"
-            alt="The Notebook Cafe Riverside"
-            fill
-            className="object-cover object-top md:object-center"
-            priority
-          />
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div
+            className="absolute inset-0 animate-hero-zoom"
+            style={{ transformOrigin: "center center" }}
+          >
+            <Image
+              src="/menu/tnc-menu-banner.webp"
+              alt="The Notebook Cafe Riverside"
+              fill
+              className="object-cover"
+              priority
+              style={{
+                width: "100%",
+                height: "100%",
+                objectPosition: "60% center",
+              }}
+            />
+          </div>
           {/* Deep overlay for high contrast with text */}
           <div className="absolute inset-0 bg-black/40 z-[1]"></div>
         </div>

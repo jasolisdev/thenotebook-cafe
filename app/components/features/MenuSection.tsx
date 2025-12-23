@@ -20,11 +20,11 @@ const MenuSection: React.FC = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
             <div className="space-y-6 relative pl-4 before:absolute before:left-0 before:top-2 before:h-24 before:w-px before:bg-cafe-tan/40">
               <Reveal>
-                <span className="text-[10px] uppercase tracking-[0.3em] text-cafe-tan-dark font-bold block">
+                <span className="text-cafe-tan uppercase tracking-[0.25em] text-xs font-semibold block mb-4">
                   Crafted With Care
                 </span>
               </Reveal>
-              <Reveal delay={120}>
+              <Reveal delay={100}>
                 <h2 className="text-4xl md:text-5xl font-bold font-display text-cafe-black">
                   From Our <span className="text-cafe-tan">Kitchen</span>
                 </h2>

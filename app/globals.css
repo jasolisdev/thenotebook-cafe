@@ -3,21 +3,21 @@
 /* Tailwind v4 Theme Configuration */
 @theme {
   /* Core Palette */
-  --color-cafe-black: #2C2420;
-  --color-cafe-brown: #4A3B32;
-  --color-cafe-tan: #A48D78;
-  --color-cafe-tan-dark: #8E7965;
-  --color-cafe-beige: #CBB9A4;
-  --color-cafe-luxe-oat: #CBBFAF;
-  --color-cafe-cream: #EDE7D8;
-  --color-cafe-mist: #F4F1EA;
-  --color-cafe-white: #FDFBF7;
-  --color-cafe-olive: #4A4F41;
+  --color-cafe-black: #2c2420;
+  --color-cafe-brown: #4a3b32;
+  --color-cafe-tan: #a48d78;
+  --color-cafe-tan-dark: #8e7965;
+  --color-cafe-beige: #cbb9a4;
+  --color-cafe-luxe-oat: #cbbfaf;
+  --color-cafe-cream: #ede7d8;
+  --color-cafe-mist: #f4f1ea;
+  --color-cafe-white: #fdfbf7;
+  --color-cafe-olive: #4a4f41;
 
   /* Premium Navbar/Footer Palette */
-  --color-coffee-50: #F3EFE9;
-  --color-coffee-100: #E6DCCA;
-  --color-coffee-900: #2C241F;
+  --color-coffee-50: #f3efe9;
+  --color-coffee-100: #e6dcca;
+  --color-coffee-900: #2c241f;
 
   /* Extended Palette */
   --color-espresso-brown: #2a1f16;
@@ -29,24 +29,24 @@
 ============================================================ */
 /* Local fonts (avoid network fetches during builds/tests) */
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Regular.woff2') format('woff2');
+  font-family: "Inter";
+  src: url("/fonts/Inter-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Medium.woff2') format('woff2');
+  font-family: "Inter";
+  src: url("/fonts/Inter-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Playfair Display';
-  src: url('/fonts/PlayfairDisplay-Variable.ttf') format('truetype');
+  font-family: "Playfair Display";
+  src: url("/fonts/PlayfairDisplay-Variable.ttf") format("truetype");
   font-weight: 400 900;
   font-style: normal;
   font-display: swap;
@@ -54,24 +54,24 @@
 
 /* OpenDyslexic Font for Accessibility */
 @font-face {
-  font-family: 'OpenDyslexic';
-  src: url('/fonts/OpenDyslexic-Regular.woff') format('woff');
+  font-family: "OpenDyslexic";
+  src: url("/fonts/OpenDyslexic-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'OpenDyslexic';
-  src: url('/fonts/OpenDyslexic-Bold.woff') format('woff');
+  font-family: "OpenDyslexic";
+  src: url("/fonts/OpenDyslexic-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'OpenDyslexic';
-  src: url('/fonts/OpenDyslexic-Italic.woff') format('woff');
+  font-family: "OpenDyslexic";
+  src: url("/fonts/OpenDyslexic-Italic.woff") format("woff");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -79,48 +79,48 @@
 
 /* Alpino Font Family */
 @font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Thin.otf') format('opentype');
+  font-family: "Alpino";
+  src: url("/fonts/Alpino-Thin.otf") format("opentype");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Light.otf') format('opentype');
+  font-family: "Alpino";
+  src: url("/fonts/Alpino-Light.otf") format("opentype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Regular.otf') format('opentype');
+  font-family: "Alpino";
+  src: url("/fonts/Alpino-Regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Medium.otf') format('opentype');
+  font-family: "Alpino";
+  src: url("/fonts/Alpino-Medium.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Bold.otf') format('opentype');
+  font-family: "Alpino";
+  src: url("/fonts/Alpino-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Alpino';
-  src: url('/fonts/Alpino-Black.otf') format('opentype');
+  font-family: "Alpino";
+  src: url("/fonts/Alpino-Black.otf") format("opentype");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -128,16 +128,16 @@
 
 /* Torus Font Family */
 @font-face {
-  font-family: 'Torus';
-  src: url('/fonts/Torus-Regular.otf') format('opentype');
+  font-family: "Torus";
+  src: url("/fonts/Torus-Regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Torus';
-  src: url('/fonts/Torus-Bold.otf') format('opentype');
+  font-family: "Torus";
+  src: url("/fonts/Torus-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -156,9 +156,9 @@
   --site-header-height: 80px;
 
   /* Menu Page Fonts */
-  --font-serif: var(--font-playfair), 'Playfair Display', serif;
+  --font-serif: var(--font-playfair), "Playfair Display", serif;
   /* Used for Titles, Headers, Prices */
-  --font-sans-menu: var(--font-inter), 'Inter', sans-serif;
+  --font-sans-menu: var(--font-inter), "Inter", sans-serif;
   /* Used for Descriptions, UI, Buttons */
 
   /* ===============================
@@ -212,7 +212,6 @@
   --white-overlay: rgba(255, 255, 255, var(--opacity-light));
   --black-overlay-subtle: rgba(0, 0, 0, var(--opacity-subtle));
   --white-overlay-subtle: rgba(255, 255, 255, var(--opacity-subtle));
-
 }
 
 /* ============================================================
@@ -395,7 +394,6 @@ h3 {
 }
 
 @keyframes pulse {
-
   0%,
   100% {
     opacity: 0.6;
@@ -419,7 +417,6 @@ h3 {
 }
 
 @keyframes pulseGlow {
-
   0%,
   100% {
     box-shadow: 0 0 20px rgba(164, 141, 120, 0.1);
@@ -443,7 +440,6 @@ h3 {
 }
 
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0);
@@ -451,6 +447,46 @@ h3 {
 
   50% {
     transform: translateY(-15px);
+  }
+}
+
+/* Hero Background Zoom Animation */
+@keyframes hero-zoom {
+  0% {
+    transform: scale(1.3) translateZ(0);
+  }
+  100% {
+    transform: scale(1) translateZ(0);
+  }
+}
+
+/* Less dramatic zoom on desktop */
+@keyframes hero-zoom-desktop {
+  0% {
+    transform: scale(1.05) translateZ(0);
+  }
+  100% {
+    transform: scale(1) translateZ(0);
+  }
+}
+
+.animate-hero-zoom {
+  animation: hero-zoom 10s ease-out forwards;
+  transform-origin: center center;
+  will-change: transform;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+/* Faster and less dramatic zoom on desktop */
+@media (min-width: 768px) {
+  .animate-hero-zoom {
+    animation-name: hero-zoom-desktop;
+    animation-duration: 7s;
   }
 }
 
@@ -540,7 +576,8 @@ h3 {
 .fade-up {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
+  transition:
+    opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
     transform 1s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -634,13 +671,19 @@ h3 {
 
 .acc-cursor-lg,
 .acc-cursor-lg * {
-  cursor: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5056 10.7754C21.1225 10.5355 21.431 10.4155 21.5176 10.2459C21.5926 10.099 21.5903 9.92446 21.5115 9.77954C21.4205 9.61226 21.109 9.50044 20.486 9.2768L4.59629 3.5728C4.0866 3.38983 3.83175 3.29835 3.66514 3.35605C3.52029 3.40621 3.40645 3.52004 3.35629 3.6649C3.29859 3.8315 3.39008 4.08635 3.57304 4.59605L9.277 20.4858C9.50064 21.1088 9.61246 21.4203 9.77973 21.5113C9.92465 21.5901 10.0991 21.5924 10.2461 21.5174C10.4157 21.4308 10.5356 21.1223 10.7756 20.5054L13.3724 13.8278C13.4194 13.707 13.4429 13.6466 13.4792 13.5957C13.5114 13.5506 13.5508 13.5112 13.5959 13.479C13.6468 13.4427 13.7072 13.4192 13.828 13.3722L20.5056 10.7754Z' fill='white' stroke='%232C2420' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 4 4, auto !important;
+  cursor:
+    url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5056 10.7754C21.1225 10.5355 21.431 10.4155 21.5176 10.2459C21.5926 10.099 21.5903 9.92446 21.5115 9.77954C21.4205 9.61226 21.109 9.50044 20.486 9.2768L4.59629 3.5728C4.0866 3.38983 3.83175 3.29835 3.66514 3.35605C3.52029 3.40621 3.40645 3.52004 3.35629 3.6649C3.29859 3.8315 3.39008 4.08635 3.57304 4.59605L9.277 20.4858C9.50064 21.1088 9.61246 21.4203 9.77973 21.5113C9.92465 21.5901 10.0991 21.5924 10.2461 21.5174C10.4157 21.4308 10.5356 21.1223 10.7756 20.5054L13.3724 13.8278C13.4194 13.707 13.4429 13.6466 13.4792 13.5957C13.5114 13.5506 13.5508 13.5112 13.5959 13.479C13.6468 13.4427 13.7072 13.4192 13.828 13.3722L20.5056 10.7754Z' fill='white' stroke='%232C2420' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      4 4,
+    auto !important;
 }
 
 .acc-cursor-lg button,
 .acc-cursor-lg a,
 .acc-cursor-lg [role="button"] {
-  cursor: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5056 10.7754C21.1225 10.5355 21.431 10.4155 21.5176 10.2459C21.5926 10.099 21.5903 9.92446 21.5115 9.77954C21.4205 9.61226 21.109 9.50044 20.486 9.2768L4.59629 3.5728C4.0866 3.38983 3.83175 3.29835 3.66514 3.35605C3.52029 3.40621 3.40645 3.52004 3.35629 3.6649C3.29859 3.8315 3.39008 4.08635 3.57304 4.59605L9.277 20.4858C9.50064 21.1088 9.61246 21.4203 9.77973 21.5113C9.92465 21.5901 10.0991 21.5924 10.2461 21.5174C10.4157 21.4308 10.5356 21.1223 10.7756 20.5054L13.3724 13.8278C13.4194 13.707 13.4429 13.6466 13.4792 13.5957C13.5114 13.5506 13.5508 13.5112 13.5959 13.479C13.6468 13.4427 13.7072 13.4192 13.828 13.3722L20.5056 10.7754Z' fill='white' stroke='%232C2420' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 4 4, pointer !important;
+  cursor:
+    url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5056 10.7754C21.1225 10.5355 21.431 10.4155 21.5176 10.2459C21.5926 10.099 21.5903 9.92446 21.5115 9.77954C21.4205 9.61226 21.109 9.50044 20.486 9.2768L4.59629 3.5728C4.0866 3.38983 3.83175 3.29835 3.66514 3.35605C3.52029 3.40621 3.40645 3.52004 3.35629 3.6649C3.29859 3.8315 3.39008 4.08635 3.57304 4.59605L9.277 20.4858C9.50064 21.1088 9.61246 21.4203 9.77973 21.5113C9.92465 21.5901 10.0991 21.5924 10.2461 21.5174C10.4157 21.4308 10.5356 21.1223 10.7756 20.5054L13.3724 13.8278C13.4194 13.707 13.4429 13.6466 13.4792 13.5957C13.5114 13.5506 13.5508 13.5112 13.5959 13.479C13.6468 13.4427 13.7072 13.4192 13.828 13.3722L20.5056 10.7754Z' fill='white' stroke='%232C2420' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      4 4,
+    pointer !important;
 }
 
 .acc-highlight-links a {
@@ -674,16 +717,16 @@ h3 {
 }
 
 .acc-readable-font {
-  font-family: 'Arial', sans-serif !important;
+  font-family: "Arial", sans-serif !important;
 }
 
 .acc-dyslexia-font {
-  font-family: 'OpenDyslexic', sans-serif !important;
+  font-family: "OpenDyslexic", sans-serif !important;
 }
 
 .acc-dyslexia-font body,
 .acc-dyslexia-font body * {
-  font-family: 'OpenDyslexic', sans-serif !important;
+  font-family: "OpenDyslexic", sans-serif !important;
 }
 
 .acc-stop-animations * {

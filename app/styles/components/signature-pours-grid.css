@@ -14,19 +14,19 @@
 
 @media (min-width: 768px) {
   .signature-pour-image-wrapper {
-    padding: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
   }
 }
 
 @media (hover: hover) {
   .signature-pour-card:hover .signature-pour-image-wrapper {
-    transform: translateY(-6px) scale(1.02) !important;
+    transform: translateY(-6px) scale(1.02);
   }
 
   .signature-pour-card:hover .signature-pour-image {
-    transform: scale(1.05) !important;
+    transform: scale(1.05);
   }
 }
 

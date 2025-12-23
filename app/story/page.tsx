@@ -76,7 +76,7 @@ export default function StoryPage() {
           </RevealText>
           <FadeInSection delay="200ms">
             <p className="font-serif italic text-lg md:text-2xl text-cafe-cream/90 drop-shadow-sm">
-              Built by Riverside Locals, For Riverside.
+              Every great story starts with a blank page and a cup of coffee
             </p>
           </FadeInSection>
         </div>
@@ -254,18 +254,19 @@ export default function StoryPage() {
               </Reveal>
               <Reveal delay={200}>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
-                  Positioned near the art district and University Drive
-                  nightlife, we&apos;re at the intersection where
-                  Riverside&apos;s diverse communities meet. Remote workers, art
-                  enthusiasts, students, pre-club crews—everyone belongs here.
+                  Riverside sits at a cultural crossroads—near the art district,
+                  close to University Drive's nightlife, accessible to everyone.
+                  Remote workers, artists, students, night-owls: the city's
+                  diverse communities naturally converge here. We wanted to be
+                  where the energy already flows.
                 </p>
               </Reveal>
               <Reveal delay={260}>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
-                  We believe in Riverside&apos;s potential. This city deserves a
-                  coffee shop that reflects its creative spirit, its diversity,
-                  its energy. We&apos;re not just opening a café—we&apos;re
-                  investing in our community&apos;s future.
+                  But more than that, we believed Riverside deserved better. A
+                  café that reflects the city's creative spirit and recognizes
+                  its potential. This isn't just a business for us—it's an
+                  investment in our community.
                 </p>
               </Reveal>
 
@@ -367,15 +368,18 @@ export default function StoryPage() {
               </Reveal>
               <Reveal delay={200}>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed mb-6">
-                  We believe that great ideas start with great coffee. Whether
-                  you&apos;re sketching your next masterpiece, writing the next
-                  great novel, or just enjoying a moment of silence.
+                  We sourced ethically, roast in small batches, and brew with
+                  precision. Every cup carries not just flavor but a story:
+                  direct-trade relationships from Chiapas and Oaxaca, terroir
+                  honored in every extraction.
                 </p>
               </Reveal>
               <Reveal delay={260}>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed mb-10">
-                  Our beans are ethically sourced, roasted in small batches, and
-                  brewed with precision to fuel your inspiration.
+                  But coffee alone doesn't fuel creativity. That's why we
+                  designed every detail—from custom furniture to curated
+                  soundscapes—to support focus and inspiration. This space was
+                  built to help ideas flourish.
                 </p>
               </Reveal>
             </div>
@@ -448,9 +452,10 @@ export default function StoryPage() {
                   Single-Origin Mexican Coffee
                 </h3>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
-                  Direct-trade Chiapas and Oaxaca lots, roasted to honor
-                  sweetness and terroir. Every cup carries a cultural story and
-                  a transparent supply chain.
+                  We partner directly with farmers in Chiapas and Oaxaca,
+                  building relationships that outlast trends. You taste that
+                  commitment in every cup: complexity, terroir, and a supply
+                  chain you can trace back to the source.
                 </p>
               </div>
             </Reveal>
@@ -472,9 +477,11 @@ export default function StoryPage() {
                   100% Custom-Designed Space
                 </h3>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
-                  Built-by-hand furniture, lighting, and layout designed by our
-                  founder. Nothing off-the-shelf—only intentional pieces that
-                  invite you to linger.
+                  From the tables to the shelving, nothing came off a showroom
+                  floor. Our founder designed this space specifically for how
+                  people actually work and create here—seating angles, light
+                  placement, sightlines. The room itself becomes part of your
+                  focus.
                 </p>
               </div>
             </Reveal>
@@ -496,9 +503,10 @@ export default function StoryPage() {
                   Curated Soundscapes
                 </h3>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
-                  Deep house, neo-soul, and lo-fi playlists scored for focus and
-                  calm. No generic radio, just sound that matches the craft in
-                  your cup.
+                  Deep house, neo-soul, lo-fi—we engineer your sonic landscape.
+                  Music isn't background here. It's calibrated to keep you
+                  grounded without demanding attention, so your mind stays where
+                  you want it.
                 </p>
               </div>
             </Reveal>
@@ -520,8 +528,10 @@ export default function StoryPage() {
                   Community First
                 </h3>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
-                  Riverside&apos;s living room—stay as long as you like.
-                  Students, creatives, neighbors: everyone is welcome, always.
+                  Riverside's living room. Nurse one coffee for three hours or
+                  make it your office—there's no time limit, no judgment.
+                  Students, creatives, nomads, neighbors: you belong here as
+                  long as you need to.
                 </p>
               </div>
             </Reveal>
@@ -615,29 +625,23 @@ export default function StoryPage() {
             </Reveal>
           </div>
 
-                    {/* Together Section - Founders Quote */}
+          {/* Together Section - Founders Quote */}
 
-                    <Reveal delay={400}>
+          <Reveal delay={400}>
+            <div className="contact-quote mt-24 p-8 sm:p-10 md:p-12 rounded-2xl text-center">
+              <Coffee size={32} className="mx-auto mb-6 contact-quote__icon" />
 
-                      <div className="contact-quote mt-24 p-8 sm:p-10 md:p-12 rounded-2xl text-center">
+              <blockquote className="contact-quote__text font-serif text-2xl md:text-3xl italic max-w-2xl mx-auto leading-relaxed mb-4">
+                "We wanted to create a space where the first sip of morning
+                coffee feels like opening a new chapter. Every day at The
+                Notebook Cafe is a story worth telling."
+              </blockquote>
 
-                        <Coffee size={32} className="mx-auto mb-6 contact-quote__icon" />
-
-                        <blockquote className="contact-quote__text font-serif text-2xl md:text-3xl italic max-w-2xl mx-auto leading-relaxed mb-4">
-
-                          &ldquo;This is more than a business venture—it&apos;s our first shared creative project, a culmination of our individual passions converging into something we hope Riverside will love as much as we do.&rdquo;
-
-                        </blockquote>
-
-                        <footer className="contact-quote__footer text-xs uppercase tracking-[0.2em] font-bold">
-
-                          — The Founders
-
-                        </footer>
-
-                      </div>
-
-                    </Reveal>
+              <footer className="contact-quote__footer text-xs uppercase tracking-[0.2em] font-bold">
+                — The Founders
+              </footer>
+            </div>
+          </Reveal>
         </div>
       </section>
     </main>

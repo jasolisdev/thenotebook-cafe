@@ -6,11 +6,7 @@
 import Reveal from "../components/ui/Reveal";
 import RevealText from "../components/ui/RevealText";
 import FadeInSection from "../components/ui/FadeInSection";
-import {
-  CheckCircle,
-  Mail,
-  ExternalLink,
-} from "lucide-react";
+import { CheckCircle, Mail, ExternalLink } from "lucide-react";
 import "../styles/pages/careers.css";
 import "../styles/components/application-form.css";
 import type { Metadata } from "next";
