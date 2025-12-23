@@ -255,8 +255,8 @@ export default function StoryPage() {
               <Reveal delay={200}>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
                   Riverside sits at a cultural crossroads—near the art district,
-                  close to University Drive's nightlife, accessible to everyone.
-                  Remote workers, artists, students, night-owls: the city's
+                  close to University Drive&apos;s nightlife, accessible to everyone.
+                  Remote workers, artists, students, night-owls: the city&apos;s
                   diverse communities naturally converge here. We wanted to be
                   where the energy already flows.
                 </p>
@@ -264,8 +264,8 @@ export default function StoryPage() {
               <Reveal delay={260}>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
                   But more than that, we believed Riverside deserved better. A
-                  café that reflects the city's creative spirit and recognizes
-                  its potential. This isn't just a business for us—it's an
+                  café that reflects the city&apos;s creative spirit and recognizes
+                  its potential. This isn&apos;t just a business for us—it&apos;s an
                   investment in our community.
                 </p>
               </Reveal>
@@ -376,7 +376,7 @@ export default function StoryPage() {
               </Reveal>
               <Reveal delay={260}>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed mb-10">
-                  But coffee alone doesn't fuel creativity. That's why we
+                  But coffee alone doesn&apos;t fuel creativity. That&apos;s why we
                   designed every detail—from custom furniture to curated
                   soundscapes—to support focus and inspiration. This space was
                   built to help ideas flourish.
@@ -504,7 +504,7 @@ export default function StoryPage() {
                 </h3>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
                   Deep house, neo-soul, lo-fi—we engineer your sonic landscape.
-                  Music isn't background here. It's calibrated to keep you
+                  Music isn&apos;t background here. It&apos;s calibrated to keep you
                   grounded without demanding attention, so your mind stays where
                   you want it.
                 </p>
@@ -528,8 +528,8 @@ export default function StoryPage() {
                   Community First
                 </h3>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
-                  Riverside's living room. Nurse one coffee for three hours or
-                  make it your office—there's no time limit, no judgment.
+                  Riverside&apos;s living room. Nurse one coffee for three hours or
+                  make it your office—there&apos;s no time limit, no judgment.
                   Students, creatives, nomads, neighbors: you belong here as
                   long as you need to.
                 </p>
@@ -632,9 +632,9 @@ export default function StoryPage() {
               <Coffee size={32} className="mx-auto mb-6 contact-quote__icon" />
 
               <blockquote className="contact-quote__text font-serif text-2xl md:text-3xl italic max-w-2xl mx-auto leading-relaxed mb-4">
-                "We wanted to create a space where the first sip of morning
+                &quot;We wanted to create a space where the first sip of morning
                 coffee feels like opening a new chapter. Every day at The
-                Notebook Cafe is a story worth telling."
+                Notebook Cafe is a story worth telling.&quot;
               </blockquote>
 
               <footer className="contact-quote__footer text-xs uppercase tracking-[0.2em] font-bold">

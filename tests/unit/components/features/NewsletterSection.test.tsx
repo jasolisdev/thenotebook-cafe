@@ -15,7 +15,7 @@ describe('NewsletterSection', () => {
   test('renders headline and newsletter form', () => {
     render(<NewsletterSection />);
 
-    expect(screen.getByText('The Story Continues.')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /the story continues/i })).toBeInTheDocument();
     expect(screen.getByTestId('newsletter-form')).toHaveAttribute('data-source', 'homepage');
     expect(screen.getByRole('link', { name: /thenotebookcafellc/i })).toHaveAttribute(
       'href',
