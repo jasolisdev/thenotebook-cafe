@@ -2,12 +2,12 @@ import React from 'react';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { render, screen, waitFor } from '@/tests/utils/test-utils';
 
-vi.mock('@/app/lib/virtualBaristaResponder', () => ({
+vi.mock('@/app/lib/data/virtualBaristaResponder', () => ({
   getLocalBaristaReply: vi.fn(),
 }));
 
 import VirtualBarista from '@/app/components/ui/VirtualBarista';
-import { getLocalBaristaReply } from '@/app/lib/virtualBaristaResponder';
+import { getLocalBaristaReply } from '@/app/lib/data/virtualBaristaResponder';
 
 describe('VirtualBarista', () => {
   beforeEach(() => {

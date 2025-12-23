@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { SEO } from '@/lib/seo';
+import { SEO } from '@/app/lib/constants/seo';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const currentDate = new Date();

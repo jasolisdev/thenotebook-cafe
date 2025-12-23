@@ -1,19 +1,50 @@
 /**
- * Homepage - The Notebook Café
+ * @fileoverview Homepage - Main landing page
+ * @module pages/home
  *
- * Redesigned homepage featuring new hero, sanctuary section, vibe carousel, and newsletter.
+ * @description
+ * Main landing page for The Notebook Café featuring hero section,
+ * menu preview, atmosphere showcase, brand philosophy, community highlights,
+ * and newsletter signup.
+ *
+ * Key features:
+ * - Full-screen hero with brand messaging and CTA
+ * - Menu preview section with quick access to full menu
+ * - Atmosphere showcase with sticky text and scrolling gallery (WiFi, outlets, curated soundtrack, creator-friendly space)
+ * - The Trinity section (Craft Espresso, Curated Sound, Creative Comfort)
+ * - Low Lights experience section with dual imagery and brand story
+ * - Newsletter subscription section
+ *
+ * @route /
+ * @access public
+ *
+ * @example
+ * Route: https://thenotebookcafellc.com/
+ * Displays: Hero → Menu Preview → Atmosphere → Trinity → Low Lights → Newsletter
+ *
+ * @see {@link app/components/features/HeroSection.tsx} for hero implementation
+ * @see {@link app/components/features/MenuSection.tsx} for menu preview
+ * @see {@link app/components/features/NewsletterSection.tsx} for newsletter signup
  */
 import "@/app/styles/pages/home.css";
 import Image from "next/image";
 import Reveal from "@/app/components/ui/Reveal";
 import StoryLink from "@/app/components/ui/StoryLink";
-import { Coffee, Music, Armchair, Sparkles, Wifi, Zap, BookOpen } from "lucide-react";
+import {
+  Coffee,
+  Music,
+  Armchair,
+  Sparkles,
+  Wifi,
+  Zap,
+  BookOpen,
+} from "lucide-react";
 import MenuSection from "@/app/components/features/MenuSection";
 import HeroSection from "@/app/components/features/HeroSection";
 import NewsletterSection from "@/app/components/features/NewsletterSection";
 import LocalBusinessJsonLd from "@/app/components/seo/LocalBusinessJsonLd";
 import type { Metadata } from "next";
-import { SEO } from "@/lib/seo";
+import { SEO } from "@/app/lib/constants/seo";
 
 export const metadata: Metadata = {
   title: SEO.pages.home.title,
@@ -152,7 +183,11 @@ export default function HomePage() {
                 <Reveal delay={250}>
                   <div className="flex items-start gap-4 group">
                     <div className="mt-1 flex-shrink-0 w-12 h-12 rounded-full bg-[rgba(var(--cafe-tan-rgb),0.12)] flex items-center justify-center group-hover:bg-cafe-tan/20 transition-colors duration-300">
-                      <Wifi size={22} className="text-cafe-tan" strokeWidth={1.5} />
+                      <Wifi
+                        size={22}
+                        className="text-cafe-tan"
+                        strokeWidth={1.5}
+                      />
                     </div>
                     <div>
                       <h4 className="text-cafe-black font-semibold text-sm tracking-wide mb-0.5">
@@ -168,7 +203,11 @@ export default function HomePage() {
                 <Reveal delay={300}>
                   <div className="flex items-start gap-4 group">
                     <div className="mt-1 flex-shrink-0 w-12 h-12 rounded-full bg-[rgba(var(--cafe-tan-rgb),0.12)] flex items-center justify-center group-hover:bg-cafe-tan/20 transition-colors duration-300">
-                      <Zap size={22} className="text-cafe-tan" strokeWidth={1.5} />
+                      <Zap
+                        size={22}
+                        className="text-cafe-tan"
+                        strokeWidth={1.5}
+                      />
                     </div>
                     <div>
                       <h4 className="text-cafe-black font-semibold text-sm tracking-wide mb-0.5">
@@ -184,7 +223,11 @@ export default function HomePage() {
                 <Reveal delay={350}>
                   <div className="flex items-start gap-4 group">
                     <div className="mt-1 flex-shrink-0 w-12 h-12 rounded-full bg-[rgba(var(--cafe-tan-rgb),0.12)] flex items-center justify-center group-hover:bg-cafe-tan/20 transition-colors duration-300">
-                      <Music size={22} className="text-cafe-tan" strokeWidth={1.5} />
+                      <Music
+                        size={22}
+                        className="text-cafe-tan"
+                        strokeWidth={1.5}
+                      />
                     </div>
                     <div>
                       <h4 className="text-cafe-black font-semibold text-sm tracking-wide mb-0.5">
@@ -200,7 +243,11 @@ export default function HomePage() {
                 <Reveal delay={400}>
                   <div className="flex items-start gap-4 group">
                     <div className="mt-1 flex-shrink-0 w-12 h-12 rounded-full bg-[rgba(var(--cafe-tan-rgb),0.12)] flex items-center justify-center group-hover:bg-cafe-tan/20 transition-colors duration-300">
-                      <BookOpen size={22} className="text-cafe-tan" strokeWidth={1.5} />
+                      <BookOpen
+                        size={22}
+                        className="text-cafe-tan"
+                        strokeWidth={1.5}
+                      />
                     </div>
                     <div>
                       <h4 className="text-cafe-black font-semibold text-sm tracking-wide mb-0.5">

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Coffee, MessageCircle, Send, X } from "lucide-react";
-import { getLocalBaristaReply } from "@/app/lib/virtualBaristaResponder";
+import { getLocalBaristaReply } from "@/app/lib/data/virtualBaristaResponder";
 
 type ChatMessage = {
   role: "user" | "model";

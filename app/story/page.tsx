@@ -1,7 +1,31 @@
 /**
- * Story Page - The Notebook Café
+ * @fileoverview Story page - Brand narrative and mission
+ * @module pages/story
  *
- * Redesigned about page featuring the café's story, values, and mission.
+ * @description
+ * Brand story page featuring the café's origin, philosophy, values, location,
+ * and founders. Tells the complete narrative of The Notebook Café's mission
+ * and what makes it unique in Riverside's coffee scene.
+ *
+ * Key features:
+ * - Hero banner with tagline
+ * - Origin story section (How It Began) with dual imagery
+ * - Why Riverside section with location context and stats
+ * - Philosophy section (Crafted for Creatives) with product imagery
+ * - What Sets Us Apart grid (Mexican coffee, custom design, soundscapes, community)
+ * - Meet the Founders profiles (Michael & Julia)
+ * - Founders quote blockquote
+ *
+ * @route /story
+ * @access public
+ *
+ * @example
+ * Route: /story
+ * Displays: Hero → Origin → Why Riverside → Philosophy → Differentiators → Founders → Quote
+ *
+ * @see {@link app/components/ui/Reveal.tsx} for reveal animations
+ * @see {@link app/components/ui/RevealText.tsx} for text animations
+ * @see {@link app/components/ui/FadeInSection.tsx} for section fades
  */
 import Reveal from "@/app/components/ui/Reveal";
 import RevealText from "@/app/components/ui/RevealText";
@@ -18,9 +42,9 @@ import {
   Home as HomeIcon,
   Award,
 } from "lucide-react";
-import "../styles/pages/story.css";
+import "@/app/styles/pages/story.css";
 import type { Metadata } from "next";
-import { SEO } from "@/lib/seo";
+import { SEO } from "@/app/lib/constants/seo";
 
 export const metadata: Metadata = {
   title: SEO.pages.story.title,

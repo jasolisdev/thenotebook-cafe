@@ -6,7 +6,7 @@
  */
 
 import { describe, test, expect, beforeEach, vi } from 'vitest';
-import { checkRateLimit } from '@/app/lib/rateLimit';
+import { checkRateLimit } from '@/app/lib/server/rateLimit';
 
 // Helper to create mock Request objects
 function createMockRequest(headers: Record<string, string> = {}): Request {

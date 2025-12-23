@@ -5,7 +5,7 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { NextResponse } from 'next/server';
 import { POST } from '@/app/api/auth/verify/route';
-import { checkRateLimit } from '@/app/lib/rateLimit';
+import { checkRateLimit } from '@/app/lib/server/rateLimit';
 
 const cookieSet = vi.fn();
 
@@ -15,7 +15,7 @@ vi.mock('next/headers', () => ({
   }),
 }));
 
-vi.mock('@/app/lib/rateLimit', () => ({
+vi.mock('@/app/lib/server/rateLimit', () => ({
   checkRateLimit: vi.fn(),
 }));
 

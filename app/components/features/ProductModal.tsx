@@ -8,7 +8,7 @@ import { MenuItem, CartItem, SelectedModifier } from '@/app/types';
 import { MODIFIERS } from '@/app/constants';
 import { Button } from '../ui/Button';
 import { useCart } from '../providers/CartProvider';
-import { COLORS } from '@/app/lib/colors';
+import { COLORS } from '@/app/lib/constants/colors';
 
 // Use shared colors for consistency across the app
 const colors = COLORS;

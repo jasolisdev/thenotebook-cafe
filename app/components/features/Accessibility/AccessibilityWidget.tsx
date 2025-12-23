@@ -8,7 +8,7 @@ import {
   ContrastIcon, EyeIcon, ResetIcon, ChevronLeftIcon,
   MousePointerIcon, LinkIcon, RulerIcon, PauseIcon, BrainIcon
 } from '@/app/components/ui/AccessibilityIcons';
-import { logger } from '@/app/lib/logger';
+import { logger } from '@/app/lib/server/logger';
 
 interface AccessibilitySettings {
   textSize: 'normal' | 'large' | 'xl';

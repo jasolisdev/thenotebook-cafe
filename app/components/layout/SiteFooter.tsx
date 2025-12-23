@@ -1,3 +1,17 @@
+/**
+ * @fileoverview Site-wide footer component
+ * @module components/layout/SiteFooter
+ *
+ * @description
+ * Responsive footer with business information, newsletter signup,
+ * navigation links, and social media. Features mobile-first design
+ * with inline newsletter subscription form.
+ *
+ * @example
+ * ```tsx
+ * <SiteFooter />
+ * ```
+ */
 "use client";
 
 import Link from "next/link";

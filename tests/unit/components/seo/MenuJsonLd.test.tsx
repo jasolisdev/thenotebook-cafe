@@ -2,7 +2,7 @@ import React from 'react';
 import { describe, expect, test } from 'vitest';
 import { render } from '@/tests/utils/test-utils';
 import MenuJsonLd from '@/app/components/seo/MenuJsonLd';
-import { SEO } from '@/lib/seo';
+import { SEO } from '@/app/lib/constants/seo';
 
 describe('MenuJsonLd', () => {
   test('renders menu sections and items, including offers when price is present', () => {

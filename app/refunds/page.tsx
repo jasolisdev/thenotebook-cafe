@@ -1,3 +1,25 @@
+/**
+ * @fileoverview Refund & Cancellation Policy page
+ * @module pages/refunds
+ *
+ * @description
+ * Legal page displaying The Notebook Café's refund and cancellation policy.
+ * Covers in-store purchases, online orders, and refund request process.
+ *
+ * Key features:
+ * - Refund policy sections (In-store, Online, Request Process)
+ * - Last updated timestamp
+ * - Noindex robots meta (not indexed by search engines)
+ * - Minimal layout with readable typography
+ * - Contact information for refund requests
+ *
+ * @route /refunds
+ * @access public
+ *
+ * @example
+ * Route: /refunds
+ * Displays: Refund policy content
+ */
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

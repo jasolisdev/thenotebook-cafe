@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
-import Reveal from "../components/ui/Reveal";
+import Reveal from "@/app/components/ui/Reveal";
 
 type MenuSection = "drinks" | "meals" | "desserts";
 

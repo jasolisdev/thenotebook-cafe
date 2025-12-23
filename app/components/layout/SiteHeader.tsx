@@ -1,3 +1,20 @@
+/**
+ * @fileoverview Main navigation header component
+ * @module components/layout/SiteHeader
+ *
+ * @description
+ * Responsive navigation header with sticky positioning, scroll detection,
+ * mobile hamburger menu, and shopping cart integration. Features dynamic
+ * background opacity based on scroll position and route.
+ *
+ * @example
+ * ```tsx
+ * <SiteHeader
+ *   instagramUrl="https://instagram.com/..."
+ *   spotifyUrl="https://spotify.com/..."
+ * />
+ * ```
+ */
 "use client";
 
 import Link from "next/link";

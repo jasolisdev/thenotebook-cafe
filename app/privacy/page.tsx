@@ -1,3 +1,24 @@
+/**
+ * @fileoverview Privacy Policy page
+ * @module pages/privacy
+ *
+ * @description
+ * Legal page displaying The Notebook Café's privacy policy.
+ * Explains data collection, usage, cookies, and user rights.
+ *
+ * Key features:
+ * - Privacy policy sections (Overview, Data Usage, Cookies)
+ * - Last updated timestamp
+ * - Noindex robots meta (not indexed by search engines)
+ * - Minimal layout with readable typography
+ *
+ * @route /privacy
+ * @access public
+ *
+ * @example
+ * Route: /privacy
+ * Displays: Privacy policy content
+ */
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

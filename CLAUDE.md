@@ -2,9 +2,13 @@
 
 This file provides comprehensive guidance to Claude Code (claude.ai/code) when working with The Notebook Café codebase.
 
-update this file if there are any changes to the project structure, tech stack, or development guidelines as well as the files in the `docs/` folder.
+Update this file if there are any changes to the project structure, tech stack, or development guidelines as well as the files in the `docs/` folder.
 
 The following are guidelines and documentation to help Claude understand the project architecture, coding standards, and key technical patterns.
+
+Whenever you make changes to the codebase, please ensure this document is updated accordingly.
+
+Create test cases for any new features or bug fixes you implement, following the existing testing patterns.
 
 ---
 
@@ -141,11 +145,11 @@ The site uses Tailwind CSS v4 with colors registered via the `@theme` directive 
 }
 ```
 
-**Shared Colors** (`app/lib/colors.ts`):
+**Shared Colors** (`app/lib/constants/colors.ts`):
 Used in React components that need static color values (e.g., CartDrawer, ProductModal).
 
 ```typescript
-import { COLORS } from "@/app/lib/colors";
+import { COLORS } from "@/app/lib/constants/colors";
 
 // Available colors:
 (COLORS.black,
@@ -588,6 +592,89 @@ npm run test:all
 ---
 
 ## Recent Updates
+
+### **December 2025 - Modular Refactoring (Phases 1-6)**
+
+Major codebase reorganization for consistency, modularity, and documentation:
+
+**Phase 1: Documentation & Types**
+- ✅ Created modular type system in `app/types/` with domain-specific files
+- ✅ Added barrel exports (`index.ts`) for convenient importing
+- ✅ Created 11 comprehensive README files documenting all major directories
+- ✅ Deleted monolithic `app/types.ts` in favor of organized structure
+
+**Phase 2: Utilities & Constants**
+- ✅ Reorganized `app/lib/` into `server/`, `data/`, and `constants/` subdirectories
+- ✅ Created barrel export at `app/lib/index.ts` for server utilities
+- ✅ Added barrel export at `app/utils/index.ts` for client utilities
+- ✅ Moved constants from root `lib/` to `app/lib/constants/`
+- ✅ Deleted root `lib/` folder after migration
+
+**Phase 3: Import Path Standardization**
+- ✅ Converted all relative imports (`../`, `./`) to absolute paths (`@/app/...`)
+- ✅ Standardized 20+ page and component files
+- ✅ Updated dynamic imports in layout components
+
+**Phase 4: Component Organization**
+- ✅ Added JSDoc file headers to layout components
+- ✅ Established JSDoc documentation pattern for all components
+- ✅ Moved `ErrorBoundary.tsx` to `app/components/ui/`
+- ✅ Validated component structure and organization
+
+**Phase 5: CSS Consolidation**
+- ✅ Audited all 21 CSS files and their import locations
+- ✅ Standardized CSS imports to absolute paths
+- ✅ Added JSDoc header pattern to CSS files
+- ✅ Removed unused `legal.css`
+- ✅ Documented CSS ownership rules
+
+**Phase 6: Documentation & Validation**
+- ✅ Updated CLAUDE.md with new structure
+- ✅ Updated all documentation to reflect changes
+- ✅ Created refactoring summary
+
+**New Structure:**
+```
+app/
+├── types/           # Domain-specific type files + barrel export
+├── lib/
+│   ├── server/      # Server-only utilities (csrf, logger, etc.)
+│   ├── data/        # Data/content files
+│   ├── constants/   # Business, SEO, color constants
+│   └── index.ts     # Barrel export
+├── utils/           # Client-safe utilities + barrel export
+├── components/      # Organized by category with READMEs
+└── styles/          # CSS with clear ownership rules
+```
+
+**Benefits:**
+- Clear separation of server/client code
+- Consistent absolute import paths
+- Comprehensive inline documentation
+- Modular, scalable architecture
+- Each directory self-documented with README
+
+### **December 2025 - Page JSDoc Documentation**
+
+- ✅ Added comprehensive JSDoc headers to all 13 page files
+- ✅ Documented all public pages (homepage, menu, story, contact, careers, legal)
+- ✅ Documented layouts (root layout, menu layout)
+- ✅ Documented special pages (studio, 404)
+- ✅ Established consistent JSDoc template for pages
+- ✅ Fixed import path issues from modular refactoring
+- ✅ Build and lint validation passes
+
+**Pages Documented:**
+- Public: homepage, menu, story, contact, careers, thank-you, privacy, terms, refunds
+- Layouts: root layout, menu layout
+- Special: studio, 404
+
+**Additional Fixes:**
+- Fixed `ErrorBoundary` import path
+- Fixed `COLORS` import paths (`@/app/lib/constants/colors`)
+- Fixed `SEO` and `BUSINESS_INFO` import paths
+- Fixed `logger` import path (`@/app/lib/server/logger`)
+- Fixed barrel export in `app/lib/constants/index.ts`
 
 ### **December 2025 - Test Coverage Analysis**
 

@@ -1,27 +1,63 @@
+/**
+ * @fileoverview Root layout with global providers
+ * @module layouts/root
+ *
+ * @description
+ * Root layout component that wraps the entire application.
+ * Provides global state management, metadata, font loading,
+ * analytics, and SiteShell wrapper.
+ *
+ * Provides:
+ * - CartProvider for shopping cart state management
+ * - ThemeProvider for dark/light mode support
+ * - Font optimization (Playfair Display, Torus, Inter)
+ * - Global CSS imports (navigation, buttons, footer, etc.)
+ * - Vercel Analytics and Speed Insights (conditionally loaded)
+ * - Open Graph and Twitter metadata
+ * - SiteShell with header/footer
+ * - PasswordGate for site-wide password protection (if enabled)
+ * - ErrorBoundary for graceful error handling
+ *
+ * @example
+ * Every page is wrapped with:
+ * <ThemeProvider>
+ *   <CartProvider>
+ *     <PasswordGate>
+ *       <SiteShell>
+ *         {children}
+ *       </SiteShell>
+ *     </PasswordGate>
+ *   </CartProvider>
+ * </ThemeProvider>
+ *
+ * @see {@link app/components/providers/CartProvider.tsx} for cart state
+ * @see {@link app/components/layout/SiteShell.tsx} for shell wrapper
+ * @see {@link app/components/ui/PasswordGate.tsx} for password protection
+ */
 // app/layout.tsx
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 // Component styles
-import "./styles/components/navigation.css";
-import "./styles/components/buttons.css";
-import "./styles/components/footer.css";
-import "./styles/components/announcement.css";
-import "./styles/components/consent-banner.css";
+import "@/app/styles/components/navigation.css";
+import "@/app/styles/components/buttons.css";
+import "@/app/styles/components/footer.css";
+import "@/app/styles/components/announcement.css";
+import "@/app/styles/components/consent-banner.css";
 
 // Layout styles
-import "./styles/layout/sections.css";
-import "./styles/layout/animations.css";
+import "@/app/styles/layout/sections.css";
+import "@/app/styles/layout/animations.css";
 
 import { ThemeProvider } from "next-themes";
 import { cookies } from "next/headers";
-import { DM_Serif_Display } from "next/font/google";
+import { inter, playfairDisplay, torus } from "./fonts";
 import PasswordGate from "./components/ui/PasswordGate";
 import SiteShell from "./components/layout/SiteShell";
 import { client, hasSanityConfig } from "@/sanity/lib/client";
 import { CartProvider } from "./components/providers/CartProvider";
-import { ErrorBoundary } from "./components/ErrorBoundary";
-import { SEO } from "@/lib/seo";
+import { ErrorBoundary } from "./components/ui/ErrorBoundary";
+import { SEO } from "@/app/lib/constants/seo";
 
 
 export const metadata: Metadata = {
@@ -97,14 +133,6 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 };
 
-const dmSerif = DM_Serif_Display({
-  weight: ["400"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  variable: "--font-dm-serif",
-  display: "swap",
-});
-
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -139,7 +167,11 @@ export default async function RootLayout({
       : null;
 
   return (
-    <html lang="en" suppressHydrationWarning className={`${dmSerif.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${inter.variable} ${playfairDisplay.variable} ${torus.variable}`}
+    >
       <body className="antialiased font-sans">
         <ThemeProvider
           attribute="class"

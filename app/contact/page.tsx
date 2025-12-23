@@ -1,20 +1,45 @@
 /**
- * Contact Page - The Notebook Café
+ * @fileoverview Contact page with form submission
+ * @module pages/contact
  *
- * Warm, welcoming contact page matching the site's overall aesthetic.
- * Features business hours, location map, contact info, and social links.
+ * @description
+ * Contact page featuring form submission with email notification,
+ * business information sidebar, and FAQ structured data for local SEO.
+ *
+ * Key features:
+ * - Hero banner with contact heading
+ * - Contact form with name, email, subject, message fields
+ * - Client-side and server-side validation
+ * - Email notification via Resend API (sent to business owner)
+ * - CSRF protection and rate limiting (3 requests per minute)
+ * - Input sanitization for XSS prevention
+ * - Success/error state handling with user feedback
+ * - Business information sidebar (hours, location, phone, email)
+ * - FAQ structured data (FAQJsonLd) for rich snippets
+ * - Local business structured data (LocalBusinessJsonLd)
+ *
+ * @route /contact
+ * @access public
+ *
+ * @example
+ * Route: /contact
+ * Flow: Fill Form → Validate → Submit → Email Sent → Confirmation Message
+ *
+ * @see {@link app/components/features/ContactForm.tsx} for form component
+ * @see {@link app/api/contact/route.ts} for API endpoint with security
+ * @see {@link app/components/seo/FAQJsonLd.tsx} for FAQ structured data
  */
 import Reveal from "@/app/components/ui/Reveal";
 import RevealText from "@/app/components/ui/RevealText";
 import FadeInSection from "@/app/components/ui/FadeInSection";
 import ContactForm from "@/app/components/features/ContactForm";
 import { MapPin, Clock, Phone, Mail, Coffee } from "lucide-react";
-import "../styles/pages/contact.css";
+import "@/app/styles/pages/contact.css";
 import type { Metadata } from "next";
-import { SEO } from "@/lib/seo";
+import { SEO } from "@/app/lib/constants/seo";
 import FAQJsonLd from "@/app/components/seo/FAQJsonLd";
 import LocalBusinessJsonLd from "@/app/components/seo/LocalBusinessJsonLd";
-import { BUSINESS_INFO } from "@/lib/business";
+import { BUSINESS_INFO } from "@/app/lib/constants/business";
 
 export const metadata: Metadata = {
   title: SEO.pages.contact.title,

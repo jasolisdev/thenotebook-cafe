@@ -2,7 +2,7 @@
  * Shared color constants for React components
  * These mirror the Tailwind @theme colors from globals.css
  *
- * Usage: import { COLORS, RGBA_COLORS } from '@/app/lib/colors';
+ * Usage: import { COLORS, RGBA_COLORS } from '@/app/lib/constants/colors';
  *
  * @example
  * // In TypeScript/JSX (static values):

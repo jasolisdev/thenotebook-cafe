@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Navigation component styles
+ * @module styles/components/navigation
+ *
+ * Imported globally in layout.tsx
+ * Provides styles for SiteHeader component
+ */
+
 /* ============================================================
    NAVIGATION
 ============================================================ */

@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { validateOrigin } from "@/app/lib/csrf";
-import { checkRateLimit } from "@/app/lib/rateLimit";
-import { logger } from "@/app/lib/logger";
-import { sanitizeEmail, sanitizeMultilineText, sanitizeText } from "@/app/lib/sanitize";
+import { validateOrigin } from "@/app/lib/server/csrf";
+import { checkRateLimit } from "@/app/lib/server/rateLimit";
+import { logger } from "@/app/lib/server/logger";
+import { sanitizeEmail, sanitizeMultilineText, sanitizeText } from "@/app/lib/server/sanitize";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_FILE_SIZE = 5 * 1024 * 1024;

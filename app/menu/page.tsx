@@ -1,3 +1,34 @@
+/**
+ * @fileoverview Menu page with product browsing
+ * @module pages/menu
+ *
+ * @description
+ * Interactive menu page with tabbed navigation, product cards,
+ * and cart integration. Features sticky category tabs, modal-based
+ * product customization, and real-time cart updates.
+ *
+ * Key features:
+ * - Hero banner with menu title and tagline
+ * - Sticky tab navigation (Drinks, Meals, Desserts) that adjusts with header visibility
+ * - Smart scroll behavior - locks viewport when switching tabs above threshold
+ * - Filterable product cards grouped by subcategory
+ * - ProductModal for customization (size, milk, extras, notes)
+ * - Add to cart with modifiers and special instructions
+ * - "Coming soon" placeholder for drinks section
+ * - Mobile-responsive layout with fixed background
+ *
+ * @route /menu
+ * @access public
+ *
+ * @example
+ * Route: /menu
+ * Flow: Browse → Select Tab → Click Product → Customize → Add to Cart
+ *
+ * @see {@link app/components/features/ProductModal.tsx} for product customization
+ * @see {@link app/menu/_components/MenuTabs.tsx} for navigation tabs
+ * @see {@link app/menu/_components/MenuSectionList.tsx} for product listing
+ * @see {@link app/constants.ts} for MENU_ITEMS data
+ */
 'use client';
 
 import { useMemo, useState, useEffect, useRef, useCallback } from 'react';
@@ -6,7 +37,7 @@ import { MENU_ITEMS } from '@/app/constants';
 import { ProductModal } from '@/app/components/features/ProductModal';
 import RevealText from '@/app/components/ui/RevealText';
 import FadeInSection from '@/app/components/ui/FadeInSection';
-import '../styles/pages/menu.css';
+import '@/app/styles/pages/menu.css';
 import { MenuTabs } from './_components/MenuTabs';
 import { MenuSectionList } from './_components/MenuSectionList';
 
