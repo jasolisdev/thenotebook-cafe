@@ -69,11 +69,11 @@ export default function StoryPage() {
           aria-hidden="true"
         />
         <div className="relative z-10 text-left md:text-center px-6 w-full max-w-7xl mx-auto">
-          <RevealText delay="0ms">
-            <h1 className="font-dm-serif font-bold text-4xl md:text-6xl text-cafe-cream mb-4">
+          <h1 className="font-dm-serif font-bold text-4xl md:text-6xl text-cafe-cream mb-4">
+            <RevealText delay="0ms">
               Our Story
-            </h1>
-          </RevealText>
+            </RevealText>
+          </h1>
           <FadeInSection delay="200ms">
             <p className="font-serif italic text-lg md:text-2xl text-cafe-cream/90 drop-shadow-sm">
               Every great story starts with a blank page and a cup of coffee

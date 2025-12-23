@@ -608,20 +608,22 @@ h3 {
   filter: contrast(125%);
 }
 
-/* Hide images but keep UI icons visible */
-.acc-hide-images main img,
-.acc-hide-images main svg:not(.bionic-skip),
-.acc-hide-images main [style*="background-image"] {
+/* Hide images but keep UI icons (SVGs) visible */
+.acc-hide-images main img {
   visibility: hidden;
 }
 
-/* Hide decorative blobs/shapes for reduced visual noise */
-.acc-hide-images .signature-pour-blob,
-.acc-hide-images .menu-card-image {
-  display: none !important;
+/* For elements with inline background images, just remove the image so text remains visible */
+.acc-hide-images main [style*="background-image"] {
+  background-image: none !important;
 }
 
-/* When images are hidden, force hero text to dark for readability */
+/* When images are hidden, ensure Hero sections have the "Gray" look (Mist background + Dark Overlay) */
+.acc-hide-images main section[data-section="Hero"] {
+  background-color: var(--color-cafe-mist) !important;
+}
+
+/* Force text to White/Cream for readability against the gray background */
 .acc-hide-images .home-hero-title,
 .acc-hide-images .home-hero-subtitle,
 .acc-hide-images .home-hero-pill,
@@ -629,10 +631,16 @@ h3 {
 .acc-hide-images .home-hero-copy,
 .acc-hide-images .home-hero-grid,
 .acc-hide-images .hero-latte-card,
-.acc-hide-images .hero-latte-pill {
-  color: var(--color-cafe-black) !important;
-  fill: var(--color-cafe-black) !important;
+.acc-hide-images .hero-latte-pill,
+.acc-hide-images main section[data-section="Hero"] h1,
+.acc-hide-images main section[data-section="Hero"] p,
+.acc-hide-images main section[data-section="Hero"] span {
+  color: var(--color-cafe-white) !important;
+  fill: var(--color-cafe-white) !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
 }
+
+/* Hide decorative blobs/shapes for reduced visual noise */
 
 .acc-hide-images .home-hero-pill,
 .acc-hide-images .hero-latte-card {
@@ -732,6 +740,38 @@ h3 {
 .acc-stop-animations * {
   animation: none !important;
   transition: none !important;
+}
+
+/* Force hidden animated elements to be visible when animations are stopped */
+.acc-stop-animations .reveal-text-anim {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+}
+
+.acc-stop-animations .scroll-reveal {
+  transform: scale(1) !important;
+  opacity: 1 !important;
+}
+
+.acc-stop-animations .fade-up {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+}
+
+/* On mobile, completely hide the image containers instead of leaving empty boxes */
+@media (max-width: 768px) {
+  .acc-hide-images .relative.aspect-\[4\/3\],
+  .acc-hide-images .relative.aspect-\[3\/4\],
+  .acc-hide-images .contact-map-frame,
+  .acc-hide-images .story-map-frame {
+    display: none !important;
+  }
+  
+  /* Ensure Hero sections are NOT hidden */
+  .acc-hide-images main section[data-section="Hero"] .relative.aspect-\[4\/3\],
+  .acc-hide-images main section[data-section="Hero"] .relative.aspect-\[3\/4\] {
+    display: block !important;
+  }
 }
 
 /* ============================================================

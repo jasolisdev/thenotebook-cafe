@@ -275,13 +275,13 @@ export default function SiteHeader({
               />
               <div className="flex flex-col">
                 <span
-                  className="font-serif whitespace-nowrap text-xl sm:text-2xl md:text-3xl leading-none tracking-tight"
+                  className="font-serif whitespace-nowrap text-xl sm:text-2xl md:text-3xl leading-none tracking-tight bionic-skip"
                   style={{ color: useLightText ? 'var(--color-coffee-50)' : 'var(--color-coffee-900)' }}
                 >
                   The Notebook
                 </span>
                 <span
-                  className="text-[12px] uppercase tracking-[0.22em] leading-none"
+                  className="text-[12px] uppercase tracking-[0.22em] leading-none bionic-skip"
                   style={{
                     color: useLightText ? 'var(--color-coffee-50)' : 'var(--color-coffee-900)',
                     opacity: 0.8

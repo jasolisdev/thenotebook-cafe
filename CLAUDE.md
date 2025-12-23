@@ -2,6 +2,10 @@
 
 This file provides comprehensive guidance to Claude Code (claude.ai/code) when working with The Notebook Café codebase.
 
+update this file if there are any changes to the project structure, tech stack, or development guidelines as well as the files in the `docs/` folder.
+
+The following are guidelines and documentation to help Claude understand the project architecture, coding standards, and key technical patterns.
+
 ---
 
 ## 📋 Table of Contents
@@ -26,6 +30,7 @@ This file provides comprehensive guidance to Claude Code (claude.ai/code) when w
 **The Notebook Café** is a Next.js 16 website for a Riverside-based coffee shop, using Sanity CMS for content management. The site features marketing pages, menu browsing with a cart UI (no on-site checkout yet), and an embedded CMS studio at `/studio`.
 
 ### Core Philosophy
+
 - **Coffee culture meets creative community**
 - **House music and soulful vibes**
 - **Premium, minimal design aesthetic**
@@ -36,42 +41,47 @@ This file provides comprehensive guidance to Claude Code (claude.ai/code) when w
 
 ## Tech Stack
 
-| Layer | Technology | Version |
-|-------|-----------|---------|
-| **Framework** | Next.js (App Router) | 16 |
-| **Language** | TypeScript | Latest |
-| **CMS** | Sanity | v4 |
-| **Styling** | Tailwind CSS v4 + Custom CSS | v4.1.16 |
-| **Fonts** | Playfair Display + Torus (Alpino available) | Custom |
-| **Icons** | Lucide React + React Icons | Latest |
-| **Animation** | Framer Motion | Latest |
-| **Email** | Resend | Latest |
-| **Analytics** | Vercel Analytics + Speed Insights | Latest |
-| **Deployment** | Vercel | Latest |
+| Layer          | Technology                                  | Version |
+| -------------- | ------------------------------------------- | ------- |
+| **Framework**  | Next.js (App Router)                        | 16      |
+| **Language**   | TypeScript                                  | Latest  |
+| **CMS**        | Sanity                                      | v4      |
+| **Styling**    | Tailwind CSS v4 + Custom CSS                | v4.1.16 |
+| **Fonts**      | Playfair Display + Torus (Alpino available) | Custom  |
+| **Icons**      | Lucide React + React Icons                  | Latest  |
+| **Animation**  | Framer Motion                               | Latest  |
+| **Email**      | Resend                                      | Latest  |
+| **Analytics**  | Vercel Analytics + Speed Insights           | Latest  |
+| **Deployment** | Vercel                                      | Latest  |
 
 ---
 
 ## Development Commands
 
 ### Local Development
+
 ```bash
 npm run dev
 ```
+
 - Frontend: http://localhost:3000
 - Sanity Studio: http://localhost:3000/studio
 
 ### Build & Production
+
 ```bash
 npm run build    # Build for production
 npm start        # Start production server
 ```
 
 ### Linting
+
 ```bash
 npm run lint     # Run ESLint
 ```
 
 ### Testing
+
 **Note:** Test infrastructure is configured (Vitest + React Testing Library + Playwright). See `docs/TEST_PLAN.md` and `docs/TEST_COVERAGE_ANALYSIS.md` for the current scope.
 
 ---
@@ -93,12 +103,14 @@ The canonical, up-to-date component catalog lives in `docs/component-inventory.m
 ### **Design Tokens**
 
 #### Typography
+
 ```css
 --font-sans: "Torus", "Inter", system-ui, sans-serif; /* Body text */
---font-display: "Playfair Display", serif;           /* Headings */
+--font-display: "Playfair Display", serif; /* Headings */
 ```
 
 **Usage:**
+
 - **Display Font (Playfair Display)**: All h1, h2, h3, branding, hero text
 - **Body Font (Torus/Inter)**: Paragraphs, navigation, UI elements
 
@@ -113,20 +125,19 @@ The site uses Tailwind CSS v4 with colors registered via the `@theme` directive 
 /* Tailwind v4 Theme - generates bg-cafe-*, text-cafe-* utilities */
 @theme {
   /* Core Palette */
-  --color-cafe-black: #2C2420;      /* Dark brown - headings, primary text */
-  --color-cafe-brown: #4A3B32;      /* Medium brown - body text */
-  --color-cafe-tan: #A48D78;        /* Primary accent - CTAs, highlights */
-  --color-cafe-tan-dark: #8E7965;   /* Button hover states */
-  --color-cafe-beige: #CBB9A4;      /* Borders, muted elements */
-  --color-cafe-luxe-oat: #CBBFAF;   /* Navigation accents */
-  --color-cafe-cream: #EDE7D8;      /* Light backgrounds */
-  --color-cafe-mist: #F4F1EA;       /* Very light backgrounds */
-  --color-cafe-white: #FAF9F6;      /* Main background */
+  --color-cafe-black: #2c2420; /* Dark brown - headings, primary text */
+  --color-cafe-brown: #4a3b32; /* Medium brown - body text */
+  --color-cafe-tan: #a48d78; /* Primary accent - CTAs, highlights */
+  --color-cafe-tan-dark: #8e7965; /* Button hover states */
+  --color-cafe-beige: #cbb9a4; /* Borders, muted elements */
+  --color-cafe-luxe-oat: #cbbfaf; /* Navigation accents */
+  --color-cafe-cream: #ede7d8; /* Light backgrounds */
+  --color-cafe-mist: #f4f1ea; /* Very light backgrounds */
+  --color-cafe-white: #faf9f6; /* Main background */
 
   /* Premium Navbar/Footer */
-  --color-coffee-50: #F3EFE9;       /* Navbar text (light) */
-  --color-coffee-900: #2C241F;      /* Navbar text (scrolled) */
-
+  --color-coffee-50: #f3efe9; /* Navbar text (light) */
+  --color-coffee-900: #2c241f; /* Navbar text (scrolled) */
 }
 ```
 
@@ -134,11 +145,17 @@ The site uses Tailwind CSS v4 with colors registered via the `@theme` directive 
 Used in React components that need static color values (e.g., CartDrawer, ProductModal).
 
 ```typescript
-import { COLORS } from '@/app/lib/colors';
+import { COLORS } from "@/app/lib/colors";
 
 // Available colors:
-COLORS.black, COLORS.brown, COLORS.tan, COLORS.beige,
-COLORS.cream, COLORS.mist, COLORS.white, COLORS.red
+(COLORS.black,
+  COLORS.brown,
+  COLORS.tan,
+  COLORS.beige,
+  COLORS.cream,
+  COLORS.mist,
+  COLORS.white,
+  COLORS.red);
 ```
 
 **Best Practice:** Prefer CSS variables (`var(--color-cafe-tan)`) for theme support over static imports.
@@ -146,6 +163,7 @@ COLORS.cream, COLORS.mist, COLORS.white, COLORS.red
 ---
 
 #### Responsive Breakpoints
+
 ```css
 /* Mobile */
 320px   /* Base mobile (iPhone SE) */
@@ -167,6 +185,7 @@ COLORS.cream, COLORS.mist, COLORS.white, COLORS.red
 The homepage uses an intentional alternating background pattern to create visual flow:
 
 **Homepage Section Flow:**
+
 1. **Hero** - `cafe-mist` - Warm welcome
 2. **Signature Pours** - `cafe-white` - Clean product showcase
 3. **Our Philosophy** - `cafe-mist` + skewed cream accent (right)
@@ -176,6 +195,7 @@ The homepage uses an intentional alternating background pattern to create visual
 7. **Newsletter** - Light tan tint - Warm close
 
 **Design Principle:**
+
 - Alternating warm/clean creates natural scroll rhythm
 - Skewed decorative elements vary in direction for dynamic interest
 - Warm sections feel intimate; white sections provide breathing room
@@ -212,14 +232,17 @@ All API routes are protected by three layers of security:
 ### **API Routes**
 
 #### POST `/api/subscribe`
+
 Newsletter subscription endpoint.
 
 **Security:**
+
 - Rate limit: 5 requests per minute
 - CSRF protected
 - Input sanitization
 
 **Request:**
+
 ```json
 {
   "email": "user@example.com",
@@ -228,6 +251,7 @@ Newsletter subscription endpoint.
 ```
 
 **Response:**
+
 ```json
 {
   "ok": true,
@@ -237,6 +261,7 @@ Newsletter subscription endpoint.
 ```
 
 **Features:**
+
 - Duplicate detection (case-insensitive)
 - Generates unsubscribe token
 - Email normalization
@@ -245,15 +270,18 @@ Newsletter subscription endpoint.
 ---
 
 #### POST `/api/contact`
+
 Contact form submission with email notification.
 
 **Security:**
+
 - Rate limit: 3 requests per minute
 - CSRF protected
 - Input sanitization
 - HTML escaping in email template
 
 **Request:**
+
 ```json
 {
   "name": "John Doe",
@@ -264,6 +292,7 @@ Contact form submission with email notification.
 ```
 
 **Features:**
+
 - Sends formatted email via Resend
 - Beautiful HTML template with dark mode
 - Creates Sanity document for record-keeping
@@ -271,6 +300,7 @@ Contact form submission with email notification.
 - Continues even if email fails (logs error)
 
 **Email Template:**
+
 - Editorial newsletter design
 - Dark mode support via `prefers-color-scheme`
 - Mobile responsive
@@ -280,9 +310,11 @@ Contact form submission with email notification.
 ---
 
 #### POST `/api/unsubscribe`
+
 Newsletter unsubscription endpoint.
 
 **Security:**
+
 - Token-based unsubscribe (no authentication needed)
 - CSRF protected
 - Rate limiting
@@ -290,9 +322,11 @@ Newsletter unsubscription endpoint.
 ---
 
 #### POST `/api/apply`
+
 Job application submission.
 
 **Security:**
+
 - Rate limiting
 - File upload validation
 - Input sanitization
@@ -300,9 +334,11 @@ Job application submission.
 ---
 
 #### POST `/api/auth/verify`
+
 Password verification for protected content.
 
 **Security:**
+
 - Session-based
 - Rate limiting (prevents brute force)
 - Constant-time comparison
@@ -312,12 +348,14 @@ Password verification for protected content.
 ### **Logging & Monitoring**
 
 **Logger** (`app/lib/logger.ts`):
+
 - Structured logging
 - Development: console output
 - Production: JSON format (ready for log aggregation)
 - Log levels: info, warn, error
 
 **Monitoring** (`app/lib/monitoring.ts`):
+
 - Error tracking
 - Performance monitoring
 - Ready for Sentry/DataDog integration
@@ -329,11 +367,13 @@ Password verification for protected content.
 ### **Two Client Pattern**
 
 **Read Client** (`sanity/lib/client.ts`):
+
 - CDN-enabled for fast public data fetching
 - Used in all page components
 - No authentication required
 
 **Write Client** (`sanity/lib/writeClient.ts`):
+
 - Authenticated with `SANITY_WRITE_TOKEN`
 - Only used in API routes (newsletter, mutations, contact)
 - Keeps token server-side for security
@@ -343,9 +383,11 @@ Password verification for protected content.
 ### **Content Schemas**
 
 #### subscriber
+
 Newsletter subscriber data.
 
 **Fields:**
+
 - `email` - Subscriber email (unique, lowercase)
 - `source` - Source page ("homepage", "footer", "modal", etc.)
 - `status` - "subscribed" | "unsubscribed"
@@ -355,9 +397,11 @@ Newsletter subscriber data.
 ---
 
 #### contactMessage
+
 Contact form submissions.
 
 **Fields:**
+
 - `name` - Sender name
 - `email` - Sender email
 - `subject` - Message subject
@@ -369,9 +413,11 @@ Contact form submissions.
 ---
 
 #### settings
+
 Global site configuration.
 
 **Fields:**
+
 - `social.instagram` - Instagram URL
 - `social.spotify` - Spotify playlist URL
 - `hours.weekday` - Weekday hours
@@ -384,6 +430,7 @@ Global site configuration.
 ## Key Technical Patterns
 
 ### **Server Components (Default)**
+
 All pages use async Server Components for data fetching.
 
 ```typescript
@@ -396,7 +443,9 @@ export default async function HomePage() {
 ---
 
 ### **Client Components**
+
 Mark with `"use client"` directive when using:
+
 - React hooks (useState, useEffect)
 - Browser APIs (window, document)
 - Event handlers (onClick, onChange)
@@ -407,6 +456,7 @@ Mark with `"use client"` directive when using:
 ---
 
 ### **Cart Flow**
+
 1. User clicks product on menu
 2. ProductModal opens with customization options
 3. User selects modifiers, quantity, and adds notes
@@ -420,6 +470,7 @@ Mark with `"use client"` directive when using:
 ---
 
 ### **Contact Form Flow**
+
 1. User fills out form (name, email, subject, message)
 2. Client-side validation
 3. POST to `/api/contact`
@@ -432,6 +483,7 @@ Mark with `"use client"` directive when using:
 ---
 
 ### **Newsletter Flow**
+
 1. User enters email in NewsLetterForm (homepage, footer, or modal)
 2. Client-side email validation
 3. POST to `/api/subscribe` with email and source
@@ -445,6 +497,7 @@ Mark with `"use client"` directive when using:
 ## Development Guidelines
 
 ### **CSS Organization**
+
 - Component styles → `app/styles/components/`
 - Page styles → `app/styles/pages/`
 - Use Tailwind utilities first
@@ -455,6 +508,7 @@ Mark with `"use client"` directive when using:
 ### **Naming Conventions**
 
 **CSS Classes:** kebab-case
+
 ```css
 .site-header
 .hero-title
@@ -462,26 +516,30 @@ Mark with `"use client"` directive when using:
 ```
 
 **Components:** PascalCase
+
 ```tsx
-SiteHeader
-CartDrawer
-NewsLetterForm
+SiteHeader;
+CartDrawer;
+NewsLetterForm;
 ```
 
 **Files:**
+
 - Components: PascalCase (`CartDrawer.tsx`)
 - Styles: kebab-case (`navigation.css`)
 - Utils: camelCase (`sanitize.ts`)
 
 ### **Import Paths**
+
 Use absolute imports with `@` alias:
+
 ```typescript
 // ✅ Good
-import { CartProvider } from '@/app/components/providers/CartProvider';
-import { COLORS } from '@/app/lib/colors';
+import { CartProvider } from "@/app/components/providers/CartProvider";
+import { COLORS } from "@/app/lib/colors";
 
 // ❌ Avoid
-import { CartProvider } from '../../components/providers/CartProvider';
+import { CartProvider } from "../../components/providers/CartProvider";
 ```
 
 ### **Security Best Practices**
@@ -495,6 +553,7 @@ import { CartProvider } from '../../components/providers/CartProvider';
 7. **Log security events** for monitoring
 
 ### **Git Workflow**
+
 - Work in feature branches (format: `claude/feature-name-xxxxx`)
 - Commit with descriptive messages (format: `type(scope): description`)
 - Push to remote with: `git push -u origin branch-name`
@@ -506,12 +565,14 @@ import { CartProvider } from '../../components/providers/CartProvider';
 ## Testing
 
 ### **Current Status**
+
 - Unit tests with Vitest + React Testing Library (`tests/unit/`)
 - E2E coverage with Playwright (`tests/e2e/`)
 - MSW configured for API mocks (`tests/utils/`)
 - CI runs lint, unit coverage, and E2E (`.github/workflows/test.yml`)
 
 ### **Run Locally**
+
 ```bash
 npm run test
 npm run test:coverage
@@ -520,6 +581,7 @@ npm run test:all
 ```
 
 ### **References**
+
 - `docs/TEST_PLAN.md`
 - `docs/TEST_COVERAGE_ANALYSIS.md`
 
@@ -528,14 +590,16 @@ npm run test:all
 ## Recent Updates
 
 ### **December 2025 - Test Coverage Analysis**
+
 - ✅ Implemented Vitest unit tests and Playwright E2E suite
 - ✅ Coverage reporting runs in CI
 - ✅ MSW configured for API mocks
 - ✅ Documentation refreshed in `docs/TEST_PLAN.md` and `docs/TEST_COVERAGE_ANALYSIS.md`
 
 ### **December 2025 - Tailwind v4 Migration & Visual Rhythm**
+
 - ✅ Fixed Tailwind v4 color generation using `@theme` directive
-- ✅ Registered all cafe-* colors for proper utility class generation
+- ✅ Registered all cafe-\* colors for proper utility class generation
 - ✅ Implemented alternating background pattern for visual flow
 - ✅ Added directional skewed accent elements (right, left, bottom)
 - ✅ Updated navbar to cafe-mist/85 with tan border for cohesion
@@ -545,6 +609,7 @@ npm run test:all
 - ✅ Ignored .playwright-mcp artifacts in git
 
 ### **December 2025 - Contact Form & Email**
+
 - ✅ Added Resend email integration for contact form
 - ✅ Created beautiful editorial newsletter-style email template
 - ✅ Implemented dark mode support for emails (prefers-color-scheme)
@@ -556,12 +621,14 @@ npm run test:all
 - ✅ Allowed Vercel preview deployments in CSRF validation
 
 ### **December 2025 - Footer Redesign**
+
 - ✅ Redesigned footer with minimal mobile-first layout
 - ✅ Integrated inline newsletter subscription
 - ✅ Improved responsive spacing and typography
 - ✅ Updated footer navigation and business info
 
 ### **November 2025 - Major Refactoring**
+
 - ✅ Reorganized components into `layout/`, `ui/`, `features/`, `providers/`, `seo/`
 - ✅ Renamed confusing classes (`.page-dark` → `.site-layout`, `.ink-cream` → `.text-light`)
 - ✅ Added comprehensive JSDoc documentation to all components
@@ -570,6 +637,7 @@ npm run test:all
 - ✅ Created refactoring summary documentation
 
 ### **November 2025 - E-Commerce Features**
+
 - ✅ Implemented shopping cart system (CartProvider, CartDrawer)
 - ✅ Created ProductModal with customization options
 - ✅ Added quantity controls and modifiers
@@ -578,6 +646,7 @@ npm run test:all
 - ✅ Edit cart items functionality
 
 ### **November 2025 - SEO Enhancements**
+
 - ✅ Added LocalBusinessJsonLd for local SEO
 - ✅ Added MenuJsonLd for menu structured data
 - ✅ Added FAQJsonLd for FAQ rich snippets
@@ -589,6 +658,7 @@ npm run test:all
 ## Environment Variables
 
 Required in `.env.local`:
+
 ```bash
 # Sanity CMS (Required)
 NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
@@ -619,10 +689,12 @@ NEXT_PUBLIC_VERCEL_ANALYTICS_ID=your_analytics_id
 **Environment Variables:** Set in Vercel project settings
 
 **Branches:**
+
 - `master` - Production (stable releases)
 - `claude/*` - Claude-generated feature branches
 
 **Deployment Notes:**
+
 - Vercel preview deployments are allowed in CSRF validation
 - Email sending works in both preview and production
 - Sanity Studio is accessible at `/studio` on all deployments
@@ -642,6 +714,7 @@ NEXT_PUBLIC_VERCEL_ANALYTICS_ID=your_analytics_id
 ## Pages & Routes
 
 ### Public Pages
+
 - `/` - Homepage with hero, signature pours, philosophy, newsletter
 - `/menu` - Menu page with product cards and modals
 - `/story` - About/Story page
@@ -652,6 +725,7 @@ NEXT_PUBLIC_VERCEL_ANALYTICS_ID=your_analytics_id
 - `/refunds` - Refund policy
 
 ### Admin
+
 - `/studio` - Sanity CMS Studio (requires authentication)
 
 ---

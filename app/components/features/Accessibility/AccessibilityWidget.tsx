@@ -116,7 +116,9 @@ export const AccessibilityWidget: React.FC = () => {
   useEffect(() => {
     const applyBionicReading = () => {
       if (settings.bionicReading) {
-        const textElements = document.querySelectorAll('main p, main h1, main h2, main h3, main h4, main h5, main h6, main li, main a, main button, main span:not(.bionic-skip)');
+        // Broaden the selector to include nav, footer, and other key areas
+        // Specifically use .nav-link for navigation to avoid hitting the brand logo/title link
+        const textElements = document.querySelectorAll('main p, main h1, main h2, main h3, main h4, main h5, main h6, main li, main a, main button, main span:not(.bionic-skip), nav a.nav-link, footer a, footer span:not(.bionic-skip), .menu-link-text');
         textElements.forEach(el => {
           const element = el as HTMLElement;
           // Skip elements that are already processed or should be skipped
@@ -133,7 +135,7 @@ export const AccessibilityWidget: React.FC = () => {
           }
         });
       } else {
-        const textElements = document.querySelectorAll('main [data-bionic-original]');
+        const textElements = document.querySelectorAll('[data-bionic-original]');
         textElements.forEach(element => {
           const original = element.getAttribute('data-bionic-original');
           if (original) {
