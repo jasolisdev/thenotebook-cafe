@@ -288,7 +288,7 @@ export const AccessibilityWidget: React.FC = () => {
       >
         <FaWheelchair
           className="w-7 h-7 -mt-0.5"
-          style={{ transform: "translate(-1px, -1px)" }}
+          style={{ transform: "translate(2px, 1px)" }}
         />
       </button>
 

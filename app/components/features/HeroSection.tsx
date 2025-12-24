@@ -82,7 +82,7 @@ const HeroSection: React.FC = () => {
         >
           {/* Location Segment */}
           <div className="flex flex-col items-center text-center max-w-xs">
-            <div className="flex items-center space-x-2 mb-3 text-cafe-brown/60">
+            <div className="flex items-center space-x-2 mb-3 text-cafe-brown">
               <MapPin size={16} />
               <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold">
                 Location
@@ -96,7 +96,7 @@ const HeroSection: React.FC = () => {
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CAFE_INFO.name)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 flex items-center space-x-2 text-[9px] md:text-[10px] uppercase tracking-[0.4em] font-extrabold text-cafe-brown/60 hover:text-cafe-brown transition-colors group"
+              className="mt-4 flex items-center space-x-2 text-[9px] md:text-[10px] uppercase tracking-[0.4em] font-extrabold text-cafe-brown/85 hover:text-cafe-brown transition-colors group"
             >
               <span>Get Directions</span>
               <ArrowUpRight
@@ -108,20 +108,18 @@ const HeroSection: React.FC = () => {
 
           {/* Hours Segment */}
           <div className="flex flex-col items-center text-center max-w-xs">
-            <div className="flex items-center space-x-2 mb-3 text-cafe-brown/60">
+            <div className="flex items-center space-x-2 mb-3 text-cafe-brown">
               <Clock size={16} />
               <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold">
                 Hours
               </span>
             </div>
             <div className="font-serif leading-tight">
-              <p className="text-xl md:text-2xl text-cafe-brown tracking-tight font-medium">
-                Mon - Sat
+              <p className="text-xl md:text-2xl text-cafe-brown tracking-tight leading-snug">
+                Mon - Sat: <br className="md:hidden" />{" "}
+                <span className="italic font-light">7:00am - 6:00pm</span>
               </p>
-              <p className="text-xl md:text-2xl text-cafe-brown tracking-tight italic mt-1 font-light">
-                7:00am - 6:00pm
-              </p>
-              <p className="text-[9px] md:text-[10px] text-cafe-brown/50 uppercase tracking-[0.4em] font-bold mt-4">
+              <p className="text-[9px] md:text-[10px] text-cafe-brown uppercase tracking-[0.4em] font-bold mt-4">
                 Sundays Closed
               </p>
             </div>
