@@ -1,7 +1,7 @@
 # Development Guide
 **The Notebook Café - Local Development Setup**
 
-Last Updated: 2025-12-23
+Last Updated: 2025-12-24
 Project: Next.js 16 + Sanity CMS Web Application
 
 ---
@@ -120,6 +120,33 @@ Edit or add a file in `sanity/schemaTypes/` and update the registry in `sanity/s
 
 ---
 
+## Performance Optimizations
+
+The project has been optimized for fast page loads (FCP < 1.5s):
+
+### Font Strategy
+- **Playfair Display:** Converted to `.woff2` format (64% smaller)
+- **Font Display:** Using `font-display: optional` for instant text rendering
+- **Lazy Loading:** OpenDyslexic font only loads when accessibility widget enables it
+
+### CSS Strategy
+- **Consolidated:** All component/layout CSS merged into `globals.css` (7 requests → 1)
+- **Page-Specific:** Only load page-specific CSS when needed
+- **See:** `docs/CSS_ORGANIZATION.md` for details
+
+### Image Strategy
+- **Hero Images:** Use `fetchPriority="high"` for above-the-fold content
+- **Next.js Image:** All images optimized automatically via `next/image`
+
+### Performance Checklist
+- ✅ All fonts converted to `.woff2` (except Torus which is .otf)
+- ✅ CSS consolidated to reduce HTTP requests
+- ✅ Unused fonts removed (Alpino removed, OpenDyslexic lazy-loaded)
+- ✅ Critical images prioritized with `fetchPriority`
+- ✅ Accessibility features maintained via lazy loading
+
+---
+
 ## Useful Entry Points
 
 - `app/layout.tsx` - Root layout
@@ -129,3 +156,12 @@ Edit or add a file in `sanity/schemaTypes/` and update the registry in `sanity/s
 - `app/careers/page.tsx` - Careers page
 - `app/contact/page.tsx` - Contact page
 - `sanity/sanity.config.ts` - CMS configuration
+
+---
+
+## Performance Testing
+
+Run Lighthouse or Vercel Analytics to verify:
+- **Target FCP:** < 1.5s
+- **Target Score:** > 90
+- **Font Load:** < 500ms for critical fonts

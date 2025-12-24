@@ -29,6 +29,7 @@ const HeroSection: React.FC = () => {
               fill
               className="object-cover"
               priority
+              fetchPriority="high"
               style={{
                 width: "100%",
                 height: "100%",

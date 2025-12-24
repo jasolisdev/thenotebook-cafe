@@ -98,6 +98,42 @@ export const AccessibilityWidget: React.FC = () => {
     };
   }, [isOpen]);
 
+  // Lazy-load OpenDyslexic font when dyslexia font is enabled
+  useEffect(() => {
+    if (settings.dyslexiaFont) {
+      // Check if font is already loaded
+      const existingStyle = document.getElementById("opendyslexic-font");
+      if (!existingStyle) {
+        const style = document.createElement("style");
+        style.id = "opendyslexic-font";
+        style.textContent = `
+          @font-face {
+            font-family: "OpenDyslexic";
+            src: url("/fonts/OpenDyslexic-Regular.woff") format("woff");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+          }
+          @font-face {
+            font-family: "OpenDyslexic";
+            src: url("/fonts/OpenDyslexic-Bold.woff") format("woff");
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+          }
+          @font-face {
+            font-family: "OpenDyslexic";
+            src: url("/fonts/OpenDyslexic-Italic.woff") format("woff");
+            font-weight: 400;
+            font-style: italic;
+            font-display: swap;
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    }
+  }, [settings.dyslexiaFont]);
+
   // Apply settings to document
   useEffect(() => {
     const html = document.documentElement;

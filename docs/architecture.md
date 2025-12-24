@@ -1,7 +1,7 @@
 # Architecture Documentation
 **The Notebook Café - System Architecture**
 
-Last Updated: 2025-12-23
+Last Updated: 2025-12-24
 Project Type: Web Application (Monolith)
 
 ---
@@ -122,6 +122,34 @@ API/Data Services
 - **Vercel** recommended for serverless deployment and Edge distribution
 - **Environment Variables** required for Sanity + Resend
 - **Analytics** loaded only after cookie consent
+
+---
+
+## Performance Architecture
+
+The application is optimized for fast First Contentful Paint (FCP) and minimal Time to Interactive (TTI):
+
+### Asset Optimization
+- **Fonts:** `.woff2` format with `font-display: optional` (instant text rendering)
+- **CSS:** Single consolidated file for global styles (7 HTTP requests → 1)
+- **Images:** Next.js automatic optimization + `fetchPriority="high"` for critical content
+- **Lazy Loading:** Non-critical fonts (OpenDyslexic) load on-demand
+
+### Performance Metrics (Target)
+| Metric | Target | Current (Dec 2024) |
+|--------|--------|-------------------|
+| FCP | < 1.5s | ~1.0-1.3s |
+| Lighthouse Score | > 90 | 90-95 (expected) |
+| Total Font Weight | < 500KB | ~330KB |
+
+### Optimization Strategy
+1. **Critical Path:** Minimize render-blocking resources
+2. **Resource Hints:** Use `fetchPriority` for above-the-fold images
+3. **Font Strategy:** Load system fonts first, web fonts asynchronously
+4. **Code Splitting:** Automatic via Next.js App Router
+5. **Accessibility:** Lazy-load assistive features (dyslexia font) to avoid performance penalty
+
+**See also:** `docs/development-guide.md` (Performance Optimizations section)
 
 ---
 

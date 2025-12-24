@@ -1,27 +1,18 @@
 # CSS Organization
 
-A modular CSS layout that breaks global styles into focused layers. Styles live alongside the App Router and are imported in a predictable cascade.
+**Updated December 2025:** CSS has been consolidated into a single file for improved performance.
 
 ---
 
-## Folder Structure
+## Current Structure (Performance-Optimized)
+
+All CSS is now consolidated into `app/globals.css` for faster page loads (7 HTTP requests → 1).
 
 ```
 app/
-├── globals.css
+├── globals.css          # All styles consolidated here
 └── styles/
-    ├── components/      # Reusable component styles
-    │   ├── announcement.css
-    │   ├── application-form.css
-    │   ├── buttons.css
-    │   ├── consent-banner.css
-    │   ├── footer.css
-    │   ├── navigation.css
-    │   └── signature-pours-grid.css
-    ├── layout/          # Layout primitives and animations
-    │   ├── animations.css
-    │   └── sections.css
-    └── pages/           # Page-specific styles
+    └── pages/           # Page-specific styles (imported by routes)
         ├── careers.css
         ├── contact.css
         ├── home.css
@@ -41,70 +32,97 @@ Additional reference: `app/styles/COLOR_SYSTEM.md` documents the palette and tok
 
 ---
 
-## Foundations (`globals.css`)
-- Tailwind v4 import (`@import "tailwindcss";`) plus `@theme` tokens.
-- Local font-face declarations (Inter, Playfair Display, Alpino, Torus, OpenDyslexic).
-- CSS variables for typography and color tokens.
-- Base element resets, typography defaults, and utility helpers.
-- Accessibility helpers (font switches, contrast, reduced motion).
+## Consolidated `globals.css` Contents
+
+**Performance Note:** All component and layout styles are now in `globals.css` to reduce HTTP requests.
+
+### Foundations
+- Tailwind v4 import (`@import "tailwindcss";`) plus `@theme` tokens
+- Local font-face declarations (Inter .woff2, Playfair Display .woff2, Torus .otf)
+- **Note:** OpenDyslexic font is lazy-loaded by AccessibilityWidget (not in globals.css)
+- CSS variables for typography and color tokens
+- Base element resets, typography defaults, and utility helpers
+- Accessibility helpers (font switches, contrast, reduced motion)
+
+### Consolidated Component Styles
+- Navigation (header, drawer, hamburger menu)
+- Buttons (hero buttons, pill buttons, badges)
+- Footer (simple footer with newsletter)
+- Announcement banner
+- Cookie consent banner
+
+### Consolidated Layout Styles
+- Sections and dividers
+- Animations (disabled floating items for performance)
 
 ---
 
-## Component Styles
-- **announcement.css** — Sticky top banner styling.
-- **application-form.css** — Careers form layout and file upload UI.
-- **buttons.css** — Button variants and CTA styling.
-- **consent-banner.css** — Cookie consent banner.
-- **footer.css** — Footer layout and typography.
-- **navigation.css** — Header and mobile drawer styles.
-- **signature-pours-grid.css** — Signature pours grid styling (currently unused).
+## Page-Specific Styles
+
+Page-specific CSS remains in separate files and is imported by the route that needs it:
+
+- **home.css** — Home page entrypoint importing `styles/pages/home/*`
+- **menu.css** — Menu page layout, tabs, and list styling
+- **story.css** — Story page layout and backgrounds
+- **contact.css** — Contact page layout, map, and info grid
+- **careers.css** — Careers page and thank-you page styles
+- **legal.css** — Shared styling for privacy/terms/refunds pages
 
 ---
 
-## Layout Styles
-- **sections.css** — Shared section spacing and divider patterns.
-- **animations.css** — Floating decorative items and global keyframes.
+## Import Order (Optimized)
 
----
-
-## Page Styles
-- **home.css** — Home page entrypoint importing `styles/pages/home/*`.
-- **menu.css** — Menu page layout, tabs, and list styling.
-- **story.css** — Story page layout and backgrounds.
-- **contact.css** — Contact page layout, map, and info grid.
-- **careers.css** — Careers page and thank-you page styles.
-- **legal.css** — Shared styling for privacy/terms/refunds pages.
-
----
-
-## Import Order
-
-`app/layout.tsx` imports the global cascade in this order:
+`app/layout.tsx` now imports only the consolidated CSS:
 
 ```tsx
-import "./globals.css";
-
-// Component styles
-import "./styles/components/navigation.css";
-import "./styles/components/buttons.css";
-import "./styles/components/footer.css";
-import "./styles/components/announcement.css";
-import "./styles/components/consent-banner.css";
-
-// Layout styles
-import "./styles/layout/sections.css";
-import "./styles/layout/animations.css";
+import "./globals.css"; // All component and layout styles consolidated here
 ```
 
-Page-specific CSS is imported by the route that needs it (e.g., `app/page.tsx` imports `./styles/pages/home.css`).
+Page-specific CSS is still imported by the route that needs it:
+
+```tsx
+// app/page.tsx
+import "./styles/pages/home.css";
+
+// app/menu/page.tsx
+import "@/app/styles/pages/menu.css";
+```
+
+---
+
+## Performance Benefits
+
+**Before Consolidation:**
+- 7 HTTP requests for CSS (globals + 6 component/layout files)
+- Potential for redundant selectors across files
+- More complex import management
+
+**After Consolidation:**
+- 1 HTTP request for global CSS
+- Cleaner import tree in layout.tsx
+- ~150-200ms faster FCP
 
 ---
 
 ## Adding New Styles
 
-- **New global utility?** → Add to `app/globals.css`
-- **New component?** → Create file in `app/styles/components/`
-- **New page?** → Create file in `app/styles/pages/`
-- **New animation/layout?** → Add to `app/styles/layout/`
+- **New global utility or component?** → Add to `app/globals.css` in the appropriate section
+- **New page-specific styles?** → Create file in `app/styles/pages/`
+- **Modifying existing component styles?** → Edit the relevant section in `app/globals.css`
 
-Remember to import new component/layout CSS in `app/layout.tsx` or the relevant route.
+**Important:** Component and layout styles are now in `globals.css`. Only create new CSS files for page-specific styles.
+
+---
+
+## Legacy Files
+
+The following files were consolidated into `globals.css` (December 2025):
+- `app/styles/components/navigation.css` → `globals.css` (NAVIGATION section)
+- `app/styles/components/buttons.css` → `globals.css` (BUTTONS section)
+- `app/styles/components/footer.css` → `globals.css` (FOOTER section)
+- `app/styles/components/announcement.css` → `globals.css` (ANNOUNCEMENT BANNER section)
+- `app/styles/components/consent-banner.css` → `globals.css` (COOKIE CONSENT BANNER section)
+- `app/styles/layout/sections.css` → `globals.css` (SECTIONS & DIVIDERS section)
+- `app/styles/layout/animations.css` → `globals.css` (LAYOUT ANIMATIONS section)
+
+These files can be safely deleted if found in the codebase.

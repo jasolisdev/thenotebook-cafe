@@ -36,18 +36,7 @@
  */
 // app/layout.tsx
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
-
-// Component styles
-import "@/app/styles/components/navigation.css";
-import "@/app/styles/components/buttons.css";
-import "@/app/styles/components/footer.css";
-import "@/app/styles/components/announcement.css";
-import "@/app/styles/components/consent-banner.css";
-
-// Layout styles
-import "@/app/styles/layout/sections.css";
-import "@/app/styles/layout/animations.css";
+import "./globals.css"; // All styles now consolidated here for better performance
 
 import { ThemeProvider } from "next-themes";
 import { cookies } from "next/headers";
