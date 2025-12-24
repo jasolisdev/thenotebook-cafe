@@ -7,7 +7,7 @@
  * - Prevents sensitive data leaks in production
  *
  * @example
- * import { logger } from '@/app/lib/logger';
+ * import { logger } from '@/app/lib/server/logger';
  *
  * try {
  *   // risky operation

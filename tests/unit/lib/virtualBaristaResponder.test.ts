@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getLocalBaristaReply } from '@/app/lib/virtualBaristaResponder';
+import { getLocalBaristaReply } from '@/app/lib/data/virtualBaristaResponder';
 
 describe('virtualBaristaResponder', () => {
   const history = [];

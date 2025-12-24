@@ -6,7 +6,7 @@
   bottom: 24px;
   left: 24px;
   right: 24px;
-  background: var(--color-cafe-charcoal);
+  background: var(--color-cafe-black);
   color: var(--color-cafe-mist);
   padding: 24px;
   display: flex;
@@ -127,7 +127,7 @@
 .consent-banner__button--solid:hover {
   background: var(--color-cafe-mist);
   border-color: var(--color-cafe-mist);
-  color: var(--color-cafe-charcoal);
+  color: var(--color-cafe-black);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }

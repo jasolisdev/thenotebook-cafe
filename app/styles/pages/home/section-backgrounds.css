@@ -18,11 +18,6 @@
   background-image: none;
 }
 
-/* Ensure no transparency in Low Lights section */
-[data-section="Low Lights"] * {
-  opacity: 1 !important;
-}
-
 [data-section="Low Lights"] .section-deco,
 [data-section="Low Lights"] .section-deco-dark,
 [data-section="Low Lights"] .section-deco-mobile {

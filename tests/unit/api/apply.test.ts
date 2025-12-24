@@ -7,10 +7,10 @@ import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { NextResponse } from 'next/server';
 import { POST } from '@/app/api/apply/route';
 import { writeClient } from '@/sanity/lib/writeClient';
-import { validateOrigin } from '@/app/lib/csrf';
-import { checkRateLimit } from '@/app/lib/rateLimit';
-import { validateUploadedFile } from '@/app/lib/fileValidation';
-import { logger } from '@/app/lib/logger';
+import { validateOrigin } from '@/app/lib/server/csrf';
+import { checkRateLimit } from '@/app/lib/server/rateLimit';
+import { validateUploadedFile } from '@/app/lib/server/fileValidation';
+import { logger } from '@/app/lib/server/logger';
 
 vi.mock('@/sanity/lib/writeClient', () => ({
   writeClient: {
@@ -21,19 +21,19 @@ vi.mock('@/sanity/lib/writeClient', () => ({
   },
 }));
 
-vi.mock('@/app/lib/csrf', () => ({
+vi.mock('@/app/lib/server/csrf', () => ({
   validateOrigin: vi.fn(),
 }));
 
-vi.mock('@/app/lib/rateLimit', () => ({
+vi.mock('@/app/lib/server/rateLimit', () => ({
   checkRateLimit: vi.fn(),
 }));
 
-vi.mock('@/app/lib/fileValidation', () => ({
+vi.mock('@/app/lib/server/fileValidation', () => ({
   validateUploadedFile: vi.fn(),
 }));
 
-vi.mock('@/app/lib/logger', () => ({
+vi.mock('@/app/lib/server/logger', () => ({
   logger: {
     error: vi.fn(),
   },

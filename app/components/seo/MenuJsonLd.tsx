@@ -11,7 +11,7 @@
  * ```
  */
 
-import { SEO } from '@/lib/seo';
+import { SEO } from '@/app/lib/constants/seo';
 
 interface MenuItem {
   name: string;

@@ -1,3 +1,17 @@
+/**
+ * @fileoverview Site-wide footer component
+ * @module components/layout/SiteFooter
+ *
+ * @description
+ * Responsive footer with business information, newsletter signup,
+ * navigation links, and social media. Features mobile-first design
+ * with inline newsletter subscription form.
+ *
+ * @example
+ * ```tsx
+ * <SiteFooter />
+ * ```
+ */
 "use client";
 
 import Link from "next/link";
@@ -28,11 +42,11 @@ export default function SiteFooter(): React.JSX.Element {
   };
 
   return (
-    <footer className="pb-12 pt-12 border-t border-white/10 bg-cafe-charcoal text-white">
+    <footer className="pb-12 pt-12 border-t border-white/10 bg-cafe-black text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
         {/* Brand signature */}
         <div className="flex flex-col items-center md:items-start">
-          <span className="text-sm font-medium uppercase text-white/90" style={{ fontFamily: "var(--font-sans)", letterSpacing: "1.5px" }}>
+          <span className="text-sm font-medium uppercase text-white/90 bionic-skip" style={{ fontFamily: "var(--font-sans)", letterSpacing: "1.5px" }}>
             THE NOTEBOOK CAFÉ
           </span>
         </div>

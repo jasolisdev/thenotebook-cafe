@@ -1,3 +1,20 @@
+/**
+ * @fileoverview Main navigation header component
+ * @module components/layout/SiteHeader
+ *
+ * @description
+ * Responsive navigation header with sticky positioning, scroll detection,
+ * mobile hamburger menu, and shopping cart integration. Features dynamic
+ * background opacity based on scroll position and route.
+ *
+ * @example
+ * ```tsx
+ * <SiteHeader
+ *   instagramUrl="https://instagram.com/..."
+ *   spotifyUrl="https://spotify.com/..."
+ * />
+ * ```
+ */
 "use client";
 
 import Link from "next/link";
@@ -275,13 +292,13 @@ export default function SiteHeader({
               />
               <div className="flex flex-col">
                 <span
-                  className="font-serif whitespace-nowrap text-xl sm:text-2xl md:text-3xl leading-none tracking-tight"
+                  className="font-serif whitespace-nowrap text-xl sm:text-2xl md:text-3xl leading-none tracking-tight bionic-skip"
                   style={{ color: useLightText ? 'var(--color-coffee-50)' : 'var(--color-coffee-900)' }}
                 >
                   The Notebook
                 </span>
                 <span
-                  className="text-[12px] uppercase tracking-[0.22em] leading-none"
+                  className="text-[12px] uppercase tracking-[0.22em] leading-none bionic-skip"
                   style={{
                     color: useLightText ? 'var(--color-coffee-50)' : 'var(--color-coffee-900)',
                     opacity: 0.8

@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Menu and cart type definitions
+ * @module types/menu
+ *
+ * @description
+ * Type definitions for menu items, cart items, modifiers, and menu navigation.
+ * Used throughout the menu and cart features.
+ */
+
 export interface MenuItem {
   id: string;
   name: string;

@@ -7,9 +7,9 @@ import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { NextResponse } from 'next/server';
 import { POST } from '@/app/api/contact/route';
 import { writeClient } from '@/sanity/lib/writeClient';
-import { validateOrigin } from '@/app/lib/csrf';
-import { checkRateLimit } from '@/app/lib/rateLimit';
-import { logger } from '@/app/lib/logger';
+import { validateOrigin } from '@/app/lib/server/csrf';
+import { checkRateLimit } from '@/app/lib/server/rateLimit';
+import { logger } from '@/app/lib/server/logger';
 const { mockSend } = vi.hoisted(() => ({ mockSend: vi.fn() }));
 
 vi.mock('@/sanity/lib/writeClient', () => ({
@@ -18,15 +18,15 @@ vi.mock('@/sanity/lib/writeClient', () => ({
   },
 }));
 
-vi.mock('@/app/lib/csrf', () => ({
+vi.mock('@/app/lib/server/csrf', () => ({
   validateOrigin: vi.fn(),
 }));
 
-vi.mock('@/app/lib/rateLimit', () => ({
+vi.mock('@/app/lib/server/rateLimit', () => ({
   checkRateLimit: vi.fn(),
 }));
 
-vi.mock('@/app/lib/logger', () => ({
+vi.mock('@/app/lib/server/logger', () => ({
   logger: {
     info: vi.fn(),
     warn: vi.fn(),

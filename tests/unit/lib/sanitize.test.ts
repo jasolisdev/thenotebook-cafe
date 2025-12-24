@@ -14,7 +14,7 @@ import {
   sanitizeUrl,
   sanitizeJsonString,
   sanitizeObject,
-} from '@/app/lib/sanitize';
+} from '@/app/lib/server/sanitize';
 
 describe('sanitizeText', () => {
   describe('HTML Tag Removal', () => {

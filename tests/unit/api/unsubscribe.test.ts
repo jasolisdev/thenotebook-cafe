@@ -7,7 +7,7 @@ import { NextResponse } from 'next/server';
 import { GET } from '@/app/api/unsubscribe/route';
 import { client } from '@/sanity/lib/client';
 import { writeClient } from '@/sanity/lib/writeClient';
-import { checkRateLimit } from '@/app/lib/rateLimit';
+import { checkRateLimit } from '@/app/lib/server/rateLimit';
 
 vi.mock('@/sanity/lib/client', () => ({
   client: {
@@ -21,7 +21,7 @@ vi.mock('@/sanity/lib/writeClient', () => ({
   },
 }));
 
-vi.mock('@/app/lib/rateLimit', () => ({
+vi.mock('@/app/lib/server/rateLimit', () => ({
   checkRateLimit: vi.fn(),
 }));
 

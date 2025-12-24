@@ -2,8 +2,8 @@ import React from 'react';
 import { describe, expect, test } from 'vitest';
 import { render } from '@/tests/utils/test-utils';
 import LocalBusinessJsonLd from '@/app/components/seo/LocalBusinessJsonLd';
-import { BUSINESS_INFO } from '@/lib/business';
-import { SEO } from '@/lib/seo';
+import { BUSINESS_INFO } from '@/app/lib/constants/business';
+import { SEO } from '@/app/lib/constants/seo';
 
 describe('LocalBusinessJsonLd', () => {
   test('renders CafeOrCoffeeShop schema', () => {

@@ -8,17 +8,16 @@ import FadeInSection from '@/app/components/ui/FadeInSection';
 
 const NewsletterSection: React.FC = () => {
   return (
-    <section className="pt-24 pb-24 bg-gradient-to-b from-cafe-tan/0 via-cafe-tan/12 to-cafe-tan/24">
+    <section className="pt-16 pb-24 bg-gradient-to-b from-cafe-tan/0 via-cafe-tan/12 to-cafe-tan/24">
       <div className="max-w-4xl mx-auto px-6 text-center">
          <Reveal>
            <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">Stay Connected</span>
          </Reveal>
          <Reveal delay={100}>
-           <h2 className="text-4xl md:text-6xl font-serif mb-8 italic tracking-tight text-cafe-black">The Story Continues.</h2>
-         </Reveal>
+                       <h2 className="text-[2.025rem] md:text-[3.375rem] font-dm-serif font-bold mb-8 italic tracking-tight text-cafe-black">The Story <span className="text-cafe-tan">Continues.</span></h2>         </Reveal>
          <Reveal delay={200}>
-           <p className="text-xl font-light text-cafe-black/60 max-w-2xl mx-auto mb-16 leading-relaxed">
-             Sign up to receive notes from the shop, seasonal menu previews, and invitations to our local Riverside gatherings. No clutter, just craft.
+           <p className="text-base md:text-xl font-light text-cafe-black/60 max-w-2xl mx-auto mb-16 leading-relaxed">
+             Sign up to receive notes from the shop, seasonal menu previews, and invitations to our local Riverside gatherings.<br/> No clutter, just craft.
            </p>
          </Reveal>
          

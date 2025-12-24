@@ -6,8 +6,8 @@
  *
  * @component
  */
-import { SEO } from '@/lib/seo';
-import { BUSINESS_INFO } from '@/lib/business';
+import { SEO } from '@/app/lib/constants/seo';
+import { BUSINESS_INFO } from '@/app/lib/constants/business';
 
 export default function LocalBusinessJsonLd() {
   const b = BUSINESS_INFO;

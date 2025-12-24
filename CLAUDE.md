@@ -2,6 +2,14 @@
 
 This file provides comprehensive guidance to Claude Code (claude.ai/code) when working with The Notebook Café codebase.
 
+Update this file if there are any changes to the project structure, tech stack, or development guidelines as well as the files in the `docs/` folder.
+
+The following are guidelines and documentation to help Claude understand the project architecture, coding standards, and key technical patterns.
+
+Whenever you make changes to the codebase, please ensure this document is updated accordingly.
+
+Create test cases for any new features or bug fixes you implement, following the existing testing patterns.
+
 ---
 
 ## 📋 Table of Contents
@@ -23,9 +31,10 @@ This file provides comprehensive guidance to Claude Code (claude.ai/code) when w
 
 ## Project Overview
 
-**The Notebook Café** is a Next.js 16 website for a Riverside-based coffee shop, using Sanity CMS for content management. The site features a public-facing website with e-commerce capabilities and an embedded CMS studio at `/studio`.
+**The Notebook Café** is a Next.js 16 website for a Riverside-based coffee shop, using Sanity CMS for content management. The site features marketing pages, menu browsing with a cart UI (no on-site checkout yet), and an embedded CMS studio at `/studio`.
 
 ### Core Philosophy
+
 - **Coffee culture meets creative community**
 - **House music and soulful vibes**
 - **Premium, minimal design aesthetic**
@@ -36,429 +45,60 @@ This file provides comprehensive guidance to Claude Code (claude.ai/code) when w
 
 ## Tech Stack
 
-| Layer | Technology | Version |
-|-------|-----------|---------|
-| **Framework** | Next.js (App Router) | 16 |
-| **Language** | TypeScript | Latest |
-| **CMS** | Sanity | v4 |
-| **Styling** | Tailwind CSS v4 + Custom CSS | v4.1.16 |
-| **Fonts** | Alpino (display) + Torus (body) | Custom |
-| **Icons** | Lucide React + React Icons | Latest |
-| **Animation** | Framer Motion | Latest |
-| **Email** | Resend | Latest |
-| **Analytics** | Vercel Analytics + Speed Insights | Latest |
-| **Deployment** | Vercel | Latest |
+| Layer          | Technology                                  | Version |
+| -------------- | ------------------------------------------- | ------- |
+| **Framework**  | Next.js (App Router)                        | 16      |
+| **Language**   | TypeScript                                  | Latest  |
+| **CMS**        | Sanity                                      | v4      |
+| **Styling**    | Tailwind CSS v4 + Custom CSS                | v4.1.16 |
+| **Fonts**      | Playfair Display + Torus (Alpino available) | Custom  |
+| **Icons**      | Lucide React + React Icons                  | Latest  |
+| **Animation**  | Framer Motion                               | Latest  |
+| **Email**      | Resend                                      | Latest  |
+| **Analytics**  | Vercel Analytics + Speed Insights           | Latest  |
+| **Deployment** | Vercel                                      | Latest  |
 
 ---
 
 ## Development Commands
 
 ### Local Development
+
 ```bash
 npm run dev
 ```
+
 - Frontend: http://localhost:3000
 - Sanity Studio: http://localhost:3000/studio
 
 ### Build & Production
+
 ```bash
 npm run build    # Build for production
 npm start        # Start production server
 ```
 
 ### Linting
+
 ```bash
 npm run lint     # Run ESLint
 ```
 
 ### Testing
-**Note:** Test infrastructure is not yet configured. See `TEST_COVERAGE_ANALYSIS.md` for comprehensive testing roadmap and recommended setup (Vitest + React Testing Library + Playwright).
+
+**Note:** Test infrastructure is configured (Vitest + React Testing Library + Playwright). See `docs/TEST_PLAN.md` and `docs/TEST_COVERAGE_ANALYSIS.md` for the current scope.
 
 ---
 
 ## Architecture & File Organization
 
-### **Directory Structure**
-
-```
-thenotebook-cafe/
-├── app/                              # Next.js App Router
-│   ├── components/                   # React components (organized)
-│   │   ├── layout/                   # Global layout components
-│   │   │   ├── SiteHeader.tsx        # Navigation with mobile drawer
-│   │   │   ├── SiteFooter.tsx        # Global footer with newsletter
-│   │   │   ├── SiteShell.tsx         # Root layout wrapper
-│   │   │   ├── PageTransition.tsx    # Page transition animations
-│   │   │   └── ImagePreloader.tsx    # Image preloading utility
-│   │   ├── ui/                       # Reusable UI components
-│   │   │   ├── AnnouncementBanner.tsx
-│   │   │   ├── Button.tsx
-│   │   │   ├── ConsentBanner.tsx     # Cookie/analytics consent
-│   │   │   ├── PasswordGate.tsx      # Password protection
-│   │   │   ├── AnalyticsLoader.tsx   # Vercel Analytics loader
-│   │   │   ├── HeroButtons.tsx       # CTA button group
-│   │   │   ├── HeroHeart.tsx         # Decorative heart icon
-│   │   │   ├── Reveal.tsx            # Scroll reveal wrapper
-│   │   │   ├── RevealText.tsx        # Text reveal animation
-│   │   │   ├── FadeInSection.tsx     # Fade-in animation
-│   │   │   ├── StoryLink.tsx         # Stylized story link
-│   │   │   ├── VirtualBarista.tsx    # AI chat widget
-│   │   │   ├── NewsletterSubscribe.tsx
-│   │   │   └── AccessibilityIcons.tsx
-│   │   ├── features/                 # Page-specific features
-│   │   │   ├── CartDrawer.tsx        # Shopping cart sidebar
-│   │   │   ├── ProductModal.tsx      # Product detail modal
-│   │   │   ├── MenuSection.tsx       # Menu display system
-│   │   │   ├── ContactForm.tsx       # Contact form with email
-│   │   │   ├── NewsLetterForm.tsx    # Email subscription
-│   │   │   ├── NewsletterModal.tsx   # Newsletter popup
-│   │   │   ├── NewsletterSection.tsx # Newsletter section
-│   │   │   ├── HeroSection.tsx       # Homepage hero
-│   │   │   ├── HeroGallery.tsx       # Hero image carousel
-│   │   │   ├── CommunityModalTrigger.tsx
-│   │   │   └── Accessibility/
-│   │   │       └── AccessibilityWidget.tsx
-│   │   ├── providers/                # Context providers
-│   │   │   └── CartProvider.tsx      # Cart state management
-│   │   ├── seo/                      # SEO & structured data
-│   │   │   ├── LocalBusinessJsonLd.tsx
-│   │   │   ├── MenuJsonLd.tsx
-│   │   │   └── FAQJsonLd.tsx
-│   │   ├── AtmosphereStrip.tsx       # Atmosphere section
-│   │   ├── SignaturePoursGrid.tsx    # Signature drinks grid
-│   │   └── ErrorBoundary.tsx         # Error boundary wrapper
-│   ├── lib/                          # Utility functions
-│   │   ├── colors.ts                 # Shared color constants
-│   │   ├── csrf.ts                   # CSRF protection
-│   │   ├── rateLimit.ts              # API rate limiting
-│   │   ├── sanitize.ts               # Input sanitization
-│   │   ├── logger.ts                 # Logging utility
-│   │   ├── monitoring.ts             # Error monitoring
-│   │   ├── fileValidation.ts         # File upload validation
-│   │   ├── virtualBaristaResponder.ts # AI chat logic
-│   │   └── baristaFaqData.ts         # FAQ data
-│   ├── api/                          # API routes
-│   │   ├── auth/verify/route.ts      # Password verification
-│   │   ├── subscribe/route.ts        # Newsletter subscription
-│   │   ├── unsubscribe/route.ts      # Newsletter unsubscribe
-│   │   ├── contact/route.ts          # Contact form + email
-│   │   └── apply/route.ts            # Job applications
-│   ├── page.tsx                      # Homepage
-│   ├── menu/page.tsx                 # Menu page
-│   ├── story/page.tsx                # Story/About page
-│   ├── contact/page.tsx              # Contact page
-│   ├── careers/page.tsx              # Careers page
-│   ├── privacy/page.tsx              # Privacy policy
-│   ├── terms/page.tsx                # Terms of service
-│   ├── refunds/page.tsx              # Refund policy
-│   ├── globals.css                   # Global styles & Tailwind
-│   ├── layout.tsx                    # Root layout
-│   └── fonts.ts                      # Font configuration
-├── sanity/                           # Sanity CMS
-│   ├── schemaTypes/                  # Content schemas
-│   │   ├── homePage.ts
-│   │   ├── aboutPage.ts
-│   │   ├── menuItem.ts
-│   │   ├── settings.ts
-│   │   ├── subscriber.ts
-│   │   ├── contactMessage.ts
-│   │   └── index.ts
-│   ├── lib/
-│   │   ├── client.ts                 # Read-only client (CDN)
-│   │   ├── writeClient.ts            # Write client (mutations)
-│   │   ├── image.ts                  # Image URL builder
-│   │   └── live.ts                   # Live preview
-│   ├── sanity.config.ts              # Sanity configuration
-│   └── structure.ts                  # Studio structure
-├── public/                           # Static assets
-│   ├── fonts/                        # Alpino font files
-│   ├── icons/                        # Menu category SVG icons
-│   ├── unsplash/                     # Stock images
-│   ├── hero-bg.png
-│   ├── logo.png
-│   └── notebook-divider-cream.svg
-├── CLAUDE.md                         # This file
-├── README.md                         # User-facing documentation
-├── TEST_COVERAGE_ANALYSIS.md         # Test coverage roadmap
-└── REFACTORING_SUMMARY.md            # Refactoring guide
-```
+The canonical, up-to-date tree and notes live in `docs/source-tree-analysis.md`.
 
 ---
 
 ## Component Library
 
-### **Layout Components** (`app/components/layout/`)
-
-#### SiteHeader
-Global navigation header with responsive mobile drawer.
-
-**Features:**
-- Fixed announcement banner integration
-- Desktop horizontal navigation (Home | Menu | Story | Contact | Careers)
-- Full-screen mobile overlay menu
-- Active page highlighting
-- Keyboard navigation (ESC to close drawer)
-- Body scroll lock when drawer open
-- Shopping cart icon with item count badge
-- Social media links (Instagram, Spotify)
-
-**Props:**
-```typescript
-{
-  instagramUrl?: string;
-  spotifyUrl?: string;
-  burgerUntil?: "sm" | "md" | "lg" | "xl";  // Breakpoint for mobile menu
-  announcementText?: string;
-}
-```
-
----
-
-#### SiteFooter
-Global footer with business information, navigation, and newsletter signup.
-
-**Features:**
-- Business address, phone, and hours
-- Footer navigation links
-- Inline newsletter subscription form
-- Copyright notice
-- Social media links
-- Minimal mobile-first design (redesigned Dec 2024)
-
-**Props:**
-```typescript
-{
-  showFloatingItems?: boolean;
-  FloatingItemsComponent?: React.ComponentType<{variant: string}>;
-}
-```
-
----
-
-#### SiteShell
-Root layout wrapper that provides global context and providers.
-
-**Features:**
-- Wraps all pages with CartProvider
-- Manages global state
-- Provides layout structure
-
----
-
-### **UI Components** (`app/components/ui/`)
-
-#### Button
-Reusable button component with multiple variants.
-
-**Variants:**
-- `default` - Primary CTA button
-- `outline` - Outlined button
-- `ghost` - Minimal button
-
-**Features:**
-- Full-width option
-- Disabled state
-- Loading state support
-- Accessible (ARIA attributes)
-
----
-
-#### ConsentBanner
-Cookie and analytics consent banner (GDPR/CCPA compliant).
-
-**Features:**
-- Shows on first visit
-- Persists acceptance to localStorage
-- Loads Vercel Analytics only after consent
-- Dismissible
-- Privacy policy link
-
----
-
-#### PasswordGate
-Password protection wrapper for protected content.
-
-**Features:**
-- Session-based authentication
-- Integrates with `/api/auth/verify`
-- Error handling
-- Persists auth to sessionStorage
-- Responsive design
-
----
-
-#### VirtualBarista
-AI-powered chat widget for customer support.
-
-**Features:**
-- FAQ-based responses
-- Menu information
-- Hours and location
-- Expandable/collapsible interface
-- Mobile-optimized
-
----
-
-#### Accessibility Widget
-Full-featured accessibility controls.
-
-**Features:**
-- Font size adjustment (3 levels)
-- High contrast mode
-- Reduced motion toggle
-- Persists settings to localStorage
-- Keyboard accessible
-- ARIA-compliant
-
----
-
-### **Feature Components** (`app/components/features/`)
-
-#### CartDrawer
-Shopping cart sidebar with full e-commerce functionality.
-
-**Features:**
-- Add/remove items
-- Quantity adjustment (+/-)
-- Edit item customizations
-- Price calculation with tax (8%)
-- LocalStorage persistence
-- Empty state
-- Checkout CTA (coming soon)
-- Framer Motion animations
-
-**State Management:**
-- Uses CartProvider context
-- Syncs across components
-- Persists to localStorage
-
----
-
-#### ProductModal
-Product detail modal with customization options.
-
-**Features:**
-- Product image and description
-- Modifier selection (size, milk, etc.)
-- Special instructions field
-- Quantity selector
-- Add to cart / Update cart
-- Edit mode for existing cart items
-- Responsive layout
-
----
-
-#### ContactForm
-Contact form with email notification via Resend.
-
-**Features:**
-- Fields: name, email, subject, message
-- Comprehensive validation
-- Rate limiting (3 req/min)
-- CSRF protection
-- Input sanitization
-- Sends formatted email to business
-- Creates Sanity document for record-keeping
-- Beautiful HTML email template with dark mode support
-- Success/error states
-
-**Email Template Features:**
-- Editorial newsletter design
-- Dark mode support with `prefers-color-scheme`
-- Mobile-responsive
-- Reply-to button with pre-filled subject and signature
-- Timezone-aware timestamp (PST)
-- XSS protection (all inputs escaped)
-
----
-
-#### NewsLetterForm
-Email subscription form with duplicate detection.
-
-**Features:**
-- Email validation
-- Duplicate detection (case-insensitive)
-- Two styles: default (homepage) and inline (footer)
-- API integration (`/api/subscribe`)
-- Creates subscriber documents in Sanity
-- Unsubscribe token generation
-- Rate limiting (5 req/min)
-- CSRF protection
-
----
-
-#### MenuSection
-Menu display system with product modals.
-
-**Features:**
-- Grid layout for menu items
-- Product cards with images
-- Click to open ProductModal
-- Category filtering
-- Responsive design
-
----
-
-### **SEO Components** (`app/components/seo/`)
-
-#### LocalBusinessJsonLd
-Structured data for local business SEO.
-
-**Schema.org Fields:**
-- Business name, address, phone
-- Hours of operation
-- Price range
-- Accepts reservations
-- Geo coordinates
-- Social media profiles
-
----
-
-#### MenuJsonLd
-Structured data for menu items.
-
-**Schema.org Fields:**
-- Menu sections
-- Item names, descriptions, prices
-- Dietary information
-- Images
-
----
-
-#### FAQJsonLd
-Structured data for frequently asked questions.
-
-**Schema.org Fields:**
-- Question/answer pairs
-- Improves rich snippet eligibility
-- Voice search optimization
-
----
-
-### **Providers** (`app/components/providers/`)
-
-#### CartProvider
-Global cart state management using React Context.
-
-**API:**
-```typescript
-const {
-  items,           // CartItem[]
-  isOpen,          // boolean
-  open,            // () => void
-  close,           // () => void
-  addItem,         // (item: CartItem) => void
-  removeItem,      // (cartId: string) => void
-  updateQuantity,  // (cartId: string, quantity: number) => void
-  clearCart,       // () => void
-} = useCart();
-```
-
-**Features:**
-- LocalStorage persistence
-- Cart open/close state
-- Item CRUD operations
-- Automatic price calculations
+The canonical, up-to-date component catalog lives in `docs/component-inventory.md`.
 
 ---
 
@@ -467,14 +107,16 @@ const {
 ### **Design Tokens**
 
 #### Typography
+
 ```css
---font-sans: "Torus", system-ui, sans-serif;      /* Body text */
---font-display: "Alpino", "Torus", sans-serif;    /* Headings */
+--font-sans: "Torus", "Inter", system-ui, sans-serif; /* Body text */
+--font-display: "Playfair Display", serif; /* Headings */
 ```
 
 **Usage:**
-- **Display Font (Alpino)**: All h1, h2, h3, branding, hero text
-- **Body Font (Torus)**: Paragraphs, navigation, UI elements
+
+- **Display Font (Playfair Display)**: All h1, h2, h3, branding, hero text
+- **Body Font (Torus/Inter)**: Paragraphs, navigation, UI elements
 
 ---
 
@@ -487,34 +129,37 @@ The site uses Tailwind CSS v4 with colors registered via the `@theme` directive 
 /* Tailwind v4 Theme - generates bg-cafe-*, text-cafe-* utilities */
 @theme {
   /* Core Palette */
-  --color-cafe-black: #2C2420;      /* Dark brown - headings, primary text */
-  --color-cafe-brown: #4A3B32;      /* Medium brown - body text */
-  --color-cafe-tan: #A48D78;        /* Primary accent - CTAs, highlights */
-  --color-cafe-tan-dark: #8E7965;   /* Button hover states */
-  --color-cafe-beige: #CBB9A4;      /* Borders, muted elements */
-  --color-cafe-luxe-oat: #CBBFAF;   /* Navigation accents */
-  --color-cafe-cream: #EDE7D8;      /* Light backgrounds */
-  --color-cafe-mist: #F4F1EA;       /* Very light backgrounds */
-  --color-cafe-white: #FAF9F6;      /* Main background */
+  --color-cafe-black: #2c2420; /* Dark brown - headings, primary text */
+  --color-cafe-brown: #4a3b32; /* Medium brown - body text */
+  --color-cafe-tan: #a48d78; /* Primary accent - CTAs, highlights */
+  --color-cafe-tan-dark: #8e7965; /* Button hover states */
+  --color-cafe-beige: #cbb9a4; /* Borders, muted elements */
+  --color-cafe-luxe-oat: #cbbfaf; /* Navigation accents */
+  --color-cafe-cream: #ede7d8; /* Light backgrounds */
+  --color-cafe-mist: #f4f1ea; /* Very light backgrounds */
+  --color-cafe-white: #faf9f6; /* Main background */
 
   /* Premium Navbar/Footer */
-  --color-coffee-50: #F3EFE9;       /* Navbar text (light) */
-  --color-coffee-900: #2C241F;      /* Navbar text (scrolled) */
-
-  /* Accent */
-  --color-gold: #C4A484;            /* Accessibility, password gate */
+  --color-coffee-50: #f3efe9; /* Navbar text (light) */
+  --color-coffee-900: #2c241f; /* Navbar text (scrolled) */
 }
 ```
 
-**Shared Colors** (`app/lib/colors.ts`):
+**Shared Colors** (`app/lib/constants/colors.ts`):
 Used in React components that need static color values (e.g., CartDrawer, ProductModal).
 
 ```typescript
-import { COLORS } from '@/app/lib/colors';
+import { COLORS } from "@/app/lib/constants/colors";
 
 // Available colors:
-COLORS.black, COLORS.brown, COLORS.tan, COLORS.beige,
-COLORS.cream, COLORS.mist, COLORS.white, COLORS.red
+(COLORS.black,
+  COLORS.brown,
+  COLORS.tan,
+  COLORS.beige,
+  COLORS.cream,
+  COLORS.mist,
+  COLORS.white,
+  COLORS.red);
 ```
 
 **Best Practice:** Prefer CSS variables (`var(--color-cafe-tan)`) for theme support over static imports.
@@ -522,6 +167,7 @@ COLORS.cream, COLORS.mist, COLORS.white, COLORS.red
 ---
 
 #### Responsive Breakpoints
+
 ```css
 /* Mobile */
 320px   /* Base mobile (iPhone SE) */
@@ -543,6 +189,7 @@ COLORS.cream, COLORS.mist, COLORS.white, COLORS.red
 The homepage uses an intentional alternating background pattern to create visual flow:
 
 **Homepage Section Flow:**
+
 1. **Hero** - `cafe-mist` - Warm welcome
 2. **Signature Pours** - `cafe-white` - Clean product showcase
 3. **Our Philosophy** - `cafe-mist` + skewed cream accent (right)
@@ -552,6 +199,7 @@ The homepage uses an intentional alternating background pattern to create visual
 7. **Newsletter** - Light tan tint - Warm close
 
 **Design Principle:**
+
 - Alternating warm/clean creates natural scroll rhythm
 - Skewed decorative elements vary in direction for dynamic interest
 - Warm sections feel intimate; white sections provide breathing room
@@ -588,14 +236,17 @@ All API routes are protected by three layers of security:
 ### **API Routes**
 
 #### POST `/api/subscribe`
+
 Newsletter subscription endpoint.
 
 **Security:**
+
 - Rate limit: 5 requests per minute
 - CSRF protected
 - Input sanitization
 
 **Request:**
+
 ```json
 {
   "email": "user@example.com",
@@ -604,6 +255,7 @@ Newsletter subscription endpoint.
 ```
 
 **Response:**
+
 ```json
 {
   "ok": true,
@@ -613,6 +265,7 @@ Newsletter subscription endpoint.
 ```
 
 **Features:**
+
 - Duplicate detection (case-insensitive)
 - Generates unsubscribe token
 - Email normalization
@@ -621,15 +274,18 @@ Newsletter subscription endpoint.
 ---
 
 #### POST `/api/contact`
+
 Contact form submission with email notification.
 
 **Security:**
+
 - Rate limit: 3 requests per minute
 - CSRF protected
 - Input sanitization
 - HTML escaping in email template
 
 **Request:**
+
 ```json
 {
   "name": "John Doe",
@@ -640,6 +296,7 @@ Contact form submission with email notification.
 ```
 
 **Features:**
+
 - Sends formatted email via Resend
 - Beautiful HTML template with dark mode
 - Creates Sanity document for record-keeping
@@ -647,6 +304,7 @@ Contact form submission with email notification.
 - Continues even if email fails (logs error)
 
 **Email Template:**
+
 - Editorial newsletter design
 - Dark mode support via `prefers-color-scheme`
 - Mobile responsive
@@ -656,9 +314,11 @@ Contact form submission with email notification.
 ---
 
 #### POST `/api/unsubscribe`
+
 Newsletter unsubscription endpoint.
 
 **Security:**
+
 - Token-based unsubscribe (no authentication needed)
 - CSRF protected
 - Rate limiting
@@ -666,9 +326,11 @@ Newsletter unsubscription endpoint.
 ---
 
 #### POST `/api/apply`
+
 Job application submission.
 
 **Security:**
+
 - Rate limiting
 - File upload validation
 - Input sanitization
@@ -676,9 +338,11 @@ Job application submission.
 ---
 
 #### POST `/api/auth/verify`
+
 Password verification for protected content.
 
 **Security:**
+
 - Session-based
 - Rate limiting (prevents brute force)
 - Constant-time comparison
@@ -688,12 +352,14 @@ Password verification for protected content.
 ### **Logging & Monitoring**
 
 **Logger** (`app/lib/logger.ts`):
+
 - Structured logging
 - Development: console output
 - Production: JSON format (ready for log aggregation)
 - Log levels: info, warn, error
 
 **Monitoring** (`app/lib/monitoring.ts`):
+
 - Error tracking
 - Performance monitoring
 - Ready for Sentry/DataDog integration
@@ -705,11 +371,13 @@ Password verification for protected content.
 ### **Two Client Pattern**
 
 **Read Client** (`sanity/lib/client.ts`):
+
 - CDN-enabled for fast public data fetching
 - Used in all page components
 - No authentication required
 
 **Write Client** (`sanity/lib/writeClient.ts`):
+
 - Authenticated with `SANITY_WRITE_TOKEN`
 - Only used in API routes (newsletter, mutations, contact)
 - Keeps token server-side for security
@@ -719,9 +387,11 @@ Password verification for protected content.
 ### **Content Schemas**
 
 #### subscriber
+
 Newsletter subscriber data.
 
 **Fields:**
+
 - `email` - Subscriber email (unique, lowercase)
 - `source` - Source page ("homepage", "footer", "modal", etc.)
 - `status` - "subscribed" | "unsubscribed"
@@ -731,9 +401,11 @@ Newsletter subscriber data.
 ---
 
 #### contactMessage
+
 Contact form submissions.
 
 **Fields:**
+
 - `name` - Sender name
 - `email` - Sender email
 - `subject` - Message subject
@@ -745,9 +417,11 @@ Contact form submissions.
 ---
 
 #### settings
+
 Global site configuration.
 
 **Fields:**
+
 - `social.instagram` - Instagram URL
 - `social.spotify` - Spotify playlist URL
 - `hours.weekday` - Weekday hours
@@ -760,6 +434,7 @@ Global site configuration.
 ## Key Technical Patterns
 
 ### **Server Components (Default)**
+
 All pages use async Server Components for data fetching.
 
 ```typescript
@@ -772,7 +447,9 @@ export default async function HomePage() {
 ---
 
 ### **Client Components**
+
 Mark with `"use client"` directive when using:
+
 - React hooks (useState, useEffect)
 - Browser APIs (window, document)
 - Event handlers (onClick, onChange)
@@ -783,6 +460,7 @@ Mark with `"use client"` directive when using:
 ---
 
 ### **Cart Flow**
+
 1. User clicks product on menu
 2. ProductModal opens with customization options
 3. User selects modifiers, quantity, and adds notes
@@ -796,6 +474,7 @@ Mark with `"use client"` directive when using:
 ---
 
 ### **Contact Form Flow**
+
 1. User fills out form (name, email, subject, message)
 2. Client-side validation
 3. POST to `/api/contact`
@@ -808,6 +487,7 @@ Mark with `"use client"` directive when using:
 ---
 
 ### **Newsletter Flow**
+
 1. User enters email in NewsLetterForm (homepage, footer, or modal)
 2. Client-side email validation
 3. POST to `/api/subscribe` with email and source
@@ -821,6 +501,7 @@ Mark with `"use client"` directive when using:
 ## Development Guidelines
 
 ### **CSS Organization**
+
 - Component styles → `app/styles/components/`
 - Page styles → `app/styles/pages/`
 - Use Tailwind utilities first
@@ -831,6 +512,7 @@ Mark with `"use client"` directive when using:
 ### **Naming Conventions**
 
 **CSS Classes:** kebab-case
+
 ```css
 .site-header
 .hero-title
@@ -838,26 +520,30 @@ Mark with `"use client"` directive when using:
 ```
 
 **Components:** PascalCase
+
 ```tsx
-SiteHeader
-CartDrawer
-NewsLetterForm
+SiteHeader;
+CartDrawer;
+NewsLetterForm;
 ```
 
 **Files:**
+
 - Components: PascalCase (`CartDrawer.tsx`)
 - Styles: kebab-case (`navigation.css`)
 - Utils: camelCase (`sanitize.ts`)
 
 ### **Import Paths**
+
 Use absolute imports with `@` alias:
+
 ```typescript
 // ✅ Good
-import { CartProvider } from '@/app/components/providers/CartProvider';
-import { COLORS } from '@/app/lib/colors';
+import { CartProvider } from "@/app/components/providers/CartProvider";
+import { COLORS } from "@/app/lib/colors";
 
 // ❌ Avoid
-import { CartProvider } from '../../components/providers/CartProvider';
+import { CartProvider } from "../../components/providers/CartProvider";
 ```
 
 ### **Security Best Practices**
@@ -871,6 +557,7 @@ import { CartProvider } from '../../components/providers/CartProvider';
 7. **Log security events** for monitoring
 
 ### **Git Workflow**
+
 - Work in feature branches (format: `claude/feature-name-xxxxx`)
 - Commit with descriptive messages (format: `type(scope): description`)
 - Push to remote with: `git push -u origin branch-name`
@@ -882,47 +569,124 @@ import { CartProvider } from '../../components/providers/CartProvider';
 ## Testing
 
 ### **Current Status**
-- **Test Coverage: 0%**
-- No test framework configured
-- No test files exist
 
-### **Testing Roadmap**
-See `TEST_COVERAGE_ANALYSIS.md` for comprehensive testing strategy.
+- Unit tests with Vitest + React Testing Library (`tests/unit/`)
+- E2E coverage with Playwright (`tests/e2e/`)
+- MSW configured for API mocks (`tests/utils/`)
+- CI runs lint, unit coverage, and E2E (`.github/workflows/test.yml`)
 
-**Recommended Stack:**
-- **Vitest** - Unit/integration testing (better Next.js 16 support than Jest)
-- **React Testing Library** - Component testing
-- **Playwright** - E2E testing
-- **MSW** - API mocking
+### **Run Locally**
 
-**Priority Areas:**
-1. **CRITICAL:** API routes security (subscribe, contact, apply)
-2. **CRITICAL:** Security utilities (csrf, rateLimit, sanitize)
-3. **HIGH:** Cart system (CartProvider, CartDrawer, ProductModal)
-4. **HIGH:** Forms (NewsLetterForm, ContactForm)
-5. **MEDIUM:** UI components (Button, ConsentBanner, PasswordGate)
-6. **LOW:** SEO components, layout components
+```bash
+npm run test
+npm run test:coverage
+npm run test:e2e
+npm run test:all
+```
 
-**Target Coverage:**
-- API routes: 90%+
-- Security utilities: 95%+
-- Cart & forms: 80%+
-- Overall: 80%+
+### **References**
+
+- `docs/TEST_PLAN.md`
+- `docs/TEST_COVERAGE_ANALYSIS.md`
 
 ---
 
 ## Recent Updates
 
+### **December 2025 - Modular Refactoring (Phases 1-6)**
+
+Major codebase reorganization for consistency, modularity, and documentation:
+
+**Phase 1: Documentation & Types**
+- ✅ Created modular type system in `app/types/` with domain-specific files
+- ✅ Added barrel exports (`index.ts`) for convenient importing
+- ✅ Created 11 comprehensive README files documenting all major directories
+- ✅ Deleted monolithic `app/types.ts` in favor of organized structure
+
+**Phase 2: Utilities & Constants**
+- ✅ Reorganized `app/lib/` into `server/`, `data/`, and `constants/` subdirectories
+- ✅ Created barrel export at `app/lib/index.ts` for server utilities
+- ✅ Added barrel export at `app/utils/index.ts` for client utilities
+- ✅ Moved constants from root `lib/` to `app/lib/constants/`
+- ✅ Deleted root `lib/` folder after migration
+
+**Phase 3: Import Path Standardization**
+- ✅ Converted all relative imports (`../`, `./`) to absolute paths (`@/app/...`)
+- ✅ Standardized 20+ page and component files
+- ✅ Updated dynamic imports in layout components
+
+**Phase 4: Component Organization**
+- ✅ Added JSDoc file headers to layout components
+- ✅ Established JSDoc documentation pattern for all components
+- ✅ Moved `ErrorBoundary.tsx` to `app/components/ui/`
+- ✅ Validated component structure and organization
+
+**Phase 5: CSS Consolidation**
+- ✅ Audited all 21 CSS files and their import locations
+- ✅ Standardized CSS imports to absolute paths
+- ✅ Added JSDoc header pattern to CSS files
+- ✅ Removed unused `legal.css`
+- ✅ Documented CSS ownership rules
+
+**Phase 6: Documentation & Validation**
+- ✅ Updated CLAUDE.md with new structure
+- ✅ Updated all documentation to reflect changes
+- ✅ Created refactoring summary
+
+**New Structure:**
+```
+app/
+├── types/           # Domain-specific type files + barrel export
+├── lib/
+│   ├── server/      # Server-only utilities (csrf, logger, etc.)
+│   ├── data/        # Data/content files
+│   ├── constants/   # Business, SEO, color constants
+│   └── index.ts     # Barrel export
+├── utils/           # Client-safe utilities + barrel export
+├── components/      # Organized by category with READMEs
+└── styles/          # CSS with clear ownership rules
+```
+
+**Benefits:**
+- Clear separation of server/client code
+- Consistent absolute import paths
+- Comprehensive inline documentation
+- Modular, scalable architecture
+- Each directory self-documented with README
+
+### **December 2025 - Page JSDoc Documentation**
+
+- ✅ Added comprehensive JSDoc headers to all 13 page files
+- ✅ Documented all public pages (homepage, menu, story, contact, careers, legal)
+- ✅ Documented layouts (root layout, menu layout)
+- ✅ Documented special pages (studio, 404)
+- ✅ Established consistent JSDoc template for pages
+- ✅ Fixed import path issues from modular refactoring
+- ✅ Build and lint validation passes
+
+**Pages Documented:**
+- Public: homepage, menu, story, contact, careers, thank-you, privacy, terms, refunds
+- Layouts: root layout, menu layout
+- Special: studio, 404
+
+**Additional Fixes:**
+- Fixed `ErrorBoundary` import path
+- Fixed `COLORS` import paths (`@/app/lib/constants/colors`)
+- Fixed `SEO` and `BUSINESS_INFO` import paths
+- Fixed `logger` import path (`@/app/lib/server/logger`)
+- Fixed barrel export in `app/lib/constants/index.ts`
+
 ### **December 2025 - Test Coverage Analysis**
-- ✅ Created comprehensive test coverage analysis document
-- ✅ Identified 190-230 test cases needed
-- ✅ Proposed Vitest + React Testing Library + Playwright setup
-- ✅ Documented security testing scenarios (XSS, CSRF, rate limiting)
-- ✅ Created 7-week testing implementation roadmap
+
+- ✅ Implemented Vitest unit tests and Playwright E2E suite
+- ✅ Coverage reporting runs in CI
+- ✅ MSW configured for API mocks
+- ✅ Documentation refreshed in `docs/TEST_PLAN.md` and `docs/TEST_COVERAGE_ANALYSIS.md`
 
 ### **December 2025 - Tailwind v4 Migration & Visual Rhythm**
+
 - ✅ Fixed Tailwind v4 color generation using `@theme` directive
-- ✅ Registered all cafe-* colors for proper utility class generation
+- ✅ Registered all cafe-\* colors for proper utility class generation
 - ✅ Implemented alternating background pattern for visual flow
 - ✅ Added directional skewed accent elements (right, left, bottom)
 - ✅ Updated navbar to cafe-mist/85 with tan border for cohesion
@@ -932,6 +696,7 @@ See `TEST_COVERAGE_ANALYSIS.md` for comprehensive testing strategy.
 - ✅ Ignored .playwright-mcp artifacts in git
 
 ### **December 2025 - Contact Form & Email**
+
 - ✅ Added Resend email integration for contact form
 - ✅ Created beautiful editorial newsletter-style email template
 - ✅ Implemented dark mode support for emails (prefers-color-scheme)
@@ -943,12 +708,14 @@ See `TEST_COVERAGE_ANALYSIS.md` for comprehensive testing strategy.
 - ✅ Allowed Vercel preview deployments in CSRF validation
 
 ### **December 2025 - Footer Redesign**
+
 - ✅ Redesigned footer with minimal mobile-first layout
 - ✅ Integrated inline newsletter subscription
 - ✅ Improved responsive spacing and typography
 - ✅ Updated footer navigation and business info
 
 ### **November 2025 - Major Refactoring**
+
 - ✅ Reorganized components into `layout/`, `ui/`, `features/`, `providers/`, `seo/`
 - ✅ Renamed confusing classes (`.page-dark` → `.site-layout`, `.ink-cream` → `.text-light`)
 - ✅ Added comprehensive JSDoc documentation to all components
@@ -957,6 +724,7 @@ See `TEST_COVERAGE_ANALYSIS.md` for comprehensive testing strategy.
 - ✅ Created refactoring summary documentation
 
 ### **November 2025 - E-Commerce Features**
+
 - ✅ Implemented shopping cart system (CartProvider, CartDrawer)
 - ✅ Created ProductModal with customization options
 - ✅ Added quantity controls and modifiers
@@ -965,6 +733,7 @@ See `TEST_COVERAGE_ANALYSIS.md` for comprehensive testing strategy.
 - ✅ Edit cart items functionality
 
 ### **November 2025 - SEO Enhancements**
+
 - ✅ Added LocalBusinessJsonLd for local SEO
 - ✅ Added MenuJsonLd for menu structured data
 - ✅ Added FAQJsonLd for FAQ rich snippets
@@ -976,6 +745,7 @@ See `TEST_COVERAGE_ANALYSIS.md` for comprehensive testing strategy.
 ## Environment Variables
 
 Required in `.env.local`:
+
 ```bash
 # Sanity CMS (Required)
 NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
@@ -1006,10 +776,12 @@ NEXT_PUBLIC_VERCEL_ANALYTICS_ID=your_analytics_id
 **Environment Variables:** Set in Vercel project settings
 
 **Branches:**
+
 - `master` - Production (stable releases)
 - `claude/*` - Claude-generated feature branches
 
 **Deployment Notes:**
+
 - Vercel preview deployments are allowed in CSRF validation
 - Email sending works in both preview and production
 - Sanity Studio is accessible at `/studio` on all deployments
@@ -1018,16 +790,18 @@ NEXT_PUBLIC_VERCEL_ANALYTICS_ID=your_analytics_id
 
 ## Support & Resources
 
-- **TEST_COVERAGE_ANALYSIS.md** - Comprehensive testing roadmap (190+ test cases)
-- **REFACTORING_SUMMARY.md** - Complete refactoring guide
-- **README.md** - User-facing documentation
-- **CLAUDE.md** (this file) - Developer guide for Claude Code
+- **docs/TEST_PLAN.md** - Test strategy and execution notes
+- **docs/TEST_COVERAGE_ANALYSIS.md** - Coverage snapshot and gaps
+- **REFACTORING_SUMMARY.md** - Refactoring guide
+- **README.md** - Project overview
+- **docs/index.md** - Documentation hub
 
 ---
 
 ## Pages & Routes
 
 ### Public Pages
+
 - `/` - Homepage with hero, signature pours, philosophy, newsletter
 - `/menu` - Menu page with product cards and modals
 - `/story` - About/Story page
@@ -1038,6 +812,7 @@ NEXT_PUBLIC_VERCEL_ANALYTICS_ID=your_analytics_id
 - `/refunds` - Refund policy
 
 ### Admin
+
 - `/studio` - Sanity CMS Studio (requires authentication)
 
 ---

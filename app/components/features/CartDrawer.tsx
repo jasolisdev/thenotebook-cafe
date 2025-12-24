@@ -9,7 +9,7 @@ import { Button } from '../ui/Button';
 import { useCart } from '../providers/CartProvider';
 import { ProductModal } from './ProductModal';
 import { CartItem } from '@/app/types';
-import { COLORS } from '@/app/lib/colors';
+import { COLORS } from '@/app/lib/constants/colors';
 
 // Use shared colors for consistency across the app
 const colors = COLORS;

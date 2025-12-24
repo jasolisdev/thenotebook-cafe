@@ -12,8 +12,8 @@ export const SEO = {
   siteTagline: 'Coffee. Culture. House Music.',
 
   // Default Metadata
-  defaultTitle: 'The Notebook Café | Riverside, CA',
-  defaultDescription: 'A genuine coffee community hub in Riverside, California. Come for the coffee, stay for the vibe.',
+  defaultTitle: 'The Notebook Café | Coffee Shop in Riverside, CA',
+  defaultDescription: 'Specialty coffee and community vibes in Riverside, CA. Visit The Notebook Café for espresso, matcha, cold brew, and signature pours.',
 
   // Location
   location: {
@@ -35,18 +35,18 @@ export const SEO = {
   // Page-Specific Metadata
   pages: {
     home: {
-      title: 'The Notebook Café | Riverside, CA',
-      description: 'A genuine coffee community hub in Riverside, California. Come for the coffee, stay for the vibe.',
+      title: 'The Notebook Café | Coffee Shop in Riverside, CA',
+      description: 'Specialty coffee and community vibes in Riverside, CA. Visit The Notebook Café for espresso, matcha, cold brew, and signature pours.',
       ogImage: '/og.png',
     },
     menu: {
-      title: 'Menu',
-      description: 'Explore espresso, pour-overs, and seasonal specials at The Notebook Café in Riverside, CA.',
+      title: 'Menu | The Notebook Café, Riverside CA',
+      description: 'Explore The Notebook Café menu in Riverside, CA. Espresso, cold brew, matcha, and seasonal favorites crafted daily.',
       ogImage: '/og-menu.png',
     },
     story: {
-      title: 'Our Story',
-      description: 'Built by locals, for locals—learn how The Notebook Café is creating a genuine Riverside coffee community hub.',
+      title: 'Our Story | The Notebook Café, Riverside CA',
+      description: 'Learn how The Notebook Café became Riverside\'s community hub for specialty coffee, creativity, and curated sound.',
       ogImage: '/og-story.png',
     },
     careers: {
@@ -55,8 +55,8 @@ export const SEO = {
       ogImage: '/og.png',
     },
     contact: {
-      title: 'Contact',
-      description: 'Get in touch with The Notebook Café in Riverside, CA. Hours, location info, and how to reach us.',
+      title: 'Contact | The Notebook Café, Riverside CA',
+      description: 'Visit The Notebook Café in Riverside, CA. Find hours, location, and contact information.',
       ogImage: '/og.png',
     },
   },

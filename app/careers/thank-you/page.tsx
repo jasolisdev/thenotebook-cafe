@@ -1,12 +1,32 @@
 /**
- * Careers Thank You Page - The Notebook Café
+ * @fileoverview Careers application confirmation page
+ * @module pages/careers/thank-you
  *
- * Confirmation page after successful job application submission.
+ * @description
+ * Success confirmation page displayed after submitting a job application.
+ * Provides next steps information and navigation back to homepage.
+ *
+ * Key features:
+ * - Success icon with animation
+ * - Confirmation message with application status
+ * - Next steps timeline (3-5 business days)
+ * - Navigation back to homepage
+ * - Contact information for follow-up questions
+ *
+ * @route /careers/thank-you
+ * @access public
+ *
+ * @example
+ * Route: /careers/thank-you
+ * Accessed after: Successful job application submission
+ *
+ * @see {@link app/careers/page.tsx} for careers page with application form
+ * @see {@link app/components/features/CareersApplyForm.tsx} for form component
  */
 import Link from "next/link";
-import Reveal from "../../components/ui/Reveal";
+import Reveal from "@/app/components/ui/Reveal";
 import { CheckCircle, Home, Mail } from "lucide-react";
-import "../../styles/pages/careers.css";
+import "@/app/styles/pages/careers.css";
 
 export default function ThankYouPage() {
   return (

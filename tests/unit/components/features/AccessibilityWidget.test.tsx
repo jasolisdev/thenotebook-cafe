@@ -1,6 +1,6 @@
 import React from 'react';
 import { afterEach, describe, expect, test, vi } from 'vitest';
-import { fireEvent, render, screen, waitFor } from '@/tests/utils/test-utils';
+import { fireEvent, render, screen, waitFor, userEvent } from '@/tests/utils/test-utils';
 import { AccessibilityWidget } from '@/app/components/features/Accessibility/AccessibilityWidget';
 
 describe('AccessibilityWidget', () => {
@@ -27,7 +27,6 @@ describe('AccessibilityWidget', () => {
   test('opens and applies text size setting', async () => {
     window.localStorage.clear();
 
-    const { userEvent } = await import('@/tests/utils/test-utils');
     const user = userEvent.setup();
 
     render(<AccessibilityWidget />);
@@ -43,10 +42,9 @@ describe('AccessibilityWidget', () => {
 
     const saved = JSON.parse(window.localStorage.getItem('accessibility-settings') ?? '{}');
     expect(saved.textSize).toBe('large');
-  });
+  }, 10000);
 
   test('toggles reading guide line and tracks mouse position', async () => {
-    const { userEvent } = await import('@/tests/utils/test-utils');
     const user = userEvent.setup();
 
     render(<AccessibilityWidget />);

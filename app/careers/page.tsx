@@ -1,20 +1,42 @@
 /**
- * Careers Page - The Notebook Café
+ * @fileoverview Careers page with job listings and application
+ * @module pages/careers
  *
- * Join our team page featuring culture, open positions, and hiring process.
+ * @description
+ * Careers page featuring company culture, open positions, and inline
+ * application form. Includes Indeed job integration and file upload
+ * for resumes.
+ *
+ * Key features:
+ * - Hero banner with careers heading
+ * - Company culture section with values and perks
+ * - Job positions listing (via JobPosition component)
+ * - Indeed job URL integration for external applications
+ * - Inline application form (CareersApplyForm component)
+ * - File upload for resume/CV (PDF, DOC, DOCX)
+ * - Form validation and error handling
+ * - Success redirect to /careers/thank-you page
+ *
+ * @route /careers
+ * @access public
+ *
+ * @example
+ * Route: /careers
+ * Flow: Browse Jobs → Fill Application → Upload Resume → Submit → Thank You Page
+ *
+ * @see {@link app/components/features/CareersApplyForm.tsx} for application form
+ * @see {@link app/components/features/JobPosition.tsx} for job listing component
+ * @see {@link app/careers/thank-you/page.tsx} for success confirmation page
+ * @see {@link app/api/careers/apply/route.ts} for API endpoint
  */
-import Reveal from "../components/ui/Reveal";
-import RevealText from "../components/ui/RevealText";
-import FadeInSection from "../components/ui/FadeInSection";
-import {
-  CheckCircle,
-  Mail,
-  ExternalLink,
-} from "lucide-react";
-import "../styles/pages/careers.css";
-import "../styles/components/application-form.css";
+import Reveal from "@/app/components/ui/Reveal";
+import RevealText from "@/app/components/ui/RevealText";
+import FadeInSection from "@/app/components/ui/FadeInSection";
+import { CheckCircle, Mail, ExternalLink } from "lucide-react";
+import "@/app/styles/pages/careers.css";
+import "@/app/styles/components/application-form.css";
 import type { Metadata } from "next";
-import { SEO } from "@/lib/seo";
+import { SEO } from "@/app/lib/constants/seo";
 import CareersApplyForm from "@/app/components/features/CareersApplyForm";
 import JobPosition from "@/app/components/features/JobPosition";
 
@@ -68,13 +90,11 @@ export default function CareersPage() {
           aria-hidden="true"
         />
         <div className="relative z-10 text-left md:text-center px-6 w-full max-w-7xl mx-auto">
-          <RevealText delay="0ms">
-            <h1 className="font-serif text-4xl md:text-6xl text-cafe-cream mb-4">
-              Careers
-            </h1>
-          </RevealText>
+          <h1 className="font-serif text-4xl md:text-6xl text-cafe-cream mb-4">
+            <RevealText delay="0ms">Careers</RevealText>
+          </h1>
           <FadeInSection delay="200ms">
-            <p className="text-lg md:text-xl text-cafe-cream/90">
+            <p className="font-serif italic text-lg md:text-2xl text-cafe-cream/90 drop-shadow-sm">
               Join The Team, Build The Culture.
             </p>
           </FadeInSection>
@@ -95,7 +115,7 @@ export default function CareersPage() {
             </Reveal>
             <Reveal delay={120}>
               <h2
-                className="font-serif text-5xl sm:text-6xl mb-8 leading-none"
+                className="font-dm-serif font-bold text-5xl sm:text-6xl mb-8 leading-none"
                 style={{ color: "var(--color-cafe-black)" }}
               >
                 A{" "}
@@ -123,70 +143,6 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Open Positions */}
-      <section
-        data-section="Join Our Team"
-        className="pt-12 pb-24 md:pt-16 md:pb-32 relative"
-      >
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <Reveal>
-              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
-                Position Status
-              </span>
-            </Reveal>
-            <Reveal delay={100}>
-              <h2
-                className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none"
-                style={{ color: "var(--color-cafe-black)" }}
-              >
-                Join Our{" "}
-                <span
-                  className="italic"
-                  style={{ color: "var(--color-cafe-tan)" }}
-                >
-                  Team
-                </span>
-              </h2>
-            </Reveal>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-10">
-              <Reveal delay={200}>
-                <JobPosition
-                  title="Barista Cashier"
-                  status="Hiring Paused"
-                  payRange="$17–$22/hr"
-                  type="Full-time / Part-time"
-                  location="In person"
-                  overview="Join our vibrant café team as a Barista Cashier. You'll greet guests, prepare drinks and café items, handle transactions, and help keep the space welcoming, clean, and running smoothly."
-                  responsibilities={[
-                    "Greet customers warmly and take orders with professionalism",
-                    "Prepare coffee beverages and food items to recipe and quality standards",
-                    "Operate Clover POS and process sales accurately",
-                    "Handle cash and card transactions with strong retail math",
-                    "Maintain cleanliness and food safety in prep and guest areas",
-                    "Move efficiently during rushes while maintaining hospitality",
-                    "Restock supplies and support basic food prep as needed",
-                  ]}
-                  qualifications={[
-                    "Prior barista experience or coffee knowledge preferred",
-                    "POS experience (Clover, Aloha, Micros, etc.) is a plus",
-                    "Strong customer service and communication skills",
-                    "Comfortable multitasking in a fast-paced environment",
-                    "Knowledge of food safety and food handling practices",
-                    "Reliable work ethic and solid time management",
-                    "Must have a California food handler card",
-                  ]}
-                  benefits={["Employee discount", "Paid sick time"]}
-                />
-              </Reveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Perks & Benefits */}
       <section
         data-section="Perks & Benefits"
@@ -195,7 +151,7 @@ export default function CareersPage() {
         <div className="max-w-5xl mx-auto px-6">
           <Reveal>
             <h2
-              className="font-serif text-4xl md:text-5xl text-center mb-16"
+              className="font-dm-serif font-bold text-4xl md:text-5xl text-center mb-16"
               style={{ color: "var(--color-cafe-black)" }}
             >
               What We{" "}
@@ -326,7 +282,7 @@ export default function CareersPage() {
             </Reveal>
             <Reveal delay={100}>
               <h2
-                className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none"
+                className="font-dm-serif font-bold text-4xl md:text-6xl lg:text-7xl mb-8 leading-none"
                 style={{ color: "var(--color-cafe-black)" }}
               >
                 How We{" "}
@@ -428,6 +384,70 @@ export default function CareersPage() {
         </div>
       </section>
 
+      {/* Open Positions */}
+      <section
+        data-section="Join Our Team"
+        className="pt-12 pb-24 md:pt-16 md:pb-32 relative"
+      >
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <Reveal>
+              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+                Position Status
+              </span>
+            </Reveal>
+            <Reveal delay={100}>
+              <h2
+                className="font-dm-serif font-bold text-4xl md:text-6xl lg:text-7xl mb-8 leading-none"
+                style={{ color: "var(--color-cafe-black)" }}
+              >
+                Join Our{" "}
+                <span
+                  className="italic"
+                  style={{ color: "var(--color-cafe-tan)" }}
+                >
+                  Team
+                </span>
+              </h2>
+            </Reveal>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-10">
+              <Reveal delay={200}>
+                <JobPosition
+                  title="Barista Cashier"
+                  status="Hiring Paused"
+                  payRange="$17–$22/hr"
+                  type="Full-time / Part-time"
+                  location="In person"
+                  overview="Join our vibrant café team as a Barista Cashier. You'll greet guests, prepare drinks and café items, handle transactions, and help keep the space welcoming, clean, and running smoothly."
+                  responsibilities={[
+                    "Greet customers warmly and take orders with professionalism",
+                    "Prepare coffee beverages and food items to recipe and quality standards",
+                    "Operate Clover POS and process sales accurately",
+                    "Handle cash and card transactions with strong retail math",
+                    "Maintain cleanliness and food safety in prep and guest areas",
+                    "Move efficiently during rushes while maintaining hospitality",
+                    "Restock supplies and support basic food prep as needed",
+                  ]}
+                  qualifications={[
+                    "Prior barista experience or coffee knowledge preferred",
+                    "POS experience (Clover, Aloha, Micros, etc.) is a plus",
+                    "Strong customer service and communication skills",
+                    "Comfortable multitasking in a fast-paced environment",
+                    "Knowledge of food safety and food handling practices",
+                    "Reliable work ethic and solid time management",
+                    "Must have a California food handler card",
+                  ]}
+                  benefits={["Employee discount", "Paid sick time"]}
+                />
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Email Application (form hidden for now) */}
       <section
         id="apply"
@@ -443,7 +463,7 @@ export default function CareersPage() {
             </Reveal>
             <Reveal delay={100}>
               <h2
-                className="font-serif text-4xl md:text-6xl lg:text-7xl mb-8 leading-none"
+                className="font-dm-serif font-bold text-4xl md:text-6xl lg:text-7xl mb-8 leading-none"
                 style={{ color: "var(--color-cafe-black)" }}
               >
                 Application{" "}

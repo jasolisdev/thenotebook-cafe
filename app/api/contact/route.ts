@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
 import { writeClient } from "@/sanity/lib/writeClient";
-import { validateOrigin } from "@/app/lib/csrf";
-import { checkRateLimit } from "@/app/lib/rateLimit";
-import { logger } from "@/app/lib/logger";
-import { sanitizeEmail, sanitizeMultilineText, sanitizeText } from "@/app/lib/sanitize";
+import {
+  validateOrigin,
+  checkRateLimit,
+  logger,
+  sanitizeEmail,
+  sanitizeMultilineText,
+  sanitizeText,
+} from "@/app/lib";
 import { Resend } from "resend";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

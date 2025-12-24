@@ -6,13 +6,18 @@ workflowType: 'ux-design'
 lastStep: 14
 project_name: 'thenotebook-cafe'
 user_name: 'Jose'
-date: '2025-12-05'
+date: '2025-12-23'
+implementationStatus: 'implemented (see app/story/page.tsx)'
 ---
 
 # UX Design Specification thenotebook-cafe
 
 **Author:** Jose
-**Date:** 2025-12-05
+**Date:** 2025-12-23
+
+**Implementation Note:** The Story Page described here is implemented in `app/story/page.tsx` with matching section layout, typography, and scroll reveal effects.
+
+**Implementation Adjustments:** The live build uses `Reveal`/`RevealText`/`FadeInSection` for scroll animations, and decorative accents are implemented inline with icons/CSS rather than dedicated floating-item components.
 
 ---
 
@@ -641,7 +646,7 @@ Where franchises feel transactional, cold, manufactured, and generic, The Notebo
 - **Implementation:** Alternating section backgrounds (cafe-mist, cafe-white, cafe-cream), cafe-tan accents for CTAs and highlights
 
 **3. Scroll-Driven Section Reveals (inspired by all sites)**
-- **Why:** Leverages existing ScrollReveal system, mobile-first audience expects smooth scroll experience
+- **Why:** Leverages existing Reveal system, mobile-first audience expects smooth scroll experience
 - **Implementation:** IntersectionObserver API, fade + subtle scale on entry, staggered delays (0.1s, 0.2s, 0.3s)
 
 **What to Adapt for Our Context:**
@@ -694,7 +699,7 @@ Where franchises feel transactional, cold, manufactured, and generic, The Notebo
 - Ken Burns hero slideshow (3-5 images, CSS animations)
 - Warm color palette application (cafe-mist, cafe-cream, cafe-tan backgrounds)
 - Balanced text strategy (short paragraphs + image pairing)
-- Basic scroll reveals (fade-in using existing ScrollReveal system)
+- Basic scroll reveals (fade-in using existing Reveal system)
 
 **Phase 2: Animation Layers (Build Depth)**
 - 3D tilted card effects for interior/coffee images (±7-9° rotations)
@@ -720,7 +725,7 @@ The Notebook Café Story Page uses a **custom design system** that leverages the
 - **Custom brand colors** registered as utility classes (cafe-mist, cafe-cream, cafe-tan, cafe-black, cafe-brown, cafe-white)
 - **Custom typography** loaded and configured (Alpino serif for display, Torus sans for body)
 - **Component architecture** organized by purpose (layout/, ui/, features/, decorative/)
-- **ScrollReveal system** for scroll-triggered animations
+- **Reveal system** for scroll-triggered animations
 - **Next.js 16** with App Router and React Server Components
 
 ### Rationale for Selection
@@ -832,7 +837,7 @@ app/components/
 ├── layout/          # Global components
 │   ├── SiteHeader.tsx
 │   ├── SiteFooter.tsx
-│   └── ScrollReveal.tsx (existing)
+│   └── Reveal.tsx (existing)
 ├── ui/              # Reusable UI components
 │   ├── Button.tsx
 │   ├── Card.tsx
@@ -871,7 +876,7 @@ app/styles/
 - Accessibility: Reduced-motion media query disables animations
 
 **2. Layered Animation System**
-- **Subtle layer:** Extend existing ScrollReveal (fade + scale 0.95)
+- **Subtle layer:** Extend existing Reveal (fade + scale 0.95)
 - **Medium layer:** New TiltedImageCard component (rotateZ ±7-9°)
 - **Parallax layer:** Custom parallax wrapper (0.5x scroll speed for backgrounds)
 - **Scroll-reactive layer:** StoryFloatingItems with scroll-based translate3d
@@ -936,7 +941,7 @@ Additional colors available via CSS custom properties for inline styles:
 - `--gold-darker` (#b48a4e) - Darker gold variant
 - `--cream-light` (#f4f0e9) - Light cream backgrounds
 - `--pearl-white` (#fffcf9) - Off-white for modals
-- `--latte-cream` (#f6ebdf) - Events page light cream
+- `--latte-cream` (#f6ebdf) - Contact page light cream
 
 **Semantic Color Mappings:**
 
@@ -1718,7 +1723,7 @@ The Notebook Café codebase currently provides these foundation components:
 **✅ Foundation Components:**
 - `SiteHeader` - Global navigation with mobile drawer
 - `SiteFooter` - Global footer with business information
-- `ScrollReveal` - Scroll-triggered animation system (IntersectionObserver-based)
+- `Reveal` - Scroll-triggered animation system (IntersectionObserver-based)
 - `Button` - Basic CTA buttons
 - `Card` - Generic card component
 - `Modal` - Modal/overlay system
@@ -1734,7 +1739,7 @@ The Notebook Café codebase currently provides these foundation components:
 **Design System Foundation:**
 - **Custom Tailwind v4** with café color palette registered
 - **Typography:** Alpino (display) + Torus (body) loaded and configured
-- **Animation system:** ScrollReveal with fade + scale transitions
+- **Animation system:** Reveal with fade + scale transitions
 - **Component architecture:** Organized by purpose (layout/, ui/, features/, decorative/)
 
 ---
@@ -1820,7 +1825,7 @@ Based on the **"Artisanal Warmth"** design direction and user journey requiremen
 - Use Playfair Display for headings, Outfit for body
 
 **Interaction Behavior:**
-- Reveals via ScrollReveal (fade + scale 0.95 → 1)
+- Reveals via Reveal (fade + scale 0.95 → 1)
 - Staggered corner decoration appearance (animation-delay: 0.1s increments)
 - No interaction unless contains CTA button
 
@@ -1860,7 +1865,7 @@ Based on the **"Artisanal Warmth"** design direction and user journey requiremen
 - 2-4 cells optimal (not overwhelming)
 
 **Interaction Behavior:**
-- Grid cells reveal via ScrollReveal with staggered delays (0.1s, 0.2s, 0.3s)
+- Grid cells reveal via Reveal with staggered delays (0.1s, 0.2s, 0.3s)
 - Hover: background gradient shift + soft shadow (`0 10px 30px rgba(44, 36, 32, 0.1)`)
 - Grid lines use `--grid-gold` color (1-2px borders)
 
@@ -1902,7 +1907,7 @@ Based on the **"Artisanal Warmth"** design direction and user journey requiremen
 - 3-6 cards per section creates gallery feel without overwhelming
 
 **Interaction Behavior:**
-- Reveals via ScrollReveal with tilt already applied
+- Reveals via Reveal with tilt already applied
 - Hover: smooth untilt + scale transition (0.4s `cubic-bezier(0.4, 0, 0.2, 1)`)
 - Optional parallax: images move slower than scroll (0.7x speed) for depth
 - Shadow animates with hover (elevation increases)
@@ -1929,7 +1934,7 @@ Based on the **"Artisanal Warmth"** design direction and user journey requiremen
 
 **Variants:**
 - **Newsletter:** Email input + submit button
-- **Navigation:** Multiple button options (Menu, Events, Instagram)
+- **Navigation:** Multiple button options (Menu, Contact, Instagram)
 - **Announcement:** Single large button with icon
 
 **Accessibility:**
@@ -1945,7 +1950,7 @@ Based on the **"Artisanal Warmth"** design direction and user journey requiremen
 - Warm, inviting language matching brand tone
 
 **Interaction Behavior:**
-- Container fades in via ScrollReveal
+- Container fades in via Reveal
 - Backdrop blur creates depth (with fallback for older browsers: solid background)
 - Floating radial gradient morphing animation (15s loop, subtle)
 - Button hover: scale (1.05) + color shift + translateY(-2px)
@@ -2095,7 +2100,7 @@ Based on the **"Artisanal Warmth"** design direction and user journey requiremen
 - Maximalist details: `--ornate-border: var(--gold-primary)`, `--double-border-inner: var(--cafe-cream)`
 
 **Animation Consistency:**
-- All components use `ScrollReveal` system for entry animations
+- All components use `Reveal` system for entry animations
 - Transition timing: 0.4-0.6s (matching homepage)
 - Easing functions: `cubic-bezier(0.4, 0, 0.2, 1)` for reveals, `cubic-bezier(0.4, 1, 0.65, 1)` for hero scroll-to-hide
 - Staggered delays: 0.1s, 0.2s, 0.3s for visual rhythm
@@ -2103,7 +2108,7 @@ Based on the **"Artisanal Warmth"** design direction and user journey requiremen
 
 **Build Principles:**
 1. **Use design system tokens** - Colors, fonts, spacing from Tailwind v4 + CSS variables
-2. **Follow existing patterns** - Extend `ScrollReveal` architecture, mirror `HomeFloatingItems` structure
+2. **Follow existing patterns** - Extend `Reveal` architecture, mirror `HomeFloatingItems` structure
 3. **Accessibility first** - WCAG AA compliance, semantic HTML, keyboard navigation, screen reader support
 4. **Performance optimization** - CSS transforms (GPU-accelerated), IntersectionObserver (efficient), lazy loading images
 5. **Progressive enhancement** - Core content accessible without JavaScript, animations enhance but don't block
@@ -2182,7 +2187,7 @@ app/styles/components/
 5. **Tilted Image Card**
    - **Why next:** Craftsmanship showcase provides visual proof for quality claims
    - **User journey impact:** Journey 1 (detail shots), Journey 3 (brand validation)
-   - **Implementation:** 3D CSS transforms (`rotateZ`) + ScrollReveal integration + hover untilt
+   - **Implementation:** 3D CSS transforms (`rotateZ`) + Reveal integration + hover untilt
    - **Complexity:** Medium (rotation animations, responsive behavior, reduced-motion handling)
    - **Estimated effort:** 4-6 hours
 

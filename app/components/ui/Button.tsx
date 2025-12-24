@@ -8,7 +8,7 @@ interface BaseProps {
   fullWidth?: boolean;
   withArrow?: boolean;
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 interface ButtonElementProps extends BaseProps, React.ButtonHTMLAttributes<HTMLButtonElement> {

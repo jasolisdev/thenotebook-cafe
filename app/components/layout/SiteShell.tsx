@@ -1,3 +1,19 @@
+/**
+ * @fileoverview Page wrapper component with header and footer
+ * @module components/layout/SiteShell
+ *
+ * @description
+ * Main layout wrapper that includes SiteHeader, SiteFooter, and global
+ * client-side components (analytics, consent banner, accessibility widget).
+ * Manages scroll behavior and dynamic component loading.
+ *
+ * @example
+ * ```tsx
+ * <SiteShell>
+ *   <YourPageContent />
+ * </SiteShell>
+ * ```
+ */
 "use client";
 
 import { useEffect, useMemo } from "react";
@@ -6,19 +22,19 @@ import dynamic from "next/dynamic";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
 import ImagePreloader from "./ImagePreloader";
-import AnnouncementBanner from "../ui/AnnouncementBanner";
+import AnnouncementBanner from "@/app/components/ui/AnnouncementBanner";
 
-const ConsentBanner = dynamic(() => import("../ui/ConsentBanner"), { ssr: false });
-const AnalyticsLoader = dynamic(() => import("../ui/AnalyticsLoader"), { ssr: false });
+const ConsentBanner = dynamic(() => import("@/app/components/ui/ConsentBanner"), { ssr: false });
+const AnalyticsLoader = dynamic(() => import("@/app/components/ui/AnalyticsLoader"), { ssr: false });
 const AccessibilityWidget = dynamic(
   () =>
-    import("../features/Accessibility/AccessibilityWidget").then(
+    import("@/app/components/features/Accessibility/AccessibilityWidget").then(
       (m) => m.AccessibilityWidget
     ),
   { ssr: false }
 );
 const CartDrawer = dynamic(
-  () => import("../features/CartDrawer").then((m) => m.CartDrawer),
+  () => import("@/app/components/features/CartDrawer").then((m) => m.CartDrawer),
   { ssr: false }
 );
 

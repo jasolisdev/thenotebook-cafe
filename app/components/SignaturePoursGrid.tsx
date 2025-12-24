@@ -1,6 +1,6 @@
 "use client";
 
-import "../styles/components/signature-pours-grid.css";
+import "@/app/styles/components/signature-pours-grid.css";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 

@@ -133,6 +133,31 @@ export function captureMessage(
 }
 
 /**
+ * Record a performance or business metric
+ */
+export function recordMetric(
+  name: string,
+  value: number,
+  tags?: Record<string, string | number | boolean>
+): void {
+  void name;
+  void value;
+  void tags;
+  if (process.env.NODE_ENV !== "production") {
+    return;
+  }
+
+  // Integrate with your metrics provider (e.g., DataDog, New Relic, Sentry).
+  // Example with a hypothetical metrics client:
+  /*
+  metricsClient.record(name, value, {
+    tags,
+    timestamp: Date.now(),
+  });
+  */
+}
+
+/**
  * Set user context for error tracking
  */
 export function setUserContext(user: {

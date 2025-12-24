@@ -1,26 +1,56 @@
 /**
- * Homepage - The Notebook Café
+ * @fileoverview Homepage - Main landing page
+ * @module pages/home
  *
- * Redesigned homepage featuring new hero, sanctuary section, vibe carousel, and newsletter.
+ * @description
+ * Main landing page for The Notebook Café featuring hero section,
+ * menu preview, atmosphere showcase, brand philosophy, community highlights,
+ * and newsletter signup.
+ *
+ * Key features:
+ * - Full-screen hero with brand messaging and CTA
+ * - Menu preview section with quick access to full menu
+ * - Atmosphere showcase with sticky text and scrolling gallery (WiFi, outlets, curated soundtrack, creator-friendly space)
+ * - The Trinity section (Craft Espresso, Curated Sound, Creative Comfort)
+ * - Low Lights experience section with dual imagery and brand story
+ * - Newsletter subscription section
+ *
+ * @route /
+ * @access public
+ *
+ * @example
+ * Route: https://thenotebookcafellc.com/
+ * Displays: Hero → Menu Preview → Atmosphere → Trinity → Low Lights → Newsletter
+ *
+ * @see {@link app/components/features/HeroSection.tsx} for hero implementation
+ * @see {@link app/components/features/MenuSection.tsx} for menu preview
+ * @see {@link app/components/features/NewsletterSection.tsx} for newsletter signup
  */
 import "@/app/styles/pages/home.css";
 import Image from "next/image";
 import Reveal from "@/app/components/ui/Reveal";
 import StoryLink from "@/app/components/ui/StoryLink";
-import { Coffee, Music, Armchair, Sparkles } from "lucide-react";
-import SignaturePoursGrid from "@/app/components/SignaturePoursGrid";
+import {
+  Coffee,
+  Music,
+  Armchair,
+  Sparkles,
+  Wifi,
+  Zap,
+  BookOpen,
+} from "lucide-react";
 import MenuSection from "@/app/components/features/MenuSection";
 import HeroSection from "@/app/components/features/HeroSection";
 import NewsletterSection from "@/app/components/features/NewsletterSection";
 import LocalBusinessJsonLd from "@/app/components/seo/LocalBusinessJsonLd";
 import type { Metadata } from "next";
-import { SEO } from "@/lib/seo";
+import { SEO } from "@/app/lib/constants/seo";
 
 export const metadata: Metadata = {
   title: SEO.pages.home.title,
   description: SEO.pages.home.description,
   alternates: {
-    canonical: "/",
+    canonical: SEO.siteUrl,
   },
   openGraph: {
     title: SEO.pages.home.title,
@@ -57,33 +87,6 @@ const imageCaptions = [
   { title: "The Community", subtitle: "Riverside's living room." },
 ];
 
-const signaturePours = [
-  {
-    name: "Iced Brown Sugar Oat",
-    description:
-      "Caramelized brown sugar layered with velvety oat milk and slow-steeped espresso.",
-    image: "/unsplash/tnc-placeholder-featured-1.png",
-  },
-  {
-    name: "Matcha Cloud",
-    description:
-      "Ceremonial grade matcha poured over cold foam for a soft, cloudlike finish.",
-    image: "/unsplash/tnc-placeholder-featured-2.png",
-  },
-  {
-    name: "Classic Cold Brew",
-    description:
-      "18-hour brew for a chocolatey, low-acid sip served over crystal-clear ice.",
-    image: "/unsplash/tnc-placeholder-featured-3.png",
-  },
-  {
-    name: "Espresso Tonic",
-    description:
-      "Bright espresso lifted by artisanal tonic, citrus oils, and a crack of ice.",
-    image: "/unsplash/tnc-placeholder-featured-4.png",
-  },
-];
-
 export default function HomePage() {
   return (
     <main className="home-page relative">
@@ -94,6 +97,7 @@ export default function HomePage() {
       <HeroSection />
 
       {/* Signature Pours */}
+      {/* 
       <section
         data-section="Signature Pours"
         className="relative pt-24 pb-12 overflow-hidden signature-pours-section"
@@ -113,6 +117,7 @@ export default function HomePage() {
         </div>
         <div />
       </section>
+      */}
 
       {/* Menu Section */}
       <MenuSection />
@@ -151,14 +156,14 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:items-start">
             {/* Left Column: Sticky Text */}
-            <div className="lg:sticky lg:top-32 h-fit lg:self-start">
+            <div className="lg:sticky lg:top-32 h-fit lg:self-start relative pl-4 before:absolute before:left-0 before:top-2 before:h-24 before:w-px before:bg-cafe-tan/40">
               <Reveal>
                 <span className="text-cafe-tan uppercase tracking-[0.25em] text-xs font-semibold block mb-4">
                   The Atmosphere
                 </span>
               </Reveal>
               <Reveal delay={100}>
-                <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-cafe-black">
+                <h2 className="font-dm-serif font-bold text-4xl md:text-5xl leading-[1.05] text-cafe-black">
                   It&apos;s not just Coffee <br />
                   <span className="italic text-cafe-tan block mt-2">
                     It&apos;s a feeling
@@ -172,6 +177,89 @@ export default function HomePage() {
                   Wi-Fi is strong, but the community is stronger.
                 </p>
               </Reveal>
+
+              {/* Features Grid */}
+              <div className="mt-12 space-y-6 max-w-md">
+                <Reveal delay={250}>
+                  <div className="flex items-start gap-4 group">
+                    <div className="mt-1 flex-shrink-0 w-12 h-12 rounded-full bg-[rgba(var(--cafe-tan-rgb),0.12)] flex items-center justify-center group-hover:bg-cafe-tan/20 transition-colors duration-300">
+                      <Wifi
+                        size={22}
+                        className="text-cafe-tan"
+                        strokeWidth={1.5}
+                      />
+                    </div>
+                    <div>
+                      <h4 className="text-cafe-black font-semibold text-sm tracking-wide mb-0.5">
+                        Strong WiFi
+                      </h4>
+                      <p className="text-cafe-brown/70 text-sm leading-relaxed">
+                        Always on, always fast
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+
+                <Reveal delay={300}>
+                  <div className="flex items-start gap-4 group">
+                    <div className="mt-1 flex-shrink-0 w-12 h-12 rounded-full bg-[rgba(var(--cafe-tan-rgb),0.12)] flex items-center justify-center group-hover:bg-cafe-tan/20 transition-colors duration-300">
+                      <Zap
+                        size={22}
+                        className="text-cafe-tan"
+                        strokeWidth={1.5}
+                      />
+                    </div>
+                    <div>
+                      <h4 className="text-cafe-black font-semibold text-sm tracking-wide mb-0.5">
+                        Plenty of Outlets
+                      </h4>
+                      <p className="text-cafe-brown/70 text-sm leading-relaxed">
+                        Every table, every seat
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+
+                <Reveal delay={350}>
+                  <div className="flex items-start gap-4 group">
+                    <div className="mt-1 flex-shrink-0 w-12 h-12 rounded-full bg-[rgba(var(--cafe-tan-rgb),0.12)] flex items-center justify-center group-hover:bg-cafe-tan/20 transition-colors duration-300">
+                      <Music
+                        size={22}
+                        className="text-cafe-tan"
+                        strokeWidth={1.5}
+                      />
+                    </div>
+                    <div>
+                      <h4 className="text-cafe-black font-semibold text-sm tracking-wide mb-0.5">
+                        Curated Soundtrack
+                      </h4>
+                      <p className="text-cafe-brown/70 text-sm leading-relaxed">
+                        Lo-fi beats & deep house
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+
+                <Reveal delay={400}>
+                  <div className="flex items-start gap-4 group">
+                    <div className="mt-1 flex-shrink-0 w-12 h-12 rounded-full bg-[rgba(var(--cafe-tan-rgb),0.12)] flex items-center justify-center group-hover:bg-cafe-tan/20 transition-colors duration-300">
+                      <BookOpen
+                        size={22}
+                        className="text-cafe-tan"
+                        strokeWidth={1.5}
+                      />
+                    </div>
+                    <div>
+                      <h4 className="text-cafe-black font-semibold text-sm tracking-wide mb-0.5">
+                        Designed for Creators
+                      </h4>
+                      <p className="text-cafe-brown/70 text-sm leading-relaxed">
+                        Notebooks welcome, ideas flow
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+              </div>
             </div>
 
             {/* Right Column: Scrolling Images */}
@@ -210,13 +298,9 @@ export default function HomePage() {
       <section
         data-section="The Trinity"
         className="py-24 md:py-28 relative overflow-hidden trinity-slab trinity-slab-light"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(var(--cafe-tan-rgb), 0) 0%, rgba(var(--cafe-tan-rgb), 0.12) 50%, rgba(var(--cafe-tan-rgb), 0) 100%)",
-        }}
       >
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-3">
+          <div className="grid md:grid-cols-3 gap-y-16 md:gap-y-0">
             <Reveal>
               <div className="p-10 text-center">
                 <div
@@ -292,52 +376,63 @@ export default function HomePage() {
         className="relative overflow-visible pt-12 pb-24 px-6"
       >
         <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
+          <div className="relative pl-4 before:absolute before:left-0 before:top-2 before:h-24 before:w-px before:bg-cafe-tan/40">
             <Reveal>
-              <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-cafe-black">
+              <span className="text-cafe-tan uppercase tracking-[0.25em] text-xs font-semibold block mb-4">
+                The Experience
+              </span>
+            </Reveal>
+            <Reveal delay={100}>
+              <h2 className="font-dm-serif font-bold text-4xl md:text-5xl leading-[1.05] text-cafe-black">
                 Low lights,
                 <br />
                 good sound,
                 <br />
                 <span className="italic text-cafe-tan">better coffee.</span>
               </h2>
-              <br />
-              <div className="w-24 h-[2px] bg-cafe-black" />
             </Reveal>
-
-            <Reveal delay={160}>
-              <p className="text-lg md:text-xl font-normal leading-relaxed max-w-xl text-cafe-brown">
+            <Reveal delay={200}>
+              <div className="w-24 h-[2px] bg-cafe-black mt-8" />
+            </Reveal>
+            <Reveal delay={250}>
+              <p className="mt-8 text-lg md:text-xl font-normal leading-relaxed max-w-xl text-cafe-brown">
                 We designed The Notebook Café as a sanctuary for the creatives,
                 the writers, and the dreamers of Riverside. It is not just about
                 the caffeine—it is about the headspace.
               </p>
-              <br />
-
-              <StoryLink />
+            </Reveal>
+            <Reveal delay={300}>
+              <div className="mt-8">
+                <StoryLink />
+              </div>
             </Reveal>
           </div>
 
-          <div className="relative">
+          <div className="relative pb-6 md:pb-10">
             <div className="grid grid-cols-2 gap-4 relative">
-              <Reveal delay={120} threshold={0.3} className="h-full">
-                <Image
-                  src="/unsplash/tnc-placeholder-1.png"
-                  alt="Barista pouring coffee at The Notebook Café in Riverside, CA"
-                  width={900}
-                  height={1200}
-                  className="w-full h-full object-cover rounded-sm translate-y-12 shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
-                  priority
-                />
+              <Reveal>
+                <div className="h-full">
+                  <Image
+                    src="/unsplash/tnc-placeholder-1.png"
+                    alt="Barista pouring coffee at The Notebook Café in Riverside, CA"
+                    width={900}
+                    height={1200}
+                    className="w-full h-full object-cover rounded-sm translate-y-12 shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                    priority
+                  />
+                </div>
               </Reveal>
 
-              <Reveal delay={180} threshold={0.3} className="h-full">
-                <Image
-                  src="/unsplash/tnc-placeholder-2.png"
-                  alt="Cozy corner seating at The Notebook Café in Riverside, CA"
-                  width={900}
-                  height={1200}
-                  className="w-full h-full object-cover rounded-sm shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
-                />
+              <Reveal delay={200}>
+                <div className="h-full">
+                  <Image
+                    src="/unsplash/tnc-placeholder-2.png"
+                    alt="Cozy corner seating at The Notebook Café in Riverside, CA"
+                    width={900}
+                    height={1200}
+                    className="w-full h-full object-cover rounded-sm shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                  />
+                </div>
               </Reveal>
             </div>
           </div>

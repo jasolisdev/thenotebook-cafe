@@ -1,3 +1,24 @@
+/**
+ * @fileoverview Terms of Service page
+ * @module pages/terms
+ *
+ * @description
+ * Legal page displaying The Notebook Café's terms of service.
+ * Covers acceptable use, orders, payments, liability, and user agreements.
+ *
+ * Key features:
+ * - Terms sections (Overview, Eligibility, Orders, Liability)
+ * - Last updated timestamp
+ * - Noindex robots meta (not indexed by search engines)
+ * - Minimal layout with readable typography
+ *
+ * @route /terms
+ * @access public
+ *
+ * @example
+ * Route: /terms
+ * Displays: Terms of service content
+ */
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

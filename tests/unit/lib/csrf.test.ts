@@ -6,7 +6,7 @@
  */
 
 import { describe, test, expect } from 'vitest';
-import { validateOrigin } from '@/app/lib/csrf';
+import { validateOrigin } from '@/app/lib/server/csrf';
 
 // Helper to create mock Request objects
 function createMockRequest(headers: Record<string, string> = {}): Request {
