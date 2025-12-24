@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { checkRateLimit } from "@/app/lib/server/rateLimit";
+import { checkRateLimit } from "@/app/lib";
 
 export async function POST(request: Request) {
   // Rate limiting: 3 requests per 15 minutes (prevent brute force)
