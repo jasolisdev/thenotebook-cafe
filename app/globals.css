@@ -659,12 +659,14 @@ h3 {
     pointer !important;
 }
 
-.acc-highlight-links a {
-  background-color: var(--color-cafe-tan) !important;
-  color: var(--color-cafe-black) !important;
+.acc-highlight-links a:not(.acc-widget-panel *),
+.acc-highlight-links button:not([aria-label="Accessibility Options"]):not(.acc-widget-panel *) {
+  background-color: #FFEB3B !important;
+  color: #000000 !important;
   text-decoration: underline !important;
   border-radius: 2px;
-  padding: 0 2px;
+  padding: 0 4px;
+  outline: 2px solid #000000 !important;
 }
 
 .bionic-bold {
@@ -676,17 +678,17 @@ h3 {
   left: 0;
   right: 0;
   height: 5px;
-  background-color: rgba(var(--cafe-tan-rgb), 0.6);
+  background-color: #DC2626;
   pointer-events: none;
   z-index: 9999;
 }
 
 .acc-text-lg {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
 }
 
 .acc-text-xl {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
 }
 
 .acc-readable-font {

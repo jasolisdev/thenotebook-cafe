@@ -179,7 +179,7 @@ export default function HomePage() {
               </Reveal>
 
               {/* Features Grid */}
-              <div className="mt-12 space-y-6 max-w-md">
+              <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
                 <Reveal delay={250}>
                   <div className="flex items-start gap-4 group">
                     <div className="mt-1 flex-shrink-0 w-12 h-12 rounded-full bg-[rgba(var(--cafe-tan-rgb),0.12)] flex items-center justify-center group-hover:bg-cafe-tan/20 transition-colors duration-300">

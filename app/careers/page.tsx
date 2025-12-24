@@ -104,7 +104,7 @@ export default function CareersPage() {
       {/* Culture Section */}
       <section
         data-section="Our Culture"
-        className="pt-24 pb-12 md:pt-32 md:pb-16 relative overflow-hidden"
+        className="pt-24 pb-0 md:pt-32 md:pb-0 relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -146,7 +146,7 @@ export default function CareersPage() {
       {/* Perks & Benefits */}
       <section
         data-section="Perks & Benefits"
-        className="py-24 md:py-32 relative"
+        className="pt-12 pb-24 md:pt-16 md:pb-32 relative"
       >
         <div className="max-w-5xl mx-auto px-6">
           <Reveal>
@@ -271,7 +271,7 @@ export default function CareersPage() {
       {/* Hiring Process */}
       <section
         data-section="Hiring Process"
-        className="py-24 md:py-32 relative"
+        className="py-16 md:py-24 relative"
       >
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-20">
@@ -387,7 +387,7 @@ export default function CareersPage() {
       {/* Open Positions */}
       <section
         data-section="Join Our Team"
-        className="pt-12 pb-24 md:pt-16 md:pb-32 relative"
+        className="py-16 md:py-24 relative"
       >
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -452,7 +452,7 @@ export default function CareersPage() {
       <section
         id="apply"
         data-section="Apply"
-        className="py-24 md:py-32 relative"
+        className="py-16 md:py-24 relative"
       >
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">

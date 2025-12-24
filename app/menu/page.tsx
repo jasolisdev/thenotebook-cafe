@@ -189,10 +189,6 @@ export default function MenuPage() {
                 Thank you for your patience! We&apos;re putting the finishing touches on our handcrafted drink menu.
                 Check back very soon to see what we&apos;ve been mixing up.
               </p>
-              <p className="mt-5 text-sm md:text-base leading-relaxed text-cafe-brown/80">
-                Signature drinks include the Iced Brown Sugar Oat, Matcha Cloud, Classic Cold Brew,
-                and Espresso Tonic. Ask about seasonal specials and featured roasts.
-              </p>
               <p className="mt-6 text-sm md:text-base font-medium text-cafe-brown/80">
                 In the meantime, explore our comforting{" "}
                 <button
