@@ -166,15 +166,16 @@ File upload validation.
 
 **Usage:**
 ```typescript
-import { validateFile } from '@/app/lib/fileValidation';
+import { validateUploadedFile } from '@/app/lib';
 
-const result = await validateFile(file, {
-  maxSize: 5 * 1024 * 1024, // 5MB
-  allowedTypes: ['application/pdf'],
-});
+const result = await validateUploadedFile(
+  file,
+  ['application/pdf'],
+  5 * 1024 * 1024 // 5MB
+);
 
 if (!result.valid) {
-  return { error: result.error };
+  throw new Error(result.error ?? 'Invalid file');
 }
 ```
 

@@ -290,3 +290,8 @@ export const GENERAL_FAQ: FaqItem[] = [
     keywords: ["price", "pricing", "cost", "expensive", "cheap"],
   },
 ];
+
+/**
+ * Backward-compatible export for consumers that expect `baristaFaqData`.
+ */
+export const baristaFaqData = GENERAL_FAQ;
