@@ -30,6 +30,7 @@ const HeroSection: React.FC = () => {
               className="object-cover"
               priority
               fetchPriority="high"
+              sizes="100vw"
               style={{
                 width: "100%",
                 height: "100%",
@@ -45,7 +46,7 @@ const HeroSection: React.FC = () => {
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center justify-center h-full">
           <div className="max-w-5xl w-full text-center flex flex-col items-center mt-6 md:mt-0">
             <div className="mb-8 md:mb-10">
-              <h1 className="leading-[1.1] md:leading-[0.9] tracking-tight font-dm-serif text-white text-[38px] md:text-[84px] lg:text-[111px] drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+              <h1 className="leading-[1.1] md:leading-[0.9] tracking-tight font-serif text-white text-[38px] md:text-[84px] lg:text-[111px] drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                 <RevealText>
                   <span className="block font-bold whitespace-nowrap">
                     Where Every Cup

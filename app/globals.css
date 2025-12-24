@@ -365,7 +365,7 @@ h3 {
 }
 
 .animate-hero-zoom {
-  animation: hero-zoom 10s ease-out forwards;
+  /* animation: hero-zoom 10s ease-out forwards; Disabled for mobile LCP */
   transform-origin: center center;
   will-change: transform;
   width: 100%;
@@ -379,8 +379,7 @@ h3 {
 /* Faster and less dramatic zoom on desktop */
 @media (min-width: 768px) {
   .animate-hero-zoom {
-    animation-name: hero-zoom-desktop;
-    animation-duration: 7s;
+    animation: hero-zoom-desktop 7s ease-out forwards;
   }
 }
 
