@@ -306,3 +306,6 @@ function buildContentEntries(): KnowledgeEntry[] {
     },
   ];
 }
+
+// Legacy/exported API alias
+export { getLocalBaristaReply as getVirtualBaristaResponse };

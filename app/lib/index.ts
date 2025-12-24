@@ -26,7 +26,11 @@ export {
 } from './server/sanitize';
 export { logger } from './server/logger';
 export { captureError, recordMetric } from './server/monitoring';
-export { validateFile } from './server/fileValidation';
+export {
+  validateDocx,
+  validateFileType,
+  validateUploadedFile,
+} from './server/fileValidation';
 
 // Data
 export { baristaFaqData } from './data/baristaFaqData';

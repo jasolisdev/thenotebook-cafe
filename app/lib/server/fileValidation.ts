@@ -5,7 +5,7 @@
  * users from bypassing MIME type checks by renaming files.
  *
  * @example
- * import { validateFileType } from '@/app/lib/fileValidation';
+ * import { validateFileType } from '@/app/lib';
  *
  * const buffer = Buffer.from(await file.arrayBuffer());
  * if (!validateFileType(buffer, ['pdf', 'doc', 'docx'])) {
