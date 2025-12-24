@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>The Notebook Cafe - Comprehensive Employment Application</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      /* Palette from globals.css */
+      --bg-color: #FDFBF7;
+      /* --color-cafe-white */
+      --sidebar-bg: #F4F1EA;
+      /* --color-cafe-mist */
+      --text-main: #2C2420;
+      /* --color-cafe-black */
+      --text-muted: #4A3B32;
+      /* --color-cafe-brown */
+      --accent-color: #A48D78;
+      /* --color-cafe-tan */
+      --border-color: #EDE7D8;
+      /* --color-cafe-cream */
+      --focus-color: #2C2420;
+      /* --color-cafe-black */
+      --white: #FFFFFF;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-main);
+      padding: 40px;
+      line-height: 1.6;
+    }
+
+    .print-actions {
+      position: sticky;
+      top: 20px;
+      z-index: 100;
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-print {
+      background: var(--text-main);
+      color: var(--white);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .btn-print:hover {
+      transform: translateY(-2px);
+      background-color: #1a1614;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: var(--white);
+      display: flex;
+      box-shadow: 0 30px 60px -12px rgba(44, 36, 32, 0.15), 0 18px 36px -18px rgba(44, 36, 32, 0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      min-height: 1000px;
+      border: 1px solid #EAE6DE;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      width: 360px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border-color);
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-shrink: 0;
+      box-shadow: inset -15px 0 30px -20px rgba(44, 36, 32, 0.05);
+    }
+
+    .brand h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    .brand p {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-color);
+    }
+
+    .status-box {
+      background: var(--white);
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      border-radius: 12px;
+      margin-top: 40px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    .status-box h4 {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-color);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .status-indicator {
+      display: flex;
+      items-center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: #F59E0B;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+    }
+
+    .footer-info p {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      line-height: 1.8;
+    }
+
+    /* Main Content Styling */
+    .main {
+      flex: 1;
+      padding: 60px 80px;
+    }
+
+    .doc-header {
+      border-bottom: 2px solid var(--text-main);
+      padding-bottom: 30px;
+      margin-bottom: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .doc-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      color: var(--text-main);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .doc-header .form-id {
+      text-align: right;
+    }
+
+    .doc-header .form-id p {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+
+    .doc-header .form-id span {
+      font-family: monospace;
+      font-size: 14px;
+      color: var(--text-muted);
+      background: #F5F5F5;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .section {
+      margin-bottom: 50px;
+    }
+
+    .section-title {
+      border-left: 4px solid var(--text-main);
+      padding-left: 15px;
+      margin-bottom: 25px;
+    }
+
+    .section-title h3 {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-main);
+    }
+
+    /* Form Styles */
+    .field-row {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .field {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .field-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent-color);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .field-input {
+      width: 100%;
+      border: 1px solid #D2C5B6;
+      /* Darker than Cream, closer to Tan */
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-size: 16px;
+      color: var(--text-main);
+      background: #FAF9F6;
+      /* Very light tint */
+      transition: all 0.2s ease;
+    }
+
+    .field-input:focus {
+      outline: none;
+      border-color: var(--text-main);
+      background: var(--white);
+      box-shadow: 0 0 0 3px rgba(44, 36, 32, 0.05);
+    }
+
+    /* Checkboxes */
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+
+    .checkbox-item:hover {
+      background-color: rgba(164, 141, 120, 0.05);
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--accent-color);
+      border-radius: 4px;
+      cursor: pointer;
+      accent-color: var(--text-main);
+    }
+
+    .checkbox-label {
+      font-size: 15px;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* Office Use Only Section */
+    .office-use-only {
+      background: var(--sidebar-bg);
+      border: 2px solid var(--border-color);
+      padding: 35px;
+      border-radius: 12px;
+      margin-bottom: 50px;
+    }
+
+    /* Yes/No Questions */
+    .yesno-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .yesno-text {
+      font-size: 16px;
+      color: var(--text-main);
+      font-weight: 500;
+      flex: 1;
+      padding-right: 24px;
+      line-height: 1.4;
+    }
+
+    .yesno-options {
+      display: flex;
+      gap: 24px;
+      flex-shrink: 0;
+    }
+
+    .yesno-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      color: var(--text-main);
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: #FAF9F6;
+      border: 1px solid var(--border-color);
+    }
+
+    .yesno-checkbox {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: var(--text-main);
+    }
+
+    .weekend-question {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: 20px;
+    }
+
+    .weekend-question .yesno-text {
+      margin-bottom: 16px;
+      padding-right: 0;
+    }
+
+    .weekend-options {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    /* Pre-screening Questions */
+    .prescreen-section {
+      background: var(--sidebar-bg);
+      padding: 35px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border-color);
+    }
+
+    .prescreen-question {
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .prescreen-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      display: block;
+      line-height: 1.3;
+    }
+
+    .prescreen-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .prescreen-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--text-main);
+      padding: 8px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+
+    .prescreen-option:hover {
+      background-color: rgba(164, 141, 120, 0.05);
+    }
+
+    .prescreen-option input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      cursor: pointer;
+      accent-color: var(--text-main);
+      flex-shrink: 0;
+    }
+
+    /* Education Table */
+    .education-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 15px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .education-table th {
+      background: var(--sidebar-bg);
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 2px solid var(--border-color);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .education-table td {
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 15px;
+      font-size: 15px;
+      background: var(--white);
+    }
+
+    .education-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .education-table .school-type {
+      font-size: 15px;
+      color: var(--text-main);
+      font-weight: 600;
+      background: #FAF9F6;
+      white-space: nowrap;
+      padding-left: 20px;
+    }
+
+    .table-input {
+      width: 100%;
+      border: 1px solid #EAE6DE;
+      padding: 10px 12px;
+      font-size: 15px;
+      color: var(--text-main);
+      background: #FDFBF7;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .table-input:focus {
+      outline: none;
+      border-color: var(--text-main);
+      background: var(--white);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .table-input:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      background: var(--white);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    }
+
+    .employment-entry {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 2px dashed var(--border-color);
+    }
+
+    .employment-entry:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .certification {
+      background: var(--sidebar-bg);
+      padding: 24px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 30px;
+      border-left: 4px solid var(--accent-color);
+    }
+
+    .signature-row {
+      display: flex;
+      gap: 40px;
+      margin-top: 30px;
+    }
+
+    .signature-field {
+      flex: 2;
+    }
+
+    .date-field {
+      flex: 1;
+    }
+
+    /* Mobile Responsive Styles */
+    @media screen and (max-width: 900px) {
+      body {
+        padding: 0;
+      }
+
+      .print-actions {
+        padding: 10px 20px;
+        position: static;
+      }
+
+      .container {
+        flex-direction: column;
+        min-height: auto;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+      }
+
+      .sidebar {
+        width: 100%;
+        padding: 40px 20px;
+        border-right: none;
+        border-bottom: 1px solid #EEE;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 30px;
+        box-shadow: none;
+      }
+
+      .brand {
+        flex: 1;
+        min-width: 250px;
+      }
+
+      .status-box {
+        margin-top: 20px;
+        padding: 15px;
+      }
+
+      .main {
+        padding: 40px 20px;
+      }
+
+      .footer-info {
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      .doc-header h2 {
+        font-size: 32px;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .sidebar {
+        flex-direction: column;
+        padding: 30px 20px;
+      }
+
+      .main {
+        padding: 30px 15px;
+      }
+
+      .field-row {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .yesno-question {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .yesno-options {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .prescreen-options {
+        grid-template-columns: 1fr;
+      }
+
+      .signature-row {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .education-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .education-table th,
+      .education-table td {
+        min-width: 160px;
+      }
+
+      .education-table .school-type {
+        min-width: 150px;
+      }
+    }
+
+    @media print {
+      @page {
+        size: letter;
+        margin: 10mm;
+      }
+
+      body {
+        padding: 0;
+        background: #FFF;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        min-width: 800px;
+        /* Ensure desktop-like spacing */
+      }
+
+      .print-actions {
+        display: none !important;
+      }
+
+      .container {
+        box-shadow: none;
+        border-radius: 0;
+        display: block !important;
+        border: none;
+        width: 100%;
+        max-width: none;
+      }
+
+      .sidebar {
+        display: none !important;
+        /* Hide sidebar for print */
+      }
+
+      .main {
+        padding: 0 !important;
+        width: 100% !important;
+      }
+
+      .section,
+      .office-use-only {
+        page-break-inside: avoid;
+      }
+
+      .prescreen-section {
+        page-break-inside: avoid;
+        page-break-before: always;
+      }
+
+      /* Reset mobile overrides for desktop layout on print */
+      .field-row {
+        flex-direction: row !important;
+        display: flex !important;
+        gap: 20px !important;
+      }
+
+      .field {
+        flex: 1 !important;
+      }
+
+      .education-table {
+        display: table !important;
+        width: 100% !important;
+      }
+
+      .education-table th,
+      .education-table td {
+        min-width: 0 !important;
+        /* Allow table to fit naturally */
+      }
+
+      .signature-row {
+        flex-direction: row !important;
+        display: flex !important;
+        gap: 40px !important;
+      }
+
+      .yesno-question {
+        flex-direction: row !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+      }
+    }
+  </style>
+
+  <div class="print-actions">
+    <button type="button" class="btn-print" onclick="window.print()">Save as PDF</button>
+  </div>
+</head>
+
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="brand">
+        <h1>The Notebook Café</h1>
+        <p>Employee Portal</p>
+        <div class="status-box">
+          <h4>Current Status</h4>
+          <div class="status-indicator">
+            <div class="dot"></div>
+            Accepting Baristas
+          </div>
+        </div>
+        <div class="status-box">
+          <h4
+            style="font-family: 'Outfit', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-color); margin-bottom: 12px; font-weight: 700;">
+            Shop Location</h4>
+          <div class="status-indicator" style="font-weight: 400; font-size: 14px; line-height: 1.6;">
+            3512 9th St,<br>
+            Riverside, CA 92501
+          </div>
+        </div>
+
+        <div class="status-box">
+          <h4
+            style="font-family: 'Outfit', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-color); margin-bottom: 16px; font-weight: 700;">
+            Instructions</h4>
+          <ul style="list-style: none; font-size: 14px; color: var(--text-main); line-height: 1.8; font-weight: 400;">
+            <li style="margin-bottom: 14px; display: flex; align-items: flex-start;">
+              <span style="color: var(--accent-color); margin-right: 8px;">•</span> Complete all items on the
+              application, even if the information is included on your resume or other document.
+            </li>
+            <li style="margin-bottom: 14px; display: flex; align-items: flex-start;">
+              <span style="color: var(--accent-color); margin-right: 8px;">•</span> Sign and date your application.
+            </li>
+            <li style="margin-bottom: 14px; display: flex; align-items: flex-start;">
+              <span style="color: var(--accent-color); margin-right: 8px;">•</span> Specify the exact title of the
+              position in which you are interested.
+            </li>
+            <li style="margin-bottom: 14px; display: flex; align-items: flex-start;">
+              <span style="color: var(--accent-color); margin-right: 8px;">•</span> Type or print all requested
+              information.
+            </li>
+            <li style="margin-bottom: 0; display: flex; align-items: flex-start;">
+              <span style="color: var(--accent-color); margin-right: 8px;">•</span> Submit your application via email to
+              thenotebookcafellc@gmail.com
+            </li>
+          </ul>
+        </div>
+
+        <div class="status-box">
+          <h4
+            style="font-family: 'Outfit', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-color); margin-bottom: 16px; font-weight: 700;">
+            Equal Opportunity</h4>
+          <div class="status-indicator" style="font-weight: 400; font-size: 13px; line-height: 1.8;">
+            The Notebook Café provides equal employment opportunity to all qualified persons and does not unlawfully
+            discriminate
+            against any person on the basis of race, color, creed, religion, sex, national origin, age, disability,
+            marital or veteran
+            status, sexual orientation, or any other legally protected status.
+          </div>
+        </div>
+      </div>
+      <div class="footer-info">
+        <p style="font-size: 10px; color: #A48D78; text-transform: uppercase; letter-spacing: 2px;">
+          Riverside, California<br>
+          Est. 2025
+        </p>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="doc-header">
+        <div>
+          <h2>Employment Application</h2>
+          <p style="font-size: 12px; font-style: italic; color: #A48D78; margin-top: 5px;">A commitment to craftsmanship
+            and community.</p>
+        </div>
+      </div>
+
+      <!-- For Official Use Only -->
+      <div class="section office-use-only">
+        <div class="section-title" style="border-left: none; padding-left: 0; margin-bottom: 15px;">
+          <h3 style="color: #A48D78;">For Official Use Only</h3>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">Date Received:</label>
+            <div class="field-input" style="height: 24px;"></div>
+          </div>
+          <div class="field">
+            <label class="field-label">Interview Date:</label>
+            <div class="field-input" style="height: 24px;"></div>
+          </div>
+          <div class="field">
+            <label class="field-label">Interviewed by:</label>
+            <div class="field-input" style="height: 24px;"></div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">Status:</label>
+            <div class="checkbox-group" style="grid-template-columns: repeat(3, 1fr); margin-top: 5px;">
+              <label class="checkbox-item">
+                <input type="checkbox" disabled>
+                <span class="checkbox-label">Hire</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" disabled>
+                <span class="checkbox-label">Hold</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" disabled>
+                <span class="checkbox-label">Reject</span>
+              </label>
+            </div>
+          </div>
+          <div class="field">
+            <label class="field-label">Hire Date:</label>
+            <div class="field-input" style="height: 24px;"></div>
+          </div>
+          <div class="field">
+            <label class="field-label">Starting Rate:</label>
+            <div class="field-input" style="height: 24px;"></div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Interview Notes:</label>
+          <div style="border-bottom: 1px solid #E5E1D8; height: 24px; margin-top: 8px;"></div>
+          <div style="border-bottom: 1px solid #E5E1D8; height: 24px; margin-top: 8px;"></div>
+          <div style="border-bottom: 1px solid #E5E1D8; height: 24px; margin-top: 8px;"></div>
+          <div style="border-bottom: 1px solid #E5E1D8; height: 24px; margin-top: 8px;"></div>
+        </div>
+      </div>
+
+      <!-- General Information -->
+      <div class="section">
+        <div class="section-title">
+          <h3>General Information</h3>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">First Name</label>
+            <input type="text" class="field-input">
+          </div>
+          <div class="field">
+            <label class="field-label">Middle Name</label>
+            <input type="text" class="field-input">
+          </div>
+          <div class="field">
+            <label class="field-label">Last Name</label>
+            <input type="text" class="field-input">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">Date of Birth</label>
+            <input type="date" class="field-input">
+          </div>
+          <div class="field" style="flex: 2;">
+            <label class="field-label">Phone Number</label>
+            <input type="text" class="field-input">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">Email Address</label>
+            <input type="text" class="field-input">
+          </div>
+          <div class="field" style="flex: 2;">
+            <label class="field-label">Street Address</label>
+            <input type="text" class="field-input">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">City, State, Zip Code</label>
+            <input type="text" class="field-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Eligibility Questions -->
+      <div class="section">
+        <div class="section-title">
+          <h3>Eligibility Questions</h3>
+        </div>
+        <div class="yesno-question">
+          <span class="yesno-text">Are you legally authorized to work in the United States? (if yes, verification will
+            be
+            required)</span>
+          <div class="yesno-options">
+            <label class="yesno-option">
+              <input type="checkbox" class="yesno-checkbox">
+              <span>Yes</span>
+            </label>
+            <label class="yesno-option">
+              <input type="checkbox" class="yesno-checkbox">
+              <span>No</span>
+            </label>
+          </div>
+        </div>
+        <div class="yesno-question">
+          <span class="yesno-text">Are you at least 18 years of age?</span>
+          <div class="yesno-options">
+            <label class="yesno-option">
+              <input type="checkbox" class="yesno-checkbox">
+              <span>Yes</span>
+            </label>
+            <label class="yesno-option">
+              <input type="checkbox" class="yesno-checkbox">
+              <span>No</span>
+            </label>
+          </div>
+        </div>
+        <div class="yesno-question">
+          <span class="yesno-text">Have you ever applied to or worked for a restaurant before? If so, when?</span>
+          <div class="yesno-options">
+            <label class="yesno-option">
+              <input type="checkbox" class="yesno-checkbox">
+              <span>Yes</span>
+            </label>
+            <label class="yesno-option">
+              <input type="checkbox" class="yesno-checkbox">
+              <span>No</span>
+            </label>
+          </div>
+        </div>
+        <div class="yesno-question">
+          <span class="yesno-text">Do you have a CA Food Handler Card? When does it expire?</span>
+          <div class="yesno-options">
+            <label class="yesno-option">
+              <input type="checkbox" class="yesno-checkbox">
+              <span>Yes</span>
+            </label>
+            <label class="yesno-option">
+              <input type="checkbox" class="yesno-checkbox">
+              <span>No</span>
+            </label>
+          </div>
+        </div>
+        <div class="yesno-question weekend-question">
+          <span class="yesno-text">Are you willing to work on weekends and holidays?</span>
+          <div class="weekend-options">
+            <label class="yesno-option">
+              <input type="checkbox" class="yesno-checkbox">
+              <span>Yes, I am willing to do so</span>
+            </label>
+            <label class="yesno-option">
+              <input type="checkbox" class="yesno-checkbox">
+              <span>Yes, but I would prefer not to</span>
+            </label>
+            <label class="yesno-option">
+              <input type="checkbox" class="yesno-checkbox">
+              <span>No</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="section">
+        <div class="section-title">
+          <h3>Education</h3>
+        </div>
+        <table class="education-table">
+          <thead>
+            <tr>
+              <th>School</th>
+              <th>Name</th>
+              <th>Location</th>
+              <th>Course/Degree</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="school-type">High School/GED</td>
+              <td><input type="text" class="table-input"></td>
+              <td><input type="text" class="table-input"></td>
+              <td><input type="text" class="table-input"></td>
+            </tr>
+            <tr>
+              <td class="school-type">College/University</td>
+              <td><input type="text" class="table-input"></td>
+              <td><input type="text" class="table-input"></td>
+              <td><input type="text" class="table-input"></td>
+            </tr>
+            <tr>
+              <td class="school-type">Graduate School</td>
+              <td><input type="text" class="table-input"></td>
+              <td><input type="text" class="table-input"></td>
+              <td><input type="text" class="table-input"></td>
+            </tr>
+            <tr>
+              <td class="school-type">Vocational / Specialized</td>
+              <td><input type="text" class="table-input"></td>
+              <td><input type="text" class="table-input"></td>
+              <td><input type="text" class="table-input"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Position(s) Applying For -->
+      <div class="section">
+        <div class="section-title">
+          <h3>Position(s) Applying For</h3>
+        </div>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">Barista</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">Shift Lead</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Availability -->
+      <div class="section">
+        <div class="section-title">
+          <h3>Availability</h3>
+        </div>
+        <p class="field-label" style="margin-bottom: 8px;">Days Available (Saturday availability may be required - We're
+          closed Sundays):</p>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">Monday</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">Tuesday</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">Wednesday</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">Thursday</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">Friday</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">Saturday</span>
+          </label>
+        </div>
+
+        <p class="field-label" style="margin: 15px 0 8px 0;">Employment Type:</p>
+        <div class="checkbox-group" style="grid-template-columns: repeat(4, 1fr);">
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">Full-time</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">Part-time</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">Weekends Only</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">Flexible</span>
+          </label>
+        </div>
+
+        <p class="field-label" style="margin: 15px 0 8px 0;">Hours Per Week Desired:</p>
+        <div class="checkbox-group" style="grid-template-columns: repeat(4, 1fr);">
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">0-16 Hours</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">16-20 Hours</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">20-35 Hours</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">35-40 Hours</span>
+          </label>
+        </div>
+
+        <div class="field-row" style="margin-top: 15px;">
+          <div class="field">
+            <label class="field-label">When can you start?</label>
+            <input type="text" class="field-input">
+          </div>
+        </div>
+
+        <p class="field-label" style="margin: 15px 0 8px 0;">How long do you plan to work here?</p>
+        <div class="checkbox-group" style="grid-template-columns: repeat(4, 1fr);">
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">3-6 months</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">6-12 months</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">1-2 years</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">2+ years</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- References -->
+      <div class="section">
+        <div class="section-title">
+          <h3>References</h3>
+        </div>
+
+        <div style="margin-bottom: 30px; padding-bottom: 30px; border-bottom: 2px dashed var(--border-color);">
+          <h4
+            style="font-size: 11px; text-transform: uppercase; color: var(--accent-color); margin-bottom: 15px; letter-spacing: 1px; font-weight: 700;">
+            Reference 1</h4>
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label">Name</label>
+              <input type="text" class="field-input">
+            </div>
+            <div class="field">
+              <label class="field-label">Company</label>
+              <input type="text" class="field-input">
+            </div>
+            <div class="field">
+              <label class="field-label">Phone/Email</label>
+              <input type="text" class="field-input">
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4
+            style="font-size: 11px; text-transform: uppercase; color: var(--accent-color); margin-bottom: 15px; letter-spacing: 1px; font-weight: 700;">
+            Reference 2</h4>
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label">Name</label>
+              <input type="text" class="field-input">
+            </div>
+            <div class="field">
+              <label class="field-label">Company</label>
+              <input type="text" class="field-input">
+            </div>
+            <div class="field">
+              <label class="field-label">Phone/Email</label>
+              <input type="text" class="field-input">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Employment History -->
+      <div class="section">
+        <div class="section-title">
+          <h3>Employment History</h3>
+        </div>
+        <p style="font-size: 10px; font-style: italic; color: #4A3B32; margin-bottom: 15px;">(Please begin with most
+          recent
+          employment)</p>
+
+        <div class="employment-entry">
+          <div class="field-row">
+            <div class="field" style="flex: 2;">
+              <label class="field-label">Employer</label>
+              <input type="text" class="field-input">
+            </div>
+            <div class="field">
+              <label class="field-label">Position</label>
+              <input type="text" class="field-input">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field" style="flex: 2;">
+              <label class="field-label">Address</label>
+              <input type="text" class="field-input">
+            </div>
+            <div class="field">
+              <label class="field-label">Phone</label>
+              <input type="text" class="field-input">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label">Supervisor</label>
+              <input type="text" class="field-input">
+            </div>
+            <div class="field">
+              <label class="field-label">Dates Employed (From - To)</label>
+              <input type="text" class="field-input">
+            </div>
+          </div>
+          <div class="field">
+            <label class="field-label">Reason for Leaving</label>
+            <input type="text" class="field-input">
+          </div>
+        </div>
+
+        <div class="employment-entry">
+          <div class="field-row">
+            <div class="field" style="flex: 2;">
+              <label class="field-label">Employer</label>
+              <input type="text" class="field-input">
+            </div>
+            <div class="field">
+              <label class="field-label">Position</label>
+              <input type="text" class="field-input">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field" style="flex: 2;">
+              <label class="field-label">Address</label>
+              <input type="text" class="field-input">
+            </div>
+            <div class="field">
+              <label class="field-label">Phone</label>
+              <input type="text" class="field-input">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label">Supervisor</label>
+              <input type="text" class="field-input">
+            </div>
+            <div class="field">
+              <label class="field-label">Dates Employed (From - To)</label>
+              <input type="text" class="field-input">
+            </div>
+          </div>
+          <div class="field">
+            <label class="field-label">Reason for Leaving</label>
+            <input type="text" class="field-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Pre-Screening Interview Questions -->
+      <div class="prescreen-section">
+        <div class="section-title" style="border-left: none; padding-left: 0; margin-bottom: 20px;">
+          <h3 style="color: #2D2926;">Pre-Screening Interview Questions</h3>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="prescreen-question">
+          <span class="prescreen-title">What are you looking for in a job? (Check all that apply)</span>
+          <div class="prescreen-options">
+            <div class="prescreen-option">
+              <input type="checkbox" id="looking-growth">
+              <label for="looking-growth">Opportunities to learn and grow</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="looking-creative">
+              <label for="looking-creative">Creative, inspiring environment</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="looking-team">
+              <label for="looking-team">Collaborative, supportive team</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="looking-culture">
+              <label for="looking-culture">Coffee culture and community connection</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="looking-flexible">
+              <label for="looking-flexible">Flexible schedule</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="looking-stability">
+              <label for="looking-stability">Long-term stability</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="looking-craft">
+              <label for="looking-craft">Developing craft skills (espresso, latte art, etc.)</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="looking-atmosphere">
+              <label for="looking-atmosphere">Music and arts-focused atmosphere</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="prescreen-question">
+          <span class="prescreen-title">How do you handle busy rushes or stressful moments? (Check all that
+            apply)</span>
+          <div class="prescreen-options">
+            <div class="prescreen-option">
+              <input type="checkbox" id="stress-focus">
+              <label for="stress-focus">Stay focused on one task at a time</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="stress-communicate">
+              <label for="stress-communicate">Communicate clearly with team members</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="stress-breathe">
+              <label for="stress-breathe">Take deep breaths and stay calm</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="stress-prioritize">
+              <label for="stress-prioritize">Prioritize urgent tasks first</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="stress-positive">
+              <label for="stress-positive">Keep a positive attitude</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="stress-help">
+              <label for="stress-help">Ask for help when needed</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="prescreen-question">
+          <span class="prescreen-title">A customer's drink doesn't taste quite right. What's your first response?</span>
+          <div class="prescreen-options">
+            <div class="prescreen-option">
+              <input type="checkbox" id="customer-apologize">
+              <label for="customer-apologize">Apologize and offer to remake it immediately</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="customer-listen">
+              <label for="customer-listen">Listen to what they expected and adjust</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="customer-explain">
+              <label for="customer-explain">Explain how the drink is made and offer alternatives</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="customer-manager">
+              <label for="customer-manager">Get a manager to handle the situation</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="prescreen-question">
+          <span class="prescreen-title">What does great customer service mean to you? (Check all that apply)</span>
+          <div class="prescreen-options">
+            <div class="prescreen-option">
+              <input type="checkbox" id="service-friendly">
+              <label for="service-friendly">Being friendly and welcoming</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="service-remember">
+              <label for="service-remember">Remembering regulars and their orders</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="service-quality">
+              <label for="service-quality">Ensuring drink quality and consistency</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="service-efficient">
+              <label for="service-efficient">Being efficient without rushing</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="service-anticipate">
+              <label for="service-anticipate">Anticipating customer needs</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="service-vibe">
+              <label for="service-vibe">Creating a comfortable atmosphere</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="prescreen-question">
+          <span class="prescreen-title">Which tasks are you comfortable with? (Check all that apply)</span>
+          <div class="prescreen-options">
+            <div class="prescreen-option">
+              <input type="checkbox" id="tasks-espresso">
+              <label for="tasks-espresso">Making espresso drinks (or willing to learn)</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="tasks-cash">
+              <label for="tasks-cash">Handling cash and POS systems</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="tasks-food">
+              <label for="tasks-food">Food prep and plating</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="tasks-clean">
+              <label for="tasks-clean">Cleaning and maintenance tasks</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="tasks-opening">
+              <label for="tasks-opening">Opening/closing procedures</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="tasks-inventory">
+              <label for="tasks-inventory">Restocking and inventory</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="prescreen-question" style="border-bottom: none;">
+          <span class="prescreen-title">How did you hear about this job?</span>
+          <div class="prescreen-options">
+            <div class="prescreen-option">
+              <input type="checkbox" id="hear-referral">
+              <label for="hear-referral">Referral (Please specify below)</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="hear-instagram">
+              <label for="hear-instagram">Instagram</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="hear-walkin">
+              <label for="hear-walkin">Walked by the café</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="hear-customer">
+              <label for="hear-customer">I'm a regular customer</label>
+            </div>
+            <div class="prescreen-option">
+              <input type="checkbox" id="hear-other">
+              <label for="hear-other">Other (Please specify below)</label>
+            </div>
+          </div>
+          <div style="margin-top: 10px;">
+            <label class="field-label" style="font-size: 10px;">If referral or other, please specify:</label>
+            <input type="text" class="field-input" style="margin-top: 5px;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Certification -->
+      <div class="section">
+        <div class="section-title">
+          <h3>Signature / Certification</h3>
+        </div>
+        <div class="certification">
+          I certify that the facts set forth in this application are true and complete to the best of my knowledge.
+          I understand that any misrepresentations or omissions can be grounds for rejection of my application or
+          immediate termination from employment. I authorize The Notebook Café to make necessary inquiries into my
+          education and employment history. I further authorize the release of my information by any of the schools
+          or employers listed on this application.
+        </div>
+        <div class="signature-row">
+          <div class="signature-field">
+            <label class="field-label">Signature</label>
+            <input type="text" class="field-input">
+          </div>
+          <div class="date-field">
+            <label class="field-label">Date</label>
+            <input type="text" class="field-input">
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>

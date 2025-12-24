@@ -1,0 +1,44 @@
+import { defineConfig } from 'vitest/config';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+
+const strictCoverage = process.env.VITEST_STRICT_COVERAGE === '1';
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    include: ['tests/unit/**/*.{test,spec}.{ts,tsx,js,jsx}'],
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./tests/setup.ts', './tests/utils/msw-setup.ts'],
+    exclude: ['tests/e2e/**'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      include: ['app/**/*.{ts,tsx}'],
+      exclude: [
+        'app/**/*.test.{ts,tsx}',
+        'app/**/*.spec.{ts,tsx}',
+        'app/types/**',
+        'app/globals.css',
+        'app/layout.tsx',
+        'app/fonts.ts',
+      ],
+      ...(strictCoverage
+        ? {
+            thresholds: {
+              lines: 80,
+              functions: 80,
+              branches: 75,
+              statements: 80,
+            },
+          }
+        : {}),
+    },
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './'),
+    },
+  },
+});

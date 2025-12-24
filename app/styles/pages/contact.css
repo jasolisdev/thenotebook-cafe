@@ -1,32 +1,32 @@
 /* Contact Page */
 
 .contact-page {
-  color: var(--cafe-brown);
+  color: var(--color-cafe-brown);
 }
 
 .contact-fixed-background {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-color: var(--cafe-mist);
+  background-color: var(--color-cafe-mist);
   background-image: none;
 }
 
 .contact-section-title {
-  color: var(--cafe-black);
+  color: var(--color-cafe-black);
 }
 
 
 .contact-section-title-accent {
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
 }
 
 .contact-divider--black {
-  background-color: var(--cafe-black);
+  background-color: var(--color-cafe-black);
 }
 
 .contact-divider--tan {
-  background-color: var(--cafe-tan);
+  background-color: var(--color-cafe-tan);
 }
 
 /* Icons & Badges */
@@ -35,16 +35,16 @@
 }
 
 .contact-icon {
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
 }
 
 .contact-eyebrow {
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
 }
 
 /* Links */
 .contact-directions-link {
-  color: var(--cafe-tan);
+  color: var(--color-cafe-tan);
 }
 
 .contact-directions-link:focus-visible {
@@ -60,31 +60,13 @@
 }
 
 .contact-map-badge {
-  background-color: var(--cafe-tan);
-  color: var(--cafe-white);
+  background-color: var(--color-cafe-tan);
+  color: var(--color-cafe-white);
   border-radius: 0.75rem;
   padding: 1rem 1.5rem;
   border: 2px solid rgba(255, 255, 255, 0.3);
   font-family: var(--font-display);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
-}
-
-/* Quote Section */
-.contact-quote {
-  background-color: rgba(var(--cafe-tan-rgb), 0.08);
-  border: 1px solid rgba(var(--cafe-tan-rgb), 0.2);
-}
-
-.contact-quote__icon {
-  color: var(--cafe-tan);
-}
-
-.contact-quote__text {
-  color: rgba(var(--cafe-brown-rgb), 0.8);
-}
-
-.contact-quote__footer {
-  color: var(--cafe-tan);
 }
 
 /* Decorative Elements */

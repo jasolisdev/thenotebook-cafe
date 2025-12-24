@@ -1,68 +1,64 @@
+/**
+ * @fileoverview Root layout with global providers
+ * @module layouts/root
+ *
+ * @description
+ * Root layout component that wraps the entire application.
+ * Provides global state management, metadata, font loading,
+ * analytics, and SiteShell wrapper.
+ *
+ * Provides:
+ * - CartProvider for shopping cart state management
+ * - ThemeProvider for dark/light mode support
+ * - Font optimization (Playfair Display, Torus, Inter)
+ * - Global CSS imports (navigation, buttons, footer, etc.)
+ * - Vercel Analytics and Speed Insights (conditionally loaded)
+ * - Open Graph and Twitter metadata
+ * - SiteShell with header/footer
+ * - PasswordGate for site-wide password protection (if enabled)
+ * - ErrorBoundary for graceful error handling
+ *
+ * @example
+ * Every page is wrapped with:
+ * <ThemeProvider>
+ *   <CartProvider>
+ *     <PasswordGate>
+ *       <SiteShell>
+ *         {children}
+ *       </SiteShell>
+ *     </PasswordGate>
+ *   </CartProvider>
+ * </ThemeProvider>
+ *
+ * @see {@link app/components/providers/CartProvider.tsx} for cart state
+ * @see {@link app/components/layout/SiteShell.tsx} for shell wrapper
+ * @see {@link app/components/ui/PasswordGate.tsx} for password protection
+ */
 // app/layout.tsx
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 // Component styles
-import "./styles/components/navigation.css";
-import "./styles/components/buttons.css";
-import "./styles/components/footer.css";
-import "./styles/components/announcement.css";
-import "./styles/components/consent-banner.css";
+import "@/app/styles/components/navigation.css";
+import "@/app/styles/components/buttons.css";
+import "@/app/styles/components/footer.css";
+import "@/app/styles/components/announcement.css";
+import "@/app/styles/components/consent-banner.css";
 
 // Layout styles
-import "./styles/layout/sections.css";
-import "./styles/layout/animations.css";
+import "@/app/styles/layout/sections.css";
+import "@/app/styles/layout/animations.css";
 
 import { ThemeProvider } from "next-themes";
-import { DM_Serif_Display, Outfit, Caveat, Inter, Playfair_Display } from "next/font/google";
 import { cookies } from "next/headers";
+import { inter, playfairDisplay, torus } from "./fonts";
 import PasswordGate from "./components/ui/PasswordGate";
 import SiteShell from "./components/layout/SiteShell";
-import { client } from "@/sanity/lib/client";
+import { client, hasSanityConfig } from "@/sanity/lib/client";
 import { CartProvider } from "./components/providers/CartProvider";
-import { ErrorBoundary } from "./components/ErrorBoundary";
-import { SEO } from "@/lib/seo";
+import { ErrorBoundary } from "./components/ui/ErrorBoundary";
+import { SEO } from "@/app/lib/constants/seo";
 
-// Google Fonts
-const dmSerif = DM_Serif_Display({
-  weight: ["400"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const outfit = Outfit({
-  weight: ["400", "500", "600"],
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-const caveat = Caveat({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  variable: "--font-handwritten",
-  display: "swap",
-  preload: false,
-});
-
-const inter = Inter({
-  weight: ["400", "500", "600"],
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  preload: false,
-});
-
-const playfairDisplay = Playfair_Display({
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-  preload: false,
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SEO.siteUrl),
@@ -157,17 +153,24 @@ export default async function RootLayout({
   const showAnnouncement = false; // temporarily hide banner
 
   // Fetch settings for header (only if not showing password gate)
-  const settings = !showPasswordGate ? await client.fetch(`
+  const settings =
+    !showPasswordGate && hasSanityConfig
+      ? await client.fetch(
+          `
     *[_type=="settings"][0]{
       social
     }
-  `, {}, { next: { revalidate: 3600 } }) : null;
+  `,
+          {},
+          { next: { revalidate: 3600 } }
+        )
+      : null;
 
   return (
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${dmSerif.variable} ${outfit.variable} ${caveat.variable} ${inter.variable} ${playfairDisplay.variable}`}
+      className={`${inter.variable} ${playfairDisplay.variable} ${torus.variable}`}
     >
       <body className="antialiased font-sans">
         <ThemeProvider

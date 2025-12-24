@@ -8,7 +8,7 @@ import {
   ContrastIcon, EyeIcon, ResetIcon, ChevronLeftIcon,
   MousePointerIcon, LinkIcon, RulerIcon, PauseIcon, BrainIcon
 } from '@/app/components/ui/AccessibilityIcons';
-import { logger } from '@/app/lib/logger';
+import { logger } from '@/app/lib';
 
 interface AccessibilitySettings {
   textSize: 'normal' | 'large' | 'xl';
@@ -116,7 +116,9 @@ export const AccessibilityWidget: React.FC = () => {
   useEffect(() => {
     const applyBionicReading = () => {
       if (settings.bionicReading) {
-        const textElements = document.querySelectorAll('main p, main h1, main h2, main h3, main h4, main h5, main h6, main li, main a, main button, main span:not(.bionic-skip)');
+        // Broaden the selector to include nav, footer, and other key areas
+        // Specifically use .nav-link for navigation to avoid hitting the brand logo/title link
+        const textElements = document.querySelectorAll('main p, main h1, main h2, main h3, main h4, main h5, main h6, main li, main a, main button, main span:not(.bionic-skip), nav a.nav-link, footer a, footer span:not(.bionic-skip), .menu-link-text');
         textElements.forEach(el => {
           const element = el as HTMLElement;
           // Skip elements that are already processed or should be skipped
@@ -133,7 +135,7 @@ export const AccessibilityWidget: React.FC = () => {
           }
         });
       } else {
-        const textElements = document.querySelectorAll('main [data-bionic-original]');
+        const textElements = document.querySelectorAll('[data-bionic-original]');
         textElements.forEach(element => {
           const original = element.getAttribute('data-bionic-original');
           if (original) {
@@ -218,7 +220,7 @@ export const AccessibilityWidget: React.FC = () => {
       {/* Floating Toggle Button */}
       <button
         onClick={toggleOpen}
-        className={`fixed bottom-6 left-6 z-[110] w-14 h-14 bg-cafe-black text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-brown transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border ${isDefaultSettings ? 'border-cafe-tan/40' : 'border-gold/90 shadow-[0_0_0_3px_rgba(196,164,132,0.18)]'}`}
+        className={`fixed bottom-6 left-6 z-[110] w-14 h-14 bg-cafe-brown text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-black transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border ${isDefaultSettings ? 'border-cafe-tan/40' : 'border-gold/90 shadow-[0_0_0_3px_rgba(196,164,132,0.18)]'}`}
         aria-label="Accessibility Options"
       >
         <AccessibilityHumanIcon className="w-8 h-8" />
@@ -266,18 +268,21 @@ export const AccessibilityWidget: React.FC = () => {
                  <div className="flex gap-2">
                     <button 
                        onClick={() => setTextSize('normal')}
+                       aria-label="Text size normal"
                        className={`flex-1 py-2 rounded-lg text-sm font-bold border transition-colors ${settings.textSize === 'normal' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50'}`}
                     >
                       Aa
                     </button>
                     <button 
                        onClick={() => setTextSize('large')}
+                       aria-label="Text size large"
                        className={`flex-1 py-2 rounded-lg text-base font-bold border transition-colors ${settings.textSize === 'large' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50'}`}
                     >
                       Aa
                     </button>
                     <button 
                        onClick={() => setTextSize('xl')}
+                       aria-label="Text size extra large"
                        className={`flex-1 py-2 rounded-lg text-lg font-bold border transition-colors ${settings.textSize === 'xl' ? 'bg-cafe-tan text-cafe-white border-cafe-tan' : 'bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50'}`}
                     >
                       Aa

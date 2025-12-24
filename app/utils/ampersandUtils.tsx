@@ -1,5 +1,17 @@
 /**
- * Utility functions for styling ampersands in text
+ * @fileoverview Typography utility for styling ampersands
+ * @module utils/ampersandUtils
+ *
+ * @description
+ * Provides functions and components for styling ampersands (&) with custom fonts.
+ * Commonly used to apply Playfair Display or Inter fonts to ampersands in headings.
+ *
+ * @example
+ * ```tsx
+ * import { TextWithSerifAmpersand } from '@/app/utils';
+ *
+ * <h2><TextWithSerifAmpersand>Coffee & Community</TextWithSerifAmpersand></h2>
+ * ```
  */
 
 import React from 'react';

@@ -100,7 +100,7 @@ function addSecurityHeaders(
     "img-src 'self' https://cdn.sanity.io https://images.unsplash.com data: blob:",
     "media-src 'self' https://cdn.sanity.io",
     "connect-src 'self' https://cdn.sanity.io https://*.sanity.io",
-    "frame-src 'none'",
+    "frame-src 'self' https://www.google.com https://maps.google.com",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",

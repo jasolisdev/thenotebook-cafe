@@ -1,8 +1,9 @@
 # thenotebook-cafe - Product Requirements Document
 
 **Author:** Jose
-**Date:** 2025-12-05
+**Date:** 2025-12-23
 **Version:** 1.0
+**Status:** Implemented (Story page live in `app/story/page.tsx`)
 
 ---
 
@@ -37,7 +38,7 @@ The redesigned Story Page succeeds when:
 3. **Shareability:** Visual moments are Instagram/TikTok-worthy, encouraging social sharing
 4. **Clarity:** The narrative flows naturally from "why we started" → "what we're building" → "the craft behind it" → "come experience this"
 5. **Time on Page:** Users spend 2-3x longer on Story page compared to current version (indicating engagement)
-6. **Flow Continuation:** 40%+ of Story page visitors continue to Menu, Events, or Newsletter signup
+6. **Flow Continuation:** 40%+ of Story page visitors continue to Menu, Contact, or Newsletter signup
 7. **Brand Consistency:** Page feels like a natural extension of the homepage aesthetic (not a jarring shift)
 
 ### Business Metrics
@@ -142,7 +143,7 @@ The Story Page should make visitors *want* to experience the space, not just lea
 - **Text:** cafe-black (#2C2420) for headings, cafe-brown (#4A3B32) for body
 - **Typography:** Alpino (serif) for headings, Torus (sans) for body
 - **Spacing:** Generous whitespace, 24px+ padding on sections
-- **Animations:** 0.4-0.6s ease-out transitions (matching homepage ScrollReveal)
+- **Animations:** 0.4-0.6s ease-out transitions (matching homepage Reveal)
 
 ### Key Interactions
 
@@ -267,7 +268,7 @@ The Story Page should make visitors *want* to experience the space, not just lea
 
 **FR38:** Page provides clear path to return to homepage
 
-**FR39:** Page suggests next action at bottom (Menu, Events, Newsletter)
+**FR39:** Page suggests next action at bottom (Menu, Contact, Newsletter)
 
 **FR40:** Page maintains site header with logo and primary navigation
 
@@ -400,7 +401,7 @@ The Story Page should make visitors *want* to experience the space, not just lea
 **Content SEO:**
 - Heading hierarchy supports keyword targeting (Riverside coffee, local café, custom design)
 - Image alt text includes relevant keywords naturally
-- Internal links to Menu, Events, Homepage
+- Internal links to Menu, Contact, Homepage
 - URL structure: /story (clean, semantic)
 
 ### Reliability

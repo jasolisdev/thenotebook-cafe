@@ -6,16 +6,7 @@ export default function StoryLink() {
   return (
     <Link
       href="/story"
-      className="uppercase text-xs tracking-widest font-semibold pb-1 transition-colors inline-block"
-      style={{ color: '#A48D78', borderBottom: '1px solid #A48D78' }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.color = '#2C2420';
-        e.currentTarget.style.borderBottomColor = '#2C2420';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.color = '#A48D78';
-        e.currentTarget.style.borderBottomColor = '#A48D78';
-      }}
+      className="uppercase text-xs tracking-widest font-semibold pb-1 transition-colors inline-block text-cafe-tan border-b border-cafe-tan hover:text-cafe-black hover:border-cafe-black"
     >
       Read Our Story
     </Link>

@@ -14,13 +14,8 @@
 
 [data-section="Low Lights"] {
   position: relative;
-  background: var(--color-cafe-baige-light);
+  background: var(--color-cafe-mist);
   background-image: none;
-}
-
-/* Ensure no transparency in Low Lights section */
-[data-section="Low Lights"] * {
-  opacity: 1 !important;
 }
 
 [data-section="Low Lights"] .section-deco,
@@ -41,7 +36,7 @@
 /* Keep Stay in the Loop readable (no gradient, solid only) */
 [data-section="Stay in the Loop"] {
   position: relative;
-  background: var(--cafe-olive);
+  background: var(--color-cafe-olive);
 }
 
 [data-section="Stay in the Loop"]::after {
@@ -51,11 +46,11 @@
 
 @media (max-width: 767px) {
   [data-section="Low Lights"] {
-    background-color: var(--color-cafe-baige-light);
+    background-color: var(--color-cafe-mist);
   }
 
   [data-section="Atmosphere"],
   [data-section="Atmosphere Images"] {
-    background-color: var(--cafe-mist);
+    background-color: var(--color-cafe-mist);
   }
 }

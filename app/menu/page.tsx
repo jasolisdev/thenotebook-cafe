@@ -1,3 +1,34 @@
+/**
+ * @fileoverview Menu page with product browsing
+ * @module pages/menu
+ *
+ * @description
+ * Interactive menu page with tabbed navigation, product cards,
+ * and cart integration. Features sticky category tabs, modal-based
+ * product customization, and real-time cart updates.
+ *
+ * Key features:
+ * - Hero banner with menu title and tagline
+ * - Sticky tab navigation (Drinks, Meals, Desserts) that adjusts with header visibility
+ * - Smart scroll behavior - locks viewport when switching tabs above threshold
+ * - Filterable product cards grouped by subcategory
+ * - ProductModal for customization (size, milk, extras, notes)
+ * - Add to cart with modifiers and special instructions
+ * - "Coming soon" placeholder for drinks section
+ * - Mobile-responsive layout with fixed background
+ *
+ * @route /menu
+ * @access public
+ *
+ * @example
+ * Route: /menu
+ * Flow: Browse → Select Tab → Click Product → Customize → Add to Cart
+ *
+ * @see {@link app/components/features/ProductModal.tsx} for product customization
+ * @see {@link app/menu/_components/MenuTabs.tsx} for navigation tabs
+ * @see {@link app/menu/_components/MenuSectionList.tsx} for product listing
+ * @see {@link app/constants.ts} for MENU_ITEMS data
+ */
 'use client';
 
 import { useMemo, useState, useEffect, useRef, useCallback } from 'react';
@@ -6,8 +37,7 @@ import { MENU_ITEMS } from '@/app/constants';
 import { ProductModal } from '@/app/components/features/ProductModal';
 import RevealText from '@/app/components/ui/RevealText';
 import FadeInSection from '@/app/components/ui/FadeInSection';
-import ParallaxHero from '@/app/components/features/ParallaxHero';
-import '../styles/pages/menu.css';
+import '@/app/styles/pages/menu.css';
 import { MenuTabs } from './_components/MenuTabs';
 import { MenuSectionList } from './_components/MenuSectionList';
 
@@ -86,28 +116,28 @@ export default function MenuPage() {
         <div className="menu-fixed-background" aria-hidden="true" />
 
         {/* Menu Header */}
-        <ParallaxHero
-          className="parallax-hero--compact"
-          contentClassName="parallax-hero__content--compact tnc-hero__content"
-          backgroundImage="/menu/tnc-menu-banner.webp"
-          backgroundColor="var(--cafe-black)"
-          backgroundFit="fitHeight"
-          backgroundFitDesktop="cover"
-          parallax={false}
-          overlayVariant="solid"
-          focusPercent={32}
+        <section
+          className="relative min-h-[32vh] md:min-h-[40vh] flex items-center justify-center overflow-hidden pt-[var(--site-header-height,80px)]"
+          data-section="Hero"
+          style={{
+            backgroundImage: 'url(/menu/tnc-menu-banner.webp)',
+            backgroundColor: 'var(--color-cafe-black)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 32%',
+          }}
         >
-          <div className="tnc-hero__inner">
-            <h1 className="tnc-hero__title font-serif">
-              <RevealText delay="0ms">Specialty Coffee Menu</RevealText>
+          <div className="absolute inset-0 bg-black/40 z-[1]" aria-hidden="true" />
+          <div className="relative z-10 text-left md:text-center px-6 w-full max-w-7xl mx-auto">
+            <h1 className="font-dm-serif font-bold text-4xl md:text-6xl text-cafe-cream mb-4">
+              <RevealText delay="0ms">The Menu</RevealText>
             </h1>
             <FadeInSection delay="200ms">
-              <p className="tnc-hero__subtitle">
+              <p className="font-serif italic text-lg md:text-2xl text-cafe-cream/90 drop-shadow-sm">
                 Handcrafted Daily in Riverside, CA.
               </p>
             </FadeInSection>
           </div>
-        </ParallaxHero>
+        </section>
 
         {/* Sticky Tabs Container */}
         <div
@@ -159,6 +189,10 @@ export default function MenuPage() {
                 Thank you for your patience! We&apos;re putting the finishing touches on our handcrafted drink menu.
                 Check back very soon to see what we&apos;ve been mixing up.
               </p>
+              <p className="mt-5 text-sm md:text-base leading-relaxed text-cafe-brown/80">
+                Signature drinks include the Iced Brown Sugar Oat, Matcha Cloud, Classic Cold Brew,
+                and Espresso Tonic. Ask about seasonal specials and featured roasts.
+              </p>
               <p className="mt-6 text-sm md:text-base font-medium text-cafe-brown/80">
                 In the meantime, explore our comforting{" "}
                 <button
@@ -193,7 +227,7 @@ export default function MenuPage() {
       <ProductModal
         item={selectedItem}
         onClose={() => setSelectedItem(null)}
-        orderingEnabled={false}
+        orderingEnabled={activeSection !== "drinks"}
       />
     </>
   );

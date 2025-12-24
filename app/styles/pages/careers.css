@@ -1,17 +1,16 @@
 /**
  * Careers Page Styles
- * Parallax hero scoped to the careers page only
  */
 
 .careers-page {
-  color: var(--cafe-brown);
+  color: var(--color-cafe-brown);
 }
 
 .careers-fixed-background {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-color: var(--cafe-mist);
+  background-color: var(--color-cafe-mist);
   background-image: none;
 }
 
@@ -23,7 +22,7 @@
   -moz-appearance: none;
   width: 1.25rem;
   height: 1.25rem;
-  border: 2px solid var(--cafe-tan);
+  border: 2px solid var(--color-cafe-tan);
   border-radius: 0.25rem;
   background-color: white;
   cursor: pointer;
@@ -37,8 +36,8 @@
 
 .careers-page input[type="checkbox"]:checked,
 .careers-page input[type="radio"]:checked {
-  background-color: var(--cafe-tan);
-  border-color: var(--cafe-tan);
+  background-color: var(--color-cafe-tan);
+  border-color: var(--color-cafe-tan);
 }
 
 .careers-page input[type="checkbox"]:checked::before {
@@ -66,7 +65,7 @@
 
 .careers-page input[type="checkbox"]:focus,
 .careers-page input[type="radio"]:focus {
-  outline: 2px solid var(--cafe-tan);
+  outline: 2px solid var(--color-cafe-tan);
   outline-offset: 2px;
 }
 

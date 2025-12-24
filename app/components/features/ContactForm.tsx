@@ -110,7 +110,7 @@ export default function ContactForm() {
         >
           <option value="" disabled>Select a topic...</option>
           <option value="General Inquiry">General Inquiry</option>
-          <option value="Events">Events & Reservations</option>
+          <option value="Events & Reservations">Events & Reservations</option>
           <option value="Careers">Careers</option>
           <option value="Feedback">Feedback</option>
         </select>

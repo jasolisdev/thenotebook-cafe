@@ -10,6 +10,8 @@ interface RevealProps {
   replay?: boolean;
   /** Animation style: default fade + slide, or slide-only (no fade). */
   effect?: 'fade-slide' | 'slide';
+  /** Intersection threshold (0 to 1). 0.2 means trigger when 20% visible. */
+  threshold?: number;
 }
 
 /**
@@ -33,7 +35,14 @@ interface RevealProps {
  * @param {string} props.className - Additional CSS classes
  * @returns {JSX.Element} Animated wrapper component
  */
-export default function Reveal({ children, delay = 0, className = '', replay = true, effect = 'fade-slide' }: RevealProps) {
+export default function Reveal({ 
+  children, 
+  delay = 0, 
+  className = '', 
+  replay = false, 
+  effect = 'fade-slide',
+  threshold = 0.2
+}: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -47,12 +56,15 @@ export default function Reveal({ children, delay = 0, className = '', replay = t
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { 
+        threshold: threshold,
+        rootMargin: '0px 0px -50px 0px' 
+      }
     );
 
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [replay]);
+  }, [replay, threshold]);
 
   const style = {
     transitionDelay: `${delay}ms`,

@@ -1,3 +1,25 @@
+/**
+ * @fileoverview Custom 404 error page
+ * @module pages/not-found
+ *
+ * @description
+ * Custom 404 error page displayed when a route is not found.
+ * Provides helpful navigation options to guide users back to main content.
+ *
+ * Key features:
+ * - Large 404 display with branded styling
+ * - Helpful error message explaining the situation
+ * - Primary CTA to homepage
+ * - Secondary CTA to menu page
+ * - Mobile-responsive layout
+ *
+ * @route /404 (or any non-existent route)
+ * @access public
+ *
+ * @example
+ * Displayed when: User navigates to non-existent route
+ * Provides: Navigation to homepage or menu
+ */
 import Link from "next/link";
 
 export default function NotFound() {

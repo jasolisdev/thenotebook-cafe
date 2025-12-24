@@ -120,7 +120,7 @@ thenotebook-cafe/
 - **`app/styles/pages/`**: Styles specific to a single page.
 - **`app/styles/layout/`**: Styles for layout-related concerns like sections and animations.
 
-This modular structure is documented in `CSS_ORGANIZATION.md`.
+This modular structure is documented in `docs/CSS_ORGANIZATION.md`.
 
 ### **Design Tokens**
 - **Colors**: A palette of creams, browns, and cool accents. See `--cream`, `--espresso-brown`, `--coffee-bean` in `globals.css`.
@@ -185,3 +185,8 @@ As a large language model from Google, I can assist with a variety of tasks in t
 - **Brainstorming**: Assist in brainstorming ideas for new features or solutions to problems.
 
 By leveraging the information in this file and the rest of the project documentation, I can provide assistance that is consistent with the project's standards and goals.
+
+no need to run npm run build after making changes.
+update this file if there are any changes to the project structure, tech stack, or development guidelines.
+
+

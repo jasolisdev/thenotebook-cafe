@@ -1,29 +1,49 @@
 /**
- * Careers Thank You Page - The Notebook Café
+ * @fileoverview Careers application confirmation page
+ * @module pages/careers/thank-you
  *
- * Confirmation page after successful job application submission.
+ * @description
+ * Success confirmation page displayed after submitting a job application.
+ * Provides next steps information and navigation back to homepage.
+ *
+ * Key features:
+ * - Success icon with animation
+ * - Confirmation message with application status
+ * - Next steps timeline (3-5 business days)
+ * - Navigation back to homepage
+ * - Contact information for follow-up questions
+ *
+ * @route /careers/thank-you
+ * @access public
+ *
+ * @example
+ * Route: /careers/thank-you
+ * Accessed after: Successful job application submission
+ *
+ * @see {@link app/careers/page.tsx} for careers page with application form
+ * @see {@link app/components/features/CareersApplyForm.tsx} for form component
  */
 import Link from "next/link";
-import Reveal from "../../components/ui/Reveal";
+import Reveal from "@/app/components/ui/Reveal";
 import { CheckCircle, Home, Mail } from "lucide-react";
-import "../../styles/pages/careers.css";
+import "@/app/styles/pages/careers.css";
 
 export default function ThankYouPage() {
   return (
     <main
       className="min-h-screen flex items-center justify-center px-6 careers-thank-you-page"
-      style={{ backgroundColor: 'var(--cafe-mist)' }}
+      style={{ backgroundColor: 'var(--color-cafe-mist)' }}
     >
       <div className="max-w-2xl w-full text-center">
         <Reveal>
-          <div className="w-24 h-24 rounded-full mx-auto mb-8 flex items-center justify-center" style={{ backgroundColor: 'var(--cafe-tan)' }}>
+          <div className="w-24 h-24 rounded-full mx-auto mb-8 flex items-center justify-center" style={{ backgroundColor: 'var(--color-cafe-tan)' }}>
             <CheckCircle size={48} className="text-white" strokeWidth={1.5} />
           </div>
         </Reveal>
 
         <Reveal delay={100}>
-          <h1 className="font-serif text-5xl md:text-6xl mb-6" style={{ color: 'var(--cafe-black)' }}>
-            Application <span className="italic" style={{ color: 'var(--cafe-tan)' }}>Received!</span>
+          <h1 className="font-serif text-5xl md:text-6xl mb-6" style={{ color: 'var(--color-cafe-black)' }}>
+            Application <span className="italic" style={{ color: 'var(--color-cafe-tan)' }}>Received!</span>
           </h1>
         </Reveal>
 
@@ -34,9 +54,9 @@ export default function ThankYouPage() {
         </Reveal>
 
         <Reveal delay={300}>
-          <div className="p-8 rounded-2xl mb-8" style={{ backgroundColor: 'var(--cafe-white)', border: '2px solid rgba(164, 141, 120, 0.2)' }}>
-            <Mail size={32} className="mx-auto mb-4" style={{ color: 'var(--cafe-tan)' }} />
-            <h2 className="font-serif text-2xl mb-3" style={{ color: 'var(--cafe-black)' }}>
+          <div className="p-8 rounded-2xl mb-8" style={{ backgroundColor: 'var(--color-cafe-white)', border: '2px solid rgba(164, 141, 120, 0.2)' }}>
+            <Mail size={32} className="mx-auto mb-4" style={{ color: 'var(--color-cafe-tan)' }} />
+            <h2 className="font-serif text-2xl mb-3" style={{ color: 'var(--color-cafe-black)' }}>
               What Happens Next?
             </h2>
             <p className="font-light leading-relaxed" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
@@ -52,7 +72,7 @@ export default function ThankYouPage() {
               href="/"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-serif text-lg transition-all hover:scale-[1.02]"
               style={{
-                backgroundColor: 'var(--cafe-tan)',
+                backgroundColor: 'var(--color-cafe-tan)',
                 color: 'white',
                 textDecoration: 'none'
               }}
@@ -63,7 +83,7 @@ export default function ThankYouPage() {
 
             <p className="text-sm font-light" style={{ color: 'rgba(74, 59, 50, 0.6)' }}>
               Questions? Email us at{" "}
-              <a href="mailto:thenotebookcafellc@gmail.com" className="underline" style={{ color: 'var(--cafe-tan)' }}>
+              <a href="mailto:thenotebookcafellc@gmail.com" className="underline" style={{ color: 'var(--color-cafe-tan)' }}>
                 thenotebookcafellc@gmail.com
               </a>
             </p>
