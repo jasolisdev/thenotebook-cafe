@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-test.describe('Cart flow', () => {
+// Cart flow tests are skipped until online ordering launches
+test.describe.skip('Cart flow', () => {
   test('add item from menu and remove from cart', async ({ page }) => {
     await page.goto('/menu');
 

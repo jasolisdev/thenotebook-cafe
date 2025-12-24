@@ -220,10 +220,11 @@ export default function MenuPage() {
         </div>
       </main>
 
+      {/* Online ordering disabled until launch - showcase mode only */}
       <ProductModal
         item={selectedItem}
         onClose={() => setSelectedItem(null)}
-        orderingEnabled={activeSection !== "drinks"}
+        orderingEnabled={false}
       />
     </>
   );

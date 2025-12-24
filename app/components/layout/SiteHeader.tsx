@@ -349,6 +349,7 @@ export default function SiteHeader({
 
             {/* Social - Right */}
             <div className="hidden md:flex items-center justify-end gap-4">
+              {/* Cart button - hidden until online ordering launches */}
               <button
                 type="button"
                 onClick={() => {
@@ -356,7 +357,7 @@ export default function SiteHeader({
                   window.dispatchEvent(new Event("open-cart"));
                 }}
                 aria-label="Shopping cart"
-                className={`relative flex items-center justify-center w-10 h-10 rounded-full transition-colors ${
+                className={`hidden relative flex items-center justify-center w-10 h-10 rounded-full transition-colors ${
                   useLightText ? "hover:bg-white/10" : "hover:bg-black/5"
                 }`}
               >
@@ -420,6 +421,7 @@ export default function SiteHeader({
             </div>
 
             <div className="md:hidden col-start-3 flex items-center justify-end gap-6">
+              {/* Cart button - hidden until online ordering launches */}
               <button
                 type="button"
                 onClick={() => {
@@ -427,7 +429,7 @@ export default function SiteHeader({
                   window.dispatchEvent(new Event("open-cart"));
                 }}
                 aria-label="Shopping cart"
-                className="relative w-12 h-12 flex items-center justify-center"
+                className="hidden relative w-12 h-12 flex items-center justify-center"
               >
                 <ShoppingBag
                   size={20}

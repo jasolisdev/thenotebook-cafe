@@ -34,12 +34,15 @@ describe('SiteHeader Component', () => {
     expect(screen.getAllByRole('link', { name: /careers/i })[0]).toBeInTheDocument();
   });
 
-  it('renders shopping cart button', () => {
+  it('shopping cart buttons are hidden until online ordering launches', () => {
     render(<SiteHeader />);
-    // There are two: desktop and mobile
+    // Cart buttons exist in DOM but are hidden until online ordering launches
     const cartButtons = screen.getAllByLabelText(/shopping cart/i);
     expect(cartButtons.length).toBeGreaterThan(0);
-    expect(cartButtons[0]).toBeInTheDocument();
+    // Both buttons should have hidden class
+    cartButtons.forEach((button) => {
+      expect(button).toHaveClass('hidden');
+    });
   });
 
   it('toggles mobile menu on hamburger click', async () => {
