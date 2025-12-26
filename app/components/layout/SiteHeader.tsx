@@ -275,11 +275,11 @@ export default function SiteHeader({
         }}
       >
         <div className="max-w-[1600px] mx-auto px-6 max-[390px]:px-4 lg:px-12">
-	          <div className="grid grid-cols-[auto_1fr_auto] items-center transition-all duration-500 py-4">
-            {/* Logo - Left */}
+	          <div className="grid grid-cols-[1fr_auto] md:grid-cols-[auto_1fr_auto] items-center transition-all duration-500 py-4">
+            {/* Logo - Left (Desktop only) */}
             <Link
               href="/"
-              className="flex items-center cursor-pointer group gap-2.5"
+              className="hidden md:flex items-center cursor-pointer group gap-2.5"
               style={{ color: 'inherit', textDecoration: 'none' }}
             >
               <Image
@@ -307,6 +307,20 @@ export default function SiteHeader({
                   Café
                 </span>
               </div>
+            </Link>
+
+            {/* Mobile Title - Centered */}
+            <Link
+              href="/"
+              className="flex md:hidden items-center justify-center cursor-pointer"
+              style={{ color: 'inherit', textDecoration: 'none' }}
+            >
+              <span
+                className="font-serif whitespace-nowrap text-xl leading-none tracking-tight bionic-skip"
+                style={{ color: useLightText ? 'var(--color-coffee-50)' : 'var(--color-coffee-900)' }}
+              >
+                The Notebook Café
+              </span>
             </Link>
 
             {/* Navigation - Center */}
