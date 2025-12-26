@@ -284,7 +284,7 @@ export const AccessibilityWidget: React.FC = () => {
       {/* Floating Toggle Button */}
       <button
         onClick={toggleOpen}
-        className={`fixed bottom-6 left-6 z-[110] w-14 h-14 bg-cafe-brown text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-black transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border ${isDefaultSettings ? "border-cafe-tan/40" : "border-gold/90 shadow-[0_0_0_3px_rgba(196,164,132,0.18)]"}`}
+        className={`fixed bottom-6 left-6 z-[1110] w-14 h-14 bg-cafe-brown text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-black transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border ${isDefaultSettings ? "border-cafe-tan/40" : "border-gold/90 shadow-[0_0_0_3px_rgba(196,164,132,0.18)]"}`}
         aria-label="Accessibility Options"
       >
         <FaWheelchair
@@ -296,14 +296,14 @@ export const AccessibilityWidget: React.FC = () => {
       {/* Backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-cafe-black/40 z-[100]"
+          className="fixed inset-0 bg-cafe-black/40 z-[1090]"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Drawer */}
       <div
-        className={`acc-widget-panel fixed inset-y-0 left-0 z-[110] w-full md:w-96 bg-cafe-cream shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? "translate-x-0" : "-translate-x-full"} flex flex-col border-r border-cafe-tan/20`}
+        className={`acc-widget-panel fixed inset-y-0 left-0 z-[1100] w-full md:w-96 bg-cafe-cream shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? "translate-x-0" : "-translate-x-full"} flex flex-col border-r border-cafe-tan/20`}
       >
         {/* Header */}
         <div className="p-6 border-b border-cafe-tan/20 bg-cafe-cream flex items-center justify-between shrink-0">
