@@ -611,10 +611,10 @@
 /* --- 1. The Backdrop Layer (Slides first) --- */
 .menu-layer-backdrop {
   position: fixed;
-  top: 0;
+  top: var(--site-header-height, 80px);
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - var(--site-header-height, 80px));
   background: var(--color-cafe-luxe-oat);
   z-index: 998;
   /* Behind the drawer */
@@ -633,10 +633,10 @@
 /* --- 2. The Main Drawer (Slides second) --- */
 .menu-drawer-cinematic {
   position: fixed;
-  top: 0;
+  top: var(--site-header-height, 80px);
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - var(--site-header-height, 80px));
   background: var(--color-cafe-black);
   color: var(--color-cafe-cream);
   z-index: 999;
