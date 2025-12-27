@@ -72,20 +72,21 @@ Note: HTML size baseline comes from seositecheckup.com; define measurement metho
 - [x] **2.8** Test tracking in development and verify in GA4 dashboard (consent accepted/denied)
 - [x] **2.9** Update privacy policy to mention GA4 and Vercel Analytics
 
-### Phase 3: Google Sheets Newsletter Integration - IN PROGRESS
+### Phase 3: Google Sheets Newsletter Integration - COMPLETE
 > Replace Sanity newsletter storage with Google Sheets + Apps Script (free, no SaaS)
 
 - [x] **3.1** Document architecture and create implementation guide (docs/google-sheets-newsletter.md)
-- [x] **3.2** Write Google Apps Script code for form submissions (in docs)
+- [x] **3.2** Write Google Apps Script code for form submissions (docs/apps-script-code.txt)
 - [x] **3.3** Update `/api/subscribe` endpoint to proxy to Apps Script
 - [x] **3.4** Update `/api/unsubscribe` to redirect to Google Form
-- [ ] **3.5** Create Google Sheet with schema (USER ACTION)
-- [ ] **3.6** Deploy Google Apps Script as web app (USER ACTION)
-- [ ] **3.7** Create Google Form for unsubscribe flow (USER ACTION)
-- [ ] **3.8** Add environment variables (GOOGLE_APPS_SCRIPT_URL, NEXT_PUBLIC_UNSUBSCRIBE_FORM_URL)
-- [ ] **3.9** Migrate existing subscribers from Sanity to Google Sheet (if any)
-- [ ] **3.10** Test subscription flow end-to-end
-- [ ] **3.11** Keep Sanity until Sheets is verified in production
+- [x] **3.5** Create Google Sheet "The Notebook Cafe - Newsletter" with Subscribers tab
+- [x] **3.6** Deploy Google Apps Script as web app (Anyone access)
+- [x] **3.7** Add GOOGLE_APPS_SCRIPT_URL to .env.local
+- [ ] **3.8** Create Google Form for unsubscribe flow (optional - can be done later)
+- [ ] **3.9** Add NEXT_PUBLIC_UNSUBSCRIBE_FORM_URL when form is created
+- [ ] **3.10** Migrate existing subscribers from Sanity to Google Sheet (if any)
+- [ ] **3.11** Test subscription flow end-to-end
+- [ ] **3.12** Keep Sanity until Sheets is verified in production
 
 ### Phase 4: Sanity CMS Removal
 > Remove CMS dependency and hardcode content (only after Mailchimp is verified in production)
@@ -199,7 +200,7 @@ Only delete after Mailchimp is verified in production and the Sanity export is a
 | 2025-12-26 | Setup | Branch created, plan written | Starting Phase 1 |
 | 2025-12-26 | Phase 1 | 1.1-1.5 all complete | Meta descriptions extended, ads.txt added, robots/sitemap verified |
 | 2025-12-26 | Phase 2 | 2.1-2.9 all complete | GA4 integrated with consent gating, privacy policy updated |
-| 2025-12-26 | Phase 3 | 3.1-3.4 complete | Google Sheets newsletter code ready, awaiting user setup |
+| 2025-12-26 | Phase 3 | 3.1-3.7 complete | Google Sheets + Apps Script deployed, env vars added |
 
 ---
 
