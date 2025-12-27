@@ -298,7 +298,7 @@ export default function SiteHeader({
           ref={headerBarRef}
           className="max-w-[1600px] mx-auto px-6 max-[390px]:px-4 lg:px-12"
         >
-          <div className="grid grid-cols-[1fr_auto] md:grid-cols-[auto_1fr_auto] items-center transition-all duration-500 py-4">
+          <div className="grid grid-cols-[auto_1fr_auto] items-center transition-all duration-500 py-4">
             {/* Logo - Left (Desktop only) */}
             <Link
               href="/"
@@ -338,6 +338,9 @@ export default function SiteHeader({
               </div>
             </Link>
 
+            {/* Mobile spacer for left column */}
+            <div className="w-10 md:hidden" aria-hidden="true" />
+
             {/* Mobile Title - Centered */}
             <Link
               href="/"
@@ -345,7 +348,7 @@ export default function SiteHeader({
               style={{ color: "inherit", textDecoration: "none" }}
             >
               <span
-                className="font-serif whitespace-nowrap text-xl leading-none tracking-tight bionic-skip"
+                className="font-serif font-semibold whitespace-nowrap text-xl leading-none tracking-tight bionic-skip"
                 style={{
                   color: useLightText
                     ? "var(--color-coffee-50)"
@@ -469,7 +472,7 @@ export default function SiteHeader({
               )}
             </div>
 
-            <div className="md:hidden col-start-3 flex items-center justify-end gap-6">
+            <div className="md:hidden flex items-center justify-end gap-6">
               {/* Cart button - hidden until online ordering launches */}
               <button
                 type="button"

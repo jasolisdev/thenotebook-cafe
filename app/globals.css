@@ -1340,9 +1340,11 @@ body[data-nav-open="true"] button[aria-label="Accessibility Options"] {
   padding: 20px 24px;
 }
 
-/* The Mask (overflow hidden wrapper) */
+/* The Mask (overflow hidden wrapper) - consistent width for number alignment */
 .menu-link-wrapper {
   overflow: hidden;
+  width: 100%;
+  max-width: 200px;
   cursor: pointer;
   padding: 12px 0;
   position: relative;
@@ -1352,8 +1354,8 @@ body[data-nav-open="true"] button[aria-label="Accessibility Options"] {
 .menu-link-content {
   display: flex;
   align-items: center;
-  gap: 16px;
-  justify-content: center;
+  gap: 12px;
+  justify-content: flex-start;
   transform: translateY(110%);
   opacity: 0;
   transition:
