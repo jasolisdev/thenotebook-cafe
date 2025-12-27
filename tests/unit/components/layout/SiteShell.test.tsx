@@ -1,6 +1,6 @@
 import React from 'react';
 import { describe, expect, test, vi } from 'vitest';
-import { render, screen, waitFor } from '@/tests/utils/test-utils';
+import { render, screen } from '@/tests/utils/test-utils';
 
 const usePathnameMock = vi.hoisted(() => vi.fn(() => '/'));
 
@@ -20,10 +20,6 @@ vi.mock('@/app/components/layout/SiteFooter', () => ({
   default: () => <div data-testid="site-footer" />,
 }));
 
-vi.mock('@/app/components/layout/ImagePreloader', () => ({
-  default: () => <div data-testid="image-preloader" />,
-}));
-
 vi.mock('@/app/components/ui/AnnouncementBanner', () => ({
   default: () => <div data-testid="announcement-banner" />,
 }));
@@ -40,27 +36,24 @@ describe('SiteShell', () => {
       </SiteShell>
     );
 
-    expect(screen.getByTestId('image-preloader')).toBeInTheDocument();
     expect(screen.getByTestId('announcement-banner')).toBeInTheDocument();
     expect(screen.getByTestId('site-header')).toBeInTheDocument();
     expect(screen.getByTestId('site-footer')).toBeInTheDocument();
     expect(screen.getByText('Shell content')).toBeInTheDocument();
   });
 
-  test('renders studio shell when pathname is studio', async () => {
-    usePathnameMock.mockReturnValue('/studio');
+  test('hides announcement banner when showAnnouncement is false', () => {
+    usePathnameMock.mockReturnValue('/');
 
     render(
-      <SiteShell showAnnouncement instagramUrl="https://ig" spotifyUrl="https://sp">
-        <div>Studio content</div>
+      <SiteShell showAnnouncement={false} instagramUrl="https://ig" spotifyUrl="https://sp">
+        <div>Shell content</div>
       </SiteShell>
     );
 
-    expect(screen.getByText('Studio content').parentElement).toHaveClass('studio-root');
-    expect(screen.queryByTestId('site-header')).not.toBeInTheDocument();
-
-    await waitFor(() => {
-      expect(document.body.classList.contains('studio-mode')).toBe(true);
-    });
+    expect(screen.queryByTestId('announcement-banner')).not.toBeInTheDocument();
+    expect(screen.getByTestId('site-header')).toBeInTheDocument();
+    expect(screen.getByTestId('site-footer')).toBeInTheDocument();
+    expect(screen.getByText('Shell content')).toBeInTheDocument();
   });
 });
