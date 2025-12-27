@@ -297,7 +297,7 @@ export default function HomePage() {
       {/* The Trinity */}
       <section
         data-section="The Trinity"
-        className="py-24 md:py-28 relative overflow-hidden trinity-slab trinity-slab-light"
+        className="hidden md:block py-24 md:py-28 relative overflow-hidden trinity-slab trinity-slab-light"
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-y-16 md:gap-y-0">

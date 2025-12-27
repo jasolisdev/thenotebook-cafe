@@ -332,11 +332,11 @@ export const AccessibilityWidget: React.FC = () => {
                     }
                   }, 50);
                 }}
-                className="flex items-center gap-1 px-3 py-2 rounded-lg hover:bg-cafe-tan/15 text-cafe-black font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
+                className="flex items-center gap-2 px-4 py-2.5 min-h-11 rounded-xl hover:bg-cafe-tan/15 text-cafe-black text-base font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
                 aria-label="Back to settings"
               >
-                <ChevronLeftIcon className="w-5 h-5" />
-                <span className="text-sm">Back to Settings</span>
+                <ChevronLeftIcon className="w-6 h-6" />
+                <span>Back to Settings</span>
               </button>
               <button
                 onClick={() => setIsOpen(false)}
@@ -350,7 +350,10 @@ export const AccessibilityWidget: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div ref={contentRef} className="flex-1 overflow-y-auto p-6 bg-cafe-cream">
+        <div
+          ref={contentRef}
+          className={`flex-1 overflow-y-auto p-6 ${view === "statement" ? "bg-cafe-mist" : "bg-cafe-cream"}`}
+        >
           {view === "settings" ? (
             <div className="space-y-4">
               <p className="text-sm text-cafe-brown/70 font-sans mb-4">

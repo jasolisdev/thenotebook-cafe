@@ -20,8 +20,8 @@ describe('SiteHeader Component', () => {
   it('renders brand logo and name', () => {
     render(<SiteHeader />);
     expect(screen.getByAltText(/the notebook café logo/i)).toBeInTheDocument();
-    expect(screen.getByText(/the notebook/i)).toBeInTheDocument();
-    expect(screen.getByText(/café/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/the notebook/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/café/i).length).toBeGreaterThan(0);
   });
 
   it('renders main navigation links on desktop', () => {
@@ -100,6 +100,25 @@ describe('SiteHeader Component', () => {
     // React to scroll (wait for raf/state update)
     await waitFor(() => {
       expect(nav).toHaveAttribute('data-at-top', 'false');
+    });
+  });
+
+  it('keeps the header visible when the mobile menu opens', async () => {
+    const user = userEvent.setup();
+    render(<SiteHeader />);
+
+    const nav = screen.getByRole('navigation');
+    Object.defineProperty(window, 'scrollY', { value: 200, writable: true });
+    fireEvent.scroll(window);
+
+    await waitFor(() => {
+      expect(nav.className).toContain('-translate-y-full');
+    });
+
+    await user.click(screen.getByRole('button', { name: /open menu/i }));
+
+    await waitFor(() => {
+      expect(nav.className).not.toContain('-translate-y-full');
     });
   });
 });
