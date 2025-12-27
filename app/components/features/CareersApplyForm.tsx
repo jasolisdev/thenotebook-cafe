@@ -161,18 +161,24 @@ export default function CareersApplyForm() {
       <div className="quick-apply-grid">
         <input
           type="text"
+          id="firstName"
+          name="firstName"
           placeholder="First Name *"
           className="input-field"
           value={formData.firstName}
           disabled
+          aria-label="First Name"
           onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
         />
         <input
           type="text"
+          id="lastName"
+          name="lastName"
           placeholder="Last Name *"
           className="input-field"
           value={formData.lastName}
           disabled
+          aria-label="Last Name"
           onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
         />
       </div>
@@ -180,25 +186,33 @@ export default function CareersApplyForm() {
       <div className="quick-apply-grid quick-apply-grid--spaced">
         <input
           type="text"
+          id="phone"
+          name="phone"
           placeholder="Phone Number *"
           className="input-field"
           value={formData.phone}
           inputMode="tel"
           disabled
+          aria-label="Phone Number"
           onChange={(e) => setFormData({ ...formData, phone: formatPhoneInput(e.target.value) })}
         />
         <input
           type="email"
+          id="email"
+          name="email"
           placeholder="Email *"
           className="input-field"
           value={formData.email}
           disabled
+          aria-label="Email"
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
       </div>
 
-      <label className="form-group-label">Why Us? *</label>
+      <label className="form-group-label" htmlFor="message">Why Us? *</label>
       <textarea
+        id="message"
+        name="message"
         className="input-field"
         placeholder="Tell us why you're a good fit..."
         style={{ minHeight: "80px", resize: "vertical" }}
@@ -207,10 +221,10 @@ export default function CareersApplyForm() {
         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
       />
 
-      <label className="form-group-label" htmlFor="resume-upload">
+      <span className="form-group-label" id="resume-label">
         Resume *
-      </label>
-      <div className="file-upload-zone opacity-50 cursor-not-allowed">
+      </span>
+      <div className="file-upload-zone opacity-50 cursor-not-allowed" aria-labelledby="resume-label">
         <p style={{ margin: "0 0 8px", fontSize: "0.9rem" }}>
           {resumeFile ? resumeFile.name : "Uploads Paused"}
         </p>
@@ -230,10 +244,10 @@ export default function CareersApplyForm() {
         , complete it, and upload the finished file below. This is now mandatory for all applicants.
       </p>
 
-      <label className="form-group-label" htmlFor="application-upload">
+      <span className="form-group-label" id="application-label">
         Completed Application *
-      </label>
-      <div className="file-upload-zone opacity-50 cursor-not-allowed">
+      </span>
+      <div className="file-upload-zone opacity-50 cursor-not-allowed" aria-labelledby="application-label">
         <p style={{ margin: "0 0 8px", fontSize: "0.9rem" }}>
           {applicationFile ? applicationFile.name : "Uploads Paused"}
         </p>

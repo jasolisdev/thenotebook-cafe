@@ -348,10 +348,12 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
                 </div>
 
                 <div className="space-y-3">
-                  <label className="font-serif text-lg flex items-center gap-2" style={{ color: colors.black }}>
+                  <label htmlFor="special-requests" className="font-serif text-lg flex items-center gap-2" style={{ color: colors.black }}>
                     Special Requests
                   </label>
                   <textarea
+                    id="special-requests"
+                    name="special-requests"
                     value={notes}
                     onChange={e => setNotes(e.target.value)}
                     placeholder={item.section === 'desserts' ? "Warmed, allergy info, etc..." : "Extra hot, allergy info, etc..."}

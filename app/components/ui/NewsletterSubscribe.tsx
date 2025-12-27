@@ -55,12 +55,15 @@ export default function NewsletterSubscribe() {
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 items-stretch">
         <input
           type="email"
+          id="newsletter-email-loop"
+          name="email"
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
           inputMode="email"
           autoComplete="email"
+          aria-label="Email address"
           className="flex-1 px-6 py-4 text-base border-2 rounded-sm focus:outline-none transition-all duration-300"
           style={{
             borderColor: borderColor,

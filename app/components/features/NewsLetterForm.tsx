@@ -47,12 +47,15 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
         <form onSubmit={onSubmit} className="flex gap-3">
           <input
             type="email"
+            id="newsletter-email-inline"
+            name="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Your email address"
             inputMode="email"
             autoComplete="email"
+            aria-label="Email address"
             className="flex-1 bg-transparent border-0 border-b outline-none px-0 py-2 text-sm transition-all"
             style={{
               borderColor: 'rgba(var(--coffee-100-rgb), 0.3)',
@@ -102,12 +105,15 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
       <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch">
         <input
           type="email"
+          id="newsletter-email-home"
+          name="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="your@email.com"
           inputMode="email"
           autoComplete="email"
+          aria-label="Email address"
           className="flex-1 px-6 py-4 rounded-md border outline-none transition-all duration-200 placeholder:text-cafe-beige bg-white"
           style={{
             borderColor: "var(--color-cafe-beige)",
