@@ -47,8 +47,9 @@ export default function SiteHeader({
   const drawerWasOpen = useRef(false);
   const lastScrollY = useRef(0);
   const scrollDeltaAcc = useRef(0);
-  const navRef = useRef<HTMLElement | null>(null);
+  const headerBarRef = useRef<HTMLDivElement | null>(null);
   const headerHeightRef = useRef<number>(80);
+  const shouldShowHeader = isVisible || isOpen;
 
   const isActive = (path: string): boolean => pathname === path;
   const navLinkBase =
@@ -130,7 +131,7 @@ export default function SiteHeader({
 
   const syncHeaderHeight = useCallback(() => {
     if (typeof window === "undefined") return;
-    const el = navRef.current;
+    const el = headerBarRef.current;
     if (!el) return;
     const height = Math.max(0, Math.round(el.getBoundingClientRect().height));
     headerHeightRef.current = height;
@@ -141,7 +142,7 @@ export default function SiteHeader({
   useEffect(() => {
     if (typeof window === "undefined") return;
     syncHeaderHeight();
-    const el = navRef.current;
+    const el = headerBarRef.current;
     if (!el) return;
     const observer = new ResizeObserver(() => syncHeaderHeight());
     observer.observe(el);
@@ -158,13 +159,13 @@ export default function SiteHeader({
     window.dispatchEvent(
       new CustomEvent("tnc-header-state", {
         detail: {
-          visible: isVisible,
+          visible: shouldShowHeader,
           atTop: atTopVisual,
           height: headerHeightRef.current,
         },
       })
     );
-  }, [isVisible, atTopVisual]);
+  }, [shouldShowHeader, atTopVisual]);
 
   // Track drawer state
   useEffect(() => {
@@ -249,8 +250,7 @@ export default function SiteHeader({
       {/* <AnnouncementBanner text={announcementText} /> */}
 
       <nav
-        ref={navRef}
-        className={`fixed top-0 left-0 right-0 z-50 border-b transform-gpu will-change-transform transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] ${
+        className={`fixed top-0 left-0 right-0 z-[1001] border-b transform-gpu will-change-transform transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] ${
           isScrolled ? 'backdrop-blur-md shadow-md' : ''
         } ${
           isOpen
@@ -258,9 +258,7 @@ export default function SiteHeader({
             : isScrolled
             ? 'border-coffee-50/20'
             : 'border-transparent'
-        } ${
-          isVisible ? 'translate-y-0' : '-translate-y-full'
-        }`}
+        } ${shouldShowHeader ? 'translate-y-0' : '-translate-y-full'}`}
         data-at-top={atTopVisual}
         style={{
           backgroundColor: atTopVisual
@@ -274,12 +272,12 @@ export default function SiteHeader({
             : 'transparent',
         }}
       >
-        <div className="max-w-[1600px] mx-auto px-6 max-[390px]:px-4 lg:px-12">
-	          <div className="grid grid-cols-[auto_1fr_auto] items-center transition-all duration-500 py-4">
-            {/* Logo - Left */}
+        <div ref={headerBarRef} className="max-w-[1600px] mx-auto px-6 max-[390px]:px-4 lg:px-12">
+	          <div className="grid grid-cols-[1fr_auto] md:grid-cols-[auto_1fr_auto] items-center transition-all duration-500 py-4">
+            {/* Logo - Left (Desktop only) */}
             <Link
               href="/"
-              className="flex items-center cursor-pointer group gap-2.5"
+              className="hidden md:flex items-center cursor-pointer group gap-2.5"
               style={{ color: 'inherit', textDecoration: 'none' }}
             >
               <Image
@@ -307,6 +305,20 @@ export default function SiteHeader({
                   Café
                 </span>
               </div>
+            </Link>
+
+            {/* Mobile Title - Centered */}
+            <Link
+              href="/"
+              className="flex md:hidden items-center justify-center cursor-pointer"
+              style={{ color: 'inherit', textDecoration: 'none' }}
+            >
+              <span
+                className="font-serif whitespace-nowrap text-xl leading-none tracking-tight bionic-skip"
+                style={{ color: useLightText ? 'var(--color-coffee-50)' : 'var(--color-coffee-900)' }}
+              >
+                The Notebook Café
+              </span>
             </Link>
 
             {/* Navigation - Center */}
@@ -463,65 +475,56 @@ export default function SiteHeader({
           </div>
         </div>
 
-        {/* Cinematic Mobile Menu - Double Layer Right-to-Left */}
-        {/* Layer 1: Backdrop (Tan) */}
-        <div
-          className={`menu-layer-backdrop md:hidden ${isOpen ? 'open' : ''}`}
-          onClick={() => setIsOpen(false)}
-        />
+      </nav>
 
-        {/* Layer 2: Main Drawer (Charcoal) */}
-        <div className={`menu-drawer-cinematic md:hidden ${isOpen ? 'open' : ''}`}>
-          {/* Close Button */}
-          <button
-            onClick={() => setIsOpen(false)}
-            className="menu-drawer-close"
-            aria-label="Close menu"
-            type="button"
-          >
-            <div className="menu-drawer-close-x" />
-          </button>
+      {/* Cinematic Mobile Menu - Double Layer Right-to-Left */}
+      {/* Layer 1: Backdrop (Tan) */}
+      <div
+        className={`menu-layer-backdrop md:hidden ${isOpen ? 'open' : ''}`}
+        onClick={() => setIsOpen(false)}
+      />
 
-          <div className="menu-links-group">
-            {/* Navigation Links */}
-            {[
-              { href: '/', label: 'Home' },
-              { href: '/menu', label: 'Menu' },
-              { href: '/story', label: 'Story' },
-              { href: '/contact', label: 'Contact' },
-              { href: '/careers', label: 'Careers' }
-            ].map((link, index) => (
-              <div key={link.href} className="menu-link-wrapper">
-                {/* The masked content container */}
-                <div
-                  className="menu-link-content"
-                  style={{ transitionDelay: isOpen ? `${0.2 + (index * 0.08)}s` : '0s' }}
+      {/* Layer 2: Main Drawer (Charcoal) */}
+      <div className={`menu-drawer-cinematic md:hidden ${isOpen ? 'open' : ''}`}>
+        <div className="menu-links-group">
+          {/* Navigation Links */}
+          {[
+            { href: '/', label: 'Home' },
+            { href: '/menu', label: 'Menu' },
+            { href: '/story', label: 'Story' },
+            { href: '/contact', label: 'Contact' },
+            { href: '/careers', label: 'Careers' }
+          ].map((link, index) => (
+            <div key={link.href} className="menu-link-wrapper">
+              {/* The masked content container */}
+              <div
+                className="menu-link-content"
+                style={{ transitionDelay: isOpen ? `${0.2 + (index * 0.08)}s` : '0s' }}
+              >
+                {/* Index Number */}
+                <span className="menu-item-number">0{index + 1}</span>
+
+                {/* Main Label */}
+                <Link
+                  href={link.href}
+                  onClick={(e) => handleMobileNavClick(e, link.href)}
+                  className={`menu-link-text ${isActive(link.href) ? 'active' : ''}`}
+                  style={{ textDecoration: 'none' }}
                 >
-                  {/* Index Number */}
-                  <span className="menu-item-number">0{index + 1}</span>
-
-                  {/* Main Label */}
-                  <Link
-                    href={link.href}
-                    onClick={(e) => handleMobileNavClick(e, link.href)}
-                    className={`menu-link-text ${isActive(link.href) ? 'active' : ''}`}
-                    style={{ textDecoration: 'none' }}
-                  >
-                    {link.label}
-                  </Link>
-                </div>
+                  {link.label}
+                </Link>
               </div>
-            ))}
+            </div>
+          ))}
 
-            {/* Footer / Copyright */}
-            <div className="menu-drawer-footer">
-              <div className="menu-drawer-footer-text">
-                Est. Riverside 2026
-              </div>
+          {/* Footer / Copyright */}
+          <div className="menu-drawer-footer">
+            <div className="menu-drawer-footer-text">
+              Est. Riverside 2026
             </div>
           </div>
         </div>
-      </nav>
+      </div>
 
     </>
   );

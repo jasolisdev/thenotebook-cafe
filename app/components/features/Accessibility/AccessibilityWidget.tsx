@@ -59,6 +59,7 @@ export const AccessibilityWidget: React.FC = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState<"settings" | "statement">("settings");
+  const contentRef = React.useRef<HTMLDivElement>(null);
   const [settings, setSettings] = useState<AccessibilitySettings>(() => {
     if (typeof window === "undefined") return defaultSettings;
     const saved = localStorage.getItem("accessibility-settings");
@@ -283,7 +284,7 @@ export const AccessibilityWidget: React.FC = () => {
       {/* Floating Toggle Button */}
       <button
         onClick={toggleOpen}
-        className={`fixed bottom-6 left-6 z-[110] w-14 h-14 bg-cafe-brown text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-black transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border ${isDefaultSettings ? "border-cafe-tan/40" : "border-gold/90 shadow-[0_0_0_3px_rgba(196,164,132,0.18)]"}`}
+        className={`fixed bottom-6 left-6 z-[1110] w-14 h-14 bg-cafe-brown text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-black transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border ${isDefaultSettings ? "border-cafe-tan/40" : "border-gold/90 shadow-[0_0_0_3px_rgba(196,164,132,0.18)]"}`}
         aria-label="Accessibility Options"
       >
         <FaWheelchair
@@ -295,33 +296,64 @@ export const AccessibilityWidget: React.FC = () => {
       {/* Backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-cafe-black/40 z-[100]"
+          className="fixed inset-0 bg-cafe-black/40 z-[1090]"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Drawer */}
       <div
-        className={`acc-widget-panel fixed inset-y-0 left-0 z-[110] w-full md:w-96 bg-cafe-cream shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? "translate-x-0" : "-translate-x-full"} flex flex-col border-r border-cafe-tan/20`}
+        className={`acc-widget-panel fixed inset-y-0 left-0 z-[1100] w-full md:w-96 bg-cafe-cream shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? "translate-x-0" : "-translate-x-full"} flex flex-col border-r border-cafe-tan/20`}
       >
         {/* Header */}
         <div className="p-6 border-b border-cafe-tan/20 bg-cafe-cream flex items-center justify-between shrink-0">
-          <h2 className="font-display font-bold text-xl text-cafe-black">
-            {view === "settings"
-              ? "Accessibility Tools"
-              : "Accessibility Statement"}
-          </h2>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="w-10 h-10 rounded-full hover:bg-cafe-tan/15 flex items-center justify-center text-cafe-brown transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
-            aria-label="Close accessibility panel"
-          >
-            <XMarkIcon className="w-6 h-6" />
-          </button>
+          {view === "settings" ? (
+            <>
+              <h2 className="font-display font-bold text-xl text-cafe-black">
+                Accessibility Tools
+              </h2>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-10 h-10 rounded-full hover:bg-cafe-tan/15 flex items-center justify-center text-cafe-brown transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
+                aria-label="Close accessibility panel"
+              >
+                <XMarkIcon className="w-6 h-6" />
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => {
+                  setView("settings");
+                  // Scroll to top of content area when going back to settings
+                  setTimeout(() => {
+                    if (contentRef.current) {
+                      contentRef.current.scrollTop = 0;
+                    }
+                  }, 50);
+                }}
+                className="flex items-center gap-2 px-4 py-2.5 min-h-11 rounded-xl hover:bg-cafe-tan/15 text-cafe-black text-base font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
+                aria-label="Back to settings"
+              >
+                <ChevronLeftIcon className="w-6 h-6" />
+                <span>Back to Settings</span>
+              </button>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-10 h-10 rounded-full hover:bg-cafe-tan/15 flex items-center justify-center text-cafe-brown transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
+                aria-label="Close accessibility panel"
+              >
+                <XMarkIcon className="w-6 h-6" />
+              </button>
+            </>
+          )}
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6 bg-cafe-cream">
+        <div
+          ref={contentRef}
+          className={`flex-1 overflow-y-auto p-6 ${view === "statement" ? "bg-cafe-mist" : "bg-cafe-cream"}`}
+        >
           {view === "settings" ? (
             <div className="space-y-4">
               <p className="text-sm text-cafe-brown/70 font-sans mb-4">
@@ -429,7 +461,15 @@ export const AccessibilityWidget: React.FC = () => {
 
               <div className="mt-8 pt-6 border-t border-cafe-cream/10">
                 <button
-                  onClick={() => setView("statement")}
+                  onClick={() => {
+                    setView("statement");
+                    // Scroll to top of content area when opening statement
+                    setTimeout(() => {
+                      if (contentRef.current) {
+                        contentRef.current.scrollTop = 0;
+                      }
+                    }, 50);
+                  }}
                   className="w-full py-3 px-4 bg-white hover:bg-cafe-tan/10 text-cafe-brown rounded-xl font-bold transition-colors text-sm border border-cafe-tan/20"
                 >
                   Read Accessibility Statement
@@ -438,14 +478,6 @@ export const AccessibilityWidget: React.FC = () => {
             </div>
           ) : (
             <div className="prose prose-sm max-w-none text-cafe-brown/90 animate-slide-in-left">
-              <button
-                onClick={() => setView("settings")}
-                className="flex items-center gap-2 text-cafe-black font-bold mb-6 hover:text-cafe-tan transition-colors"
-              >
-                <ChevronLeftIcon className="w-5 h-5" />
-                Back to Settings
-              </button>
-
               <h3 className="font-display font-bold text-lg text-cafe-black mb-2">
                 Our Commitment to Accessibility
               </h3>
