@@ -21,7 +21,7 @@ Create test cases for any new features or bug fixes you implement, following the
 5. [Component Library](#component-library)
 6. [Styling System](#styling-system)
 7. [Security & API Routes](#security--api-routes)
-8. [Content Management (Sanity)](#content-management-sanity)
+8. [Data & Content Management](#data--content-management)
 9. [Key Technical Patterns](#key-technical-patterns)
 10. [Development Guidelines](#development-guidelines)
 11. [Testing](#testing)
@@ -31,7 +31,7 @@ Create test cases for any new features or bug fixes you implement, following the
 
 ## Project Overview
 
-**The Notebook Café** is a Next.js 16 website for a Riverside-based coffee shop, using Sanity CMS for content management. The site features marketing pages, menu browsing with a cart UI (no on-site checkout yet), and an embedded CMS studio at `/studio`.
+**The Notebook Café** is a Next.js 16 website for a Riverside-based coffee shop. The site features marketing pages, menu browsing with a cart UI (no on-site checkout yet), and uses Google Sheets for newsletter subscriptions and Resend for email notifications.
 
 ### Core Philosophy
 
@@ -49,13 +49,12 @@ Create test cases for any new features or bug fixes you implement, following the
 | -------------- | ------------------------------------------- | ------- |
 | **Framework**  | Next.js (App Router)                        | 16      |
 | **Language**   | TypeScript                                  | Latest  |
-| **CMS**        | Sanity                                      | v4      |
 | **Styling**    | Tailwind CSS v4 + Custom CSS                | v4.1.16 |
-| **Fonts**      | Playfair Display + Torus (Alpino available) | Custom  |
-| **Icons**      | Lucide React + React Icons                  | Latest  |
-| **Animation**  | Framer Motion                               | Latest  |
+| **Fonts**      | Playfair Display + Torus                    | Custom  |
+| **Icons**      | Lucide React                                | Latest  |
 | **Email**      | Resend                                      | Latest  |
-| **Analytics**  | Vercel Analytics + Speed Insights           | Latest  |
+| **Newsletter** | Google Sheets + Apps Script                 | -       |
+| **Analytics**  | Vercel Analytics + GA4                      | Latest  |
 | **Deployment** | Vercel                                      | Latest  |
 
 ---
@@ -69,7 +68,6 @@ npm run dev
 ```
 
 - Frontend: http://localhost:3000
-- Sanity Studio: http://localhost:3000/studio
 
 ### Build & Production
 
@@ -366,68 +364,40 @@ Password verification for protected content.
 
 ---
 
-## Content Management (Sanity)
+## Data & Content Management
 
-### **Two Client Pattern**
+### **Static Content**
 
-**Read Client** (`sanity/lib/client.ts`):
+All site content uses static TypeScript constants:
 
-- CDN-enabled for fast public data fetching
-- Used in all page components
-- No authentication required
+**Business Info** (`app/lib/constants/business.ts`):
+- Business name, address, phone
+- Social media links (Instagram, TikTok)
+- Business hours
+- Map/directions URLs
 
-**Write Client** (`sanity/lib/writeClient.ts`):
+**SEO Constants** (`app/lib/constants/seo.ts`):
+- Page titles and descriptions
+- Open Graph images
+- Site metadata
 
-- Authenticated with `SANITY_WRITE_TOKEN`
-- Only used in API routes (newsletter, mutations, contact)
-- Keeps token server-side for security
+### **Newsletter Subscriptions**
 
----
+Uses Google Sheets + Apps Script (no CMS):
 
-### **Content Schemas**
+- `/api/subscribe` - Proxies to Google Apps Script
+- `/api/unsubscribe` - Redirects to Google Form
+- Data stored in Google Sheets
+- Free, scalable, no vendor lock-in
 
-#### subscriber
+### **Contact & Job Applications**
 
-Newsletter subscriber data.
+Uses Resend for email delivery:
 
-**Fields:**
-
-- `email` - Subscriber email (unique, lowercase)
-- `source` - Source page ("homepage", "footer", "modal", etc.)
-- `status` - "subscribed" | "unsubscribed"
-- `unsubscribeToken` - UUID for unsubscribe link
-- `createdAt` - Timestamp
-
----
-
-#### contactMessage
-
-Contact form submissions.
-
-**Fields:**
-
-- `name` - Sender name
-- `email` - Sender email
-- `subject` - Message subject
-- `message` - Message body
-- `status` - "new" | "read" | "archived"
-- `source` - "contact-page"
-- `createdAt` - Timestamp
-
----
-
-#### settings
-
-Global site configuration.
-
-**Fields:**
-
-- `social.instagram` - Instagram URL
-- `social.spotify` - Spotify playlist URL
-- `hours.weekday` - Weekday hours
-- `hours.weekend` - Weekend hours
-- `address` - Business address
-- `phone` - Business phone
+- `/api/contact` - Sends email to business owner
+- `/api/apply` - Sends application with resume attachment
+- Beautiful HTML email templates
+- No database storage required
 
 ---
 
@@ -480,9 +450,8 @@ Mark with `"use client"` directive when using:
 3. POST to `/api/contact`
 4. Server validates, sanitizes, and checks rate limit
 5. Sends HTML email via Resend to business owner
-6. Creates contactMessage document in Sanity
-7. Returns success/error to client
-8. Form shows appropriate message
+6. Returns success/error to client
+7. Form shows appropriate message
 
 ---
 
@@ -491,10 +460,10 @@ Mark with `"use client"` directive when using:
 1. User enters email in NewsLetterForm (homepage, footer, or modal)
 2. Client-side email validation
 3. POST to `/api/subscribe` with email and source
-4. Server checks for duplicates (case-insensitive)
-5. If duplicate: returns `{ok: true, duplicate: true}`
-6. If new: creates subscriber document with unsubscribe token
-7. Form shows success message or duplicate message
+4. Server proxies request to Google Apps Script
+5. Apps Script checks for duplicates and saves to Google Sheets
+6. Returns success/duplicate status to client
+7. Form shows appropriate message
 
 ---
 
@@ -548,11 +517,11 @@ import { CartProvider } from "../../components/providers/CartProvider";
 
 ### **Security Best Practices**
 
-1. **Always sanitize user input** before storing in Sanity
+1. **Always sanitize user input** before sending emails or storing data
 2. **Use CSRF protection** on all mutation endpoints
 3. **Implement rate limiting** to prevent abuse
 4. **Escape HTML** in email templates
-5. **Use write client only server-side** (never expose token to client)
+5. **Keep API keys server-side** (never expose tokens to client)
 6. **Validate file uploads** (size, type, content)
 7. **Log security events** for monitoring
 
@@ -740,7 +709,7 @@ app/
 - ✅ Pre-filled reply button with subject and signature
 - ✅ XSS protection with HTML escaping
 - ✅ Timezone-aware timestamps (PST)
-- ✅ Graceful email failure handling (logs error, still saves to Sanity)
+- ✅ Graceful email failure handling (logs error, returns success)
 - ✅ Allowed Vercel preview deployments in CSRF validation
 
 ### **December 2025 - Footer Redesign**
@@ -783,20 +752,19 @@ app/
 Required in `.env.local`:
 
 ```bash
-# Sanity CMS (Required)
-NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
-NEXT_PUBLIC_SANITY_DATASET=production
-SANITY_WRITE_TOKEN=your_write_token
-
-# Email (Required for contact form)
+# Email (Required for contact/apply forms)
 RESEND_API_KEY=your_resend_api_key
 CONTACT_EMAIL_RECIPIENT=business@example.com
 
+# Newsletter (Required for subscriptions)
+GOOGLE_APPS_SCRIPT_URL=your_apps_script_url
+NEXT_PUBLIC_UNSUBSCRIBE_FORM_URL=your_google_form_url
+
+# Analytics (Optional)
+NEXT_PUBLIC_GA4_ID=G-XXXXXXXXXX
+
 # Optional: Password Protection
 SITE_PASSWORD=  # Leave empty to disable
-
-# Optional: Analytics
-NEXT_PUBLIC_VERCEL_ANALYTICS_ID=your_analytics_id
 ```
 
 **Important:** Environment variables require server restart to take effect.
@@ -820,7 +788,7 @@ NEXT_PUBLIC_VERCEL_ANALYTICS_ID=your_analytics_id
 
 - Vercel preview deployments are allowed in CSRF validation
 - Email sending works in both preview and production
-- Sanity Studio is accessible at `/studio` on all deployments
+- Newsletter subscriptions save to Google Sheets
 
 ---
 
@@ -846,10 +814,6 @@ NEXT_PUBLIC_VERCEL_ANALYTICS_ID=your_analytics_id
 - `/privacy` - Privacy policy
 - `/terms` - Terms of service
 - `/refunds` - Refund policy
-
-### Admin
-
-- `/studio` - Sanity CMS Studio (requires authentication)
 
 ---
 
