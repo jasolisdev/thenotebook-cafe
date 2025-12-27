@@ -32,14 +32,20 @@
 'use client';
 
 import { useMemo, useState, useEffect, useRef, useCallback } from 'react';
+import dynamic from 'next/dynamic';
 import type { MenuItem as MenuItemType } from '@/app/types';
 import { MENU_ITEMS } from '@/app/constants';
-import { ProductModal } from '@/app/components/features/ProductModal';
 import RevealText from '@/app/components/ui/RevealText';
 import FadeInSection from '@/app/components/ui/FadeInSection';
 import '@/app/styles/pages/menu.css';
 import { MenuTabs } from './_components/MenuTabs';
 import { MenuSectionList } from './_components/MenuSectionList';
+
+// Lazy load ProductModal - only loaded when user selects a product
+const ProductModal = dynamic(
+  () => import('@/app/components/features/ProductModal').then((m) => m.ProductModal),
+  { ssr: false, loading: () => null }
+);
 
 const MENU_VIEWPORT_LOCK_Y = 250;
 
@@ -221,11 +227,13 @@ export default function MenuPage() {
       </main>
 
       {/* Online ordering disabled until launch - showcase mode only */}
-      <ProductModal
-        item={selectedItem}
-        onClose={() => setSelectedItem(null)}
-        orderingEnabled={false}
-      />
+      {selectedItem && (
+        <ProductModal
+          item={selectedItem}
+          onClose={() => setSelectedItem(null)}
+          orderingEnabled={false}
+        />
+      )}
     </>
   );
 }

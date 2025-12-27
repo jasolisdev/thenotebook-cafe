@@ -150,21 +150,6 @@ body {
   overflow-anchor: auto;
 }
 
-/* Sanity Studio should fully take over the viewport */
-body.studio-mode {
-  overflow: hidden;
-  overscroll-behavior: none;
-}
-
-.studio-root {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  height: 100dvh;
-  overflow: auto;
-  background: var(--bg-solid);
-}
-
 /* Hide horizontal scrollbar for hero gallery track */
 .scrollbar-none::-webkit-scrollbar {
   display: none;
@@ -219,15 +204,6 @@ body.studio-mode {
 }
 
 .text-light-muted {
-  color: var(--text-light-muted);
-}
-
-/* Legacy class names (deprecated - use .text-light instead) */
-.ink-cream {
-  color: var(--text-light);
-}
-
-.ink-cream-dim {
   color: var(--text-light-muted);
 }
 
@@ -843,26 +819,6 @@ body[data-nav-open="true"] button[aria-label="Accessibility Options"] {
   background: transparent;
 }
 
-/* Legacy nav-glass-wrap (not currently used) */
-.nav-glass-wrap {
-  position: relative;
-  background: linear-gradient(
-    135deg,
-    rgba(58, 45, 40, 0.98) 0%,
-    rgba(58, 45, 40, 0.92) 100%
-  );
-  border-bottom: 1px solid var(--tan-light);
-  box-shadow:
-    0 6px 18px rgba(0, 0, 0, 0.3),
-    0 1px 0 var(--tan-subtle);
-  animation: fadeIn 0.4s ease;
-}
-
-.nav-glass {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
 /* Site header - always visible on top within container */
 .site-header {
   height: 80px;
@@ -897,12 +853,6 @@ body[data-nav-open="true"] button[aria-label="Accessibility Options"] {
   z-index: 3;
 }
 
-/* Legacy class name (deprecated - use .site-header) */
-.header-dark {
-  /* Redirects to site-header for backward compatibility */
-  @extend .site-header;
-}
-
 .site-brand {
   display: inline-flex;
   align-items: center;
@@ -915,22 +865,6 @@ body[data-nav-open="true"] button[aria-label="Accessibility Options"] {
 }
 
 .site-brand:hover {
-  transform: translateY(-2px);
-}
-
-/* Legacy class name (deprecated - use .site-brand) */
-.brand-dark {
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
-  padding-left: 0;
-  padding-top: 0;
-  transition:
-    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.brand-dark:hover {
   transform: translateY(-2px);
 }
 
