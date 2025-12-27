@@ -20,12 +20,29 @@
  * Displays: Terms of service content
  */
 import type { Metadata } from 'next';
+import { SEO } from '@/app/lib/constants/seo';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service',
+  title: 'Terms of Service | The Notebook Café',
+  description: 'Terms of Service for The Notebook Café. Read our user agreements, ordering policies, and legal terms. Covers eligibility, acceptable use, and liability.',
   robots: {
     index: false,
     follow: true,
+  },
+  openGraph: {
+    title: 'Terms of Service | The Notebook Café',
+    description: 'Terms of Service for The Notebook Café. Read our user agreements, ordering policies, and legal terms. Covers eligibility, acceptable use, and liability.',
+    url: `${SEO.siteUrl}/terms`,
+    images: [{
+      url: SEO.ogImage,
+      width: 1200,
+      height: 630,
+      alt: 'The Notebook Café',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [SEO.twitterImage],
   },
 };
 
