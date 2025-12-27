@@ -20,22 +20,44 @@ Comprehensive SEO optimization addressing performance, analytics, and architectu
 | FCP | 2.268s | <1.8s |
 | CDN | Not optimized | Vercel Edge optimized |
 
+Note: HTML size baseline comes from seositecheckup.com; define measurement method in Phase 0 before treating targets as verified.
+
 ### Key Decisions
 - **Analytics:** Google Analytics 4 (GA4)
+- **Consent:** Existing cookie consent system enables Vercel Analytics; GA4 must be gated by the same consent signal
 - **Newsletter:** Migrate from Sanity to Mailchimp
 - **CMS:** Remove Sanity entirely (hardcode content)
+
+### Assumptions & Constraints
+- Cookie consent must control all analytics (GA4 + Vercel Analytics)
+- Sanity must remain in place until Mailchimp subscription flow is verified in production
+- HTML size and request-count targets require a documented measurement method
+
+### Measurement & Acceptance Criteria
+- Define measurement sources and configs for HTML size, request count, and FCP (seositecheckup, Lighthouse mobile, WebPageTest, DevTools)
+- Confirm how seositecheckup reports HTML size; if unclear, choose a primary source of truth and update targets
+- Capture baselines using the same tooling and document exact settings (device, network, cache)
+- Define "HTML size" as the initial document response size for the home page and specify raw vs compressed
 
 ---
 
 ## Phase Checklist
 
-### Phase 1: Quick Wins (Low Risk, High Impact)
+### Phase 0: Baseline & Measurement
+> Make targets measurable and consistent
+
+- [ ] **0.1** Document measurement tooling and configs (seositecheckup, Lighthouse mobile, DevTools)
+- [ ] **0.2** Confirm seositecheckup HTML size methodology or choose a primary source of truth
+- [ ] **0.3** Capture baseline measurements using the chosen tooling
+
+### Phase 1: Quick Wins (Low Risk, High Impact) - COMPLETE
 > Simple fixes that don't require architectural changes
 
-- [ ] **1.1** Extend meta description to 150-220 characters
-- [ ] **1.2** Update page-specific meta descriptions (menu, story, contact, careers)
-- [ ] **1.3** Add ads.txt file (empty or with placeholder if not running ads)
-- [ ] **1.4** Verify www redirect is properly configured in Vercel
+- [x] **1.1** Extend meta description to 150-220 characters (172 chars)
+- [x] **1.2** Update page-specific meta descriptions (menu, story, contact, careers) - all 160-172 chars
+- [x] **1.3** Add ads.txt file (empty or with placeholder if not running ads)
+- [x] **1.4** Verify www redirect is properly configured in Vercel (handled at dashboard level)
+- [x] **1.5** Verify robots.txt and sitemap.xml are present and correct (both exist via Next.js dynamic routes)
 
 ### Phase 2: Google Analytics 4 Integration
 > Add tracking while minimizing performance impact
@@ -43,9 +65,12 @@ Comprehensive SEO optimization addressing performance, analytics, and architectu
 - [ ] **2.1** Create GA4 property in Google Analytics console
 - [ ] **2.2** Install @next/third-parties for optimized GA loading
 - [ ] **2.3** Add GA4 component with proper gtag configuration
-- [ ] **2.4** Configure GA4 to respect cookie consent (GDPR-friendly)
-- [ ] **2.5** Test tracking in development and verify in GA4 dashboard
-- [ ] **2.6** Update privacy policy to mention Google Analytics
+- [ ] **2.4** Gate GA4 behind existing cookie consent signal (same trigger as Vercel Analytics)
+- [ ] **2.5** Configure GA4 consent mode defaults (deny until acceptance)
+- [ ] **2.6** Update consent UI/vendor list to include GA4 (if required by the CMP)
+- [ ] **2.7** Update CSP allowlist if CSP is enforced
+- [ ] **2.8** Test tracking in development and verify in GA4 dashboard (consent accepted/denied)
+- [ ] **2.9** Update privacy policy to mention GA4 and Vercel Analytics
 
 ### Phase 3: Mailchimp Integration
 > Replace Sanity newsletter storage with Mailchimp
@@ -57,20 +82,22 @@ Comprehensive SEO optimization addressing performance, analytics, and architectu
 - [ ] **3.5** Migrate existing subscribers from Sanity to Mailchimp (if any)
 - [ ] **3.6** Update `/api/unsubscribe` endpoint for Mailchimp
 - [ ] **3.7** Test subscription flow end-to-end
-- [ ] **3.8** Remove Sanity subscriber schema
+- [ ] **3.8** Keep Sanity subscriber schema/endpoints until Mailchimp is verified in production
 
 ### Phase 4: Sanity CMS Removal
-> Remove CMS dependency and hardcode content
+> Remove CMS dependency and hardcode content (only after Mailchimp is verified in production)
 
+- [ ] **4.0** Export Sanity dataset and store a backup artifact
 - [ ] **4.1** Audit all Sanity queries in codebase
 - [ ] **4.2** Extract current content from Sanity (settings, social links)
 - [ ] **4.3** Create static content files in `app/lib/data/`
 - [ ] **4.4** Replace Sanity fetches with static imports
-- [ ] **4.5** Remove Sanity client configuration
-- [ ] **4.6** Remove Sanity packages from package.json
-- [ ] **4.7** Delete `/studio` route and Sanity schemas
-- [ ] **4.8** Remove Sanity environment variables from Vercel
-- [ ] **4.9** Update CLAUDE.md documentation
+- [ ] **4.5** Validate content parity (page content and metadata)
+- [ ] **4.6** Remove Sanity client configuration
+- [ ] **4.7** Remove Sanity packages from package.json
+- [ ] **4.8** Delete `/studio` route and Sanity schemas
+- [ ] **4.9** Remove Sanity environment variables from Vercel (after Mailchimp verification)
+- [ ] **4.10** Update CLAUDE.md documentation
 
 ### Phase 5: HTML & Bundle Size Reduction
 > Reduce HTML from 62KB to ~33KB
@@ -137,6 +164,8 @@ Comprehensive SEO optimization addressing performance, analytics, and architectu
 - `package.json` - Remove Sanity, add Mailchimp SDK
 
 ### Files to Delete
+Only delete after Mailchimp is verified in production and the Sanity export is archived.
+
 - `sanity/` directory (entire folder)
 - `sanity.config.ts`
 - `sanity.cli.ts`
@@ -149,10 +178,15 @@ Comprehensive SEO optimization addressing performance, analytics, and architectu
 - `MAILCHIMP_AUDIENCE_ID` - Mailchimp audience/list ID
 - `MAILCHIMP_SERVER_PREFIX` - Mailchimp server (e.g., us21)
 
-**Remove (after migration):**
+**Remove (after Mailchimp is verified in production):**
 - `NEXT_PUBLIC_SANITY_PROJECT_ID`
 - `NEXT_PUBLIC_SANITY_DATASET`
 - `SANITY_WRITE_TOKEN`
+
+### Dependencies & Sequencing Notes
+- Phase 4 removal must wait for Phase 3 verification; keep Sanity read paths until then
+- Phases 5-7 overlap (critical CSS, render blocking, request count); coordinate changes and measure after each tranche
+- Use Phase 0 measurement definitions for validation in Phases 5-8
 
 ---
 
@@ -161,6 +195,7 @@ Comprehensive SEO optimization addressing performance, analytics, and architectu
 | Date | Phase | Items Completed | Notes |
 |------|-------|-----------------|-------|
 | 2025-12-26 | Setup | Branch created, plan written | Starting Phase 1 |
+| 2025-12-26 | Phase 1 | 1.1-1.5 all complete | Meta descriptions extended, ads.txt added, robots/sitemap verified |
 
 ---
 
@@ -168,7 +203,7 @@ Comprehensive SEO optimization addressing performance, analytics, and architectu
 
 If issues arise:
 1. Each phase is independent - can be reverted separately
-2. Keep Sanity credentials until Mailchimp is verified working
+2. Keep Sanity credentials and export backup until Mailchimp is verified working
 3. GA4 can be disabled by removing component
 4. All changes are in feature branch until verified
 
@@ -179,5 +214,6 @@ If issues arise:
 - [GA4 Setup Guide](https://support.google.com/analytics/answer/9304153)
 - [Next.js Third Parties](https://nextjs.org/docs/app/building-your-application/optimizing/third-party-libraries)
 - [Mailchimp Marketing API](https://mailchimp.com/developer/marketing/api/)
+- [SEO Site Checkup](https://seositecheckup.com/)
 - [Vercel Edge Network](https://vercel.com/docs/edge-network/overview)
 - [Web Vitals](https://web.dev/vitals/)
