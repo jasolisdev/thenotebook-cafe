@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from 'react';
-import NewsletterModal from './NewsletterModal';
+import dynamic from 'next/dynamic';
+
+// Lazy load NewsletterModal - only loaded when user clicks trigger
+const NewsletterModal = dynamic(() => import('./NewsletterModal'), {
+  ssr: false,
+  loading: () => null,
+});
 
 interface CommunityModalTriggerProps {
   children: React.ReactNode;
@@ -27,11 +33,13 @@ export default function CommunityModalTrigger({ children, source = "story-commun
       <div onClick={() => setIsModalOpen(true)} className="cursor-pointer">
         {children}
       </div>
-      <NewsletterModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        source={source}
-      />
+      {isModalOpen && (
+        <NewsletterModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          source={source}
+        />
+      )}
     </>
   );
 }
