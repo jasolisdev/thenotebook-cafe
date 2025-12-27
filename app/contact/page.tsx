@@ -152,7 +152,7 @@ export default function ContactPage() {
           {/* Header Section */}
           <div className="text-center mb-16 md:mb-24">
             <Reveal>
-              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block font-inter">
                 Get in Touch
               </span>
             </Reveal>
@@ -183,7 +183,7 @@ export default function ContactPage() {
                         strokeWidth={1.5}
                       />
                     </div>
-                    <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold">
+                    <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
                       Location
                     </span>
                   </div>
@@ -225,7 +225,7 @@ export default function ContactPage() {
                         strokeWidth={1.5}
                       />
                     </div>
-                    <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold">
+                    <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
                       Hours
                     </span>
                   </div>
@@ -262,7 +262,7 @@ export default function ContactPage() {
                         strokeWidth={1.5}
                       />
                     </div>
-                    <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold">
+                    <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
                       Contact
                     </span>
                   </div>

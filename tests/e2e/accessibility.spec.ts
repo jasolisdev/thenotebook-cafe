@@ -15,8 +15,6 @@ test.describe('Accessibility widget', () => {
     await expect(page.locator('html')).toHaveAttribute('class', /acc-text-lg/);
 
     await page.getByRole('button', { name: 'Close accessibility panel' }).click();
-    await expect(page.locator('div.fixed.inset-y-0.left-0.z-\\[110\\]')).toHaveClass(
-      /-translate-x-full/
-    );
+    await expect(page.locator('.acc-widget-panel')).toHaveClass(/-translate-x-full/);
   });
 });

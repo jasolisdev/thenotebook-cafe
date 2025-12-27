@@ -130,7 +130,7 @@ export default function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <div className="relative pl-4 before:absolute before:left-0 before:top-2 before:h-24 before:w-px before:bg-cafe-tan/40">
             <Reveal>
-              <span className="text-cafe-tan uppercase tracking-[0.25em] text-xs font-semibold block mb-4">
+              <span className="text-cafe-tan uppercase tracking-[0.25em] text-xs font-semibold block mb-4 font-inter">
                 The Experience
               </span>
             </Reveal>
@@ -306,7 +306,7 @@ export default function HomePage() {
             {/* Left Column: Sticky Text */}
             <div className="lg:sticky lg:top-32 h-fit lg:self-start relative pl-4 before:absolute before:left-0 before:top-2 before:h-24 before:w-px before:bg-cafe-tan/40">
               <Reveal>
-                <span className="text-cafe-tan uppercase tracking-[0.25em] text-xs font-semibold block mb-4">
+                <span className="text-cafe-tan uppercase tracking-[0.25em] text-xs font-semibold block mb-4 font-inter">
                   The Atmosphere
                 </span>
               </Reveal>
