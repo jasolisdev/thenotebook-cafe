@@ -15,7 +15,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function proxy(request: NextRequest) {
+export function middleware(request: NextRequest) {
   const startTime = Date.now();
   const { pathname, search } = request.nextUrl;
   const method = request.method;
@@ -94,12 +94,12 @@ function addSecurityHeaders(
   // Allows: self, Sanity CDN, Unsplash, Google Fonts, inline styles (for Next.js)
   const cspDirectives = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-eval' 'unsafe-inline'", // Next.js requires unsafe-eval and unsafe-inline
+    "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com", // Next.js requires unsafe-eval and unsafe-inline
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com", // Tailwind and Google Fonts
     "font-src 'self' https://fonts.gstatic.com data:",
     "img-src 'self' https://cdn.sanity.io https://images.unsplash.com data: blob:",
     "media-src 'self' https://cdn.sanity.io",
-    "connect-src 'self' https://cdn.sanity.io https://*.sanity.io",
+    "connect-src 'self' https://cdn.sanity.io https://*.sanity.io https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://region1.google-analytics.com https://region1.analytics.google.com https://*.vercel.com",
     "frame-src 'self' https://www.google.com https://maps.google.com",
     "object-src 'none'",
     "base-uri 'self'",

@@ -134,11 +134,14 @@ export default async function RootLayout({
 }) {
   // Check if site is password protected
   const sitePassword = process.env.SITE_PASSWORD;
-  const cookieStore = await cookies();
-  const isAuthenticated = cookieStore.get("site-auth")?.value === "authenticated";
+  let showPasswordGate = false;
 
-  // Show password gate if password is set and user is not authenticated
-  const showPasswordGate = sitePassword && !isAuthenticated;
+  if (sitePassword) {
+    const cookieStore = await cookies();
+    const isAuthenticated = cookieStore.get("site-auth")?.value === "authenticated";
+    showPasswordGate = !isAuthenticated;
+  }
+
   const showAnnouncement = false; // temporarily hide banner
 
   return (

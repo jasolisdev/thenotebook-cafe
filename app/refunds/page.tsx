@@ -24,26 +24,26 @@ import type { Metadata } from 'next';
 import { SEO } from '@/app/lib/constants/seo';
 
 export const metadata: Metadata = {
-  title: 'Refund & Cancellation Policy | The Notebook Café',
-  description: 'Refund and cancellation policy for The Notebook Café. Learn about our return process for in-store and online orders, and how to request a refund.',
+  title: SEO.pages.refunds.title,
+  description: SEO.pages.refunds.description,
   robots: {
     index: false,
     follow: true,
   },
   openGraph: {
-    title: 'Refund & Cancellation Policy | The Notebook Café',
-    description: 'Refund and cancellation policy for The Notebook Café. Learn about our return process for in-store and online orders, and how to request a refund.',
+    title: SEO.pages.refunds.title,
+    description: SEO.pages.refunds.description,
     url: `${SEO.siteUrl}/refunds`,
     images: [{
-      url: SEO.ogImage,
+      url: SEO.pages.refunds.ogImage,
       width: 1200,
       height: 630,
-      alt: 'The Notebook Café',
+      alt: 'The Notebook Café Refund Policy',
     }],
   },
   twitter: {
     card: 'summary_large_image',
-    images: [SEO.twitterImage],
+    images: [SEO.pages.refunds.ogImage],
   },
 };
 
