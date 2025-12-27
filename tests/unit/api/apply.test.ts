@@ -6,43 +6,32 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { NextResponse } from 'next/server';
 import { POST } from '@/app/api/apply/route';
-import { writeClient } from '@/sanity/lib/writeClient';
-import { validateOrigin } from '@/app/lib/server/csrf';
-import { checkRateLimit } from '@/app/lib/server/rateLimit';
-import { validateUploadedFile } from '@/app/lib/server/fileValidation';
-import { logger } from '@/app/lib/server/logger';
+import { validateOrigin, checkRateLimit, validateUploadedFile, logger } from '@/app/lib';
+const { mockSend } = vi.hoisted(() => ({ mockSend: vi.fn() }));
 
-vi.mock('@/sanity/lib/writeClient', () => ({
-  writeClient: {
-    create: vi.fn(),
-    assets: {
-      upload: vi.fn(),
+vi.mock('@/app/lib', async (importActual) => {
+  const actual = await importActual<typeof import('@/app/lib')>();
+  return {
+    ...actual,
+    validateOrigin: vi.fn(),
+    checkRateLimit: vi.fn(),
+    validateUploadedFile: vi.fn(),
+    logger: {
+      error: vi.fn(),
+      info: vi.fn(),
     },
-  },
-}));
+  };
+});
 
-vi.mock('@/app/lib/server/csrf', () => ({
-  validateOrigin: vi.fn(),
-}));
-
-vi.mock('@/app/lib/server/rateLimit', () => ({
-  checkRateLimit: vi.fn(),
-}));
-
-vi.mock('@/app/lib/server/fileValidation', () => ({
-  validateUploadedFile: vi.fn(),
-}));
-
-vi.mock('@/app/lib/server/logger', () => ({
-  logger: {
-    error: vi.fn(),
+vi.mock('resend', () => ({
+  Resend: class ResendMock {
+    emails = { send: mockSend };
+    constructor() {}
   },
 }));
 
 const mockedValidateOrigin = vi.mocked(validateOrigin);
 const mockedCheckRateLimit = vi.mocked(checkRateLimit);
-const mockedWriteCreate = vi.mocked(writeClient.create);
-const mockedUpload = vi.mocked(writeClient.assets.upload);
 const mockedValidateFile = vi.mocked(validateUploadedFile);
 const mockedLoggerError = vi.mocked(logger.error);
 
@@ -85,9 +74,9 @@ beforeEach(() => {
   vi.clearAllMocks();
   mockedValidateOrigin.mockReturnValue(null);
   mockedCheckRateLimit.mockReturnValue(null);
-  mockedWriteCreate.mockResolvedValue({ _id: 'application-1' } as { _id: string });
-  mockedUpload.mockResolvedValue({ _id: 'file-1' } as { _id: string });
   mockedValidateFile.mockResolvedValue({ valid: true });
+  process.env.RESEND_API_KEY = 'test-resend-key';
+  mockSend.mockResolvedValue({ data: { id: 'email-1' } });
 });
 
 describe('POST /api/apply', () => {
@@ -170,7 +159,7 @@ describe('POST /api/apply', () => {
     expect(payload).toEqual({ ok: false, error: 'Invalid resume file' });
   });
 
-  test('uploads resume and supplemental files when provided', async () => {
+  test('sends email with attachments when files are provided', async () => {
     const data = buildFormData();
     const resume = createFile([1, 2, 3], 'resume.pdf', 'application/pdf');
     const supplemental = createFile([4, 5, 6], 'supp.pdf', 'application/pdf');
@@ -182,30 +171,47 @@ describe('POST /api/apply', () => {
     const payload = await response.json();
 
     expect(response.status).toBe(200);
-    expect(payload).toEqual({ ok: true, id: 'application-1' });
-    expect(mockedUpload).toHaveBeenCalledTimes(2);
-    expect(mockedWriteCreate).toHaveBeenCalledWith(
-      expect.objectContaining({
-        _type: 'jobApplication',
-        firstName: 'Ada',
-        lastName: 'Lovelace',
-        email: 'ada@example.com',
-        resume: {
-          _type: 'file',
-          asset: { _type: 'reference', _ref: 'file-1' },
-        },
-        supplementalApplication: {
-          _type: 'file',
-          asset: { _type: 'reference', _ref: 'file-1' },
-        },
-      })
+    expect(payload).toEqual({ ok: true });
+    expect(mockSend).toHaveBeenCalled();
+    const sendArgs = mockSend.mock.calls[0]?.[0];
+    expect(sendArgs.attachments).toHaveLength(2);
+  });
+
+  test('returns 500 when email service is not configured', async () => {
+    delete process.env.RESEND_API_KEY;
+
+    const response = await POST(makeRequest(buildFormData()));
+    const payload = await response.json();
+
+    expect(response.status).toBe(500);
+    expect(payload).toEqual({ ok: false, error: 'Email service not configured' });
+    expect(mockedLoggerError).toHaveBeenCalledWith('RESEND_API_KEY not configured');
+  });
+
+  test('returns 500 when email sending fails', async () => {
+    mockSend.mockRejectedValue(new Error('email failed'));
+
+    const response = await POST(makeRequest(buildFormData()));
+    const payload = await response.json();
+
+    expect(response.status).toBe(500);
+    expect(payload).toEqual({
+      ok: false,
+      error: 'Failed to send application. Please try again.',
+    });
+    expect(mockedLoggerError).toHaveBeenCalledWith(
+      'Failed to send job application email',
+      expect.any(Error)
     );
   });
 
   test('returns 500 on unexpected errors', async () => {
-    mockedWriteCreate.mockRejectedValue(new Error('boom'));
-
-    const response = await POST(makeRequest(buildFormData()));
+    const response = await POST({
+      formData: () => {
+        throw new Error('boom');
+      },
+      headers: new Headers({ origin: 'http://localhost:3000' }),
+    } as Request);
     const payload = await response.json();
 
     expect(response.status).toBe(500);

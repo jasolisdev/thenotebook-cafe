@@ -6,33 +6,22 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { NextResponse } from 'next/server';
 import { POST } from '@/app/api/contact/route';
-import { writeClient } from '@/sanity/lib/writeClient';
-import { validateOrigin } from '@/app/lib/server/csrf';
-import { checkRateLimit } from '@/app/lib/server/rateLimit';
-import { logger } from '@/app/lib/server/logger';
+import { validateOrigin, checkRateLimit, logger } from '@/app/lib';
 const { mockSend } = vi.hoisted(() => ({ mockSend: vi.fn() }));
 
-vi.mock('@/sanity/lib/writeClient', () => ({
-  writeClient: {
-    create: vi.fn(),
-  },
-}));
-
-vi.mock('@/app/lib/server/csrf', () => ({
-  validateOrigin: vi.fn(),
-}));
-
-vi.mock('@/app/lib/server/rateLimit', () => ({
-  checkRateLimit: vi.fn(),
-}));
-
-vi.mock('@/app/lib/server/logger', () => ({
-  logger: {
-    info: vi.fn(),
-    warn: vi.fn(),
-    error: vi.fn(),
-  },
-}));
+vi.mock('@/app/lib', async (importActual) => {
+  const actual = await importActual<typeof import('@/app/lib')>();
+  return {
+    ...actual,
+    validateOrigin: vi.fn(),
+    checkRateLimit: vi.fn(),
+    logger: {
+      info: vi.fn(),
+      warn: vi.fn(),
+      error: vi.fn(),
+    },
+  };
+});
 
 vi.mock('resend', () => ({
   Resend: class ResendMock {
@@ -43,7 +32,6 @@ vi.mock('resend', () => ({
 
 const mockedValidateOrigin = vi.mocked(validateOrigin);
 const mockedCheckRateLimit = vi.mocked(checkRateLimit);
-const mockedWriteCreate = vi.mocked(writeClient.create);
 const mockedLoggerInfo = vi.mocked(logger.info);
 const mockedLoggerWarn = vi.mocked(logger.warn);
 const mockedLoggerError = vi.mocked(logger.error);
@@ -59,7 +47,6 @@ beforeEach(() => {
   vi.clearAllMocks();
   mockedValidateOrigin.mockReturnValue(null);
   mockedCheckRateLimit.mockReturnValue(null);
-  mockedWriteCreate.mockResolvedValue({ _id: 'contact-1' } as { _id: string });
   process.env.RESEND_API_KEY = 'test-resend-key';
   mockSend.mockResolvedValue({ data: { id: 'email-1' } });
 });
@@ -137,7 +124,7 @@ describe('POST /api/contact', () => {
     const payload = await response.json();
 
     expect(response.status).toBe(200);
-    expect(payload).toEqual({ ok: true, id: 'contact-1' });
+    expect(payload).toEqual({ ok: true });
     expect(mockSend).toHaveBeenCalled();
     expect(mockedLoggerInfo).toHaveBeenCalledWith(
       'Contact email sent successfully',
@@ -178,48 +165,19 @@ describe('POST /api/contact', () => {
     const payload = await response.json();
 
     expect(response.status).toBe(200);
-    expect(payload).toEqual({ ok: true, id: 'contact-1' });
+    expect(payload).toEqual({ ok: true });
     expect(mockedLoggerError).toHaveBeenCalledWith(
       'Failed to send contact email',
       expect.any(Error)
     );
-    expect(mockedWriteCreate).toHaveBeenCalled();
-  });
-
-  test('creates sanitized contact document', async () => {
-    await POST(
-      makeRequest({
-        name: '  Ada <b>Lovelace</b> ',
-        email: ' ADA@EXAMPLE.COM ',
-        subject: 'Hello <script>alert(1)</script>',
-        message: 'Line 1\n<script>bad</script>',
-      })
-    );
-
-    expect(mockedWriteCreate).toHaveBeenCalledWith(
-      expect.objectContaining({
-        _type: 'contactMessage',
-        name: 'Ada Lovelace',
-        email: 'ada@example.com',
-        subject: 'Hello alert(1)',
-        message: 'Line 1\nbad',
-        status: 'new',
-        source: 'contact-page',
-      })
-    );
   });
 
   test('returns 500 on unexpected errors', async () => {
-    mockedWriteCreate.mockRejectedValue(new Error('boom'));
-
-    const response = await POST(
-      makeRequest({
-        name: 'Ada',
-        email: 'ada@example.com',
-        subject: 'Hello',
-        message: 'Hi',
-      })
-    );
+    const response = await POST({
+      json: () => {
+        throw new Error('boom');
+      },
+    } as Request);
     const payload = await response.json();
 
     expect(response.status).toBe(500);

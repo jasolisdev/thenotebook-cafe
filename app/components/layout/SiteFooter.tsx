@@ -16,7 +16,7 @@
 
 import Link from "next/link";
 import { Mail, Instagram } from "lucide-react";
-import { FaYelp } from "react-icons/fa";
+import { YelpIcon, TikTokIcon } from "@/app/components/ui/SocialIcons";
 import { BUSINESS_INFO } from "@/app/lib/constants/business";
 
 /**
@@ -68,7 +68,7 @@ export default function SiteFooter(): React.JSX.Element {
             className="text-white/80 hover:text-white transition-colors duration-300"
             aria-label="Yelp"
           >
-            <FaYelp size={20} />
+            <YelpIcon size={16} />
           </a>
           <a
             href={BUSINESS_INFO.social.tiktok}
@@ -77,9 +77,7 @@ export default function SiteFooter(): React.JSX.Element {
             className="text-white/80 hover:text-white transition-colors duration-300"
             aria-label="TikTok"
           >
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-              <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743l-.002-.001.002.001a2.895 2.895 0 0 1 3.183-4.51v-3.5a6.329 6.329 0 0 0-5.394 10.692 6.33 6.33 0 0 0 10.857-4.424V8.617a8.171 8.171 0 0 0 5.429 2.03V7.228a4.793 4.793 0 0 1-1.659-.542Z" />
-            </svg>
+            <TikTokIcon size={20} />
           </a>
           <a
             href={BUSINESS_INFO.social.instagram}

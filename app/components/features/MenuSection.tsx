@@ -15,12 +15,12 @@ const FEATURED_ITEMS = ALL_MENU_ITEMS.filter((item) =>
 const MenuSection: React.FC = () => {
   return (
     <section id="menu" className="pt-12 bg-cafe-mist">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="mb-20">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
+          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center mb-20">
             <div className="space-y-6 relative pl-4 before:absolute before:left-0 before:top-2 before:h-24 before:w-px before:bg-cafe-tan/40">
               <Reveal>
-                <span className="text-cafe-tan uppercase tracking-[0.25em] text-xs font-semibold block mb-4">
+                <span className="text-cafe-tan uppercase tracking-[0.25em] text-xs font-semibold block mb-4 font-inter">
                   Crafted With Care
                 </span>
               </Reveal>

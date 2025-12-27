@@ -3,47 +3,25 @@
  * Focus: security, validation, business logic, error handling.
  */
 
-import { describe, test, expect, vi, beforeEach } from 'vitest';
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
 import { NextResponse } from 'next/server';
-import { POST } from '@/app/api/subscribe/route';
-import { client } from '@/sanity/lib/client';
-import { writeClient } from '@/sanity/lib/writeClient';
-import { validateOrigin } from '@/app/lib/server/csrf';
-import { checkRateLimit } from '@/app/lib/server/rateLimit';
-import { logger } from '@/app/lib/server/logger';
+import { validateOrigin, checkRateLimit, logger } from '@/app/lib';
 
-vi.mock('@/sanity/lib/client', () => ({
-  client: {
-    fetch: vi.fn(),
-  },
-}));
-
-vi.mock('@/sanity/lib/writeClient', () => ({
-  writeClient: {
-    create: vi.fn(),
-    patch: vi.fn(),
-  },
-}));
-
-vi.mock('@/app/lib/server/csrf', () => ({
-  validateOrigin: vi.fn(),
-}));
-
-vi.mock('@/app/lib/server/rateLimit', () => ({
-  checkRateLimit: vi.fn(),
-}));
-
-vi.mock('@/app/lib/server/logger', () => ({
-  logger: {
-    error: vi.fn(),
-  },
-}));
+vi.mock('@/app/lib', async (importActual) => {
+  const actual = await importActual<typeof import('@/app/lib')>();
+  return {
+    ...actual,
+    validateOrigin: vi.fn(),
+    checkRateLimit: vi.fn(),
+    logger: {
+      error: vi.fn(),
+      info: vi.fn(),
+    },
+  };
+});
 
 const mockedValidateOrigin = vi.mocked(validateOrigin);
 const mockedCheckRateLimit = vi.mocked(checkRateLimit);
-const mockedClientFetch = vi.mocked(client.fetch);
-const mockedWriteCreate = vi.mocked(writeClient.create);
-const mockedWritePatch = vi.mocked(writeClient.patch);
 const mockedLoggerError = vi.mocked(logger.error);
 
 const makeRequest = (body: unknown) =>
@@ -53,11 +31,36 @@ const makeRequest = (body: unknown) =>
     body: JSON.stringify(body),
   });
 
+const loadPost = async () => (await import('@/app/api/subscribe/route')).POST;
+
+const originalAppsScriptUrl = process.env.GOOGLE_APPS_SCRIPT_URL;
+const originalFetch = globalThis.fetch;
+const originalCrypto = globalThis.crypto;
+
 beforeEach(() => {
   vi.clearAllMocks();
+  vi.resetModules();
   mockedValidateOrigin.mockReturnValue(null);
   mockedCheckRateLimit.mockReturnValue(null);
-  mockedClientFetch.mockResolvedValue(null);
+  process.env.GOOGLE_APPS_SCRIPT_URL = 'https://script.test';
+  globalThis.fetch = vi.fn();
+  Object.defineProperty(globalThis, 'crypto', {
+    value: {
+      subtle: {
+        digest: vi.fn().mockResolvedValue(new Uint8Array(32).buffer),
+      },
+    },
+    configurable: true,
+  });
+});
+
+afterEach(() => {
+  process.env.GOOGLE_APPS_SCRIPT_URL = originalAppsScriptUrl;
+  globalThis.fetch = originalFetch;
+  Object.defineProperty(globalThis, 'crypto', {
+    value: originalCrypto,
+    configurable: true,
+  });
 });
 
 describe('POST /api/subscribe', () => {
@@ -66,6 +69,7 @@ describe('POST /api/subscribe', () => {
       NextResponse.json({ ok: false }, { status: 403 })
     );
 
+    const POST = await loadPost();
     const response = await POST(makeRequest({ email: 'test@example.com' }));
 
     expect(response.status).toBe(403);
@@ -77,12 +81,14 @@ describe('POST /api/subscribe', () => {
       NextResponse.json({ ok: false }, { status: 429 })
     );
 
+    const POST = await loadPost();
     const response = await POST(makeRequest({ email: 'test@example.com' }));
 
     expect(response.status).toBe(429);
   });
 
   test('rejects invalid email input', async () => {
+    const POST = await loadPost();
     const response = await POST(makeRequest({ email: 'not-an-email' }));
     const payload = await response.json();
 
@@ -92,6 +98,7 @@ describe('POST /api/subscribe', () => {
 
   test('rejects emails longer than 254 characters', async () => {
     const longEmail = `${'a'.repeat(250)}@ex.com`;
+    const POST = await loadPost();
     const response = await POST(makeRequest({ email: longEmail }));
     const payload = await response.json();
 
@@ -99,103 +106,90 @@ describe('POST /api/subscribe', () => {
     expect(payload).toEqual({ ok: false, error: 'Invalid email' });
   });
 
-  test('returns duplicate response when subscriber exists', async () => {
-    mockedClientFetch.mockResolvedValue({
-      _id: 'subscriber-1',
-      status: 'subscribed',
-      unsubscribeToken: 'token-xyz',
-    });
+  test('returns 500 when Google Apps Script URL is missing', async () => {
+    delete process.env.GOOGLE_APPS_SCRIPT_URL;
+    vi.resetModules();
+    const POST = await loadPost();
 
     const response = await POST(makeRequest({ email: 'test@example.com' }));
     const payload = await response.json();
 
-    expect(response.status).toBe(200);
-    expect(payload).toEqual({ ok: true, duplicate: true });
-    expect(mockedWritePatch).not.toHaveBeenCalled();
+    expect(response.status).toBe(500);
+    expect(payload).toEqual({
+      ok: false,
+      error: 'Newsletter service not configured',
+    });
+    expect(mockedLoggerError).toHaveBeenCalledWith(
+      'GOOGLE_APPS_SCRIPT_URL not configured'
+    );
   });
 
-  test('adds unsubscribe token for existing subscriber without one', async () => {
-    const commit = vi.fn().mockResolvedValue({});
-    const set = vi.fn().mockReturnValue({ commit });
+  test('subscribes successfully via Apps Script', async () => {
+    const fetchMock = vi.mocked(globalThis.fetch);
+    fetchMock.mockResolvedValue({
+      json: vi.fn().mockResolvedValue({
+        success: true,
+        duplicate: false,
+        resubscribed: false,
+      }),
+    } as Response);
 
-    mockedClientFetch.mockResolvedValue({
-      _id: 'subscriber-2',
-      status: 'subscribed',
-      unsubscribeToken: null,
-    });
-    mockedWritePatch.mockReturnValue({ set, commit } as ReturnType<typeof mockedWritePatch>);
-
-    const response = await POST(makeRequest({ email: 'test@example.com' }));
-    const payload = await response.json();
-
-    expect(response.status).toBe(200);
-    expect(payload).toEqual({ ok: true, duplicate: true });
-    expect(mockedWritePatch).toHaveBeenCalledWith('subscriber-2');
-    expect(set).toHaveBeenCalledWith({
-      unsubscribeToken: expect.any(String),
-    });
-    expect(commit).toHaveBeenCalledWith({
-      autoGenerateArrayKeys: true,
-      returnDocuments: false,
-    });
-  });
-
-  test('creates a new subscriber with sanitized values', async () => {
-    mockedWriteCreate.mockResolvedValue({ _id: 'new-sub' });
-
+    const POST = await loadPost();
     const response = await POST(
       makeRequest({
         email: 'TEST+TAG@Example.com',
-        source: '  Footer <b>CTA</b>  ',
+        source: '  footer  ',
       })
     );
     const payload = await response.json();
 
     expect(response.status).toBe(200);
-    expect(payload).toEqual({ ok: true, id: 'new-sub' });
-    expect(mockedWriteCreate).toHaveBeenCalledWith(
+    expect(payload).toEqual({
+      ok: true,
+      duplicate: false,
+      resubscribed: false,
+    });
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://script.test',
+      expect.objectContaining({ method: 'POST' })
+    );
+
+    const body = JSON.parse(fetchMock.mock.calls[0]?.[1]?.body as string);
+    expect(body).toEqual(
       expect.objectContaining({
-        _type: 'subscriber',
         email: 'test+tag@example.com',
-        source: 'Footer CTA',
-        status: 'subscribed',
-        unsubscribeToken: expect.any(String),
+        source: 'footer',
+        ipHash: '0000000000000000',
       })
     );
   });
 
-  test('defaults source when input is missing or invalid', async () => {
-    mockedWriteCreate.mockResolvedValue({ _id: 'new-sub' });
+  test('returns 500 when Apps Script reports failure', async () => {
+    const fetchMock = vi.mocked(globalThis.fetch);
+    fetchMock.mockResolvedValue({
+      json: vi.fn().mockResolvedValue({
+        success: false,
+        error: 'Bad request',
+      }),
+    } as Response);
 
+    const POST = await loadPost();
     const response = await POST(makeRequest({ email: 'test@example.com' }));
-    await response.json();
+    const payload = await response.json();
 
-    expect(mockedWriteCreate).toHaveBeenCalledWith(
-      expect.objectContaining({
-        source: 'homepage',
-      })
-    );
-  });
-
-  test('truncates overly long source values', async () => {
-    mockedWriteCreate.mockResolvedValue({ _id: 'new-sub' });
-    const longSource = 'a'.repeat(200);
-
-    const response = await POST(
-      makeRequest({ email: 'test@example.com', source: longSource })
-    );
-    await response.json();
-
-    expect(mockedWriteCreate).toHaveBeenCalledWith(
-      expect.objectContaining({
-        source: 'a'.repeat(64),
-      })
+    expect(response.status).toBe(500);
+    expect(payload).toEqual({ ok: false, error: 'Bad request' });
+    expect(mockedLoggerError).toHaveBeenCalledWith(
+      'Google Sheets subscription failed',
+      expect.objectContaining({ email: 'test@example.com', error: 'Bad request' })
     );
   });
 
   test('returns 500 on unexpected errors', async () => {
-    mockedClientFetch.mockRejectedValue(new Error('boom'));
+    const fetchMock = vi.mocked(globalThis.fetch);
+    fetchMock.mockRejectedValue(new Error('boom'));
 
+    const POST = await loadPost();
     const response = await POST(makeRequest({ email: 'test@example.com' }));
     const payload = await response.json();
 
@@ -211,6 +205,7 @@ describe('POST /api/subscribe', () => {
       body: '{invalid-json',
     });
 
+    const POST = await loadPost();
     const response = await POST(req);
     const payload = await response.json();
 

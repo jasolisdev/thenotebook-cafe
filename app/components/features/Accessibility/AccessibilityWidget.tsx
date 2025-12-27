@@ -15,7 +15,7 @@ import {
   PauseIcon,
   BrainIcon,
 } from "@/app/components/ui/AccessibilityIcons";
-import { FaWheelchair } from "react-icons/fa";
+import { WheelchairIcon } from "@/app/components/ui/SocialIcons";
 import { logger } from "@/app/lib";
 
 interface AccessibilitySettings {
@@ -287,10 +287,7 @@ export const AccessibilityWidget: React.FC = () => {
         className={`fixed bottom-6 left-6 z-[1110] w-14 h-14 bg-cafe-brown text-cafe-cream rounded-full shadow-2xl flex items-center justify-center hover:scale-105 hover:bg-cafe-black transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-cafe-tan/50 border ${isDefaultSettings ? "border-cafe-tan/40" : "border-gold/90 shadow-[0_0_0_3px_rgba(196,164,132,0.18)]"}`}
         aria-label="Accessibility Options"
       >
-        <FaWheelchair
-          className="w-7 h-7 -mt-0.5"
-          style={{ transform: "translate(2px, 1px)" }}
-        />
+        <WheelchairIcon size={28} className="-mt-0.5" />
       </button>
 
       {/* Backdrop */}
@@ -303,7 +300,7 @@ export const AccessibilityWidget: React.FC = () => {
 
       {/* Drawer */}
       <div
-        className={`acc-widget-panel fixed inset-y-0 left-0 z-[1100] w-full md:w-96 bg-cafe-cream shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? "translate-x-0" : "-translate-x-full"} flex flex-col border-r border-cafe-tan/20`}
+        className={`acc-widget-panel fixed inset-y-0 left-0 z-[1120] w-full md:w-96 bg-cafe-cream shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? "translate-x-0" : "-translate-x-full"} flex flex-col border-r border-cafe-tan/20`}
       >
         {/* Header */}
         <div className="p-6 border-b border-cafe-tan/20 bg-cafe-cream flex items-center justify-between shrink-0">

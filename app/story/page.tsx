@@ -152,7 +152,7 @@ export default function StoryPage() {
             {/* Content */}
             <div className="space-y-6 order-1 lg:order-2 text-right lg:text-left">
               <Reveal>
-                <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+                <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block font-inter">
                   Our Story
                 </span>
               </Reveal>
@@ -261,7 +261,7 @@ export default function StoryPage() {
             {/* Content */}
             <div className="space-y-6 order-1 lg:order-1">
               <Reveal>
-                <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+                <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block font-inter">
                   Our Riverside Home
                 </span>
               </Reveal>
@@ -375,7 +375,7 @@ export default function StoryPage() {
 
             <div className="order-1 lg:order-2 space-y-6 text-right items-end lg:pl-10 relative">
               <Reveal>
-                <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+                <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block font-inter">
                   Our Philosophy
                 </span>
               </Reveal>
@@ -440,7 +440,7 @@ export default function StoryPage() {
           {/* Header Section */}
           <div className="mb-24">
             <Reveal>
-              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block font-inter">
                 The Difference
               </span>
             </Reveal>
@@ -591,7 +591,7 @@ export default function StoryPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
             <Reveal>
-              <span className="story-eyebrow text-xs uppercase tracking-[0.25em] font-semibold">
+              <span className="story-eyebrow text-xs uppercase tracking-[0.25em] font-semibold font-inter">
                 The People Behind the Pour
               </span>
             </Reveal>
@@ -628,7 +628,7 @@ export default function StoryPage() {
                     <h3 className="story-card-title font-serif text-3xl md:text-4xl mb-2">
                       Michael & Julia
                     </h3>
-                    <p className="story-eyebrow text-xs uppercase tracking-[0.25em] font-semibold text-cafe-tan">
+                    <p className="story-eyebrow text-xs uppercase tracking-[0.25em] font-semibold text-cafe-tan font-inter">
                       Founders & Owners
                     </p>
                   </div>

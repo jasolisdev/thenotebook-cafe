@@ -109,7 +109,7 @@ export default function CareersPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <Reveal>
-              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block font-inter">
                 Not Your Typical Coffee Shop
               </span>
             </Reveal>
@@ -276,7 +276,7 @@ export default function CareersPage() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-20">
             <Reveal>
-              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block font-inter">
                 Our Process
               </span>
             </Reveal>
@@ -392,7 +392,7 @@ export default function CareersPage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <Reveal>
-              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block font-inter">
                 Position Status
               </span>
             </Reveal>
@@ -457,7 +457,7 @@ export default function CareersPage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <Reveal>
-              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block">
+              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block font-inter">
                 Status Update
               </span>
             </Reveal>
