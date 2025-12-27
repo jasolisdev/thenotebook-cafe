@@ -17,6 +17,7 @@
 import Link from "next/link";
 import { Mail, Instagram } from "lucide-react";
 import { FaYelp } from "react-icons/fa";
+import { BUSINESS_INFO } from "@/app/lib/constants/business";
 
 /**
  * SiteFooter Component
@@ -70,7 +71,7 @@ export default function SiteFooter(): React.JSX.Element {
             <FaYelp size={20} />
           </a>
           <a
-            href="https://tiktok.com/@thenotebookcafe"
+            href={BUSINESS_INFO.social.tiktok}
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/80 hover:text-white transition-colors duration-300"
@@ -81,7 +82,7 @@ export default function SiteFooter(): React.JSX.Element {
             </svg>
           </a>
           <a
-            href="https://www.instagram.com/thenotebookcafellc/"
+            href={BUSINESS_INFO.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/80 hover:text-white transition-colors duration-300"

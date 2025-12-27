@@ -67,6 +67,7 @@ export const BUSINESS_INFO = {
   // Social Media
   social: {
     instagram: 'https://www.instagram.com/thenotebookcafellc/',
+    tiktok: 'https://tiktok.com/@thenotebookcafe',
   },
 
   // Geo Coordinates - ONLY include when verified

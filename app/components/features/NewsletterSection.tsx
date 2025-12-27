@@ -5,6 +5,7 @@ import { MapPin } from 'lucide-react';
 import NewsletterForm from '@/app/components/features/NewsLetterForm';
 import Reveal from '@/app/components/ui/Reveal';
 import FadeInSection from '@/app/components/ui/FadeInSection';
+import { BUSINESS_INFO } from '@/app/lib/constants/business';
 
 const NewsletterSection: React.FC = () => {
   return (
@@ -32,7 +33,7 @@ const NewsletterSection: React.FC = () => {
 
            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-10 text-xs md:text-sm uppercase tracking-[0.2em] opacity-70 text-cafe-black/70">
               <a
-                href="https://instagram.com/thenotebookcafellc"
+                href={BUSINESS_INFO.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 hover:opacity-100 hover:text-cafe-brown transition-all"
