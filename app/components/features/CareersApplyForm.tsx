@@ -168,6 +168,7 @@ export default function CareersApplyForm() {
           value={formData.firstName}
           disabled
           aria-label="First Name"
+          autoComplete="given-name"
           onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
         />
         <input
@@ -179,6 +180,7 @@ export default function CareersApplyForm() {
           value={formData.lastName}
           disabled
           aria-label="Last Name"
+          autoComplete="family-name"
           onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
         />
       </div>
@@ -194,6 +196,7 @@ export default function CareersApplyForm() {
           inputMode="tel"
           disabled
           aria-label="Phone Number"
+          autoComplete="tel"
           onChange={(e) => setFormData({ ...formData, phone: formatPhoneInput(e.target.value) })}
         />
         <input
@@ -205,6 +208,7 @@ export default function CareersApplyForm() {
           value={formData.email}
           disabled
           aria-label="Email"
+          autoComplete="email"
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
       </div>
