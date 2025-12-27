@@ -68,19 +68,19 @@ export const SEO = {
     privacy: {
       title: "Privacy Policy | The Notebook Café",
       description:
-        "Privacy policy for The Notebook Café. Learn how we collect, use, and protect your personal information.",
+        "Privacy policy for The Notebook Café in Riverside, CA. Learn how we collect, use, and protect your personal information when you visit our website or coffee shop.", // 163 chars
       ogImage: "/og-privacy.png",
     },
     terms: {
       title: "Terms of Service | The Notebook Café",
       description:
-        "Terms of Service for The Notebook Café. By using our website, you agree to these terms and conditions.",
+        "Terms of Service for The Notebook Café in Riverside, CA. By using our website or visiting our coffee shop, you agree to these terms and conditions.", // 150 chars
       ogImage: "/og-terms.png",
     },
     refunds: {
       title: "Refund Policy | The Notebook Café",
       description:
-        "Refund Policy for The Notebook Café. Details on returns, refunds, and exchanges for our products and services.",
+        "Refund policy for The Notebook Café in Riverside, CA. Details on returns, refunds, and exchanges for our coffee products, merchandise, and café services.", // 156 chars
       ogImage: "/og-refunds.png",
     },
   },
