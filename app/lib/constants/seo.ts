@@ -52,12 +52,27 @@ export const SEO = {
     careers: {
       title: 'Careers',
       description: 'Join The Notebook Café team in Riverside, CA. We\'re looking for passionate people who love coffee, community, and creating memorable experiences. Apply today.', // 160 chars
-      ogImage: '/og.png',
+      ogImage: '/og-careers.png',
     },
     contact: {
       title: 'Contact | The Notebook Café, Riverside CA',
       description: 'Visit The Notebook Café in Riverside, CA. Find our hours, location, and contact information. Drop by for specialty coffee, good vibes, and a welcoming atmosphere.', // 165 chars
-      ogImage: '/og.png',
+      ogImage: '/og-contact.png',
+    },
+    privacy: {
+      title: 'Privacy Policy | The Notebook Café',
+      description: 'Privacy policy for The Notebook Café. Learn how we collect, use, and protect your personal information.',
+      ogImage: '/og-privacy.png',
+    },
+    terms: {
+      title: 'Terms of Service | The Notebook Café',
+      description: 'Terms of Service for The Notebook Café. By using our website, you agree to these terms and conditions.',
+      ogImage: '/og-terms.png',
+    },
+    refunds: {
+      title: 'Refund Policy | The Notebook Café',
+      description: 'Refund Policy for The Notebook Café. Details on returns, refunds, and exchanges for our products and services.',
+      ogImage: '/og-refunds.png',
     },
   },
 } as const;

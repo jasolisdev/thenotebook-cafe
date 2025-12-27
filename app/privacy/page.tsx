@@ -23,26 +23,26 @@ import type { Metadata } from 'next';
 import { SEO } from '@/app/lib/constants/seo';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | The Notebook Café',
-  description: 'Privacy policy for The Notebook Café. Learn how we collect, use, and protect your personal information. Explains cookies, analytics, and your privacy rights.',
+  title: SEO.pages.privacy.title,
+  description: SEO.pages.privacy.description,
   robots: {
     index: false,
     follow: true,
   },
   openGraph: {
-    title: 'Privacy Policy | The Notebook Café',
-    description: 'Privacy policy for The Notebook Café. Learn how we collect, use, and protect your personal information. Explains cookies, analytics, and your privacy rights.',
+    title: SEO.pages.privacy.title,
+    description: SEO.pages.privacy.description,
     url: `${SEO.siteUrl}/privacy`,
     images: [{
-      url: SEO.ogImage,
+      url: SEO.pages.privacy.ogImage,
       width: 1200,
       height: 630,
-      alt: 'The Notebook Café',
+      alt: 'The Notebook Café Privacy Policy',
     }],
   },
   twitter: {
     card: 'summary_large_image',
-    images: [SEO.twitterImage],
+    images: [SEO.pages.privacy.ogImage],
   },
 };
 
