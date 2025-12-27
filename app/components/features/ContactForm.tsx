@@ -73,6 +73,7 @@ export default function ContactForm() {
             name="name"
             type="text"
             required
+            autoComplete="name"
             value={formData.name}
             onChange={handleChange}
             className="w-full bg-transparent border-b border-cafe-tan/30 py-3 focus:border-cafe-tan focus:outline-none transition-colors placeholder:text-cafe-brown/30 text-cafe-black"
@@ -88,6 +89,7 @@ export default function ContactForm() {
             name="email"
             type="email"
             required
+            autoComplete="email"
             value={formData.email}
             onChange={handleChange}
             className="w-full bg-transparent border-b border-cafe-tan/30 py-3 focus:border-cafe-tan focus:outline-none transition-colors placeholder:text-cafe-brown/30 text-cafe-black"
