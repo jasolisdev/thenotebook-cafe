@@ -21,12 +21,29 @@
  * Displays: Refund policy content
  */
 import type { Metadata } from 'next';
+import { SEO } from '@/app/lib/constants/seo';
 
 export const metadata: Metadata = {
-  title: 'Refund & Cancellation Policy',
+  title: 'Refund & Cancellation Policy | The Notebook Café',
+  description: 'Refund and cancellation policy for The Notebook Café. Learn about our return process for in-store and online orders, and how to request a refund.',
   robots: {
     index: false,
     follow: true,
+  },
+  openGraph: {
+    title: 'Refund & Cancellation Policy | The Notebook Café',
+    description: 'Refund and cancellation policy for The Notebook Café. Learn about our return process for in-store and online orders, and how to request a refund.',
+    url: `${SEO.siteUrl}/refunds`,
+    images: [{
+      url: SEO.ogImage,
+      width: 1200,
+      height: 630,
+      alt: 'The Notebook Café',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [SEO.twitterImage],
   },
 };
 

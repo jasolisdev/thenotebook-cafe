@@ -23,10 +23,36 @@
  * @see {@link app/careers/page.tsx} for careers page with application form
  * @see {@link app/components/features/CareersApplyForm.tsx} for form component
  */
+import type { Metadata } from 'next';
 import Link from "next/link";
 import Reveal from "@/app/components/ui/Reveal";
 import { CheckCircle, Home, Mail } from "lucide-react";
+import { SEO } from "@/app/lib/constants/seo";
 import "@/app/styles/pages/careers.css";
+
+export const metadata: Metadata = {
+  title: 'Application Received | The Notebook Café',
+  description: 'Thank you for applying to join The Notebook Café team! We\'ve received your application and will review it within 3-5 business days.',
+  robots: {
+    index: false,
+    follow: true,
+  },
+  openGraph: {
+    title: 'Application Received | The Notebook Café',
+    description: 'Thank you for applying to join The Notebook Café team! We\'ve received your application and will review it within 3-5 business days.',
+    url: `${SEO.siteUrl}/careers/thank-you`,
+    images: [{
+      url: SEO.ogImage,
+      width: 1200,
+      height: 630,
+      alt: 'The Notebook Café',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [SEO.twitterImage],
+  },
+};
 
 export default function ThankYouPage() {
   return (

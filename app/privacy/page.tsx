@@ -20,12 +20,29 @@
  * Displays: Privacy policy content
  */
 import type { Metadata } from 'next';
+import { SEO } from '@/app/lib/constants/seo';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy',
+  title: 'Privacy Policy | The Notebook Café',
+  description: 'Privacy policy for The Notebook Café. Learn how we collect, use, and protect your personal information. Explains cookies, analytics, and your privacy rights.',
   robots: {
     index: false,
     follow: true,
+  },
+  openGraph: {
+    title: 'Privacy Policy | The Notebook Café',
+    description: 'Privacy policy for The Notebook Café. Learn how we collect, use, and protect your personal information. Explains cookies, analytics, and your privacy rights.',
+    url: `${SEO.siteUrl}/privacy`,
+    images: [{
+      url: SEO.ogImage,
+      width: 1200,
+      height: 630,
+      alt: 'The Notebook Café',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [SEO.twitterImage],
   },
 };
 
