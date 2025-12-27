@@ -12,13 +12,12 @@ npm run dev
 ```
 
 App: http://localhost:3000
-Sanity Studio: http://localhost:3000/studio
 
 ---
 
 ## Overview
 
-The site is a Next.js 16 monolith with an embedded Sanity Studio and custom UI system. It focuses on marketing pages, menu browsing, newsletter capture, contact/careers intake, and accessibility tooling. Cart UI exists but there is no on-site checkout yet.
+The site is a Next.js 16 application with custom UI system. It focuses on marketing pages, menu browsing, newsletter capture, contact/careers intake, and accessibility tooling. Cart UI exists but there is no on-site checkout yet.
 
 ---
 
@@ -28,13 +27,13 @@ The site is a Next.js 16 monolith with an embedded Sanity Studio and custom UI s
 |-------|-----------|
 | Framework | Next.js 16 (App Router) |
 | Language | TypeScript |
-| CMS | Sanity v4 (embedded Studio) |
 | Styling | Tailwind CSS v4 + custom CSS |
-| Animations | Framer Motion |
-| Fonts | Playfair Display + Torus (Alpino available) + OpenDyslexic |
+| Fonts | Playfair Display + Torus + OpenDyslexic |
 | Email | Resend |
+| Newsletter | Google Sheets + Apps Script |
+| Analytics | Google Analytics 4 + Vercel Analytics |
 | Testing | Vitest + Playwright |
-| Deployment | Vercel-ready |
+| Deployment | Vercel |
 
 ---
 
@@ -43,7 +42,6 @@ The site is a Next.js 16 monolith with an embedded Sanity Studio and custom UI s
 ```
 thenotebook-cafe/
 ├── app/          # App Router pages, components, API routes
-├── sanity/       # Sanity config + schemas
 ├── public/       # Static assets
 ├── tests/        # Unit + E2E tests
 └── docs/         # Documentation hub
@@ -55,12 +53,12 @@ For full details, see `docs/source-tree-analysis.md`.
 
 ## Key Features
 
-- Embedded Sanity Studio at `/studio`
 - Menu browsing with product modal + cart UI (non-transactional)
-- Newsletter subscription + unsubscribe flow (Sanity)
+- Newsletter subscription via Google Sheets + Apps Script
 - Contact form and careers quick-apply email (Resend)
-- Accessibility widget + consent banner
-- Structured data for local SEO
+- Accessibility widget + cookie consent banner
+- Google Analytics 4 with consent gating
+- Structured data for local SEO (JSON-LD)
 
 ---
 
@@ -69,12 +67,19 @@ For full details, see `docs/source-tree-analysis.md`.
 Create `.env.local`:
 
 ```bash
-NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
-NEXT_PUBLIC_SANITY_DATASET=production
-SANITY_WRITE_TOKEN=your_write_token
+# Email (Required for contact/apply forms)
 RESEND_API_KEY=re_your_api_key
 CONTACT_EMAIL_RECIPIENT=you@example.com
 CAREERS_EMAIL_RECIPIENT=you@example.com
+
+# Newsletter (Required for subscriptions)
+GOOGLE_APPS_SCRIPT_URL=your_apps_script_url
+NEXT_PUBLIC_UNSUBSCRIBE_FORM_URL=your_google_form_url
+
+# Analytics (Optional)
+NEXT_PUBLIC_GA4_ID=G-XXXXXXXXXX
+
+# Optional: Password Protection
 SITE_PASSWORD=
 ```
 
