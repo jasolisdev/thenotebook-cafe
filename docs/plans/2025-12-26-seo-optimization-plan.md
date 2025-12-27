@@ -59,18 +59,18 @@ Note: HTML size baseline comes from seositecheckup.com; define measurement metho
 - [x] **1.4** Verify www redirect is properly configured in Vercel (handled at dashboard level)
 - [x] **1.5** Verify robots.txt and sitemap.xml are present and correct (both exist via Next.js dynamic routes)
 
-### Phase 2: Google Analytics 4 Integration
+### Phase 2: Google Analytics 4 Integration - COMPLETE
 > Add tracking while minimizing performance impact
 
-- [ ] **2.1** Create GA4 property in Google Analytics console
-- [ ] **2.2** Install @next/third-parties for optimized GA loading
-- [ ] **2.3** Add GA4 component with proper gtag configuration
-- [ ] **2.4** Gate GA4 behind existing cookie consent signal (same trigger as Vercel Analytics)
-- [ ] **2.5** Configure GA4 consent mode defaults (deny until acceptance)
-- [ ] **2.6** Update consent UI/vendor list to include GA4 (if required by the CMP)
-- [ ] **2.7** Update CSP allowlist if CSP is enforced
-- [ ] **2.8** Test tracking in development and verify in GA4 dashboard (consent accepted/denied)
-- [ ] **2.9** Update privacy policy to mention GA4 and Vercel Analytics
+- [x] **2.1** Create GA4 property in Google Analytics console (G-73H83BV4N2)
+- [x] **2.2** Install @next/third-parties for optimized GA loading
+- [x] **2.3** Add GA4 component with proper gtag configuration (integrated into AnalyticsLoader.tsx)
+- [x] **2.4** Gate GA4 behind existing cookie consent signal (same trigger as Vercel Analytics)
+- [x] **2.5** Configure GA4 consent mode defaults (deny until acceptance)
+- [x] **2.6** Update consent UI/vendor list to include GA4 (using existing ConsentBanner)
+- [x] **2.7** Update CSP allowlist if CSP is enforced (not currently enforced)
+- [x] **2.8** Test tracking in development and verify in GA4 dashboard (consent accepted/denied)
+- [x] **2.9** Update privacy policy to mention GA4 and Vercel Analytics
 
 ### Phase 3: Mailchimp Integration
 > Replace Sanity newsletter storage with Mailchimp
@@ -196,6 +196,7 @@ Only delete after Mailchimp is verified in production and the Sanity export is a
 |------|-------|-----------------|-------|
 | 2025-12-26 | Setup | Branch created, plan written | Starting Phase 1 |
 | 2025-12-26 | Phase 1 | 1.1-1.5 all complete | Meta descriptions extended, ads.txt added, robots/sitemap verified |
+| 2025-12-26 | Phase 2 | 2.1-2.9 all complete | GA4 integrated with consent gating, privacy policy updated |
 
 ---
 
