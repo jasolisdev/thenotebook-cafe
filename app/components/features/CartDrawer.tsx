@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBag, X, Trash2, Minus, Plus, Edit2 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { useCart } from '../providers/CartProvider';
 import { ProductModal } from './ProductModal';
@@ -17,8 +16,22 @@ const colors = COLORS;
 export const CartDrawer: React.FC = () => {
   const { items: cart, isOpen, open, close, removeItem, updateQuantity } = useCart();
   const [editingItem, setEditingItem] = useState<CartItem | null>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
   const subtotal = cart.reduce((acc, item) => acc + item.totalPrice, 0);
   const totalItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Trigger animation when drawer opens
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    if (isOpen) {
+      // Small delay to ensure CSS transition triggers
+      timer = setTimeout(() => setIsAnimating(true), 10);
+    } else {
+      // Reset animation state immediately when closing
+      timer = setTimeout(() => setIsAnimating(false), 0);
+    }
+    return () => clearTimeout(timer);
+  }, [isOpen]);
 
   // Listen for global 'open-cart' events (triggered by cart icon in header)
   useEffect(() => {
@@ -27,30 +40,31 @@ export const CartDrawer: React.FC = () => {
     return () => window.removeEventListener('open-cart', handleOpenCart);
   }, [open]);
 
+  if (!isOpen && !editingItem) return null;
+
   return (
-    <AnimatePresence mode="wait">
+    <>
       {isOpen && (
-        <React.Fragment key="cart-drawer">
-          <motion.div
-            key="cart-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+        <>
+          <div
             onClick={close}
             data-testid="cart-overlay"
-            className="fixed inset-0 z-50"
-            style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
+            className="fixed inset-0 z-50 transition-opacity duration-300"
+            style={{
+              backgroundColor: 'rgba(0,0,0,0.6)',
+              opacity: isAnimating ? 1 : 0,
+            }}
           />
 
-          <motion.div
-            key="cart-content"
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed right-0 top-0 h-full w-full max-w-md z-50 shadow-2xl flex flex-col"
+          <div
             data-testid="cart-drawer"
-            style={{ backgroundColor: colors.mist, borderLeft: `1px solid ${colors.beige}80` }}
+            className="fixed right-0 top-0 h-full w-full max-w-md z-50 shadow-2xl flex flex-col transition-transform duration-500"
+            style={{
+              backgroundColor: colors.mist,
+              borderLeft: `1px solid ${colors.beige}80`,
+              transform: isAnimating ? 'translateX(0)' : 'translateX(100%)',
+              transitionTimingFunction: 'cubic-bezier(0.32, 0.72, 0, 1)',
+            }}
           >
             <div
               className="p-6 flex items-center justify-between"
@@ -102,15 +116,14 @@ export const CartDrawer: React.FC = () => {
               ) : (
                 <>
                   {cart.map((item, idx) => (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
+                    <div
                       key={`${item.cartId}-${idx}`}
-                      className="p-5 rounded-xl flex gap-4 group"
+                      className="p-5 rounded-xl flex gap-4 group animate-fade-in"
                       style={{
                         backgroundColor: colors.white,
                         border: `1px solid ${colors.beige}4D`,
                         boxShadow: '0 6px 18px rgba(0,0,0,0.06)',
+                        animationDelay: `${idx * 50}ms`,
                       }}
                     >
                       <div
@@ -214,7 +227,7 @@ export const CartDrawer: React.FC = () => {
                           </div>
                         </div>
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
 
                   {/* Add More Items Link */}
@@ -279,8 +292,8 @@ export const CartDrawer: React.FC = () => {
                 Checkout (Coming Soon)
               </Button>
             </div>
-          </motion.div>
-        </React.Fragment>
+          </div>
+        </>
       )}
 
       {/* Edit Modal */}
@@ -295,6 +308,6 @@ export const CartDrawer: React.FC = () => {
           }}
         />
       )}
-    </AnimatePresence>
+    </>
   );
 }

@@ -1,19 +1,15 @@
 "use client";
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 
 /**
  * PageTransition Component
  *
- * Provides smooth fade transitions between pages.
- * Works with Next.js App Router to create seamless navigation.
+ * Provides smooth fade-in animation when pages mount.
+ * Uses CSS animations for lightweight page transitions.
  *
  * Animation:
- * - Exit: Fade out (0.2s)
- * - Enter: Fade in (0.3s)
- * - Uses expo easing for premium feel
+ * - Enter: Fade in (0.3s) with expo easing
  *
  * @component
  * @example
@@ -32,22 +28,9 @@ interface PageTransitionProps {
 }
 
 export default function PageTransition({ children }: PageTransitionProps) {
-  const pathname = usePathname();
-
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={pathname}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{
-          duration: 0.3,
-          ease: [0.19, 1, 0.22, 1], // Expo ease-out
-        }}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <div className="animate-fade-in">
+      {children}
+    </div>
   );
 }

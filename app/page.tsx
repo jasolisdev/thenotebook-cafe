@@ -10,9 +10,9 @@
  * Key features:
  * - Full-screen hero with brand messaging and CTA
  * - Menu preview section with quick access to full menu
- * - Atmosphere showcase with sticky text and scrolling gallery (WiFi, outlets, curated soundtrack, creator-friendly space)
- * - The Trinity section (Craft Espresso, Curated Sound, Creative Comfort)
  * - Low Lights experience section with dual imagery and brand story
+ * - The Trinity section (Craft Espresso, Curated Sound, Creative Comfort)
+ * - Atmosphere showcase with sticky text and scrolling gallery (WiFi, outlets, curated soundtrack, creator-friendly space)
  * - Newsletter subscription section
  *
  * @route /
@@ -20,7 +20,7 @@
  *
  * @example
  * Route: https://thenotebookcafellc.com/
- * Displays: Hero → Menu Preview → Atmosphere → Trinity → Low Lights → Newsletter
+ * Displays: Hero → Menu Preview → Low Lights → Trinity → Atmosphere → Newsletter
  *
  * @see {@link app/components/features/HeroSection.tsx} for hero implementation
  * @see {@link app/components/features/MenuSection.tsx} for menu preview
@@ -122,6 +122,154 @@ export default function HomePage() {
       {/* Menu Section */}
       <MenuSection />
 
+      {/* Low Lights Section */}
+      <section
+        data-section="Low Lights"
+        className="relative overflow-visible pt-12 pb-24"
+      >
+        <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+          <div className="relative pl-4 before:absolute before:left-0 before:top-2 before:h-24 before:w-px before:bg-cafe-tan/40">
+            <Reveal>
+              <span className="text-cafe-tan uppercase tracking-[0.25em] text-xs font-semibold block mb-4">
+                The Experience
+              </span>
+            </Reveal>
+            <Reveal delay={100}>
+              <h2 className="font-dm-serif font-bold text-4xl md:text-5xl leading-[1.05] text-cafe-black">
+                Low lights,
+                <br />
+                good sound,
+                <br />
+                <span className="italic text-cafe-tan">better coffee.</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={200}>
+              <div className="w-24 h-[2px] bg-cafe-black mt-8" />
+            </Reveal>
+            <Reveal delay={250}>
+              <p className="mt-8 text-lg md:text-xl font-normal leading-relaxed max-w-xl text-cafe-brown">
+                We designed The Notebook Café as a sanctuary for the creatives,
+                the writers, and the dreamers of Riverside. It is not just about
+                the caffeine—it is about the headspace.
+              </p>
+            </Reveal>
+            <Reveal delay={300}>
+              <div className="mt-8">
+                <StoryLink />
+              </div>
+            </Reveal>
+          </div>
+
+          <div className="relative pb-6 md:pb-10">
+            <div className="grid grid-cols-2 gap-4 relative">
+              <Reveal>
+                <div className="h-full">
+                  <Image
+                    src="/unsplash/tnc-placeholder-1.png"
+                    alt="Barista pouring coffee at The Notebook Café in Riverside, CA"
+                    width={900}
+                    height={1200}
+                    className="w-full h-full object-cover rounded-md translate-y-12 shadow-lg grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                    priority
+                  />
+                </div>
+              </Reveal>
+
+              <Reveal delay={200}>
+                <div className="h-full">
+                  <Image
+                    src="/unsplash/tnc-placeholder-2.png"
+                    alt="Cozy corner seating at The Notebook Café in Riverside, CA"
+                    width={900}
+                    height={1200}
+                    className="w-full h-full object-cover rounded-md shadow-lg grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                  />
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="home-fixed-background-alt" aria-hidden="true"></div>
+      </section>
+      {/* The Trinity */}
+      <section
+        data-section="The Trinity"
+        className="hidden md:block py-24 md:py-28 relative overflow-hidden trinity-slab trinity-slab-light"
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-3 gap-y-16 md:gap-y-0">
+            <Reveal>
+              <div className="p-10 text-center">
+                <div
+                  className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full trinity-icon"
+                  style={{
+                    backgroundColor: "var(--cafe-white)",
+                    color: "var(--cafe-tan)",
+                    border: "1px solid rgba(var(--cafe-tan-rgb), 0.35)",
+                  }}
+                >
+                  <Coffee
+                    size={26}
+                    className="couch-bounce"
+                    aria-hidden="true"
+                  />
+                </div>
+                <h3 className="font-serif text-2xl mb-3">Craft Espresso</h3>
+                <p className="text-base md:text-lg font-light leading-relaxed text-cafe-brown/70">
+                  Roasted locally, extracted with precision. We respect the bean
+                  and the process.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={150}>
+              <div className="relative p-10 text-center">
+                <div
+                  className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full"
+                  style={{
+                    backgroundColor: "var(--cafe-white)",
+                    color: "var(--cafe-tan)",
+                    border: "1px solid rgba(var(--cafe-tan-rgb), 0.35)",
+                  }}
+                >
+                  <Music
+                    size={26}
+                    className="couch-bounce"
+                    aria-hidden="true"
+                  />
+                </div>
+                <h3 className="font-serif text-2xl mb-3">Curated Sound</h3>
+                <p className="text-base md:text-lg font-light leading-relaxed text-cafe-brown/70">
+                  Deep house, soul, and lo-fi grooves tuned to keep you in flow.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={250}>
+              <div className="p-10 text-center">
+                <div
+                  className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full"
+                  style={{
+                    backgroundColor: "var(--cafe-white)",
+                    color: "var(--cafe-tan)",
+                    border: "1px solid rgba(var(--cafe-tan-rgb), 0.35)",
+                  }}
+                >
+                  <Armchair size={26} className="couch-bounce" />
+                </div>
+                <h3 className="font-serif text-2xl mb-3">Creative Comfort</h3>
+                <p className="text-base md:text-lg font-light leading-relaxed text-cafe-brown/70">
+                  Cozy seating, warm light, plenty of outlets—stay as long as
+                  you need.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
       {/* Atmosphere Images */}
       <section
         data-section="Atmosphere Images"
@@ -286,154 +434,6 @@ export default function HomePage() {
                   </div>
                 </Reveal>
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div className="home-fixed-background-alt" aria-hidden="true"></div>
-      </section>
-      {/* The Trinity */}
-      <section
-        data-section="The Trinity"
-        className="hidden md:block py-24 md:py-28 relative overflow-hidden trinity-slab trinity-slab-light"
-      >
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-y-16 md:gap-y-0">
-            <Reveal>
-              <div className="p-10 text-center">
-                <div
-                  className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full trinity-icon"
-                  style={{
-                    backgroundColor: "var(--cafe-white)",
-                    color: "var(--cafe-tan)",
-                    border: "1px solid rgba(var(--cafe-tan-rgb), 0.35)",
-                  }}
-                >
-                  <Coffee
-                    size={26}
-                    className="couch-bounce"
-                    aria-hidden="true"
-                  />
-                </div>
-                <h3 className="font-serif text-2xl mb-3">Craft Espresso</h3>
-                <p className="text-base md:text-lg font-light leading-relaxed text-cafe-brown/70">
-                  Roasted locally, extracted with precision. We respect the bean
-                  and the process.
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={150}>
-              <div className="relative p-10 text-center">
-                <div
-                  className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full"
-                  style={{
-                    backgroundColor: "var(--cafe-white)",
-                    color: "var(--cafe-tan)",
-                    border: "1px solid rgba(var(--cafe-tan-rgb), 0.35)",
-                  }}
-                >
-                  <Music
-                    size={26}
-                    className="couch-bounce"
-                    aria-hidden="true"
-                  />
-                </div>
-                <h3 className="font-serif text-2xl mb-3">Curated Sound</h3>
-                <p className="text-base md:text-lg font-light leading-relaxed text-cafe-brown/70">
-                  Deep house, soul, and lo-fi grooves tuned to keep you in flow.
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={250}>
-              <div className="p-10 text-center">
-                <div
-                  className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full"
-                  style={{
-                    backgroundColor: "var(--cafe-white)",
-                    color: "var(--cafe-tan)",
-                    border: "1px solid rgba(var(--cafe-tan-rgb), 0.35)",
-                  }}
-                >
-                  <Armchair size={26} className="couch-bounce" />
-                </div>
-                <h3 className="font-serif text-2xl mb-3">Creative Comfort</h3>
-                <p className="text-base md:text-lg font-light leading-relaxed text-cafe-brown/70">
-                  Cozy seating, warm light, plenty of outlets—stay as long as
-                  you need.
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-      {/* Low Lights Section */}
-      <section
-        data-section="Low Lights"
-        className="relative overflow-visible pt-12 pb-24 px-6"
-      >
-        <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div className="relative pl-4 before:absolute before:left-0 before:top-2 before:h-24 before:w-px before:bg-cafe-tan/40">
-            <Reveal>
-              <span className="text-cafe-tan uppercase tracking-[0.25em] text-xs font-semibold block mb-4">
-                The Experience
-              </span>
-            </Reveal>
-            <Reveal delay={100}>
-              <h2 className="font-dm-serif font-bold text-4xl md:text-5xl leading-[1.05] text-cafe-black">
-                Low lights,
-                <br />
-                good sound,
-                <br />
-                <span className="italic text-cafe-tan">better coffee.</span>
-              </h2>
-            </Reveal>
-            <Reveal delay={200}>
-              <div className="w-24 h-[2px] bg-cafe-black mt-8" />
-            </Reveal>
-            <Reveal delay={250}>
-              <p className="mt-8 text-lg md:text-xl font-normal leading-relaxed max-w-xl text-cafe-brown">
-                We designed The Notebook Café as a sanctuary for the creatives,
-                the writers, and the dreamers of Riverside. It is not just about
-                the caffeine—it is about the headspace.
-              </p>
-            </Reveal>
-            <Reveal delay={300}>
-              <div className="mt-8">
-                <StoryLink />
-              </div>
-            </Reveal>
-          </div>
-
-          <div className="relative pb-6 md:pb-10">
-            <div className="grid grid-cols-2 gap-4 relative">
-              <Reveal>
-                <div className="h-full">
-                  <Image
-                    src="/unsplash/tnc-placeholder-1.png"
-                    alt="Barista pouring coffee at The Notebook Café in Riverside, CA"
-                    width={900}
-                    height={1200}
-                    className="w-full h-full object-cover rounded-sm translate-y-12 shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
-                    priority
-                  />
-                </div>
-              </Reveal>
-
-              <Reveal delay={200}>
-                <div className="h-full">
-                  <Image
-                    src="/unsplash/tnc-placeholder-2.png"
-                    alt="Cozy corner seating at The Notebook Café in Riverside, CA"
-                    width={900}
-                    height={1200}
-                    className="w-full h-full object-cover rounded-sm shadow-xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
-                  />
-                </div>
-              </Reveal>
             </div>
           </div>
         </div>

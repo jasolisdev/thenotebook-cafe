@@ -76,7 +76,7 @@ const HeroSection: React.FC = () => {
       </div>
 
       {/* Integrated Location & Hours Bar - Updated to Mist */}
-      <div className="relative w-full bg-cafe-mist border-t border-cafe-brown/10 z-20 flex items-center py-4 md:py-10 lg:py-12 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+      <div className="relative w-full bg-cafe-mist border-t border-cafe-brown/10 z-20 flex items-center pt-8 pb-4 md:py-10 lg:py-12 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
         <FadeInSection
           delay="700ms"
           className="max-w-7xl mx-auto px-6 lg:px-12 w-full flex flex-col md:flex-row items-center justify-center md:justify-between space-y-10 md:space-y-0"
