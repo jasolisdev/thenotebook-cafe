@@ -55,10 +55,23 @@ export default function PrivacyPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="font-serif text-2xl" style={{ color: 'var(--color-cafe-black)' }}>Cookies & sharing</h2>
+        <h2 className="font-serif text-2xl" style={{ color: 'var(--color-cafe-black)' }}>Cookies & analytics</h2>
         <p className="text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
           We use essential cookies to operate the site. Optional analytics cookies help us understand performance but only load if you accept them. You can manage this choice in the footer.
         </p>
+        <p className="text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
+          When you accept analytics cookies, we use <strong>Google Analytics 4</strong> and <strong>Vercel Analytics</strong> to understand how visitors use our site. These tools collect anonymized data about page views, device type, and general location. Google Analytics operates under Google&apos;s{' '}
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: 'var(--color-cafe-tan)' }}>
+            Privacy Policy
+          </a>. You can opt out of Google Analytics using the{' '}
+          <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: 'var(--color-cafe-tan)' }}>
+            Google Analytics Opt-out Browser Add-on
+          </a>.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-serif text-2xl" style={{ color: 'var(--color-cafe-black)' }}>Data sharing</h2>
         <p className="text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
           We share limited data with trusted service providers (like hosting and email services) who are bound by confidentiality. We do not sell personal information.
         </p>

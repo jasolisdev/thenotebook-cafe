@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { writeClient } from "@/sanity/lib/writeClient";
 import {
   validateOrigin,
   checkRateLimit,
@@ -303,20 +302,8 @@ export async function POST(req: Request) {
       logger.warn("Resend client not initialized - email not sent");
     }
 
-    // Create with sanitization
-    const doc = await writeClient.create({
-      _type: "contactMessage",
-      name: sanitizeText(normalizedName),
-      email: sanitizeEmail(normalizedEmail),
-      subject: sanitizeText(normalizedSubject),
-      message: sanitizeMultilineText(normalizedMessage),
-      status: "new",
-      createdAt: new Date().toISOString(),
-      source: "contact-page",
-    });
-
     return NextResponse.json(
-      { ok: true, id: doc._id },
+      { ok: true },
       { headers: { "Cache-Control": "no-store" } }
     );
   } catch (err) {

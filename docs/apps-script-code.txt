@@ -1,0 +1,84 @@
+/**
+ * Google Apps Script for Newsletter Subscriptions
+ * The Notebook Café - handles subscribe requests from website
+ */
+
+const SHEET_NAME = 'Subscribers';
+const EMAIL_COL = 1;
+const STATUS_COL = 2;
+const SUBSCRIBED_AT_COL = 3;
+const UNSUBSCRIBED_AT_COL = 4;
+const SOURCE_COL = 5;
+const IP_HASH_COL = 6;
+
+function doPost(e) {
+  try {
+    const data = JSON.parse(e.postData.contents);
+    const email = (data.email || '').toLowerCase().trim();
+    const source = data.source || 'website';
+    const ipHash = data.ipHash || '';
+
+    if (!email || !isValidEmail(email)) {
+      return jsonResponse({ success: false, error: 'Invalid email address' });
+    }
+
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+    if (!sheet) {
+      return jsonResponse({ success: false, error: 'Sheet not found' });
+    }
+
+    const existingRow = findEmailRow(sheet, email);
+
+    if (existingRow) {
+      const status = sheet.getRange(existingRow, STATUS_COL).getValue();
+      if (status === 'subscribed') {
+        return jsonResponse({ success: true, duplicate: true, message: 'Already subscribed' });
+      } else {
+        sheet.getRange(existingRow, STATUS_COL).setValue('subscribed');
+        sheet.getRange(existingRow, SUBSCRIBED_AT_COL).setValue(new Date().toISOString());
+        sheet.getRange(existingRow, UNSUBSCRIBED_AT_COL).setValue('');
+        sheet.getRange(existingRow, SOURCE_COL).setValue(source + ' (resubscribed)');
+        return jsonResponse({ success: true, resubscribed: true, message: 'Welcome back!' });
+      }
+    }
+
+    sheet.appendRow([email, 'subscribed', new Date().toISOString(), '', source, ipHash]);
+    return jsonResponse({ success: true, message: 'Successfully subscribed' });
+
+  } catch (error) {
+    return jsonResponse({ success: false, error: 'Server error' });
+  }
+}
+
+function doGet(e) {
+  return jsonResponse({ status: 'ok', message: 'Newsletter API is running' });
+}
+
+function findEmailRow(sheet, email) {
+  const data = sheet.getDataRange().getValues();
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][0].toLowerCase().trim() === email) {
+      return i + 1;
+    }
+  }
+  return null;
+}
+
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email) && email.length <= 254;
+}
+
+function jsonResponse(data) {
+  return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON);
+}
+
+function onFormSubmit(e) {
+  const email = e.values[1].toLowerCase().trim();
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+  const existingRow = findEmailRow(sheet, email);
+  if (existingRow) {
+    sheet.getRange(existingRow, STATUS_COL).setValue('unsubscribed');
+    sheet.getRange(existingRow, UNSUBSCRIBED_AT_COL).setValue(new Date().toISOString());
+  }
+}

@@ -43,10 +43,10 @@ import { cookies } from "next/headers";
 import { inter, playfairDisplay, torus } from "./fonts";
 import PasswordGate from "./components/ui/PasswordGate";
 import SiteShell from "./components/layout/SiteShell";
-import { client, hasSanityConfig } from "@/sanity/lib/client";
 import { CartProvider } from "./components/providers/CartProvider";
 import { ErrorBoundary } from "./components/ui/ErrorBoundary";
 import { SEO } from "@/app/lib/constants/seo";
+import { BUSINESS_INFO } from "@/app/lib/constants/business";
 
 
 export const metadata: Metadata = {
@@ -141,20 +141,6 @@ export default async function RootLayout({
   const showPasswordGate = sitePassword && !isAuthenticated;
   const showAnnouncement = false; // temporarily hide banner
 
-  // Fetch settings for header (only if not showing password gate)
-  const settings =
-    !showPasswordGate && hasSanityConfig
-      ? await client.fetch(
-          `
-    *[_type=="settings"][0]{
-      social
-    }
-  `,
-          {},
-          { next: { revalidate: 3600 } }
-        )
-      : null;
-
   return (
     <html
       lang="en"
@@ -173,8 +159,7 @@ export default async function RootLayout({
                 <PasswordGate />
               ) : (
                 <SiteShell
-                  instagramUrl={settings?.social?.instagram}
-                  spotifyUrl={settings?.social?.spotify}
+                  instagramUrl={BUSINESS_INFO.social.instagram}
                   showAnnouncement={showAnnouncement}
                 >
                   {children}
