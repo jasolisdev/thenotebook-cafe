@@ -5,6 +5,7 @@ import { Button } from "@/app/components/ui/Button";
 import Reveal from "@/app/components/ui/Reveal";
 import FadeInSection from "@/app/components/ui/FadeInSection";
 import { MENU_ITEMS as ALL_MENU_ITEMS } from "@/app/constants";
+import { FEATURES } from "@/app/lib/constants/features";
 
 // Select specific featured items from the real menu (Meals & Desserts)
 const FEATURED_IDS = ["33", "36", "29", "41", "31", "39"];
@@ -69,10 +70,14 @@ const MenuSection: React.FC = () => {
                         <h3 className="text-xl font-semibold font-serif text-cafe-black group-hover:text-cafe-tan-dark transition-colors">
                           {item.name}
                         </h3>
-                        <div className="flex-grow mx-4 border-b border-cafe-luxe-oat/40" />
-                        <span className="font-medium text-cafe-black">
-                          {item.price}
-                        </span>
+                        {FEATURES.SHOW_MENU_PRICES && (
+                          <>
+                            <div className="flex-grow mx-4 border-b border-cafe-luxe-oat/40" />
+                            <span className="font-medium text-cafe-black">
+                              {item.price}
+                            </span>
+                          </>
+                        )}
                       </div>
                       <p className="text-cafe-black/60 text-sm leading-relaxed max-w-sm">
                         {item.description}
