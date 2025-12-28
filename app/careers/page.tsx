@@ -385,10 +385,7 @@ export default function CareersPage() {
       </section>
 
       {/* Open Positions */}
-      <section
-        data-section="Join Our Team"
-        className="py-16 md:py-24 relative"
-      >
+      <section data-section="Join Our Team" className="py-16 md:py-24 relative">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <Reveal>

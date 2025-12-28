@@ -174,8 +174,8 @@ export default function ContactPage() {
             <div className="space-y-16">
               {/* Location */}
               <Reveal delay={200}>
-                <div className="space-y-6 flex flex-col items-center text-center md:items-start md:text-left">
-                  <div className="flex items-center justify-center md:justify-start gap-3">
+                <div className="space-y-6 flex flex-col items-start text-left">
+                  <div className="flex items-center justify-start gap-3">
                     <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
                       <MapPin
                         size={22}
@@ -216,8 +216,8 @@ export default function ContactPage() {
 
               {/* Hours */}
               <Reveal delay={300}>
-                <div className="space-y-6 flex flex-col items-center text-center md:items-start md:text-left">
-                  <div className="flex items-center justify-center md:justify-start gap-3">
+                <div className="space-y-6 flex flex-col items-start text-left">
+                  <div className="flex items-center justify-start gap-3">
                     <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
                       <Clock
                         size={22}
@@ -253,8 +253,8 @@ export default function ContactPage() {
 
               {/* Contact Methods */}
               <Reveal delay={400}>
-                <div className="space-y-6 flex flex-col items-center text-center md:items-start md:text-left">
-                  <div className="flex items-center justify-center md:justify-start gap-3">
+                <div className="space-y-6 flex flex-col items-start text-left">
+                  <div className="flex items-center justify-start gap-3">
                     <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
                       <Phone
                         size={22}

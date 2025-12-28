@@ -125,27 +125,28 @@ export default function StyleGuidePage() {
               usage="Headings, Hero Titles, Featured Text" 
             />
             
-            <FontSample 
-              name="Inter (Sans)" 
-              fontClass="font-sans" 
-              usage="Body Copy, UI Navigation, Buttons" 
+            <FontSample
+              name="Torus (Sans)"
+              fontClass="font-sans"
+              usage="Body Copy, UI Navigation, Buttons"
             />
 
-            <FontSample 
-              name="DM Serif Display" 
-              fontClass="font-dm-serif" 
-              usage="Original Brand Headings" 
+            <FontSample
+              name="DM Serif Display"
+              fontClass="font-dm-serif"
+              usage="Original Brand Headings"
             />
-            
-            <div className="p-6 border border-dashed border-cafe-tan/30 rounded-lg bg-cafe-white/30">
-              <div className="flex justify-between items-baseline mb-4">
-                 <h3 className="text-sm font-bold text-cafe-tan-dark uppercase tracking-wider">Torus (Available but Unused?)</h3>
-                 <span className="text-xs text-cafe-tan font-mono">variable: --font-torus</span>
+
+            <div className="p-6 border border-cafe-tan/20 rounded-lg bg-cafe-white/50">
+              <div className="flex justify-between items-baseline mb-4 border-b border-cafe-tan/10 pb-2">
+                 <h3 className="text-sm font-bold text-cafe-tan-dark uppercase tracking-wider">Inter (Sans Fallback)</h3>
+                 <span className="text-xs text-cafe-tan font-mono">variable: --font-inter</span>
               </div>
-              <div style={{ fontFamily: 'var(--font-torus)' }} className="text-cafe-black space-y-4">
+              <div style={{ fontFamily: 'var(--font-inter)' }} className="text-cafe-black space-y-4">
                  <p className="text-4xl">The quick brown fox jumps over the lazy dog.</p>
+                 <p className="text-xl">The quick brown fox jumps over the lazy dog.</p>
                  <p className="text-base opacity-80">
-                   This font is defined in <code>app/fonts.ts</code> but may not be globally assigned to <code>font-sans</code> or <code>font-display</code> in CSS variables yet.
+                   Modern sans-serif fallback. Used in menu drawer navigation and UI elements where specified.
                  </p>
               </div>
             </div>
@@ -240,15 +241,15 @@ export default function StyleGuidePage() {
               </div>
 
               <div className="p-4 bg-white/50 rounded-lg">
-                <p className="text-xs font-mono text-cafe-tan mb-2">Inter (font-sans)</p>
+                <p className="text-xs font-mono text-cafe-tan mb-2">Torus (font-sans)</p>
                 <h2 className="font-sans text-5xl sm:text-6xl text-cafe-black leading-none">
                   How It <span className="italic">Began</span>
                 </h2>
               </div>
 
               <div className="p-4 bg-white/50 rounded-lg">
-                <p className="text-xs font-mono text-cafe-tan mb-2">Torus (var(--font-torus))</p>
-                <h2 style={{ fontFamily: 'var(--font-torus)' }} className="text-5xl sm:text-6xl text-cafe-black leading-none">
+                <p className="text-xs font-mono text-cafe-tan mb-2">Inter (var(--font-inter))</p>
+                <h2 style={{ fontFamily: 'var(--font-inter)' }} className="text-5xl sm:text-6xl text-cafe-black leading-none">
                   How It <span className="italic">Began</span>
                 </h2>
               </div>

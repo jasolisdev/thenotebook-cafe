@@ -74,10 +74,10 @@ export const metadata: Metadata = {
 };
 
 const vibeImages = [
-  "/unsplash/tnc-placeholder-3.png",
-  "/unsplash/tnc-placeholder-4.png",
-  "/unsplash/tnc-placeholder-5.png",
-  "/unsplash/tnc-placeholder-6.png",
+  "/home/tnc-home-vibeImage-1.png",
+  "/home/tnc-home-vibeImage-2.png",
+  "/home/tnc-home-vibeImage-3.png",
+  "/home/tnc-home-vibeImage-4.png",
 ];
 
 const imageCaptions = [
@@ -178,7 +178,7 @@ export default function HomePage() {
               <Reveal delay={200}>
                 <div className="h-full">
                   <Image
-                    src="/unsplash/tnc-placeholder-2.png"
+                    src="/home/tnc-home-lowLights-2.jpg"
                     alt="Cozy corner seating at The Notebook Café in Riverside, CA"
                     width={900}
                     height={1200}
@@ -423,13 +423,15 @@ export default function HomePage() {
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       sizes="(min-width: 1024px) 50vw, 100vw"
                     />
-                    <div className="absolute bottom-8 left-8 z-20 text-white">
-                      <h3 className="font-serif text-3xl">
-                        {imageCaptions[i]?.title || "The Café"}
-                      </h3>
-                      <p className="font-sans text-sm opacity-90 mt-2 font-medium tracking-wide">
-                        {imageCaptions[i]?.subtitle}
-                      </p>
+                    <div className="absolute bottom-0 left-0 right-0 z-20">
+                      <div className="bg-cafe-mist/10 backdrop-blur-[2px] px-6 py-4">
+                        <h3 className="font-serif text-3xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
+                          {imageCaptions[i]?.title || "The Café"}
+                        </h3>
+                        <p className="font-sans text-sm text-white/90 mt-2 font-medium tracking-wide drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]">
+                          {imageCaptions[i]?.subtitle}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </Reveal>

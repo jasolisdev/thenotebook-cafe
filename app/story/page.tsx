@@ -150,7 +150,7 @@ export default function StoryPage() {
             </div>
 
             {/* Content */}
-            <div className="space-y-6 order-1 lg:order-2 text-right lg:text-left">
+            <div className="space-y-6 order-1 lg:order-2 lg:text-right">
               <Reveal>
                 <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block font-inter">
                   Our Story
@@ -165,7 +165,7 @@ export default function StoryPage() {
                 </h2>
               </Reveal>
               <Reveal delay={180}>
-                <div className="story-divider story-divider--black w-24 h-[2px] ml-auto lg:ml-0" />
+                <div className="story-divider story-divider--black w-24 h-[2px] lg:ml-auto" />
               </Reveal>
               <Reveal delay={200}>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
@@ -373,7 +373,7 @@ export default function StoryPage() {
               </Reveal>
             </div>
 
-            <div className="order-1 lg:order-2 space-y-6 text-right items-end lg:pl-10 relative">
+            <div className="order-1 lg:order-2 space-y-6 lg:text-right items-start lg:items-end lg:pl-10 relative">
               <Reveal>
                 <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block font-inter">
                   Our Philosophy
@@ -388,7 +388,7 @@ export default function StoryPage() {
                 </h2>
               </Reveal>
               <Reveal delay={180}>
-                <div className="story-divider story-divider--black w-24 h-[2px] ml-auto" />
+                <div className="story-divider story-divider--black w-24 h-[2px] lg:ml-auto" />
               </Reveal>
               <Reveal delay={200}>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed mb-6">
@@ -463,12 +463,14 @@ export default function StoryPage() {
             <Reveal delay={200}>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
-                  <Coffee
-                    size={20}
-                    className="text-cafe-tan"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-xs uppercase tracking-[0.2em] font-semibold text-cafe-tan">
+                  <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
+                    <Coffee
+                      size={22}
+                      className="contact-icon"
+                      strokeWidth={1.5}
+                    />
+                  </div>
+                  <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
                     Origin
                   </span>
                 </div>
@@ -488,12 +490,14 @@ export default function StoryPage() {
             <Reveal delay={260}>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
-                  <Users
-                    size={20}
-                    className="text-cafe-tan"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-xs uppercase tracking-[0.2em] font-semibold text-cafe-tan">
+                  <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
+                    <Users
+                      size={22}
+                      className="contact-icon"
+                      strokeWidth={1.5}
+                    />
+                  </div>
+                  <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
                     Design
                   </span>
                 </div>
@@ -514,12 +518,14 @@ export default function StoryPage() {
             <Reveal delay={320}>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
-                  <Music
-                    size={20}
-                    className="text-cafe-tan"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-xs uppercase tracking-[0.2em] font-semibold text-cafe-tan">
+                  <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
+                    <Music
+                      size={22}
+                      className="contact-icon"
+                      strokeWidth={1.5}
+                    />
+                  </div>
+                  <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
                     Atmosphere
                   </span>
                 </div>
@@ -539,12 +545,14 @@ export default function StoryPage() {
             <Reveal delay={380}>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
-                  <Heart
-                    size={20}
-                    className="text-cafe-tan"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-xs uppercase tracking-[0.2em] font-semibold text-cafe-tan">
+                  <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
+                    <Heart
+                      size={22}
+                      className="contact-icon"
+                      strokeWidth={1.5}
+                    />
+                  </div>
+                  <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
                     Hospitality
                   </span>
                 </div>

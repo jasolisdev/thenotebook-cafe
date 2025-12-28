@@ -63,11 +63,11 @@ export default function SiteHeader({
   // New scroll-based color system
   // At top (transparent) = light text (off-white)
   // Scrolled (glassmorphism) = dark text (deep espresso)
-  // Drawer open = light text (on dark background)
+  // Drawer open = dark text (on cafe-mist background)
   const forceSolid = forceSolidBg || forceHighContrast;
   const atTopVisual = isAtTop && !forceSolid;
   const isScrolled = !atTopVisual;
-  const useLightText = atTopVisual || isOpen;
+  const useLightText = atTopVisual && !isOpen;
 
   const activeLinkClass = useLightText
     ? "font-semibold text-coffee-50"
@@ -281,7 +281,7 @@ export default function SiteHeader({
         data-at-top={atTopVisual}
         style={{
           backgroundColor: isOpen
-            ? "var(--color-cafe-black)"
+            ? "var(--color-cafe-mist)"
             : atTopVisual
               ? "transparent"
               : forceSolid
@@ -289,9 +289,7 @@ export default function SiteHeader({
                 : isScrolled
                   ? "rgba(var(--coffee-50-rgb), 0.9)"
                   : "transparent",
-          boxShadow: isOpen
-            ? "0 4px 20px rgba(0, 0, 0, 0.3)"
-            : undefined,
+          boxShadow: isOpen ? "0 2px 8px rgba(0, 0, 0, 0.08)" : undefined,
         }}
       >
         <div
@@ -545,11 +543,11 @@ export default function SiteHeader({
         <div className="menu-links-group">
           {/* Navigation Links */}
           {[
-            { href: "/", label: "Home" },
-            { href: "/menu", label: "Menu" },
-            { href: "/story", label: "Story" },
-            { href: "/contact", label: "Contact" },
-            { href: "/careers", label: "Careers" },
+            { href: "/", label: "home", period: true },
+            { href: "/menu", label: "menu", period: true },
+            { href: "/story", label: "story", period: true },
+            { href: "/contact", label: "contact", period: true },
+            { href: "/careers", label: "careers", period: true },
           ].map((link, index) => (
             <div key={link.href} className="menu-link-wrapper">
               <div
@@ -566,6 +564,7 @@ export default function SiteHeader({
                   style={{ textDecoration: "none" }}
                 >
                   {link.label}
+                  <span style={{ opacity: 0.7 }}>.</span>
                 </Link>
               </div>
             </div>

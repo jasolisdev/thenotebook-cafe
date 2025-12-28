@@ -189,31 +189,35 @@ export default function MenuPage() {
               className="mx-auto max-w-2xl text-center py-20 md:py-28 px-4"
             >
               <h2 className="font-serif font-bold text-4xl md:text-5xl text-cafe-black">
-                We&apos;re Busy Brewing!
+                <RevealText delay="0ms">We&apos;re Busy Brewing!</RevealText>
               </h2>
-              <p className="mt-5 text-base md:text-lg leading-relaxed text-cafe-brown/80">
-                Thank you for your patience! We&apos;re putting the finishing touches on our handcrafted drink menu.
-                Check back very soon to see what we&apos;ve been mixing up.
-              </p>
-              <p className="mt-6 text-sm md:text-base font-medium text-cafe-brown/80">
-                In the meantime, explore our comforting{" "}
-                <button
-                  type="button"
-                  onClick={() => setActiveSection("meals")}
-                  className="underline underline-offset-4 hover:text-cafe-black transition-colors"
-                >
-                  MEALS
-                </button>{" "}
-                and sweet{" "}
-                <button
-                  type="button"
-                  onClick={() => setActiveSection("desserts")}
-                  className="underline underline-offset-4 hover:text-cafe-black transition-colors"
-                >
-                  DESSERTS
-                </button>
-                !
-              </p>
+              <FadeInSection delay="200ms">
+                <p className="mt-5 text-base md:text-lg leading-relaxed text-cafe-brown/80">
+                  Thank you for your patience! We&apos;re putting the finishing touches on our handcrafted drink menu.
+                  Check back very soon to see what we&apos;ve been mixing up.
+                </p>
+              </FadeInSection>
+              <FadeInSection delay="400ms">
+                <p className="mt-6 text-sm md:text-base font-medium text-cafe-brown/80">
+                  In the meantime, explore our comforting{" "}
+                  <button
+                    type="button"
+                    onClick={() => setActiveSection("meals")}
+                    className="underline underline-offset-4 hover:text-cafe-black transition-colors"
+                  >
+                    MEALS
+                  </button>{" "}
+                  and sweet{" "}
+                  <button
+                    type="button"
+                    onClick={() => setActiveSection("desserts")}
+                    className="underline underline-offset-4 hover:text-cafe-black transition-colors"
+                  >
+                    DESSERTS
+                  </button>
+                  !
+                </p>
+              </FadeInSection>
             </section>
           ) : (
             <MenuSectionList
