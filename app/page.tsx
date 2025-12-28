@@ -127,7 +127,7 @@ export default function HomePage() {
         data-section="Low Lights"
         className="relative overflow-visible pt-12 pb-24"
       >
-        <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 items-center">
           <div className="relative pl-4 before:absolute before:left-0 before:top-2 before:h-24 before:w-px before:bg-cafe-tan/40">
             <Reveal>
               <span className="text-cafe-tan uppercase tracking-[0.25em] text-xs font-semibold block mb-4 font-inter">
@@ -161,11 +161,11 @@ export default function HomePage() {
           </div>
 
           <div className="relative pb-6 md:pb-10">
-            <div className="grid grid-cols-2 gap-4 relative">
+            <div className="grid grid-cols-2 gap-2 md:gap-3 relative">
               <Reveal>
                 <div className="h-full">
                   <Image
-                    src="/unsplash/tnc-placeholder-1.png"
+                    src="/home/tnc-home-lowLights.png"
                     alt="Barista pouring coffee at The Notebook Café in Riverside, CA"
                     width={900}
                     height={1200}
@@ -415,12 +415,11 @@ export default function HomePage() {
               {vibeImages.map((src, i) => (
                 <Reveal key={i} delay={100}>
                   <div className="group relative overflow-hidden rounded-[2rem] shadow-2xl w-full aspect-[3/4]">
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
                     <Image
                       src={src}
                       alt={`The Notebook Café atmosphere in Riverside, CA — photo ${i + 1}`}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                       sizes="(min-width: 1024px) 50vw, 100vw"
                     />
                     <div className="absolute bottom-0 left-0 right-0 z-20">

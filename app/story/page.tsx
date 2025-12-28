@@ -94,9 +94,7 @@ export default function StoryPage() {
         />
         <div className="relative z-10 text-left md:text-center px-6 w-full max-w-7xl mx-auto">
           <h1 className="font-dm-serif font-bold text-4xl md:text-6xl text-cafe-cream mb-4">
-            <RevealText delay="0ms">
-              Our Story
-            </RevealText>
+            <RevealText delay="0ms">Our Story</RevealText>
           </h1>
           <FadeInSection delay="200ms">
             <p className="font-serif italic text-lg md:text-2xl text-cafe-cream/90 drop-shadow-sm">
@@ -138,10 +136,10 @@ export default function StoryPage() {
               <Reveal>
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                   <Image
-                    src="/unsplash/tnc-placeholder-philosophy-1.png"
+                    src="/story/tnc-story.png"
                     alt="The Notebook Café founders preparing specialty coffee in their Riverside, CA coffee shop"
                     fill
-                    className="object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                    className="object-cover object-center grayscale-[20%] hover:grayscale-0 transition-all duration-700"
                     sizes="(min-width: 1024px) 50vw, 100vw"
                   />
                   <div className="story-image-overlay absolute inset-0 opacity-30" />
@@ -235,10 +233,10 @@ export default function StoryPage() {
               <Reveal>
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                   <Image
-                    src="/unsplash/placeholder-interior-shop.png"
+                    src="/home/tnc-home-vibeImage-1.png"
                     alt="The Notebook Café storefront in Riverside art district with warm lighting and modern design"
                     fill
-                    className="object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                    className="object-cover object-[50%_10%] grayscale-[20%] hover:grayscale-0 transition-all duration-700"
                     sizes="(min-width: 1024px) 50vw, 100vw"
                   />
                   <div className="story-image-overlay absolute inset-0 opacity-30" />
@@ -247,7 +245,7 @@ export default function StoryPage() {
 
               <Reveal delay={150} replay={false}>
                 <div className="story-established-badge absolute -bottom-6 -right-6 shadow-2xl">
-                  <p className="text-xl md:text-2xl leading-tight">2025</p>
+                  <p className="text-xl md:text-2xl leading-tight">2026</p>
                   <p className="text-xl md:text-2xl leading-tight">
                     Established
                   </p>
@@ -279,18 +277,18 @@ export default function StoryPage() {
               <Reveal delay={200}>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
                   Riverside sits at a cultural crossroads—near the art district,
-                  close to University Drive&apos;s nightlife, accessible to everyone.
-                  Remote workers, artists, students, night-owls: the city&apos;s
-                  diverse communities naturally converge here. We wanted to be
-                  where the energy already flows.
+                  close to University Drive&apos;s nightlife, accessible to
+                  everyone. Remote workers, artists, students, night-owls: the
+                  city&apos;s diverse communities naturally converge here. We
+                  wanted to be where the energy already flows.
                 </p>
               </Reveal>
               <Reveal delay={260}>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
                   But more than that, we believed Riverside deserved better. A
-                  café that reflects the city&apos;s creative spirit and recognizes
-                  its potential. This isn&apos;t just a business for us—it&apos;s an
-                  investment in our community.
+                  café that reflects the city&apos;s creative spirit and
+                  recognizes its potential. This isn&apos;t just a business for
+                  us—it&apos;s an investment in our community.
                 </p>
               </Reveal>
 
@@ -356,14 +354,14 @@ export default function StoryPage() {
               <Reveal>
                 <div className="grid grid-cols-2 gap-4">
                   <Image
-                    src="/unsplash/tnc-placeholder-philosophy-1.png"
+                    src="/story/tnc-story-3.png"
                     alt="Professional espresso machine and coffee bar at specialty coffee shop in Riverside, CA"
                     width={900}
                     height={900}
                     className="w-full aspect-[3/4] object-cover rounded-2xl shadow-xl -mt-6 md:mt-12"
                   />
                   <Image
-                    src="/unsplash/tnc-placeholder-philosophy-2.png"
+                    src="/story/tnc-story-4.png"
                     alt="Fresh pastries and acai bowls at The Notebook Café in Riverside, California"
                     width={900}
                     height={900}
@@ -400,8 +398,8 @@ export default function StoryPage() {
               </Reveal>
               <Reveal delay={260}>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed mb-10">
-                  But coffee alone doesn&apos;t fuel creativity. That&apos;s why we
-                  designed every detail—from custom furniture to curated
+                  But coffee alone doesn&apos;t fuel creativity. That&apos;s why
+                  we designed every detail—from custom furniture to curated
                   soundscapes—to support focus and inspiration. This space was
                   built to help ideas flourish.
                 </p>
@@ -534,9 +532,9 @@ export default function StoryPage() {
                 </h3>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
                   Deep house, neo-soul, lo-fi—we engineer your sonic landscape.
-                  Music isn&apos;t background here. It&apos;s calibrated to keep you
-                  grounded without demanding attention, so your mind stays where
-                  you want it.
+                  Music isn&apos;t background here. It&apos;s calibrated to keep
+                  you grounded without demanding attention, so your mind stays
+                  where you want it.
                 </p>
               </div>
             </Reveal>
@@ -560,10 +558,10 @@ export default function StoryPage() {
                   Community First
                 </h3>
                 <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
-                  Riverside&apos;s living room. Nurse one coffee for three hours or
-                  make it your office—there&apos;s no time limit, no judgment.
-                  Students, creatives, nomads, neighbors: you belong here as
-                  long as you need to.
+                  Riverside&apos;s living room. Nurse one coffee for three hours
+                  or make it your office—there&apos;s no time limit, no
+                  judgment. Students, creatives, nomads, neighbors: you belong
+                  here as long as you need to.
                 </p>
               </div>
             </Reveal>

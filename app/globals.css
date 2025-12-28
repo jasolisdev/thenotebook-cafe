@@ -757,6 +757,13 @@ body[data-nav-open="true"] button[aria-label="Accessibility Options"] {
   padding-bottom: 4px;
 }
 
+/* Desktop: Increase nav link size by 10% (14px → 15.4px) */
+@media (min-width: 1024px) {
+  .nav-link {
+    font-size: 0.9625rem; /* 15.4px (10% larger than text-sm) */
+  }
+}
+
 /* Animated underline for active page */
 .nav-underline {
   position: absolute;
