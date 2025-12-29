@@ -100,7 +100,7 @@ export default function PasswordGate() {
         {/* Footer Note */}
         <div className="mt-8 text-center">
           <p className="text-xs text-cafe-brown/70">
-            Coming Fall 2025 • Riverside, CA
+            Coming Soon 2026 • Riverside, CA
           </p>
         </div>
       </div>
