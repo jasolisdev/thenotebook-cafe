@@ -1,75 +1,8 @@
-# Project Documentation Index
-**The Notebook Café - Documentation Hub**
+# Documentation
 
-Last Updated: 2025-12-23
+**The Notebook Cafe - Documentation Hub**
 
----
-
-## Project Overview
-
-- **Name:** The Notebook Café
-- **Type:** Monolith (Next.js App Router)
-- **Primary Language:** TypeScript
-- **CMS:** Sanity 4.11
-- **Deployment:** Vercel-ready (serverless)
-
----
-
-## Quick Reference
-
-### Tech Stack
-- **Framework:** Next.js 16
-- **Runtime:** React 19
-- **Language:** TypeScript 5
-- **Styling:** Tailwind CSS 4.1 + Custom CSS
-- **Animations:** Framer Motion 12
-- **Email:** Resend
-- **Testing:** Vitest + Playwright
-
-### Entry Points
-- `app/layout.tsx`
-- `app/page.tsx`
-- `sanity/sanity.config.ts`
-
-### Stats
-- **Components:** 37
-- **API Routes:** 6
-- **Sanity Schemas:** 8
-- **Public Routes:** Home, Menu, Story, Careers, Contact, Legal, Style Guide
-
----
-
-## Core Documentation
-
-- **[Project Overview](./project-overview.md)**
-- **[Architecture](./architecture.md)**
-- **[Source Tree Analysis](./source-tree-analysis.md)**
-- **[Development Guide](./development-guide.md)**
-- **[Component Inventory](./component-inventory.md)**
-- **[API Contracts](./api-contracts.md)**
-- **[Data Models](./data-models.md)**
-
----
-
-## Supporting Docs
-
-- **[CSS Organization](./CSS_ORGANIZATION.md)**
-- **[SEO Plan](./seo-plan.md)**
-- **[SEO Validation](./SEO_VALIDATION.md)**
-- **[Test Plan](./TEST_PLAN.md)**
-- **[Test Coverage Analysis](./TEST_COVERAGE_ANALYSIS.md)**
-- **[Email Setup](./EMAIL_SETUP.md)**
-- **[PRD](./prd.md)**
-- **[UX Design Spec](./ux-design-specification.md)**
-
----
-
-## Repo References
-
-- `README.md`
-- `CLAUDE.md`
-- `REFACTORING_SUMMARY.md`
-- `.github/workflows/test.yml` (CI)
+Last Updated: December 2025
 
 ---
 
@@ -77,7 +10,84 @@ Last Updated: 2025-12-23
 
 ```bash
 npm install
-npm run dev
+npm run dev     # http://localhost:3000
 ```
 
-Sanity Studio: http://localhost:3000/studio
+---
+
+## Project Overview
+
+| Attribute | Value |
+|-----------|-------|
+| **Type** | Next.js 16 Web Application |
+| **Language** | TypeScript |
+| **Styling** | Tailwind CSS v4 + Custom CSS |
+| **Email** | Resend |
+| **Newsletter** | Google Sheets + Apps Script |
+| **Deployment** | Vercel |
+
+---
+
+## Documentation
+
+### Core
+
+| Document | Purpose |
+|----------|---------|
+| [architecture.md](./architecture.md) | System architecture & project structure |
+| [development.md](./development.md) | Local development setup |
+| [api.md](./api.md) | API endpoint reference |
+| [components.md](./components.md) | Component inventory |
+
+### Features
+
+| Document | Purpose |
+|----------|---------|
+| [css.md](./css.md) | CSS organization & performance |
+| [email.md](./email.md) | Resend email configuration |
+| [newsletter.md](./newsletter.md) | Google Sheets newsletter system |
+| [apps-script.txt](./apps-script.txt) | Apps Script source code |
+
+### SEO & Testing
+
+| Document | Purpose |
+|----------|---------|
+| [seo.md](./seo.md) | SEO strategy & keywords |
+| [seo-checklist.md](./seo-checklist.md) | SEO validation checklist |
+| [testing.md](./testing.md) | Test strategy & coverage |
+
+---
+
+## Root Files
+
+| File | Purpose |
+|------|---------|
+| `AGENTS.md` | Canonical source of truth for AI agents |
+| `CLAUDE.md` | Claude-specific preferences |
+| `GEMINI.md` | Gemini-specific preferences |
+| `README.md` | Project overview |
+
+---
+
+## Commands
+
+```bash
+npm run dev          # Development server
+npm run build        # Production build
+npm run lint         # ESLint
+npm run test         # Unit tests
+npm run test:e2e     # E2E tests
+```
+
+---
+
+## Routes
+
+| Route | Description |
+|-------|-------------|
+| `/` | Homepage |
+| `/menu` | Menu with products |
+| `/story` | About page |
+| `/careers` | Job listings |
+| `/contact` | Contact form |
+| `/privacy`, `/terms`, `/refunds` | Legal |
