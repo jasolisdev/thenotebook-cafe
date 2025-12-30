@@ -2,7 +2,7 @@
 
 Server-only utility functions and libraries. These files should **never** be imported in client components.
 
-## ⚠️ Important
+## Important
 
 All code in this directory is **server-only**:
 - Runs only on the server
@@ -10,19 +10,26 @@ All code in this directory is **server-only**:
 - May contain sensitive tokens/secrets
 - Uses Node.js APIs not available in browsers
 
-## Current Structure
+## Structure
 
 ```
 lib/
-├── colors.ts              # Shared color constants (move to constants/)
-├── csrf.ts                # CSRF protection
-├── rateLimit.ts           # Rate limiting
-├── sanitize.ts            # Input sanitization
-├── logger.ts              # Structured logging
-├── monitoring.ts          # Error tracking & monitoring
-├── fileValidation.ts      # File upload validation
-├── baristaFaqData.ts      # FAQ data (move to data/)
-└── virtualBaristaResponder.ts  # AI responder (move to data/)
+├── index.ts              # Barrel export for server utilities
+├── server/               # Server-only utilities
+│   ├── csrf.ts           # CSRF protection
+│   ├── rateLimit.ts      # Rate limiting
+│   ├── sanitize.ts       # Input sanitization
+│   ├── logger.ts         # Structured logging
+│   ├── monitoring.ts     # Error tracking
+│   └── fileValidation.ts # File upload validation
+├── data/                 # Data/content
+│   ├── baristaFaqData.ts
+│   └── virtualBaristaResponder.ts
+└── constants/            # Shared constants
+    ├── business.ts       # Business info
+    ├── seo.ts            # SEO metadata
+    ├── colors.ts         # Color constants
+    └── features.ts       # Feature flags
 ```
 
 ## Security Utilities
@@ -38,7 +45,7 @@ Cross-Site Request Forgery protection for API routes.
 
 **Usage:**
 ```typescript
-import { validateCsrf } from '@/app/lib/csrf';
+import { validateCsrf } from '@/app/lib/server/csrf';
 
 export async function POST(request: Request) {
   const csrfValid = await validateCsrf(request);
@@ -62,7 +69,7 @@ In-memory IP-based rate limiting.
 
 **Usage:**
 ```typescript
-import { createRateLimiter } from '@/app/lib/rateLimit';
+import { createRateLimiter } from '@/app/lib/server/rateLimit';
 
 const limiter = createRateLimiter({
   maxRequests: 5,
@@ -98,15 +105,13 @@ Input sanitization to prevent XSS and injection attacks.
 
 **Usage:**
 ```typescript
-import { sanitizeInput, sanitizeEmail } from '@/app/lib/sanitize';
+import { sanitizeText, sanitizeEmail } from '@/app/lib/server/sanitize';
 
-const cleanName = sanitizeInput(userInput);
+const cleanName = sanitizeText(userInput);
 const cleanEmail = sanitizeEmail(email);
 ```
 
 ---
-
-## Logging & Monitoring
 
 ### logger.ts
 
@@ -119,7 +124,7 @@ Structured logging utility.
 
 **Usage:**
 ```typescript
-import { logger } from '@/app/lib/logger';
+import { logger } from '@/app/lib/server/logger';
 
 logger.info('User subscribed', { email: 'user@example.com' });
 logger.warn('Rate limit approaching', { ip: '1.2.3.4' });
@@ -127,32 +132,6 @@ logger.error('API call failed', { error: err.message });
 ```
 
 ---
-
-### monitoring.ts
-
-Error tracking and performance monitoring.
-
-**Features:**
-- Ready for Sentry/DataDog integration
-- Error capture with context
-- Performance timing
-
-**Usage:**
-```typescript
-import { captureError, recordMetric } from '@/app/lib/monitoring';
-
-try {
-  // Operation...
-} catch (error) {
-  captureError(error, { context: 'subscription' });
-}
-
-recordMetric('api.response_time', 150);
-```
-
----
-
-## Validation
 
 ### fileValidation.ts
 
@@ -166,7 +145,7 @@ File upload validation.
 
 **Usage:**
 ```typescript
-import { validateUploadedFile } from '@/app/lib';
+import { validateUploadedFile } from '@/app/lib/server/fileValidation';
 
 const result = await validateUploadedFile(
   file,
@@ -178,16 +157,6 @@ if (!result.valid) {
   throw new Error(result.error ?? 'Invalid file');
 }
 ```
-
----
-
-## Data Files (To Reorganize)
-
-### baristaFaqData.ts
-Virtual barista FAQ data - **should move to** `lib/data/`
-
-### virtualBaristaResponder.ts
-AI responder logic - **should move to** `lib/data/`
 
 ---
 
@@ -205,28 +174,9 @@ AI responder logic - **should move to** `lib/data/`
 
 ```typescript
 // ✅ Good - In server components or API routes
-import { validateCsrf } from '@/app/lib/csrf';
-import { logger } from '@/app/lib/logger';
+import { validateCsrf } from '@/app/lib/server/csrf';
+import { logger } from '@/app/lib/server/logger';
 
 // ❌ Bad - In client components
 // This will cause build errors or bundle bloat
-```
-
-## Future Organization
-
-Planned reorganization (Phase 2):
-```
-lib/
-├── server/              # Server-only utilities
-│   ├── csrf.ts
-│   ├── rateLimit.ts
-│   ├── sanitize.ts
-│   ├── logger.ts
-│   ├── monitoring.ts
-│   └── fileValidation.ts
-├── data/                # Data/content
-│   ├── baristaFaqData.ts
-│   └── virtualBaristaResponder.ts
-└── constants/           # Shared constants
-    └── colors.ts
 ```

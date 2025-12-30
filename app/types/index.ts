@@ -36,12 +36,6 @@ export type {
   ApplicationFormData,
 } from './forms';
 
-// Sanity document types
-export type {
-  SanitySubscriber,
-  SanityContactMessage,
-} from './sanity';
-
 // Common utility types
 export type {
   DeepPartial,
