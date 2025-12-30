@@ -54,8 +54,8 @@ export const BUSINESS_INFO = {
 
   // Business Hours
   hours: {
-    monSat: { opens: '07:00', closes: '18:00' },
-    closedDays: ['Sunday'] as const,
+    monFri: { opens: '07:00', closes: '18:00' },
+    satSun: { opens: '07:00', closes: '15:00' },
   },
 
   // Google Maps

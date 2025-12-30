@@ -117,11 +117,12 @@ const HeroSection: React.FC = () => {
             </div>
             <div className="font-serif leading-tight">
               <p className="text-xl md:text-2xl text-cafe-brown tracking-tight leading-snug">
-                Mon - Sat: <br className="md:hidden" />{" "}
-                <span className="italic font-light">7:00am - 6:00pm</span>
+                Mon - Fri: <br className="md:hidden" />{" "}
+                <span className="italic font-light">7am - 6pm</span>
               </p>
-              <p className="text-[9px] md:text-[10px] text-cafe-brown uppercase tracking-[0.4em] font-bold mt-4">
-                Sundays Closed
+              <p className="text-xl md:text-2xl text-cafe-brown tracking-tight leading-snug mt-2">
+                Sat - Sun: <br className="md:hidden" />{" "}
+                <span className="italic font-light">7am - 3pm</span>
               </p>
             </div>
           </div>
