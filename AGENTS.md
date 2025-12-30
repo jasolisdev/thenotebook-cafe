@@ -20,10 +20,11 @@ This document provides authoritative guidance for any AI assistant (Claude, Gemi
 8. [Data & Content Management](#data--content-management)
 9. [Key Technical Patterns](#key-technical-patterns)
 10. [Development Guidelines](#development-guidelines)
-11. [Testing](#testing)
-12. [Environment Variables](#environment-variables)
-13. [Deployment](#deployment)
-14. [Pages & Routes](#pages--routes)
+11. [Skills](#skills)
+12. [Testing](#testing)
+13. [Environment Variables](#environment-variables)
+14. [Deployment](#deployment)
+15. [Pages & Routes](#pages--routes)
 
 ---
 
@@ -373,6 +374,50 @@ import { CartProvider } from "../../components/providers/CartProvider";
 - Commit format: `type(scope): description`
 - Push: `git push -u origin branch-name`
 - Merge to `master` for production
+
+---
+
+## Skills
+
+Skills are specialized prompts that enhance agent capabilities for specific tasks. They are defined in `.claude/skills/` and should be invoked when appropriate.
+
+### Available Skills
+
+| Skill | Purpose | When to Use |
+|-------|---------|-------------|
+| `git-commit-helper` | Generate descriptive commit messages by analyzing git diffs | Before creating any commit |
+| `session-start-hook` | Set up repository hooks for Claude Code web sessions | When configuring startup hooks |
+
+### Using Skills
+
+**Before committing changes**, always invoke the `git-commit-helper` skill:
+
+```
+skill: "git-commit-helper"
+```
+
+This skill:
+- Analyzes staged changes via `git diff --cached`
+- Generates a descriptive commit message following project conventions
+- Ensures consistent commit message format: `type(scope): description`
+
+### Commit Message Format
+
+Skills should generate commits following this format:
+
+```
+type(scope): short description
+
+- Detailed bullet point (optional)
+- Another detail (optional)
+```
+
+**Types:** `feat`, `fix`, `refactor`, `docs`, `style`, `test`, `chore`
+
+**Examples:**
+- `feat(cart): add quantity controls to cart drawer`
+- `fix(api): handle rate limit edge case in subscribe endpoint`
+- `docs(agents): add skills section to AGENTS.md`
 
 ---
 
