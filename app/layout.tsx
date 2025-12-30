@@ -171,7 +171,7 @@ export default async function RootLayout({
               )}
             </CartProvider>
           </ErrorBoundary>
-          {/* Typography Debug - Press Ctrl+Shift+T to toggle */}
+          {/* Typography Debug - Remove or set enabled={false} to disable */}
           <TypographyDebug />
         </ThemeProvider>
       </body>

@@ -10,24 +10,10 @@ import { useEffect, useState } from "react";
  * - Font weight
  * - Font size
  *
- * Usage: Add <TypographyDebug /> to your layout and press Ctrl+Shift+T to toggle
- * Or set enabled={true} to always show
+ * Usage: Add <TypographyDebug enabled /> to your layout to show debug overlay
  */
-export default function TypographyDebug({ enabled = false }: { enabled?: boolean }) {
+export default function TypographyDebug({ enabled = true }: { enabled?: boolean }) {
   const [isActive, setIsActive] = useState(enabled);
-
-  useEffect(() => {
-    // Keyboard shortcut: Ctrl+Shift+T to toggle
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.shiftKey && e.key === "T") {
-        e.preventDefault();
-        setIsActive((prev) => !prev);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
 
   useEffect(() => {
     if (!isActive) {
@@ -126,7 +112,7 @@ export default function TypographyDebug({ enabled = false }: { enabled?: boolean
         <span>Labels</span>
       </div>
       <div style={{ marginTop: "8px", paddingTop: "8px", borderTop: "1px solid #374151", color: "#9ca3af", fontSize: "9px" }}>
-        Press <kbd style={{ background: "#374151", padding: "2px 4px", borderRadius: "2px" }}>Ctrl+Shift+T</kbd> to toggle
+        Set <code style={{ background: "#374151", padding: "2px 4px", borderRadius: "2px" }}>enabled=&#123;false&#125;</code> to hide
       </div>
     </div>
   );
