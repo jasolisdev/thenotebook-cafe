@@ -616,6 +616,45 @@ export default function StyleGuidePage() {
               ))}
             </div>
           </div>
+
+          {/* Breakpoints */}
+          <div className="mt-12">
+            <h3 className="text-sm font-bold text-cafe-tan-dark uppercase tracking-wider mb-6">Responsive Breakpoints</h3>
+            <p className="text-sm text-cafe-brown mb-6">Using Tailwind CSS default breakpoints (mobile-first approach)</p>
+            <div className="space-y-3">
+              {[
+                { prefix: 'Default', min: '0px', desc: 'Mobile phones (portrait)', color: 'bg-cafe-olive' },
+                { prefix: 'sm:', min: '640px', desc: 'Mobile phones (landscape), small tablets', color: 'bg-cafe-tan-dark' },
+                { prefix: 'md:', min: '768px', desc: 'Tablets (portrait)', color: 'bg-cafe-tan' },
+                { prefix: 'lg:', min: '1024px', desc: 'Tablets (landscape), small laptops', color: 'bg-cafe-beige' },
+                { prefix: 'xl:', min: '1280px', desc: 'Desktops, large laptops', color: 'bg-cafe-cream' },
+                { prefix: '2xl:', min: '1536px', desc: 'Large desktops', color: 'bg-cafe-mist' },
+              ].map((bp, i) => (
+                <div key={bp.prefix} className="flex items-center gap-4">
+                  <div className={`w-16 h-8 rounded ${bp.color} flex items-center justify-center`}>
+                    <span className={`text-xs font-mono font-bold ${i < 3 ? 'text-cafe-white' : 'text-cafe-brown'}`}>{bp.prefix}</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-sm text-cafe-brown">{bp.min}</span>
+                      <span className="text-xs text-cafe-tan">and up</span>
+                    </div>
+                    <p className="text-xs text-cafe-tan-dark">{bp.desc}</p>
+                  </div>
+                  <div
+                    className="hidden md:block h-2 bg-cafe-tan/20 rounded"
+                    style={{ width: `${Math.min((parseInt(bp.min) / 1536) * 100, 100)}%`, minWidth: '20px' }}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 p-4 bg-cafe-cream/50 rounded-lg">
+              <p className="text-xs text-cafe-brown">
+                <strong>Usage:</strong> Classes like <code className="bg-cafe-white px-1 rounded">md:text-lg</code> apply styles at that breakpoint and above.
+                Mobile styles are written first, then enhanced for larger screens.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* ============================================================
@@ -756,29 +795,6 @@ export default function StyleGuidePage() {
               recommendation="Consider using --color-cafe-tan-dark for consistency with other interactive elements, or document olive as the 'active state' color."
             />
 
-            <IssueCard
-              severity="low"
-              title="Missing Tailwind Color Integration"
-              location="tailwind.config.ts"
-              description="Colors are defined in CSS @theme block but not fully exposed as Tailwind utilities. Some cafe colors work (via @theme), but extended colors may not."
-              recommendation="Verify all colors work as Tailwind utilities (bg-*, text-*, border-*). Add any missing colors to tailwind.config.ts."
-            />
-
-            <IssueCard
-              severity="low"
-              title="Font Variable Naming"
-              location="globals.css"
-              description="Multiple font variables exist: --font-sans, --font-display, --font-playfair, --font-inter. Some overlap (playfair = display). Torus is referenced in --font-sans but has no dedicated variable."
-              recommendation="Simplify to: --font-display (Playfair), --font-body (Torus), --font-fallback (Inter). Remove redundant aliases."
-            />
-
-            <IssueCard
-              severity="info"
-              title="No Documented Breakpoint Strategy"
-              location="N/A"
-              description="The codebase uses Tailwind default breakpoints (sm: 640px, md: 768px, lg: 1024px, xl: 1280px) but this isn't documented anywhere."
-              recommendation="Add breakpoint documentation to this style guide. Consider if custom breakpoints are needed for the café's design."
-            />
           </div>
 
           {/* Summary Stats */}
@@ -786,7 +802,7 @@ export default function StyleGuidePage() {
             <StatCard label="Critical" value="0" color="bg-green-500" />
             <StatCard label="High" value="2" color="bg-orange-500" />
             <StatCard label="Medium" value="3" color="bg-yellow-500" />
-            <StatCard label="Low/Info" value="3" color="bg-blue-500" />
+            <StatCard label="Low/Info" value="0" color="bg-green-500" />
           </div>
         </section>
 
