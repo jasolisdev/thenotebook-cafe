@@ -2583,3 +2583,12 @@ body[data-nav-open="true"] button[aria-label="Accessibility Options"] {
   border-radius: 2px;
   flex-shrink: 0;
 }
+
+/* Hide debug legend boxes on mobile, but keep borders and labels */
+@media (max-width: 1023px) {
+  /* Hide the Element Types legend */
+  .debug-typography-legend,
+  .debug-typography::before {
+    display: none !important;
+  }
+}
