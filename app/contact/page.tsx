@@ -72,7 +72,7 @@ export const metadata: Metadata = {
 const contactFAQs = [
   {
     question: "What are The Notebook Café hours?",
-    answer: `We're open Monday through Saturday from 7am to 6pm. We're closed on Sundays to give our team time to rest and recharge.`,
+    answer: `We're open Monday through Friday from 7am to 6pm, and Saturday through Sunday from 7am to 3pm.`,
   },
   {
     question: "Where is The Notebook Café located?",
@@ -233,7 +233,7 @@ export default function ContactPage() {
                   <div className="space-y-4 w-full max-w-md">
                     <div className="flex justify-between items-baseline border-b border-cafe-tan/20 pb-2">
                       <span className="text-cafe-brown/70 font-medium">
-                        Monday – Saturday
+                        Monday – Friday
                       </span>
                       <span className="font-serif text-xl text-cafe-black">
                         7am — 6pm
@@ -241,10 +241,10 @@ export default function ContactPage() {
                     </div>
                     <div className="flex justify-between items-baseline border-b border-cafe-tan/20 pb-2">
                       <span className="text-cafe-brown/70 font-medium">
-                        Sunday
+                        Saturday – Sunday
                       </span>
-                      <span className="font-serif text-xl text-cafe-black italic">
-                        Closed
+                      <span className="font-serif text-xl text-cafe-black">
+                        7am — 3pm
                       </span>
                     </div>
                   </div>
@@ -362,7 +362,7 @@ export default function ContactPage() {
                   Visit Us
                 </p>
                 <p className="text-[0.65rem] uppercase tracking-[0.2em] mt-2 opacity-90 font-bold">
-                  Open Mon–Sat
+                  Open 7 Days
                 </p>
               </div>
             </div>

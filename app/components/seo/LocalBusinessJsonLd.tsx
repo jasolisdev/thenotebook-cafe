@@ -34,9 +34,15 @@ export default function LocalBusinessJsonLd() {
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        opens: b.hours.monSat.opens,
-        closes: b.hours.monSat.closes,
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: b.hours.monFri.opens,
+        closes: b.hours.monFri.closes,
+      },
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Saturday', 'Sunday'],
+        opens: b.hours.satSun.opens,
+        closes: b.hours.satSun.closes,
       },
     ],
     hasMap: b.maps.directionsUrl,

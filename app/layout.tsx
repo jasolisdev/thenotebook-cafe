@@ -45,6 +45,7 @@ import PasswordGate from "./components/ui/PasswordGate";
 import SiteShell from "./components/layout/SiteShell";
 import { CartProvider } from "./components/providers/CartProvider";
 import { ErrorBoundary } from "./components/ui/ErrorBoundary";
+import TypographyDebug from "./components/ui/TypographyDebug";
 import { SEO } from "@/app/lib/constants/seo";
 import { BUSINESS_INFO } from "@/app/lib/constants/business";
 
@@ -170,6 +171,8 @@ export default async function RootLayout({
               )}
             </CartProvider>
           </ErrorBoundary>
+          {/* Typography Debug - Remove or set enabled={false} to disable */}
+          <TypographyDebug />
         </ThemeProvider>
       </body>
     </html>
