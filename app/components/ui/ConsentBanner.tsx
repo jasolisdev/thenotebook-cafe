@@ -2,7 +2,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import "@/app/styles/components/consent-banner.css";
+// Styles consolidated into globals.css (COOKIE CONSENT BANNER section)
 
 const STORAGE_KEY = "tnc-consent";
 
