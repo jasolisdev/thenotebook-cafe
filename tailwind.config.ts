@@ -8,6 +8,10 @@ export default {
     "./pages/**/*.{ts,tsx,js,jsx}",
     "./test/**/*.{ts,tsx,js,jsx}",
   ],
+  safelist: [
+    "debug-typography",
+    { pattern: /^debug-/ },
+  ],
   theme: {
     extend: {
       fontFamily: {
