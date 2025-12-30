@@ -10,16 +10,20 @@ All CSS is now consolidated into `app/globals.css` for faster page loads (7 HTTP
 
 ```
 app/
-├── globals.css          # All styles consolidated here
+├── globals.css              # All global styles consolidated here
 └── styles/
-    └── pages/           # Page-specific styles (imported by routes)
+    ├── COLOR_SYSTEM.md      # Color palette documentation
+    ├── components/          # Component-specific styles (still imported)
+    │   ├── application-form.css
+    │   └── signature-pours-grid.css
+    └── pages/               # Page-specific styles (imported by routes)
         ├── careers.css
         ├── contact.css
         ├── home.css
         ├── legal.css
         ├── menu.css
         ├── story.css
-        └── home/         # Home page split by section
+        └── home/            # Home page split by section
             ├── base.css
             ├── hero.css
             ├── home-fixed-background.css
@@ -114,15 +118,17 @@ import "@/app/styles/pages/menu.css";
 
 ---
 
-## Legacy Files
+## Legacy Files (Deleted)
 
-The following files were consolidated into `globals.css` (December 2025):
-- `app/styles/components/navigation.css` → `globals.css` (NAVIGATION section)
-- `app/styles/components/buttons.css` → `globals.css` (BUTTONS section)
-- `app/styles/components/footer.css` → `globals.css` (FOOTER section)
-- `app/styles/components/announcement.css` → `globals.css` (ANNOUNCEMENT BANNER section)
-- `app/styles/components/consent-banner.css` → `globals.css` (COOKIE CONSENT BANNER section)
-- `app/styles/layout/sections.css` → `globals.css` (SECTIONS & DIVIDERS section)
-- `app/styles/layout/animations.css` → `globals.css` (LAYOUT ANIMATIONS section)
+The following files were consolidated into `globals.css` and have been deleted:
+- ~~`app/styles/components/navigation.css`~~ → `globals.css` (NAVIGATION section)
+- ~~`app/styles/components/buttons.css`~~ → `globals.css` (BUTTONS section)
+- ~~`app/styles/components/footer.css`~~ → `globals.css` (FOOTER section)
+- ~~`app/styles/components/announcement.css`~~ → `globals.css` (ANNOUNCEMENT BANNER section)
+- ~~`app/styles/components/consent-banner.css`~~ → `globals.css` (COOKIE CONSENT BANNER section)
+- ~~`app/styles/layout/sections.css`~~ → `globals.css` (SECTIONS & DIVIDERS section)
+- ~~`app/styles/layout/animations.css`~~ → `globals.css` (LAYOUT ANIMATIONS section)
 
-These files can be safely deleted if found in the codebase.
+**Still Active (Page-Specific):**
+- `app/styles/components/application-form.css` — Careers application form styles
+- `app/styles/components/signature-pours-grid.css` — SignaturePoursGrid component styles
