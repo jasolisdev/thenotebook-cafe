@@ -41,13 +41,16 @@
    DESIGN TOKENS
 =========================================================== */
 :root {
-  --font-sans: "Torus", "Inter", system-ui, sans-serif;
-  --font-display: "Playfair Display", serif;
-  --font-playfair: "Playfair Display";
-  --font-inter: "Inter";
+  /*
+   * IMPORTANT: --font-playfair, --font-inter, and --font-torus are set by Next.js
+   * in app/fonts.ts via localFont(). Do NOT override them here.
+   * The values below are fallbacks only used if Next.js fonts fail to load.
+   */
+  --font-sans: var(--font-torus), "Torus", "Inter", system-ui, sans-serif;
+  --font-display: var(--font-playfair), "Playfair Display", serif;
   --site-header-height: 80px;
 
-  /* Menu Page Fonts */
+  /* Menu Page Fonts - reference Next.js variables with fallbacks */
   --font-serif: var(--font-playfair), "Playfair Display", serif;
   /* Used for Titles, Headers, Prices */
   --font-sans-menu: var(--font-inter), "Inter", sans-serif;
@@ -215,11 +218,11 @@ body {
 }
 
 .font-playfair {
-  font-family: var(--font-playfair);
+  font-family: var(--font-playfair), "Playfair Display", serif;
 }
 
 .font-inter {
-  font-family: var(--font-inter);
+  font-family: var(--font-inter), "Inter", sans-serif;
 }
 
 h1,
