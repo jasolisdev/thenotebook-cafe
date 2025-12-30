@@ -12,7 +12,6 @@ types/
 ├── menu.ts       # Menu, cart, and product types
 ├── api.ts        # API request/response types
 ├── forms.ts      # Form data types
-├── sanity.ts     # Sanity CMS document types
 └── common.ts     # Shared utility types
 ```
 
@@ -117,31 +116,6 @@ const contactData: ContactFormData = {
 const subscribeData: SubscribeFormData = {
   email: 'user@example.com',
   source: 'homepage',
-};
-```
-
----
-
-### sanity.ts
-
-Sanity CMS document schema types.
-
-**Types:**
-- `SanitySubscriber` - Newsletter subscriber document
-- `SanityContactMessage` - Contact message document
-
-**Usage:**
-```typescript
-import { SanitySubscriber } from '@/app/types';
-
-const subscriber: SanitySubscriber = {
-  _id: 'sub-123',
-  _type: 'subscriber',
-  email: 'user@example.com',
-  source: 'homepage',
-  status: 'subscribed',
-  unsubscribeToken: 'uuid-...',
-  createdAt: '2025-12-23T...',
 };
 ```
 

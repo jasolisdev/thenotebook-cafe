@@ -1,7 +1,7 @@
 /**
  * Input Sanitization Utility
  *
- * Sanitizes user input to prevent injection attacks before storing in Sanity.
+ * Sanitizes user input to prevent injection attacks.
  * Removes dangerous characters and patterns that could be exploited.
  *
  * @example
@@ -119,7 +119,7 @@ export function sanitizeJsonString(input: string): string {
 }
 
 /**
- * Sanitize object for Sanity mutations
+ * Sanitize object recursively
  * Recursively sanitizes all string values in an object
  */
 export function sanitizeObject<T extends Record<string, unknown>>(

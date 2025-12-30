@@ -70,9 +70,9 @@ Preloads critical images for better performance.
 
 ## Styling
 
-Layout components use:
-- `app/styles/components/navigation.css` - Header styles
-- `app/styles/components/footer.css` - Footer styles
+Layout component styles are consolidated in `app/globals.css`:
+- Navigation section for header styles
+- Footer section for footer styles
 - Tailwind utility classes for responsive behavior
 
 ## Best Practices

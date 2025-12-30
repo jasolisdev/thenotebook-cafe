@@ -48,10 +48,9 @@ Newsletter subscription endpoint.
 
 **Features:**
 - Duplicate detection (case-insensitive)
-- Generates unsubscribe token
 - Email normalization
 - Length validation (max 254 chars)
-- Creates Sanity subscriber document
+- Proxies to Google Apps Script → Google Sheets
 
 **Implementation:**
 ```typescript
@@ -94,7 +93,6 @@ Contact form submission with email notification.
 **Features:**
 - Sends formatted email via Resend
 - Beautiful HTML template with dark mode
-- Creates Sanity document for record-keeping
 - Reply-to button with pre-filled content
 - Continues even if email fails (logs error)
 - Timezone-aware formatting (PST)
@@ -107,33 +105,13 @@ Contact form submission with email notification.
 
 ---
 
-### POST /api/unsubscribe
+### GET /api/unsubscribe
 
-Newsletter unsubscription endpoint.
-
-**Security:**
-- Token-based unsubscribe (no authentication needed)
-- CSRF protected
-- Rate limiting
-
-**Request:**
-```json
-{
-  "token": "unsubscribe-token-uuid"
-}
-```
-
-**Response:**
-```json
-{
-  "ok": true
-}
-```
+Newsletter unsubscription redirect.
 
 **Features:**
-- Updates subscriber status to 'unsubscribed'
-- Token validation
-- No email required
+- Redirects to Google Form for unsubscribe requests
+- No authentication required
 
 ---
 
@@ -152,8 +130,7 @@ Job application submission.
 
 **Features:**
 - Resume file validation (type, size)
-- Creates application document in Sanity
-- File storage (planned)
+- Sends application email via Resend
 
 ---
 
@@ -303,22 +280,22 @@ done
 2. **Rate limit aggressively** - Prevent abuse
 3. **Sanitize all inputs** - Never trust user data
 4. **Log security events** - Track suspicious activity
-5. **Use write client server-side** - Never expose tokens to client
-6. **Handle errors gracefully** - Don't leak sensitive info
-7. **Return consistent responses** - Always use `{ ok: boolean }`
-8. **Validate file uploads** - Check size, type, content
+5. **Handle errors gracefully** - Don't leak sensitive info
+6. **Return consistent responses** - Always use `{ ok: boolean }`
+7. **Validate file uploads** - Check size, type, content
 
 ## Environment Variables
 
 Required for API routes:
 
 ```bash
-# Sanity (Required)
-SANITY_WRITE_TOKEN=your_write_token
-
-# Email (Required for /contact)
+# Email (Required for /contact, /apply)
 RESEND_API_KEY=your_resend_api_key
 CONTACT_EMAIL_RECIPIENT=business@example.com
+
+# Newsletter (Required for /subscribe)
+GOOGLE_APPS_SCRIPT_URL=your_apps_script_url
+NEXT_PUBLIC_UNSUBSCRIBE_FORM_URL=your_google_form_url
 
 # Auth (Optional)
 SITE_PASSWORD=your_password  # Leave empty to disable
