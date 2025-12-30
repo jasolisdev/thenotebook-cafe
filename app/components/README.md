@@ -38,8 +38,6 @@ Page structure components that define the overall layout:
 - `SiteHeader.tsx` - Main navigation header
 - `SiteFooter.tsx` - Site-wide footer
 - `SiteShell.tsx` - Page wrapper with header/footer
-- `PageTransition.tsx` - Page transition animations
-- `ImagePreloader.tsx` - Image preloading utility
 
 ### UI (`ui/`)
 Reusable UI primitives and atoms:

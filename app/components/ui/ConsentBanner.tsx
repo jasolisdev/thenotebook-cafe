@@ -1,8 +1,11 @@
-
+/**
+ * @file ConsentBanner Component
+ * @description Cookie consent banner with analytics integration
+ * Styles consolidated in app/globals.css (COOKIE CONSENT BANNER section)
+ */
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import "@/app/styles/components/consent-banner.css";
 
 const STORAGE_KEY = "tnc-consent";
 

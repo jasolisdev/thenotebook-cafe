@@ -2,18 +2,16 @@
 **The Notebook Café - Component Catalog**
 
 Last Updated: 2025-12-23
-Total Components: 37
+Total Components: 35
 
 ---
 
-## Layout Components (5)
+## Layout Components (3)
 Location: `app/components/layout/`
 
 - `SiteHeader.tsx` - Global navigation header + cart badge
 - `SiteFooter.tsx` - Global footer with contact/social links
 - `SiteShell.tsx` - App wrapper, header/footer, overlays
-- `PageTransition.tsx` - Route transition wrapper
-- `ImagePreloader.tsx` - Preloads hero/menu imagery
 
 ---
 

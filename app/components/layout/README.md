@@ -53,21 +53,6 @@ import { SiteShell } from '@/app/components/layout/SiteShell';
 </SiteShell>
 ```
 
-### PageTransition.tsx
-Handles page transition animations.
-
-**Features:**
-- Smooth fade transitions between routes
-- Framer Motion animations
-
-### ImagePreloader.tsx
-Preloads critical images for better performance.
-
-**Features:**
-- Preloads hero and featured images
-- Improves perceived performance
-- No visual component (utility)
-
 ## Styling
 
 Layout component styles are consolidated in `app/globals.css`:

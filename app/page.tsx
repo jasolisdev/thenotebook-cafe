@@ -105,7 +105,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <Reveal>
-              <span className="text-cafe-tan text-md uppercase tracking-[0.25em] font-semibold">
+              <span className="text-cafe-tan text-md uppercase tracking-[0.25em] font-semibold font-inter">
                 Our Signature Pours
               </span>
             </Reveal>

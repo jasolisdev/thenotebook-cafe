@@ -81,7 +81,7 @@ export default function JobPosition({
               className="p-5 rounded-2xl"
               style={{ backgroundColor: 'rgba(250, 249, 246, 0.6)', border: '1px solid rgba(164, 141, 120, 0.18)' }}
             >
-              <p className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'rgba(74, 59, 50, 0.65)' }}>
+              <p className="text-xs uppercase tracking-[0.2em] font-bold font-inter" style={{ color: 'rgba(74, 59, 50, 0.65)' }}>
                 Quick Facts
               </p>
               <ul className="mt-4 space-y-2">
@@ -104,7 +104,7 @@ export default function JobPosition({
               className="p-5 rounded-2xl"
               style={{ backgroundColor: 'rgba(250, 249, 246, 0.6)', border: '1px solid rgba(164, 141, 120, 0.18)' }}
             >
-              <p className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: 'rgba(74, 59, 50, 0.65)' }}>
+              <p className="text-xs uppercase tracking-[0.2em] font-bold font-inter" style={{ color: 'rgba(74, 59, 50, 0.65)' }}>
                 Benefits
               </p>
               <ul className="mt-4 space-y-2">

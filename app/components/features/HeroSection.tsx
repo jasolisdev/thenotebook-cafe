@@ -64,7 +64,7 @@ const HeroSection: React.FC = () => {
               delay="300ms"
               className="flex flex-col items-center space-y-4 text-white"
             >
-              <p className="font-bold tracking-[0.4em] md:tracking-[0.6em] uppercase text-[10px] md:text-[13px] opacity-90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+              <p className="font-inter font-bold tracking-[0.4em] md:tracking-[0.6em] uppercase text-[10px] md:text-[13px] opacity-90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
                 SPECIALTY COFFEE IN RIVERSIDE, CA.
               </p>
               <p className="font-serif italic text-lg md:text-2xl opacity-80 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] tracking-wide">
@@ -85,7 +85,7 @@ const HeroSection: React.FC = () => {
           <div className="flex flex-col items-center text-center max-w-xs">
             <div className="flex items-center space-x-2 mb-3 text-cafe-brown">
               <MapPin size={16} />
-              <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold">
+              <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold font-inter">
                 Location
               </span>
             </div>
@@ -97,7 +97,7 @@ const HeroSection: React.FC = () => {
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CAFE_INFO.name)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 flex items-center space-x-2 text-[9px] md:text-[10px] uppercase tracking-[0.4em] font-extrabold text-cafe-brown/85 hover:text-cafe-brown transition-colors group"
+              className="mt-4 flex items-center space-x-2 text-[9px] md:text-[10px] uppercase tracking-[0.4em] font-extrabold font-inter text-cafe-brown/85 hover:text-cafe-brown transition-colors group"
             >
               <span>Get Directions</span>
               <ArrowUpRight
@@ -111,7 +111,7 @@ const HeroSection: React.FC = () => {
           <div className="flex flex-col items-center text-center max-w-xs">
             <div className="flex items-center space-x-2 mb-3 text-cafe-brown">
               <Clock size={16} />
-              <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold">
+              <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold font-inter">
                 Hours
               </span>
             </div>
@@ -120,7 +120,7 @@ const HeroSection: React.FC = () => {
                 Mon - Sat: <br className="md:hidden" />{" "}
                 <span className="italic font-light">7:00am - 6:00pm</span>
               </p>
-              <p className="text-[9px] md:text-[10px] text-cafe-brown uppercase tracking-[0.4em] font-bold mt-4">
+              <p className="text-[9px] md:text-[10px] text-cafe-brown uppercase tracking-[0.4em] font-bold font-inter mt-4">
                 Sundays Closed
               </p>
             </div>

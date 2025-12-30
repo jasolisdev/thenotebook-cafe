@@ -101,7 +101,7 @@ const MenuSection: React.FC = () => {
 
           {/*
           <Reveal>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-cafe-tan-dark font-bold block mb-4">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-cafe-tan-dark font-bold font-inter block mb-4">
               The Selection
             </span>
           </Reveal>

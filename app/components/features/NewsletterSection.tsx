@@ -27,11 +27,11 @@ const NewsletterSection: React.FC = () => {
          </FadeInSection>
          
          <FadeInSection delay="400ms">
-           <p className="mt-8 text-[10.89px] text-cafe-black/30 uppercase tracking-widest">
+           <p className="mt-8 text-[10.89px] text-cafe-black/30 uppercase tracking-widest font-inter">
              No spam. Only hand-crafted updates.
            </p>
 
-           <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-10 text-xs md:text-sm uppercase tracking-[0.2em] opacity-70 text-cafe-black/70">
+           <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-10 text-xs md:text-sm uppercase tracking-[0.2em] opacity-70 text-cafe-black/70 font-inter">
               <a
                 href={BUSINESS_INFO.social.instagram}
                 target="_blank"

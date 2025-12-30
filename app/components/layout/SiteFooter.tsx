@@ -96,31 +96,31 @@ export default function SiteFooter(): React.JSX.Element {
         <div className="flex items-center space-x-6">
           <Link
             href="/terms"
-            className="text-[9px] text-white/60 uppercase tracking-[0.3em] hover:text-white transition-colors"
+            className="text-[9px] text-white/60 uppercase tracking-[0.3em] font-inter hover:text-white transition-colors"
           >
             TERMS
           </Link>
           <Link
             href="/privacy"
-            className="text-[9px] text-white/60 uppercase tracking-[0.3em] hover:text-white transition-colors"
+            className="text-[9px] text-white/60 uppercase tracking-[0.3em] font-inter hover:text-white transition-colors"
           >
             POLICY
           </Link>
           <Link
             href="/refunds"
-            className="text-[9px] text-white/60 uppercase tracking-[0.3em] hover:text-white transition-colors"
+            className="text-[9px] text-white/60 uppercase tracking-[0.3em] font-inter hover:text-white transition-colors"
           >
             REFUNDS
           </Link>
           <button
             type="button"
             onClick={openConsentBanner}
-            className="text-[9px] text-white/60 uppercase tracking-[0.3em] hover:text-white transition-colors"
+            className="text-[9px] text-white/60 uppercase tracking-[0.3em] font-inter hover:text-white transition-colors"
           >
             COOKIES
           </button>
         </div>
-        <div className="text-[9px] text-white/40 uppercase tracking-[0.3em]">
+        <div className="text-[9px] text-white/40 uppercase tracking-[0.3em] font-inter">
           &copy; {year} Handcrafted with care
         </div>
       </div>

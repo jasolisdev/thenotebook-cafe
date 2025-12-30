@@ -138,6 +138,23 @@ Newsletter        → light tan tint
 4. **Avoid duplication** - Core styles are in globals.css
 5. **Use semantic names** - `.hero-section`, not `.test-123`
 
+## Import Examples
+
+### In layout.tsx (global)
+```typescript
+// All component and layout styles consolidated in globals.css
+import './globals.css';
+```
+
+### In page.tsx (page-specific)
+```typescript
+import '@/app/styles/pages/home.css';
+
+export default function HomePage() {
+  // ...
+}
+```
+
 ## Adding New Styles
 
 - **Global utility or component?** → Add to `app/globals.css`
