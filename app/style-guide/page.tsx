@@ -192,22 +192,22 @@ export default function StyleGuidePage() {
           <div className="mb-12">
             <h3 className="text-sm font-bold text-cafe-tan-dark uppercase tracking-wider mb-6">Type Scale</h3>
             <div className="bg-cafe-white rounded-xl p-8 border border-cafe-tan/10 space-y-8">
-              <TypeScaleRow label="Hero / H1" size="clamp(2.8rem, 6.5vw, 5.2rem)" className="text-5xl md:text-7xl font-display">
+              <TypeScaleRow as="h1" label="Hero / H1" size="clamp(2.8rem, 6.5vw, 5.2rem)" className="text-5xl md:text-7xl font-display">
                 Coffee & Community
               </TypeScaleRow>
-              <TypeScaleRow label="H2 / Section" size="2.25rem - 3rem" className="text-3xl md:text-4xl font-display">
+              <TypeScaleRow as="h2" label="H2 / Section" size="2.25rem - 3rem" className="text-3xl md:text-4xl font-display">
                 Our Signature Pours
               </TypeScaleRow>
-              <TypeScaleRow label="H3 / Card" size="1.5rem" className="text-2xl font-display">
+              <TypeScaleRow as="h3" label="H3 / Card" size="1.5rem" className="text-2xl font-display">
                 Lavender Haze Latte
               </TypeScaleRow>
-              <TypeScaleRow label="H4 / Subtitle" size="1.25rem" className="text-xl font-sans font-semibold">
+              <TypeScaleRow as="h4" label="H4 / Subtitle" size="1.25rem" className="text-xl font-sans font-semibold">
                 Crafted with Care
               </TypeScaleRow>
-              <TypeScaleRow label="Body" size="1rem / 16px" className="text-base font-sans leading-relaxed max-w-xl">
+              <TypeScaleRow as="p" label="Body" size="1rem / 16px" className="text-base font-sans leading-relaxed max-w-xl">
                 We believe in the power of a good cup of coffee to bring people together. Our beans are ethically sourced and roasted with care.
               </TypeScaleRow>
-              <TypeScaleRow label="Caption" size="0.75rem" className="text-xs uppercase tracking-widest text-cafe-tan-dark font-bold">
+              <TypeScaleRow as="span" label="Caption" size="0.75rem" className="text-xs uppercase tracking-widest text-cafe-tan-dark font-bold">
                 Est. 2024 • Riverside, CA
               </TypeScaleRow>
             </div>
@@ -936,16 +936,16 @@ function FontCard({
   );
 }
 
-function TypeScaleRow({ label, size, className, children }: { label: string; size: string; className: string; children: React.ReactNode }) {
+function TypeScaleRow({ label, size, className, children, as: Element = "div" }: { label: string; size: string; className: string; children: React.ReactNode; as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div" }) {
   return (
     <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 pb-6 border-b border-cafe-tan/10 last:border-0 last:pb-0">
       <div className="md:w-32 flex-shrink-0">
         <span className="text-xs font-mono text-cafe-tan">{label}</span>
         <p className="text-[10px] font-mono text-cafe-tan-dark">{size}</p>
       </div>
-      <div className={`${className} text-cafe-black`}>
+      <Element className={`${className} text-cafe-black`}>
         {children}
-      </div>
+      </Element>
     </div>
   );
 }
