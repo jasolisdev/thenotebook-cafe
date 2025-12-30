@@ -419,6 +419,34 @@ type(scope): short description
 - `fix(api): handle rate limit edge case in subscribe endpoint`
 - `docs(agents): add skills section to AGENTS.md`
 
+### Available Agents
+
+Custom agents are defined in `.claude/agents/` and provide specialized expertise for different development tasks. These are invoked automatically via the Task tool when appropriate.
+
+| Agent | Model | Purpose | When to Use |
+|-------|-------|---------|-------------|
+| `code-reviewer` | sonnet | Code quality, security, and maintainability review | After writing or modifying code |
+| `frontend-developer` | sonnet | React components, responsive design, accessibility | UI development, performance optimization |
+| `fullstack-developer` | opus | End-to-end application development | Complex features spanning frontend/backend |
+| `seo-analyzer` | sonnet | Technical SEO audits and optimization | Meta tags, Core Web Vitals, structured data |
+| `ui-ux-designer` | sonnet | User-centered design and interface systems | Wireframes, design systems, UX flows |
+
+### Agent Usage Guidelines
+
+**Proactive usage** - These agents should be used proactively:
+- Run `code-reviewer` after implementing significant code changes
+- Use `seo-analyzer` when modifying pages or adding new routes
+- Invoke `frontend-developer` for complex UI component work
+
+**Model selection:**
+- `sonnet` agents are faster and cost-effective for focused tasks
+- `opus` agents (fullstack-developer) handle complex, multi-faceted problems
+
+**Agent outputs:**
+- Review checklist with prioritized feedback (critical/warnings/suggestions)
+- Implementation code with accessibility and performance considerations
+- Audit reports with actionable recommendations
+
 ---
 
 ## Testing
