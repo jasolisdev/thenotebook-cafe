@@ -701,25 +701,6 @@ export default function StyleGuidePage() {
           </div>
 
           <div className="space-y-6">
-            {/* Critical Issues */}
-            <IssueCard
-              severity="critical"
-              title="Legacy CSS Files Not Deleted"
-              location="app/styles/components/"
-              description={
-                <span>
-                  Per <code className="bg-white/50 px-1 rounded text-xs">docs/css.md</code>, these legacy files should be deleted as they were consolidated into globals.css:
-                  <ul className="list-disc list-inside mt-2 space-y-1">
-                    <li>buttons.css</li>
-                    <li>announcement.css</li>
-                    <li>consent-banner.css</li>
-                    <li>footer.css</li>
-                  </ul>
-                </span>
-              }
-              recommendation="Delete the legacy files. Keep only application-form.css (still used by careers page) and signature-pours-grid.css if still imported."
-            />
-
             <IssueCard
               severity="high"
               title="Hardcoded Color Values"
@@ -802,7 +783,7 @@ export default function StyleGuidePage() {
 
           {/* Summary Stats */}
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-            <StatCard label="Critical" value="1" color="bg-red-500" />
+            <StatCard label="Critical" value="0" color="bg-green-500" />
             <StatCard label="High" value="2" color="bg-orange-500" />
             <StatCard label="Medium" value="3" color="bg-yellow-500" />
             <StatCard label="Low/Info" value="3" color="bg-blue-500" />
