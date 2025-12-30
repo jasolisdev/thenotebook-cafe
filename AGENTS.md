@@ -447,6 +447,35 @@ Custom agents are defined in `.claude/agents/` and provide specialized expertise
 - Implementation code with accessibility and performance considerations
 - Audit reports with actionable recommendations
 
+### BMAD Framework (Complex Features)
+
+For multi-story features or architectural changes, use the **BMAD-METHOD** framework in `.bmad/`. This provides structured workflows for larger initiatives.
+
+**When to use BMAD:**
+
+| Scope | Approach |
+|-------|----------|
+| Bug fix, small tweak | Lightweight agents (above) |
+| New component/page | BMAD Quick Flow track |
+| Major feature (checkout, auth) | BMAD Method track |
+| Full rebuild/enterprise | BMAD Enterprise track |
+
+**Getting started with BMAD:**
+
+1. Load the Analyst agent → Run `*workflow-init`
+2. Choose track based on complexity
+3. Follow phase workflows (Analysis → Planning → Solutioning → Implementation)
+
+**BMAD Agents** (`.bmad/bmm/agents/`):
+- `analyst` - Project initialization, research
+- `pm` - PRD creation, requirements
+- `architect` - System design, technical decisions
+- `sm` - Sprint planning, story management
+- `dev` - Implementation, code review
+- `ux-designer` - UI/UX specifications
+
+**Documentation:** `.bmad/bmm/docs/quick-start.md`
+
 ---
 
 ## Testing
