@@ -120,14 +120,7 @@ import "@/app/styles/pages/menu.css";
 
 ## Legacy Files (Deleted)
 
-The following files were consolidated into `globals.css` and have been deleted:
-- ~~`app/styles/components/navigation.css`~~ → `globals.css` (NAVIGATION section)
-- ~~`app/styles/components/buttons.css`~~ → `globals.css` (BUTTONS section)
-- ~~`app/styles/components/footer.css`~~ → `globals.css` (FOOTER section)
-- ~~`app/styles/components/announcement.css`~~ → `globals.css` (ANNOUNCEMENT BANNER section)
-- ~~`app/styles/components/consent-banner.css`~~ → `globals.css` (COOKIE CONSENT BANNER section)
-- ~~`app/styles/layout/sections.css`~~ → `globals.css` (SECTIONS & DIVIDERS section)
-- ~~`app/styles/layout/animations.css`~~ → `globals.css` (LAYOUT ANIMATIONS section)
+Component and layout styles were consolidated into `app/globals.css`, and the legacy files were removed to prevent drift.
 
 **Still Active (Page-Specific):**
 - `app/styles/components/application-form.css` — Careers application form styles

@@ -41,7 +41,7 @@ type AnnouncementBannerProps = {
  * - Responsive spacing (8px → 12px gap between cup and text)
  * - Client-side hydration handling to prevent mismatch
  *
- * Styles: app/styles/components/announcement.css
+ * Styles: app/globals.css (ANNOUNCEMENT BANNER section)
  * - `.announcement-banner` - Container with fixed positioning
  * - `.announcement-steam` - Rising steam animation
  * - Responsive gaps via CSS clamp()

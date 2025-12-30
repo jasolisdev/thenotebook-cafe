@@ -290,17 +290,20 @@ export const AccessibilityWidget: React.FC = () => {
         <WheelchairIcon size={28} className="-mt-0.5" />
       </button>
 
-      {/* Backdrop */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-cafe-black/40 z-[1090]"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
-
-      {/* Drawer */}
+      {/* Dim Overlay (Full screen, bottom layer) */}
       <div
-        className={`acc-widget-panel fixed inset-y-0 left-0 z-[1120] w-full md:w-96 bg-cafe-cream shadow-2xl transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpen ? "translate-x-0" : "-translate-x-full"} flex flex-col border-r border-cafe-tan/20`}
+        className={`acc-dim-overlay ${isOpen ? "open" : ""}`}
+        onClick={() => setIsOpen(false)}
+      />
+
+      {/* Tan Panel (Slides from left, middle layer) */}
+      <div
+        className={`acc-layer-backdrop ${isOpen ? "open" : ""}`}
+      />
+
+      {/* Drawer (Slides from left, top layer) */}
+      <div
+        className={`acc-widget-panel ${isOpen ? "open" : ""}`}
       >
         {/* Header */}
         <div className="p-6 border-b border-cafe-tan/20 bg-cafe-cream flex items-center justify-between shrink-0">
@@ -329,7 +332,7 @@ export const AccessibilityWidget: React.FC = () => {
                     }
                   }, 50);
                 }}
-                className="flex items-center gap-2 px-4 py-2.5 min-h-11 rounded-xl hover:bg-cafe-tan/15 text-cafe-black text-base font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
+                className="flex items-center gap-2 font-display font-bold text-xl text-cafe-black hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-cafe-tan/40"
                 aria-label="Back to settings"
               >
                 <ChevronLeftIcon className="w-6 h-6" />
@@ -349,7 +352,7 @@ export const AccessibilityWidget: React.FC = () => {
         {/* Content */}
         <div
           ref={contentRef}
-          className={`flex-1 overflow-y-auto p-6 ${view === "statement" ? "bg-cafe-mist" : "bg-cafe-cream"}`}
+          className="flex-1 overflow-y-auto p-6 bg-cafe-mist"
         >
           {view === "settings" ? (
             <div className="space-y-4">
@@ -455,23 +458,6 @@ export const AccessibilityWidget: React.FC = () => {
                   onClick={() => toggleSetting("stopAnimations")}
                 />
               </div>
-
-              <div className="mt-8 pt-6 border-t border-cafe-cream/10">
-                <button
-                  onClick={() => {
-                    setView("statement");
-                    // Scroll to top of content area when opening statement
-                    setTimeout(() => {
-                      if (contentRef.current) {
-                        contentRef.current.scrollTop = 0;
-                      }
-                    }, 50);
-                  }}
-                  className="w-full py-3 px-4 bg-white hover:bg-cafe-tan/10 text-cafe-brown rounded-xl font-bold transition-colors text-sm border border-cafe-tan/20"
-                >
-                  Read Accessibility Statement
-                </button>
-              </div>
             </div>
           ) : (
             <div className="prose prose-sm max-w-none text-cafe-brown/90 animate-slide-in-left">
@@ -534,7 +520,21 @@ export const AccessibilityWidget: React.FC = () => {
 
         {/* Footer */}
         {view === "settings" && (
-          <div className="p-6 border-t border-cafe-tan/20 bg-cafe-cream shrink-0">
+          <div className="p-6 border-t border-cafe-tan/20 bg-cafe-cream shrink-0 space-y-3">
+            <button
+              onClick={() => {
+                setView("statement");
+                // Scroll to top of content area when opening statement
+                setTimeout(() => {
+                  if (contentRef.current) {
+                    contentRef.current.scrollTop = 0;
+                  }
+                }, 50);
+              }}
+              className="w-full py-3 px-4 bg-white hover:bg-cafe-tan/10 text-cafe-brown rounded-xl font-bold transition-colors text-sm border border-cafe-tan/20"
+            >
+              Read Accessibility Statement
+            </button>
             <button
               onClick={resetSettings}
               className="w-full flex items-center justify-center gap-2 py-3 px-4 border-2 border-cafe-tan/25 text-cafe-brown hover:bg-cafe-tan/10 rounded-xl font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-cafe-tan/40 bg-white"

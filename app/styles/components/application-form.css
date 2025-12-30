@@ -186,31 +186,6 @@
   background: rgba(34, 197, 94, 0.1); /* green-100 */
 }
 
-/* 5. Submit Button */
-.btn-primary {
-  background: var(--color-cafe-black);
-  color: #fff;
-  padding: 16px 36px;
-  border: none;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  font-family: var(--font-sans);
-  font-weight: 600;
-}
-
-.btn-primary:hover {
-  background: var(--color-cafe-olive);
-}
-
-.btn-primary:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 /* Textarea styling */
 textarea.input-field {
   min-height: 80px;

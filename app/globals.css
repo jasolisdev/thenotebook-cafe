@@ -9,6 +9,7 @@
   --color-cafe-tan-dark: #8e7965;
   --color-cafe-beige: #cbb9a4;
   --color-cafe-luxe-oat: #cbbfaf;
+  --color-cafe-toasted-oat: #b2a698;
   --color-cafe-cream: #ede7d8;
   --color-cafe-mist: #f4f1ea;
   --color-cafe-white: #fdfbf7;
@@ -1685,29 +1686,79 @@ body[data-nav-open="true"] button[aria-label="Accessibility Options"] {
 }
 
 /* ============================================================
-   BUTTONS
+   ACCESSIBILITY WIDGET DRAWER - CINEMATIC ANIMATION
+   Triple-layer slide animation from left with accordion effect
 ============================================================ */
 
-/* Hero button styles */
-.hero-button-primary {
-  background-color: var(--color-cafe-black);
-  color: var(--color-cafe-white);
+/* --- 1. The Dim Overlay (Full-screen, bottom layer) --- */
+.acc-dim-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1090;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
-.hero-button-primary:hover {
-  background-color: var(--color-cafe-tan);
+.acc-dim-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.hero-button-secondary {
-  border: 1px solid var(--color-cafe-brown);
-  background-color: transparent;
-  color: var(--color-cafe-black);
+/* --- 2. The Tan Panel (Slides from left, middle layer) --- */
+.acc-layer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 65%;
+  max-width: 280px;
+  height: 100dvh;
+  background: rgba(164, 141, 120, 0.95); /* cafe-tan with transparency */
+  z-index: 1100;
+  transform: translateX(-100%);
+  transition: transform 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+  pointer-events: none;
 }
 
-.hero-button-secondary:hover {
-  background-color: var(--color-cafe-brown);
-  color: var(--color-cafe-white);
+.acc-layer-backdrop.open {
+  transform: translateX(0);
+  pointer-events: auto;
+  transition-duration: 0.4s;
 }
+
+/* --- 3. The Main Drawer (Slides from left, top layer) --- */
+.acc-widget-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100dvh;
+  background: linear-gradient(180deg, #f4f1ea 0%, #ede7d8 100%);
+  box-shadow: inset 0 0 80px rgba(164, 141, 120, 0.08);
+  color: var(--color-cafe-brown);
+  z-index: 1110;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 0;
+  transform: translateX(-100%);
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1); /* Closing: no delay */
+  will-change: transform;
+  pointer-events: none;
+}
+
+.acc-widget-panel.open {
+  transform: translateX(0);
+  pointer-events: auto;
+  transition-delay: 0.08s; /* Opening: wait for tan layer to start */
+}
+
+/* ============================================================
+   BUTTONS
+============================================================ */
 
 .btn-pill {
   display: inline-block;
@@ -2322,7 +2373,7 @@ body[data-nav-open="true"] button[aria-label="Accessibility Options"] {
 }
 
 /* ============================================================
-   LAYOUT ANIMATIONS (merged from animations.css)
+   LAYOUT ANIMATIONS
 ============================================================ */
 
 /* Floating items container omitted - disabled with display: none at end of file */
@@ -2406,8 +2457,8 @@ body[data-nav-open="true"] button[aria-label="Accessibility Options"] {
 }
 
 /* Buttons - Green tones */
-.debug-typography button,
-.debug-typography [role="button"] {
+.debug-typography button:not([aria-label="Accessibility Options"]),
+.debug-typography [role="button"]:not([aria-label="Accessibility Options"]) {
   outline: 2px solid #22c55e !important;
   outline-offset: 2px;
   position: relative;

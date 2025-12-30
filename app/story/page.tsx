@@ -155,7 +155,7 @@ export default function StoryPage() {
                 </span>
               </Reveal>
               <Reveal delay={120}>
-                <h2 className="story-section-title font-dm-serif font-bold text-5xl sm:text-6xl mb-8 leading-none">
+                <h2 className="story-section-title font-dm-serif font-bold text-[36px] sm:text-5xl md:text-6xl mb-8 leading-none">
                   How It{" "}
                   <span className="story-section-title-accent italic">
                     Began
@@ -166,7 +166,7 @@ export default function StoryPage() {
                 <div className="story-divider story-divider--black w-24 h-[2px] lg:ml-auto" />
               </Reveal>
               <Reveal delay={200}>
-                <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
+                <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed">
                   Riverside needed a place that felt different. Not a quick stop
                   for caffeine, but a{" "}
                   <strong className="story-strong">destination</strong>.
@@ -176,7 +176,7 @@ export default function StoryPage() {
                 </p>
               </Reveal>
               <Reveal delay={260}>
-                <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
+                <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed">
                   A space born from a love of{" "}
                   <strong className="story-strong">specialty coffee</strong> and{" "}
                   <strong className="story-strong">creative solitude</strong>.
@@ -185,7 +185,7 @@ export default function StoryPage() {
                 </p>
               </Reveal>
               <Reveal delay={320}>
-                <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
+                <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed">
                   From single-origin Mexican beans to custom-designed furniture,
                   every detail intentional. This isn&apos;t a corporate
                   playbook—it&apos;s a husband-wife team building their{" "}
@@ -264,7 +264,7 @@ export default function StoryPage() {
                 </span>
               </Reveal>
               <Reveal delay={120}>
-                <h2 className="story-section-title font-dm-serif font-bold text-5xl sm:text-6xl mb-8 leading-none">
+                <h2 className="story-section-title font-dm-serif font-bold text-[36px] sm:text-5xl md:text-6xl mb-8 leading-none">
                   Why{" "}
                   <span className="story-section-title-accent italic">
                     Here?
@@ -275,7 +275,7 @@ export default function StoryPage() {
                 <div className="story-divider story-divider--black w-24 h-[2px]" />
               </Reveal>
               <Reveal delay={200}>
-                <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
+                <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed">
                   Riverside sits at a cultural crossroads—near the art district,
                   close to University Drive&apos;s nightlife, accessible to
                   everyone. Remote workers, artists, students, night-owls: the
@@ -284,7 +284,7 @@ export default function StoryPage() {
                 </p>
               </Reveal>
               <Reveal delay={260}>
-                <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
+                <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed">
                   But more than that, we believed Riverside deserved better. A
                   café that reflects the city&apos;s creative spirit and
                   recognizes its potential. This isn&apos;t just a business for
@@ -378,8 +378,8 @@ export default function StoryPage() {
                 </span>
               </Reveal>
               <Reveal delay={120}>
-                <h2 className="font-dm-serif font-bold text-5xl md:text-6xl lg:text-7xl text-cafe-black mb-8 leading-none">
-                  Crafted for <br />
+                <h2 className="font-dm-serif font-bold text-[36px] sm:text-5xl md:text-6xl lg:text-7xl text-cafe-black mb-8 leading-none">
+                  Crafted for
                   <span className="story-section-title-accent italic">
                     Creatives
                   </span>
@@ -389,7 +389,7 @@ export default function StoryPage() {
                 <div className="story-divider story-divider--black w-24 h-[2px] lg:ml-auto" />
               </Reveal>
               <Reveal delay={200}>
-                <p className="story-body text-lg md:text-xl font-normal leading-relaxed mb-6">
+                <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed mb-6">
                   We sourced ethically, roast in small batches, and brew with
                   precision. Every cup carries not just flavor but a story:
                   direct-trade relationships from Chiapas and Oaxaca, terroir
@@ -397,7 +397,7 @@ export default function StoryPage() {
                 </p>
               </Reveal>
               <Reveal delay={260}>
-                <p className="story-body text-lg md:text-xl font-normal leading-relaxed mb-10">
+                <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed mb-10">
                   But coffee alone doesn&apos;t fuel creativity. That&apos;s why
                   we designed every detail—from custom furniture to curated
                   soundscapes—to support focus and inspiration. This space was
@@ -443,7 +443,7 @@ export default function StoryPage() {
               </span>
             </Reveal>
             <Reveal delay={100}>
-              <h2 className="story-section-title font-dm-serif font-bold text-5xl sm:text-6xl mb-6 leading-none">
+              <h2 className="story-section-title font-dm-serif font-bold text-[36px] sm:text-5xl md:text-6xl mb-6 leading-none">
                 What Makes Us{" "}
                 <span className="story-section-title-accent italic">
                   Unique
@@ -461,21 +461,21 @@ export default function StoryPage() {
             <Reveal delay={200}>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
-                    <Coffee
+                  <div className="story-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
+                    <MapPin
                       size={22}
-                      className="contact-icon"
+                      className="story-icon"
                       strokeWidth={1.5}
                     />
                   </div>
-                  <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
+                  <span className="story-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
                     Origin
                   </span>
                 </div>
                 <h3 className="font-serif text-3xl md:text-4xl leading-tight text-cafe-black">
                   Single-Origin Mexican Coffee
                 </h3>
-                <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
+                <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed">
                   We partner directly with farmers in Chiapas and Oaxaca,
                   building relationships that outlast trends. You taste that
                   commitment in every cup: complexity, terroir, and a supply
@@ -488,21 +488,17 @@ export default function StoryPage() {
             <Reveal delay={260}>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
-                    <Users
-                      size={22}
-                      className="contact-icon"
-                      strokeWidth={1.5}
-                    />
+                  <div className="story-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
+                    <Users size={22} className="story-icon" strokeWidth={1.5} />
                   </div>
-                  <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
+                  <span className="story-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
                     Design
                   </span>
                 </div>
                 <h3 className="font-serif text-3xl md:text-4xl leading-tight text-cafe-black">
                   100% Custom-Designed Space
                 </h3>
-                <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
+                <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed">
                   From the tables to the shelving, nothing came off a showroom
                   floor. Our founder designed this space specifically for how
                   people actually work and create here—seating angles, light
@@ -516,21 +512,17 @@ export default function StoryPage() {
             <Reveal delay={320}>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
-                    <Music
-                      size={22}
-                      className="contact-icon"
-                      strokeWidth={1.5}
-                    />
+                  <div className="story-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
+                    <Music size={22} className="story-icon" strokeWidth={1.5} />
                   </div>
-                  <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
+                  <span className="story-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
                     Atmosphere
                   </span>
                 </div>
                 <h3 className="font-serif text-3xl md:text-4xl leading-tight text-cafe-black">
                   Curated Soundscapes
                 </h3>
-                <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
+                <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed">
                   Deep house, neo-soul, lo-fi—we engineer your sonic landscape.
                   Music isn&apos;t background here. It&apos;s calibrated to keep
                   you grounded without demanding attention, so your mind stays
@@ -543,21 +535,17 @@ export default function StoryPage() {
             <Reveal delay={380}>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="contact-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
-                    <Heart
-                      size={22}
-                      className="contact-icon"
-                      strokeWidth={1.5}
-                    />
+                  <div className="story-icon-badge w-12 h-12 rounded-full flex items-center justify-center">
+                    <Heart size={22} className="story-icon" strokeWidth={1.5} />
                   </div>
-                  <span className="contact-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
+                  <span className="story-eyebrow text-xs uppercase tracking-[0.2em] font-bold font-inter">
                     Hospitality
                   </span>
                 </div>
                 <h3 className="font-serif text-3xl md:text-4xl leading-tight text-cafe-black">
                   Community First
                 </h3>
-                <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
+                <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed">
                   Riverside&apos;s living room. Nurse one coffee for three hours
                   or make it your office—there&apos;s no time limit, no
                   judgment. Students, creatives, nomads, neighbors: you belong
@@ -572,7 +560,7 @@ export default function StoryPage() {
       {/* Meet the Founders - Personal Profiles */}
       <section
         data-section="Meet the Founders"
-        className="relative py-24 md:py-32 overflow-hidden"
+        className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-cafe-tan/0 via-cafe-tan/12 to-cafe-tan/24"
       >
         <div
           className="section-deco"
@@ -602,7 +590,7 @@ export default function StoryPage() {
               </span>
             </Reveal>
             <Reveal delay={120}>
-              <h2 className="story-section-title font-dm-serif font-bold text-4xl md:text-6xl mt-4">
+              <h2 className="story-section-title font-dm-serif font-bold text-[36px] md:text-5xl lg:text-6xl mt-4">
                 Meet the{" "}
                 <span className="story-section-title-accent italic">
                   Founders & Owners
@@ -641,7 +629,7 @@ export default function StoryPage() {
 
                   <div className="story-divider story-divider--tan w-16 h-[2px]" />
 
-                  <p className="story-body text-lg md:text-xl font-normal leading-relaxed">
+                  <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed">
                     A husband-wife team with a shared vision: to create a coffee
                     shop that Riverside deserves. Michael brings expertise in
                     specialty coffee, sourcing, and extraction science, while

@@ -33,7 +33,7 @@ import Reveal from "@/app/components/ui/Reveal";
 import RevealText from "@/app/components/ui/RevealText";
 import FadeInSection from "@/app/components/ui/FadeInSection";
 import ContactForm from "@/app/components/features/ContactForm";
-import { MapPin, Clock, Phone, Mail, Coffee } from "lucide-react";
+import { MapPin, Clock, Phone, Mail, Coffee, ArrowUpRight } from "lucide-react";
 import "@/app/styles/pages/contact.css";
 import type { Metadata } from "next";
 import { SEO } from "@/app/lib/constants/seo";
@@ -97,7 +97,7 @@ const contactFAQs = [
 
 export default function ContactPage() {
   return (
-    <main className="contact-page min-h-screen relative">
+    <main className="contact-page min-h-screen relative bg-gradient-to-b from-cafe-tan/0 via-cafe-tan/12 to-cafe-tan/24">
       <FAQJsonLd items={contactFAQs} />
       <LocalBusinessJsonLd />
       <div className="contact-fixed-background" aria-hidden="true" />
@@ -207,9 +207,10 @@ export default function ContactPage() {
                     className="contact-directions-link inline-flex items-center gap-2 text-sm uppercase tracking-wider font-semibold transition-all duration-400 group pt-2"
                   >
                     <span>Get Directions</span>
-                    <span className="transition-transform duration-400 group-hover:translate-x-2">
-                      →
-                    </span>
+                    <ArrowUpRight
+                      size={16}
+                      className="transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+                    />
                   </a>
                 </div>
               </Reveal>
@@ -232,19 +233,19 @@ export default function ContactPage() {
 
                   <div className="space-y-4 w-full max-w-md">
                     <div className="flex justify-between items-baseline border-b border-cafe-tan/20 pb-2">
-                      <span className="text-cafe-brown/70 font-medium">
+                      <span className="font-serif text-cafe-brown/70 font-medium">
                         Monday – Friday
                       </span>
-                      <span className="font-serif text-xl text-cafe-black">
-                        7am — 6pm
+                      <span className="font-serif text-cafe-black">
+                        <span className="text-2xl">7</span><span className="text-sm">am</span> — <span className="text-2xl">6</span><span className="text-sm">pm</span>
                       </span>
                     </div>
                     <div className="flex justify-between items-baseline border-b border-cafe-tan/20 pb-2">
-                      <span className="text-cafe-brown/70 font-medium">
+                      <span className="font-serif text-cafe-brown/70 font-medium">
                         Saturday – Sunday
                       </span>
-                      <span className="font-serif text-xl text-cafe-black">
-                        7am — 3pm
+                      <span className="font-serif text-cafe-black">
+                        <span className="text-2xl">7</span><span className="text-sm">am</span> — <span className="text-2xl">3</span><span className="text-sm">pm</span>
                       </span>
                     </div>
                   </div>
@@ -322,7 +323,7 @@ export default function ContactPage() {
       {/* Map Section - Centered Map */}
       <section
         data-section="Map"
-        className="py-24 md:py-32 relative overflow-hidden bg-cafe-tan/5"
+        className="py-24 md:py-32 relative overflow-hidden"
       >
         <div
           className="section-deco contact-map-deco contact-map-deco--pin"

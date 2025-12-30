@@ -72,7 +72,7 @@ const INDEED_JOB_URL =
 
 export default function CareersPage() {
   return (
-    <main className="careers-page min-h-screen relative">
+    <main className="careers-page min-h-screen relative bg-gradient-to-b from-cafe-tan/0 via-cafe-tan/12 to-cafe-tan/24">
       <div className="careers-fixed-background" aria-hidden="true" />
       {/* Hero Section */}
       <section
@@ -115,7 +115,7 @@ export default function CareersPage() {
             </Reveal>
             <Reveal delay={120}>
               <h2
-                className="font-dm-serif font-bold text-5xl sm:text-6xl mb-8 leading-none"
+                className="font-dm-serif font-bold text-[36px] sm:text-5xl md:text-6xl mb-8 leading-none"
                 style={{ color: "var(--color-cafe-black)" }}
               >
                 A{" "}

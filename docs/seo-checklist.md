@@ -18,7 +18,7 @@ Last Updated: 2025-12-23
 - Home, Menu, Story, Careers, Contact
 - Legal pages (Privacy/Refunds/Terms) set to noindex
 - Studio set to noindex, nofollow
-- Style Guide is indexable (no robots override)
+- Design System dashboard is indexable (no robots override)
 
 ### 3. Structured Data (JSON-LD)
 - LocalBusiness schema on Home + Contact

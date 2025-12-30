@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@/app/components/ui/Button";
 
 export default function NewsletterForm({ source = "homepage", inline = false }: { source?: string; inline?: boolean }) {
   const [email, setEmail] = useState("");
@@ -129,16 +130,15 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
             e.currentTarget.style.boxShadow = "0 8px 28px rgba(var(--cafe-black-rgb), 0.06)";
           }}
         />
-	        <button
-	          type="submit"
-	          disabled={status === "loading"}
-            className="group relative inline-flex items-center justify-center px-8 py-4 sm:px-12 sm:py-4 rounded-sm uppercase tracking-[0.2em] text-2xs sm:text-xs font-semibold bg-cafe-brown text-cafe-white transition-all duration-300 disabled:opacity-50 hover:bg-cafe-tan hover:shadow-lg hover:-translate-y-0.5 overflow-hidden whitespace-nowrap shrink-0"
-	        >
-          <span className="relative z-10">
-            {status === "loading" ? "Subscribing…" : "Subscribe"}
-          </span>
-          <div className="absolute inset-0 bg-cafe-tan opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-        </button>
+        <Button
+          type="submit"
+          variant="primary"
+          size="md"
+          disabled={status === "loading"}
+          className="whitespace-nowrap shrink-0"
+        >
+          {status === "loading" ? "Subscribing…" : "Subscribe"}
+        </Button>
       </form>
 
       {msg && (

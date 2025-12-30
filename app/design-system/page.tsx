@@ -88,13 +88,6 @@ const COMPONENTS = {
   seo: ['LocalBusinessJsonLd', 'FAQJsonLd', 'MenuJsonLd'],
 };
 
-const BUTTON_VARIANTS = [
-  { name: 'Primary', classes: 'bg-cafe-black text-cafe-cream hover:bg-cafe-brown', usage: 'Main CTAs, form submissions' },
-  { name: 'Secondary', classes: 'bg-cafe-tan text-white hover:bg-cafe-tan-dark', usage: 'Secondary actions' },
-  { name: 'Outline', classes: 'border-2 border-cafe-black text-cafe-black hover:bg-cafe-black hover:text-cafe-cream', usage: 'Tertiary actions' },
-  { name: 'Ghost', classes: 'text-cafe-black hover:bg-cafe-black/5', usage: 'Minimal actions' },
-];
-
 const CODING_RULES = [
   { category: 'Imports', rule: 'Use absolute imports (@/app/...)', status: 'enforced' },
   { category: 'Components', rule: 'PascalCase naming (CartProvider.tsx)', status: 'enforced' },
@@ -109,7 +102,6 @@ const CODING_RULES = [
 const RECOMMENDATIONS = [
   { priority: 'high', issue: 'Duplicate validation functions', action: 'Extract to shared app/lib/server/validation.ts' },
   { priority: 'high', issue: 'Button inconsistency', action: 'Standardize all buttons to use Button component' },
-  { priority: 'medium', issue: 'Legacy CSS files', action: 'Delete 6 consolidated files from app/styles/' },
   { priority: 'medium', issue: 'Missing CartProvider tests', action: 'Add unit tests for cart state management' },
   { priority: 'low', issue: 'Cart ID generation', action: 'Replace Math.random() with crypto.randomUUID()' },
   { priority: 'low', issue: 'Rate limiting scope', action: 'Document serverless limitations or use Redis' },
@@ -659,562 +651,44 @@ export default function DesignSystemPage() {
         </div>
       </section>
 
-      {/* Buttons */}
-      <section id="buttons" className="py-24 px-6 bg-cafe-cream scroll-mt-16">
+      {/* Button System */}
+      <section id="buttons" className="py-24 px-6 bg-cafe-white scroll-mt-16">
         <div className="max-w-7xl mx-auto">
           <SectionHeader
             eyebrow="Interactive"
-            title="Button Variants"
-            subtitle="Consistent button styling with proper hover states, focus rings, and accessibility support."
+            title="Button System"
+            subtitle="A cohesive collection of interactive elements centered around the 'Editorial Luxe' aesthetic."
           />
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {BUTTON_VARIANTS.map((variant) => (
-              <div key={variant.name} className="p-6 bg-cafe-white rounded-xl">
-                <h4 className="text-sm font-semibold text-cafe-black mb-4">{variant.name}</h4>
-                <button
-                  type="button"
-                  className={`px-6 py-3 rounded-lg font-medium transition-all ${variant.classes}`}
-                  aria-label={`Example ${variant.name} button style`}
-                >
-                  View Menu
-                </button>
-                <p className="text-xs text-cafe-brown mt-4">{variant.usage}</p>
-                <code className="text-[10px] font-mono text-cafe-beige block mt-2 break-all">{variant.classes}</code>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 p-6 bg-cafe-white rounded-xl border-l-4 border-l-cafe-tan">
-            <h4 className="font-semibold text-cafe-black mb-2">Recommendation</h4>
-            <p className="text-sm text-cafe-brown">
-              Some pages use custom button classes instead of the Button component.
-              Standardize all buttons to use the Button component variants for consistency.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Button Exploration - 4 Directions */}
-      <section className="py-24 px-6 bg-cafe-white">
-        <div className="max-w-7xl mx-auto">
-          <SectionHeader
-            eyebrow="Exploration"
-            title="Button Directions"
-            subtitle="Four distinct approaches to button styling. Each captures a different aspect of The Notebook Cafe's personality."
-          />
-
-          {/* Direction 1: Warm & Inviting */}
-          <div className="mb-16">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-8 h-8 rounded-full bg-cafe-tan/20 flex items-center justify-center text-cafe-tan font-bold text-sm">1</span>
-              <div>
-                <h3 className="text-xl font-semibold text-cafe-black">Warm & Inviting</h3>
-                <p className="text-sm text-cafe-brown">Soft edges, earthy tones, cozy handwritten note feeling</p>
-              </div>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {/* Primary - Warm */}
-              <div className="p-6 bg-cafe-mist rounded-2xl">
-                <span className="text-xs text-cafe-tan-dark mb-3 block">Primary</span>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3.5 rounded-full bg-[#8b7355] text-cafe-cream font-medium transition-all duration-300 hover:bg-[#7a6349] hover:shadow-lg hover:shadow-[#8b7355]/20 hover:-translate-y-0.5"
-                >
-                  View Menu
-                </button>
-              </div>
-              {/* Secondary - Warm */}
-              <div className="p-6 bg-cafe-mist rounded-2xl">
-                <span className="text-xs text-cafe-tan-dark mb-3 block">Secondary</span>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3.5 rounded-full bg-cafe-cream text-cafe-brown font-medium transition-all duration-300 hover:bg-cafe-beige hover:-translate-y-0.5"
-                >
-                  Our Story
-                </button>
-              </div>
-              {/* Outline - Warm */}
-              <div className="p-6 bg-cafe-mist rounded-2xl">
-                <span className="text-xs text-cafe-tan-dark mb-3 block">Outline</span>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3.5 rounded-full border-2 border-cafe-beige text-cafe-brown font-medium transition-all duration-300 hover:border-[#8b7355] hover:text-[#8b7355]"
-                >
-                  Contact
-                </button>
-              </div>
-              {/* Ghost - Warm */}
-              <div className="p-6 bg-cafe-mist rounded-2xl">
-                <span className="text-xs text-cafe-tan-dark mb-3 block">Ghost</span>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3.5 rounded-full text-cafe-brown font-medium transition-all duration-300 hover:bg-cafe-cream/50"
-                >
-                  Learn More
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Direction 2: Editorial & Refined */}
-          <div className="mb-16">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-8 h-8 rounded-full bg-cafe-black/10 flex items-center justify-center text-cafe-black font-bold text-sm">2</span>
-              <div>
-                <h3 className="text-xl font-semibold text-cafe-black">Editorial & Refined</h3>
-                <p className="text-sm text-cafe-brown">Elegant, magazine-quality, sophisticated restraint</p>
-              </div>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {/* Primary - Editorial */}
-              <div className="p-6 bg-cafe-mist rounded-2xl">
-                <span className="text-xs text-cafe-tan-dark mb-3 block">Primary</span>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3 rounded-sm bg-cafe-black text-cafe-cream text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-cafe-brown"
-                >
-                  View Menu
-                </button>
-              </div>
-              {/* Secondary - Editorial */}
-              <div className="p-6 bg-cafe-mist rounded-2xl">
-                <span className="text-xs text-cafe-tan-dark mb-3 block">Secondary</span>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3 rounded-sm bg-cafe-tan text-cafe-white text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-cafe-tan-dark"
-                >
-                  Our Story
-                </button>
-              </div>
-              {/* Outline - Editorial */}
-              <div className="p-6 bg-cafe-mist rounded-2xl">
-                <span className="text-xs text-cafe-tan-dark mb-3 block">Outline</span>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3 rounded-sm border border-cafe-black text-cafe-black text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-cafe-black hover:text-cafe-cream"
-                >
-                  Contact
-                </button>
-              </div>
-              {/* Ghost - Editorial */}
-              <div className="p-6 bg-cafe-mist rounded-2xl">
-                <span className="text-xs text-cafe-tan-dark mb-3 block">Ghost</span>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3 rounded-sm text-cafe-black text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:text-cafe-tan border-b-2 border-transparent hover:border-cafe-tan"
-                >
-                  Learn More
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Direction 3: Playful & Creative */}
-          <div className="mb-16">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-8 h-8 rounded-full bg-[#c4a77d]/20 flex items-center justify-center text-[#c4a77d] font-bold text-sm">3</span>
-              <div>
-                <h3 className="text-xl font-semibold text-cafe-black">Playful & Creative</h3>
-                <p className="text-sm text-cafe-brown">Expressive, artsy, unexpected personality</p>
-              </div>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {/* Primary - Playful */}
-              <div className="p-6 bg-cafe-mist rounded-2xl">
-                <span className="text-xs text-cafe-tan-dark mb-3 block">Primary</span>
-                <button
-                  type="button"
-                  className="group w-full px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#8b7355] to-[#a48d78] text-cafe-cream font-medium transition-all duration-300 hover:shadow-xl hover:shadow-[#8b7355]/25 hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  <span className="inline-flex items-center gap-2">
-                    View Menu
-                    <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                  </span>
-                </button>
-              </div>
-              {/* Secondary - Playful */}
-              <div className="p-6 bg-cafe-mist rounded-2xl">
-                <span className="text-xs text-cafe-tan-dark mb-3 block">Secondary</span>
-                <button
-                  type="button"
-                  className="group w-full px-6 py-3.5 rounded-xl bg-cafe-cream text-cafe-brown font-medium transition-all duration-300 hover:bg-cafe-beige hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden"
-                >
-                  Our Story
-                </button>
-              </div>
-              {/* Outline - Playful */}
-              <div className="p-6 bg-cafe-mist rounded-2xl">
-                <span className="text-xs text-cafe-tan-dark mb-3 block">Outline</span>
-                <button
-                  type="button"
-                  className="group w-full px-6 py-3.5 rounded-xl border-2 border-dashed border-cafe-tan text-cafe-brown font-medium transition-all duration-300 hover:border-solid hover:bg-cafe-tan/10"
-                >
-                  Contact
-                </button>
-              </div>
-              {/* Ghost - Playful */}
-              <div className="p-6 bg-cafe-mist rounded-2xl">
-                <span className="text-xs text-cafe-tan-dark mb-3 block">Ghost</span>
-                <button
-                  type="button"
-                  className="group w-full px-6 py-3.5 rounded-xl text-cafe-brown font-medium transition-all duration-300 hover:text-[#8b7355]"
-                >
-                  <span className="relative">
-                    Learn More
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#8b7355] transition-all duration-300 group-hover:w-full" />
-                  </span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Direction 4: Moody & Atmospheric */}
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-8 h-8 rounded-full bg-cafe-black/80 flex items-center justify-center text-cafe-cream font-bold text-sm">4</span>
-              <div>
-                <h3 className="text-xl font-semibold text-cafe-black">Moody & Atmospheric</h3>
-                <p className="text-sm text-cafe-brown">Low-light lounge energy, intimate, smooth transitions</p>
-              </div>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {/* Primary - Moody */}
-              <div className="p-6 bg-[#2c2420] rounded-2xl">
-                <span className="text-xs text-cafe-beige mb-3 block">Primary</span>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3.5 rounded-lg bg-cafe-tan text-cafe-black font-medium transition-all duration-500 hover:bg-cafe-cream hover:shadow-lg hover:shadow-cafe-tan/30"
-                >
-                  View Menu
-                </button>
-              </div>
-              {/* Secondary - Moody */}
-              <div className="p-6 bg-[#2c2420] rounded-2xl">
-                <span className="text-xs text-cafe-beige mb-3 block">Secondary</span>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3.5 rounded-lg bg-cafe-brown/50 text-cafe-cream font-medium transition-all duration-500 hover:bg-cafe-brown hover:shadow-lg hover:shadow-cafe-brown/20"
-                >
-                  Our Story
-                </button>
-              </div>
-              {/* Outline - Moody */}
-              <div className="p-6 bg-[#2c2420] rounded-2xl">
-                <span className="text-xs text-cafe-beige mb-3 block">Outline</span>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3.5 rounded-lg border border-cafe-beige/40 text-cafe-beige font-medium transition-all duration-500 hover:border-cafe-tan hover:text-cafe-tan hover:shadow-lg hover:shadow-cafe-tan/10"
-                >
-                  Contact
-                </button>
-              </div>
-              {/* Ghost - Moody */}
-              <div className="p-6 bg-[#2c2420] rounded-2xl">
-                <span className="text-xs text-cafe-beige mb-3 block">Ghost</span>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3.5 rounded-lg text-cafe-beige/70 font-medium transition-all duration-500 hover:text-cafe-cream hover:bg-white/5"
-                >
-                  Learn More
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Comparison note */}
-          <div className="mt-12 p-6 bg-cafe-mist rounded-xl border border-cafe-tan/20">
-            <h4 className="font-semibold text-cafe-black mb-2">Which direction speaks to you?</h4>
-            <p className="text-sm text-cafe-brown">
-              Consider how each style feels when you imagine clicking &quot;Order Now&quot; at 10pm with lo-fi playing.
-              The right buttons should feel like an extension of the cafe&apos;s atmosphere.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Color Exploration - Editorial Style */}
-      <section className="py-24 px-6 bg-cafe-cream">
-        <div className="max-w-7xl mx-auto">
-          <SectionHeader
-            eyebrow="Color Exploration"
-            title="Editorial Palette Options"
-            subtitle="Testing warmer browns for primary buttons and different accents for secondary. All in the Editorial & Refined style."
-          />
-
-          {/* Primary Brown Options */}
-          <div className="mb-20">
-            <h3 className="text-2xl font-display text-cafe-black mb-2">Primary Button Colors</h3>
-            <p className="text-sm text-cafe-brown mb-8">Warmer alternatives to pure black. Hover to see the darker state.</p>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* Coffee Brown */}
-              <div className="p-6 bg-cafe-white rounded-2xl">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="w-6 h-6 rounded-full bg-[#5c4a3a]" />
-                  <div>
-                    <h4 className="text-sm font-semibold text-cafe-black">Coffee Brown</h4>
-                    <code className="text-[10px] text-cafe-tan-dark">#5c4a3a → #4a3c2f</code>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3 rounded-sm bg-[#5c4a3a] text-cafe-cream text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#4a3c2f] hover:shadow-lg hover:shadow-[#5c4a3a]/25"
-                >
-                  View Menu
-                </button>
-                <p className="text-xs text-cafe-brown mt-3">Rich, roasted, like fresh espresso</p>
-              </div>
-
-              {/* Walnut */}
-              <div className="p-6 bg-cafe-white rounded-2xl">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="w-6 h-6 rounded-full bg-[#6b5344]" />
-                  <div>
-                    <h4 className="text-sm font-semibold text-cafe-black">Walnut</h4>
-                    <code className="text-[10px] text-cafe-tan-dark">#6b5344 → #574436</code>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3 rounded-sm bg-[#6b5344] text-cafe-cream text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#574436] hover:shadow-lg hover:shadow-[#6b5344]/25"
-                >
-                  View Menu
-                </button>
-                <p className="text-xs text-cafe-brown mt-3">Warmer, woody, inviting</p>
-              </div>
-
-              {/* Mocha */}
-              <div className="p-6 bg-cafe-white rounded-2xl">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="w-6 h-6 rounded-full bg-[#7a6352]" />
-                  <div>
-                    <h4 className="text-sm font-semibold text-cafe-black">Mocha</h4>
-                    <code className="text-[10px] text-cafe-tan-dark">#7a6352 → #655143</code>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3 rounded-sm bg-[#7a6352] text-cafe-cream text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#655143] hover:shadow-lg hover:shadow-[#7a6352]/25"
-                >
-                  View Menu
-                </button>
-                <p className="text-xs text-cafe-brown mt-3">Lighter, milk chocolate territory</p>
-              </div>
-
-              {/* Chestnut */}
-              <div className="p-6 bg-cafe-white rounded-2xl">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="w-6 h-6 rounded-full bg-[#8b7355]" />
-                  <div>
-                    <h4 className="text-sm font-semibold text-cafe-black">Chestnut</h4>
-                    <code className="text-[10px] text-cafe-tan-dark">#8b7355 → #7a6349</code>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3 rounded-sm bg-[#8b7355] text-cafe-cream text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#7a6349] hover:shadow-lg hover:shadow-[#8b7355]/25"
-                >
-                  View Menu
-                </button>
-                <p className="text-xs text-cafe-brown mt-3">Warm brown from Direction 1</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Secondary Accent Options */}
-          <div className="mb-20">
-            <h3 className="text-2xl font-display text-cafe-black mb-2">Secondary Button Colors</h3>
-            <p className="text-sm text-cafe-brown mb-8">Accent alternatives to tan. Each brings a different personality.</p>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* Terracotta */}
-              <div className="p-6 bg-cafe-white rounded-2xl">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="w-6 h-6 rounded-full bg-[#c4846c]" />
-                  <div>
-                    <h4 className="text-sm font-semibold text-cafe-black">Terracotta</h4>
-                    <code className="text-[10px] text-cafe-tan-dark">#c4846c → #b3735b</code>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3 rounded-sm bg-[#c4846c] text-white text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#b3735b] hover:shadow-lg hover:shadow-[#c4846c]/25"
-                >
-                  Our Story
-                </button>
-                <p className="text-xs text-cafe-brown mt-3">Earthy, warm, artisanal feel</p>
-              </div>
-
-              {/* Dusty Rose */}
-              <div className="p-6 bg-cafe-white rounded-2xl">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="w-6 h-6 rounded-full bg-[#c9a396]" />
-                  <div>
-                    <h4 className="text-sm font-semibold text-cafe-black">Dusty Rose</h4>
-                    <code className="text-[10px] text-cafe-tan-dark">#c9a396 → #b89285</code>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3 rounded-sm bg-[#c9a396] text-white text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#b89285] hover:shadow-lg hover:shadow-[#c9a396]/25"
-                >
-                  Our Story
-                </button>
-                <p className="text-xs text-cafe-brown mt-3">Soft, sophisticated, unexpected</p>
-              </div>
-
-              {/* Sage */}
-              <div className="p-6 bg-cafe-white rounded-2xl">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="w-6 h-6 rounded-full bg-[#8a9a7a]" />
-                  <div>
-                    <h4 className="text-sm font-semibold text-cafe-black">Sage</h4>
-                    <code className="text-[10px] text-cafe-tan-dark">#8a9a7a → #798969</code>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3 rounded-sm bg-[#8a9a7a] text-white text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#798969] hover:shadow-lg hover:shadow-[#8a9a7a]/25"
-                >
-                  Our Story
-                </button>
-                <p className="text-xs text-cafe-brown mt-3">Natural, grounding, coffee-plant vibes</p>
-              </div>
-
-              {/* Copper */}
-              <div className="p-6 bg-cafe-white rounded-2xl">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="w-6 h-6 rounded-full bg-[#bf8a5a]" />
-                  <div>
-                    <h4 className="text-sm font-semibold text-cafe-black">Copper</h4>
-                    <code className="text-[10px] text-cafe-tan-dark">#bf8a5a → #a87a4d</code>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="w-full px-6 py-3 rounded-sm bg-[#bf8a5a] text-white text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#a87a4d] hover:shadow-lg hover:shadow-[#bf8a5a]/25"
-                >
-                  Our Story
-                </button>
-                <p className="text-xs text-cafe-brown mt-3">Warm metallic energy, premium feel</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Combined Examples */}
-          <div>
-            <h3 className="text-2xl font-display text-cafe-black mb-2">Recommended Combinations</h3>
-            <p className="text-sm text-cafe-brown mb-8">Primary + Secondary pairings that work well together.</p>
-
+          {/* 1. The Chosen Style: Editorial Luxe */}
+          <div className="mb-24">
+            <h3 className="text-2xl font-display text-cafe-black mb-6">Primary System: Editorial Luxe</h3>
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Combo 1: Walnut + Terracotta */}
-              <div className="p-8 bg-cafe-white rounded-2xl border border-cafe-tan/10">
-                <h4 className="text-lg font-semibold text-cafe-black mb-1">Walnut + Terracotta</h4>
-                <p className="text-xs text-cafe-tan-dark mb-6">Earthy and warm — artisanal coffee house</p>
-                <div className="flex flex-wrap gap-3">
-                  <button type="button" className="px-6 py-3 rounded-sm bg-[#6b5344] text-cafe-cream text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#574436] hover:shadow-lg">
-                    View Menu
-                  </button>
-                  <button type="button" className="px-6 py-3 rounded-sm bg-[#c4846c] text-white text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#b3735b] hover:shadow-lg">
-                    Our Story
-                  </button>
-                  <button type="button" className="px-6 py-3 rounded-sm border border-[#6b5344] text-[#6b5344] text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#6b5344] hover:text-cafe-cream">
-                    Contact
-                  </button>
+              {/* Primary Action */}
+              <div className="p-10 bg-cafe-mist rounded-2xl border border-cafe-tan/10 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-mono uppercase tracking-widest text-cafe-tan-dark mb-6">Primary Action</span>
+                <button className="px-10 py-3.5 rounded-none bg-[#cbbfaf] text-[#2c2420] font-medium tracking-[0.15em] uppercase text-xs transition-all duration-300 hover:bg-[#b2a698] hover:shadow-sm">
+                  Add to Cart
+                </button>
+                <div className="mt-8 text-left max-w-xs">
+                  <p className="text-sm font-semibold text-cafe-black mb-1">Editorial Sharp</p>
+                  <p className="text-xs text-cafe-brown leading-relaxed">
+                    Precise 90° corners. Luxe Oat background that toasts slightly darker (#b2a698) on hover. High-fashion tracking.
+                  </p>
                 </div>
               </div>
 
-              {/* Combo 2: Coffee + Copper */}
-              <div className="p-8 bg-cafe-white rounded-2xl border border-cafe-tan/10">
-                <h4 className="text-lg font-semibold text-cafe-black mb-1">Coffee + Copper</h4>
-                <p className="text-xs text-cafe-tan-dark mb-6">Rich and premium — specialty roaster energy</p>
-                <div className="flex flex-wrap gap-3">
-                  <button type="button" className="px-6 py-3 rounded-sm bg-[#5c4a3a] text-cafe-cream text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#4a3c2f] hover:shadow-lg">
-                    View Menu
-                  </button>
-                  <button type="button" className="px-6 py-3 rounded-sm bg-[#bf8a5a] text-white text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#a87a4d] hover:shadow-lg">
-                    Our Story
-                  </button>
-                  <button type="button" className="px-6 py-3 rounded-sm border border-[#5c4a3a] text-[#5c4a3a] text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#5c4a3a] hover:text-cafe-cream">
-                    Contact
-                  </button>
-                </div>
-              </div>
-
-              {/* Combo 3: Mocha + Dusty Rose */}
-              <div className="p-8 bg-cafe-white rounded-2xl border border-cafe-tan/10">
-                <h4 className="text-lg font-semibold text-cafe-black mb-1">Mocha + Dusty Rose</h4>
-                <p className="text-xs text-cafe-tan-dark mb-6">Soft and sophisticated — modern cafe aesthetic</p>
-                <div className="flex flex-wrap gap-3">
-                  <button type="button" className="px-6 py-3 rounded-sm bg-[#7a6352] text-cafe-cream text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#655143] hover:shadow-lg">
-                    View Menu
-                  </button>
-                  <button type="button" className="px-6 py-3 rounded-sm bg-[#c9a396] text-white text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#b89285] hover:shadow-lg">
-                    Our Story
-                  </button>
-                  <button type="button" className="px-6 py-3 rounded-sm border border-[#7a6352] text-[#7a6352] text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#7a6352] hover:text-cafe-cream">
-                    Contact
-                  </button>
-                </div>
-              </div>
-
-              {/* Combo 4: Chestnut + Sage */}
-              <div className="p-8 bg-cafe-white rounded-2xl border border-cafe-tan/10">
-                <h4 className="text-lg font-semibold text-cafe-black mb-1">Chestnut + Sage</h4>
-                <p className="text-xs text-cafe-tan-dark mb-6">Natural and grounded — botanical coffee vibes</p>
-                <div className="flex flex-wrap gap-3">
-                  <button type="button" className="px-6 py-3 rounded-sm bg-[#8b7355] text-cafe-cream text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#7a6349] hover:shadow-lg">
-                    View Menu
-                  </button>
-                  <button type="button" className="px-6 py-3 rounded-sm bg-[#8a9a7a] text-white text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#798969] hover:shadow-lg">
-                    Our Story
-                  </button>
-                  <button type="button" className="px-6 py-3 rounded-sm border border-[#8b7355] text-[#8b7355] text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#8b7355] hover:text-cafe-cream">
-                    Contact
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Dark background test */}
-          <div className="mt-16">
-            <h3 className="text-2xl font-display text-cafe-black mb-2">On Dark Backgrounds</h3>
-            <p className="text-sm text-cafe-brown mb-8">How the combinations look in moody/dark contexts (footer, hero overlays).</p>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Dark: Walnut + Terracotta */}
-              <div className="p-8 bg-[#2c2420] rounded-2xl">
-                <h4 className="text-lg font-semibold text-cafe-cream mb-1">Walnut + Terracotta</h4>
-                <p className="text-xs text-cafe-beige mb-6">On dark background</p>
-                <div className="flex flex-wrap gap-3">
-                  <button type="button" className="px-6 py-3 rounded-sm bg-[#6b5344] text-cafe-cream text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#7a6352] hover:shadow-lg hover:shadow-[#6b5344]/30">
-                    View Menu
-                  </button>
-                  <button type="button" className="px-6 py-3 rounded-sm bg-[#c4846c] text-white text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#d4947c] hover:shadow-lg hover:shadow-[#c4846c]/30">
-                    Our Story
-                  </button>
-                  <button type="button" className="px-6 py-3 rounded-sm border border-cafe-beige/50 text-cafe-beige text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:border-cafe-cream hover:text-cafe-cream">
-                    Contact
-                  </button>
-                </div>
-              </div>
-
-              {/* Dark: Coffee + Copper */}
-              <div className="p-8 bg-[#2c2420] rounded-2xl">
-                <h4 className="text-lg font-semibold text-cafe-cream mb-1">Coffee + Copper</h4>
-                <p className="text-xs text-cafe-beige mb-6">On dark background</p>
-                <div className="flex flex-wrap gap-3">
-                  <button type="button" className="px-6 py-3 rounded-sm bg-[#5c4a3a] text-cafe-cream text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#6b5344] hover:shadow-lg hover:shadow-[#5c4a3a]/30">
-                    View Menu
-                  </button>
-                  <button type="button" className="px-6 py-3 rounded-sm bg-[#bf8a5a] text-white text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:bg-[#cf9a6a] hover:shadow-lg hover:shadow-[#bf8a5a]/30">
-                    Our Story
-                  </button>
-                  <button type="button" className="px-6 py-3 rounded-sm border border-cafe-beige/50 text-cafe-beige text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:border-cafe-cream hover:text-cafe-cream">
-                    Contact
-                  </button>
+              {/* Secondary Action */}
+              <div className="p-10 bg-cafe-mist rounded-2xl border border-cafe-tan/10 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-mono uppercase tracking-widest text-cafe-tan-dark mb-6">Secondary Action</span>
+                <button className="px-10 py-3.5 rounded-none border border-[#cbbfaf] text-[#2c2420] font-medium tracking-[0.15em] uppercase text-xs transition-all duration-300 hover:bg-[#cbbfaf] hover:shadow-sm">
+                  View Details
+                </button>
+                <div className="mt-8 text-left max-w-xs">
+                  <p className="text-sm font-semibold text-cafe-black mb-1">Editorial Outline</p>
+                  <p className="text-xs text-cafe-brown leading-relaxed">
+                    Clean 1px Luxe Oat border. Fills smoothly with oat color on hover. Maintains the sharp editorial silhouette.
+                  </p>
                 </div>
               </div>
             </div>
@@ -1222,8 +696,6 @@ export default function DesignSystemPage() {
 
         </div>
       </section>
-
-      {/* Spacing & Layout */}
       <section id="spacing" className="py-24 px-6 bg-cafe-mist scroll-mt-16">
         <div className="max-w-7xl mx-auto">
           <SectionHeader
@@ -1573,7 +1045,7 @@ export default function DesignSystemPage() {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12">
             <StatCard label="Critical" value="0" color="bg-red-500" />
             <StatCard label="High" value="2" color="bg-orange-500" />
-            <StatCard label="Medium" value="2" color="bg-yellow-500" />
+            <StatCard label="Medium" value="1" color="bg-yellow-500" />
             <StatCard label="Low" value="2" color="bg-blue-500" />
             <StatCard label="Info" value="1" color="bg-blue-400" />
           </div>
@@ -1596,14 +1068,6 @@ export default function DesignSystemPage() {
               location="Multiple components"
               description="Some pages use custom button classes while others use the Button component, leading to visual inconsistencies."
               recommendation="Standardize all buttons to use the Button component variants. Audit all files for raw <button> elements with custom styling."
-            />
-
-            <IssueCard
-              severity="medium"
-              title="Legacy CSS Files"
-              location="app/styles/"
-              description="6 CSS files have been consolidated into globals.css but the original files still exist, causing potential confusion."
-              recommendation="Delete the consolidated CSS files: announcement.css, buttons.css, consent-banner.css, footer.css, animations.css, sections.css"
             />
 
             <IssueCard

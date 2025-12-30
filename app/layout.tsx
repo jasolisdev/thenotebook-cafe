@@ -172,7 +172,7 @@ export default async function RootLayout({
             </CartProvider>
           </ErrorBoundary>
           {/* Typography Debug - Remove or set enabled={false} to disable */}
-          <TypographyDebug />
+          <TypographyDebug enabled={false} />
         </ThemeProvider>
       </body>
     </html>

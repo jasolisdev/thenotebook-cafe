@@ -116,7 +116,7 @@ export default function MenuPage() {
   return (
     <>
       <main
-        className="menu-page min-h-screen pb-32 relative" /* Added relative for z-index context */
+        className="menu-page min-h-screen pb-32 relative bg-gradient-to-b from-cafe-tan/0 via-cafe-tan/12 to-cafe-tan/24" /* Added relative for z-index context */
       >
         {/* Fixed background layer for mobile compatibility */}
         <div className="menu-fixed-background" aria-hidden="true" />
@@ -147,15 +147,15 @@ export default function MenuPage() {
 
         {/* Sticky Tabs Container */}
         <div
-          className="menu-sticky-tabs px-4 md:relative md:static transition-all duration-300"
+          className="menu-sticky-tabs w-full md:px-4 md:relative md:static transition-all duration-300 z-30"
           ref={tabsRef}
           style={{
             top: isHeaderVisible ? 'var(--site-header-height, 80px)' : '0px',
           }}
         >
-          <div className="max-w-md mx-auto">
+          <div className="w-full md:max-w-md md:mx-auto">
             <div
-              className="menu-tabs-wrapper rounded-2xl shadow-xl p-2 flex flex-col sm:flex-row items-center gap-3 border"
+              className="menu-tabs-wrapper w-full md:w-auto rounded-none md:rounded-2xl shadow-sm md:shadow-xl p-0 md:p-2 flex flex-row items-stretch md:items-center justify-center border-b md:border bg-[#FAF9F6] md:bg-white"
             >
               {/* Section Tabs */}
               <MenuTabs activeSection={activeSection} onChange={handleTabChange} />

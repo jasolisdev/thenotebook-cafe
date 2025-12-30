@@ -26,7 +26,7 @@ const MenuSection: React.FC = () => {
                 </span>
               </Reveal>
               <Reveal delay={100}>
-                <h2 className="text-4xl md:text-5xl font-bold font-display text-cafe-black">
+                <h2 className="text-[36px] sm:text-5xl md:text-6xl font-bold font-display text-cafe-black whitespace-nowrap sm:whitespace-normal">
                   From Our <span className="text-cafe-tan">Kitchen</span>
                 </h2>
               </Reveal>
@@ -47,13 +47,9 @@ const MenuSection: React.FC = () => {
               </Reveal>
               <Reveal delay={260}>
                 <div className="hidden lg:flex">
-                  <Button
-                    href="/menu"
-                    variant="primary"
-                    className="bg-cafe-brown text-cafe-cream hover:bg-cafe-black"
-                  >
+                  <Button href="/menu" variant="secondary">
                     View Full Menu →
-                  </Button>
+                  </Button>{" "}
                 </div>
               </Reveal>
             </div>
@@ -87,19 +83,15 @@ const MenuSection: React.FC = () => {
                 </div>
               </FadeInSection>
               <div className="mt-10 flex justify-center lg:hidden">
-                <Button
-                  href="/menu"
-                  variant="primary"
-                  className="bg-cafe-brown text-cafe-cream hover:bg-cafe-black"
-                >
+                <Button href="/menu" variant="secondary">
                   View Full Menu →
-                </Button>
+                </Button>{" "}
               </div>
             </div>
           </div>
         </div>
 
-          {/*
+        {/*
           <Reveal>
             <span className="text-[10px] uppercase tracking-[0.3em] text-cafe-tan-dark font-bold font-inter block mb-4">
               The Selection

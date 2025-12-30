@@ -14,7 +14,7 @@ const CAFE_INFO = {
 
 const HeroSection: React.FC = () => {
   return (
-    <div className="relative w-full min-h-[90svh] md:min-h-[100svh] overflow-hidden bg-cafe-mist flex flex-col items-center">
+    <div className="relative w-full min-h-[95svh] md:min-h-[100svh] overflow-hidden bg-cafe-mist flex flex-col items-center">
       {/* Hero Content Section - Now flex-grow to push bar down */}
       <div className="relative w-full flex-grow flex flex-col items-center justify-center pt-12 md:pt-16 pb-0 md:pb-0">
         {/* Hero Background Image */}
@@ -46,7 +46,7 @@ const HeroSection: React.FC = () => {
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center justify-center h-full">
           <div className="max-w-5xl w-full text-center flex flex-col items-center mt-6 md:mt-0">
             <div className="mb-8 md:mb-10">
-              <h1 className="leading-[1.1] md:leading-[0.9] tracking-tight font-serif text-white text-[38px] md:text-[84px] lg:text-[111px] drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+              <h1 className="leading-[1.1] md:leading-[0.9] tracking-tight font-serif text-white text-[40px] md:text-[84px] lg:text-[111px] drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                 <RevealText>
                   <span className="block font-bold whitespace-nowrap">
                     Where Every Cup
@@ -82,7 +82,7 @@ const HeroSection: React.FC = () => {
           className="max-w-7xl mx-auto px-6 lg:px-12 w-full flex flex-col md:flex-row items-center justify-center md:justify-between space-y-10 md:space-y-0"
         >
           {/* Location Segment */}
-          <div className="flex flex-col items-center text-center max-w-xs">
+          <div className="flex flex-col items-center text-center max-w-xs pt-[5px]">
             <div className="flex items-center space-x-2 mb-3 text-cafe-brown">
               <MapPin size={16} />
               <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold font-inter">
@@ -117,12 +117,16 @@ const HeroSection: React.FC = () => {
             </div>
             <div className="font-serif leading-tight">
               <p className="text-xl md:text-2xl text-cafe-brown tracking-tight leading-snug">
-                Mon - Fri: <br className="md:hidden" />{" "}
-                <span className="italic font-light">7am - 6pm</span>
+                Mon - Fri:{" "}
+                <span className="italic font-light ml-6">
+                  <span className="text-2xl md:text-3xl">7</span><span className="text-sm">am</span> - <span className="text-2xl md:text-3xl">6</span><span className="text-sm">pm</span>
+                </span>
               </p>
               <p className="text-xl md:text-2xl text-cafe-brown tracking-tight leading-snug mt-2">
-                Sat - Sun: <br className="md:hidden" />{" "}
-                <span className="italic font-light">7am - 3pm</span>
+                Sat - Sun:{" "}
+                <span className="italic font-light ml-6">
+                  <span className="text-2xl md:text-3xl">7</span><span className="text-sm">am</span> - <span className="text-2xl md:text-3xl">3</span><span className="text-sm">pm</span>
+                </span>
               </p>
             </div>
           </div>

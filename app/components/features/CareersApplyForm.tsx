@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useRef, useState } from "react";
+import { Button } from "@/app/components/ui/Button";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -123,13 +124,15 @@ export default function CareersApplyForm() {
           <p className="text-cafe-brown/80 max-w-xs text-sm">
             Thanks for applying. We&apos;ll review your resume and reach out soon.
           </p>
-          <button
+          <Button
             type="button"
-            className="btn-primary"
+            variant="primary"
+            size="lg"
+            fullWidth
             onClick={() => setSubmitStatus("idle")}
           >
             Send Another
-          </button>
+          </Button>
         </div>
       </div>
     );
@@ -258,9 +261,9 @@ export default function CareersApplyForm() {
         <span style={{ fontSize: "0.75rem", opacity: 0.6 }}>PDF, DOC, or DOCX (Max 5MB)</span>
       </div>
 
-      <button type="button" disabled className="btn-primary opacity-50 cursor-not-allowed">
+      <Button type="button" variant="primary" size="lg" fullWidth disabled>
         Applications Closed
-      </button>
+      </Button>
 
       {submitStatus === "error" && (
         <p className="text-center font-medium" style={{ color: "#ef4444" }}>
