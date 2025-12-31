@@ -47,7 +47,7 @@ const MenuSection: React.FC = () => {
               </Reveal>
               <Reveal delay={260}>
                 <div className="hidden lg:flex">
-                  <Button href="/menu" variant="secondary">
+                  <Button href="/menu" variant="cta" className="px-10 py-4">
                     View Full Menu →
                   </Button>{" "}
                 </div>
@@ -83,7 +83,7 @@ const MenuSection: React.FC = () => {
                 </div>
               </FadeInSection>
               <div className="mt-10 flex justify-center lg:hidden">
-                <Button href="/menu" variant="secondary">
+                <Button href="/menu" variant="cta" className="px-10 py-4">
                   View Full Menu →
                 </Button>{" "}
               </div>

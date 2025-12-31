@@ -601,12 +601,45 @@ body[data-nav-open="true"] button[aria-label="Accessibility Options"] {
   z-index: 9999;
 }
 
-.acc-text-lg {
-  font-size: 1.125rem;
+/* Prevent horizontal scroll when accessibility text sizes are active */
+html.acc-text-lg,
+html.acc-text-xl {
+  overflow-x: hidden;
 }
 
-.acc-text-xl {
-  font-size: 1.35rem;
+/* Scale all text elements when accessibility text size is enabled */
+.acc-text-lg p,
+.acc-text-lg li,
+.acc-text-lg span,
+.acc-text-lg a,
+.acc-text-lg button,
+.acc-text-lg label,
+.acc-text-lg input,
+.acc-text-lg textarea {
+  font-size: 1.125em !important;
+}
+
+.acc-text-xl p,
+.acc-text-xl li,
+.acc-text-xl span,
+.acc-text-xl a,
+.acc-text-xl button,
+.acc-text-xl label,
+.acc-text-xl input,
+.acc-text-xl textarea {
+  font-size: 1.35em !important;
+}
+
+/* Mobile: Don't scale headings - they're already sized for viewport */
+@media (max-width: 767px) {
+  .acc-text-lg h1,
+  .acc-text-lg h2,
+  .acc-text-lg h3,
+  .acc-text-xl h1,
+  .acc-text-xl h2,
+  .acc-text-xl h3 {
+    font-size: inherit !important;
+  }
 }
 
 .acc-readable-font {
@@ -1748,6 +1781,26 @@ body[data-nav-open="true"] button[aria-label="Accessibility Options"] {
   transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1); /* Closing: no delay */
   will-change: transform;
   pointer-events: none;
+}
+
+/* Desktop: side drawer instead of fullscreen, no layered animation */
+@media (min-width: 768px) {
+  .acc-widget-panel {
+    width: 380px;
+    max-width: 380px;
+    box-shadow:
+      inset 0 0 80px rgba(164, 141, 120, 0.08),
+      4px 0 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .acc-widget-panel.open {
+    transition-delay: 0s;
+  }
+
+  .acc-layer-backdrop {
+    display: none !important;
+  }
 }
 
 .acc-widget-panel.open {

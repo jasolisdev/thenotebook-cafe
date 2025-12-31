@@ -213,8 +213,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
             <button
               onClick={close}
               aria-label="Close modal"
-              className="p-2 rounded-full transition-colors"
-              style={{ backgroundColor: `${colors.mist}CC`, color: colors.black }}
+              className="p-2 rounded-full transition-colors bg-cafe-black text-cafe-white hover:bg-cafe-brown"
             >
               <X size={24} />
             </button>
@@ -233,8 +232,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
             <button
               onClick={close}
               aria-label="Close modal"
-              className="absolute top-4 right-4 p-2 rounded-full text-white transition-colors z-20"
-              style={{ backgroundColor: 'rgba(0,0,0,0.35)' }}
+              className="absolute top-4 right-4 p-2 rounded-full text-cafe-white bg-cafe-black transition-colors hover:bg-cafe-brown z-20"
             >
               <X size={24} />
             </button>
@@ -460,6 +458,7 @@ const ProductModalContent: React.FC<ProductModalContentProps> = ({
               </p>
               <Button
                 fullWidth
+                variant="cta"
                 onClick={close}
                 className="h-12 sm:h-14 flex justify-center items-center px-6 text-sm sm:text-base"
               >

@@ -97,7 +97,7 @@ const contactFAQs = [
 
 export default function ContactPage() {
   return (
-    <main className="contact-page min-h-screen relative bg-gradient-to-b from-cafe-tan/0 via-cafe-tan/12 to-cafe-tan/24">
+    <main className="contact-page min-h-screen relative">
       <FAQJsonLd items={contactFAQs} />
       <LocalBusinessJsonLd />
       <div className="contact-fixed-background" aria-hidden="true" />

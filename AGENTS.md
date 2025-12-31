@@ -229,14 +229,35 @@ All API routes are protected by three layers:
    - Allows localhost, production domain, Vercel previews
 
 2. **Rate Limiting** (`app/lib/server/rateLimit.ts`)
-   - In-memory IP-based limiting
-   - Configurable per endpoint
-   - Returns 429 with Retry-After header
+   - IP-based limiting with configurable windows
+   - **In-memory by default** (suitable for single-server/Vercel)
+   - **Optional Redis support** for multi-server scaling (see below)
+   - Returns 429 with Retry-After and X-RateLimit-* headers
 
-3. **Input Sanitization** (`app/lib/server/sanitize.ts`)
+3. **Input Validation** (`app/lib/server/validation.ts`)
+   - Centralized validation utilities (normalizeEmail, normalizeText, etc.)
+   - XSS prevention via dangerous character rejection
+   - Consistent validation across all API routes
+
+4. **Input Sanitization** (`app/lib/server/sanitize.ts`)
    - Removes HTML tags and script injection
    - Validates email format
    - Sanitizes URLs
+
+### Rate Limiting - Redis for Production (Optional)
+
+The default in-memory rate limiter works fine for:
+- Single server deployments
+- Vercel (one instance per region)
+- Low-to-medium traffic sites
+
+**For high-scale production** with multiple server instances, enable Upstash Redis:
+
+1. Create free account at [upstash.com](https://upstash.com)
+2. Create a Redis database
+3. Add environment variables (see Environment Variables section)
+
+The rate limiter auto-detects Redis and switches to distributed mode.
 
 ### API Endpoints
 
@@ -521,6 +542,13 @@ NEXT_PUBLIC_GA4_ID=G-XXXXXXXXXX
 
 # Password Protection (Optional)
 SITE_PASSWORD=  # Leave empty to disable
+
+# Rate Limiting - Upstash Redis (Optional)
+# Only needed for multi-server/high-scale deployments
+# Free tier: 10,000 commands/day, 256MB storage
+# Get credentials at: https://upstash.com
+UPSTASH_REDIS_REST_URL=    # Leave empty to use in-memory (default)
+UPSTASH_REDIS_REST_TOKEN=  # Leave empty to use in-memory (default)
 ```
 
 **Note:** Requires server restart after changes.

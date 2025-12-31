@@ -72,7 +72,7 @@ const INDEED_JOB_URL =
 
 export default function CareersPage() {
   return (
-    <main className="careers-page min-h-screen relative bg-gradient-to-b from-cafe-tan/0 via-cafe-tan/12 to-cafe-tan/24">
+    <main className="careers-page min-h-screen relative">
       <div className="careers-fixed-background" aria-hidden="true" />
       {/* Hero Section */}
       <section

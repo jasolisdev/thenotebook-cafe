@@ -75,9 +75,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         return updated;
       } else {
         // New unique item - add to cart
+        // Use crypto.randomUUID() for cryptographically secure IDs
         const cartItem: CartItem = {
           ...item,
-          cartId: Math.random().toString(36).slice(2, 11),
+          cartId: crypto.randomUUID(),
           modifiers,
           notes: notes || '',
           totalPrice,
