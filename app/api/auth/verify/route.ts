@@ -4,7 +4,7 @@ import { checkRateLimit } from "@/app/lib";
 
 export async function POST(request: Request) {
   // Rate limiting: 3 requests per 15 minutes (prevent brute force)
-  const rateLimitError = checkRateLimit(request, "/api/auth/verify", 3, 900000);
+  const rateLimitError = await checkRateLimit(request, "/api/auth/verify", 3, 900000);
   if (rateLimitError) return rateLimitError;
 
   try {

@@ -12,25 +12,13 @@ import {
   checkRateLimit,
   logger,
 } from "@/app/lib";
+import { normalizeEmail, normalizeText } from "@/app/lib/server/validation";
 
 const GOOGLE_APPS_SCRIPT_URL = process.env.GOOGLE_APPS_SCRIPT_URL;
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function normalizeEmail(input: unknown): string | null {
-  if (typeof input !== "string") return null;
-  const email = input.trim().toLowerCase();
-  if (email.length > 254) return null;
-  if (/[<>"'`\s]/.test(email)) return null;
-  if (!EMAIL_RE.test(email)) return null;
-  return email;
-}
-
 function normalizeSource(input: unknown): string {
-  if (typeof input !== "string") return "homepage";
-  const source = input.trim();
-  if (!source) return "homepage";
-  return source.length > 64 ? source.slice(0, 64) : source;
+  const source = normalizeText(input, 64);
+  return source || "homepage";
 }
 
 /**
@@ -52,7 +40,7 @@ export async function POST(req: Request) {
   if (originError) return originError;
 
   // Rate limiting: 5 requests per minute
-  const rateLimitError = checkRateLimit(req, "/api/subscribe", 5, 60000);
+  const rateLimitError = await checkRateLimit(req, "/api/subscribe", 5, 60000);
   if (rateLimitError) return rateLimitError;
 
   // Check if Google Apps Script URL is configured

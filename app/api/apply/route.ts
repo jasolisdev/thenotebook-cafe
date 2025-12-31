@@ -8,9 +8,8 @@ import {
   sanitizeText,
   sanitizePhone,
 } from "@/app/lib";
+import { normalizeEmail } from "@/app/lib/server/validation";
 import { Resend } from "resend";
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Email recipient (configurable via environment variable)
 const CONTACT_EMAIL_RECIPIENT = process.env.CONTACT_EMAIL_RECIPIENT || "jasolisdev@gmail.com";
@@ -25,22 +24,13 @@ function getResendClient() {
   return new Resend(apiKey);
 }
 
-function normalizeEmail(input: unknown): string | null {
-  if (typeof input !== "string") return null;
-  const email = input.trim();
-  if (email.length > 254) return null;
-  if (/[<>"'`\s]/.test(email)) return null;
-  if (!EMAIL_RE.test(email)) return null;
-  return email;
-}
-
 export async function POST(req: Request) {
   // CSRF protection
   const originError = validateOrigin(req);
   if (originError) return originError;
 
   // Rate limiting: 2 requests per hour (applications are infrequent)
-  const rateLimitError = checkRateLimit(req, "/api/apply", 2, 3600000);
+  const rateLimitError = await checkRateLimit(req, "/api/apply", 2, 3600000);
   if (rateLimitError) return rateLimitError;
 
   try {

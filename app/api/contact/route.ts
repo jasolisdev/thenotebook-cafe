@@ -7,9 +7,12 @@ import {
   sanitizeMultilineText,
   sanitizeText,
 } from "@/app/lib";
+import {
+  normalizeEmail,
+  normalizeText,
+  sanitizeHtml,
+} from "@/app/lib/server/validation";
 import { Resend } from "resend";
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Email recipient (configurable via environment variable)
 const CONTACT_EMAIL_RECIPIENT = process.env.CONTACT_EMAIL_RECIPIENT || "jasolisdev@gmail.com";
@@ -24,29 +27,8 @@ function getResendClient() {
   return new Resend(apiKey);
 }
 
-function normalizeText(input: unknown, maxLen: number): string {
-  if (typeof input !== "string") return "";
-  const value = input.trim();
-  if (!value) return "";
-  return value.length > maxLen ? value.slice(0, maxLen) : value;
-}
-
-function normalizeEmail(input: unknown): string | null {
-  const email = normalizeText(input, 254);
-  if (!email) return null;
-  if (/[<>"'`\s]/.test(email)) return null;
-  if (!EMAIL_RE.test(email)) return null;
-  return email;
-}
-
-function escapeHtml(input: string): string {
-  return input
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
+// Alias for backward compatibility in email templates
+const escapeHtml = sanitizeHtml;
 
 function buildContactEmailText(params: {
   name: string;
@@ -247,7 +229,7 @@ export async function POST(req: Request) {
   if (originError) return originError;
 
   // Rate limiting: 3 requests per minute
-  const rateLimitError = checkRateLimit(req, "/api/contact", 3, 60000);
+  const rateLimitError = await checkRateLimit(req, "/api/contact", 3, 60000);
   if (rateLimitError) return rateLimitError;
 
   try {

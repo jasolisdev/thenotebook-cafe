@@ -8,8 +8,12 @@ import {
   sanitizeMultilineText,
   sanitizeText,
 } from "@/app/lib";
+import {
+  normalizeEmail,
+  normalizeText,
+  sanitizeHtml,
+} from "@/app/lib/server/validation";
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const ALLOWED_TYPES = new Set([
   "application/pdf",
@@ -30,21 +34,6 @@ function getResendClient() {
     return null;
   }
   return new Resend(apiKey);
-}
-
-function normalizeText(input: unknown, maxLen: number): string {
-  if (typeof input !== "string") return "";
-  const value = input.trim();
-  if (!value) return "";
-  return value.length > maxLen ? value.slice(0, maxLen) : value;
-}
-
-function normalizeEmail(input: unknown): string | null {
-  const email = normalizeText(input, 254);
-  if (!email) return null;
-  if (/[<>"'`\s]/.test(email)) return null;
-  if (!EMAIL_RE.test(email)) return null;
-  return email;
 }
 
 function parseJsonList(value: FormDataEntryValue | null): string[] {
@@ -84,14 +73,8 @@ function formatBirthdate(input: string): string {
   return input;
 }
 
-function escapeHtml(input: string): string {
-  return input
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
+// Use sanitizeHtml from shared validation (aliased as escapeHtml for compatibility)
+const escapeHtml = sanitizeHtml;
 
 function buildCareersEmailText(params: {
   name: string;
@@ -247,7 +230,7 @@ export async function POST(req: Request) {
   const originError = validateOrigin(req);
   if (originError) return originError;
 
-  const rateLimitError = checkRateLimit(req, "/api/careers/apply", 3, 60000);
+  const rateLimitError = await checkRateLimit(req, "/api/careers/apply", 3, 60000);
   if (rateLimitError) return rateLimitError;
 
   try {
@@ -375,7 +358,7 @@ export async function POST(req: Request) {
             email: sanitizeEmail(normalizedEmail),
             role: sanitizeText(resolvedRole),
             availability: sanitizeText(resolvedAvailability),
-            message: sanitizeMultilineText(normalizedMessage),
+            message: sanitizeMultilineText(normalizedMessage || ""),
             resumeName: sanitizeText(resume.name || "resume"),
             applicationName,
             details,
@@ -386,7 +369,7 @@ export async function POST(req: Request) {
             email: normalizedEmail,
             role: resolvedRole,
             availability: resolvedAvailability,
-            message: normalizedMessage,
+            message: normalizedMessage || "",
             resumeName: resume.name || "resume",
             applicationName,
             details,

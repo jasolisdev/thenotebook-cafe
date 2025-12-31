@@ -74,7 +74,7 @@ function htmlResponse(title: string, message: string, status = 200) {
 
 export async function GET(req: Request) {
   // Rate limiting: 10 requests per hour
-  const rateLimitError = checkRateLimit(req, "/api/unsubscribe", 10, 3600000);
+  const rateLimitError = await checkRateLimit(req, "/api/unsubscribe", 10, 3600000);
   if (rateLimitError) return rateLimitError;
 
   // If unsubscribe form URL is configured, redirect to it
