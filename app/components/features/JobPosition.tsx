@@ -71,22 +71,6 @@ export default function JobPosition({
         </span>
       </div>
 
-      {/* Pay Range */}
-      <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-5 sm:mb-6 text-sm sm:text-base">
-        <div className="flex items-center gap-2">
-          <Briefcase size={18} strokeWidth={1.5} style={{ color: 'var(--color-cafe-brown)' }} />
-          <span className="font-normal" style={{ color: 'var(--color-cafe-brown)' }}>
-            {type}
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <DollarSign size={18} strokeWidth={1.5} style={{ color: 'var(--color-cafe-brown)' }} />
-          <span className="font-normal" style={{ color: 'var(--color-cafe-brown)' }}>
-            {payRange}
-          </span>
-        </div>
-      </div>
-
       {/* Overview */}
       <p
         className="font-normal text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8"
@@ -155,24 +139,24 @@ export default function JobPosition({
             {/* Quick Facts and Benefits Grid */}
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
               <div
-                className="p-4 sm:p-6 rounded-xl sm:rounded-2xl"
-                style={{ backgroundColor: 'rgba(250, 249, 246, 0.6)', border: '1px solid rgba(164, 141, 120, 0.18)' }}
+                className="p-5 sm:p-7 rounded-xl sm:rounded-2xl"
+                style={{ backgroundColor: 'rgba(237, 228, 218, 0.4)', border: '1px solid rgba(164, 141, 120, 0.2)' }}
               >
-                <p className="text-[0.65rem] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.2em] font-bold font-inter mb-3 sm:mb-4" style={{ color: 'rgba(74, 59, 50, 0.65)' }}>
+                <p className="text-xs sm:text-sm uppercase tracking-[0.2em] font-bold font-inter mb-4 sm:mb-5" style={{ color: 'rgba(74, 59, 50, 0.7)' }}>
                   Quick Facts
                 </p>
-                <ul className="space-y-2 sm:space-y-3">
-                  <li className="flex items-center gap-2 sm:gap-3">
-                    <DollarSign size={14} strokeWidth={1.6} aria-hidden="true" className="sm:w-4 sm:h-4" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                    <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Pay: {payRange}</span>
+                <ul className="space-y-3 sm:space-y-4">
+                  <li className="flex items-start gap-3">
+                    <DollarSign size={18} strokeWidth={1.6} aria-hidden="true" className="mt-0.5 flex-shrink-0" style={{ color: 'rgba(74, 59, 50, 0.65)' }} />
+                    <span className="font-normal text-base sm:text-lg leading-snug" style={{ color: 'rgba(74, 59, 50, 0.9)' }}>Pay: {payRange}</span>
                   </li>
-                  <li className="flex items-center gap-2 sm:gap-3">
-                    <Briefcase size={14} strokeWidth={1.6} aria-hidden="true" className="sm:w-4 sm:h-4" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                    <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Type: {type}</span>
+                  <li className="flex items-start gap-3">
+                    <Briefcase size={18} strokeWidth={1.6} aria-hidden="true" className="mt-0.5 flex-shrink-0" style={{ color: 'rgba(74, 59, 50, 0.65)' }} />
+                    <span className="font-normal text-base sm:text-lg leading-snug" style={{ color: 'rgba(74, 59, 50, 0.9)' }}>Type: {type}</span>
                   </li>
-                  <li className="flex items-center gap-2 sm:gap-3">
-                    <MapPin size={14} strokeWidth={1.6} aria-hidden="true" className="sm:w-4 sm:h-4" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                    <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Location: {location}</span>
+                  <li className="flex items-start gap-3">
+                    <MapPin size={18} strokeWidth={1.6} aria-hidden="true" className="mt-0.5 flex-shrink-0" style={{ color: 'rgba(74, 59, 50, 0.65)' }} />
+                    <span className="font-normal text-base sm:text-lg leading-snug" style={{ color: 'rgba(74, 59, 50, 0.9)' }}>Location: {location}</span>
                   </li>
                 </ul>
               </div>
