@@ -48,19 +48,19 @@ export default function JobPosition({
 
   return (
     <div
-      className="rounded-[2rem] p-8 md:p-10"
+      className="rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-10"
       style={{
         backgroundColor: 'rgba(237, 231, 216, 0.35)',
         border: '2px solid rgba(164, 141, 120, 0.25)',
       }}
     >
       {/* Header Section */}
-      <div className="flex items-start justify-between mb-6">
-        <h4 className="font-serif text-3xl md:text-4xl leading-tight" style={{ color: 'var(--color-cafe-black)' }}>
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
+        <h4 className="font-serif text-2xl sm:text-3xl md:text-4xl leading-tight" style={{ color: 'var(--color-cafe-black)' }}>
           {title}
         </h4>
         <span
-          className="inline-block px-4 py-2 rounded-full text-xs tracking-[0.18em] uppercase font-semibold whitespace-nowrap ml-4"
+          className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[0.65rem] sm:text-xs tracking-[0.15em] sm:tracking-[0.18em] uppercase font-semibold whitespace-nowrap self-start"
           style={{
             color: 'var(--color-cafe-tan)',
             backgroundColor: 'rgba(250, 249, 246, 0.8)',
@@ -72,39 +72,43 @@ export default function JobPosition({
       </div>
 
       {/* Pay Range */}
-      <div className="flex items-center gap-3 mb-6">
-        <Briefcase size={20} strokeWidth={1.5} style={{ color: 'var(--color-cafe-brown)' }} />
-        <span className="font-normal text-lg" style={{ color: 'var(--color-cafe-brown)' }}>
-          {type}
-        </span>
-        <DollarSign size={20} strokeWidth={1.5} style={{ color: 'var(--color-cafe-brown)' }} className="ml-4" />
-        <span className="font-normal text-lg" style={{ color: 'var(--color-cafe-brown)' }}>
-          {payRange}
-        </span>
+      <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-5 sm:mb-6 text-sm sm:text-base">
+        <div className="flex items-center gap-2">
+          <Briefcase size={18} strokeWidth={1.5} style={{ color: 'var(--color-cafe-brown)' }} />
+          <span className="font-normal" style={{ color: 'var(--color-cafe-brown)' }}>
+            {type}
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <DollarSign size={18} strokeWidth={1.5} style={{ color: 'var(--color-cafe-brown)' }} />
+          <span className="font-normal" style={{ color: 'var(--color-cafe-brown)' }}>
+            {payRange}
+          </span>
+        </div>
       </div>
 
       {/* Overview */}
       <p
-        className="font-normal text-base md:text-lg leading-relaxed mb-8"
+        className="font-normal text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8"
         style={{ color: 'rgba(74, 59, 50, 0.85)' }}
       >
         {overview}
       </p>
 
       {/* Requirements Header */}
-      <h5 className="font-serif text-xl mb-4" style={{ color: 'var(--color-cafe-black)' }}>
+      <h5 className="font-serif text-lg sm:text-xl mb-3 sm:mb-4" style={{ color: 'var(--color-cafe-black)' }}>
         Requirements:
       </h5>
 
       {/* Key Qualifications (show first 4) */}
-      <ul className="space-y-3 mb-8">
+      <ul className="space-y-2.5 sm:space-y-3 mb-6 sm:mb-8">
         {qualifications.slice(0, 4).map((item, idx) => (
-          <li key={idx} className="flex gap-3 items-start">
+          <li key={idx} className="flex gap-2.5 sm:gap-3 items-start">
             <div
-              className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0"
+              className="w-1.5 h-1.5 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"
               style={{ backgroundColor: 'var(--color-cafe-tan)' }}
             />
-            <span className="font-normal text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
+            <span className="font-normal text-sm sm:text-base leading-snug" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>
               {item}
             </span>
           </li>
@@ -115,7 +119,7 @@ export default function JobPosition({
       <button
         onClick={handleApplyClick}
         disabled={isHiringPaused}
-        className={`w-full py-5 rounded-full font-semibold tracking-[0.14em] uppercase text-sm transition-all duration-300 ${
+        className={`w-full py-4 sm:py-5 rounded-full font-semibold tracking-[0.12em] sm:tracking-[0.14em] uppercase text-xs sm:text-sm transition-all duration-300 ${
           isHiringPaused
             ? 'cursor-not-allowed opacity-60'
             : 'hover:scale-[1.02] hover:shadow-lg'
@@ -131,11 +135,11 @@ export default function JobPosition({
       {/* View Details Dropdown Toggle */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-center gap-2 mt-6 text-sm uppercase tracking-widest font-bold transition-colors duration-300 hover:opacity-70"
+        className="w-full flex items-center justify-center gap-2 mt-5 sm:mt-6 text-xs sm:text-sm uppercase tracking-wider sm:tracking-widest font-bold transition-colors duration-300 hover:opacity-70"
         style={{ color: 'var(--color-cafe-tan)' }}
       >
         {isOpen ? "Hide Details" : "View Details"}
-        {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+        {isOpen ? <ChevronUp size={16} className="sm:w-[18px] sm:h-[18px]" /> : <ChevronDown size={16} className="sm:w-[18px] sm:h-[18px]" />}
       </button>
 
       {/* Expandable Details Section */}
@@ -147,44 +151,44 @@ export default function JobPosition({
         }}
       >
         <div className="overflow-hidden min-h-0">
-          <div className="pt-8 space-y-8">
+          <div className="pt-6 sm:pt-8 space-y-6 sm:space-y-8">
             {/* Quick Facts and Benefits Grid */}
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
               <div
-                className="p-6 rounded-2xl"
+                className="p-4 sm:p-6 rounded-xl sm:rounded-2xl"
                 style={{ backgroundColor: 'rgba(250, 249, 246, 0.6)', border: '1px solid rgba(164, 141, 120, 0.18)' }}
               >
-                <p className="text-xs uppercase tracking-[0.2em] font-bold font-inter mb-4" style={{ color: 'rgba(74, 59, 50, 0.65)' }}>
+                <p className="text-[0.65rem] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.2em] font-bold font-inter mb-3 sm:mb-4" style={{ color: 'rgba(74, 59, 50, 0.65)' }}>
                   Quick Facts
                 </p>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-3">
-                    <DollarSign size={16} strokeWidth={1.6} aria-hidden="true" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                    <span className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Pay: {payRange}</span>
+                <ul className="space-y-2 sm:space-y-3">
+                  <li className="flex items-center gap-2 sm:gap-3">
+                    <DollarSign size={14} strokeWidth={1.6} aria-hidden="true" className="sm:w-4 sm:h-4" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                    <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Pay: {payRange}</span>
                   </li>
-                  <li className="flex items-center gap-3">
-                    <Briefcase size={16} strokeWidth={1.6} aria-hidden="true" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                    <span className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Type: {type}</span>
+                  <li className="flex items-center gap-2 sm:gap-3">
+                    <Briefcase size={14} strokeWidth={1.6} aria-hidden="true" className="sm:w-4 sm:h-4" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                    <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Type: {type}</span>
                   </li>
-                  <li className="flex items-center gap-3">
-                    <MapPin size={16} strokeWidth={1.6} aria-hidden="true" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                    <span className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Location: {location}</span>
+                  <li className="flex items-center gap-2 sm:gap-3">
+                    <MapPin size={14} strokeWidth={1.6} aria-hidden="true" className="sm:w-4 sm:h-4" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                    <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>Location: {location}</span>
                   </li>
                 </ul>
               </div>
 
               <div
-                className="p-6 rounded-2xl"
+                className="p-4 sm:p-6 rounded-xl sm:rounded-2xl"
                 style={{ backgroundColor: 'rgba(250, 249, 246, 0.6)', border: '1px solid rgba(164, 141, 120, 0.18)' }}
               >
-                <p className="text-xs uppercase tracking-[0.2em] font-bold font-inter mb-4" style={{ color: 'rgba(74, 59, 50, 0.65)' }}>
+                <p className="text-[0.65rem] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.2em] font-bold font-inter mb-3 sm:mb-4" style={{ color: 'rgba(74, 59, 50, 0.65)' }}>
                   Benefits
                 </p>
-                <ul className="space-y-3">
+                <ul className="space-y-2 sm:space-y-3">
                   {benefits.map((benefit, idx) => (
-                    <li key={idx} className="flex items-center gap-3">
-                      <Gift size={16} strokeWidth={1.6} aria-hidden="true" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                      <span className="font-normal" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>{benefit}</span>
+                    <li key={idx} className="flex items-center gap-2 sm:gap-3">
+                      <Gift size={14} strokeWidth={1.6} aria-hidden="true" className="sm:w-4 sm:h-4" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                      <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>{benefit}</span>
                     </li>
                   ))}
                 </ul>
@@ -192,26 +196,26 @@ export default function JobPosition({
             </div>
 
             {/* Responsibilities and Full Qualifications */}
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-4">
-                <h5 className="font-serif text-xl" style={{ color: 'var(--color-cafe-black)' }}>Responsibilities</h5>
-                <ul className="space-y-3">
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+              <div className="space-y-3 sm:space-y-4">
+                <h5 className="font-serif text-lg sm:text-xl" style={{ color: 'var(--color-cafe-black)' }}>Responsibilities</h5>
+                <ul className="space-y-2 sm:space-y-3">
                   {responsibilities.map((item, idx) => (
-                    <li key={idx} className="flex gap-3 items-start">
-                      <CheckCircle size={16} strokeWidth={1.6} aria-hidden="true" className="mt-[2px] flex-shrink-0" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                      <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>{item}</span>
+                    <li key={idx} className="flex gap-2 sm:gap-3 items-start">
+                      <CheckCircle size={14} strokeWidth={1.6} aria-hidden="true" className="mt-[2px] flex-shrink-0 sm:w-4 sm:h-4" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                      <span className="font-normal text-sm sm:text-base leading-snug" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="space-y-4">
-                <h5 className="font-serif text-xl" style={{ color: 'var(--color-cafe-black)' }}>All Qualifications</h5>
-                <ul className="space-y-3">
+              <div className="space-y-3 sm:space-y-4">
+                <h5 className="font-serif text-lg sm:text-xl" style={{ color: 'var(--color-cafe-black)' }}>All Qualifications</h5>
+                <ul className="space-y-2 sm:space-y-3">
                   {qualifications.map((item, idx) => (
-                    <li key={idx} className="flex gap-3 items-start">
-                      <CheckCircle size={16} strokeWidth={1.6} aria-hidden="true" className="mt-[2px] flex-shrink-0" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
-                      <span className="font-normal text-sm sm:text-base" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>{item}</span>
+                    <li key={idx} className="flex gap-2 sm:gap-3 items-start">
+                      <CheckCircle size={14} strokeWidth={1.6} aria-hidden="true" className="mt-[2px] flex-shrink-0 sm:w-4 sm:h-4" style={{ color: 'rgba(74, 59, 50, 0.55)' }} />
+                      <span className="font-normal text-sm sm:text-base leading-snug" style={{ color: 'rgba(74, 59, 50, 0.85)' }}>{item}</span>
                     </li>
                   ))}
                 </ul>
