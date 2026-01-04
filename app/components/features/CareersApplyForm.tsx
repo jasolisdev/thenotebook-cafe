@@ -45,7 +45,7 @@ export default function CareersApplyForm() {
     if (!formData.phone.trim()) errors.push("Phone Number is required");
     if (!formData.message.trim()) errors.push("Why Us? is required");
     if (!resumeFile) errors.push("Resume is required");
-    if (!applicationFile) errors.push("Completed application is required");
+
 
     if (errors.length > 0) {
       setValidationErrors(errors);
@@ -258,7 +258,7 @@ export default function CareersApplyForm() {
       )}
 
       <p className="text-xs text-cafe-brown/70 mb-6">
-        <strong>Required:</strong> Please{" "}
+        <strong>Optional:</strong> You can{" "}
         <a
           href="/tnc-application-template.html"
           target="_blank"
@@ -267,11 +267,11 @@ export default function CareersApplyForm() {
         >
           download our application template
         </a>
-        , complete it, and upload the finished file below. This is now mandatory for all applicants.
+        , complete it, and upload the finished file below.
       </p>
 
       <span className="form-group-label" id="application-label">
-        Completed Application *
+        Completed Application
       </span>
       <label className="file-upload-zone" aria-labelledby="application-label">
         <input

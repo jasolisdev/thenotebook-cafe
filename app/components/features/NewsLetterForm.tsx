@@ -136,6 +136,10 @@ export default function NewsletterForm({ source = "homepage", inline = false }: 
           size="md"
           disabled={status === "loading"}
           className="whitespace-nowrap shrink-0"
+          style={{
+            backgroundColor: status === "loading" ? 'rgba(164, 141, 120, 0.7)' : 'var(--color-cafe-tan)',
+            color: 'white',
+          }}
         >
           {status === "loading" ? "Subscribing…" : "Subscribe"}
         </Button>
