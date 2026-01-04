@@ -439,6 +439,7 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      table-layout: fixed;
     }
 
     .education-table th {
@@ -451,6 +452,16 @@
       border-bottom: 2px solid var(--border-color);
       text-transform: uppercase;
       letter-spacing: 1.5px;
+    }
+
+    .education-table th:first-child {
+      width: 25%;
+    }
+
+    .education-table th:nth-child(2),
+    .education-table th:nth-child(3),
+    .education-table th:nth-child(4) {
+      width: 25%;
     }
 
     .education-table td {
@@ -469,8 +480,8 @@
       color: var(--text-main);
       font-weight: 600;
       background: #FAF9F6;
-      white-space: nowrap;
       padding-left: 20px;
+      line-height: 1.4;
     }
 
     .table-input {
@@ -543,7 +554,7 @@
 
       .print-actions {
         padding: 10px 20px;
-        position: static;
+        top: 10px;
       }
 
       .container {
@@ -682,6 +693,16 @@
       .section,
       .office-use-only {
         page-break-inside: avoid;
+      }
+
+      /* Keep office-use-only on first page with header */
+      .office-use-only {
+        page-break-before: avoid;
+      }
+
+      /* Keep adjacent sections together when possible */
+      .section + .section {
+        page-break-before: avoid;
       }
 
       .prescreen-section {
@@ -874,41 +895,43 @@
         <div class="field-row">
           <div class="field">
             <label class="field-label">First Name</label>
-            <input type="text" class="field-input">
+            <input type="text" class="field-input" autocomplete="given-name">
           </div>
           <div class="field">
             <label class="field-label">Middle Name</label>
-            <input type="text" class="field-input">
+            <input type="text" class="field-input" autocomplete="additional-name">
           </div>
           <div class="field">
             <label class="field-label">Last Name</label>
-            <input type="text" class="field-input">
+            <input type="text" class="field-input" autocomplete="family-name">
           </div>
         </div>
         <div class="field-row">
           <div class="field">
             <label class="field-label">Date of Birth</label>
-            <input type="date" class="field-input">
+            <input type="date" class="field-input" autocomplete="bday">
           </div>
           <div class="field" style="flex: 2;">
             <label class="field-label">Phone Number</label>
-            <input type="text" class="field-input">
+            <input type="text" class="field-input" autocomplete="tel">
           </div>
         </div>
         <div class="field-row">
           <div class="field">
             <label class="field-label">Email Address</label>
-            <input type="text" class="field-input">
+            <input type="text" class="field-input" autocomplete="email">
           </div>
-          <div class="field" style="flex: 2;">
+        </div>
+        <div class="field-row">
+          <div class="field">
             <label class="field-label">Street Address</label>
-            <input type="text" class="field-input">
+            <input type="text" class="field-input" autocomplete="street-address">
           </div>
         </div>
         <div class="field-row">
           <div class="field">
             <label class="field-label">City, State, Zip Code</label>
-            <input type="text" class="field-input">
+            <input type="text" class="field-input" autocomplete="address-level2">
           </div>
         </div>
       </div>
@@ -1056,8 +1079,7 @@
         <div class="section-title">
           <h3>Availability</h3>
         </div>
-        <p class="field-label" style="margin-bottom: 8px;">Days Available (Saturday availability may be required - We're
-          closed Sundays):</p>
+        <p class="field-label" style="margin-bottom: 8px;">Days Available (Weekend availability may be required):</p>
         <div class="checkbox-group">
           <label class="checkbox-item">
             <input type="checkbox">
@@ -1083,10 +1105,14 @@
             <input type="checkbox">
             <span class="checkbox-label">Saturday</span>
           </label>
+          <label class="checkbox-item">
+            <input type="checkbox">
+            <span class="checkbox-label">Sunday</span>
+          </label>
         </div>
 
         <p class="field-label" style="margin: 15px 0 8px 0;">Employment Type:</p>
-        <div class="checkbox-group" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="checkbox-group">
           <label class="checkbox-item">
             <input type="checkbox">
             <span class="checkbox-label">Full-time</span>
@@ -1106,7 +1132,7 @@
         </div>
 
         <p class="field-label" style="margin: 15px 0 8px 0;">Hours Per Week Desired:</p>
-        <div class="checkbox-group" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="checkbox-group">
           <label class="checkbox-item">
             <input type="checkbox">
             <span class="checkbox-label">0-16 Hours</span>
@@ -1133,7 +1159,7 @@
         </div>
 
         <p class="field-label" style="margin: 15px 0 8px 0;">How long do you plan to work here?</p>
-        <div class="checkbox-group" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="checkbox-group">
           <label class="checkbox-item">
             <input type="checkbox">
             <span class="checkbox-label">3-6 months</span>
@@ -1213,36 +1239,36 @@
           <div class="field-row">
             <div class="field" style="flex: 2;">
               <label class="field-label">Employer</label>
-              <input type="text" class="field-input">
+              <input type="text" class="field-input" autocomplete="section-employment1 organization">
             </div>
             <div class="field">
               <label class="field-label">Position</label>
-              <input type="text" class="field-input">
+              <input type="text" class="field-input" autocomplete="section-employment1 organization-title">
             </div>
           </div>
           <div class="field-row">
             <div class="field" style="flex: 2;">
               <label class="field-label">Address</label>
-              <input type="text" class="field-input">
+              <input type="text" class="field-input" autocomplete="section-employment1 address-line1">
             </div>
             <div class="field">
               <label class="field-label">Phone</label>
-              <input type="text" class="field-input">
+              <input type="text" class="field-input" autocomplete="section-employment1 tel-national">
             </div>
           </div>
           <div class="field-row">
             <div class="field">
               <label class="field-label">Supervisor</label>
-              <input type="text" class="field-input">
+              <input type="text" class="field-input" autocomplete="section-employment1 name">
             </div>
             <div class="field">
               <label class="field-label">Dates Employed (From - To)</label>
-              <input type="text" class="field-input">
+              <input type="text" class="field-input" autocomplete="section-employment1 off">
             </div>
           </div>
           <div class="field">
             <label class="field-label">Reason for Leaving</label>
-            <input type="text" class="field-input">
+            <input type="text" class="field-input" autocomplete="section-employment1 off">
           </div>
         </div>
 
@@ -1250,36 +1276,36 @@
           <div class="field-row">
             <div class="field" style="flex: 2;">
               <label class="field-label">Employer</label>
-              <input type="text" class="field-input">
+              <input type="text" class="field-input" autocomplete="section-employment2 organization">
             </div>
             <div class="field">
               <label class="field-label">Position</label>
-              <input type="text" class="field-input">
+              <input type="text" class="field-input" autocomplete="section-employment2 organization-title">
             </div>
           </div>
           <div class="field-row">
             <div class="field" style="flex: 2;">
               <label class="field-label">Address</label>
-              <input type="text" class="field-input">
+              <input type="text" class="field-input" autocomplete="section-employment2 address-line1">
             </div>
             <div class="field">
               <label class="field-label">Phone</label>
-              <input type="text" class="field-input">
+              <input type="text" class="field-input" autocomplete="section-employment2 tel-national">
             </div>
           </div>
           <div class="field-row">
             <div class="field">
               <label class="field-label">Supervisor</label>
-              <input type="text" class="field-input">
+              <input type="text" class="field-input" autocomplete="section-employment2 name">
             </div>
             <div class="field">
               <label class="field-label">Dates Employed (From - To)</label>
-              <input type="text" class="field-input">
+              <input type="text" class="field-input" autocomplete="section-employment2 off">
             </div>
           </div>
           <div class="field">
             <label class="field-label">Reason for Leaving</label>
-            <input type="text" class="field-input">
+            <input type="text" class="field-input" autocomplete="section-employment2 off">
           </div>
         </div>
       </div>

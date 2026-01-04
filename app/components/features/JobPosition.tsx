@@ -50,7 +50,7 @@ export default function JobPosition({
     <div
       className="rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-10"
       style={{
-        backgroundColor: 'rgba(237, 231, 216, 0.35)',
+        backgroundColor: 'rgba(253, 251, 247, 0.5)',
         border: '2px solid rgba(164, 141, 120, 0.25)',
       }}
     >

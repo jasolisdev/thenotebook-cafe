@@ -62,7 +62,7 @@ export default function CareersApplyForm() {
 
     setValidationErrors([]);
     setSubmitError("");
-    setSubmitStatus("idle");
+    setSubmitStatus("loading");
 
     try {
       const payload = new FormData();
@@ -169,7 +169,6 @@ export default function CareersApplyForm() {
           placeholder="First Name *"
           className="input-field"
           value={formData.firstName}
-          disabled
           aria-label="First Name"
           autoComplete="given-name"
           onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
@@ -181,7 +180,6 @@ export default function CareersApplyForm() {
           placeholder="Last Name *"
           className="input-field"
           value={formData.lastName}
-          disabled
           aria-label="Last Name"
           autoComplete="family-name"
           onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
@@ -197,7 +195,6 @@ export default function CareersApplyForm() {
           className="input-field"
           value={formData.phone}
           inputMode="tel"
-          disabled
           aria-label="Phone Number"
           autoComplete="tel"
           onChange={(e) => setFormData({ ...formData, phone: formatPhoneInput(e.target.value) })}
@@ -209,7 +206,6 @@ export default function CareersApplyForm() {
           placeholder="Email *"
           className="input-field"
           value={formData.email}
-          disabled
           aria-label="Email"
           autoComplete="email"
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -224,19 +220,42 @@ export default function CareersApplyForm() {
         placeholder="Tell us why you're a good fit..."
         style={{ minHeight: "80px", resize: "vertical" }}
         value={formData.message}
-        disabled
         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
       />
 
       <span className="form-group-label" id="resume-label">
         Resume *
       </span>
-      <div className="file-upload-zone opacity-50 cursor-not-allowed" aria-labelledby="resume-label">
+      <label className="file-upload-zone" aria-labelledby="resume-label">
+        <input
+          type="file"
+          ref={resumeInputRef}
+          accept=".pdf,.doc,.docx"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (file) {
+              if (file.size > 5 * 1024 * 1024) {
+                setResumeError("Resume file must be under 5MB");
+                setResumeFile(null);
+                e.target.value = "";
+              } else {
+                setResumeError("");
+                setResumeFile(file);
+              }
+            }
+          }}
+          style={{ display: "none" }}
+        />
         <p style={{ margin: "0 0 8px", fontSize: "0.9rem" }}>
-          {resumeFile ? resumeFile.name : "Uploads Paused"}
+          {resumeFile ? resumeFile.name : "Click to upload resume"}
         </p>
         <span style={{ fontSize: "0.75rem", opacity: 0.6 }}>PDF, DOC, or DOCX (Max 5MB)</span>
-      </div>
+      </label>
+      {resumeError && (
+        <p className="text-sm mt-1" style={{ color: "#ef4444" }}>
+          {resumeError}
+        </p>
+      )}
 
       <p className="text-xs text-cafe-brown/70 mb-6">
         <strong>Required:</strong> Please{" "}
@@ -254,15 +273,49 @@ export default function CareersApplyForm() {
       <span className="form-group-label" id="application-label">
         Completed Application *
       </span>
-      <div className="file-upload-zone opacity-50 cursor-not-allowed" aria-labelledby="application-label">
+      <label className="file-upload-zone" aria-labelledby="application-label">
+        <input
+          type="file"
+          ref={applicationInputRef}
+          accept=".pdf,.doc,.docx"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (file) {
+              if (file.size > 5 * 1024 * 1024) {
+                setApplicationError("Application file must be under 5MB");
+                setApplicationFile(null);
+                e.target.value = "";
+              } else {
+                setApplicationError("");
+                setApplicationFile(file);
+              }
+            }
+          }}
+          style={{ display: "none" }}
+        />
         <p style={{ margin: "0 0 8px", fontSize: "0.9rem" }}>
-          {applicationFile ? applicationFile.name : "Uploads Paused"}
+          {applicationFile ? applicationFile.name : "Click to upload application"}
         </p>
         <span style={{ fontSize: "0.75rem", opacity: 0.6 }}>PDF, DOC, or DOCX (Max 5MB)</span>
-      </div>
+      </label>
+      {applicationError && (
+        <p className="text-sm mt-1" style={{ color: "#ef4444" }}>
+          {applicationError}
+        </p>
+      )}
 
-      <Button type="button" variant="primary" size="lg" fullWidth disabled>
-        Applications Closed
+      <Button
+        type="submit"
+        variant="primary"
+        size="lg"
+        fullWidth
+        disabled={submitStatus === "loading"}
+        style={{
+          backgroundColor: submitStatus === "loading" ? 'rgba(164, 141, 120, 0.7)' : 'var(--color-cafe-tan)',
+          color: 'white',
+        }}
+      >
+        {submitStatus === "loading" ? "Submitting..." : "Submit Application"}
       </Button>
 
       {submitStatus === "error" && (

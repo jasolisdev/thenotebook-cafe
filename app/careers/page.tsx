@@ -149,20 +149,27 @@ export default function CareersPage() {
         className="pt-12 pb-24 md:pt-16 md:pb-32 relative"
       >
         <div className="max-w-5xl mx-auto px-6">
-          <Reveal>
-            <h2
-              className="font-dm-serif font-bold text-4xl md:text-5xl text-center mb-16"
-              style={{ color: "var(--color-cafe-black)" }}
-            >
-              What We{" "}
-              <span
-                className="italic"
-                style={{ color: "var(--color-cafe-tan)" }}
-              >
-                Offer
+          <div className="text-center mb-16">
+            <Reveal>
+              <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block font-inter">
+                Perks & Benefits
               </span>
-            </h2>
-          </Reveal>
+            </Reveal>
+            <Reveal delay={100}>
+              <h2
+                className="font-dm-serif font-bold text-4xl md:text-5xl mb-8 leading-none"
+                style={{ color: "var(--color-cafe-black)" }}
+              >
+                What We{" "}
+                <span
+                  className="italic"
+                  style={{ color: "var(--color-cafe-tan)" }}
+                >
+                  Offer
+                </span>
+              </h2>
+            </Reveal>
+          </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <Reveal delay={100}>
@@ -414,7 +421,7 @@ export default function CareersPage() {
               <Reveal delay={200}>
                 <JobPosition
                   title="Barista Cashier"
-                  status="Hiring Paused"
+                  status="Now Hiring"
                   payRange="$17–$22/hr"
                   type="Full-time / Part-time"
                   location="In person"
@@ -445,7 +452,7 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Email Application (form hidden for now) */}
+      {/* Email Application */}
       <section
         id="apply"
         data-section="Apply"
@@ -455,7 +462,7 @@ export default function CareersPage() {
           <div className="text-center mb-12">
             <Reveal>
               <span className="text-cafe-tan font-bold tracking-widest uppercase text-xs mb-4 block font-inter">
-                Status Update
+                Ready to Join?
               </span>
             </Reveal>
             <Reveal delay={100}>
@@ -463,129 +470,115 @@ export default function CareersPage() {
                 className="font-dm-serif font-bold text-4xl md:text-6xl lg:text-7xl mb-8 leading-none"
                 style={{ color: "var(--color-cafe-black)" }}
               >
-                Application{" "}
+                Apply{" "}
                 <span
                   className="italic"
                   style={{ color: "var(--color-cafe-tan)" }}
                 >
-                  Update
+                  Today
                 </span>
               </h2>
             </Reveal>
-            <Reveal delay={150}>
-              <div className="max-w-2xl mx-auto bg-amber-50/50 border border-amber-100 rounded-2xl p-6 md:p-8">
-                <p className="text-lg text-cafe-brown font-medium">
-                  We are currently reviewing applications and are not accepting
-                  new submissions at this time.
-                </p>
-                <p className="text-cafe-brown/70 mt-2">
-                  Please check back later for future opportunities!
-                </p>
-              </div>
-            </Reveal>
           </div>
 
-          <Reveal delay={200}>
-            <div
-              className="p-6 sm:p-8 md:p-12 rounded-3xl shadow-[0_14px_40px_rgba(44,36,32,0.08)] opacity-60 pointer-events-none select-none grayscale-[0.5]"
-              style={{
-                backgroundColor: "rgba(250, 249, 246, 0.85)",
-                border: "2px solid rgba(164, 141, 120, 0.14)",
-              }}
-            >
-              <div className="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-16 items-start">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center"
-                      style={{ backgroundColor: "rgba(164, 141, 120, 0.12)" }}
-                    >
-                      <Mail
-                        size={20}
-                        style={{ color: "var(--color-cafe-tan)" }}
-                        strokeWidth={1.5}
-                      />
-                    </div>
-                    <span
-                      className="text-xs uppercase tracking-[0.2em] font-bold"
-                      style={{ color: "var(--color-cafe-tan)" }}
-                    >
-                      Careers
-                    </span>
-                  </div>
-
-                  <p
-                    className="text-base md:text-lg font-normal leading-relaxed"
-                    style={{ color: "rgba(74, 59, 50, 0.85)" }}
+          <div
+            className="p-6 sm:p-8 md:p-12 rounded-3xl shadow-[0_14px_40px_rgba(44,36,32,0.08)]"
+            style={{
+              backgroundColor: "rgba(250, 249, 246, 0.85)",
+              border: "2px solid rgba(164, 141, 120, 0.14)",
+            }}
+          >
+            <div className="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-16 items-start">
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: "rgba(164, 141, 120, 0.12)" }}
                   >
-                    Send your resume and a quick note. We&rsquo;ll reply to
-                    qualified candidates within 3–5 business days. We&rsquo;re
-                    always looking for friendly souls to join our morning
-                    rituals.
-                  </p>
-
-                  <ul className="space-y-4">
-                    {[
-                      "Contact details + role interest",
-                      "Availability",
-                      "Resume + Job Application",
-                    ].map((item) => (
-                      <li key={item} className="flex gap-3 items-start">
-                        <CheckCircle
-                          size={18}
-                          strokeWidth={1.6}
-                          aria-hidden="true"
-                          className="mt-[2px] flex-shrink-0"
-                          style={{ color: "rgba(74, 59, 50, 0.55)" }}
-                        />
-                        <span
-                          className="font-normal text-sm sm:text-base"
-                          style={{ color: "rgba(74, 59, 50, 0.82)" }}
-                        >
-                          {item}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                    <Mail
+                      size={20}
+                      style={{ color: "var(--color-cafe-tan)" }}
+                      strokeWidth={1.5}
+                    />
+                  </div>
+                  <span
+                    className="text-xs uppercase tracking-[0.2em] font-bold"
+                    style={{ color: "var(--color-cafe-tan)" }}
+                  >
+                    Careers
+                  </span>
                 </div>
 
-                <div className="flex flex-col gap-4">
-                  <div>
-                    <div className="flex items-center gap-3 mb-3">
-                      <Mail
+                <p
+                  className="text-base md:text-lg font-normal leading-relaxed"
+                  style={{ color: "rgba(74, 59, 50, 0.85)" }}
+                >
+                  Send your resume and a quick note. We&rsquo;ll reply to
+                  qualified candidates within 3–5 business days. We&rsquo;re
+                  always looking for friendly souls to join our morning rituals.
+                </p>
+
+                <ul className="space-y-4">
+                  {[
+                    "Contact details + role interest",
+                    "Availability",
+                    "Resume + Job Application",
+                  ].map((item) => (
+                    <li key={item} className="flex gap-3 items-start">
+                      <CheckCircle
                         size={18}
-                        strokeWidth={1.8}
-                        style={{ color: "var(--color-cafe-tan)" }}
+                        strokeWidth={1.6}
+                        aria-hidden="true"
+                        className="mt-[2px] flex-shrink-0"
+                        style={{ color: "rgba(74, 59, 50, 0.55)" }}
                       />
                       <span
-                        className="text-xs uppercase tracking-[0.2em] font-bold"
-                        style={{ color: "rgba(74, 59, 50, 0.7)" }}
+                        className="font-normal text-sm sm:text-base"
+                        style={{ color: "rgba(74, 59, 50, 0.82)" }}
                       >
-                        Quick Apply
+                        {item}
                       </span>
-                    </div>
-                    <CareersApplyForm />
-                  </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-                  <a
-                    href={INDEED_JOB_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-3 px-6 sm:px-10 py-4 rounded-full font-semibold tracking-[0.14em] sm:tracking-[0.16em] uppercase text-xs sm:text-sm transition-transform hover:scale-[1.02]"
-                    style={{
-                      backgroundColor: "rgba(250, 249, 246, 0.55)",
-                      color: "rgba(44, 36, 32, 0.9)",
-                      textDecoration: "none",
-                      border: "1.5px solid rgba(44, 36, 32, 0.35)",
-                    }}
-                  >
-                    <ExternalLink size={18} strokeWidth={1.8} />
-                    Apply on Indeed
-                  </a>
+              <div className="flex flex-col gap-4">
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <Mail
+                      size={18}
+                      strokeWidth={1.8}
+                      style={{ color: "var(--color-cafe-tan)" }}
+                    />
+                    <span
+                      className="text-xs uppercase tracking-[0.2em] font-bold"
+                      style={{ color: "rgba(74, 59, 50, 0.7)" }}
+                    >
+                      Quick Apply
+                    </span>
+                  </div>
+                  <CareersApplyForm />
                 </div>
+
+                <a
+                  href={INDEED_JOB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-3 px-6 sm:px-10 py-4 rounded-full font-semibold tracking-[0.14em] sm:tracking-[0.16em] uppercase text-xs sm:text-sm transition-transform hover:scale-[1.02]"
+                  style={{
+                    backgroundColor: "rgba(250, 249, 246, 0.55)",
+                    color: "rgba(44, 36, 32, 0.9)",
+                    textDecoration: "none",
+                    border: "1.5px solid rgba(44, 36, 32, 0.35)",
+                  }}
+                >
+                  <ExternalLink size={18} strokeWidth={1.8} />
+                  Apply on Indeed
+                </a>
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
     </main>

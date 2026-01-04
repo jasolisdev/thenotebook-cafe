@@ -135,12 +135,16 @@ export default function ContactForm() {
       </div>
 
       <div className="pt-4">
-        <Button 
-          type="submit" 
-          disabled={status === "loading"} 
+        <Button
+          type="submit"
+          disabled={status === "loading"}
           fullWidth
           variant="primary"
           className="md:w-auto"
+          style={{
+            backgroundColor: status === "loading" ? 'rgba(164, 141, 120, 0.7)' : 'var(--color-cafe-tan)',
+            color: 'white',
+          }}
         >
           {status === "loading" ? "Sending..." : "Send Message"}
         </Button>
