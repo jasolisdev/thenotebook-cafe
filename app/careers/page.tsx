@@ -430,11 +430,11 @@ export default function CareersPage() {
                   ]}
                   qualifications={[
                     "Prior barista experience or coffee knowledge preferred",
-                    "POS experience (Clover, Aloha, Micros, etc.) is a plus",
                     "Strong customer service and communication skills",
                     "Comfortable multitasking in a fast-paced environment",
-                    "Knowledge of food safety and food handling practices",
                     "Reliable work ethic and solid time management",
+                    "POS experience (Clover, Aloha, Micros, etc.) is a plus",
+                    "Knowledge of food safety and food handling practices",
                     "Must have a California food handler card",
                   ]}
                   benefits={["Employee discount", "Paid sick time"]}
