@@ -4,6 +4,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import {
   XMarkIcon,
+  TypeIcon,
   ContrastIcon,
   EyeIcon,
   ResetIcon,
@@ -259,6 +260,10 @@ export const AccessibilityWidget: React.FC = () => {
 
   const toggleSetting = (key: keyof AccessibilitySettings) => {
     setSettings((prev) => ({ ...prev, [key]: !prev[key] as boolean }));
+  };
+
+  const setTextSize = (size: "normal" | "large" | "xl") => {
+    setSettings((prev) => ({ ...prev, textSize: size }));
   };
 
   const resetSettings = () => {
