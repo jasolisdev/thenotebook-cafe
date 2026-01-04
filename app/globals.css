@@ -688,38 +688,39 @@ body[data-nav-open="true"] button[aria-label="Accessibility Options"] {
   opacity: 1 !important;
 }
 
-/* Text Size Scaling - Main content only */
-html.acc-text-lg main {
-  font-size: 115%;
-}
-
+/* Text Size Scaling - Main content only
+   Scales all text elements by adjusting font-size with !important to override fixed sizes */
 html.acc-text-lg main p,
 html.acc-text-lg main li,
-html.acc-text-lg main h1,
-html.acc-text-lg main h2,
-html.acc-text-lg main h3,
-html.acc-text-lg main h4,
-html.acc-text-lg main h5,
-html.acc-text-lg main h6 {
+html.acc-text-lg main span:not(.bionic-bold):not(.bionic-skip),
+html.acc-text-lg main a {
+  font-size: 1.15em !important;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
-html.acc-text-xl main {
-  font-size: 130%;
-}
+html.acc-text-lg main h1 { font-size: clamp(2.3rem, 6vw, 3.45rem) !important; }
+html.acc-text-lg main h2 { font-size: clamp(1.725rem, 4.5vw, 2.3rem) !important; }
+html.acc-text-lg main h3 { font-size: clamp(1.38rem, 3.5vw, 1.725rem) !important; }
+html.acc-text-lg main h4 { font-size: clamp(1.15rem, 3vw, 1.38rem) !important; }
+html.acc-text-lg main h5 { font-size: clamp(1.035rem, 2.5vw, 1.15rem) !important; }
+html.acc-text-lg main h6 { font-size: clamp(0.92rem, 2vw, 1.035rem) !important; }
 
 html.acc-text-xl main p,
 html.acc-text-xl main li,
-html.acc-text-xl main h1,
-html.acc-text-xl main h2,
-html.acc-text-xl main h3,
-html.acc-text-xl main h4,
-html.acc-text-xl main h5,
-html.acc-text-xl main h6 {
+html.acc-text-xl main span:not(.bionic-bold):not(.bionic-skip),
+html.acc-text-xl main a {
+  font-size: 1.30em !important;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+
+html.acc-text-xl main h1 { font-size: clamp(2.6rem, 7vw, 3.9rem) !important; }
+html.acc-text-xl main h2 { font-size: clamp(1.95rem, 5.25vw, 2.6rem) !important; }
+html.acc-text-xl main h3 { font-size: clamp(1.56rem, 4vw, 1.95rem) !important; }
+html.acc-text-xl main h4 { font-size: clamp(1.3rem, 3.5vw, 1.56rem) !important; }
+html.acc-text-xl main h5 { font-size: clamp(1.17rem, 3vw, 1.3rem) !important; }
+html.acc-text-xl main h6 { font-size: clamp(1.04rem, 2.5vw, 1.17rem) !important; }
 
 /* On mobile, completely hide the image containers instead of leaving empty boxes */
 @media (max-width: 768px) {
