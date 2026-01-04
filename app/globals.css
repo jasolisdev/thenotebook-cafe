@@ -601,44 +601,28 @@ body[data-nav-open="true"] button[aria-label="Accessibility Options"] {
   z-index: 9999;
 }
 
-/* Prevent horizontal scroll when accessibility text sizes are active */
-html.acc-text-lg,
-html.acc-text-xl {
-  overflow-x: hidden;
+/* Accessibility text scaling - targeted scaling for main content only */
+/* Scale paragraphs, lists, and body text in main content */
+.acc-text-lg main p,
+.acc-text-lg main li,
+.acc-text-lg main span:not([class*="text-"]):not(.bionic-bold),
+.acc-text-lg main a:not([class*="text-"]),
+.acc-text-lg main button:not([class*="text-"]) {
+  font-size: 1.1em !important;
 }
 
-/* Scale all text elements when accessibility text size is enabled */
-.acc-text-lg p,
-.acc-text-lg li,
-.acc-text-lg span,
-.acc-text-lg a,
-.acc-text-lg button,
-.acc-text-lg label,
-.acc-text-lg input,
-.acc-text-lg textarea {
-  font-size: 1.125em !important;
+/* Scale accessibility widget text */
+.acc-text-lg .acc-widget-panel p,
+.acc-text-lg .acc-widget-panel span,
+.acc-text-lg .acc-widget-panel button {
+  font-size: 1.1em !important;
 }
 
-.acc-text-xl p,
-.acc-text-xl li,
-.acc-text-xl span,
-.acc-text-xl a,
-.acc-text-xl button,
-.acc-text-xl label,
-.acc-text-xl input,
-.acc-text-xl textarea {
-  font-size: 1.35em !important;
-}
-
-/* Mobile: Don't scale headings - they're already sized for viewport */
-@media (max-width: 767px) {
-  .acc-text-lg h1,
-  .acc-text-lg h2,
-  .acc-text-lg h3,
-  .acc-text-xl h1,
-  .acc-text-xl h2,
-  .acc-text-xl h3 {
-    font-size: inherit !important;
+/* Mobile: Gentler scaling */
+@media (max-width: 480px) {
+  .acc-text-lg main p,
+  .acc-text-lg main li {
+    font-size: 1.06em !important;
   }
 }
 
@@ -653,6 +637,59 @@ html.acc-text-xl {
 .acc-dyslexia-font body,
 .acc-dyslexia-font body * {
   font-family: "OpenDyslexic", sans-serif !important;
+}
+
+/* Dyslexia font mobile overflow protection */
+@media (max-width: 768px) {
+  .acc-dyslexia-font,
+  .acc-dyslexia-font body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  .acc-dyslexia-font body * {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Scale down headings - OpenDyslexic is ~25% wider than standard fonts */
+  .acc-dyslexia-font h1 {
+    font-size: clamp(21px, 5.8vw, 30px) !important;
+    word-break: break-word;
+    hyphens: auto;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  /* Override whitespace-nowrap for dyslexia font to allow wrapping */
+  .acc-dyslexia-font h1 span,
+  .acc-dyslexia-font h1 .whitespace-nowrap {
+    white-space: normal !important;
+  }
+
+  .acc-dyslexia-font h2 {
+    font-size: clamp(21px, 5.8vw, 30px) !important;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  .acc-dyslexia-font h3,
+  .acc-dyslexia-font h4 {
+    font-size: clamp(17px, 4.7vw, 23px) !important;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  /* Menu drawer text wrapping */
+  .acc-dyslexia-font .menu-link-text {
+    font-size: clamp(19px, 5.25vw, 25px) !important;
+    word-break: break-word;
+  }
+
+  /* Hide mobile nav logo when dyslexia font is active */
+  .acc-dyslexia-font nav a img[alt="The Notebook Café logo"] {
+    display: none !important;
+  }
 }
 
 .acc-stop-animations * {

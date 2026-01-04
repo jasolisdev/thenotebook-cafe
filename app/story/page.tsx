@@ -560,7 +560,7 @@ export default function StoryPage() {
       {/* Meet the Founders - Personal Profiles */}
       <section
         data-section="Meet the Founders"
-        className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-cafe-tan/0 via-cafe-tan/12 to-cafe-tan/24"
+        className="relative py-24 md:py-32 overflow-hidden"
       >
         <div
           className="section-deco"

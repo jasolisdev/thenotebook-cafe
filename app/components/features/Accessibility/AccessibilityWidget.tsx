@@ -19,7 +19,7 @@ import { WheelchairIcon } from "@/app/components/ui/SocialIcons";
 import { logger } from "@/app/lib";
 
 interface AccessibilitySettings {
-  textSize: "normal" | "large" | "xl";
+  textSize: "normal" | "large";
   grayscale: boolean;
   highContrast: boolean;
   readableFont: boolean;
@@ -65,7 +65,12 @@ export const AccessibilityWidget: React.FC = () => {
     const saved = localStorage.getItem("accessibility-settings");
     if (!saved) return defaultSettings;
     try {
-      return JSON.parse(saved) as AccessibilitySettings;
+      const parsed = JSON.parse(saved) as AccessibilitySettings;
+      // Migrate: if user had "xl" selected, convert to "large"
+      if ((parsed.textSize as string) === "xl") {
+        parsed.textSize = "large";
+      }
+      return parsed;
     } catch (e) {
       logger.error("Failed to load accessibility settings", e);
       return defaultSettings;
@@ -139,10 +144,9 @@ export const AccessibilityWidget: React.FC = () => {
   useEffect(() => {
     const html = document.documentElement;
 
-    // Text Size
+    // Text Size (2 options: normal and large)
     html.classList.remove("acc-text-md", "acc-text-lg", "acc-text-xl");
     if (settings.textSize === "large") html.classList.add("acc-text-lg");
-    if (settings.textSize === "xl") html.classList.add("acc-text-xl");
 
     // Toggles
     if (settings.grayscale) html.classList.add("acc-grayscale");
@@ -266,7 +270,7 @@ export const AccessibilityWidget: React.FC = () => {
     setSettings((prev) => ({ ...prev, [key]: !prev[key] as boolean }));
   };
 
-  const setTextSize = (size: "normal" | "large" | "xl") => {
+  const setTextSize = (size: "normal" | "large") => {
     setSettings((prev) => ({ ...prev, textSize: size }));
   };
 
@@ -377,14 +381,7 @@ export const AccessibilityWidget: React.FC = () => {
                   <button
                     onClick={() => setTextSize("large")}
                     aria-label="Text size large"
-                    className={`flex-1 py-2 rounded-lg text-base font-bold border transition-colors ${settings.textSize === "large" ? "bg-cafe-tan text-cafe-white border-cafe-tan" : "bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50"}`}
-                  >
-                    Aa
-                  </button>
-                  <button
-                    onClick={() => setTextSize("xl")}
-                    aria-label="Text size extra large"
-                    className={`flex-1 py-2 rounded-lg text-lg font-bold border transition-colors ${settings.textSize === "xl" ? "bg-cafe-tan text-cafe-white border-cafe-tan" : "bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50"}`}
+                    className={`flex-1 py-2 rounded-lg text-lg font-bold border transition-colors ${settings.textSize === "large" ? "bg-cafe-tan text-cafe-white border-cafe-tan" : "bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50"}`}
                   >
                     Aa
                   </button>
