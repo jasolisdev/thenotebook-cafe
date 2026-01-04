@@ -361,6 +361,52 @@ export const AccessibilityWidget: React.FC = () => {
                 Customize your viewing experience with our accessibility tools.
               </p>
 
+              {/* Text Size Control */}
+              <div className="bg-white p-4 rounded-xl border border-cafe-tan/20 shadow-sm mb-4">
+                <div className="flex items-center gap-2 mb-3 text-cafe-black font-bold">
+                  <TypeIcon className="w-5 h-5" />
+                  <span>Text Size</span>
+                </div>
+                <div className="flex rounded-lg border border-cafe-tan/20 overflow-hidden">
+                  <button
+                    onClick={() => setTextSize("normal")}
+                    aria-label="Text size normal"
+                    aria-pressed={settings.textSize === "normal"}
+                    className={`flex-1 py-3 text-sm font-bold transition-colors ${
+                      settings.textSize === "normal"
+                        ? "bg-cafe-tan/15 text-cafe-black"
+                        : "bg-white text-cafe-brown hover:bg-cafe-tan/5"
+                    }`}
+                  >
+                    Normal
+                  </button>
+                  <button
+                    onClick={() => setTextSize("large")}
+                    aria-label="Text size large"
+                    aria-pressed={settings.textSize === "large"}
+                    className={`flex-1 py-3 text-sm font-bold transition-colors border-x border-cafe-tan/20 ${
+                      settings.textSize === "large"
+                        ? "bg-cafe-tan/15 text-cafe-black"
+                        : "bg-white text-cafe-brown hover:bg-cafe-tan/5"
+                    }`}
+                  >
+                    Large
+                  </button>
+                  <button
+                    onClick={() => setTextSize("xl")}
+                    aria-label="Text size extra large"
+                    aria-pressed={settings.textSize === "xl"}
+                    className={`flex-1 py-3 text-sm font-bold transition-colors ${
+                      settings.textSize === "xl"
+                        ? "bg-cafe-tan/15 text-cafe-black"
+                        : "bg-white text-cafe-brown hover:bg-cafe-tan/5"
+                    }`}
+                  >
+                    XL
+                  </button>
+                </div>
+              </div>
+
               {/* Toggles */}
               <div className="space-y-3">
                 <ToggleButton
