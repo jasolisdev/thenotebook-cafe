@@ -637,10 +637,10 @@ export default function StoryPage() {
                     shop that Riverside deserves. Michael brings expertise in
                     specialty coffee, sourcing, and extraction science, while
                     Julia designs every intentional detail—from custom furniture
-                    to the lighting that sets the mood. Together with Michael&apos;s
-                    brother John, they&apos;re building more than a business;
-                    they&apos;re crafting a community sanctuary rooted in family
-                    values.
+                    to the lighting that sets the mood. Together with
+                    Michael&apos;s brother John, they&apos;re building more than
+                    a business; they&apos;re crafting a community sanctuary
+                    rooted in family values.
                   </p>
                 </div>
               </div>
@@ -653,7 +653,7 @@ export default function StoryPage() {
                 <div className="relative order-1 lg:order-2">
                   <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                     <Image
-                      src="/story/tnc-founder-john.webp"
+                      src="/story/tnc-story.png"
                       alt="John - Co-Founder"
                       fill
                       className="object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-700"
