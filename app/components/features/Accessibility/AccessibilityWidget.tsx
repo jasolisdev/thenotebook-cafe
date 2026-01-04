@@ -4,7 +4,6 @@ import React, { useMemo, useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import {
   XMarkIcon,
-  TypeIcon,
   ContrastIcon,
   EyeIcon,
   ResetIcon,
@@ -19,7 +18,7 @@ import { WheelchairIcon } from "@/app/components/ui/SocialIcons";
 import { logger } from "@/app/lib";
 
 interface AccessibilitySettings {
-  textSize: "normal" | "large";
+  textSize: "normal" | "large" | "xl";
   grayscale: boolean;
   highContrast: boolean;
   readableFont: boolean;
@@ -66,10 +65,6 @@ export const AccessibilityWidget: React.FC = () => {
     if (!saved) return defaultSettings;
     try {
       const parsed = JSON.parse(saved) as AccessibilitySettings;
-      // Migrate: if user had "xl" selected, convert to "large"
-      if ((parsed.textSize as string) === "xl") {
-        parsed.textSize = "large";
-      }
       return parsed;
     } catch (e) {
       logger.error("Failed to load accessibility settings", e);
@@ -143,10 +138,6 @@ export const AccessibilityWidget: React.FC = () => {
   // Apply settings to document
   useEffect(() => {
     const html = document.documentElement;
-
-    // Text Size (2 options: normal and large)
-    html.classList.remove("acc-text-md", "acc-text-lg", "acc-text-xl");
-    if (settings.textSize === "large") html.classList.add("acc-text-lg");
 
     // Toggles
     if (settings.grayscale) html.classList.add("acc-grayscale");
@@ -270,10 +261,6 @@ export const AccessibilityWidget: React.FC = () => {
     setSettings((prev) => ({ ...prev, [key]: !prev[key] as boolean }));
   };
 
-  const setTextSize = (size: "normal" | "large") => {
-    setSettings((prev) => ({ ...prev, textSize: size }));
-  };
-
   const resetSettings = () => {
     setSettings(defaultSettings);
   };
@@ -364,30 +351,6 @@ export const AccessibilityWidget: React.FC = () => {
                 Customize your viewing experience with our accessibility tools.
               </p>
 
-              {/* Text Size Control */}
-              <div className="bg-white p-4 rounded-xl border border-cafe-tan/20 shadow-sm">
-                <div className="flex items-center gap-2 mb-3 text-cafe-black font-bold">
-                  <TypeIcon className="w-5 h-5" />
-                  <span>Text Size</span>
-                </div>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => setTextSize("normal")}
-                    aria-label="Text size normal"
-                    className={`flex-1 py-2 rounded-lg text-sm font-bold border transition-colors ${settings.textSize === "normal" ? "bg-cafe-tan text-cafe-white border-cafe-tan" : "bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50"}`}
-                  >
-                    Aa
-                  </button>
-                  <button
-                    onClick={() => setTextSize("large")}
-                    aria-label="Text size large"
-                    className={`flex-1 py-2 rounded-lg text-lg font-bold border transition-colors ${settings.textSize === "large" ? "bg-cafe-tan text-cafe-white border-cafe-tan" : "bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50"}`}
-                  >
-                    Aa
-                  </button>
-                </div>
-              </div>
-
               {/* Toggles */}
               <div className="space-y-3">
                 <ToggleButton
@@ -472,16 +435,12 @@ export const AccessibilityWidget: React.FC = () => {
               </h3>
               <ul className="list-disc pl-5 mb-4 space-y-1 text-cafe-brown/80">
                 <li>
-                  <strong>Text Options:</strong> Adjustable sizes and
-                  high-contrast mode.
+                  <strong>Visual Options:</strong> High-contrast mode, grayscale,
+                  hide images, and pause animations.
                 </li>
                 <li>
                   <strong>Reading Aids:</strong> Dyslexia-friendly font, bionic
                   reading, and a reading guide line.
-                </li>
-                <li>
-                  <strong>Visual Controls:</strong> Grayscale, hide images,
-                  pause animations.
                 </li>
                 <li>
                   <strong>Focus Helpers:</strong> Larger cursor, link
