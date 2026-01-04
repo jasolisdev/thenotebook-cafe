@@ -491,12 +491,14 @@ export const AccessibilityWidget: React.FC = () => {
               </h3>
               <ul className="list-disc pl-5 mb-4 space-y-1 text-cafe-brown/80">
                 <li>
+                  <strong>Text Options:</strong> Three text sizes (Normal, Large, XL) and dyslexia-friendly font.
+                </li>
+                <li>
                   <strong>Visual Options:</strong> High-contrast mode, grayscale,
                   hide images, and pause animations.
                 </li>
                 <li>
-                  <strong>Reading Aids:</strong> Dyslexia-friendly font, bionic
-                  reading, and a reading guide line.
+                  <strong>Reading Aids:</strong> Bionic reading and a reading guide line.
                 </li>
                 <li>
                   <strong>Focus Helpers:</strong> Larger cursor, link
