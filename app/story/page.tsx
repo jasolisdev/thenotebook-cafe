@@ -13,7 +13,7 @@
  * - Why Riverside section with location context and stats
  * - Philosophy section (Crafted for Creatives) with product imagery
  * - What Sets Us Apart grid (Mexican coffee, custom design, soundscapes, community)
- * - Meet the Founders profiles (Michael & Julia)
+ * - Meet the Founders profiles (Michael & Julia, and John)
  * - Founders quote blockquote
  *
  * @route /story
@@ -188,12 +188,14 @@ export default function StoryPage() {
                 <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed">
                   From single-origin Mexican beans to custom-designed furniture,
                   every detail intentional. This isn&apos;t a corporate
-                  playbook—it&apos;s a husband-wife team building their{" "}
+                  playbook—it&apos;s a{" "}
+                  <strong className="story-strong">family business</strong>{" "}
+                  building their{" "}
                   <em className="story-em-accent italic">
-                    first business together
+                    first venture together
                   </em>
-                  , pouring everything into creating something genuinely
-                  special.
+                  . Michael, Julia, and Michael&apos;s brother John—each pouring
+                  their talents into creating something genuinely special.
                 </p>
               </Reveal>
             </div>
@@ -586,14 +588,14 @@ export default function StoryPage() {
           <div className="text-center mb-20">
             <Reveal>
               <span className="story-eyebrow text-xs uppercase tracking-[0.25em] font-semibold font-inter">
-                The People Behind the Pour
+                The Family Behind the Pour
               </span>
             </Reveal>
             <Reveal delay={120}>
               <h2 className="story-section-title font-dm-serif font-bold text-[36px] md:text-5xl lg:text-6xl mt-4">
                 Meet the{" "}
                 <span className="story-section-title-accent italic">
-                  Founders & Owners
+                  Founders
                 </span>
               </h2>
             </Reveal>
@@ -630,13 +632,56 @@ export default function StoryPage() {
                   <div className="story-divider story-divider--tan w-16 h-[2px]" />
 
                   <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed">
-                    A husband-wife team with a shared vision: to create a coffee
+                    At the heart of The Notebook Café are Michael and Julia, a
+                    husband-wife team with a shared vision: to create a coffee
                     shop that Riverside deserves. Michael brings expertise in
                     specialty coffee, sourcing, and extraction science, while
                     Julia designs every intentional detail—from custom furniture
-                    to the lighting that sets the mood. Together, they&apos;re
-                    building more than a business; they&apos;re crafting a
-                    community sanctuary.
+                    to the lighting that sets the mood. Together with Michael&apos;s
+                    brother John, they&apos;re building more than a business;
+                    they&apos;re crafting a community sanctuary rooted in family
+                    values.
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* John - Co-Founder */}
+            <Reveal delay={300}>
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                {/* Image */}
+                <div className="relative order-1 lg:order-2">
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+                    <Image
+                      src="/story/tnc-founder-john.webp"
+                      alt="John - Co-Founder"
+                      fill
+                      className="object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-700"
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                    />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="space-y-6 order-2 lg:order-1">
+                  <div>
+                    <h3 className="story-card-title font-serif text-3xl md:text-4xl mb-2">
+                      John
+                    </h3>
+                    <p className="story-eyebrow text-xs uppercase tracking-[0.25em] font-semibold text-cafe-tan font-inter">
+                      Co-Founder
+                    </p>
+                  </div>
+
+                  <div className="story-divider story-divider--tan w-16 h-[2px]" />
+
+                  <p className="story-body text-[16px] md:text-lg font-normal leading-relaxed">
+                    Michael&apos;s brother and integral partner in bringing The
+                    Notebook Café to life. John&apos;s business acumen and
+                    operational expertise help ensure that every detail runs
+                    smoothly behind the scenes. His commitment to quality and
+                    family values shapes the foundation of everything we do,
+                    making this truly a family-owned and operated venture.
                   </p>
                 </div>
               </div>
