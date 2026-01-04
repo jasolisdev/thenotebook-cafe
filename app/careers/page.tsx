@@ -479,106 +479,49 @@ export default function CareersPage() {
                 </span>
               </h2>
             </Reveal>
+            <Reveal delay={150}>
+              <p className="text-lg md:text-xl font-normal leading-relaxed text-cafe-brown/80 max-w-2xl mx-auto">
+                Send your resume and a quick note. We&rsquo;ll reply to qualified candidates within 3–5 business days. We&rsquo;re always looking for friendly souls to join our morning rituals.
+              </p>
+            </Reveal>
           </div>
 
-          <div
-            className="p-6 sm:p-8 md:p-12 rounded-3xl shadow-[0_14px_40px_rgba(44,36,32,0.08)]"
-            style={{
-              backgroundColor: "rgba(250, 249, 246, 0.85)",
-              border: "2px solid rgba(164, 141, 120, 0.14)",
-            }}
-          >
-            <div className="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-16 items-start">
-              <div className="space-y-6">
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: "rgba(164, 141, 120, 0.12)" }}
-                  >
-                    <Mail
-                      size={20}
-                      style={{ color: "var(--color-cafe-tan)" }}
-                      strokeWidth={1.5}
-                    />
-                  </div>
-                  <span
-                    className="text-xs uppercase tracking-[0.2em] font-bold"
-                    style={{ color: "var(--color-cafe-tan)" }}
-                  >
-                    Careers
-                  </span>
-                </div>
-
-                <p
-                  className="text-base md:text-lg font-normal leading-relaxed"
-                  style={{ color: "rgba(74, 59, 50, 0.85)" }}
+          <Reveal delay={200}>
+            <div className="max-w-3xl mx-auto">
+              <div className="flex items-center gap-3 mb-4 pl-2">
+                <Mail
+                  size={18}
+                  strokeWidth={1.8}
+                  style={{ color: "var(--color-cafe-tan)" }}
+                />
+                <span
+                  className="text-xs uppercase tracking-[0.2em] font-bold"
+                  style={{ color: "rgba(74, 59, 50, 0.7)" }}
                 >
-                  Send your resume and a quick note. We&rsquo;ll reply to
-                  qualified candidates within 3–5 business days. We&rsquo;re
-                  always looking for friendly souls to join our morning rituals.
-                </p>
-
-                <ul className="space-y-4">
-                  {[
-                    "Contact details + role interest",
-                    "Availability",
-                    "Resume + Job Application",
-                  ].map((item) => (
-                    <li key={item} className="flex gap-3 items-start">
-                      <CheckCircle
-                        size={18}
-                        strokeWidth={1.6}
-                        aria-hidden="true"
-                        className="mt-[2px] flex-shrink-0"
-                        style={{ color: "rgba(74, 59, 50, 0.55)" }}
-                      />
-                      <span
-                        className="font-normal text-sm sm:text-base"
-                        style={{ color: "rgba(74, 59, 50, 0.82)" }}
-                      >
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                  Quick Apply
+                </span>
               </div>
-
-              <div className="flex flex-col gap-4">
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <Mail
-                      size={18}
-                      strokeWidth={1.8}
-                      style={{ color: "var(--color-cafe-tan)" }}
-                    />
-                    <span
-                      className="text-xs uppercase tracking-[0.2em] font-bold"
-                      style={{ color: "rgba(74, 59, 50, 0.7)" }}
-                    >
-                      Quick Apply
-                    </span>
-                  </div>
-                  <CareersApplyForm />
-                </div>
-
-                <a
-                  href={INDEED_JOB_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-3 px-6 sm:px-10 py-4 rounded-full font-semibold tracking-[0.14em] sm:tracking-[0.16em] uppercase text-xs sm:text-sm transition-transform hover:scale-[1.02]"
-                  style={{
-                    backgroundColor: "rgba(250, 249, 246, 0.55)",
-                    color: "rgba(44, 36, 32, 0.9)",
-                    textDecoration: "none",
-                    border: "1.5px solid rgba(44, 36, 32, 0.35)",
-                  }}
-                >
-                  <ExternalLink size={18} strokeWidth={1.8} />
-                  Apply on Indeed
-                </a>
+              <div className="shadow-lg rounded-sm overflow-hidden">
+                <CareersApplyForm />
               </div>
             </div>
-          </div>
+          </Reveal>
+
+          <Reveal delay={250}>
+            <div className="mt-12 text-center">
+              <span className="text-cafe-brown/60 text-sm block mb-4 font-medium">
+                Prefer Indeed?
+              </span>
+              <a
+                href={INDEED_JOB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-cafe-tan hover:text-cafe-brown font-bold uppercase text-xs tracking-widest transition-colors"
+              >
+                Apply on Indeed <ExternalLink size={14} />
+              </a>
+            </div>
+          </Reveal>
         </div>
       </section>
     </main>

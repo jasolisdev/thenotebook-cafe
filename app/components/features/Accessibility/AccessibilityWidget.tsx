@@ -19,7 +19,7 @@ import { WheelchairIcon } from "@/app/components/ui/SocialIcons";
 import { logger } from "@/app/lib";
 
 interface AccessibilitySettings {
-  textSize: "normal" | "large";
+  textSize: "normal" | "large" | "xl";
   grayscale: boolean;
   highContrast: boolean;
   readableFont: boolean;
@@ -66,10 +66,6 @@ export const AccessibilityWidget: React.FC = () => {
     if (!saved) return defaultSettings;
     try {
       const parsed = JSON.parse(saved) as AccessibilitySettings;
-      // Migrate: if user had "xl" selected, convert to "large"
-      if ((parsed.textSize as string) === "xl") {
-        parsed.textSize = "large";
-      }
       return parsed;
     } catch (e) {
       logger.error("Failed to load accessibility settings", e);
@@ -144,9 +140,10 @@ export const AccessibilityWidget: React.FC = () => {
   useEffect(() => {
     const html = document.documentElement;
 
-    // Text Size (2 options: normal and large)
-    html.classList.remove("acc-text-md", "acc-text-lg", "acc-text-xl");
+    // Text Size (3 options: normal, large, xl)
+    html.classList.remove("acc-text-lg", "acc-text-xl");
     if (settings.textSize === "large") html.classList.add("acc-text-lg");
+    if (settings.textSize === "xl") html.classList.add("acc-text-xl");
 
     // Toggles
     if (settings.grayscale) html.classList.add("acc-grayscale");
@@ -270,7 +267,7 @@ export const AccessibilityWidget: React.FC = () => {
     setSettings((prev) => ({ ...prev, [key]: !prev[key] as boolean }));
   };
 
-  const setTextSize = (size: "normal" | "large") => {
+  const setTextSize = (size: "normal" | "large" | "xl") => {
     setSettings((prev) => ({ ...prev, textSize: size }));
   };
 
@@ -365,25 +362,47 @@ export const AccessibilityWidget: React.FC = () => {
               </p>
 
               {/* Text Size Control */}
-              <div className="bg-white p-4 rounded-xl border border-cafe-tan/20 shadow-sm">
+              <div className="bg-white p-4 rounded-xl border border-cafe-tan/20 shadow-sm mb-4">
                 <div className="flex items-center gap-2 mb-3 text-cafe-black font-bold">
                   <TypeIcon className="w-5 h-5" />
                   <span>Text Size</span>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex rounded-lg border border-cafe-tan/20 overflow-hidden">
                   <button
                     onClick={() => setTextSize("normal")}
                     aria-label="Text size normal"
-                    className={`flex-1 py-2 rounded-lg text-sm font-bold border transition-colors ${settings.textSize === "normal" ? "bg-cafe-tan text-cafe-white border-cafe-tan" : "bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50"}`}
+                    aria-pressed={settings.textSize === "normal"}
+                    className={`flex-1 py-3 text-sm font-bold transition-colors ${
+                      settings.textSize === "normal"
+                        ? "bg-cafe-tan/15 text-cafe-black"
+                        : "bg-white text-cafe-brown hover:bg-cafe-tan/5"
+                    }`}
                   >
-                    Aa
+                    Normal
                   </button>
                   <button
                     onClick={() => setTextSize("large")}
                     aria-label="Text size large"
-                    className={`flex-1 py-2 rounded-lg text-lg font-bold border transition-colors ${settings.textSize === "large" ? "bg-cafe-tan text-cafe-white border-cafe-tan" : "bg-white text-cafe-brown border-cafe-tan/30 hover:bg-cafe-tan/10 hover:border-cafe-tan/50"}`}
+                    aria-pressed={settings.textSize === "large"}
+                    className={`flex-1 py-3 text-sm font-bold transition-colors border-x border-cafe-tan/20 ${
+                      settings.textSize === "large"
+                        ? "bg-cafe-tan/15 text-cafe-black"
+                        : "bg-white text-cafe-brown hover:bg-cafe-tan/5"
+                    }`}
                   >
-                    Aa
+                    Large
+                  </button>
+                  <button
+                    onClick={() => setTextSize("xl")}
+                    aria-label="Text size extra large"
+                    aria-pressed={settings.textSize === "xl"}
+                    className={`flex-1 py-3 text-sm font-bold transition-colors ${
+                      settings.textSize === "xl"
+                        ? "bg-cafe-tan/15 text-cafe-black"
+                        : "bg-white text-cafe-brown hover:bg-cafe-tan/5"
+                    }`}
+                  >
+                    XL
                   </button>
                 </div>
               </div>
@@ -472,16 +491,14 @@ export const AccessibilityWidget: React.FC = () => {
               </h3>
               <ul className="list-disc pl-5 mb-4 space-y-1 text-cafe-brown/80">
                 <li>
-                  <strong>Text Options:</strong> Adjustable sizes and
-                  high-contrast mode.
+                  <strong>Text Options:</strong> Three text sizes (Normal, Large, XL) and dyslexia-friendly font.
                 </li>
                 <li>
-                  <strong>Reading Aids:</strong> Dyslexia-friendly font, bionic
-                  reading, and a reading guide line.
+                  <strong>Visual Options:</strong> High-contrast mode, grayscale,
+                  hide images, and pause animations.
                 </li>
                 <li>
-                  <strong>Visual Controls:</strong> Grayscale, hide images,
-                  pause animations.
+                  <strong>Reading Aids:</strong> Bionic reading and a reading guide line.
                 </li>
                 <li>
                   <strong>Focus Helpers:</strong> Larger cursor, link

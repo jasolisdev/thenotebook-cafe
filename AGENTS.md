@@ -2,9 +2,9 @@
 
 **Canonical source of truth for AI agents working on The Notebook Café codebase.**
 
-This document provides authoritative guidance for any AI assistant (Claude, Gemini, ChatGPT, Codex, etc.) when working with this project. Model-specific preferences are in their respective wrapper files (CLAUDE.md, GEMINI.md).
+This document provides authoritative guidance for any AI assistant (Claude, Gemini, ChatGPT, Codex, etc.) when working with this project. Model-specific preferences are in their respective wrapper files (CLAUDE.md, GEMINI.md, CODEX.md).
 
-**Last Updated:** December 2025
+**Last Updated:** See git history
 
 ---
 
@@ -20,11 +20,12 @@ This document provides authoritative guidance for any AI assistant (Claude, Gemi
 8. [Data & Content Management](#data--content-management)
 9. [Key Technical Patterns](#key-technical-patterns)
 10. [Development Guidelines](#development-guidelines)
-11. [Skills](#skills)
-12. [Testing](#testing)
-13. [Environment Variables](#environment-variables)
-14. [Deployment](#deployment)
-15. [Pages & Routes](#pages--routes)
+11. [Sub-Agent Delegation](#sub-agent-delegation)
+12. [Skills](#skills)
+13. [Testing](#testing)
+14. [Environment Variables](#environment-variables)
+15. [Deployment](#deployment)
+16. [Pages & Routes](#pages--routes)
 
 ---
 
@@ -56,6 +57,16 @@ This document provides authoritative guidance for any AI assistant (Claude, Gemi
 | **Analytics**  | Vercel Analytics + GA4        | Latest   |
 | **Testing**    | Vitest + Playwright           | Latest   |
 | **Deployment** | Vercel                        | Latest   |
+
+---
+
+### Legacy Notes (Ignore Older Docs)
+
+Ignore references to:
+- Sanity CMS (newsletter is Google Sheets + Apps Script)
+- Alpino font (headings use Playfair Display)
+- React Icons (use Lucide React only)
+- `/studio` route (removed)
 
 ---
 
@@ -379,6 +390,11 @@ import { COLORS } from "@/app/lib/constants/colors";
 import { CartProvider } from "../../components/providers/CartProvider";
 ```
 
+### Documentation Standards
+
+- Add concise JSDoc for new components, hooks, and utilities
+- Document non-obvious props, side effects, and edge cases
+
 ### Security Best Practices
 
 1. Always sanitize user input before sending emails or storing
@@ -391,16 +407,30 @@ import { CartProvider } from "../../components/providers/CartProvider";
 
 ### Git Workflow
 
-- Feature branches: `claude/feature-name-xxxxx` or `gemini/feature-name-xxxxx`
+- Feature branches: `claude/feature-name-xxxxx`, `gemini/feature-name-xxxxx`, or `codex/feature-name-xxxxx`
 - Commit format: `type(scope): description`
 - Push: `git push -u origin branch-name`
 - Merge to `master` for production
 
 ---
 
+## Sub-Agent Delegation
+
+Use sub-agents for high-context or specialized work (security, commerce, performance, large features). Delegation docs live in `docs/agents/`:
+
+- `docs/agents/README.md` - Index and quick entry points
+- `docs/agents/SUB_AGENT_SYSTEM.md` - Delegation workflow + review checklist
+- `docs/agents/SUB_AGENT_QUICK_REFERENCE.md` - Decision matrix + handoff templates
+- `docs/agents/CLAUDE_SUB.md` - Claude sub-agent specializations
+- `docs/agents/GEMINI_SUB.md` - Gemini sub-agent specializations
+- `docs/agents/SYSTEM_ARCHITECTURE.md` - Doc relationships and usage flow
+
+---
+
 ## Skills
 
 Skills are specialized prompts that enhance agent capabilities for specific tasks. They are defined in `.claude/skills/` and should be invoked when appropriate.
+Note: These skills and agents are configured for Claude Code; other assistants can ignore this section if unsupported.
 
 ### Available Skills
 
@@ -501,6 +531,11 @@ For multi-story features or architectural changes, use the **BMAD-METHOD** frame
 
 ## Testing
 
+### Expectations
+
+- Add or update unit/e2e tests for new features or bug fixes
+- Follow patterns in `tests/unit/` and `tests/e2e/`
+
 ### Infrastructure
 
 - **Unit tests**: Vitest + React Testing Library (`tests/unit/`)
@@ -563,7 +598,7 @@ UPSTASH_REDIS_REST_TOKEN=  # Leave empty to use in-memory (default)
 
 **Branches:**
 - `master` - Production
-- `claude/*`, `gemini/*` - AI-generated feature branches
+- `claude/*`, `gemini/*`, `codex/*` - AI-generated feature branches
 
 **Notes:**
 - Vercel preview deployments allowed in CSRF validation
@@ -599,6 +634,9 @@ UPSTASH_REDIS_REST_TOKEN=  # Leave empty to use in-memory (default)
 | `docs/google-sheets-newsletter.md` | Newsletter setup |
 | `docs/EMAIL_SETUP.md` | Resend email setup |
 | `docs/architecture.md` | Architecture overview |
+| `docs/agents/README.md` | Sub-agent documentation index |
+| `docs/agents/SUB_AGENT_SYSTEM.md` | Delegation workflow and review checklist |
+| `docs/agents/SUB_AGENT_QUICK_REFERENCE.md` | Decision matrix and handoff templates |
 
 ---
 
@@ -607,7 +645,10 @@ UPSTASH_REDIS_REST_TOKEN=  # Leave empty to use in-memory (default)
 For model-specific output preferences and behaviors, see:
 - **CLAUDE.md** - Claude Code preferences
 - **GEMINI.md** - Gemini preferences
-- **docs/agents/** - Extended agent configurations (optional)
+- **CODEX.md** - Codex preferences
+- **docs/agents/README.md** - Sub-agent system entry point
+- **docs/agents/CLAUDE_SUB.md** - Claude sub-agent specializations
+- **docs/agents/GEMINI_SUB.md** - Gemini sub-agent specializations
 
 ---
 
