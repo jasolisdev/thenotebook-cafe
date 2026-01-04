@@ -140,6 +140,11 @@ export const AccessibilityWidget: React.FC = () => {
   useEffect(() => {
     const html = document.documentElement;
 
+    // Text Size (3 options: normal, large, xl)
+    html.classList.remove("acc-text-lg", "acc-text-xl");
+    if (settings.textSize === "large") html.classList.add("acc-text-lg");
+    if (settings.textSize === "xl") html.classList.add("acc-text-xl");
+
     // Toggles
     if (settings.grayscale) html.classList.add("acc-grayscale");
     else html.classList.remove("acc-grayscale");
