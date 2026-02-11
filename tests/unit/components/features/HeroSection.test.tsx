@@ -11,6 +11,6 @@ describe('HeroSection', () => {
     expect(screen.getByText('Tells A Story')).toBeInTheDocument();
     expect(screen.getByText(/specialty coffee in riverside/i)).toBeInTheDocument();
     expect(screen.getByText(/3512 9th st/i)).toBeInTheDocument();
-    expect(screen.getByText(/mon - sat/i)).toBeInTheDocument();
+    expect(screen.getByText(/mon - fri/i)).toBeInTheDocument();
   });
 });

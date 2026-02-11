@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { checkRateLimit } from "@/app/lib";
+import {
+  AUTH_COOKIE_MAX_AGE_SECONDS,
+  AUTH_COOKIE_NAME,
+  createAuthCookieValue,
+} from "@/app/lib/server/authCookie";
 
 export async function POST(request: Request) {
   // Rate limiting: 3 requests per 15 minutes (prevent brute force)
@@ -19,13 +24,21 @@ export async function POST(request: Request) {
     }
 
     if (password === correctPassword) {
-      // Set a cookie that expires in 7 days
+      const authCookieValue = createAuthCookieValue();
+      if (!authCookieValue) {
+        return NextResponse.json(
+          { success: false, message: "Auth cookie secret not configured" },
+          { status: 500 }
+        );
+      }
+
+      // Set a signed cookie that expires in 7 days
       const cookieStore = await cookies();
-      cookieStore.set("site-auth", "authenticated", {
+      cookieStore.set(AUTH_COOKIE_NAME, authCookieValue, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
-        maxAge: 60 * 60 * 24 * 7, // 7 days
+        maxAge: AUTH_COOKIE_MAX_AGE_SECONDS,
         path: "/",
       });
 

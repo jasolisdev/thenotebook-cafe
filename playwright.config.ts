@@ -1,5 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const PLAYWRIGHT_HOST = process.env.PLAYWRIGHT_HOST ?? '127.0.0.1';
+const PLAYWRIGHT_PORT = process.env.PLAYWRIGHT_PORT ?? '4017';
+const DEFAULT_BASE_URL = `http://${PLAYWRIGHT_HOST}:${PLAYWRIGHT_PORT}`;
+const BASE_URL = process.env.PLAYWRIGHT_BASE_URL ?? DEFAULT_BASE_URL;
+const USE_WEB_SERVER = process.env.PLAYWRIGHT_BASE_URL == null;
+
 /**
  * Playwright E2E Testing Configuration
  * See https://playwright.dev/docs/test-configuration
@@ -13,7 +19,7 @@ export default defineConfig({
   reporter: 'html',
 
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: BASE_URL,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
@@ -49,13 +55,15 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'npm run build && npm run start -- -p 3000',
-    url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000, // 2 minutes
-    env: {
-      NEXT_DISABLE_TURBOPACK: '1',
-    },
-  },
+  webServer: USE_WEB_SERVER
+    ? {
+        command: `npm run build && npm run start -- -H ${PLAYWRIGHT_HOST} -p ${PLAYWRIGHT_PORT}`,
+        url: BASE_URL,
+        reuseExistingServer: process.env.PLAYWRIGHT_REUSE_SERVER === '1',
+        timeout: 180 * 1000,
+        env: {
+          NEXT_DISABLE_TURBOPACK: '1',
+        },
+      }
+    : undefined,
 });

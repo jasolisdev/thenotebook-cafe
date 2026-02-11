@@ -48,6 +48,7 @@ import { ErrorBoundary } from "./components/ui/ErrorBoundary";
 import TypographyDebug from "./components/ui/TypographyDebug";
 import { SEO } from "@/app/lib/constants/seo";
 import { BUSINESS_INFO } from "@/app/lib/constants/business";
+import { AUTH_COOKIE_NAME, isAuthCookieValid } from "@/app/lib/server/authCookie";
 
 
 export const metadata: Metadata = {
@@ -139,7 +140,9 @@ export default async function RootLayout({
 
   if (sitePassword) {
     const cookieStore = await cookies();
-    const isAuthenticated = cookieStore.get("site-auth")?.value === "authenticated";
+    const isAuthenticated = isAuthCookieValid(
+      cookieStore.get(AUTH_COOKIE_NAME)?.value
+    );
     showPasswordGate = !isAuthenticated;
   }
 

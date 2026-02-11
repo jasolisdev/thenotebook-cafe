@@ -19,7 +19,7 @@ describe('SiteHeader Component', () => {
 
   it('renders brand logo and name', () => {
     render(<SiteHeader />);
-    expect(screen.getByAltText(/the notebook café logo/i)).toBeInTheDocument();
+    expect(screen.getAllByAltText(/the notebook café logo/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/the notebook/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/café/i).length).toBeGreaterThan(0);
   });

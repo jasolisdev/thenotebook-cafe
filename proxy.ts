@@ -15,7 +15,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const startTime = Date.now();
   const { pathname, search } = request.nextUrl;
   const method = request.method;
@@ -27,9 +27,8 @@ export function middleware(request: NextRequest) {
     console.log(`[${method}] ${pathname}${search} - IP: ${ip.split(",")[0].trim()}`);
   }
 
-  // Allow access to /studio (Sanity CMS) and API routes without authentication
+  // Allow API routes and static assets without password checks
   if (
-    pathname.startsWith("/studio") ||
     pathname.startsWith("/api") ||
     pathname.startsWith("/_next") ||
     pathname.includes(".")

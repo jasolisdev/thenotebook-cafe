@@ -33,7 +33,6 @@ vi.mock('resend', () => ({
 const mockedValidateOrigin = vi.mocked(validateOrigin);
 const mockedCheckRateLimit = vi.mocked(checkRateLimit);
 const mockedLoggerInfo = vi.mocked(logger.info);
-const mockedLoggerWarn = vi.mocked(logger.warn);
 const mockedLoggerError = vi.mocked(logger.error);
 
 const makeRequest = (body: unknown) =>
@@ -48,6 +47,7 @@ beforeEach(() => {
   mockedValidateOrigin.mockReturnValue(null);
   mockedCheckRateLimit.mockReturnValue(null);
   process.env.RESEND_API_KEY = 'test-resend-key';
+  process.env.CONTACT_EMAIL_RECIPIENT = 'owner@thenotebookcafe.com';
   mockSend.mockResolvedValue({ data: { id: 'email-1' } });
 });
 
@@ -132,7 +132,23 @@ describe('POST /api/contact', () => {
     );
   });
 
-  test('logs warning when Resend is not configured', async () => {
+  test("accepts apostrophes in names", async () => {
+    const response = await POST(
+      makeRequest({
+        name: "O'Connor",
+        email: "oconnor@example.com",
+        subject: "Hello",
+        message: "Checking in",
+      })
+    );
+    const payload = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(payload).toEqual({ ok: true });
+    expect(mockSend).toHaveBeenCalled();
+  });
+
+  test('returns 503 when Resend is not configured', async () => {
     delete process.env.RESEND_API_KEY;
 
     const response = await POST(
@@ -143,15 +159,14 @@ describe('POST /api/contact', () => {
         message: 'Hi',
       })
     );
-    await response.json();
+    const payload = await response.json();
 
-    expect(mockedLoggerWarn).toHaveBeenCalledWith(
-      'Resend client not initialized - email not sent'
-    );
+    expect(response.status).toBe(503);
+    expect(payload).toEqual({ ok: false, error: 'Email service not configured' });
     expect(mockSend).not.toHaveBeenCalled();
   });
 
-  test('continues when email sending fails', async () => {
+  test('returns 502 when email sending fails', async () => {
     mockSend.mockRejectedValue(new Error('email failed'));
 
     const response = await POST(
@@ -164,11 +179,34 @@ describe('POST /api/contact', () => {
     );
     const payload = await response.json();
 
-    expect(response.status).toBe(200);
-    expect(payload).toEqual({ ok: true });
+    expect(response.status).toBe(502);
+    expect(payload).toEqual({
+      ok: false,
+      error: 'Failed to deliver message. Please try again.',
+    });
     expect(mockedLoggerError).toHaveBeenCalledWith(
       'Failed to send contact email',
       expect.any(Error)
+    );
+  });
+
+  test('returns 503 when recipient email is not configured', async () => {
+    delete process.env.CONTACT_EMAIL_RECIPIENT;
+
+    const response = await POST(
+      makeRequest({
+        name: 'Ada Lovelace',
+        email: 'ada@example.com',
+        subject: 'Hello',
+        message: 'Hi',
+      })
+    );
+    const payload = await response.json();
+
+    expect(response.status).toBe(503);
+    expect(payload).toEqual({ ok: false, error: 'Email service not configured' });
+    expect(mockedLoggerError).toHaveBeenCalledWith(
+      'CONTACT_EMAIL_RECIPIENT not configured'
     );
   });
 

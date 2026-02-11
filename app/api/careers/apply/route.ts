@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import {
   validateOrigin,
   checkRateLimit,
+  validateUploadedFile,
   logger,
   sanitizeEmail,
   sanitizeMultilineText,
@@ -15,17 +16,24 @@ import {
 } from "@/app/lib/server/validation";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
-const ALLOWED_TYPES = new Set([
+const ALLOWED_MIME_TYPES = [
   "application/pdf",
   "application/msword",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-]);
-const ALLOWED_EXTENSIONS = new Set(["pdf", "doc", "docx"]);
+];
 
-const CAREERS_EMAIL_RECIPIENT =
-  process.env.CAREERS_EMAIL_RECIPIENT ||
-  process.env.CONTACT_EMAIL_RECIPIENT ||
-  "jasolisdev@gmail.com";
+function getCareersEmailRecipient(): string | null {
+  const recipient =
+    process.env.CAREERS_EMAIL_RECIPIENT?.trim() ||
+    process.env.CONTACT_EMAIL_RECIPIENT?.trim();
+
+  if (!recipient) {
+    logger.error("CAREERS_EMAIL_RECIPIENT or CONTACT_EMAIL_RECIPIENT not configured");
+    return null;
+  }
+
+  return recipient;
+}
 
 function getResendClient() {
   const apiKey = process.env.RESEND_API_KEY;
@@ -226,11 +234,20 @@ function buildCareersEmailHtml(params: {
 </html>`;
 }
 
-export async function POST(req: Request) {
+type CareersApplyHandlerOptions = {
+  rateLimitEndpoint?: string;
+};
+
+export async function handleCareersApplyPost(
+  req: Request,
+  options: CareersApplyHandlerOptions = {}
+) {
+  const rateLimitEndpoint = options.rateLimitEndpoint ?? "/api/careers/apply";
+
   const originError = validateOrigin(req);
   if (originError) return originError;
 
-  const rateLimitError = await checkRateLimit(req, "/api/careers/apply", 3, 60000);
+  const rateLimitError = await checkRateLimit(req, rateLimitEndpoint, 3, 60000);
   if (rateLimitError) return rateLimitError;
 
   try {
@@ -247,7 +264,8 @@ export async function POST(req: Request) {
     const positionsRaw = formData.get("positions");
     const daysAvailableRaw = formData.get("daysAvailable");
     const resume = formData.get("resume");
-    const application = formData.get("application");
+    const application =
+      formData.get("application") ?? formData.get("supplementalApplication");
 
     const normalizedName = normalizeText(name, 120);
     const normalizedFirstName = normalizeText(firstName, 60);
@@ -290,98 +308,125 @@ export async function POST(req: Request) {
       );
     }
 
-    if (resume.size > MAX_FILE_SIZE) {
+    const resumeValidation = await validateUploadedFile(
+      resume,
+      ALLOWED_MIME_TYPES,
+      MAX_FILE_SIZE
+    );
+
+    if (!resumeValidation.valid) {
       return NextResponse.json(
-        { ok: false, error: "Resume must be under 5MB" },
+        { ok: false, error: resumeValidation.error || "Invalid resume file" },
         { status: 400, headers: { "Cache-Control": "no-store" } }
       );
     }
 
-    const extension = resume.name.split(".").pop()?.toLowerCase() || "";
-    const typeAllowed = resume.type ? ALLOWED_TYPES.has(resume.type) : false;
-    if (!typeAllowed && !ALLOWED_EXTENSIONS.has(extension)) {
+    if (application instanceof File && application.size > 0) {
+      const applicationValidation = await validateUploadedFile(
+        application,
+        ALLOWED_MIME_TYPES,
+        MAX_FILE_SIZE
+      );
+
+      if (!applicationValidation.valid) {
+        return NextResponse.json(
+          {
+            ok: false,
+            error: applicationValidation.error || "Invalid application file",
+          },
+          { status: 400, headers: { "Cache-Control": "no-store" } }
+        );
+      }
+    }
+
+    const recipient = getCareersEmailRecipient();
+    if (!recipient) {
       return NextResponse.json(
-        { ok: false, error: "Resume must be a PDF or Word document" },
-        { status: 400, headers: { "Cache-Control": "no-store" } }
+        { ok: false, error: "Email service not configured" },
+        { status: 503, headers: { "Cache-Control": "no-store" } }
       );
     }
 
     const resend = getResendClient();
-    if (resend) {
-      const arrayBuffer = await resume.arrayBuffer();
-        const attachment = {
-          filename: resume.name || "resume",
-          content: Buffer.from(arrayBuffer),
-          contentType: resume.type || undefined,
-        };
-        const applicationAttachments = [];
-        if (application instanceof File && application.size > 0) {
-          const extension = application.name.split(".").pop()?.toLowerCase() || "";
-          const typeAllowed = application.type ? ALLOWED_TYPES.has(application.type) : false;
-          if (application.size > MAX_FILE_SIZE) {
-            return NextResponse.json(
-              { ok: false, error: "Application must be under 5MB" },
-              { status: 400, headers: { "Cache-Control": "no-store" } }
-            );
-          }
-          if (!typeAllowed && !ALLOWED_EXTENSIONS.has(extension)) {
-            return NextResponse.json(
-              { ok: false, error: "Application must be a PDF or Word document" },
-              { status: 400, headers: { "Cache-Control": "no-store" } }
-            );
-          }
-          const applicationBuffer = await application.arrayBuffer();
-          applicationAttachments.push({
-            filename: application.name || "application",
-            content: Buffer.from(applicationBuffer),
-            contentType: application.type || undefined,
-          });
-        }
-      try {
-        const receivedAt = new Date();
-        const details: string[] = [];
-        if (normalizedPhone) details.push(`Phone: ${sanitizeText(formatPhoneNumber(normalizedPhone))}`);
-        if (normalizedBirthdate) details.push(`Birthdate: ${sanitizeText(formatBirthdate(normalizedBirthdate))}`);
-        if (daysAvailableText) details.push(`Days Available: ${sanitizeText(daysAvailableText)}`);
-        const applicationName =
-          application instanceof File && application.size > 0
-            ? application.name || "application"
-            : undefined;
+    if (!resend) {
+      return NextResponse.json(
+        { ok: false, error: "Email service not configured" },
+        { status: 503, headers: { "Cache-Control": "no-store" } }
+      );
+    }
 
-        await resend.emails.send({
-          from: "The Notebook Café <onboarding@resend.dev>",
-          to: CAREERS_EMAIL_RECIPIENT,
-          replyTo: sanitizeEmail(normalizedEmail),
-          subject: `Careers Application: ${sanitizeText(resolvedRole)}`,
-          text: buildCareersEmailText({
-            name: sanitizeText(resolvedName),
-            email: sanitizeEmail(normalizedEmail),
-            role: sanitizeText(resolvedRole),
-            availability: sanitizeText(resolvedAvailability),
-            message: sanitizeMultilineText(normalizedMessage || ""),
-            resumeName: sanitizeText(resume.name || "resume"),
-            applicationName,
-            details,
-            receivedAt,
-          }),
-          html: buildCareersEmailHtml({
-            name: resolvedName,
-            email: normalizedEmail,
-            role: resolvedRole,
-            availability: resolvedAvailability,
-            message: normalizedMessage || "",
-            resumeName: resume.name || "resume",
-            applicationName,
-            details,
-            receivedAt,
-          }),
-          attachments: [attachment, ...applicationAttachments],
-        });
-      } catch (emailError) {
-        logger.error("Failed to send careers email", emailError);
+    const arrayBuffer = await resume.arrayBuffer();
+    const attachment = {
+      filename: resume.name || "resume",
+      content: Buffer.from(arrayBuffer),
+      contentType: resume.type || undefined,
+    };
+
+    const applicationAttachments = [];
+    if (application instanceof File && application.size > 0) {
+      const applicationBuffer = await application.arrayBuffer();
+      applicationAttachments.push({
+        filename: application.name || "application",
+        content: Buffer.from(applicationBuffer),
+        contentType: application.type || undefined,
+      });
+    }
+
+    try {
+      const receivedAt = new Date();
+      const details: string[] = [];
+      if (normalizedPhone) {
+        details.push(`Phone: ${sanitizeText(formatPhoneNumber(normalizedPhone))}`);
       }
-    } else {
-      logger.warn("Resend client not initialized - careers email not sent");
+      if (normalizedBirthdate) {
+        details.push(
+          `Birthdate: ${sanitizeText(formatBirthdate(normalizedBirthdate))}`
+        );
+      }
+      if (daysAvailableText) {
+        details.push(`Days Available: ${sanitizeText(daysAvailableText)}`);
+      }
+
+      const applicationName =
+        application instanceof File && application.size > 0
+          ? application.name || "application"
+          : undefined;
+
+      await resend.emails.send({
+        from: "The Notebook Café <onboarding@resend.dev>",
+        to: recipient,
+        replyTo: sanitizeEmail(normalizedEmail),
+        subject: `Careers Application: ${sanitizeText(resolvedRole)}`,
+        text: buildCareersEmailText({
+          name: sanitizeText(resolvedName),
+          email: sanitizeEmail(normalizedEmail),
+          role: sanitizeText(resolvedRole),
+          availability: sanitizeText(resolvedAvailability),
+          message: sanitizeMultilineText(normalizedMessage || ""),
+          resumeName: sanitizeText(resume.name || "resume"),
+          applicationName,
+          details,
+          receivedAt,
+        }),
+        html: buildCareersEmailHtml({
+          name: resolvedName,
+          email: normalizedEmail,
+          role: resolvedRole,
+          availability: resolvedAvailability,
+          message: normalizedMessage || "",
+          resumeName: resume.name || "resume",
+          applicationName,
+          details,
+          receivedAt,
+        }),
+        attachments: [attachment, ...applicationAttachments],
+      });
+    } catch (emailError) {
+      logger.error("Failed to send careers email", emailError);
+      return NextResponse.json(
+        { ok: false, error: "Failed to send application. Please try again." },
+        { status: 502, headers: { "Cache-Control": "no-store" } }
+      );
     }
 
     return NextResponse.json(
@@ -395,4 +440,8 @@ export async function POST(req: Request) {
       { status: 500, headers: { "Cache-Control": "no-store" } }
     );
   }
+}
+
+export async function POST(req: Request) {
+  return handleCareersApplyPost(req, { rateLimitEndpoint: "/api/careers/apply" });
 }

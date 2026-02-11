@@ -95,7 +95,21 @@ const contactFAQs = [
   },
 ];
 
+function formatHourParts(time24: string): { hour: string; period: string } {
+  const parsedHour = Number.parseInt(time24.split(":")[0] ?? "", 10);
+  if (!Number.isFinite(parsedHour)) return { hour: time24, period: "" };
+
+  const period = parsedHour >= 12 ? "pm" : "am";
+  const hour = (parsedHour % 12 || 12).toString();
+  return { hour, period };
+}
+
 export default function ContactPage() {
+  const weekdayOpen = formatHourParts(BUSINESS_INFO.hours.monFri.opens);
+  const weekdayClose = formatHourParts(BUSINESS_INFO.hours.monFri.closes);
+  const weekendOpen = formatHourParts(BUSINESS_INFO.hours.satSun.opens);
+  const weekendClose = formatHourParts(BUSINESS_INFO.hours.satSun.closes);
+
   return (
     <main className="contact-page min-h-screen relative">
       <FAQJsonLd items={contactFAQs} />
@@ -194,14 +208,15 @@ export default function ContactPage() {
                       welcoming space to work or relax.
                     </p>
                     <address className="not-italic font-serif text-xl md:text-2xl leading-relaxed text-cafe-black/80">
-                      3512 9th St,
+                      {BUSINESS_INFO.address.street},
                       <br />
-                      Riverside, CA 92501
+                      {BUSINESS_INFO.address.city}, {BUSINESS_INFO.address.state}{" "}
+                      {BUSINESS_INFO.address.zip}
                     </address>
                   </div>
 
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=The+Notebook+Cafe%2C+3512+9th+St%2C+Riverside%2C+CA+92501"
+                    href={BUSINESS_INFO.maps.directionsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="contact-directions-link inline-flex items-center gap-2 text-sm uppercase tracking-wider font-semibold transition-all duration-400 group pt-2"
@@ -237,7 +252,10 @@ export default function ContactPage() {
                         Monday – Friday
                       </span>
                       <span className="font-serif text-cafe-black">
-                        <span className="text-2xl">7</span><span className="text-sm">am</span> — <span className="text-2xl">6</span><span className="text-sm">pm</span>
+                        <span className="text-2xl">{weekdayOpen.hour}</span>
+                        <span className="text-sm">{weekdayOpen.period}</span> —{" "}
+                        <span className="text-2xl">{weekdayClose.hour}</span>
+                        <span className="text-sm">{weekdayClose.period}</span>
                       </span>
                     </div>
                     <div className="flex justify-between items-baseline border-b border-cafe-tan/20 pb-2">
@@ -245,7 +263,10 @@ export default function ContactPage() {
                         Saturday – Sunday
                       </span>
                       <span className="font-serif text-cafe-black">
-                        <span className="text-2xl">7</span><span className="text-sm">am</span> — <span className="text-2xl">3</span><span className="text-sm">pm</span>
+                        <span className="text-2xl">{weekendOpen.hour}</span>
+                        <span className="text-sm">{weekendOpen.period}</span> —{" "}
+                        <span className="text-2xl">{weekendClose.hour}</span>
+                        <span className="text-sm">{weekendClose.period}</span>
                       </span>
                     </div>
                   </div>
@@ -274,10 +295,10 @@ export default function ContactPage() {
                         Phone
                       </p>
                       <a
-                        href="tel:+19518230004"
+                        href={`tel:${BUSINESS_INFO.phoneE164}`}
                         className="font-serif text-2xl text-cafe-black hover:text-cafe-tan transition-colors"
                       >
-                        (951) 823-0004
+                        {BUSINESS_INFO.phoneDisplay}
                       </a>
                     </div>
                     <div>
@@ -285,10 +306,10 @@ export default function ContactPage() {
                         Email
                       </p>
                       <a
-                        href="mailto:thenotebookcafellc@gmail.com"
+                        href={`mailto:${BUSINESS_INFO.email}`}
                         className="font-serif text-xl text-cafe-black hover:text-cafe-tan transition-colors"
                       >
-                        thenotebookcafellc@gmail.com
+                        {BUSINESS_INFO.email}
                       </a>
                     </div>
                   </div>
@@ -343,7 +364,7 @@ export default function ContactPage() {
             <div className="relative">
               <div className="contact-map-frame relative w-full h-[420px] sm:h-[500px] md:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
                 <iframe
-                  src="https://www.google.com/maps?q=The+Notebook+Cafe%2C+3512+9th+St%2C+Riverside%2C+CA+92501&output=embed"
+                  src={BUSINESS_INFO.maps.embedUrl}
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

@@ -13,6 +13,11 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     "test/**", // Ignore the test directory
+    "coverage/**",
+    "demo/**",
+    "playwright-report/**",
+    "test-results/**",
+    "**/*.backup",
   ]),
 ]);
 

@@ -21,6 +21,7 @@
  */
 import type { Metadata } from 'next';
 import { SEO } from '@/app/lib/constants/seo';
+import { BUSINESS_INFO } from "@/app/lib/constants/business";
 
 export const metadata: Metadata = {
   title: SEO.pages.terms.title,
@@ -146,8 +147,12 @@ export default function TermsPage() {
         <h2 className="font-serif text-2xl" style={{ color: 'var(--color-cafe-black)' }}>Contact</h2>
         <p className="text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
           Questions about these Terms of Service? Email{" "}
-          <a href="mailto:thenotebookcafellc@gmail.com" className="underline" style={{ color: 'var(--color-cafe-tan-dark)' }}>
-            thenotebookcafellc@gmail.com
+          <a
+            href={`mailto:${BUSINESS_INFO.email}`}
+            className="underline"
+            style={{ color: "var(--color-cafe-tan-dark)" }}
+          >
+            {BUSINESS_INFO.email}
           </a>.
         </p>
       </section>

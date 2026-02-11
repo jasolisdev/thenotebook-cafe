@@ -64,7 +64,7 @@ describe('POST /api/auth/verify', () => {
     expect(payload).toEqual({ success: true });
     expect(cookieSet).toHaveBeenCalledWith(
       'site-auth',
-      'authenticated',
+      expect.stringMatching(/^v1\.\d+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/),
       expect.objectContaining({
         httpOnly: true,
         secure: false,

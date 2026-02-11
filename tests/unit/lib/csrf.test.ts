@@ -35,14 +35,8 @@ describe('validateOrigin', () => {
       expect(result).toBeNull();
     });
 
-    test('allows Vercel preview deployments', () => {
-      const req = createMockRequest({ origin: 'https://thenotebook-cafe-git-main-username.vercel.app' });
-      const result = validateOrigin(req);
-      expect(result).toBeNull();
-    });
-
-    test('allows any Vercel preview URL pattern', () => {
-      const req = createMockRequest({ origin: 'https://my-branch-abc123.vercel.app' });
+    test('allows 127.0.0.1 origin for local tooling', () => {
+      const req = createMockRequest({ origin: 'http://127.0.0.1:3000' });
       const result = validateOrigin(req);
       expect(result).toBeNull();
     });
@@ -63,8 +57,8 @@ describe('validateOrigin', () => {
       expect(result?.status).toBe(403);
     });
 
-    test('rejects non-https Vercel preview', () => {
-      const req = createMockRequest({ origin: 'http://test.vercel.app' });
+    test('rejects untrusted Vercel preview origin', () => {
+      const req = createMockRequest({ origin: 'https://test.vercel.app' });
       const result = validateOrigin(req);
       expect(result).not.toBeNull();
       expect(result?.status).toBe(403);
@@ -140,10 +134,11 @@ describe('validateOrigin', () => {
       });
     });
 
-    test('allows Vercel preview in referer', () => {
+    test('rejects untrusted Vercel preview in referer', () => {
       const req = createMockRequest({ referer: 'https://preview-abc123.vercel.app/contact' });
       const result = validateOrigin(req);
-      expect(result).toBeNull();
+      expect(result).not.toBeNull();
+      expect(result?.status).toBe(403);
     });
   });
 

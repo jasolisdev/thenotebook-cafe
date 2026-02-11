@@ -22,14 +22,24 @@
 export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
- * Characters that could indicate XSS or injection attempts
+ * Patterns that could indicate HTML/script injection attempts
  */
-const DANGEROUS_CHARS_PATTERN = /[<>"'`]/;
+const HTML_TAG_PATTERN = /[<>]/;
+const SCRIPT_INJECTION_PATTERN = /(javascript:|data:text\/html|on\w+\s*=)/i;
+const NULL_BYTE_PATTERN = /\0/;
 
 /**
  * Whitespace pattern for collapsing multiple spaces
  */
 const MULTI_WHITESPACE_PATTERN = /\s+/g;
+
+function hasUnsafeInput(text: string): boolean {
+  return (
+    HTML_TAG_PATTERN.test(text) ||
+    SCRIPT_INJECTION_PATTERN.test(text) ||
+    NULL_BYTE_PATTERN.test(text)
+  );
+}
 
 /**
  * Normalizes and validates text input
@@ -78,7 +88,7 @@ export function normalizeText(
   if (text.length > maxLength) return null;
 
   // XSS prevention (unless explicitly allowed)
-  if (!allowHtml && DANGEROUS_CHARS_PATTERN.test(text)) return null;
+  if (!allowHtml && hasUnsafeInput(text)) return null;
 
   // Optional lowercase conversion
   if (lowercase) {
@@ -112,8 +122,8 @@ export function normalizeEmail(input: unknown): string | null {
   // RFC 5321 max length for email
   if (email.length > 254) return null;
 
-  // XSS prevention - reject dangerous characters
-  if (DANGEROUS_CHARS_PATTERN.test(email)) return null;
+  // XSS prevention
+  if (hasUnsafeInput(email)) return null;
 
   // Whitespace in email is invalid
   if (/\s/.test(email)) return null;
@@ -144,7 +154,7 @@ export function normalizePhone(input: unknown): string | null {
   if (phone.length > 20) return null;
 
   // XSS prevention
-  if (DANGEROUS_CHARS_PATTERN.test(phone)) return null;
+  if (hasUnsafeInput(phone)) return null;
 
   // Must contain at least 10 digits (US phone)
   const digitsOnly = phone.replace(/\D/g, "");

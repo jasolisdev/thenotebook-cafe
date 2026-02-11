@@ -5,14 +5,23 @@ import Image from "next/image";
 import { MapPin, Clock, ArrowUpRight } from "lucide-react";
 import RevealText from "@/app/components/ui/RevealText";
 import FadeInSection from "@/app/components/ui/FadeInSection";
+import { BUSINESS_INFO } from "@/app/lib/constants/business";
 
-const CAFE_INFO = {
-  name: "The Notebook Café",
-  address: "3512 9th St",
-  location: "Riverside, CA 92501",
-};
+function formatHourParts(time24: string): { hour: string; period: string } {
+  const parsedHour = Number.parseInt(time24.split(":")[0] ?? "", 10);
+  if (!Number.isFinite(parsedHour)) return { hour: time24, period: "" };
+
+  const period = parsedHour >= 12 ? "pm" : "am";
+  const hour = (parsedHour % 12 || 12).toString();
+  return { hour, period };
+}
 
 const HeroSection: React.FC = () => {
+  const weekdayOpen = formatHourParts(BUSINESS_INFO.hours.monFri.opens);
+  const weekdayClose = formatHourParts(BUSINESS_INFO.hours.monFri.closes);
+  const weekendOpen = formatHourParts(BUSINESS_INFO.hours.satSun.opens);
+  const weekendClose = formatHourParts(BUSINESS_INFO.hours.satSun.closes);
+
   return (
     <div className="relative w-full min-h-[95svh] md:min-h-[100svh] overflow-hidden bg-cafe-mist flex flex-col items-center">
       {/* Hero Content Section - Now flex-grow to push bar down */}
@@ -90,11 +99,12 @@ const HeroSection: React.FC = () => {
               </span>
             </div>
             <p className="font-serif text-xl md:text-2xl text-cafe-brown tracking-tight leading-snug">
-              {CAFE_INFO.address},<br className="md:hidden" />{" "}
-              {CAFE_INFO.location}
+              {BUSINESS_INFO.address.street},<br className="md:hidden" />{" "}
+              {BUSINESS_INFO.address.city}, {BUSINESS_INFO.address.state}{" "}
+              {BUSINESS_INFO.address.zip}
             </p>
             <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CAFE_INFO.name)}`}
+              href={BUSINESS_INFO.maps.directionsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 flex items-center space-x-2 text-[9px] md:text-[10px] uppercase tracking-[0.4em] font-extrabold font-inter text-cafe-brown/85 hover:text-cafe-brown transition-colors group"
@@ -119,13 +129,19 @@ const HeroSection: React.FC = () => {
               <p className="text-xl md:text-2xl text-cafe-brown tracking-tight leading-snug">
                 Mon - Fri:{" "}
                 <span className="italic font-light ml-6">
-                  <span className="text-2xl md:text-3xl">7</span><span className="text-sm">am</span> - <span className="text-2xl md:text-3xl">6</span><span className="text-sm">pm</span>
+                  <span className="text-2xl md:text-3xl">{weekdayOpen.hour}</span>
+                  <span className="text-sm">{weekdayOpen.period}</span> -{" "}
+                  <span className="text-2xl md:text-3xl">{weekdayClose.hour}</span>
+                  <span className="text-sm">{weekdayClose.period}</span>
                 </span>
               </p>
               <p className="text-xl md:text-2xl text-cafe-brown tracking-tight leading-snug mt-2">
                 Sat - Sun:{" "}
                 <span className="italic font-light ml-6">
-                  <span className="text-2xl md:text-3xl">7</span><span className="text-sm">am</span> - <span className="text-2xl md:text-3xl">3</span><span className="text-sm">pm</span>
+                  <span className="text-2xl md:text-3xl">{weekendOpen.hour}</span>
+                  <span className="text-sm">{weekendOpen.period}</span> -{" "}
+                  <span className="text-2xl md:text-3xl">{weekendClose.hour}</span>
+                  <span className="text-sm">{weekendClose.period}</span>
                 </span>
               </p>
             </div>

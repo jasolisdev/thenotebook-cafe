@@ -20,15 +20,16 @@ describe('Button Component', () => {
   it('applies primary variant styles by default', () => {
     render(<Button>Primary</Button>);
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('bg-cafe-black');
-    expect(button).toHaveClass('text-cafe-cream');
+    expect(button).toHaveClass('bg-cafe-luxe-oat');
+    expect(button).toHaveClass('text-cafe-black');
   });
 
   it('applies secondary variant styles', () => {
     render(<Button variant="secondary">Secondary</Button>);
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('bg-cafe-tan');
-    expect(button).toHaveClass('text-white');
+    expect(button).toHaveClass('border');
+    expect(button).toHaveClass('border-cafe-luxe-oat');
+    expect(button).toHaveClass('bg-transparent');
   });
 
   it('applies outline variant styles', () => {

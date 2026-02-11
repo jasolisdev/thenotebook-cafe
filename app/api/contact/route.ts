@@ -14,8 +14,14 @@ import {
 } from "@/app/lib/server/validation";
 import { Resend } from "resend";
 
-// Email recipient (configurable via environment variable)
-const CONTACT_EMAIL_RECIPIENT = process.env.CONTACT_EMAIL_RECIPIENT || "jasolisdev@gmail.com";
+function getContactEmailRecipient(): string | null {
+  const recipient = process.env.CONTACT_EMAIL_RECIPIENT?.trim();
+  if (!recipient) {
+    logger.error("CONTACT_EMAIL_RECIPIENT not configured");
+    return null;
+  }
+  return recipient;
+}
 
 // Lazy initialize Resend client
 function getResendClient() {
@@ -247,41 +253,54 @@ export async function POST(req: Request) {
       );
     }
 
-    // Send email notification
+    const recipient = getContactEmailRecipient();
+    if (!recipient) {
+      return NextResponse.json(
+        { ok: false, error: "Email service not configured" },
+        { status: 503, headers: { "Cache-Control": "no-store" } }
+      );
+    }
+
     const resend = getResendClient();
-    if (resend) {
-      try {
-        const receivedAt = new Date();
-        const emailResult = await resend.emails.send({
-          from: "The Notebook Café <onboarding@resend.dev>",
-          to: CONTACT_EMAIL_RECIPIENT,
-          replyTo: sanitizeEmail(normalizedEmail),
-          subject: `Contact Form: ${sanitizeText(normalizedSubject)}`,
-          text: buildContactEmailText({
-            name: sanitizeText(normalizedName),
-            email: sanitizeEmail(normalizedEmail),
-            subject: sanitizeText(normalizedSubject),
-            message: sanitizeMultilineText(normalizedMessage),
-            receivedAt,
-          }),
-          html: buildContactEmailHtml({
-            name: normalizedName,
-            email: normalizedEmail,
-            subject: normalizedSubject,
-            message: normalizedMessage,
-            receivedAt,
-          }),
-        });
-        logger.info("Contact email sent successfully", {
-          emailId: emailResult.data?.id,
-          recipient: CONTACT_EMAIL_RECIPIENT
-        });
-      } catch (emailError) {
-        // Log email error but don't fail the request
-        logger.error("Failed to send contact email", emailError);
-      }
-    } else {
-      logger.warn("Resend client not initialized - email not sent");
+    if (!resend) {
+      return NextResponse.json(
+        { ok: false, error: "Email service not configured" },
+        { status: 503, headers: { "Cache-Control": "no-store" } }
+      );
+    }
+
+    try {
+      const receivedAt = new Date();
+      const emailResult = await resend.emails.send({
+        from: "The Notebook Café <onboarding@resend.dev>",
+        to: recipient,
+        replyTo: sanitizeEmail(normalizedEmail),
+        subject: `Contact Form: ${sanitizeText(normalizedSubject)}`,
+        text: buildContactEmailText({
+          name: sanitizeText(normalizedName),
+          email: sanitizeEmail(normalizedEmail),
+          subject: sanitizeText(normalizedSubject),
+          message: sanitizeMultilineText(normalizedMessage),
+          receivedAt,
+        }),
+        html: buildContactEmailHtml({
+          name: normalizedName,
+          email: normalizedEmail,
+          subject: normalizedSubject,
+          message: normalizedMessage,
+          receivedAt,
+        }),
+      });
+      logger.info("Contact email sent successfully", {
+        emailId: emailResult.data?.id,
+        recipient,
+      });
+    } catch (emailError) {
+      logger.error("Failed to send contact email", emailError);
+      return NextResponse.json(
+        { ok: false, error: "Failed to deliver message. Please try again." },
+        { status: 502, headers: { "Cache-Control": "no-store" } }
+      );
     }
 
     return NextResponse.json(

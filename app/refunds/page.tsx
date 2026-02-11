@@ -22,6 +22,7 @@
  */
 import type { Metadata } from 'next';
 import { SEO } from '@/app/lib/constants/seo';
+import { BUSINESS_INFO } from "@/app/lib/constants/business";
 
 export const metadata: Metadata = {
   title: SEO.pages.refunds.title,
@@ -72,7 +73,7 @@ export default function RefundsPage() {
       <section className="space-y-4">
         <h2 className="font-serif text-2xl" style={{ color: 'var(--color-cafe-black)' }}>How to request a refund</h2>
         <ul className="list-disc pl-5 space-y-2 text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
-          <li>Visit us in person or email <a href="mailto:thenotebookcafellc@gmail.com" className="underline" style={{ color: 'var(--color-cafe-tan-dark)' }}>thenotebookcafellc@gmail.com</a>.</li>
+          <li>Visit us in person or email <a href={`mailto:${BUSINESS_INFO.email}`} className="underline" style={{ color: 'var(--color-cafe-tan-dark)' }}>{BUSINESS_INFO.email}</a>.</li>
           <li>Include order details (date, time, items) and what went wrong.</li>
           <li>For online orders, include your order number and platform.</li>
         </ul>
@@ -89,8 +90,8 @@ export default function RefundsPage() {
         <h2 className="font-serif text-2xl" style={{ color: 'var(--color-cafe-black)' }}>Questions</h2>
         <p className="text-base font-light" style={{ color: 'rgba(var(--cafe-brown-rgb),0.82)' }}>
           We want every experience to be great. If something’s off, let us know and we’ll make it right:{" "}
-          <a href="mailto:thenotebookcafellc@gmail.com" className="underline" style={{ color: 'var(--color-cafe-tan-dark)' }}>
-            thenotebookcafellc@gmail.com
+          <a href={`mailto:${BUSINESS_INFO.email}`} className="underline" style={{ color: 'var(--color-cafe-tan-dark)' }}>
+            {BUSINESS_INFO.email}
           </a>.
         </p>
       </section>
